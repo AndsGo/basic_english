@@ -1,0 +1,398 @@
+:root {
+  color: #17211a;
+  background: #f7f5ef;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.hero-panel {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  color: #496454;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.primary-button {
+  min-height: 48px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 18px;
+  color: white;
+  background: #265c46;
+  font-weight: 700;
+}
+
+.layout {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 16px 16px 88px;
+}
+
+.topbar {
+  max-width: 960px;
+  margin: 0 auto 16px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.page-content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.panel {
+  background: #fffdf8;
+  border: 1px solid #ded8ca;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.panel h2,
+.panel h3,
+.panel p {
+  margin-top: 0;
+}
+
+.today {
+  display: grid;
+  gap: 12px;
+}
+
+.today--with-sticky-next {
+  padding-bottom: calc(144px + env(safe-area-inset-bottom, 0px));
+}
+
+.today-header,
+.today-step-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.today-header h2,
+.today-header p,
+.today-step-panel h3,
+.today-step-panel p {
+  margin: 0;
+}
+
+.time-label,
+.muted {
+  color: #496454;
+}
+
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 0;
+  margin: 4px 0 0;
+  list-style: none;
+}
+
+.stepper-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: #657268;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.stepper-item.current {
+  color: #265c46;
+}
+
+.stepper-item.complete {
+  color: #33443a;
+}
+
+.step-dot {
+  display: inline-grid;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border: 1px solid #cfc7b8;
+  border-radius: 999px;
+  background: white;
+  font-size: 0.78rem;
+}
+
+.stepper-item.current .step-dot,
+.stepper-item.complete .step-dot {
+  color: white;
+  border-color: #265c46;
+  background: #265c46;
+}
+
+.card-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.learning-card {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #e5dfd1;
+  border-radius: 8px;
+  background: white;
+}
+
+.word-text,
+.pattern-title {
+  margin: 0;
+  color: #17211a;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.structure {
+  padding: 10px;
+  border-radius: 8px;
+  background: #eee8da;
+  font-weight: 700;
+}
+
+.example,
+.example-list p {
+  color: #33443a;
+}
+
+.example-list {
+  display: grid;
+  gap: 6px;
+}
+
+.card-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.exercise-list,
+.output-editor,
+.completion-summary {
+  display: grid;
+  gap: 12px;
+}
+
+.exercise-card {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #e5dfd1;
+  border-radius: 8px;
+  background: white;
+}
+
+.option-list {
+  display: grid;
+  gap: 8px;
+}
+
+.option-list button {
+  min-height: 44px;
+  border: 1px solid #cfc7b8;
+  border-radius: 8px;
+  color: #17211a;
+  background: #fffdf8;
+  font-weight: 700;
+  text-align: left;
+}
+
+.option-list .selected-option {
+  color: white;
+  border-color: #265c46;
+  background: #265c46;
+}
+
+.exercise-card input,
+.output-editor textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #cfc7b8;
+  border-radius: 8px;
+  padding: 10px;
+  background: white;
+}
+
+.prompt-list,
+.template-list,
+.checklist,
+.self-rating,
+.completion-checklist {
+  display: grid;
+  gap: 8px;
+}
+
+.template-list code,
+.saved-output {
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+  background: #eee8da;
+}
+
+.saved-output {
+  white-space: pre-wrap;
+}
+
+.checklist label,
+.self-rating label {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.secondary-button {
+  min-height: 44px;
+  border: 1px solid #cfc7b8;
+  border-radius: 8px;
+  color: #265c46;
+  background: #fffdf8;
+  font-weight: 700;
+}
+
+.speech-button {
+  display: inline-grid;
+  width: 32px;
+  height: 32px;
+  min-height: 32px;
+  padding: 0;
+  place-items: center;
+  border-radius: 999px;
+  color: #265c46;
+  background: #eef6f1;
+  vertical-align: middle;
+}
+
+.speech-button svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.speech-button:hover:not(:disabled),
+.speech-button:focus-visible {
+  border-color: #265c46;
+  background: #dceee6;
+}
+
+.speech-button:focus-visible {
+  outline: 3px solid #9ccbb7;
+  outline-offset: 2px;
+}
+
+.speech-button[aria-pressed='true'] {
+  color: white;
+  border-color: #265c46;
+  background: #265c46;
+}
+
+.speech-button:disabled {
+  opacity: 0.45;
+}
+
+.sticky-next {
+  position: fixed;
+  right: 16px;
+  bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+  left: 16px;
+  z-index: 2;
+}
+
+.bottom-nav {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  padding: 8px;
+  background: #fffdf8;
+  border-top: 1px solid #ded8ca;
+}
+
+.nav-item {
+  min-height: 48px;
+  border: 0;
+  border-radius: 8px;
+  color: #33443a;
+  background: transparent;
+  font-weight: 700;
+}
+
+.nav-item.active {
+  color: white;
+  background: #265c46;
+}
+
+.day-list,
+.word-bank {
+  display: grid;
+  gap: 10px;
+}
+
+.day-row,
+.word-bank-item {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid #e5dfd1;
+  border-radius: 8px;
+  background: white;
+}
+
+.day-row small,
+.word-bank-item small {
+  color: #496454;
+}
+
+@media (min-width: 760px) {
+  .layout {
+    padding: 24px 24px 96px;
+  }
+
+  .topbar h1 {
+    font-size: 2rem;
+  }
+
+  .stepper {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sticky-next {
+    right: calc((100vw - min(960px, calc(100vw - 48px))) / 2);
+    left: auto;
+    min-width: 220px;
+  }
+}

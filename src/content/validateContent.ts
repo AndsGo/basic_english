@@ -1,0 +1,276 @@
+import type { Course, Exercise, Pattern, WeeklyCheckRubric } from '../domain/types';
+
+export interface ValidationResult {
+  errors: string[];
+}
+
+const mojibakePattern = /\uFFFD|锟斤拷|鎴戠|鎴戜|鍚嶅瓧|鏄|闂|涓|鑻辫|瀛︾|濂瑰|浠栨|杩欐|鍥犱/;
+
+export function validateCourseContent(course: Course): ValidationResult {
+  const errors: string[] = [];
+  const wordIds = new Set(course.words.map((word) => word.id));
+  const patternIds = new Set(course.patterns.map((pattern) => pattern.id));
+  const patternsById = new Map(course.patterns.map((pattern) => [pattern.id, pattern]));
+  const allIds = new Set<string>();
+
+  const registerId = (id: string, label: string) => {
+    if (!id.trim()) {
+      errors.push(`Empty id for ${label}`);
+      return;
+    }
+
+    if (allIds.has(id)) {
+      errors.push(`Duplicate id: ${id}`);
+    }
+    allIds.add(id);
+  };
+
+  registerId(course.id, 'course');
+  if (!course.title || !course.contentVersion || course.schemaVersion < 1) {
+    errors.push('Course is missing title, contentVersion, or schemaVersion');
+  }
+
+  course.words.forEach((word) => {
+    registerId(word.id, 'word');
+    if (!word.text || !word.definition || !word.chinese || !word.example) {
+      errors.push(`Word ${word.id} is missing text, definition, chinese, or example`);
+    }
+  });
+
+  course.patterns.forEach((pattern) => {
+    registerId(pattern.id, 'pattern');
+    if (!pattern.title || !pattern.use || !pattern.structure || pattern.examples.length === 0) {
+      errors.push(`Pattern ${pattern.id} is incomplete`);
+    }
+  });
+
+  course.weeks.forEach((week) => {
+    registerId(week.id, 'week');
+    if (!week.title || !week.goal || week.days.length === 0) {
+      errors.push(`Week ${week.id} is incomplete`);
+    }
+
+    week.days.forEach((day) => {
+      registerId(day.id, 'day');
+      if (day.weekId !== week.id) {
+        errors.push(`${day.id} has wrong weekId`);
+      }
+      if (!day.title || !day.goal || day.estimatedMinutes <= 0) {
+        errors.push(`${day.id} is missing required fields`);
+      }
+      if (day.wordIds.length < 6 || day.wordIds.length > 13) {
+        errors.push(`${day.id} must have 6-13 words`);
+      }
+      if (day.patternIds.length < 1 || day.patternIds.length > 5) {
+        errors.push(`${day.id} must have 1-5 patterns`);
+      }
+      if (day.exercises.length < 5 || day.exercises.length > 8) {
+        errors.push(`${day.id} must have 5-8 exercises`);
+      }
+      if (!day.exercises.some((exercise) => exercise.type === 'translation')) {
+        errors.push(`${day.id} must have a translation exercise`);
+      }
+
+      day.wordIds.forEach((wordId) => {
+        if (!wordIds.has(wordId)) {
+          errors.push(`${day.id} references missing word ${wordId}`);
+        }
+      });
+      day.patternIds.forEach((patternId) => {
+        if (!patternIds.has(patternId)) {
+          errors.push(`${day.id} references missing pattern ${patternId}`);
+        }
+      });
+      day.exercises.forEach((exercise) => {
+        registerId(exercise.id, 'exercise');
+        validateExercise(exercise, patternsById, new Set(day.patternIds), day.id, errors);
+      });
+
+      if (day.weeklyCheckRubric) {
+        validateWeeklyCheckRubric(day.id, day.weeklyCheckRubric, errors);
+      }
+
+      registerId(day.outputTask.id, 'output task');
+
+      if (!day.outputTask.id || !day.outputTask.topic || day.outputTask.prompts.length === 0 || day.outputTask.template.length === 0) {
+        errors.push(`${day.id} output task is incomplete`);
+      }
+      if (day.outputTask.requiredSentenceCount < 4) {
+        errors.push(`${day.id} output requires too few sentences`);
+      }
+    });
+  });
+
+  if (mojibakePattern.test(JSON.stringify(course))) {
+    errors.push('Content contains invalid Chinese text or mojibake');
+  }
+
+  return { errors };
+}
+
+function validateWeeklyCheckRubric(dayId: string, rubric: WeeklyCheckRubric, errors: string[]) {
+  if (rubric.scale.min !== 0) {
+    errors.push(`${dayId} weekly check rubric scale min must be 0`);
+  }
+  if (rubric.scale.max !== 2) {
+    errors.push(`${dayId} weekly check rubric scale max must be 2`);
+  }
+
+  if (rubric.criteria.length === 0) {
+    errors.push(`${dayId} weekly check rubric must have criteria`);
+  }
+
+  const criterionIds = new Set<string>();
+  rubric.criteria.forEach((criterion) => {
+    if (!criterion.id.trim()) {
+      errors.push(`${dayId} weekly check rubric criterion has an empty id`);
+    } else if (criterionIds.has(criterion.id)) {
+      errors.push(`${dayId} weekly check rubric has duplicate criterion id ${criterion.id}`);
+    }
+    criterionIds.add(criterion.id);
+
+    if (!criterion.label.trim()) {
+      errors.push(`${dayId} weekly check rubric criterion ${criterion.id} must have a non-blank label`);
+    }
+
+    if (criterion.scores.length !== 3 || criterion.scores.some((score) => !score.trim())) {
+      errors.push(`${dayId} weekly check rubric criterion ${criterion.id} must have score levels for 0, 1, and 2`);
+    }
+  });
+
+  const maxPossibleScore = rubric.criteria.length * 2;
+  if (rubric.pass.minimumTotalScore < 1 || rubric.pass.minimumTotalScore > maxPossibleScore) {
+    errors.push(`${dayId} weekly check rubric minimumTotalScore must be between 1 and ${maxPossibleScore}`);
+  }
+
+  if (rubric.pass.minimumMeaningScore < 0 || rubric.pass.minimumMeaningScore > 2) {
+    errors.push(`${dayId} weekly check rubric minimumMeaningScore must be between 0 and 2`);
+  }
+
+  if (rubric.pass.minimumSentenceCount < 1) {
+    errors.push(`${dayId} weekly check rubric minimumSentenceCount must be at least 1`);
+  }
+}
+
+function validateExercise(
+  exercise: Exercise,
+  patternsById: Map<string, Pattern>,
+  dayPatternIds: Set<string>,
+  dayId: string,
+  errors: string[],
+) {
+  if (!exercise.id.trim()) {
+    errors.push('Exercise has an empty id');
+  }
+
+  if (exercise.type === 'choice') {
+    const options = exercise.options.map((option) => option.trim()).filter(Boolean);
+    const uniqueOptions = new Set(options);
+    if (!exercise.prompt || exercise.options.length === 0 || !exercise.options.includes(exercise.correctOption)) {
+      errors.push(`${exercise.id} choice exercise is incomplete`);
+    }
+    if (uniqueOptions.size < 2) {
+      errors.push(`${exercise.id} choice exercise must have at least 2 non-empty unique options`);
+    }
+    if (!exercise.correctOption.trim() || !uniqueOptions.has(exercise.correctOption.trim())) {
+      errors.push(`${exercise.id} choice exercise correctOption must be included in options`);
+    }
+  }
+
+  if (exercise.type === 'fill_blank') {
+    if (!exercise.prompt || exercise.acceptedAnswers.length === 0) {
+      errors.push(`${exercise.id} fill blank exercise is incomplete`);
+    }
+    if (!exercise.acceptedAnswers.some((answer) => answer.trim())) {
+      errors.push(`${exercise.id} fill blank exercise must have non-blank accepted answers`);
+    }
+  }
+
+  if (exercise.type === 'sentence_order') {
+    if (exercise.tokens.length === 0 || exercise.correctOrder.length === 0 || !exercise.finalSentence) {
+      errors.push(`${exercise.id} sentence order exercise is incomplete`);
+    }
+    if (!sameTokenMultiset(exercise.tokens, exercise.correctOrder)) {
+      errors.push(`${exercise.id} sentence order exercise tokens and correctOrder must contain the same tokens`);
+    }
+    if (!exercise.finalSentence.trim()) {
+      errors.push(`${exercise.id} sentence order exercise finalSentence must be non-blank`);
+    }
+    if (
+      exercise.correctOrder.length > 0 &&
+      exercise.finalSentence.trim() &&
+      !sameNormalizedSentence(exercise.correctOrder.join(' '), exercise.finalSentence)
+    ) {
+      errors.push(`${exercise.id} sentence order exercise finalSentence must match correctOrder`);
+    }
+  }
+
+  if (exercise.type === 'replacement') {
+    const pattern = patternsById.get(exercise.patternId);
+    if (!pattern) {
+      errors.push(`${exercise.id} references missing pattern ${exercise.patternId}`);
+    }
+    if (Object.keys(exercise.slotValues).length === 0 || !exercise.referenceAnswer) {
+      errors.push(`${exercise.id} replacement exercise is incomplete`);
+    }
+    pattern?.slots.forEach((slot) => {
+      if (!(slot in exercise.slotValues)) {
+        errors.push(`${exercise.id} replacement exercise is missing slot value for ${slot}`);
+      }
+    });
+    if (pattern && pattern.slots.every((slot) => slot in exercise.slotValues) && exercise.referenceAnswer.trim()) {
+      const expectedAnswer = pattern.slots.reduce(
+        (structure, slot) => structure.split(`{${slot}}`).join(exercise.slotValues[slot]),
+        pattern.structure,
+      );
+      if (!sameNormalizedSentence(expectedAnswer, exercise.referenceAnswer)) {
+        errors.push(`${exercise.id} replacement exercise referenceAnswer must match pattern structure`);
+      }
+    }
+  }
+
+  if (exercise.type === 'translation') {
+    if (!exercise.chinesePrompt || !exercise.coreMeaningHint || exercise.referenceAnswers.length === 0) {
+      errors.push(`${exercise.id} translation exercise is incomplete`);
+    }
+    if (!exercise.referenceAnswers.some((answer) => answer.trim())) {
+      errors.push(`${exercise.id} translation exercise must have non-blank reference answers`);
+    }
+    if (exercise.suggestedPatternIds.length === 0) {
+      errors.push(`${exercise.id} translation exercise must have suggested pattern ids`);
+    }
+    exercise.suggestedPatternIds.forEach((patternId) => {
+      if (!patternsById.has(patternId)) {
+        errors.push(`${exercise.id} references missing pattern ${patternId}`);
+      }
+      if (!dayPatternIds.has(patternId)) {
+        errors.push(`${exercise.id} suggested pattern ${patternId} must be included in ${dayId} patternIds`);
+      }
+    });
+  }
+}
+
+function sameNormalizedSentence(expected: string, actual: string) {
+  return normalizeSentence(expected) === normalizeSentence(actual);
+}
+
+function normalizeSentence(sentence: string) {
+  return sentence.trim().replace(/[.!?]$/, '').trim().replace(/\s+/g, ' ');
+}
+
+function sameTokenMultiset(tokens: string[], correctOrder: string[]) {
+  if (tokens.length !== correctOrder.length) {
+    return false;
+  }
+
+  const counts = new Map<string, number>();
+  tokens.forEach((token) => {
+    counts.set(token, (counts.get(token) ?? 0) + 1);
+  });
+
+  correctOrder.forEach((token) => {
+    counts.set(token, (counts.get(token) ?? 0) - 1);
+  });
+
+  return Array.from(counts.values()).every((count) => count === 0);
+}
