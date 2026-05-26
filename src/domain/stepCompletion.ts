@@ -58,11 +58,13 @@ export function getTranslationCompletion(
 
 export function getOutputCompletion(output: UserOutput, requiredSentenceCount: number): CompletionGate {
   const missing: string[] = [];
+  const checklist = output.checklist;
+
   if (output.sentenceCount < requiredSentenceCount) missing.push(`Write at least ${requiredSentenceCount} sentences.`);
-  if (!output.checklist.usedTargetPattern) missing.push("Check: I used today's pattern.");
-  if (!output.checklist.usedLessonWords) missing.push('Check: I used lesson words.');
-  if (!output.checklist.hasSubjects) missing.push('Check: Each sentence has a subject.');
-  if (!output.checklist.meaningIsClear) missing.push('Check: My meaning is clear.');
+  if (!checklist?.usedTargetPattern) missing.push("Check: I used today's pattern.");
+  if (!checklist?.usedLessonWords) missing.push('Check: I used lesson words.');
+  if (!checklist?.hasSubjects) missing.push('Check: Each sentence has a subject.');
+  if (!checklist?.meaningIsClear) missing.push('Check: My meaning is clear.');
   if (!output.selfRating) missing.push('Choose a self rating.');
   return done(missing);
 }

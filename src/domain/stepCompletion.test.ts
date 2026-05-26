@@ -32,6 +32,8 @@ describe('step completion gates', () => {
   it('requires translation answer and self-mark', () => {
     expect(getTranslationCompletion(['t1'], { t1: { answer: 'I am Li.' } }).isComplete).toBe(false);
     expect(getTranslationCompletion(['t1'], { t1: { answer: 'I am Li.', selfMark: 'close' } }).isComplete).toBe(true);
+    expect(getTranslationCompletion(['t1'], {}).isComplete).toBe(false);
+    expect(getTranslationCompletion(['t1'], { t1: { answer: '   ', selfMark: 'close' } }).isComplete).toBe(false);
   });
 
   it('requires sentence count, checklist, and self-rating for output', () => {
@@ -55,5 +57,28 @@ describe('step completion gates', () => {
     expect(getOutputCompletion({ ...output, checklist: { ...output.checklist, hasSubjects: false } }, 4).isComplete).toBe(
       false,
     );
+    expect(getOutputCompletion({ ...output, selfRating: undefined } as unknown as UserOutput, 4).isComplete).toBe(false);
+  });
+
+  it('treats missing output checklist as incomplete without throwing', () => {
+    const output = {
+      id: 'output-day-001',
+      dayId: 'day-001',
+      text: 'My name is Li. I am from China. I study English. I am happy.',
+      sentenceCount: 4,
+      selfRating: 'ok',
+      updatedAt: '2026-05-26T00:00:00.000Z',
+    } as unknown as UserOutput;
+
+    expect(() => getOutputCompletion(output, 4)).not.toThrow();
+    expect(getOutputCompletion(output, 4)).toMatchObject({
+      isComplete: false,
+      missingRequirements: [
+        "Check: I used today's pattern.",
+        'Check: I used lesson words.',
+        'Check: Each sentence has a subject.',
+        'Check: My meaning is clear.',
+      ],
+    });
   });
 });
