@@ -88,6 +88,9 @@ export function validateCourseContent(course: Course): ValidationResult {
 
       if (day.weeklyCheckRubric) {
         validateWeeklyCheckRubric(day.id, day.weeklyCheckRubric, errors);
+        if (day.outputTask.template.length < day.weeklyCheckRubric.pass.minimumSentenceCount) {
+          errors.push(`${day.id} weekly check template has fewer sentences than the minimum sentence count`);
+        }
       }
 
       registerId(day.outputTask.id, 'output task');

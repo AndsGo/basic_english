@@ -236,7 +236,7 @@ export const week2: Week = {
         id: 'day-014-output',
         topic: 'Week 2 Room and Things',
         prompts: ['What is your room like?', 'What things are in your room?', 'Where are they?', 'What things are useful or important?'],
-        template: ['This is my room.', 'My room is ___.', 'There is a ___ in my room.', 'The ___ is on ___.', 'I use it because ___.'],
+        template: ['This is my room.', 'My room is ___.', 'There is a ___ in my room.', 'The ___ is on ___.', 'I use it every day.', 'I use it because ___.'],
         requiredSentenceCount: 6,
       },
       weeklyCheckRubric: {

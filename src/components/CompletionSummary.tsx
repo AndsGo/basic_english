@@ -46,7 +46,7 @@ export function CompletionSummary({
           Start Day {nextDay.dayNumber}
         </button>
       ) : (
-        <p>View Week 1 result</p>
+        <p>View course result</p>
       )}
     </section>
   );

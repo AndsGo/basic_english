@@ -38,6 +38,7 @@ describe('CoursePage', () => {
 
     expect(screen.getByText('Review: 2 items')).toBeInTheDocument();
     expect(screen.getByText('Review needed')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Review Day' })).not.toBeInTheDocument();
   });
 
   it('locks Week 2 until Week 1 is complete', () => {

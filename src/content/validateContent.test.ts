@@ -125,6 +125,17 @@ describe('week1Course', () => {
     );
   });
 
+  it('rejects a weekly check minimum sentence count above the template length', () => {
+    const course = cloneCourse();
+    const day = course.weeks[0].days[6];
+    day.outputTask.template = ['My name is ___.'];
+    day.weeklyCheckRubric!.pass.minimumSentenceCount = 2;
+
+    expect(validateCourseContent(course).errors).toContain(
+      'day-007 weekly check template has fewer sentences than the minimum sentence count',
+    );
+  });
+
   it('validates sentence order final sentence against correct order with punctuation normalization', () => {
     const course = cloneCourse();
     const exercise = course.weeks[0].days[0].exercises[2];
@@ -301,6 +312,14 @@ describe('basicEnglishCourse V1.2', () => {
 
     expect(day13!.outputTask.template).toContain('This thing is good.');
     expect(day13!.outputTask.template).not.toContain('This thing is good for me.');
+  });
+
+  it('keeps weekly check templates long enough for their minimum sentence count', () => {
+    const day14 = basicEnglishCourse.weeks[1].days.find((day) => day.id === 'day-014');
+
+    expect(day14).toBeDefined();
+    expect(day14!.weeklyCheckRubric).toBeDefined();
+    expect(day14!.outputTask.template.length).toBeGreaterThanOrEqual(day14!.weeklyCheckRubric!.pass.minimumSentenceCount);
   });
 });
 

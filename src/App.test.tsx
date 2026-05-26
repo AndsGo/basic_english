@@ -77,7 +77,7 @@ describe('App shell', () => {
     expect(screen.getAllByText('Complete Week 1 to unlock Home & Things.').length).toBeGreaterThan(0);
 
     await user.click(screen.getByRole('button', { name: 'Words' }));
-    expect(screen.getByRole('heading', { name: 'Week 1 Words' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Course Words' })).toBeInTheDocument();
     expect(screen.getByText('name')).toBeInTheDocument();
     expect(screen.getByText('what a person is called')).toBeInTheDocument();
     expect(screen.queryByText(/名字/)).not.toBeInTheDocument();

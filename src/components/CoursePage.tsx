@@ -68,10 +68,10 @@ export function CoursePage({
                     <span>{day.goal}</span>
                     <small>{day.estimatedMinutes} minutes</small>
                     {lockedMessage && <small className="helper-text">{lockedMessage}</small>}
-                    {actionLabel && (
-                      <button type="button" className="secondary-button" onClick={() => onStartDay(day.id)}>
-                        {actionLabel}
-                      </button>
+                {state === 'current' && actionLabel && (
+                  <button type="button" className="secondary-button" onClick={() => onStartDay(day.id)}>
+                    {actionLabel}
+                  </button>
                     )}
                   </article>
                 );

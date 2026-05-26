@@ -832,9 +832,10 @@ describe('MePage', () => {
       userOutputs: [outputDraft({ text: 'My name is Mei.' })],
     });
 
-    render(<MePage repository={repository} />);
+    render(<MePage repository={repository} totalDayCount={14} />);
 
     expect(await screen.findByText('Completed days: 1')).toBeInTheDocument();
+    expect(screen.getByText('/ 14')).toBeInTheDocument();
     expect(screen.getByText('My name is Mei.')).toBeInTheDocument();
   });
 

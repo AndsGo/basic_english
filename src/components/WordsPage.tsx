@@ -4,7 +4,7 @@ import { SpeechButton } from './SpeechButton';
 export function WordsPage({ course, showChineseHelp = false }: { course: Course; showChineseHelp?: boolean }) {
   return (
     <section className="panel">
-      <h2>Week 1 Words</h2>
+      <h2>Course Words</h2>
       <div className="word-bank">
         {course.words.map((word) => (
           <article className="word-bank-item" key={word.id}>

@@ -6,7 +6,7 @@ import type { ScenarioCapability } from '../domain/types';
 import type { SpeechRate } from '../speech/speechService';
 import type { ProgressRepository, StudyActivity, UserOutput } from '../storage/progressRepository';
 
-const WEEK_DAY_COUNT = 7;
+const DEFAULT_TOTAL_DAY_COUNT = 7;
 
 function getCurrentStreakDays(activities: StudyActivity[]) {
   const dates = Array.from(new Set(activities.map((activity) => activity.localDate))).sort();
@@ -49,6 +49,7 @@ export function MePage({
   onReadingEnabledChange,
   speechRate = 'normal',
   onSpeechRateChange,
+  totalDayCount = DEFAULT_TOTAL_DAY_COUNT,
 }: {
   repository: ProgressRepository;
   scenarioCapabilities?: ScenarioCapability[];
@@ -58,6 +59,7 @@ export function MePage({
   onReadingEnabledChange?: (readingEnabled: boolean) => void;
   speechRate?: SpeechRate;
   onSpeechRateChange?: (speechRate: SpeechRate) => void;
+  totalDayCount?: number;
 }) {
   const [days, setDays] = useState<DayProgress[]>([]);
   const [outputs, setOutputs] = useState<UserOutput[]>([]);
@@ -118,7 +120,7 @@ export function MePage({
       <h2>My Progress</h2>
       {loadError && <p role="alert">Progress could not be loaded.</p>}
       <p>
-        <span>Completed days: {completedDayCount}</span> / {WEEK_DAY_COUNT}
+        <span>Completed days: {completedDayCount}</span> / {totalDayCount}
       </p>
       <p>Current streak: {currentStreakDays} days</p>
       <p>Review items: {reviewItems.length}</p>

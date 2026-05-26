@@ -397,7 +397,7 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByText('Day 7: Weekly Check')).toBeVisible();
 
     await page.getByRole('button', { name: 'Words' }).click();
-    await expect(page.getByRole('heading', { name: 'Week 1 Words' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Course Words' })).toBeVisible();
     await expect(page.getByText('what a person is called')).toBeVisible();
     await expect(page.getByText(/Chinese:/)).toHaveCount(0);
     await expect(page.getByText('My name is Li.')).toBeVisible();

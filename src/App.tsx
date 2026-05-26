@@ -123,6 +123,7 @@ export default function App() {
             onReadingEnabledChange={setReadingEnabled}
             speechRate={speechRate}
             onSpeechRateChange={setSpeechRate}
+            totalDayCount={basicEnglishCourse.weeks.flatMap((week) => week.days).length}
           />
         )}
       </Layout>
