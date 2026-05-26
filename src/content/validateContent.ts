@@ -1,4 +1,4 @@
-import type { Course, Exercise, Pattern, WeeklyCheckRubric } from '../domain/types';
+import type { Course, Exercise, Pattern, ScenarioCapability, WeeklyCheckRubric } from '../domain/types';
 
 export interface ValidationResult {
   errors: string[];
@@ -104,6 +104,33 @@ export function validateCourseContent(course: Course): ValidationResult {
   if (mojibakePattern.test(JSON.stringify(course))) {
     errors.push('Content contains invalid Chinese text or mojibake');
   }
+
+  return { errors };
+}
+
+export function validateScenarioCapabilities(capabilities: ScenarioCapability[], course: Course): ValidationResult {
+  const errors: string[] = [];
+  const dayIds = new Set(course.weeks.flatMap((week) => week.days.map((day) => day.id)));
+  const capabilityIds = new Set<string>();
+
+  capabilities.forEach((capability) => {
+    if (!capability.id.trim()) errors.push('Scenario capability has empty id');
+    if (capabilityIds.has(capability.id)) errors.push(`Duplicate scenario capability id: ${capability.id}`);
+    capabilityIds.add(capability.id);
+
+    if (!capability.title.trim() || !capability.description.trim()) {
+      errors.push(`${capability.id} is missing title or description`);
+    }
+    if (capability.unlockedByDayIds.length === 0) {
+      errors.push(`${capability.id} must reference at least one unlock day`);
+    }
+    capability.unlockedByDayIds.forEach((dayId) => {
+      if (!dayIds.has(dayId)) errors.push(`${capability.id} references missing day ${dayId}`);
+    });
+    if (capability.exampleOutputs.length === 0 || capability.exampleOutputs.some((output) => !output.trim())) {
+      errors.push(`${capability.id} must have non-empty example outputs`);
+    }
+  });
 
   return { errors };
 }

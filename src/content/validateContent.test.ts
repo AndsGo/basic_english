@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import type { Course } from '../domain/types';
 import { basicEnglishCourse } from './course';
+import { scenarioCapabilities, scenarioWeekMap } from './scenarioCapabilities';
 import { week1Course } from './week1';
-import { validateCourseContent } from './validateContent';
+import { validateCourseContent, validateScenarioCapabilities } from './validateContent';
 
 function cloneCourse(): Course {
   return structuredClone(week1Course);
@@ -300,5 +301,19 @@ describe('basicEnglishCourse V1.2', () => {
 
     expect(day13!.outputTask.template).toContain('This thing is good.');
     expect(day13!.outputTask.template).not.toContain('This thing is good for me.');
+  });
+});
+
+describe('scenario capabilities', () => {
+  it('defines the 12-week scenario roadmap', () => {
+    expect(scenarioWeekMap).toHaveLength(12);
+    expect(scenarioWeekMap[1]).toMatchObject({
+      weekNumber: 2,
+      theme: 'Home & Things',
+    });
+  });
+
+  it('references valid day IDs and has usable examples', () => {
+    expect(validateScenarioCapabilities(scenarioCapabilities, basicEnglishCourse).errors).toEqual([]);
   });
 });
