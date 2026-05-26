@@ -15,6 +15,7 @@ function createInitialOutput(dayId: string): UserOutput {
     id: `output-${dayId}`,
     dayId,
     text: '',
+    sentenceCount: 0,
     selfRating: 'ok',
     checklist: {
       usedTargetPattern: false,

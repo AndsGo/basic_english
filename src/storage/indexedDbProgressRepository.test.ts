@@ -1,6 +1,7 @@
 import { openDB } from 'idb';
 import { describe, expect, it } from 'vitest';
 import type { DayProgress } from '../domain/progress';
+import { createWordReviewItem, resolveReviewItem } from '../domain/review';
 import { createIndexedDbProgressRepository } from './indexedDbProgressRepository';
 import type { ExerciseAttempt, UserOutput, WordProgress } from './progressRepository';
 
@@ -30,6 +31,7 @@ function userOutput(overrides: Partial<UserOutput> = {}): UserOutput {
     id: 'output-day-001',
     dayId: 'day-001',
     text: 'My name is Li.',
+    sentenceCount: 1,
     selfRating: 'ok',
     checklist: {
       usedTargetPattern: true,
@@ -93,7 +95,7 @@ describe('indexedDbProgressRepository', () => {
       text: 'Second draft.',
     });
 
-    const db = await openDB(dbName, 2);
+    const db = await openDB(dbName, 3);
     await expect(db.getAll('userOutputs')).resolves.toEqual([
       userOutput({ id: 'second-output-id', text: 'Second draft.' }),
     ]);
@@ -121,7 +123,7 @@ describe('indexedDbProgressRepository', () => {
       dayId: 'day-001',
     });
 
-    const db = await openDB(dbName, 2);
+    const db = await openDB(dbName, 3);
     await expect(db.getAll('userOutputs')).resolves.toEqual([userOutput({ id: 'upgraded-output-id' })]);
     db.close();
   });
@@ -152,7 +154,7 @@ describe('indexedDbProgressRepository', () => {
 
     await repo.saveExerciseAttempt(attempt);
 
-    const db = await openDB(dbName, 2);
+    const db = await openDB(dbName, 3);
     await expect(db.get('exerciseAttempts', attempt.id)).resolves.toEqual(attempt);
     db.close();
   });
@@ -169,5 +171,84 @@ describe('indexedDbProgressRepository', () => {
       wordProgress({ id: 'word-review', wordId: 'review', status: 'review' }),
       wordProgress({ id: 'word-seen', wordId: 'seen', status: 'seen' }),
     ]);
+  });
+});
+
+describe('indexedDbProgressRepository V1.1', () => {
+  it('persists and resolves review items', async () => {
+    const repo = createIndexedDbProgressRepository('v1-1-review-test');
+    const item = createWordReviewItem({
+      wordId: 'name',
+      wordText: 'name',
+      sourceDayId: 'day-001',
+      now: '2026-05-26T00:00:00.000Z',
+    });
+
+    await repo.saveReviewItem(item);
+    expect(await repo.listReviewItems('active')).toHaveLength(1);
+
+    await repo.saveReviewItem(resolveReviewItem(item, '2026-05-26T00:01:00.000Z'));
+    expect(await repo.listReviewItems('active')).toHaveLength(0);
+    expect(await repo.listReviewItems('known')).toHaveLength(1);
+  });
+
+  it('lists user outputs and exercise attempts by day', async () => {
+    const repo = createIndexedDbProgressRepository('v1-1-output-attempt-test');
+
+    await repo.saveExerciseAttempt({
+      id: 'attempt-1',
+      exerciseId: 'exercise-1',
+      dayId: 'day-001',
+      answer: 'wrong',
+      result: 'incorrect',
+      createdAt: '2026-05-26T00:00:00.000Z',
+    });
+
+    await repo.saveUserOutput({
+      id: 'output-day-001',
+      dayId: 'day-001',
+      text: 'My name is Li.',
+      sentenceCount: 1,
+      selfRating: 'ok',
+      checklist: {
+        usedTargetPattern: true,
+        usedLessonWords: true,
+        hasSubjects: true,
+        meaningIsClear: true,
+      },
+      updatedAt: '2026-05-26T00:00:00.000Z',
+    });
+
+    expect(await repo.listExerciseAttempts('day-001')).toHaveLength(1);
+    expect(await repo.listUserOutputs()).toHaveLength(1);
+  });
+
+  it('persists step completions, study activities, and retrieves review items by id', async () => {
+    const repo = createIndexedDbProgressRepository('v1-1-completion-activity-test');
+    const reviewItem = createWordReviewItem({
+      wordId: 'name',
+      wordText: 'name',
+      sourceDayId: 'day-001',
+      now: '2026-05-26T00:00:00.000Z',
+    });
+
+    await repo.saveStepCompletion({
+      id: 'completion-day-001-words',
+      dayId: 'day-001',
+      stepId: 'words',
+      isComplete: true,
+      completedAt: '2026-05-26T00:02:00.000Z',
+      summary: { practicedCount: 3, reviewCreatedCount: 1 },
+    });
+    await repo.saveReviewItem(reviewItem);
+    await repo.saveStudyActivity({
+      id: 'activity-2026-05-26',
+      localDate: '2026-05-26',
+      completedDayIds: ['day-001'],
+    });
+
+    expect(await repo.listStepCompletions('day-001')).toHaveLength(1);
+    expect(await repo.getReviewItem(reviewItem.id)).toEqual(reviewItem);
+    expect(await repo.listStudyActivities()).toHaveLength(1);
   });
 });

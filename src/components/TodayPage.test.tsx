@@ -5,10 +5,13 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { week1Course } from '../content/week1';
 import type { DayProgress } from '../domain/progress';
 import { startDay } from '../domain/progress';
+import type { ReviewItem } from '../domain/review';
 import type {
   ExerciseAttempt,
   ProgressRepository,
+  StepCompletion,
   StepProgress,
+  StudyActivity,
   UserOutput,
   WordProgress,
 } from '../storage/progressRepository';
@@ -29,6 +32,7 @@ function outputDraft(overrides: Partial<UserOutput> = {}): UserOutput {
     id: 'custom-output-id',
     dayId: day.id,
     text: '',
+    sentenceCount: 0,
     selfRating: 'ok',
     checklist: {
       usedTargetPattern: false,
@@ -64,8 +68,17 @@ function createTestRepository({
     async saveStepProgress(_progress: StepProgress) {
       return undefined;
     },
+    async saveStepCompletion(_completion: StepCompletion) {
+      return undefined;
+    },
+    async listStepCompletions(_dayId: string) {
+      return [];
+    },
     async saveExerciseAttempt(_attempt: ExerciseAttempt) {
       return undefined;
+    },
+    async listExerciseAttempts(_dayId: string) {
+      return [];
     },
     async saveUserOutput(output) {
       outputsByDay.set(output.dayId, output);
@@ -73,10 +86,28 @@ function createTestRepository({
     async getUserOutput(dayId) {
       return outputsByDay.get(dayId) ?? null;
     },
+    async listUserOutputs() {
+      return [...outputsByDay.values()];
+    },
     async saveWordProgress(_progress: WordProgress) {
       return undefined;
     },
     async listReviewWords() {
+      return [];
+    },
+    async saveReviewItem(_item: ReviewItem) {
+      return undefined;
+    },
+    async listReviewItems(_status?: ReviewItem['status']) {
+      return [];
+    },
+    async getReviewItem(_id: string) {
+      return null;
+    },
+    async saveStudyActivity(_activity: StudyActivity) {
+      return undefined;
+    },
+    async listStudyActivities() {
       return [];
     },
   };

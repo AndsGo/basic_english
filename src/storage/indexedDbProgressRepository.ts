@@ -1,8 +1,17 @@
 import { openDB, type DBSchema, type IDBPDatabase } from 'idb';
 import type { DayProgress } from '../domain/progress';
-import type { ExerciseAttempt, ProgressRepository, StepProgress, UserOutput, WordProgress } from './progressRepository';
+import type { ReviewItem } from '../domain/review';
+import type {
+  ExerciseAttempt,
+  ProgressRepository,
+  StepCompletion,
+  StepProgress,
+  StudyActivity,
+  UserOutput,
+  WordProgress,
+} from './progressRepository';
 
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 
 interface ProgressDb extends DBSchema {
   dayProgress: {
@@ -13,9 +22,15 @@ interface ProgressDb extends DBSchema {
     key: string;
     value: StepProgress;
   };
+  stepCompletions: {
+    key: string;
+    value: StepCompletion;
+    indexes: { byDayId: string };
+  };
   exerciseAttempts: {
     key: string;
     value: ExerciseAttempt;
+    indexes: { byDayId: string };
   };
   userOutputs: {
     key: string;
@@ -24,6 +39,15 @@ interface ProgressDb extends DBSchema {
   wordProgress: {
     key: string;
     value: WordProgress;
+  };
+  reviewItems: {
+    key: string;
+    value: ReviewItem;
+    indexes: { byStatus: ReviewItem['status']; bySourceDayId: string };
+  };
+  studyActivities: {
+    key: string;
+    value: StudyActivity;
   };
 }
 
@@ -36,8 +60,13 @@ async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
       if (!db.objectStoreNames.contains('stepProgress')) {
         db.createObjectStore('stepProgress', { keyPath: 'id' });
       }
+      if (!db.objectStoreNames.contains('stepCompletions')) {
+        const store = db.createObjectStore('stepCompletions', { keyPath: 'id' });
+        store.createIndex('byDayId', 'dayId');
+      }
       if (!db.objectStoreNames.contains('exerciseAttempts')) {
-        db.createObjectStore('exerciseAttempts', { keyPath: 'id' });
+        const store = db.createObjectStore('exerciseAttempts', { keyPath: 'id' });
+        store.createIndex('byDayId', 'dayId');
       }
       if (db.objectStoreNames.contains('userOutputs')) {
         const userOutputsStore = transaction.objectStore('userOutputs');
@@ -51,6 +80,14 @@ async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
       }
       if (!db.objectStoreNames.contains('wordProgress')) {
         db.createObjectStore('wordProgress', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains('reviewItems')) {
+        const store = db.createObjectStore('reviewItems', { keyPath: 'id' });
+        store.createIndex('byStatus', 'status');
+        store.createIndex('bySourceDayId', 'sourceDayId');
+      }
+      if (!db.objectStoreNames.contains('studyActivities')) {
+        db.createObjectStore('studyActivities', { keyPath: 'id' });
       }
     },
   });
@@ -80,19 +117,43 @@ export function createIndexedDbProgressRepository(dbName = 'basic-english-progre
       await db.put('stepProgress', progress);
     },
 
+    async saveStepCompletion(completion) {
+      const db = await dbPromise;
+      await db.put('stepCompletions', completion);
+    },
+
+    async listStepCompletions(dayId) {
+      const db = await dbPromise;
+      return (await db.getAll('stepCompletions')).filter((completion) => completion.dayId === dayId);
+    },
+
     async saveExerciseAttempt(attempt) {
       const db = await dbPromise;
       await db.put('exerciseAttempts', attempt);
     },
 
+    async listExerciseAttempts(dayId) {
+      const db = await dbPromise;
+      return (await db.getAll('exerciseAttempts')).filter((attempt) => attempt.dayId === dayId);
+    },
+
     async saveUserOutput(output) {
       const db = await dbPromise;
-      await db.put('userOutputs', { ...output, id: output.id || `output-${output.dayId}` });
+      await db.put('userOutputs', {
+        ...output,
+        id: output.id || `output-${output.dayId}`,
+        sentenceCount: output.sentenceCount ?? 0,
+      });
     },
 
     async getUserOutput(dayId) {
       const db = await dbPromise;
       return (await db.get('userOutputs', dayId)) ?? null;
+    },
+
+    async listUserOutputs() {
+      const db = await dbPromise;
+      return db.getAll('userOutputs');
     },
 
     async saveWordProgress(progress) {
@@ -109,6 +170,34 @@ export function createIndexedDbProgressRepository(dbName = 'basic-english-progre
           if (a.status !== b.status) return a.status === 'review' ? -1 : 1;
           return a.id.localeCompare(b.id);
         });
+    },
+
+    async saveReviewItem(item) {
+      const db = await dbPromise;
+      await db.put('reviewItems', item);
+    },
+
+    async listReviewItems(status) {
+      const db = await dbPromise;
+      const items = await db.getAll('reviewItems');
+      return items
+        .filter((item) => (status ? item.status === status : true))
+        .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+    },
+
+    async getReviewItem(id) {
+      const db = await dbPromise;
+      return (await db.get('reviewItems', id)) ?? null;
+    },
+
+    async saveStudyActivity(activity) {
+      const db = await dbPromise;
+      await db.put('studyActivities', activity);
+    },
+
+    async listStudyActivities() {
+      const db = await dbPromise;
+      return db.getAll('studyActivities');
     },
   };
 }
