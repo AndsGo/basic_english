@@ -1,3 +1,4 @@
+import { countSentences } from '../domain/exercises';
 import type { OutputTask } from '../domain/types';
 import type { UserOutput } from '../storage/progressRepository';
 
@@ -26,7 +27,7 @@ export function OutputTaskEditor({
   value: UserOutput;
   onChange: (output: UserOutput) => void;
 }) {
-  const updateValue = (patch: Partial<Pick<UserOutput, 'text' | 'selfRating' | 'checklist'>>) => {
+  const updateValue = (patch: Partial<Pick<UserOutput, 'text' | 'sentenceCount' | 'selfRating' | 'checklist'>>) => {
     onChange({ ...value, ...patch, updatedAt: new Date().toISOString() });
   };
 
@@ -45,11 +46,19 @@ export function OutputTaskEditor({
       </div>
       <textarea
         value={value.text}
-        onChange={(event) => updateValue({ text: event.target.value })}
+        onChange={(event) =>
+          updateValue({
+            text: event.target.value,
+            sentenceCount: countSentences(event.target.value),
+          })
+        }
         rows={8}
         aria-label="Daily output"
         placeholder="Write your sentences here."
       />
+      <p className="helper-text">
+        {value.sentenceCount} / {task.requiredSentenceCount} sentences
+      </p>
       <div className="checklist">
         {checklistItems.map((item) => (
           <label key={item.key}>
