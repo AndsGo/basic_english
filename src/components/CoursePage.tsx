@@ -21,45 +21,62 @@ export function CoursePage({
   reviewCount: number;
   onStartDay: (dayId: string) => void;
 }) {
-  const week = course.weeks[0];
+  const allDays = course.weeks.flatMap((week) => week.days);
   const dayStates = deriveCourseDayStates({
-    orderedDayIds: week.days.map((day) => day.id),
+    orderedDayIds: allDays.map((day) => day.id),
     completedDayIds,
     activeReviewDayIds,
   });
+  const completedDays = new Set(completedDayIds);
 
   return (
     <section className="panel">
-      <h2>{week.title}</h2>
-      <p>{week.goal}</p>
-      <p>{completedDayIds.length} / {week.days.length} days completed</p>
       <p>
         Review: {reviewCount} {reviewCount === 1 ? 'item' : 'items'}
       </p>
-      <div className="day-list">
-        {week.days.map((day) => {
-          const state = dayStates[day.id];
-          const canOpen = state !== 'locked';
+      {course.weeks.map((week, weekIndex) => {
+        const previousWeeks = course.weeks.slice(0, weekIndex);
+        const isWeekLocked = previousWeeks.some((previousWeek) =>
+          previousWeek.days.some((day) => !completedDays.has(day.id)),
+        );
+        const completedWeekDayCount = week.days.filter((day) => completedDays.has(day.id)).length;
+        const lockedMessage = isWeekLocked ? `Complete Week ${week.number - 1} to unlock ${week.title}.` : undefined;
 
-          return (
-            <article className="day-row" key={day.id}>
-              <div className="button-row">
-                <strong>
-                  Day {day.dayNumber}: {day.title}
-                </strong>
-                <span className="status-pill">{dayStateLabels[state]}</span>
-              </div>
-              <span>{day.goal}</span>
-              <small>{day.estimatedMinutes} minutes</small>
-              {canOpen && (
-                <button type="button" className="secondary-button" onClick={() => onStartDay(day.id)}>
-                  Open Today
-                </button>
-              )}
-            </article>
-          );
-        })}
-      </div>
+        return (
+          <section className="week-section" key={week.id}>
+            <h2>{week.title}</h2>
+            <p>{week.goal}</p>
+            <p>
+              {completedWeekDayCount} / {week.days.length} days completed
+            </p>
+            <div className="day-list">
+              {week.days.map((day) => {
+                const state = isWeekLocked ? 'locked' : dayStates[day.id];
+                const canOpen = state !== 'locked';
+
+                return (
+                  <article className="day-row" key={day.id}>
+                    <div className="button-row">
+                      <strong>
+                        Day {day.dayNumber}: {day.title}
+                      </strong>
+                      <span className="status-pill">{dayStateLabels[state]}</span>
+                    </div>
+                    <span>{day.goal}</span>
+                    <small>{day.estimatedMinutes} minutes</small>
+                    {lockedMessage && <small className="helper-text">{lockedMessage}</small>}
+                    {canOpen && (
+                      <button type="button" className="secondary-button" onClick={() => onStartDay(day.id)}>
+                        Open Today
+                      </button>
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
     </section>
   );
 }

@@ -358,6 +358,17 @@ textarea {
   gap: 10px;
 }
 
+.week-section {
+  display: grid;
+  gap: 10px;
+  padding-top: 16px;
+}
+
+.week-section + .week-section {
+  margin-top: 18px;
+  border-top: 1px solid #e5dfd1;
+}
+
 .day-row,
 .word-bank-item {
   display: grid;

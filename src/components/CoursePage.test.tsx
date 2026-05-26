@@ -1,5 +1,6 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { basicEnglishCourse } from '../content/course';
 import { week1Course } from '../content/week1';
 import { CoursePage } from './CoursePage';
 
@@ -37,5 +38,50 @@ describe('CoursePage', () => {
 
     expect(screen.getByText('Review: 2 items')).toBeInTheDocument();
     expect(screen.getByText('Review needed')).toBeInTheDocument();
+  });
+
+  it('locks Week 2 until Week 1 is complete', () => {
+    render(
+      <CoursePage
+        course={basicEnglishCourse}
+        completedDayIds={[]}
+        activeReviewDayIds={[]}
+        reviewCount={0}
+        onStartDay={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByRole('heading', { name: 'People, Identity, and Basic Sentences' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Home & Things' })).toBeInTheDocument();
+    expect(screen.getAllByText('0 / 7 days completed')).toHaveLength(2);
+
+    const day8Card = screen.getByText('Day 8: My Room').closest('article');
+    expect(day8Card).not.toBeNull();
+    expect(within(day8Card!).getByText('Locked')).toBeInTheDocument();
+    expect(within(day8Card!).getByText('Complete Week 1 to unlock Home & Things.')).toBeInTheDocument();
+    expect(within(day8Card!).queryByRole('button', { name: 'Open Today' })).not.toBeInTheDocument();
+  });
+
+  it('makes Day 8 current after Week 1 is complete', () => {
+    const week1DayIds = basicEnglishCourse.weeks[0].days.map((day) => day.id);
+
+    render(
+      <CoursePage
+        course={basicEnglishCourse}
+        completedDayIds={week1DayIds}
+        activeReviewDayIds={[]}
+        reviewCount={0}
+        onStartDay={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByText('7 / 7 days completed')).toBeInTheDocument();
+    expect(screen.getByText('0 / 7 days completed')).toBeInTheDocument();
+    expect(screen.queryByText('Complete Week 1 to unlock Home & Things.')).not.toBeInTheDocument();
+
+    const day8Card = screen.getByText('Day 8: My Room').closest('article');
+    expect(day8Card).not.toBeNull();
+    expect(within(day8Card!).getByText('Current')).toBeInTheDocument();
+    expect(within(day8Card!).getByRole('button', { name: 'Open Today' })).toBeInTheDocument();
   });
 });
