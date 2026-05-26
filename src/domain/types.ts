@@ -139,3 +139,17 @@ export interface WeeklyCheckCriterion {
   label: string;
   scores: [string, string, string];
 }
+
+export interface ScenarioCapability {
+  id: string;
+  title: string;
+  description: string;
+  unlockedByDayIds: string[];
+  exampleOutputs: string[];
+}
+
+export interface ScenarioWeek {
+  weekNumber: number;
+  theme: string;
+  expressionOutcome: string;
+}
