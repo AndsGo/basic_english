@@ -1,4 +1,5 @@
 import { expect, test, type Page, type Route } from '@playwright/test';
+import { week1Course } from '../../src/content/week1';
 
 async function clearAppStorage(page: Page) {
   const blankPage = (route: Route) =>
@@ -54,23 +55,27 @@ async function completeDayOnePatterns(page: Page) {
   }
 }
 
+function getDayOneChoiceReviewValues() {
+  const dayOne = week1Course.weeks[0]?.days.find((day) => day.id === 'day-001');
+  const exercise = dayOne?.exercises.find((item) => item.id === 'day-001-choice-001');
+
+  if (!exercise || exercise.type !== 'choice') {
+    throw new Error('Expected day-001-choice-001 to be a choice exercise.');
+  }
+
+  const wrongChoice = exercise.options.find((option) => option !== exercise.correctOption);
+  if (!wrongChoice) {
+    throw new Error('Expected day-001-choice-001 to include a wrong option.');
+  }
+
+  return { correctChoice: exercise.correctOption, wrongChoice };
+}
+
 async function completeDayOneDrillsWithWrongChoice(page: Page) {
   const choiceCard = page.getByRole('article').filter({
     has: page.getByRole('heading', { name: 'What does "name" mean?' }),
   });
-  // Day 1 fixture defines the first rendered option as the correct choice. Derive the wrong
-  // option from the DOM so this test does not depend on the current mojibake Chinese text.
-  const [correctChoice, wrongChoice] = await choiceCard.getByRole('button').evaluateAll((buttons) => {
-    const labels = buttons.map((button) => button.textContent?.trim() ?? '').filter(Boolean);
-    const knownCorrectChoice = labels[0];
-    const knownWrongChoice = labels.find((label) => label !== knownCorrectChoice);
-
-    if (!knownCorrectChoice || !knownWrongChoice) {
-      throw new Error('Expected the Day 1 choice drill to render one correct option and at least one wrong option.');
-    }
-
-    return [knownCorrectChoice, knownWrongChoice];
-  });
+  const { correctChoice, wrongChoice } = getDayOneChoiceReviewValues();
   await choiceCard.getByRole('button', { name: wrongChoice, exact: true }).click();
   await expect(choiceCard.getByRole('status')).toHaveText('Try again');
 
