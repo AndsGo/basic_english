@@ -17,7 +17,7 @@ describe('App shell', () => {
     render(<App />);
 
     expect(screen.getByRole('heading', { name: 'My Name' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Continue' })).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Course' }));
@@ -35,7 +35,7 @@ describe('App shell', () => {
     expect(screen.getByRole('button', { name: 'Read example for name' })).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Review' }));
-    expect(screen.getByRole('heading', { name: 'Review' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Review today' })).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Me' }));
     expect(screen.getByRole('heading', { name: 'My Progress' })).toBeInTheDocument();

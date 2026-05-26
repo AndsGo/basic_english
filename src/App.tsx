@@ -91,12 +91,20 @@ export default function App() {
   return (
     <SpeechProvider enabled={readingEnabled} rate={speechRate}>
       <Layout activeTab={activeTab} onTabChange={handleTabChange} reviewCount={reviewCount}>
-        {activeTab === 'today' && <TodayPage course={week1Course} repository={repository} showChineseHelp={showChineseHelp} />}
+        {activeTab === 'today' && (
+          <TodayPage
+            course={week1Course}
+            repository={repository}
+            showChineseHelp={showChineseHelp}
+            onProgressChange={() => void refreshProgressSummary()}
+          />
+        )}
         {activeTab === 'course' && (
           <CoursePage
             course={week1Course}
             completedDayIds={completedDayIds}
             activeReviewDayIds={activeReviewDayIds}
+            reviewCount={reviewCount}
             onStartDay={() => handleTabChange('today')}
           />
         )}

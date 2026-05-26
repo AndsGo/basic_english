@@ -81,10 +81,12 @@ export function TodayPage({
   course,
   repository,
   showChineseHelp = false,
+  onProgressChange,
 }: {
   course: Course;
   repository: ProgressRepository;
   showChineseHelp?: boolean;
+  onProgressChange?: () => void;
 }) {
   const allDays = useMemo(() => course.weeks.flatMap((week) => week.days), [course.weeks]);
   const orderedDayIds = useMemo(() => allDays.map((courseDay) => courseDay.id), [allDays]);
@@ -199,6 +201,7 @@ export function TodayPage({
   const saveReviewItem = async (item: ReviewItem) => {
     await repository.saveReviewItem(item);
     setActiveReviewItems(await repository.listReviewItems('active'));
+    onProgressChange?.();
   };
 
   const dayReviewCount = activeReviewItems.filter((item) => item.sourceDayId === day.id).length;
@@ -324,6 +327,7 @@ export function TodayPage({
       });
       await repository.saveDayProgress(updatedProgress);
       setDayProgress(updatedProgress);
+      if (updatedProgress.currentStep === 'done') onProgressChange?.();
     } finally {
       setIsAdvancing(false);
     }

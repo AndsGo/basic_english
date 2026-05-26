@@ -255,6 +255,20 @@ describe('TodayPage', () => {
     });
   });
 
+  it('notifies when a word review item is created', async () => {
+    const user = userEvent.setup();
+    const repo = createIndexedDbProgressRepository('today-v1-1-word-review-callback');
+    const onProgressChange = vi.fn();
+    renderWithSpeech(<TodayPage course={week1Course} repository={repo} onProgressChange={onProgressChange} />);
+
+    await user.click(await getEnabledContinueButton());
+    await user.click(await screen.findByRole('button', { name: 'Review name' }));
+
+    await waitFor(() => {
+      expect(onProgressChange).toHaveBeenCalled();
+    });
+  });
+
   it('keeps Continue disabled until current-day selection resolves', async () => {
     const progressList = deferred<DayProgress[]>();
     const repository = {

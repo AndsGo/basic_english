@@ -12,11 +12,13 @@ export function CoursePage({
   course,
   completedDayIds,
   activeReviewDayIds,
+  reviewCount,
   onStartDay,
 }: {
   course: Course;
   completedDayIds: string[];
   activeReviewDayIds: string[];
+  reviewCount: number;
   onStartDay: (dayId: string) => void;
 }) {
   const week = course.weeks[0];
@@ -32,7 +34,7 @@ export function CoursePage({
       <p>{week.goal}</p>
       <p>{completedDayIds.length} / {week.days.length} days completed</p>
       <p>
-        Review: {activeReviewDayIds.length} {activeReviewDayIds.length === 1 ? 'item' : 'items'}
+        Review: {reviewCount} {reviewCount === 1 ? 'item' : 'items'}
       </p>
       <div className="day-list">
         {week.days.map((day) => {
@@ -51,7 +53,7 @@ export function CoursePage({
               <small>{day.estimatedMinutes} minutes</small>
               {canOpen && (
                 <button type="button" className="secondary-button" onClick={() => onStartDay(day.id)}>
-                  {state === 'current' ? 'Start day' : 'Reopen day'}
+                  Open Today
                 </button>
               )}
             </article>
