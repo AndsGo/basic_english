@@ -83,5 +83,11 @@ describe('CoursePage', () => {
     expect(day8Card).not.toBeNull();
     expect(within(day8Card!).getByText('Current')).toBeInTheDocument();
     expect(within(day8Card!).getByRole('button', { name: 'Open Today' })).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: 'Open Today' })).toHaveLength(1);
+
+    const day1Card = screen.getByText('Day 1: My Name').closest('article');
+    expect(day1Card).not.toBeNull();
+    expect(within(day1Card!).getByText('Completed')).toBeInTheDocument();
+    expect(within(day1Card!).queryByRole('button')).not.toBeInTheDocument();
   });
 });

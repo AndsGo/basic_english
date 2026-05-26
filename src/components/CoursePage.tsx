@@ -52,7 +52,8 @@ export function CoursePage({
             <div className="day-list">
               {week.days.map((day) => {
                 const state = isWeekLocked ? 'locked' : dayStates[day.id];
-                const canOpen = state !== 'locked';
+                const actionLabel =
+                  state === 'current' ? 'Open Today' : state === 'review_needed' ? 'Review Day' : undefined;
 
                 return (
                   <article className="day-row" key={day.id}>
@@ -65,9 +66,9 @@ export function CoursePage({
                     <span>{day.goal}</span>
                     <small>{day.estimatedMinutes} minutes</small>
                     {lockedMessage && <small className="helper-text">{lockedMessage}</small>}
-                    {canOpen && (
+                    {actionLabel && (
                       <button type="button" className="secondary-button" onClick={() => onStartDay(day.id)}>
-                        Open Today
+                        {actionLabel}
                       </button>
                     )}
                   </article>
