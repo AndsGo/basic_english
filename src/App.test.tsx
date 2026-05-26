@@ -1,14 +1,64 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
+import { MePage } from './components/MePage';
 import { basicEnglishCourse } from './content/course';
+import { scenarioCapabilities } from './content/scenarioCapabilities';
+import type { DayProgress } from './domain/progress';
+import type { ProgressRepository } from './storage/progressRepository';
 
 afterEach(() => {
   cleanup();
   window.localStorage.clear();
   vi.restoreAllMocks();
 });
+
+function createDeferred<T>() {
+  let resolve!: (value: T) => void;
+  const promise = new Promise<T>((promiseResolve) => {
+    resolve = promiseResolve;
+  });
+
+  return { promise, resolve };
+}
+
+function createDayProgress(overrides: Partial<DayProgress>): DayProgress {
+  return {
+    id: 'day-001',
+    dayId: 'day-001',
+    status: 'not_started',
+    currentStep: 'review',
+    completedStepIds: [],
+    updatedAt: '2026-05-26T00:00:00.000Z',
+    contentVersion: 'test',
+    ...overrides,
+  };
+}
+
+function createProgressRepository(overrides: Partial<ProgressRepository> = {}): ProgressRepository {
+  return {
+    getDayProgress: vi.fn().mockResolvedValue(null),
+    listDayProgress: vi.fn().mockResolvedValue([]),
+    saveDayProgress: vi.fn().mockResolvedValue(undefined),
+    saveStepProgress: vi.fn().mockResolvedValue(undefined),
+    saveStepCompletion: vi.fn().mockResolvedValue(undefined),
+    listStepCompletions: vi.fn().mockResolvedValue([]),
+    saveExerciseAttempt: vi.fn().mockResolvedValue(undefined),
+    listExerciseAttempts: vi.fn().mockResolvedValue([]),
+    saveUserOutput: vi.fn().mockResolvedValue(undefined),
+    getUserOutput: vi.fn().mockResolvedValue(null),
+    listUserOutputs: vi.fn().mockResolvedValue([]),
+    saveWordProgress: vi.fn().mockResolvedValue(undefined),
+    listReviewWords: vi.fn().mockResolvedValue([]),
+    saveReviewItem: vi.fn().mockResolvedValue(undefined),
+    listReviewItems: vi.fn().mockResolvedValue([]),
+    getReviewItem: vi.fn().mockResolvedValue(null),
+    saveStudyActivity: vi.fn().mockResolvedValue(undefined),
+    listStudyActivities: vi.fn().mockResolvedValue([]),
+    ...overrides,
+  };
+}
 
 describe('App shell', () => {
   it('opens on Today and switches between mobile navigation tabs', async () => {
@@ -113,5 +163,44 @@ describe('App shell', () => {
 
     expect(screen.getByRole('checkbox', { name: 'Enable reading aloud' })).not.toBeChecked();
     expect(screen.getByRole('radio', { name: 'Slow' })).toBeChecked();
+  });
+});
+
+describe('Me capability progress', () => {
+  it('does not render empty capability results before progress has loaded', async () => {
+    const dayProgress = createDeferred<DayProgress[]>();
+    const repository = createProgressRepository({
+      listDayProgress: vi.fn().mockReturnValue(dayProgress.promise),
+    });
+
+    render(<MePage repository={repository} scenarioCapabilities={scenarioCapabilities} />);
+
+    expect(screen.queryByText('No capabilities unlocked yet.')).not.toBeInTheDocument();
+    expect(screen.queryByText('Complete Day 1.')).not.toBeInTheDocument();
+
+    dayProgress.resolve([]);
+
+    expect(await screen.findByText('No capabilities unlocked yet.')).toBeInTheDocument();
+    expect(screen.getByText('Complete Day 1.')).toBeInTheDocument();
+  });
+
+  it('unlocks capabilities for day progress whose current step is done', async () => {
+    const repository = createProgressRepository({
+      listDayProgress: vi.fn().mockResolvedValue([
+        createDayProgress({
+          status: 'in_progress',
+          currentStep: 'done',
+          completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'output'],
+        }),
+      ]),
+    });
+
+    render(<MePage repository={repository} scenarioCapabilities={scenarioCapabilities} />);
+
+    const unlockedHeading = await screen.findByRole('heading', { name: 'Unlocked' });
+    const unlockedSection = unlockedHeading.closest('section');
+    expect(unlockedSection).not.toBeNull();
+    expect(within(unlockedSection!).getByText('I can introduce myself.')).toBeInTheDocument();
+    expect(within(unlockedSection!).queryByText('No capabilities unlocked yet.')).not.toBeInTheDocument();
   });
 });

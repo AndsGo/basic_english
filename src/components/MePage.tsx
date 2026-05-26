@@ -23,6 +23,10 @@ function getCurrentStreakDays(activities: StudyActivity[]) {
   return streak;
 }
 
+function isCompletedDay(day: DayProgress) {
+  return day.status === 'completed' || day.currentStep === 'done';
+}
+
 function formatDayId(dayId: string) {
   const dayNumber = Number(dayId.replace('day-', ''));
   return Number.isFinite(dayNumber) ? `Day ${dayNumber}` : dayId;
@@ -60,9 +64,11 @@ export function MePage({
   const [reviewItems, setReviewItems] = useState<ReviewItem[]>([]);
   const [activities, setActivities] = useState<StudyActivity[]>([]);
   const [loadError, setLoadError] = useState(false);
+  const [hasLoadedProgress, setHasLoadedProgress] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
+    setHasLoadedProgress(false);
 
     async function loadProgress() {
       try {
@@ -79,6 +85,7 @@ export function MePage({
         setReviewItems(activeReviewItems);
         setActivities(savedActivities);
         setLoadError(false);
+        setHasLoadedProgress(true);
       } catch {
         if (!isMounted) return;
         setDays([]);
@@ -86,6 +93,7 @@ export function MePage({
         setReviewItems([]);
         setActivities([]);
         setLoadError(true);
+        setHasLoadedProgress(true);
       }
     }
 
@@ -96,11 +104,12 @@ export function MePage({
     };
   }, [repository]);
 
-  const completedDayCount = days.filter((day) => day.status === 'completed').length;
+  const completedDayCount = days.filter(isCompletedDay).length;
   const currentStreakDays = getCurrentStreakDays(activities);
   const hasSettings = Boolean(onShowChineseHelpChange || onReadingEnabledChange || onSpeechRateChange);
-  const completedDayIds = days.filter((day) => day.status === 'completed').map((day) => day.dayId);
-  const capabilityStates = scenarioCapabilities ? getCapabilityStates(scenarioCapabilities, completedDayIds) : null;
+  const completedDayIds = days.filter(isCompletedDay).map((day) => day.dayId);
+  const capabilityStates =
+    scenarioCapabilities && hasLoadedProgress && !loadError ? getCapabilityStates(scenarioCapabilities, completedDayIds) : null;
   const missingNextDayIds =
     capabilityStates?.next?.unlockedByDayIds.filter((dayId) => !completedDayIds.includes(dayId)) ?? [];
 
@@ -113,6 +122,12 @@ export function MePage({
       </p>
       <p>Current streak: {currentStreakDays} days</p>
       <p>Review items: {reviewItems.length}</p>
+      {scenarioCapabilities && !hasLoadedProgress && (
+        <section>
+          <h3>I Can Say</h3>
+          <p>Loading capabilities...</p>
+        </section>
+      )}
       {capabilityStates && (
         <section>
           <h3>I Can Say</h3>
