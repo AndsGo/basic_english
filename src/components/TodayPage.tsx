@@ -108,6 +108,7 @@ export function TodayPage({
   const outputSaveQueue = useRef<Promise<void>>(Promise.resolve());
   const words = useMemo(() => course.words.filter((word) => day.wordIds.includes(word.id)), [course.words, day.wordIds]);
   const patterns = useMemo(() => course.patterns.filter((pattern) => day.patternIds.includes(pattern.id)), [course.patterns, day.patternIds]);
+  const currentWeek = useMemo(() => course.weeks.find((week) => week.id === day.weekId) ?? course.weeks[0], [course.weeks, day.weekId]);
   const drillExercises = useMemo(() => day.exercises.filter((exercise) => exercise.type !== 'translation'), [day.exercises]);
   const translationExercises = useMemo(
     () => day.exercises.filter((exercise): exercise is TranslationExercise => exercise.type === 'translation'),
@@ -346,7 +347,7 @@ export function TodayPage({
   return (
     <section className={hasStickyNext ? 'today today--with-sticky-next' : 'today'}>
       <div className="today-header panel">
-        <p className="eyebrow">Week 1 / Day {day.dayNumber}</p>
+        <p className="eyebrow">Week {currentWeek.number} / Day {day.dayNumber}</p>
         <h2>{day.title}</h2>
         <p>{day.goal}</p>
         <p className="time-label">{day.estimatedMinutes} minutes</p>

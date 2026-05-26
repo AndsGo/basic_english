@@ -100,3 +100,12 @@ describe('progress V1.1 rules', () => {
     expect(updated.status).toBe('in_progress');
   });
 });
+
+describe('progress V1.2 rules', () => {
+  it('selects Day 8 when Days 1-7 are complete and Day 8 is ordered next', () => {
+    const completedWeek1DayIds = ['day-001', 'day-002', 'day-003', 'day-004', 'day-005', 'day-006', 'day-007'];
+    const orderedDayIds = [...completedWeek1DayIds, 'day-008'];
+
+    expect(getCurrentDayId(completedWeek1DayIds, orderedDayIds)).toBe('day-008');
+  });
+});

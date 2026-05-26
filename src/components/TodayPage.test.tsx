@@ -2,6 +2,7 @@ import { act, cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ReactNode } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { basicEnglishCourse } from '../content/course';
 import { week1Course } from '../content/week1';
 import type { DayProgress } from '../domain/progress';
 import { startDay } from '../domain/progress';
@@ -124,6 +125,20 @@ function createTestSpeechService(): SpeechService {
   };
 }
 
+function completedDayProgress(dayId: string, contentVersion: string): DayProgress {
+  return {
+    id: dayId,
+    dayId,
+    status: 'completed',
+    currentStep: 'done',
+    completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'output'],
+    startedAt: '2026-05-26T00:00:00.000Z',
+    completedAt: '2026-05-26T00:10:00.000Z',
+    updatedAt: '2026-05-26T00:10:00.000Z',
+    contentVersion,
+  };
+}
+
 function renderWithSpeech(children: ReactNode) {
   render(
     <SpeechProvider enabled rate="normal" service={createTestSpeechService()}>
@@ -212,6 +227,19 @@ function deferred<T>() {
 }
 
 describe('TodayPage', () => {
+  it('shows Week 2 Day 8 after Days 1-7 are completed', async () => {
+    const completedWeek1Progress = basicEnglishCourse.weeks[0].days.map((courseDay) =>
+      completedDayProgress(courseDay.id, basicEnglishCourse.contentVersion),
+    );
+    const repository = createTestRepository({ dayProgress: completedWeek1Progress });
+
+    renderWithSpeech(<TodayPage course={basicEnglishCourse} repository={repository} />);
+
+    expect(await screen.findByRole('heading', { level: 2, name: 'My Room' })).toBeInTheDocument();
+    expect(screen.getByText(/Week 2 \/ Day 8/)).toBeInTheDocument();
+    expect(screen.getByText('Describe your room with simple sentences.')).toBeInTheDocument();
+  });
+
   it('shows Day 2 after Day 1 is completed', async () => {
     const repo = createIndexedDbProgressRepository('today-v1-1-current-day');
     await repo.saveDayProgress({
