@@ -2,7 +2,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
-import { week1Course } from './content/week1';
+import { basicEnglishCourse } from './content/course';
 
 afterEach(() => {
   cleanup();
@@ -21,8 +21,10 @@ describe('App shell', () => {
     expect(screen.getByRole('button', { name: 'Continue' })).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Course' }));
-    expect(screen.getByRole('heading', { name: week1Course.weeks[0].title })).toBeInTheDocument();
-    expect(screen.getAllByText(/Day \d:/)).toHaveLength(7);
+    expect(screen.getByRole('heading', { name: basicEnglishCourse.weeks[0].title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: basicEnglishCourse.weeks[1].title })).toBeInTheDocument();
+    expect(screen.getAllByText(/Day \d+:/)).toHaveLength(14);
+    expect(screen.getAllByText('Complete Week 1 to unlock Home & Things.')).toHaveLength(7);
 
     await user.click(screen.getByRole('button', { name: 'Words' }));
     expect(screen.getByRole('heading', { name: 'Week 1 Words' })).toBeInTheDocument();
