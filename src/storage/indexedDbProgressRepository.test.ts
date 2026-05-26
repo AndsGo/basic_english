@@ -17,6 +17,7 @@ function dayProgress(overrides: Partial<DayProgress> = {}): DayProgress {
     dayId: 'day-001',
     status: 'in_progress',
     currentStep: 'words',
+    completedStepIds: [],
     startedAt: '2026-05-25T12:00:00.000Z',
     updatedAt: '2026-05-25T12:05:00.000Z',
     contentVersion: '1.0.0',
