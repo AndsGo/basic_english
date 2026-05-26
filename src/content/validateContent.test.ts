@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import type { Course, ScenarioCapability } from '../domain/types';
+import type { Course, ScenarioCapability, ScenarioWeek } from '../domain/types';
 import { basicEnglishCourse } from './course';
 import { scenarioCapabilities, scenarioWeekMap } from './scenarioCapabilities';
 import { week1Course } from './week1';
-import { validateCourseContent, validateScenarioCapabilities } from './validateContent';
+import { validateCourseContent, validateScenarioCapabilities, validateScenarioWeekMap } from './validateContent';
 
 function cloneCourse(): Course {
   return structuredClone(week1Course);
@@ -305,6 +305,13 @@ describe('basicEnglishCourse V1.2', () => {
 });
 
 describe('scenario capabilities', () => {
+  function scenarioWeek(overrides: Partial<ScenarioWeek> = {}): ScenarioWeek {
+    return {
+      ...structuredClone(scenarioWeekMap[0]),
+      ...overrides,
+    };
+  }
+
   function scenarioCapability(overrides: Partial<ScenarioCapability> = {}): ScenarioCapability {
     return {
       ...structuredClone(scenarioCapabilities[0]),
@@ -318,6 +325,39 @@ describe('scenario capabilities', () => {
       weekNumber: 2,
       theme: 'Home & Things',
     });
+  });
+
+  it('validates the 12-week scenario roadmap', () => {
+    expect(validateScenarioWeekMap(scenarioWeekMap).errors).toEqual([]);
+  });
+
+  it('rejects duplicate, missing, or invalid roadmap week numbers', () => {
+    const missingWeek = scenarioWeekMap.slice(0, 11);
+    const duplicateWeek = scenarioWeekMap.map((week) => ({ ...week }));
+    duplicateWeek[1].weekNumber = 1;
+    const invalidWeek = [...scenarioWeekMap, scenarioWeek({ weekNumber: 13 })];
+
+    expect(validateScenarioWeekMap(missingWeek).errors).toContain('Scenario roadmap must define weeks 1 through 12');
+    expect(validateScenarioWeekMap(duplicateWeek).errors).toEqual(
+      expect.arrayContaining([
+        'Duplicate scenario week number: 1',
+        'Scenario roadmap must define weeks 1 through 12',
+      ]),
+    );
+    expect(validateScenarioWeekMap(invalidWeek).errors).toContain('Scenario week number must be between 1 and 12: 13');
+  });
+
+  it('rejects blank roadmap theme or expression outcome', () => {
+    const weeks = scenarioWeekMap.map((week) => ({ ...week }));
+    weeks[1].theme = ' ';
+    weeks[2].expressionOutcome = '';
+
+    expect(validateScenarioWeekMap(weeks).errors).toEqual(
+      expect.arrayContaining([
+        'Scenario week 2 is missing theme or expression outcome',
+        'Scenario week 3 is missing theme or expression outcome',
+      ]),
+    );
   });
 
   it('references valid day IDs and has usable examples', () => {

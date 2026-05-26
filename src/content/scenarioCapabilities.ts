@@ -77,6 +77,6 @@ export const scenarioCapabilities: ScenarioCapability[] = [
     title: 'I can describe important things in my life.',
     description: 'Say why a thing is useful or important.',
     unlockedByDayIds: ['day-014'],
-    exampleOutputs: ['It is important to me.', 'I use it every day.'],
+    exampleOutputs: ['It is important.', 'I use it every day.'],
   },
 ];

@@ -1,4 +1,4 @@
-import type { Course, Exercise, Pattern, ScenarioCapability, WeeklyCheckRubric } from '../domain/types';
+import type { Course, Exercise, Pattern, ScenarioCapability, ScenarioWeek, WeeklyCheckRubric } from '../domain/types';
 
 export interface ValidationResult {
   errors: string[];
@@ -131,6 +131,32 @@ export function validateScenarioCapabilities(capabilities: ScenarioCapability[],
       errors.push(`${capability.id} must have non-empty example outputs`);
     }
   });
+
+  return { errors };
+}
+
+export function validateScenarioWeekMap(weeks: ScenarioWeek[]): ValidationResult {
+  const errors: string[] = [];
+  const weekNumbers = new Set<number>();
+
+  weeks.forEach((week) => {
+    if (weekNumbers.has(week.weekNumber)) {
+      errors.push(`Duplicate scenario week number: ${week.weekNumber}`);
+    }
+    weekNumbers.add(week.weekNumber);
+
+    if (week.weekNumber < 1 || week.weekNumber > 12) {
+      errors.push(`Scenario week number must be between 1 and 12: ${week.weekNumber}`);
+    }
+    if (!week.theme.trim() || !week.expressionOutcome.trim()) {
+      errors.push(`Scenario week ${week.weekNumber} is missing theme or expression outcome`);
+    }
+  });
+
+  const hasExpectedSequence = weeks.length === 12 && Array.from({ length: 12 }, (_, index) => index + 1).every((weekNumber) => weekNumbers.has(weekNumber));
+  if (!hasExpectedSequence) {
+    errors.push('Scenario roadmap must define weeks 1 through 12');
+  }
 
   return { errors };
 }
