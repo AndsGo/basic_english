@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Course } from '../domain/types';
+import type { Course, ScenarioCapability } from '../domain/types';
 import { basicEnglishCourse } from './course';
 import { scenarioCapabilities, scenarioWeekMap } from './scenarioCapabilities';
 import { week1Course } from './week1';
@@ -305,6 +305,13 @@ describe('basicEnglishCourse V1.2', () => {
 });
 
 describe('scenario capabilities', () => {
+  function scenarioCapability(overrides: Partial<ScenarioCapability> = {}): ScenarioCapability {
+    return {
+      ...structuredClone(scenarioCapabilities[0]),
+      ...overrides,
+    };
+  }
+
   it('defines the 12-week scenario roadmap', () => {
     expect(scenarioWeekMap).toHaveLength(12);
     expect(scenarioWeekMap[1]).toMatchObject({
@@ -315,5 +322,50 @@ describe('scenario capabilities', () => {
 
   it('references valid day IDs and has usable examples', () => {
     expect(validateScenarioCapabilities(scenarioCapabilities, basicEnglishCourse).errors).toEqual([]);
+  });
+
+  it('rejects duplicate or empty capability ids and missing metadata', () => {
+    const capabilities = [
+      scenarioCapability({ id: '', title: ' ', description: 'Description' }),
+      scenarioCapability({ id: 'duplicate-capability' }),
+      scenarioCapability({ id: 'duplicate-capability', description: ' ' }),
+    ];
+
+    expect(validateScenarioCapabilities(capabilities, basicEnglishCourse).errors).toEqual(
+      expect.arrayContaining([
+        'Scenario capability has empty id',
+        ' is missing title or description',
+        'Duplicate scenario capability id: duplicate-capability',
+        'duplicate-capability is missing title or description',
+      ]),
+    );
+  });
+
+  it('rejects missing or invalid unlock day references', () => {
+    const capabilities = [
+      scenarioCapability({ id: 'missing-unlock-day', unlockedByDayIds: [] }),
+      scenarioCapability({ id: 'invalid-unlock-day', unlockedByDayIds: ['day-999'] }),
+    ];
+
+    expect(validateScenarioCapabilities(capabilities, basicEnglishCourse).errors).toEqual(
+      expect.arrayContaining([
+        'missing-unlock-day must reference at least one unlock day',
+        'invalid-unlock-day references missing day day-999',
+      ]),
+    );
+  });
+
+  it('rejects empty or blank example outputs', () => {
+    const capabilities = [
+      scenarioCapability({ id: 'missing-examples', exampleOutputs: [] }),
+      scenarioCapability({ id: 'blank-example', exampleOutputs: [' '] }),
+    ];
+
+    expect(validateScenarioCapabilities(capabilities, basicEnglishCourse).errors).toEqual(
+      expect.arrayContaining([
+        'missing-examples must have non-empty example outputs',
+        'blank-example must have non-empty example outputs',
+      ]),
+    );
   });
 });
