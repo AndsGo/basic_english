@@ -373,6 +373,68 @@ textarea {
   color: #496454;
 }
 
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border: 1px solid #cfc7b8;
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: #265c46;
+  background: #eef6f1;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.nav-badge {
+  display: inline-grid;
+  min-width: 18px;
+  height: 18px;
+  margin-left: 6px;
+  place-items: center;
+  border-radius: 999px;
+  color: white;
+  background: #b6412d;
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.review-list,
+.output-list,
+.requirement-list {
+  display: grid;
+  gap: 10px;
+}
+
+.review-card,
+.output-card {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #e5dfd1;
+  border-radius: 8px;
+  background: white;
+}
+
+.review-card h3,
+.review-card p,
+.output-card p {
+  margin: 0;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.helper-text {
+  color: #496454;
+  font-size: 0.92rem;
+}
+
 @media (min-width: 760px) {
   .layout {
     padding: 24px 24px 96px;

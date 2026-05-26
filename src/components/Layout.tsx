@@ -13,10 +13,11 @@ const tabs: Array<{ id: TabId; label: string }> = [
 interface LayoutProps {
   activeTab: TabId;
   onTabChange: (tab: TabId) => void;
+  reviewCount?: number;
   children: ReactNode;
 }
 
-export function Layout({ activeTab, onTabChange, children }: LayoutProps) {
+export function Layout({ activeTab, onTabChange, reviewCount, children }: LayoutProps) {
   return (
     <div className="layout">
       <header className="topbar">
@@ -36,6 +37,7 @@ export function Layout({ activeTab, onTabChange, children }: LayoutProps) {
             onClick={() => onTabChange(tab.id)}
           >
             {tab.label}
+            {tab.id === 'review' && reviewCount ? <span className="nav-badge">{reviewCount}</span> : null}
           </button>
         ))}
       </nav>
