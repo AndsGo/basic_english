@@ -6,6 +6,7 @@ import { week1Course } from '../content/week1';
 import type { DayProgress } from '../domain/progress';
 import { startDay } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
+import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
 import type {
   ExerciseAttempt,
   ProgressRepository,
@@ -147,6 +148,58 @@ async function getEnabledContinueButton() {
   return button;
 }
 
+async function completeWords(user: ReturnType<typeof userEvent.setup>) {
+  for (const button of screen.getAllByRole('button', { name: 'Know' })) {
+    await user.click(button);
+  }
+  await user.click(await getEnabledContinueButton());
+}
+
+async function completePatterns(user: ReturnType<typeof userEvent.setup>) {
+  for (const button of screen.getAllByRole('button', { name: 'Practice this' })) {
+    await user.click(button);
+  }
+  await user.click(await getEnabledContinueButton());
+}
+
+async function completeDrills(user: ReturnType<typeof userEvent.setup>) {
+  const sentenceOrderExercise = day.exercises.find((exercise) => exercise.type === 'sentence_order');
+  const replacementExercise = day.exercises.find((exercise) => exercise.type === 'replacement');
+  if (!choiceExercise || !sentenceOrderExercise || !replacementExercise) throw new Error('Day 1 drill test content is incomplete.');
+
+  await user.click(screen.getByRole('button', { name: choiceExercise.correctOption }));
+  await user.type(screen.getByRole('textbox', { name: 'My ___ is Li.' }), 'name');
+  for (const token of sentenceOrderExercise.correctOrder) {
+    await user.click(screen.getByRole('button', { name: token }));
+  }
+  await user.type(screen.getByRole('textbox', { name: 'Replacement answer' }), replacementExercise.referenceAnswer);
+  await user.click(await getEnabledContinueButton());
+}
+
+async function completeTranslation(user: ReturnType<typeof userEvent.setup>) {
+  if (!translationExercise) throw new Error('Day 1 translation test content is incomplete.');
+
+  await user.type(screen.getByRole('textbox', { name: `Translation answer for ${translationExercise.id}` }), translationExercise.referenceAnswers[0]);
+  await user.click(screen.getByRole('button', { name: 'Show reference' }));
+  await user.click(screen.getByRole('radio', { name: 'Close enough' }));
+  await user.click(await getEnabledContinueButton());
+}
+
+async function completeToOutput(user: ReturnType<typeof userEvent.setup>) {
+  await user.click(await getEnabledContinueButton());
+  await completeWords(user);
+  await completePatterns(user);
+  await completeDrills(user);
+  await completeTranslation(user);
+}
+
+async function satisfyOutputGate(user: ReturnType<typeof userEvent.setup>, text = 'My name is Mei. I am from China. I study English. I am happy.') {
+  await user.type(screen.getByRole('textbox', { name: 'Daily output' }), text);
+  for (const checkbox of screen.getAllByRole('checkbox')) {
+    if (!(checkbox as HTMLInputElement).checked) await user.click(checkbox);
+  }
+}
+
 function deferred<T>() {
   let resolve!: (value: T | PromiseLike<T>) => void;
   let reject!: (reason?: unknown) => void;
@@ -159,6 +212,49 @@ function deferred<T>() {
 }
 
 describe('TodayPage', () => {
+  it('shows Day 2 after Day 1 is completed', async () => {
+    const repo = createIndexedDbProgressRepository('today-v1-1-current-day');
+    await repo.saveDayProgress({
+      id: 'day-001',
+      dayId: 'day-001',
+      status: 'completed',
+      currentStep: 'done',
+      completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'output'],
+      startedAt: '2026-05-26T00:00:00.000Z',
+      completedAt: '2026-05-26T00:10:00.000Z',
+      updatedAt: '2026-05-26T00:10:00.000Z',
+      contentVersion: week1Course.contentVersion,
+    });
+
+    renderWithSpeech(<TodayPage course={week1Course} repository={repo} />);
+
+    expect(await screen.findByText('I Am')).toBeInTheDocument();
+    expect(screen.getByText(/Week 1 \/ Day 2/)).toBeInTheDocument();
+  });
+
+  it('blocks Continue on Words until every word is marked', async () => {
+    const user = userEvent.setup();
+    const repo = createIndexedDbProgressRepository('today-v1-1-words-gate');
+    renderWithSpeech(<TodayPage course={week1Course} repository={repo} />);
+
+    await user.click(await getEnabledContinueButton());
+    expect(screen.getByRole('button', { name: 'Continue' })).toBeDisabled();
+    expect(screen.getByText(/Mark name as Know or Review/)).toBeInTheDocument();
+  });
+
+  it('creates a review item when a word is marked Review', async () => {
+    const user = userEvent.setup();
+    const repo = createIndexedDbProgressRepository('today-v1-1-word-review');
+    renderWithSpeech(<TodayPage course={week1Course} repository={repo} />);
+
+    await user.click(await getEnabledContinueButton());
+    await user.click((await screen.findAllByRole('button', { name: 'Review' }))[0]);
+
+    await waitFor(async () => {
+      expect(await repo.listReviewItems('active')).toHaveLength(1);
+    });
+  });
+
   it('shows Day 1 review and advances through the local Today steps', async () => {
     if (!choiceExercise || !translationExercise) throw new Error('Day 1 test content is incomplete.');
 
@@ -179,10 +275,10 @@ describe('TodayPage', () => {
     expect(screen.getByRole('button', { name: 'Read word name' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read definition for name' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read example for name' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Review name' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Know name' })).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: 'Review' })[0]).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: 'Know' })[0]).toBeInTheDocument();
 
-    await user.click(await getEnabledContinueButton());
+    await completeWords(user);
     expect(screen.getByRole('heading', { name: 'Patterns' })).toBeInTheDocument();
     expect(screen.getByText('My name is ___.')).toBeInTheDocument();
     expect(screen.getByText('My name is Li.')).toBeInTheDocument();
@@ -190,26 +286,28 @@ describe('TodayPage', () => {
     expect(screen.getByRole('button', { name: 'Read structure My name is {name}.' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read example My name is Li.' })).toBeInTheDocument();
 
-    await user.click(await getEnabledContinueButton());
+    await completePatterns(user);
     expect(screen.getByRole('heading', { name: choiceExercise.prompt })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: choiceExercise.correctOption })).toBeInTheDocument();
     expect(screen.queryByText(translationExercise.chinesePrompt)).not.toBeInTheDocument();
 
-    await user.click(await getEnabledContinueButton());
+    await completeDrills(user);
     expect(screen.getByRole('heading', { name: translationExercise.chinesePrompt })).toBeInTheDocument();
     expect(screen.getByText(`Core meaning: ${translationExercise.coreMeaningHint}`)).toBeInTheDocument();
     expect(screen.queryByText(translationExercise.referenceAnswers[0])).not.toBeInTheDocument();
 
+    await user.type(screen.getByRole('textbox', { name: `Translation answer for ${translationExercise.id}` }), translationExercise.referenceAnswers[0]);
     await user.click(screen.getByRole('button', { name: 'Show reference' }));
-    expect(screen.getByText(translationExercise.referenceAnswers[0])).toBeInTheDocument();
+    expect(screen.getAllByText(translationExercise.referenceAnswers[0]).length).toBeGreaterThan(0);
+    await user.click(screen.getByRole('radio', { name: 'Close enough' }));
 
     await user.click(await getEnabledContinueButton());
     expect(screen.getByRole('heading', { level: 3, name: 'My Name' })).toBeInTheDocument();
-    await user.type(screen.getByRole('textbox', { name: 'Daily output' }), 'My name is Mei.\nI am from China.');
+    await satisfyOutputGate(user, 'My name is Mei.\nI am from China.\nI study English.\nI am happy.');
 
     await user.click(await getEnabledContinueButton());
-    expect(screen.getByRole('heading', { name: 'Day complete' })).toBeInTheDocument();
-    const savedOutput = screen.getByText((_, element) => element?.textContent === 'My name is Mei.\nI am from China.');
+    expect(screen.getByRole('heading', { name: 'Day 1 complete' })).toBeInTheDocument();
+    const savedOutput = screen.getByText((_, element) => element?.textContent === 'My name is Mei.\nI am from China.\nI study English.\nI am happy.');
     expect(savedOutput).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Continue' })).not.toBeInTheDocument();
   });
@@ -219,16 +317,13 @@ describe('TodayPage', () => {
 
     renderToday();
 
-    for (let step = 0; step < 5; step += 1) {
-      await user.click(await getEnabledContinueButton());
-    }
+    await completeToOutput(user);
 
-    await user.type(screen.getByRole('textbox', { name: 'Daily output' }), 'My name is Mei.');
-    await user.click(screen.getByRole('checkbox', { name: /I used today's pattern/i }));
+    await satisfyOutputGate(user, 'My name is Mei. I am from China. I study English. I am happy.');
     await user.click(screen.getByRole('radio', { name: 'Hard' }));
     await user.click(await getEnabledContinueButton());
 
-    expect(screen.getByText('My name is Mei.')).toBeInTheDocument();
+    expect(screen.getByText('My name is Mei. I am from China. I study English. I am happy.')).toBeInTheDocument();
     expect(screen.getByText('Self rating: hard')).toBeInTheDocument();
     expect(screen.getByText("Used today's pattern")).toBeInTheDocument();
   });
@@ -275,22 +370,17 @@ describe('TodayPage', () => {
 
     renderToday(repository);
 
-    for (let step = 0; step < 5; step += 1) {
-      await user.click(await getEnabledContinueButton());
-    }
+    await completeToOutput(user);
 
-    await user.type(screen.getByRole('textbox', { name: 'Daily output' }), 'My name is Mei.\nI am from China.');
-    await user.click(screen.getByRole('checkbox', { name: /I used today's pattern/i }));
+    await satisfyOutputGate(user, 'My name is Mei.\nI am from China.\nI study English.\nI am happy.');
     await user.click(screen.getByRole('radio', { name: 'Hard' }));
     await user.click(await getEnabledContinueButton());
 
     cleanup();
     renderToday(repository);
 
-    expect(await screen.findByRole('heading', { name: 'Day complete' })).toBeInTheDocument();
-    expect(screen.getByText((_, element) => element?.textContent === 'My name is Mei.\nI am from China.')).toBeInTheDocument();
-    expect(screen.getByText('Self rating: hard')).toBeInTheDocument();
-    expect(screen.getByText("Used today's pattern")).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { level: 2, name: 'I Am' })).toBeInTheDocument();
+    expect(screen.getByText(/Week 1 \/ Day 2/)).toBeInTheDocument();
   });
 
   it('disables Continue during hydration and keeps saved progress after hydration wins', async () => {
@@ -300,7 +390,16 @@ describe('TodayPage', () => {
       ...startDay(day.id, week1Course.contentVersion, '2026-05-25T00:00:00.000Z'),
       currentStep: 'output' as const,
     };
-    const savedOutput = outputDraft({ text: 'My saved output.' });
+    const savedOutput = outputDraft({
+      text: 'My saved output. It has two. It has three. It has four.',
+      sentenceCount: 4,
+      checklist: {
+        usedTargetPattern: true,
+        usedLessonWords: true,
+        hasSubjects: true,
+        meaningIsClear: true,
+      },
+    });
     const savedProgresses: DayProgress[] = [];
 
     const repository = {
@@ -326,7 +425,7 @@ describe('TodayPage', () => {
       await Promise.all([progressLoad.promise, outputLoad.promise]);
     });
 
-    expect(await screen.findByRole('textbox', { name: 'Daily output' })).toHaveValue('My saved output.');
+    expect(await screen.findByRole('textbox', { name: 'Daily output' })).toHaveValue('My saved output. It has two. It has three. It has four.');
     expect(screen.getByRole('button', { name: 'Continue' })).toBeEnabled();
     expect(savedProgresses).toHaveLength(0);
   });
@@ -344,18 +443,18 @@ describe('TodayPage', () => {
       });
     });
 
-    for (let step = 0; step < 4; step += 1) {
-      await user.click(await getEnabledContinueButton());
-    }
+    await completeWords(user);
+    await completePatterns(user);
+    await completeDrills(user);
+    await completeTranslation(user);
 
-    await user.type(screen.getByRole('textbox', { name: 'Daily output' }), 'My name is Mei.');
-    await user.click(screen.getByRole('checkbox', { name: /I used lesson words/i }));
+    await satisfyOutputGate(user, 'My name is Mei. I am from China. I study English. I am happy.');
     await user.click(screen.getByRole('radio', { name: 'Easy' }));
 
     await waitFor(async () => {
       await expect(repository.getUserOutput(day.id)).resolves.toMatchObject({
         dayId: day.id,
-        text: 'My name is Mei.',
+        text: 'My name is Mei. I am from China. I study English. I am happy.',
         selfRating: 'easy',
         checklist: expect.objectContaining({ usedLessonWords: true }),
       });
@@ -372,7 +471,7 @@ describe('TodayPage', () => {
     });
     await waitFor(async () => {
       await expect(repository.getUserOutput(day.id)).resolves.toMatchObject({
-        text: 'My name is Mei.',
+        text: 'My name is Mei. I am from China. I study English. I am happy.',
         selfRating: 'easy',
       });
     });
@@ -391,6 +490,18 @@ describe('TodayPage', () => {
             currentStep: 'output' as const,
           },
         ],
+        userOutputs: [
+          outputDraft({
+            text: 'My name is Mei. I am from China. I study English. I am happy.',
+            sentenceCount: 4,
+            checklist: {
+              usedTargetPattern: true,
+              usedLessonWords: true,
+              hasSubjects: true,
+              meaningIsClear: true,
+            },
+          }),
+        ],
       }),
       async saveDayProgress(progress: DayProgress) {
         savedProgresses.push(progress);
@@ -402,7 +513,7 @@ describe('TodayPage', () => {
 
     await user.click(await screen.findByRole('button', { name: 'Continue' }));
 
-    expect(screen.queryByRole('heading', { name: 'Day complete' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Day 1 complete' })).not.toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: 'Daily output' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Continue' })).toBeDisabled();
     expect(savedProgresses).toHaveLength(1);
@@ -413,7 +524,7 @@ describe('TodayPage', () => {
       await progressSave.promise;
     });
 
-    expect(await screen.findByRole('heading', { name: 'Day complete' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Day 1 complete' })).toBeInTheDocument();
   });
 
   it('serializes output autosaves so an earlier delayed save cannot overwrite later output', async () => {

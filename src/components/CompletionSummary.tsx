@@ -8,15 +8,28 @@ const completedChecklistLabels: Record<keyof UserOutput['checklist'], string> = 
   meaningIsClear: 'Meaning is clear',
 };
 
-export function CompletionSummary({ day, output }: { day: Day; output: UserOutput }) {
+export function CompletionSummary({
+  day,
+  output,
+  reviewCount,
+  nextDay,
+  onStartNextDay,
+}: {
+  day: Day;
+  output: UserOutput;
+  reviewCount: number;
+  nextDay?: Day;
+  onStartNextDay?: () => void;
+}) {
   const completedChecklist = Object.entries(output.checklist)
     .filter(([, isComplete]) => isComplete)
     .map(([key]) => completedChecklistLabels[key as keyof UserOutput['checklist']]);
 
   return (
     <section className="completion-summary">
-      <h3>Day complete</h3>
+      <h3>Day {day.dayNumber} complete</h3>
       <p>You can now say: {day.goal}</p>
+      <p>Practiced {day.wordIds.length} words and {day.patternIds.length} patterns.</p>
       <h4>Your output</h4>
       <p className="saved-output">{output.text || 'No saved output text.'}</p>
       <p>Self rating: {output.selfRating}</p>
@@ -27,7 +40,14 @@ export function CompletionSummary({ day, output }: { day: Day; output: UserOutpu
           ))}
         </ul>
       )}
-      <p>Come back for the next day.</p>
+      <p>Review tomorrow: {reviewCount}</p>
+      {nextDay ? (
+        <button type="button" className="primary-button" onClick={onStartNextDay}>
+          Start Day {nextDay.dayNumber}
+        </button>
+      ) : (
+        <p>View Week 1 result</p>
+      )}
     </section>
   );
 }

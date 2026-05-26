@@ -1,6 +1,23 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { Course, TranslationExercise } from '../domain/types';
-import { completeStep, type DayProgress, startDay } from '../domain/progress';
+import { checkExerciseAnswer, type ExerciseAnswer, type ExerciseResult } from '../domain/exercises';
+import { completeStep, getCurrentDayId, type DayProgress, startDay, type StepId } from '../domain/progress';
+import {
+  createExerciseReviewItem,
+  createOutputReviewItem,
+  createTranslationReviewItem,
+  createWordReviewItem,
+  type ReviewItem,
+} from '../domain/review';
+import {
+  getDrillsCompletion,
+  getOutputCompletion,
+  getPatternsCompletion,
+  getTranslationCompletion,
+  getWordsCompletion,
+  type TranslationDraft,
+  type WordMark,
+} from '../domain/stepCompletion';
+import type { Course, Exercise, TranslationExercise, Word } from '../domain/types';
 import type { ProgressRepository, UserOutput } from '../storage/progressRepository';
 import { CompletionSummary } from './CompletionSummary';
 import { ExerciseRenderer } from './ExerciseRenderer';
@@ -27,6 +44,33 @@ function createInitialOutput(dayId: string): UserOutput {
   };
 }
 
+function getReferenceAnswer(exercise: Exercise): string | undefined {
+  if (exercise.type === 'choice') return exercise.correctOption;
+  if (exercise.type === 'fill_blank') return exercise.acceptedAnswers[0];
+  if (exercise.type === 'sentence_order') return exercise.finalSentence;
+  if (exercise.type === 'replacement') return exercise.referenceAnswer;
+  return exercise.referenceAnswers[0];
+}
+
+function getExercisePrompt(exercise: Exercise): string {
+  if (exercise.type === 'choice' || exercise.type === 'fill_blank') return exercise.prompt;
+  if (exercise.type === 'sentence_order') return 'Put the words in order';
+  if (exercise.type === 'replacement') return Object.values(exercise.slotValues).join(', ');
+  return exercise.chinesePrompt;
+}
+
+function formatAnswer(answer: ExerciseAnswer): string {
+  return Array.isArray(answer) ? answer.join(' ') : answer;
+}
+
+function makeStepCompletionId(dayId: string, stepId: StepId): string {
+  return `completion-${dayId}-${stepId}`;
+}
+
+function makeAttemptId(dayId: string, exerciseId: string, now: string): string {
+  return `attempt-${dayId}-${exerciseId}-${now}`;
+}
+
 export function TodayPage({
   course,
   repository,
@@ -36,18 +80,55 @@ export function TodayPage({
   repository: ProgressRepository;
   showChineseHelp?: boolean;
 }) {
-  const day = course.weeks[0].days[0];
+  const allDays = useMemo(() => course.weeks.flatMap((week) => week.days), [course.weeks]);
+  const orderedDayIds = useMemo(() => allDays.map((courseDay) => courseDay.id), [allDays]);
+  const [selectedDayId, setSelectedDayId] = useState(() => orderedDayIds[0]);
+  const day = allDays.find((courseDay) => courseDay.id === selectedDayId) ?? allDays[0];
   const [dayProgress, setDayProgress] = useState<DayProgress>(() =>
     startDay(day.id, course.contentVersion, new Date().toISOString()),
   );
   const [outputDraft, setOutputDraft] = useState<UserOutput>(() => createInitialOutput(day.id));
+  const [wordMarks, setWordMarks] = useState<Record<string, WordMark | undefined>>({});
+  const [practicedPatternIds, setPracticedPatternIds] = useState<Set<string>>(() => new Set());
+  const [drillAnswers, setDrillAnswers] = useState<Record<string, ExerciseAnswer | undefined>>({});
+  const [translationDrafts, setTranslationDrafts] = useState<Record<string, TranslationDraft | undefined>>({});
+  const [activeReviewItems, setActiveReviewItems] = useState<ReviewItem[]>([]);
   const [isHydrating, setIsHydrating] = useState(true);
   const [isAdvancing, setIsAdvancing] = useState(false);
   const outputSaveQueue = useRef<Promise<void>>(Promise.resolve());
   const words = useMemo(() => course.words.filter((word) => day.wordIds.includes(word.id)), [course.words, day.wordIds]);
   const patterns = useMemo(() => course.patterns.filter((pattern) => day.patternIds.includes(pattern.id)), [course.patterns, day.patternIds]);
-  const translationExercises = day.exercises.filter((exercise): exercise is TranslationExercise => exercise.type === 'translation');
+  const drillExercises = useMemo(() => day.exercises.filter((exercise) => exercise.type !== 'translation'), [day.exercises]);
+  const translationExercises = useMemo(
+    () => day.exercises.filter((exercise): exercise is TranslationExercise => exercise.type === 'translation'),
+    [day.exercises],
+  );
   const currentStep = dayProgress.currentStep;
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadCourseProgress() {
+      setIsHydrating(true);
+      const [allProgress, activeReviews] = await Promise.all([
+        repository.listDayProgress(),
+        repository.listReviewItems('active'),
+      ]);
+      if (!isMounted) return;
+
+      const completedDayIds = allProgress
+        .filter((progress) => progress.status === 'completed' || progress.currentStep === 'done')
+        .map((progress) => progress.dayId);
+      setActiveReviewItems(activeReviews);
+      setSelectedDayId(getCurrentDayId(completedDayIds, orderedDayIds));
+    }
+
+    void loadCourseProgress();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [orderedDayIds, repository]);
 
   useEffect(() => {
     let isMounted = true;
@@ -60,8 +141,12 @@ export function TodayPage({
       ]);
 
       if (!isMounted) return;
-      if (savedProgress) setDayProgress(savedProgress);
-      if (savedOutput) setOutputDraft(savedOutput);
+      setDayProgress(savedProgress ?? startDay(day.id, course.contentVersion, new Date().toISOString()));
+      setOutputDraft(savedOutput ?? createInitialOutput(day.id));
+      setWordMarks({});
+      setPracticedPatternIds(new Set());
+      setDrillAnswers({});
+      setTranslationDrafts({});
       setIsHydrating(false);
     }
 
@@ -71,6 +156,34 @@ export function TodayPage({
       isMounted = false;
     };
   }, [day.id, repository]);
+
+  const currentGate = useMemo(() => {
+    if (currentStep === 'words') return getWordsCompletion(day.wordIds, wordMarks);
+    if (currentStep === 'patterns') return getPatternsCompletion(day.patternIds, practicedPatternIds);
+    if (currentStep === 'drills') return getDrillsCompletion(drillExercises.map((exercise) => exercise.id), drillAnswers);
+    if (currentStep === 'translate') return getTranslationCompletion(translationExercises.map((exercise) => exercise.id), translationDrafts);
+    if (currentStep === 'output') return getOutputCompletion(outputDraft, day.outputTask.requiredSentenceCount);
+    return { isComplete: true, missingRequirements: [] };
+  }, [
+    currentStep,
+    day.wordIds,
+    day.patternIds,
+    day.outputTask.requiredSentenceCount,
+    wordMarks,
+    practicedPatternIds,
+    drillExercises,
+    drillAnswers,
+    translationExercises,
+    translationDrafts,
+    outputDraft,
+  ]);
+
+  const nextDay = useMemo(() => allDays[allDays.findIndex((courseDay) => courseDay.id === day.id) + 1], [allDays, day.id]);
+
+  const saveReviewItem = async (item: ReviewItem) => {
+    await repository.saveReviewItem(item);
+    setActiveReviewItems(await repository.listReviewItems('active'));
+  };
 
   const enqueueOutputSave = (output: UserOutput) => {
     const save = outputSaveQueue.current
@@ -85,21 +198,113 @@ export function TodayPage({
     void enqueueOutputSave(output);
   };
 
-  const moveNext = async () => {
-    if (isHydrating || isAdvancing) return;
+  const markWord = (word: Word, mark: WordMark) => {
+    const now = new Date().toISOString();
+    setWordMarks((current) => ({ ...current, [word.id]: mark }));
+    void repository.saveWordProgress({
+      id: word.id,
+      wordId: word.id,
+      status: mark,
+      seenCount: 1,
+      correctCount: mark === 'known' ? 1 : 0,
+      lastSeenAt: now,
+      updatedAt: now,
+    });
+    if (mark === 'review') {
+      void saveReviewItem(createWordReviewItem({ wordId: word.id, wordText: word.text, sourceDayId: day.id, now }));
+    }
+  };
 
-    const updatedProgress = completeStep(dayProgress, currentStep, new Date().toISOString());
+  const handleDrillAnswer = (exerciseId: string, answer: ExerciseAnswer, result: ExerciseResult) => {
+    const exercise = drillExercises.find((item) => item.id === exerciseId);
+    const now = new Date().toISOString();
+    setDrillAnswers((current) => ({ ...current, [exerciseId]: answer }));
+    if (!exercise || result !== 'incorrect') return;
+
+    void repository.saveExerciseAttempt({
+      id: makeAttemptId(day.id, exerciseId, now),
+      exerciseId,
+      dayId: day.id,
+      answer,
+      result,
+      createdAt: now,
+    });
+    void saveReviewItem(
+      createExerciseReviewItem({
+        exerciseId,
+        sourceDayId: day.id,
+        prompt: getExercisePrompt(exercise),
+        userAnswer: formatAnswer(answer),
+        referenceAnswer: getReferenceAnswer(exercise),
+        now,
+      }),
+    );
+  };
+
+  const handleTranslationDraftChange = (exerciseId: string, draft: TranslationDraft) => {
+    const exercise = translationExercises.find((item) => item.id === exerciseId);
+    const previous = translationDrafts[exerciseId];
+    const now = new Date().toISOString();
+    setTranslationDrafts((current) => ({ ...current, [exerciseId]: draft }));
+
+    if (!exercise || draft.selfMark !== 'review' || previous?.selfMark === 'review') return;
+
+    void saveReviewItem(
+      createTranslationReviewItem({
+        exerciseId,
+        sourceDayId: day.id,
+        prompt: exercise.chinesePrompt,
+        userAnswer: draft.answer ?? '',
+        referenceAnswer: exercise.referenceAnswers[0],
+        now,
+      }),
+    );
+  };
+
+  const moveNext = async () => {
+    if (isHydrating || isAdvancing || !currentGate.isComplete) return;
+
+    const now = new Date().toISOString();
+    const updatedProgress = completeStep(dayProgress, currentStep, now);
     setIsAdvancing(true);
     try {
       if (updatedProgress.currentStep === 'done') {
         await enqueueOutputSave(outputDraft);
+        if (outputDraft.selfRating === 'hard') {
+          await saveReviewItem(createOutputReviewItem({ sourceDayId: day.id, text: outputDraft.text, now }));
+        }
       }
+      await repository.saveStepCompletion({
+        id: makeStepCompletionId(day.id, currentStep),
+        dayId: day.id,
+        stepId: currentStep,
+        isComplete: currentGate.isComplete,
+        completedAt: now,
+        summary: {
+          practicedCount:
+            currentStep === 'words'
+              ? Object.values(wordMarks).filter(Boolean).length
+              : currentStep === 'patterns'
+                ? practicedPatternIds.size
+                : undefined,
+          reviewCreatedCount: activeReviewItems.filter((item) => item.sourceDayId === day.id).length,
+          missingRequirements: currentGate.missingRequirements,
+        },
+      });
       await repository.saveDayProgress(updatedProgress);
       setDayProgress(updatedProgress);
     } finally {
       setIsAdvancing(false);
     }
   };
+
+  const startNextDay = async () => {
+    if (!nextDay) return;
+    const nextProgress = startDay(nextDay.id, course.contentVersion, new Date().toISOString());
+    await repository.saveDayProgress(nextProgress);
+    setSelectedDayId(nextDay.id);
+  };
+
   const hasStickyNext = currentStep !== 'done';
 
   return (
@@ -120,17 +325,58 @@ export function TodayPage({
           </section>
         )}
         {currentStep === 'words' && (
-          <WordCards words={words} showChineseHelp={showChineseHelp} onReview={() => undefined} onKnow={() => undefined} />
+          <WordCards
+            words={words}
+            showChineseHelp={showChineseHelp}
+            marks={wordMarks}
+            onReview={(wordId) => {
+              const word = words.find((item) => item.id === wordId);
+              if (word) markWord(word, 'review');
+            }}
+            onKnow={(wordId) => {
+              const word = words.find((item) => item.id === wordId);
+              if (word) markWord(word, 'known');
+            }}
+          />
         )}
-        {currentStep === 'patterns' && <PatternCards patterns={patterns} />}
-        {currentStep === 'drills' && <ExerciseRenderer exercises={day.exercises} />}
-        {currentStep === 'translate' && <TranslationTask exercises={translationExercises} />}
+        {currentStep === 'patterns' && (
+          <PatternCards
+            patterns={patterns}
+            practicedPatternIds={practicedPatternIds}
+            onPractice={(patternId) => setPracticedPatternIds((current) => new Set([...current, patternId]))}
+          />
+        )}
+        {currentStep === 'drills' && <ExerciseRenderer exercises={drillExercises} answers={drillAnswers} onAnswer={handleDrillAnswer} />}
+        {currentStep === 'translate' && (
+          <TranslationTask exercises={translationExercises} drafts={translationDrafts} onDraftChange={handleTranslationDraftChange} />
+        )}
         {currentStep === 'output' && <OutputTaskEditor task={day.outputTask} value={outputDraft} onChange={saveOutputDraft} />}
-        {currentStep === 'done' && <CompletionSummary day={day} output={outputDraft} />}
+        {currentStep === 'done' && (
+          <CompletionSummary
+            day={day}
+            output={outputDraft}
+            reviewCount={activeReviewItems.length}
+            nextDay={nextDay}
+            onStartNextDay={startNextDay}
+          />
+        )}
       </div>
 
+      {!currentGate.isComplete && (
+        <div className="requirement-list" role="status">
+          {currentGate.missingRequirements.map((requirement) => (
+            <p key={requirement}>{requirement}</p>
+          ))}
+        </div>
+      )}
+
       {hasStickyNext && (
-        <button type="button" className="sticky-next primary-button" onClick={moveNext} disabled={isHydrating || isAdvancing}>
+        <button
+          type="button"
+          className="sticky-next primary-button"
+          onClick={moveNext}
+          disabled={isHydrating || isAdvancing || !currentGate.isComplete}
+        >
           Continue
         </button>
       )}

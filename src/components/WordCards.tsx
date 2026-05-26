@@ -4,11 +4,12 @@ import { SpeechButton } from './SpeechButton';
 interface WordCardsProps {
   words: Word[];
   showChineseHelp?: boolean;
+  marks?: Record<string, 'known' | 'review' | undefined>;
   onReview: (wordId: string) => void;
   onKnow: (wordId: string) => void;
 }
 
-export function WordCards({ words, showChineseHelp = false, onReview, onKnow }: WordCardsProps) {
+export function WordCards({ words, showChineseHelp = false, marks = {}, onReview, onKnow }: WordCardsProps) {
   return (
     <section>
       <h3>Words</h3>
@@ -34,7 +35,7 @@ export function WordCards({ words, showChineseHelp = false, onReview, onKnow }: 
               <button
                 type="button"
                 className="secondary-button"
-                aria-label={`Review ${word.text}`}
+                aria-pressed={marks[word.id] === 'review'}
                 onClick={() => onReview(word.id)}
               >
                 Review
@@ -42,7 +43,7 @@ export function WordCards({ words, showChineseHelp = false, onReview, onKnow }: 
               <button
                 type="button"
                 className="secondary-button"
-                aria-label={`Know ${word.text}`}
+                aria-pressed={marks[word.id] === 'known'}
                 onClick={() => onKnow(word.id)}
               >
                 Know

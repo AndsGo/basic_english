@@ -1,7 +1,15 @@
 import type { Pattern } from '../domain/types';
 import { SpeechButton } from './SpeechButton';
 
-export function PatternCards({ patterns }: { patterns: Pattern[] }) {
+export function PatternCards({
+  patterns,
+  practicedPatternIds = new Set<string>(),
+  onPractice,
+}: {
+  patterns: Pattern[];
+  practicedPatternIds?: Set<string>;
+  onPractice?: (patternId: string) => void;
+}) {
   return (
     <section>
       <h3>Patterns</h3>
@@ -27,6 +35,14 @@ export function PatternCards({ patterns }: { patterns: Pattern[] }) {
                 </p>
               ))}
             </div>
+            <button
+              type="button"
+              className="secondary-button"
+              aria-pressed={practicedPatternIds.has(pattern.id)}
+              onClick={() => onPractice?.(pattern.id)}
+            >
+              Practice this
+            </button>
           </article>
         ))}
       </div>

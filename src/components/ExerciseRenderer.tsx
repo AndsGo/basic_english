@@ -1,13 +1,33 @@
 import { useState } from 'react';
 import type { Exercise } from '../domain/types';
+import { checkExerciseAnswer, type ExerciseAnswer, type ExerciseResult } from '../domain/exercises';
 
-export function ExerciseRenderer({ exercises }: { exercises: Exercise[] }) {
-  const [answers, setAnswers] = useState<Record<string, string>>({});
+function stringAnswer(answer: ExerciseAnswer | undefined): string {
+  return typeof answer === 'string' ? answer : '';
+}
+
+function tokenAnswer(answer: ExerciseAnswer | undefined): string[] {
+  return Array.isArray(answer) ? answer : [];
+}
+
+export function ExerciseRenderer({
+  exercises,
+  answers: controlledAnswers,
+  onAnswer,
+}: {
+  exercises: Exercise[];
+  answers?: Record<string, ExerciseAnswer | undefined>;
+  onAnswer?: (exerciseId: string, answer: ExerciseAnswer, result: ExerciseResult) => void;
+}) {
+  const [localAnswers, setLocalAnswers] = useState<Record<string, ExerciseAnswer | undefined>>({});
   const [visibleReferences, setVisibleReferences] = useState<Record<string, boolean>>({});
   const drills = exercises.filter((exercise) => exercise.type !== 'translation');
+  const answers = controlledAnswers ?? localAnswers;
 
-  const setAnswer = (exerciseId: string, answer: string) => {
-    setAnswers((current) => ({ ...current, [exerciseId]: answer }));
+  const setAnswer = (exercise: Exercise, answer: ExerciseAnswer) => {
+    const result = checkExerciseAnswer(exercise, answer);
+    if (!controlledAnswers) setLocalAnswers((current) => ({ ...current, [exercise.id]: answer }));
+    onAnswer?.(exercise.id, answer, result);
   };
 
   const showReference = (exerciseId: string) => {
@@ -28,13 +48,17 @@ export function ExerciseRenderer({ exercises }: { exercises: Exercise[] }) {
                     key={option}
                     aria-pressed={answers[exercise.id] === option}
                     className={answers[exercise.id] === option ? 'selected-option' : ''}
-                    onClick={() => setAnswer(exercise.id, option)}
+                    onClick={() => setAnswer(exercise, option)}
                   >
                     {option}
                   </button>
                 ))}
               </div>
-              {answers[exercise.id] && <p role="status">{answers[exercise.id] === exercise.correctOption ? 'Correct' : 'Try again'}</p>}
+              {answers[exercise.id] && (
+                <p role="status">
+                  {checkExerciseAnswer(exercise, answers[exercise.id] ?? '') === 'correct' ? 'Correct' : 'Try again'}
+                </p>
+              )}
             </>
           )}
 
@@ -43,14 +67,12 @@ export function ExerciseRenderer({ exercises }: { exercises: Exercise[] }) {
               <h3>{exercise.prompt}</h3>
               <input
                 aria-label={exercise.prompt}
-                value={answers[exercise.id] ?? ''}
-                onChange={(event) => setAnswer(exercise.id, event.target.value)}
+                value={stringAnswer(answers[exercise.id])}
+                onChange={(event) => setAnswer(exercise, event.target.value)}
               />
               {answers[exercise.id] && (
                 <p role="status">
-                  {exercise.acceptedAnswers.some(
-                    (acceptedAnswer) => acceptedAnswer.trim().toLocaleLowerCase() === answers[exercise.id].trim().toLocaleLowerCase(),
-                  )
+                  {checkExerciseAnswer(exercise, stringAnswer(answers[exercise.id])) === 'correct'
                     ? 'Correct'
                     : 'Check the pattern and try again'}
                 </p>
@@ -61,7 +83,31 @@ export function ExerciseRenderer({ exercises }: { exercises: Exercise[] }) {
           {exercise.type === 'sentence_order' && (
             <>
               <h3>Put the words in order</h3>
-              <p>{exercise.tokens.join(' / ')}</p>
+              <div className="option-list">
+                {exercise.tokens.map((token, index) => (
+                  <button
+                    type="button"
+                    key={`${exercise.id}-${token}-${index}`}
+                    onClick={() => {
+                      const existing = tokenAnswer(answers[exercise.id]);
+                      setAnswer(exercise, [...existing, token]);
+                    }}
+                  >
+                    {token}
+                  </button>
+                ))}
+              </div>
+              <p className="example" aria-label="Selected sentence">
+                {tokenAnswer(answers[exercise.id]).join(' ')}
+              </p>
+              {answers[exercise.id] && (
+                <p role="status">
+                  {checkExerciseAnswer(exercise, tokenAnswer(answers[exercise.id])) === 'correct' ? 'Correct' : 'Try again'}
+                </p>
+              )}
+              <button type="button" className="secondary-button" onClick={() => setAnswer(exercise, [])}>
+                Clear sentence
+              </button>
               <button type="button" className="secondary-button" onClick={() => showReference(exercise.id)}>
                 Show sentence order reference
               </button>
@@ -73,9 +119,15 @@ export function ExerciseRenderer({ exercises }: { exercises: Exercise[] }) {
             <>
               <h3>Make a sentence</h3>
               <p>{Object.values(exercise.slotValues).join(', ')}</p>
+              <input
+                aria-label="Replacement answer"
+                value={stringAnswer(answers[exercise.id])}
+                onChange={(event) => setAnswer(exercise, event.target.value)}
+              />
               <button type="button" className="secondary-button" onClick={() => showReference(exercise.id)}>
                 Show replacement reference
               </button>
+              {answers[exercise.id] && <p role="status">Answer saved</p>}
               {visibleReferences[exercise.id] && <p className="example">Reference: {exercise.referenceAnswer}</p>}
             </>
           )}
