@@ -58,7 +58,20 @@ async function completeDayOneDrillsWithWrongChoice(page: Page) {
   const choiceCard = page.getByRole('article').filter({
     has: page.getByRole('heading', { name: 'What does "name" mean?' }),
   });
-  await choiceCard.getByRole('button').nth(1).click();
+  // Day 1 fixture defines the first rendered option as the correct choice. Derive the wrong
+  // option from the DOM so this test does not depend on the current mojibake Chinese text.
+  const [correctChoice, wrongChoice] = await choiceCard.getByRole('button').evaluateAll((buttons) => {
+    const labels = buttons.map((button) => button.textContent?.trim() ?? '').filter(Boolean);
+    const knownCorrectChoice = labels[0];
+    const knownWrongChoice = labels.find((label) => label !== knownCorrectChoice);
+
+    if (!knownCorrectChoice || !knownWrongChoice) {
+      throw new Error('Expected the Day 1 choice drill to render one correct option and at least one wrong option.');
+    }
+
+    return [knownCorrectChoice, knownWrongChoice];
+  });
+  await choiceCard.getByRole('button', { name: wrongChoice, exact: true }).click();
   await expect(choiceCard.getByRole('status')).toHaveText('Try again');
 
   await page.getByLabel('My ___ is Li.').fill('name');
@@ -75,6 +88,8 @@ async function completeDayOneDrillsWithWrongChoice(page: Page) {
 
   await page.getByLabel('Replacement answer').fill('My name is Anna.');
   await expect(page.getByRole('status').filter({ hasText: 'Answer saved' })).toBeVisible();
+
+  return { correctChoice, wrongChoice };
 }
 
 async function completeDayOneTranslationWithReview(page: Page) {
@@ -123,7 +138,7 @@ test.describe('Basic English MVP e2e', () => {
     await completeDayOnePatterns(page);
 
     await continueTo(page, 'What does "name" mean?');
-    await completeDayOneDrillsWithWrongChoice(page);
+    const drillReviewValues = await completeDayOneDrillsWithWrongChoice(page);
 
     await page.getByRole('button', { name: 'Continue' }).click();
     await completeDayOneTranslationWithReview(page);
@@ -148,8 +163,14 @@ test.describe('Basic English MVP e2e', () => {
       has: page.getByRole('heading', { name: 'What does "name" mean?' }),
     });
     await expect(exerciseReview.getByText('exercise / day-001')).toBeVisible();
-    await expect(exerciseReview.getByText(/User answer:/)).toBeVisible();
-    await expect(exerciseReview.getByText(/Reference answer:/)).toBeVisible();
+    await expect(exerciseReview.getByText(`User answer: ${drillReviewValues.wrongChoice}`)).toBeVisible();
+    await expect(exerciseReview.getByText(`Reference answer: ${drillReviewValues.correctChoice}`)).toBeVisible();
+
+    const translationReview = page.getByRole('article').filter({
+      hasText: 'translation / day-001',
+    });
+    await expect(translationReview.getByText('User answer: My name is Li.')).toBeVisible();
+    await expect(translationReview.getByText('Reference answer: My name is Li.')).toBeVisible();
     await page.getByRole('button', { name: 'I know this' }).first().click();
     await expect(page.getByText('2 items to review')).toBeVisible();
 
