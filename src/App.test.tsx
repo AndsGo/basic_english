@@ -41,6 +41,11 @@ describe('App shell', () => {
 
     await user.click(screen.getByRole('button', { name: 'Me' }));
     expect(screen.getByRole('heading', { name: 'My Progress' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'I Can Say' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Next' })).toBeInTheDocument();
+    expect(screen.getByText('No capabilities unlocked yet.')).toBeInTheDocument();
+    expect(screen.getByText('I can introduce myself.')).toBeInTheDocument();
+    expect(screen.getByText('Complete Day 1.')).toBeInTheDocument();
   });
 
   it('shows Chinese word help only after the learner enables it', async () => {

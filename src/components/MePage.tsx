@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { getCapabilityStates } from '../domain/capabilities';
 import type { DayProgress } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
+import type { ScenarioCapability } from '../domain/types';
 import type { SpeechRate } from '../speech/speechService';
 import type { ProgressRepository, StudyActivity, UserOutput } from '../storage/progressRepository';
 
@@ -21,8 +23,22 @@ function getCurrentStreakDays(activities: StudyActivity[]) {
   return streak;
 }
 
+function formatDayId(dayId: string) {
+  const dayNumber = Number(dayId.replace('day-', ''));
+  return Number.isFinite(dayNumber) ? `Day ${dayNumber}` : dayId;
+}
+
+function formatDayCompletionHint(dayIds: string[]) {
+  const formattedDays = dayIds.map(formatDayId);
+  if (formattedDays.length === 0) return '';
+  if (formattedDays.length === 1) return `Complete ${formattedDays[0]}.`;
+  if (formattedDays.length === 2) return `Complete ${formattedDays[0]} and ${formattedDays[1]}.`;
+  return `Complete ${formattedDays.slice(0, -1).join(', ')}, and ${formattedDays[formattedDays.length - 1]}.`;
+}
+
 export function MePage({
   repository,
+  scenarioCapabilities,
   showChineseHelp = false,
   onShowChineseHelpChange,
   readingEnabled = true,
@@ -31,6 +47,7 @@ export function MePage({
   onSpeechRateChange,
 }: {
   repository: ProgressRepository;
+  scenarioCapabilities?: ScenarioCapability[];
   showChineseHelp?: boolean;
   onShowChineseHelpChange?: (showChineseHelp: boolean) => void;
   readingEnabled?: boolean;
@@ -82,6 +99,10 @@ export function MePage({
   const completedDayCount = days.filter((day) => day.status === 'completed').length;
   const currentStreakDays = getCurrentStreakDays(activities);
   const hasSettings = Boolean(onShowChineseHelpChange || onReadingEnabledChange || onSpeechRateChange);
+  const completedDayIds = days.filter((day) => day.status === 'completed').map((day) => day.dayId);
+  const capabilityStates = scenarioCapabilities ? getCapabilityStates(scenarioCapabilities, completedDayIds) : null;
+  const missingNextDayIds =
+    capabilityStates?.next?.unlockedByDayIds.filter((dayId) => !completedDayIds.includes(dayId)) ?? [];
 
   return (
     <section className="panel">
@@ -92,6 +113,34 @@ export function MePage({
       </p>
       <p>Current streak: {currentStreakDays} days</p>
       <p>Review items: {reviewItems.length}</p>
+      {capabilityStates && (
+        <section>
+          <h3>I Can Say</h3>
+          <section>
+            <h4>Unlocked</h4>
+            {capabilityStates.unlocked.length > 0 ? (
+              <ul>
+                {capabilityStates.unlocked.map((capability) => (
+                  <li key={capability.id}>{capability.title}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>No capabilities unlocked yet.</p>
+            )}
+          </section>
+          <section>
+            <h4>Next</h4>
+            {capabilityStates.next ? (
+              <>
+                <p>{capabilityStates.next.title}</p>
+                <p>{formatDayCompletionHint(missingNextDayIds)}</p>
+              </>
+            ) : (
+              <p>All available capabilities unlocked.</p>
+            )}
+          </section>
+        </section>
+      )}
       {hasSettings && (
         <section>
           <h3>Settings</h3>

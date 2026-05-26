@@ -6,6 +6,7 @@ import { ReviewPage } from './components/ReviewPage';
 import { TodayPage } from './components/TodayPage';
 import { WordsPage } from './components/WordsPage';
 import { basicEnglishCourse } from './content/course';
+import { scenarioCapabilities } from './content/scenarioCapabilities';
 import { getActiveReviewDayIds } from './domain/review';
 import { SpeechProvider } from './speech/SpeechProvider';
 import type { SpeechRate } from './speech/speechService';
@@ -115,6 +116,7 @@ export default function App() {
         {activeTab === 'me' && (
           <MePage
             repository={repository}
+            scenarioCapabilities={scenarioCapabilities}
             showChineseHelp={showChineseHelp}
             onShowChineseHelpChange={setShowChineseHelp}
             readingEnabled={readingEnabled}
