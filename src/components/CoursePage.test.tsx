@@ -51,8 +51,8 @@ describe('CoursePage', () => {
       />,
     );
 
-    expect(screen.getByRole('heading', { name: 'People, Identity, and Basic Sentences' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Home & Things' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Week 1: People, Identity, and Basic Sentences' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Week 2: Home & Things' })).toBeInTheDocument();
     expect(screen.getAllByText('0 / 7 days completed')).toHaveLength(2);
 
     const day8Card = screen.getByText('Day 8: My Room').closest('article');

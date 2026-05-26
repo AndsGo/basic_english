@@ -44,7 +44,9 @@ export function CoursePage({
 
         return (
           <section className="week-section" key={week.id}>
-            <h2>{week.title}</h2>
+            <h2>
+              Week {week.number}: {week.title}
+            </h2>
             <p>{week.goal}</p>
             <p>
               {completedWeekDayCount} / {week.days.length} days completed

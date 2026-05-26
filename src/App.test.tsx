@@ -71,8 +71,8 @@ describe('App shell', () => {
     expect(screen.getByRole('button', { name: 'Continue' })).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Course' }));
-    expect(screen.getByRole('heading', { name: basicEnglishCourse.weeks[0].title })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: basicEnglishCourse.weeks[1].title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: `Week 1: ${basicEnglishCourse.weeks[0].title}` })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: `Week 2: ${basicEnglishCourse.weeks[1].title}` })).toBeInTheDocument();
     expect(screen.getAllByText(/Day \d+:/)).toHaveLength(14);
     expect(screen.getAllByText('Complete Week 1 to unlock Home & Things.').length).toBeGreaterThan(0);
 

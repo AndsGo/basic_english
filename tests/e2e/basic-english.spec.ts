@@ -393,7 +393,7 @@ test.describe('Basic English MVP e2e', () => {
 
   test('navigates course and word bank views with configurable Chinese help', async ({ page }) => {
     await page.getByRole('button', { name: 'Course' }).click();
-    await expect(page.getByRole('heading', { name: 'People, Identity, and Basic Sentences' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Week 1: People, Identity, and Basic Sentences' })).toBeVisible();
     await expect(page.getByText('Day 7: Weekly Check')).toBeVisible();
 
     await page.getByRole('button', { name: 'Words' }).click();
@@ -424,7 +424,7 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByText('Week 2 / Day 8')).toBeVisible();
 
     await page.getByRole('button', { name: 'Course' }).click();
-    await expect(page.getByRole('heading', { name: 'Home & Things' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Week 2: Home & Things' })).toBeVisible();
     await expect(page.getByText('Day 8: My Room')).toBeVisible();
 
     await page.getByRole('button', { name: 'Today', exact: true }).click();
@@ -442,8 +442,10 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByRole('heading', { name: 'My Name' })).toBeVisible();
     await page.getByRole('button', { name: 'Course' }).click();
     await expect(page.getByText('0 / 7 days completed').first()).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Home & Things' })).toBeVisible();
-    await expect(page.getByText('Complete Week 1 to unlock Home & Things.').first()).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Week 2: Home & Things' })).toBeVisible();
+    const lockedDay8Card = page.getByRole('article').filter({ hasText: 'Day 8: My Room' });
+    await expect(lockedDay8Card.getByText('Locked')).toBeVisible();
+    await expect(lockedDay8Card.getByText('Complete Week 1 to unlock Home & Things.')).toBeVisible();
     await goToReview(page);
     await expect(page.getByRole('heading', { name: 'Review today' })).toBeVisible();
     await page.getByRole('button', { name: 'Me', exact: true }).click();
