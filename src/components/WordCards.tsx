@@ -35,6 +35,7 @@ export function WordCards({ words, showChineseHelp = false, marks = {}, onReview
               <button
                 type="button"
                 className="secondary-button"
+                aria-label={`Review ${word.text}`}
                 aria-pressed={marks[word.id] === 'review'}
                 onClick={() => onReview(word.id)}
               >
@@ -43,6 +44,7 @@ export function WordCards({ words, showChineseHelp = false, marks = {}, onReview
               <button
                 type="button"
                 className="secondary-button"
+                aria-label={`Know ${word.text}`}
                 aria-pressed={marks[word.id] === 'known'}
                 onClick={() => onKnow(word.id)}
               >

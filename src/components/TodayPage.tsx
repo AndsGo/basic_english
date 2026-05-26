@@ -63,6 +63,12 @@ function formatAnswer(answer: ExerciseAnswer): string {
   return Array.isArray(answer) ? answer.join(' ') : answer;
 }
 
+function hasAnswerInput(answer: ExerciseAnswer | undefined): answer is ExerciseAnswer {
+  if (answer === undefined) return false;
+  if (typeof answer === 'string') return answer.trim().length > 0;
+  return answer.length > 0;
+}
+
 function makeStepCompletionId(dayId: string, stepId: StepId): string {
   return `completion-${dayId}-${stepId}`;
 }
@@ -93,8 +99,10 @@ export function TodayPage({
   const [drillAnswers, setDrillAnswers] = useState<Record<string, ExerciseAnswer | undefined>>({});
   const [translationDrafts, setTranslationDrafts] = useState<Record<string, TranslationDraft | undefined>>({});
   const [activeReviewItems, setActiveReviewItems] = useState<ReviewItem[]>([]);
-  const [isHydrating, setIsHydrating] = useState(true);
+  const [isCourseHydrating, setIsCourseHydrating] = useState(true);
+  const [isDayHydrating, setIsDayHydrating] = useState(true);
   const [isAdvancing, setIsAdvancing] = useState(false);
+  const selectedDayIdRef = useRef(selectedDayId);
   const outputSaveQueue = useRef<Promise<void>>(Promise.resolve());
   const words = useMemo(() => course.words.filter((word) => day.wordIds.includes(word.id)), [course.words, day.wordIds]);
   const patterns = useMemo(() => course.patterns.filter((pattern) => day.patternIds.includes(pattern.id)), [course.patterns, day.patternIds]);
@@ -104,12 +112,17 @@ export function TodayPage({
     [day.exercises],
   );
   const currentStep = dayProgress.currentStep;
+  const isHydrating = isCourseHydrating || isDayHydrating;
+
+  useEffect(() => {
+    selectedDayIdRef.current = selectedDayId;
+  }, [selectedDayId]);
 
   useEffect(() => {
     let isMounted = true;
 
     async function loadCourseProgress() {
-      setIsHydrating(true);
+      setIsCourseHydrating(true);
       const [allProgress, activeReviews] = await Promise.all([
         repository.listDayProgress(),
         repository.listReviewItems('active'),
@@ -120,7 +133,10 @@ export function TodayPage({
         .filter((progress) => progress.status === 'completed' || progress.currentStep === 'done')
         .map((progress) => progress.dayId);
       setActiveReviewItems(activeReviews);
-      setSelectedDayId(getCurrentDayId(completedDayIds, orderedDayIds));
+      const nextDayId = getCurrentDayId(completedDayIds, orderedDayIds);
+      if (nextDayId !== selectedDayIdRef.current) setIsDayHydrating(true);
+      setSelectedDayId(nextDayId);
+      setIsCourseHydrating(false);
     }
 
     void loadCourseProgress();
@@ -134,7 +150,7 @@ export function TodayPage({
     let isMounted = true;
 
     async function loadSavedProgress() {
-      setIsHydrating(true);
+      setIsDayHydrating(true);
       const [savedProgress, savedOutput] = await Promise.all([
         repository.getDayProgress(day.id),
         repository.getUserOutput(day.id),
@@ -147,7 +163,7 @@ export function TodayPage({
       setPracticedPatternIds(new Set());
       setDrillAnswers({});
       setTranslationDrafts({});
-      setIsHydrating(false);
+      setIsDayHydrating(false);
     }
 
     void loadSavedProgress();
@@ -185,6 +201,8 @@ export function TodayPage({
     setActiveReviewItems(await repository.listReviewItems('active'));
   };
 
+  const dayReviewCount = activeReviewItems.filter((item) => item.sourceDayId === day.id).length;
+
   const enqueueOutputSave = (output: UserOutput) => {
     const save = outputSaveQueue.current
       .catch(() => undefined)
@@ -215,30 +233,34 @@ export function TodayPage({
     }
   };
 
-  const handleDrillAnswer = (exerciseId: string, answer: ExerciseAnswer, result: ExerciseResult) => {
-    const exercise = drillExercises.find((item) => item.id === exerciseId);
-    const now = new Date().toISOString();
+  const handleDrillAnswer = (exerciseId: string, answer: ExerciseAnswer, _result: ExerciseResult) => {
     setDrillAnswers((current) => ({ ...current, [exerciseId]: answer }));
-    if (!exercise || result !== 'incorrect') return;
+  };
 
-    void repository.saveExerciseAttempt({
-      id: makeAttemptId(day.id, exerciseId, now),
-      exerciseId,
-      dayId: day.id,
-      answer,
-      result,
-      createdAt: now,
-    });
-    void saveReviewItem(
-      createExerciseReviewItem({
-        exerciseId,
-        sourceDayId: day.id,
-        prompt: getExercisePrompt(exercise),
-        userAnswer: formatAnswer(answer),
-        referenceAnswer: getReferenceAnswer(exercise),
-        now,
-      }),
-    );
+  const persistIncorrectDrillReviews = async (now: string) => {
+    for (const exercise of drillExercises) {
+      const answer = drillAnswers[exercise.id];
+      if (!hasAnswerInput(answer) || checkExerciseAnswer(exercise, answer) !== 'incorrect') continue;
+
+      await repository.saveExerciseAttempt({
+        id: makeAttemptId(day.id, exercise.id, now),
+        exerciseId: exercise.id,
+        dayId: day.id,
+        answer,
+        result: 'incorrect',
+        createdAt: now,
+      });
+      await saveReviewItem(
+        createExerciseReviewItem({
+          exerciseId: exercise.id,
+          sourceDayId: day.id,
+          prompt: getExercisePrompt(exercise),
+          userAnswer: formatAnswer(answer),
+          referenceAnswer: getReferenceAnswer(exercise),
+          now,
+        }),
+      );
+    }
   };
 
   const handleTranslationDraftChange = (exerciseId: string, draft: TranslationDraft) => {
@@ -268,6 +290,9 @@ export function TodayPage({
     const updatedProgress = completeStep(dayProgress, currentStep, now);
     setIsAdvancing(true);
     try {
+      if (currentStep === 'drills') {
+        await persistIncorrectDrillReviews(now);
+      }
       if (updatedProgress.currentStep === 'done') {
         await enqueueOutputSave(outputDraft);
         if (outputDraft.selfRating === 'hard') {
@@ -287,7 +312,7 @@ export function TodayPage({
               : currentStep === 'patterns'
                 ? practicedPatternIds.size
                 : undefined,
-          reviewCreatedCount: activeReviewItems.filter((item) => item.sourceDayId === day.id).length,
+          reviewCreatedCount: dayReviewCount,
           missingRequirements: currentGate.missingRequirements,
         },
       });
@@ -302,6 +327,7 @@ export function TodayPage({
     if (!nextDay) return;
     const nextProgress = startDay(nextDay.id, course.contentVersion, new Date().toISOString());
     await repository.saveDayProgress(nextProgress);
+    setIsDayHydrating(true);
     setSelectedDayId(nextDay.id);
   };
 
@@ -355,7 +381,7 @@ export function TodayPage({
           <CompletionSummary
             day={day}
             output={outputDraft}
-            reviewCount={activeReviewItems.length}
+            reviewCount={dayReviewCount}
             nextDay={nextDay}
             onStartNextDay={startNextDay}
           />

@@ -149,7 +149,7 @@ async function getEnabledContinueButton() {
 }
 
 async function completeWords(user: ReturnType<typeof userEvent.setup>) {
-  for (const button of screen.getAllByRole('button', { name: 'Know' })) {
+  for (const button of screen.getAllByRole('button', { name: /^Know / })) {
     await user.click(button);
   }
   await user.click(await getEnabledContinueButton());
@@ -248,11 +248,116 @@ describe('TodayPage', () => {
     renderWithSpeech(<TodayPage course={week1Course} repository={repo} />);
 
     await user.click(await getEnabledContinueButton());
-    await user.click((await screen.findAllByRole('button', { name: 'Review' }))[0]);
+    await user.click(await screen.findByRole('button', { name: 'Review name' }));
 
     await waitFor(async () => {
       expect(await repo.listReviewItems('active')).toHaveLength(1);
     });
+  });
+
+  it('keeps Continue disabled until current-day selection resolves', async () => {
+    const progressList = deferred<DayProgress[]>();
+    const repository = {
+      ...createTestRepository(),
+      listDayProgress: () => progressList.promise,
+    };
+
+    renderToday(repository);
+
+    const continueButton = screen.getByRole('button', { name: 'Continue' });
+    await act(async () => {
+      await Promise.resolve();
+    });
+    expect(continueButton).toBeDisabled();
+
+    await act(async () => {
+      progressList.resolve([
+        {
+          id: 'day-001',
+          dayId: 'day-001',
+          status: 'completed',
+          currentStep: 'done',
+          completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'output'],
+          startedAt: '2026-05-26T00:00:00.000Z',
+          completedAt: '2026-05-26T00:10:00.000Z',
+          updatedAt: '2026-05-26T00:10:00.000Z',
+          contentVersion: week1Course.contentVersion,
+        },
+      ]);
+      await progressList.promise;
+    });
+
+    expect(await screen.findByRole('heading', { level: 2, name: 'I Am' })).toBeInTheDocument();
+    expect(screen.getByText(/Week 1 \/ Day 2/)).toBeInTheDocument();
+  });
+
+  it('does not create drill attempts or review items for empty drill commits', async () => {
+    const attempts: ExerciseAttempt[] = [];
+    const reviewItems: ReviewItem[] = [];
+    const user = userEvent.setup();
+    const repository = {
+      ...createTestRepository(),
+      async saveExerciseAttempt(attempt: ExerciseAttempt) {
+        attempts.push(attempt);
+      },
+      async saveReviewItem(item: ReviewItem) {
+        reviewItems.push(item);
+      },
+      async listReviewItems(status?: ReviewItem['status']) {
+        return reviewItems.filter((item) => (status ? item.status === status : true));
+      },
+    };
+
+    renderToday(repository);
+    await user.click(await getEnabledContinueButton());
+    await completeWords(user);
+    await completePatterns(user);
+
+    await user.click(screen.getByRole('button', { name: 'Clear sentence' }));
+
+    expect(attempts).toHaveLength(0);
+    expect(reviewItems).toHaveLength(0);
+  });
+
+  it('creates one incorrect drill attempt when leaving drills instead of while typing', async () => {
+    const attempts: ExerciseAttempt[] = [];
+    const reviewItems: ReviewItem[] = [];
+    const sentenceOrderExercise = day.exercises.find((exercise) => exercise.type === 'sentence_order');
+    const replacementExercise = day.exercises.find((exercise) => exercise.type === 'replacement');
+    if (!choiceExercise || !sentenceOrderExercise || !replacementExercise) throw new Error('Day 1 drill test content is incomplete.');
+    const user = userEvent.setup();
+    const repository = {
+      ...createTestRepository(),
+      async saveExerciseAttempt(attempt: ExerciseAttempt) {
+        attempts.push(attempt);
+      },
+      async saveReviewItem(item: ReviewItem) {
+        reviewItems.push(item);
+      },
+      async listReviewItems(status?: ReviewItem['status']) {
+        return reviewItems.filter((item) => (status ? item.status === status : true));
+      },
+    };
+
+    renderToday(repository);
+    await user.click(await getEnabledContinueButton());
+    await completeWords(user);
+    await completePatterns(user);
+
+    await user.click(screen.getByRole('button', { name: choiceExercise.correctOption }));
+    await user.type(screen.getByRole('textbox', { name: 'My ___ is Li.' }), 'wrong');
+    for (const token of sentenceOrderExercise.correctOrder) {
+      await user.click(screen.getByRole('button', { name: token }));
+    }
+    await user.type(screen.getByRole('textbox', { name: 'Replacement answer' }), replacementExercise.referenceAnswer);
+
+    expect(attempts).toHaveLength(0);
+    expect(reviewItems).toHaveLength(0);
+
+    await user.click(await getEnabledContinueButton());
+
+    expect(attempts).toHaveLength(1);
+    expect(reviewItems).toHaveLength(1);
   });
 
   it('shows Day 1 review and advances through the local Today steps', async () => {
@@ -275,8 +380,8 @@ describe('TodayPage', () => {
     expect(screen.getByRole('button', { name: 'Read word name' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read definition for name' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read example for name' })).toBeInTheDocument();
-    expect(screen.getAllByRole('button', { name: 'Review' })[0]).toBeInTheDocument();
-    expect(screen.getAllByRole('button', { name: 'Know' })[0]).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Review name' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Know name' })).toBeInTheDocument();
 
     await completeWords(user);
     expect(screen.getByRole('heading', { name: 'Patterns' })).toBeInTheDocument();
