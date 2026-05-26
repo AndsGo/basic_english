@@ -277,4 +277,28 @@ describe('basicEnglishCourse V1.2', () => {
   it('validates the combined course content', () => {
     expect(validateCourseContent(basicEnglishCourse).errors).toEqual([]);
   });
+
+  it('keeps Week 2 learner-facing sentences within taught beginner language', () => {
+    const day9 = basicEnglishCourse.weeks[1].days.find((day) => day.id === 'day-009');
+    const day13 = basicEnglishCourse.weeks[1].days.find((day) => day.id === 'day-013');
+
+    expect(day9).toBeDefined();
+    expect(day13).toBeDefined();
+
+    const day9Replacement = day9!.exercises.find((exercise) => exercise.id === 'day-009-replace-002');
+    expect(day9Replacement).toMatchObject({
+      type: 'replacement',
+      referenceAnswer: 'There are books on my table.',
+    });
+
+    const day9Translation = day9!.exercises.find((exercise) => exercise.id === 'day-009-translation-001');
+    expect(day9Translation).toMatchObject({
+      type: 'translation',
+      suggestedPatternIds: ['there-are'],
+      referenceAnswers: ['There are books in my room. There are pens in my room.'],
+    });
+
+    expect(day13!.outputTask.template).toContain('This thing is good.');
+    expect(day13!.outputTask.template).not.toContain('This thing is good for me.');
+  });
 });
