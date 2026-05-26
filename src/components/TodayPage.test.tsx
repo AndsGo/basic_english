@@ -291,6 +291,55 @@ describe('TodayPage', () => {
     expect(screen.getByText(/Week 1 \/ Day 2/)).toBeInTheDocument();
   });
 
+  it('hides completion actions until current-day selection resolves', async () => {
+    const progressList = deferred<DayProgress[]>();
+    const completedDayProgress: DayProgress = {
+      id: 'day-001',
+      dayId: 'day-001',
+      status: 'completed',
+      currentStep: 'done',
+      completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'output'],
+      startedAt: '2026-05-26T00:00:00.000Z',
+      completedAt: '2026-05-26T00:10:00.000Z',
+      updatedAt: '2026-05-26T00:10:00.000Z',
+      contentVersion: week1Course.contentVersion,
+    };
+    const repository = {
+      ...createTestRepository({
+        dayProgress: [completedDayProgress],
+        userOutputs: [
+          outputDraft({
+            text: 'My name is Mei. I am from China. I study English. I am happy.',
+            sentenceCount: 4,
+            checklist: {
+              usedTargetPattern: true,
+              usedLessonWords: true,
+              hasSubjects: true,
+              meaningIsClear: true,
+            },
+          }),
+        ],
+      }),
+      listDayProgress: () => progressList.promise,
+    };
+
+    renderToday(repository);
+
+    await act(async () => {
+      await Promise.resolve();
+    });
+    expect(screen.getByText('Loading today...')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Start Day 2' })).not.toBeInTheDocument();
+
+    await act(async () => {
+      progressList.resolve([completedDayProgress]);
+      await progressList.promise;
+    });
+
+    expect(await screen.findByRole('heading', { level: 2, name: 'I Am' })).toBeInTheDocument();
+    expect(screen.getByText(/Week 1 \/ Day 2/)).toBeInTheDocument();
+  });
+
   it('does not create drill attempts or review items for empty drill commits', async () => {
     const attempts: ExerciseAttempt[] = [];
     const reviewItems: ReviewItem[] = [];
@@ -368,7 +417,7 @@ describe('TodayPage', () => {
     renderToday();
 
     expect(screen.getByRole('heading', { level: 2, name: 'My Name' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
     expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Review');
     expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Output');
 

@@ -238,6 +238,8 @@ export function TodayPage({
   };
 
   const persistIncorrectDrillReviews = async (now: string) => {
+    let createdReviewCount = 0;
+
     for (const exercise of drillExercises) {
       const answer = drillAnswers[exercise.id];
       if (!hasAnswerInput(answer) || checkExerciseAnswer(exercise, answer) !== 'incorrect') continue;
@@ -260,7 +262,10 @@ export function TodayPage({
           now,
         }),
       );
+      createdReviewCount += 1;
     }
+
+    return createdReviewCount;
   };
 
   const handleTranslationDraftChange = (exerciseId: string, draft: TranslationDraft) => {
@@ -290,8 +295,9 @@ export function TodayPage({
     const updatedProgress = completeStep(dayProgress, currentStep, now);
     setIsAdvancing(true);
     try {
+      let newlyCreatedReviewCount = 0;
       if (currentStep === 'drills') {
-        await persistIncorrectDrillReviews(now);
+        newlyCreatedReviewCount = await persistIncorrectDrillReviews(now);
       }
       if (updatedProgress.currentStep === 'done') {
         await enqueueOutputSave(outputDraft);
@@ -312,7 +318,7 @@ export function TodayPage({
               : currentStep === 'patterns'
                 ? practicedPatternIds.size
                 : undefined,
-          reviewCreatedCount: dayReviewCount,
+          reviewCreatedCount: dayReviewCount + newlyCreatedReviewCount,
           missingRequirements: currentGate.missingRequirements,
         },
       });
@@ -344,51 +350,59 @@ export function TodayPage({
       </div>
 
       <div className="panel today-step-panel">
-        {currentStep === 'review' && (
+        {isHydrating ? (
           <section>
-            <h3>Quick Review</h3>
-            <p>Day 1 has no review. Start with today&apos;s words.</p>
+            <h3>Loading today...</h3>
           </section>
-        )}
-        {currentStep === 'words' && (
-          <WordCards
-            words={words}
-            showChineseHelp={showChineseHelp}
-            marks={wordMarks}
-            onReview={(wordId) => {
-              const word = words.find((item) => item.id === wordId);
-              if (word) markWord(word, 'review');
-            }}
-            onKnow={(wordId) => {
-              const word = words.find((item) => item.id === wordId);
-              if (word) markWord(word, 'known');
-            }}
-          />
-        )}
-        {currentStep === 'patterns' && (
-          <PatternCards
-            patterns={patterns}
-            practicedPatternIds={practicedPatternIds}
-            onPractice={(patternId) => setPracticedPatternIds((current) => new Set([...current, patternId]))}
-          />
-        )}
-        {currentStep === 'drills' && <ExerciseRenderer exercises={drillExercises} answers={drillAnswers} onAnswer={handleDrillAnswer} />}
-        {currentStep === 'translate' && (
-          <TranslationTask exercises={translationExercises} drafts={translationDrafts} onDraftChange={handleTranslationDraftChange} />
-        )}
-        {currentStep === 'output' && <OutputTaskEditor task={day.outputTask} value={outputDraft} onChange={saveOutputDraft} />}
-        {currentStep === 'done' && (
-          <CompletionSummary
-            day={day}
-            output={outputDraft}
-            reviewCount={dayReviewCount}
-            nextDay={nextDay}
-            onStartNextDay={startNextDay}
-          />
+        ) : (
+          <>
+            {currentStep === 'review' && (
+              <section>
+                <h3>Quick Review</h3>
+                <p>Day 1 has no review. Start with today&apos;s words.</p>
+              </section>
+            )}
+            {currentStep === 'words' && (
+              <WordCards
+                words={words}
+                showChineseHelp={showChineseHelp}
+                marks={wordMarks}
+                onReview={(wordId) => {
+                  const word = words.find((item) => item.id === wordId);
+                  if (word) markWord(word, 'review');
+                }}
+                onKnow={(wordId) => {
+                  const word = words.find((item) => item.id === wordId);
+                  if (word) markWord(word, 'known');
+                }}
+              />
+            )}
+            {currentStep === 'patterns' && (
+              <PatternCards
+                patterns={patterns}
+                practicedPatternIds={practicedPatternIds}
+                onPractice={(patternId) => setPracticedPatternIds((current) => new Set([...current, patternId]))}
+              />
+            )}
+            {currentStep === 'drills' && <ExerciseRenderer exercises={drillExercises} answers={drillAnswers} onAnswer={handleDrillAnswer} />}
+            {currentStep === 'translate' && (
+              <TranslationTask exercises={translationExercises} drafts={translationDrafts} onDraftChange={handleTranslationDraftChange} />
+            )}
+            {currentStep === 'output' && <OutputTaskEditor task={day.outputTask} value={outputDraft} onChange={saveOutputDraft} />}
+            {currentStep === 'done' && (
+              <CompletionSummary
+                day={day}
+                output={outputDraft}
+                reviewCount={dayReviewCount}
+                nextDay={nextDay}
+                onStartNextDay={startNextDay}
+              />
+            )}
+          </>
         )}
       </div>
 
-      {!currentGate.isComplete && (
+      {!isHydrating && !currentGate.isComplete && (
         <div className="requirement-list" role="status">
           {currentGate.missingRequirements.map((requirement) => (
             <p key={requirement}>{requirement}</p>
