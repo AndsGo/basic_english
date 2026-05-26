@@ -93,6 +93,10 @@ async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
   });
 }
 
+function normalizeUserOutput(output: UserOutput): UserOutput {
+  return { ...output, sentenceCount: output.sentenceCount ?? 0 };
+}
+
 export function createIndexedDbProgressRepository(dbName = 'basic-english-progress'): ProgressRepository {
   const dbPromise = openProgressDb(dbName);
 
@@ -148,12 +152,13 @@ export function createIndexedDbProgressRepository(dbName = 'basic-english-progre
 
     async getUserOutput(dayId) {
       const db = await dbPromise;
-      return (await db.get('userOutputs', dayId)) ?? null;
+      const output = await db.get('userOutputs', dayId);
+      return output ? normalizeUserOutput(output) : null;
     },
 
     async listUserOutputs() {
       const db = await dbPromise;
-      return db.getAll('userOutputs');
+      return (await db.getAll('userOutputs')).map(normalizeUserOutput);
     },
 
     async saveWordProgress(progress) {

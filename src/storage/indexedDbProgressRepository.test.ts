@@ -223,6 +223,33 @@ describe('indexedDbProgressRepository V1.1', () => {
     expect(await repo.listUserOutputs()).toHaveLength(1);
   });
 
+  it('normalizes legacy user outputs without sentence counts when reading', async () => {
+    const dbName = nextDbName();
+    const repo = createIndexedDbProgressRepository(dbName);
+    await repo.listUserOutputs();
+
+    const db = await openDB(dbName, 3);
+    await db.put('userOutputs', {
+      id: 'legacy-output-day-001',
+      dayId: 'day-001',
+      text: 'My name is Li.',
+      selfRating: 'ok',
+      checklist: {
+        usedTargetPattern: true,
+        usedLessonWords: true,
+        hasSubjects: true,
+        meaningIsClear: true,
+      },
+      updatedAt: '2026-05-26T00:00:00.000Z',
+    } as UserOutput);
+    db.close();
+
+    await expect(repo.getUserOutput('day-001')).resolves.toMatchObject({ sentenceCount: 0 });
+    await expect(repo.listUserOutputs()).resolves.toEqual([
+      expect.objectContaining({ dayId: 'day-001', sentenceCount: 0 }),
+    ]);
+  });
+
   it('persists step completions, study activities, and retrieves review items by id', async () => {
     const repo = createIndexedDbProgressRepository('v1-1-completion-activity-test');
     const reviewItem = createWordReviewItem({
