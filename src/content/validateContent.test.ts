@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Course } from '../domain/types';
+import { basicEnglishCourse } from './course';
 import { week1Course } from './week1';
 import { validateCourseContent } from './validateContent';
 
@@ -251,5 +252,29 @@ describe('week1Course', () => {
 
     expect(result.errors).toContain('day-001-translation-001 translation exercise must have non-blank reference answers');
     expect(result.errors).toContain('day-001-translation-001 translation exercise must have suggested pattern ids');
+  });
+});
+
+describe('basicEnglishCourse V1.2', () => {
+  it('contains Week 1 and a complete Week 2', () => {
+    expect(basicEnglishCourse.weeks).toHaveLength(2);
+    expect(basicEnglishCourse.weeks[1]).toMatchObject({
+      id: 'week-02',
+      number: 2,
+      title: 'Home & Things',
+    });
+    expect(basicEnglishCourse.weeks[1].days.map((day) => day.id)).toEqual([
+      'day-008',
+      'day-009',
+      'day-010',
+      'day-011',
+      'day-012',
+      'day-013',
+      'day-014',
+    ]);
+  });
+
+  it('validates the combined course content', () => {
+    expect(validateCourseContent(basicEnglishCourse).errors).toEqual([]);
   });
 });

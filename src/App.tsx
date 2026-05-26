@@ -5,7 +5,7 @@ import { MePage } from './components/MePage';
 import { ReviewPage } from './components/ReviewPage';
 import { TodayPage } from './components/TodayPage';
 import { WordsPage } from './components/WordsPage';
-import { week1Course } from './content/week1';
+import { basicEnglishCourse } from './content/course';
 import { getActiveReviewDayIds } from './domain/review';
 import { SpeechProvider } from './speech/SpeechProvider';
 import type { SpeechRate } from './speech/speechService';
@@ -93,7 +93,7 @@ export default function App() {
       <Layout activeTab={activeTab} onTabChange={handleTabChange} reviewCount={reviewCount}>
         {activeTab === 'today' && (
           <TodayPage
-            course={week1Course}
+            course={basicEnglishCourse}
             repository={repository}
             showChineseHelp={showChineseHelp}
             onProgressChange={() => void refreshProgressSummary()}
@@ -101,7 +101,7 @@ export default function App() {
         )}
         {activeTab === 'course' && (
           <CoursePage
-            course={week1Course}
+            course={basicEnglishCourse}
             completedDayIds={completedDayIds}
             activeReviewDayIds={activeReviewDayIds}
             reviewCount={reviewCount}
@@ -111,7 +111,7 @@ export default function App() {
         {activeTab === 'review' && (
           <ReviewPage repository={repository} onStartToday={() => handleTabChange('today')} onReviewChange={() => void refreshProgressSummary()} />
         )}
-        {activeTab === 'words' && <WordsPage course={week1Course} showChineseHelp={showChineseHelp} />}
+        {activeTab === 'words' && <WordsPage course={basicEnglishCourse} showChineseHelp={showChineseHelp} />}
         {activeTab === 'me' && (
           <MePage
             repository={repository}

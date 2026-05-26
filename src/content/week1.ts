@@ -273,3 +273,7 @@ export const week1Course: Course = {
     },
   ],
 };
+
+export const week1Words = words;
+export const week1Patterns = patterns;
+export const week1 = week1Course.weeks[0];

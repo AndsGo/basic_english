@@ -1,5 +1,5 @@
 import { expect, test, type Page, type Route } from '@playwright/test';
-import { week1Course } from '../../src/content/week1';
+import { basicEnglishCourse } from '../../src/content/course';
 
 async function clearAppStorage(page: Page) {
   const blankPage = (route: Route) =>
@@ -56,7 +56,7 @@ async function completeDayOnePatterns(page: Page) {
 }
 
 function getDayOneChoiceReviewValues() {
-  const dayOne = week1Course.weeks[0]?.days.find((day) => day.id === 'day-001');
+  const dayOne = basicEnglishCourse.weeks[0]?.days.find((day) => day.id === 'day-001');
   const exercise = dayOne?.exercises.find((item) => item.id === 'day-001-choice-001');
 
   if (!exercise || exercise.type !== 'choice') {
