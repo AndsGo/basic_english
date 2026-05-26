@@ -7,6 +7,13 @@ function normalizeText(value: string): string {
   return value.trim().toLocaleLowerCase();
 }
 
+function hasAnswerInput(answer: ExerciseAnswer | undefined): answer is ExerciseAnswer {
+  if (answer === undefined) return false;
+  if (typeof answer === 'string') return answer.trim().length > 0;
+
+  return answer.length > 0;
+}
+
 export function checkExerciseAnswer(exercise: Exercise, answer: ExerciseAnswer): ExerciseResult {
   if (exercise.type === 'choice') {
     return answer === exercise.correctOption ? 'correct' : 'incorrect';
@@ -38,17 +45,16 @@ export function countSentences(text: string): number {
 
 export function summarizeDrillCompletion(exercises: Exercise[], answers: Record<string, ExerciseAnswer>) {
   const drills = exercises.filter((exercise) => exercise.type !== 'translation');
-  const missingExerciseIds = drills
-    .filter((exercise) => answers[exercise.id] === undefined || answers[exercise.id] === '')
-    .map((exercise) => exercise.id);
+  const answeredDrills = drills.filter((exercise) => hasAnswerInput(answers[exercise.id]));
+  const missingExerciseIds = drills.filter((exercise) => !hasAnswerInput(answers[exercise.id])).map((exercise) => exercise.id);
   const incorrectExerciseIds = drills
-    .filter((exercise) => answers[exercise.id] !== undefined && checkExerciseAnswer(exercise, answers[exercise.id]) === 'incorrect')
+    .filter((exercise) => hasAnswerInput(answers[exercise.id]) && checkExerciseAnswer(exercise, answers[exercise.id]) === 'incorrect')
     .map((exercise) => exercise.id);
 
   return {
     isComplete: missingExerciseIds.length === 0,
     requiredCount: drills.length,
-    answeredCount: drills.length - missingExerciseIds.length,
+    answeredCount: answeredDrills.length,
     missingExerciseIds,
     incorrectExerciseIds,
   };

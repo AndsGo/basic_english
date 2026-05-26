@@ -53,4 +53,18 @@ describe('exercise rules', () => {
     expect(summary.missingExerciseIds).toEqual([]);
     expect(summary.incorrectExerciseIds).toEqual(['choice-1']);
   });
+
+  it('treats blank drill answers as missing learner input', () => {
+    const summary = summarizeDrillCompletion(exercises, {
+      'choice-1': '',
+      'fill-1': '   ',
+      'order-1': [],
+      'replace-1': '   ',
+    });
+
+    expect(summary.isComplete).toBe(false);
+    expect(summary.answeredCount).toBe(0);
+    expect(summary.missingExerciseIds).toEqual(['choice-1', 'fill-1', 'order-1', 'replace-1']);
+    expect(summary.incorrectExerciseIds).toEqual([]);
+  });
 });
