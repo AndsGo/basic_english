@@ -1,4 +1,4 @@
-import type { DayProgress, StepId } from './progress';
+import type { DayProgress } from './progress';
 import type { SceneHelpMode, SceneOutput } from './types';
 
 type PartialSceneOutput = Partial<SceneOutput> & { sceneId?: string };
@@ -9,7 +9,7 @@ export interface SceneCompletionGate {
 }
 
 function isCompletedDay(progress: Pick<DayProgress, 'status' | 'currentStep'>) {
-  return progress.status === 'completed' || progress.currentStep === ('done' as StepId);
+  return progress.status === 'completed' || progress.currentStep === 'done';
 }
 
 function normalizeHelpMode(value: unknown): SceneHelpMode {
@@ -27,7 +27,7 @@ export function createInitialSceneOutput(sceneId: string): SceneOutput {
 }
 
 export function normalizeSceneOutput(scene: PartialSceneOutput | undefined, fallbackSceneId = ''): SceneOutput {
-  const sentences = Array.isArray(scene?.sentences) ? scene.sentences.slice(0, 6) : [];
+  const sentences = Array.isArray(scene?.sentences) ? [...scene.sentences] : [];
   while (sentences.length < 4) sentences.push('');
 
   return {
@@ -57,7 +57,8 @@ export function getCompletedSceneIds(
 ): string[] {
   const completedDayIds = new Set(dayProgress.filter(isCompletedDay).map((progress) => progress.dayId));
 
-  return outputs
-    .filter((output) => completedDayIds.has(output.dayId) && output.scene && getSceneOutputCompletion(output.scene).isComplete)
-    .map((output) => output.scene!.sceneId);
+  return outputs.flatMap((output) => {
+    if (!completedDayIds.has(output.dayId) || !output.scene) return [];
+    return getSceneOutputCompletion(output.scene).isComplete ? [output.scene.sceneId] : [];
+  });
 }

@@ -63,6 +63,15 @@ describe('scene output helpers', () => {
     });
   });
 
+  it('preserves stored scene outputs with more than six sentences', () => {
+    expect(
+      normalizeSceneOutput({
+        sceneId: 'self',
+        sentences: ['One.', 'Two.', 'Three.', 'Four.', 'Five.', 'Six.', 'Seven.'],
+      }).sentences,
+    ).toEqual(['One.', 'Two.', 'Three.', 'Four.', 'Five.', 'Six.', 'Seven.']);
+  });
+
   it('returns completed scene ids only for completed days with complete scene output', () => {
     const sceneIds = getCompletedSceneIds(
       [
