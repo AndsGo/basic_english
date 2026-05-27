@@ -215,7 +215,24 @@ async function completeDayOneThroughOutput(user: ReturnType<typeof userEvent.set
   });
   if (screen.queryByLabelText('Scene sentence 1') || screen.queryByRole('textbox', { name: 'Daily output' })) return;
 
-  await completeToOutput(user);
+  if (!choiceExercise || !translationExercise) throw new Error('Day 1 test content is incomplete.');
+
+  await user.click(await getEnabledContinueButton());
+  expect(await screen.findByRole('heading', { name: 'Words' })).toBeInTheDocument();
+
+  await completeWords(user);
+  expect(await screen.findByRole('heading', { name: 'Patterns' })).toBeInTheDocument();
+
+  await completePatterns(user);
+  expect(await screen.findByRole('heading', { name: choiceExercise.prompt })).toBeInTheDocument();
+
+  await completeDrills(user);
+  expect(await screen.findByRole('heading', { name: translationExercise.chinesePrompt })).toBeInTheDocument();
+
+  await completeTranslation(user);
+  await waitFor(() => {
+    expect(screen.queryByLabelText('Scene sentence 1') || screen.queryByRole('textbox', { name: 'Daily output' })).toBeTruthy();
+  });
 }
 
 async function satisfyOutputGate(user: ReturnType<typeof userEvent.setup>, text = 'My name is Mei. I am from China. I study English. I am happy.') {

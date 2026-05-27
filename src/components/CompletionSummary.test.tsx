@@ -46,6 +46,28 @@ describe('CompletionSummary', () => {
     expect(screen.queryByText('No saved output text.')).not.toBeInTheDocument();
   });
 
+  it('uses legacy fallback when scene output has no summary content', () => {
+    const day1 = basicEnglishCourse.weeks[0].days[0];
+    const emptySceneOutput: UserOutput = {
+      ...output,
+      dayId: day1.id,
+      text: '',
+      scene: {
+        sceneId: 'self',
+        helpMode: 'template',
+        sentences: ['', '', '', ''],
+        sceneText: '   ',
+        dialogue: '',
+      },
+    };
+
+    render(<CompletionSummary day={day1} output={emptySceneOutput} reviewCount={0} onStartNextDay={vi.fn()} />);
+
+    expect(screen.getByText('No saved output text.')).toBeInTheDocument();
+    expect(screen.queryByText('Scene')).not.toBeInTheDocument();
+    expect(screen.queryByText('Dialogue')).not.toBeInTheDocument();
+  });
+
   it('uses course-complete copy when there is no next day', () => {
     const day14 = basicEnglishCourse.weeks[1].days[6];
 

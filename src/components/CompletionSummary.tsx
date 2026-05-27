@@ -24,6 +24,7 @@ export function CompletionSummary({
   const completedChecklist = Object.entries(output.checklist)
     .filter(([, isComplete]) => isComplete)
     .map(([key]) => completedChecklistLabels[key as keyof UserOutput['checklist']]);
+  const hasSceneSummary = Boolean(output.scene?.sceneText.trim() || output.scene?.dialogue.trim());
 
   return (
     <section className="completion-summary">
@@ -31,7 +32,7 @@ export function CompletionSummary({
       <p>You can now say: {day.goal}</p>
       <p>Practiced {day.wordIds.length} words and {day.patternIds.length} patterns.</p>
       <h4>Your output</h4>
-      {output.scene ? (
+      {output.scene && hasSceneSummary ? (
         <div className="saved-output">
           <p>
             <strong>Scene</strong>
