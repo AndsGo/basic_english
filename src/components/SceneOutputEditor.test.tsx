@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createInitialSceneOutput } from '../domain/sceneOutput';
@@ -40,6 +40,29 @@ describe('SceneOutputEditor', () => {
 
     expect(screen.getByLabelText('Scene sentence 1')).toHaveValue('My name is Li.');
     expect(screen.getByText('Say your name.')).toBeInTheDocument();
+  });
+
+  it('keeps help mode radio groups isolated for repeated goal ids', async () => {
+    const user = userEvent.setup();
+    const firstValue = createInitialSceneOutput('self');
+    const secondValue: SceneOutput = { ...createInitialSceneOutput('self'), sceneText: 'Second editor' };
+    const firstOnChange = vi.fn();
+    const secondOnChange = vi.fn();
+
+    render(
+      <>
+        <SceneOutputEditor goal={sceneGoal} value={firstValue} onChange={firstOnChange} />
+        <SceneOutputEditor goal={sceneGoal} value={secondValue} onChange={secondOnChange} />
+      </>,
+    );
+
+    const [firstHelpMode, secondHelpMode] = screen.getAllByRole('radiogroup', { name: 'Output help mode' });
+
+    await user.click(within(secondHelpMode).getByRole('radio', { name: 'Guided' }));
+
+    expect(within(firstHelpMode).getByRole('radio', { name: 'Template' })).toBeChecked();
+    expect(firstOnChange).not.toHaveBeenCalled();
+    expect(secondOnChange).toHaveBeenCalledWith(expect.objectContaining({ helpMode: 'guided' }));
   });
 
   it('updates sentences, scene text, and dialogue', async () => {

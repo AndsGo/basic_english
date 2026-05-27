@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import type { SceneGoal, SceneHelpMode, SceneOutput } from '../domain/types';
 
 const helpModes: Array<{ value: SceneHelpMode; label: string }> = [
@@ -15,6 +16,8 @@ export function SceneOutputEditor({
   value: SceneOutput;
   onChange: (output: SceneOutput) => void;
 }) {
+  const helpModeName = `${useId()}-${goal.id}-help-mode`;
+
   const updateValue = (patch: Partial<SceneOutput>) => {
     onChange({ ...value, ...patch });
   };
@@ -32,7 +35,7 @@ export function SceneOutputEditor({
           <label key={mode.value}>
             <input
               type="radio"
-              name={`${goal.id}-help-mode`}
+              name={helpModeName}
               value={mode.value}
               checked={value.helpMode === mode.value}
               onChange={() => updateValue({ helpMode: mode.value })}

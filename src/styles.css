@@ -230,7 +230,8 @@ textarea {
   gap: 10px;
 }
 
-.scene-output-editor input[type='text'] {
+.scene-output-editor input[type='text'],
+.scene-output-editor textarea {
   width: 100%;
   box-sizing: border-box;
   padding: 10px 12px;
