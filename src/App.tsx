@@ -119,6 +119,7 @@ export default function App() {
           <MePage
             repository={repository}
             scenarioCapabilities={scenarioCapabilities}
+            sceneGoalsByDayId={sceneGoalsByDayId}
             showChineseHelp={showChineseHelp}
             onShowChineseHelpChange={setShowChineseHelp}
             readingEnabled={readingEnabled}

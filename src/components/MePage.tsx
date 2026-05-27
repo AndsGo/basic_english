@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { getCapabilityStates } from '../domain/capabilities';
 import type { DayProgress } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
-import type { ScenarioCapability } from '../domain/types';
+import { getCompletedSceneIds } from '../domain/sceneOutput';
+import type { ScenarioCapability, SceneGoal } from '../domain/types';
 import type { SpeechRate } from '../speech/speechService';
 import type { ProgressRepository, StudyActivity, UserOutput } from '../storage/progressRepository';
+import { SceneMap } from './SceneMap';
 
 const DEFAULT_TOTAL_DAY_COUNT = 7;
 
@@ -43,6 +45,7 @@ function formatDayCompletionHint(dayIds: string[]) {
 export function MePage({
   repository,
   scenarioCapabilities,
+  sceneGoalsByDayId,
   showChineseHelp = false,
   onShowChineseHelpChange,
   readingEnabled = true,
@@ -53,6 +56,7 @@ export function MePage({
 }: {
   repository: ProgressRepository;
   scenarioCapabilities?: ScenarioCapability[];
+  sceneGoalsByDayId?: Partial<Record<string, SceneGoal>>;
   showChineseHelp?: boolean;
   onShowChineseHelpChange?: (showChineseHelp: boolean) => void;
   readingEnabled?: boolean;
@@ -114,6 +118,8 @@ export function MePage({
     scenarioCapabilities && hasLoadedProgress && !loadError ? getCapabilityStates(scenarioCapabilities, completedDayIds) : null;
   const missingNextDayIds =
     capabilityStates?.next?.unlockedByDayIds.filter((dayId) => !completedDayIds.includes(dayId)) ?? [];
+  const sceneGoals = sceneGoalsByDayId ? Object.values(sceneGoalsByDayId).filter((goal): goal is SceneGoal => Boolean(goal)) : [];
+  const completedSceneIds = getCompletedSceneIds(days, outputs);
 
   return (
     <section className="panel">
@@ -208,6 +214,7 @@ export function MePage({
           )}
         </section>
       )}
+      {sceneGoals.length > 0 && <SceneMap goals={sceneGoals} completedSceneIds={completedSceneIds} />}
       <section>
         <h3>Saved Outputs</h3>
         {outputs.length > 0 ? (
