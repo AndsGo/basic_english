@@ -18,6 +18,7 @@ import {
   type WordMark,
 } from '../domain/stepCompletion';
 import type { Course, Exercise, TranslationExercise, Word } from '../domain/types';
+import { useSpeech } from '../speech/SpeechProvider';
 import type { ProgressRepository, UserOutput } from '../storage/progressRepository';
 import { CompletionSummary } from './CompletionSummary';
 import { ExerciseRenderer } from './ExerciseRenderer';
@@ -106,6 +107,7 @@ export function TodayPage({
   const [isAdvancing, setIsAdvancing] = useState(false);
   const selectedDayIdRef = useRef(selectedDayId);
   const outputSaveQueue = useRef<Promise<void>>(Promise.resolve());
+  const { stop: stopSpeech } = useSpeech();
   const words = useMemo(() => course.words.filter((word) => day.wordIds.includes(word.id)), [course.words, day.wordIds]);
   const patterns = useMemo(() => course.patterns.filter((pattern) => day.patternIds.includes(pattern.id)), [course.patterns, day.patternIds]);
   const currentWeek = useMemo(() => course.weeks.find((week) => week.id === day.weekId) ?? course.weeks[0], [course.weeks, day.weekId]);
@@ -297,6 +299,7 @@ export function TodayPage({
 
     const now = new Date().toISOString();
     const updatedProgress = completeStep(dayProgress, currentStep, now);
+    stopSpeech();
     setIsAdvancing(true);
     try {
       let newlyCreatedReviewCount = 0;
@@ -343,6 +346,13 @@ export function TodayPage({
   };
 
   const hasStickyNext = currentStep !== 'done';
+
+  useEffect(
+    () => () => {
+      stopSpeech();
+    },
+    [stopSpeech],
+  );
 
   return (
     <section className={hasStickyNext ? 'today today--with-sticky-next' : 'today'}>
@@ -421,8 +431,9 @@ export function TodayPage({
           className="sticky-next primary-button"
           onClick={moveNext}
           disabled={isHydrating || isAdvancing || !currentGate.isComplete}
+          aria-busy={isAdvancing}
         >
-          Continue
+          {isAdvancing ? 'Saving...' : 'Continue'}
         </button>
       )}
     </section>

@@ -84,4 +84,30 @@ describe('SpeechButton', () => {
 
     expect(screen.getByRole('button', { name: 'Read hello' })).toBeDisabled();
   });
+
+  it('keeps active state on the clicked button when another button has the same text', async () => {
+    const user = userEvent.setup();
+    const service = createTestService();
+
+    render(
+      <SpeechProvider enabled rate="normal" service={service}>
+        <SpeechButton text="I am from China." label="Read example for from" />
+        <SpeechButton text="I am from China." label="Read example for China" />
+      </SpeechProvider>,
+    );
+
+    const fromButton = screen.getByRole('button', { name: 'Read example for from' });
+    const chinaButton = screen.getByRole('button', { name: 'Read example for China' });
+
+    await user.click(fromButton);
+
+    expect(fromButton).toHaveAttribute('aria-pressed', 'true');
+    expect(chinaButton).toHaveAttribute('aria-pressed', 'false');
+
+    await user.click(chinaButton);
+
+    expect(fromButton).toHaveAttribute('aria-pressed', 'false');
+    expect(chinaButton).toHaveAttribute('aria-pressed', 'true');
+    expect(service.speak).toHaveBeenCalledTimes(2);
+  });
 });

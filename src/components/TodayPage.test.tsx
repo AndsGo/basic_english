@@ -283,6 +283,34 @@ describe('TodayPage', () => {
     });
   });
 
+  it('shows visible selected feedback when words and patterns are marked', async () => {
+    const user = userEvent.setup();
+    const repo = createIndexedDbProgressRepository('today-visible-selection-feedback');
+    renderWithSpeech(<TodayPage course={week1Course} repository={repo} />);
+
+    await user.click(await getEnabledContinueButton());
+
+    const knowName = await screen.findByRole('button', { name: 'Know name' });
+    await user.click(knowName);
+
+    expect(knowName).toHaveAttribute('aria-pressed', 'true');
+    expect(knowName).toHaveClass('selected-button');
+    expect(screen.getByText('Known')).toBeInTheDocument();
+
+    for (const button of screen.getAllByRole('button', { name: /^Know / })) {
+      if (button !== knowName) await user.click(button);
+    }
+    await user.click(await getEnabledContinueButton());
+
+    const practiceButtons = await screen.findAllByRole('button', { name: 'Practice this' });
+    const practiceButton = practiceButtons[0];
+    await user.click(practiceButton);
+
+    expect(practiceButton).toHaveAttribute('aria-pressed', 'true');
+    expect(practiceButton).toHaveClass('selected-button');
+    expect(screen.getByText('Practiced')).toBeInTheDocument();
+  });
+
   it('notifies when a word review item is created', async () => {
     const user = userEvent.setup();
     const repo = createIndexedDbProgressRepository('today-v1-1-word-review-callback');
@@ -480,7 +508,7 @@ describe('TodayPage', () => {
     expect(screen.getByText('My name is Li.')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read pattern My name is ___.' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read structure My name is {name}.' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Read example My name is Li.' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Read example for My name is ___.: My name is Li.' })).toBeInTheDocument();
 
     await completePatterns(user);
     expect(screen.getByRole('heading', { name: choiceExercise.prompt })).toBeInTheDocument();
@@ -711,7 +739,8 @@ describe('TodayPage', () => {
 
     expect(screen.queryByRole('heading', { name: 'Day 1 complete' })).not.toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: 'Daily output' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Continue' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Saving...' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Saving...' })).toHaveAttribute('aria-busy', 'true');
     expect(savedProgresses).toHaveLength(1);
     expect(savedProgresses[0]).toMatchObject({ currentStep: 'done', status: 'completed' });
 

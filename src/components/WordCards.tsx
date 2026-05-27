@@ -31,10 +31,11 @@ export function WordCards({ words, showChineseHelp = false, marks = {}, onReview
               {word.example}
               <SpeechButton text={word.example} label={`Read example for ${word.text}`} />
             </p>
+            {marks[word.id] && <p className="selection-status">{marks[word.id] === 'known' ? 'Known' : 'Marked for review'}</p>}
             <div className="card-actions">
               <button
                 type="button"
-                className="secondary-button"
+                className={`secondary-button${marks[word.id] === 'review' ? ' selected-button' : ''}`}
                 aria-label={`Review ${word.text}`}
                 aria-pressed={marks[word.id] === 'review'}
                 onClick={() => onReview(word.id)}
@@ -43,7 +44,7 @@ export function WordCards({ words, showChineseHelp = false, marks = {}, onReview
               </button>
               <button
                 type="button"
-                className="secondary-button"
+                className={`secondary-button${marks[word.id] === 'known' ? ' selected-button' : ''}`}
                 aria-label={`Know ${word.text}`}
                 aria-pressed={marks[word.id] === 'known'}
                 onClick={() => onKnow(word.id)}

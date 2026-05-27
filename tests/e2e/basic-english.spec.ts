@@ -339,7 +339,7 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByText('My name is ___.')).toBeVisible();
     await expect(page.getByRole('button', { name: 'Read pattern My name is ___.' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Read structure My name is {name}.' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Read example My name is Li.' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Read example for My name is ___.: My name is Li.' })).toBeVisible();
     await completeDayOnePatterns(page);
 
     await continueTo(page, 'What does "name" mean?');

@@ -14,11 +14,12 @@ type SpeechProviderProps = {
 };
 
 type SpeechContextValue = {
+  activeId: string | null;
   activeText: string | null;
   enabled: boolean;
   isSupported: boolean;
   rate: SpeechRate;
-  speak(text: string): void;
+  speak(text: string, activeId?: string): void;
   stop(): void;
 };
 
@@ -36,12 +37,16 @@ export function SpeechProvider({
   service = browserSpeechService,
 }: SpeechProviderProps) {
   const [activeText, setActiveText] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const activeTextRef = useRef<string | null>(null);
+  const activeIdRef = useRef<string | null>(null);
   const utteranceTokenRef = useRef(0);
   const isSupported = service.isSupported();
 
-  const setTrackedActiveText = useCallback((text: string | null) => {
+  const setTrackedActiveSpeech = useCallback((id: string | null, text: string | null) => {
+    activeIdRef.current = id;
     activeTextRef.current = text;
+    setActiveId(id);
     setActiveText(text);
   }, []);
 
@@ -52,25 +57,26 @@ export function SpeechProvider({
   const stop = useCallback(() => {
     invalidateUtterance();
     service.stop();
-    setTrackedActiveText(null);
-  }, [invalidateUtterance, service, setTrackedActiveText]);
+    setTrackedActiveSpeech(null, null);
+  }, [invalidateUtterance, service, setTrackedActiveSpeech]);
 
   const speak = useCallback(
-    (text: string) => {
+    (text: string, activeIdForRequest?: string) => {
       const trimmedText = text.trim();
+      const requestedActiveId = activeIdForRequest ?? trimmedText;
 
       if (!enabled || !isSupported || !trimmedText) {
         return;
       }
 
-      const currentActiveText = activeTextRef.current;
+      const currentActiveId = activeIdRef.current;
 
-      if (trimmedText === currentActiveText) {
+      if (requestedActiveId === currentActiveId) {
         stop();
         return;
       }
 
-      if (currentActiveText) {
+      if (currentActiveId) {
         service.stop();
       }
 
@@ -81,18 +87,18 @@ export function SpeechProvider({
       if (utterance) {
         const clearIfCurrent = () => {
           if (utteranceTokenRef.current === utteranceToken) {
-            setTrackedActiveText(null);
+            setTrackedActiveSpeech(null, null);
           }
         };
 
         utterance.onend = clearIfCurrent;
         utterance.onerror = clearIfCurrent;
-        setTrackedActiveText(trimmedText);
-      } else if (currentActiveText) {
-        setTrackedActiveText(null);
+        setTrackedActiveSpeech(requestedActiveId, trimmedText);
+      } else if (currentActiveId) {
+        setTrackedActiveSpeech(null, null);
       }
     },
-    [enabled, isSupported, rate, service, setTrackedActiveText, stop],
+    [enabled, isSupported, rate, service, setTrackedActiveSpeech, stop],
   );
 
   useEffect(() => {
@@ -106,15 +112,15 @@ export function SpeechProvider({
       if (activeTextRef.current) {
         invalidateUtterance();
         service.stop();
-        setTrackedActiveText(null);
+        setTrackedActiveSpeech(null, null);
       }
     },
-    [invalidateUtterance, service, setTrackedActiveText],
+    [invalidateUtterance, service, setTrackedActiveSpeech],
   );
 
   const value = useMemo<SpeechContextValue>(() => {
-    return { activeText, enabled, isSupported, rate, speak, stop };
-  }, [activeText, enabled, isSupported, rate, speak, stop]);
+    return { activeId, activeText, enabled, isSupported, rate, speak, stop };
+  }, [activeId, activeText, enabled, isSupported, rate, speak, stop]);
 
   return <SpeechContext.Provider value={value}>{children}</SpeechContext.Provider>;
 }

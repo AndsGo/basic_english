@@ -41,6 +41,26 @@ textarea {
   font-weight: 700;
 }
 
+.primary-button:hover:not(:disabled),
+.primary-button:focus-visible {
+  background: #1f4d3b;
+}
+
+.primary-button:focus-visible,
+.secondary-button:focus-visible {
+  outline: 3px solid #9ccbb7;
+  outline-offset: 2px;
+}
+
+.primary-button:active:not(:disabled),
+.secondary-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.primary-button:disabled {
+  opacity: 0.62;
+}
+
 .layout {
   min-height: 100vh;
   box-sizing: border-box;
@@ -275,6 +295,35 @@ textarea {
   color: #265c46;
   background: #fffdf8;
   font-weight: 700;
+}
+
+.secondary-button:hover:not(:disabled),
+.secondary-button:focus-visible {
+  border-color: #265c46;
+  background: #eef6f1;
+}
+
+.secondary-button.selected-button,
+.secondary-button[aria-pressed='true'] {
+  color: white;
+  border-color: #265c46;
+  background: #265c46;
+}
+
+.secondary-button:disabled {
+  opacity: 0.55;
+}
+
+.selection-status {
+  display: inline-flex;
+  width: fit-content;
+  margin: 0;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: #265c46;
+  background: #dceee6;
+  font-size: 0.82rem;
+  font-weight: 800;
 }
 
 .speech-button {

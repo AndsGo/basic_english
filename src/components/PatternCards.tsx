@@ -31,13 +31,14 @@ export function PatternCards({
               {pattern.examples.map((example) => (
                 <p className="example" key={example}>
                   {example}
-                  <SpeechButton text={example} label={`Read example ${example}`} />
+                  <SpeechButton text={example} label={`Read example for ${pattern.title}: ${example}`} />
                 </p>
               ))}
             </div>
+            {practicedPatternIds.has(pattern.id) && <p className="selection-status">Practiced</p>}
             <button
               type="button"
-              className="secondary-button"
+              className={`secondary-button${practicedPatternIds.has(pattern.id) ? ' selected-button' : ''}`}
               aria-pressed={practicedPatternIds.has(pattern.id)}
               onClick={() => onPractice?.(pattern.id)}
             >

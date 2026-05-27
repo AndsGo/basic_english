@@ -8,7 +8,7 @@ type SpeechButtonProps = {
 export function SpeechButton({ text, label }: SpeechButtonProps) {
   const speech = useSpeech();
   const trimmedText = text.trim();
-  const isActive = speech.activeText === trimmedText;
+  const isActive = speech.activeId === label;
   const isDisabled = !speech.enabled || !speech.isSupported || !trimmedText;
   const icon = isActive ? (
     <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
@@ -30,7 +30,7 @@ export function SpeechButton({ text, label }: SpeechButtonProps) {
       aria-label={label}
       aria-pressed={isActive}
       disabled={isDisabled}
-      onClick={() => speech.speak(trimmedText)}
+      onClick={() => speech.speak(trimmedText, label)}
     >
       {icon}
     </button>
