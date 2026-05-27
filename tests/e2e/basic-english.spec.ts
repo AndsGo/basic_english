@@ -431,6 +431,10 @@ test.describe('Basic English MVP e2e', () => {
     await page.getByRole('button', { name: 'Me', exact: true }).click();
     await expect(page.getByText('I can describe my room.')).toBeVisible();
     await expect(page.getByRole('listitem', { name: /Room Completed/ })).toBeVisible();
+
+    await page.reload();
+    await page.getByRole('button', { name: 'Me', exact: true }).click();
+    await expect(page.getByRole('listitem', { name: /Room Completed/ })).toBeVisible();
   });
 
   test('exposes primary navigation on a mobile viewport', async ({ page }) => {
