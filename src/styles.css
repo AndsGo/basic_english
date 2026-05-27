@@ -555,3 +555,49 @@ textarea {
     min-width: 220px;
   }
 }
+.scene-goal-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid #d8e2dc;
+  border-radius: 8px;
+  background: #f7fbf8;
+}
+
+.scene-chip {
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: #265c46;
+  background: #dceee6;
+  font-weight: 800;
+}
+
+.scene-map ul {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.scene-map-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #d8e2dc;
+  border-radius: 8px;
+  background: #f8faf8;
+}
+
+.scene-map-item--completed {
+  border-color: #265c46;
+  background: #dceee6;
+}
+
+.scene-map-item--current {
+  border-color: #265c46;
+}
