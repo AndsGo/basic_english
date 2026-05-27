@@ -22,6 +22,30 @@ const output: UserOutput = {
 };
 
 describe('CompletionSummary', () => {
+  it('shows saved scene output instead of empty legacy output text', () => {
+    const day1 = basicEnglishCourse.weeks[0].days[0];
+    const sceneOutput: UserOutput = {
+      ...output,
+      dayId: day1.id,
+      text: '',
+      scene: {
+        sceneId: 'self',
+        helpMode: 'template',
+        sentences: ['My name is Li.', 'I am from China.', 'I am a student.', 'I study English.'],
+        sceneText: 'My name is Li. I am from China. I am a student. I study English.',
+        dialogue: 'A: What is your name?\nB: My name is Li.',
+      },
+    };
+
+    render(<CompletionSummary day={day1} output={sceneOutput} reviewCount={0} onStartNextDay={vi.fn()} />);
+
+    expect(screen.getByText('Scene')).toBeInTheDocument();
+    expect(screen.getByText('My name is Li. I am from China. I am a student. I study English.')).toBeInTheDocument();
+    expect(screen.getByText('Dialogue')).toBeInTheDocument();
+    expect(screen.getByText('A: What is your name? B: My name is Li.')).toBeInTheDocument();
+    expect(screen.queryByText('No saved output text.')).not.toBeInTheDocument();
+  });
+
   it('uses course-complete copy when there is no next day', () => {
     const day14 = basicEnglishCourse.weeks[1].days[6];
 

@@ -31,7 +31,20 @@ export function CompletionSummary({
       <p>You can now say: {day.goal}</p>
       <p>Practiced {day.wordIds.length} words and {day.patternIds.length} patterns.</p>
       <h4>Your output</h4>
-      <p className="saved-output">{output.text || 'No saved output text.'}</p>
+      {output.scene ? (
+        <div className="saved-output">
+          <p>
+            <strong>Scene</strong>
+          </p>
+          <p>{output.scene.sceneText}</p>
+          <p>
+            <strong>Dialogue</strong>
+          </p>
+          <p>{output.scene.dialogue}</p>
+        </div>
+      ) : (
+        <p className="saved-output">{output.text || 'No saved output text.'}</p>
+      )}
       <p>Self rating: {output.selfRating}</p>
       {completedChecklist.length > 0 && (
         <ul className="completion-checklist">
