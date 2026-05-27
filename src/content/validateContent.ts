@@ -167,9 +167,14 @@ export function validateScenarioWeekMap(weeks: ScenarioWeek[]): ValidationResult
 export function validateSceneGoals(sceneGoalsByDayId: Record<string, SceneGoal>, course: Course): ValidationResult {
   const errors: string[] = [];
   const dayIds = new Set(course.weeks.flatMap((week) => week.days.map((day) => day.id)));
+  const sceneGoalIds = new Set<string>();
 
   Object.entries(sceneGoalsByDayId).forEach(([dayId, sceneGoal]) => {
     if (!dayIds.has(dayId)) errors.push(`Scene goal ${dayId} references missing day`);
+    if (sceneGoalIds.has(sceneGoal.id)) {
+      errors.push(`Duplicate scene goal id: ${sceneGoal.id}`);
+    }
+    sceneGoalIds.add(sceneGoal.id);
     if (!sceneGoal.id.trim() || !sceneGoal.title.trim() || !sceneGoal.capability.trim()) {
       errors.push(`Scene goal for ${dayId} is missing id, title, or capability`);
     }

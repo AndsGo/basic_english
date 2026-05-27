@@ -1,6 +1,8 @@
 import type { SceneGoal } from '../domain/types';
 
-export const sceneGoalsByDayId: Record<string, SceneGoal> = {
+type SceneGoalDayId = 'day-001' | 'day-008' | 'day-009' | 'day-010';
+
+export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   'day-001': {
     id: 'self',
     title: 'Self',

@@ -439,6 +439,7 @@ describe('scene goals', () => {
   it('validates scene goals for existing playable days', () => {
     const result = validateSceneGoals(sceneGoalsByDayId, basicEnglishCourse);
 
+    expect(Object.keys(sceneGoalsByDayId)).toEqual(['day-001', 'day-008', 'day-009', 'day-010']);
     expect(result.errors).toEqual([]);
   });
 
@@ -484,5 +485,33 @@ describe('scene goals', () => {
       'Scene goal for day-001 must include a scene prompt',
       'Scene goal for day-001 must include non-empty dialogue prompts',
     ]);
+  });
+
+  it('reports duplicate scene goal ids', () => {
+    const result = validateSceneGoals(
+      {
+        'day-001': {
+          id: 'self',
+          title: 'Self',
+          capability: 'I can describe myself.',
+          templates: ['My name is ____.'],
+          guidedPrompts: ['Say your name.'],
+          scenePrompt: 'Use your sentences to describe yourself clearly.',
+          dialoguePrompts: ['Ask and answer about your name.'],
+        },
+        'day-008': {
+          id: 'self',
+          title: 'Room',
+          capability: 'I can describe my room.',
+          templates: ['This is my room.'],
+          guidedPrompts: ['Say what your room is.'],
+          scenePrompt: 'Use your sentences to describe your room.',
+          dialoguePrompts: ['Ask and answer about your room.'],
+        },
+      },
+      basicEnglishCourse,
+    );
+
+    expect(result.errors).toContain('Duplicate scene goal id: self');
   });
 });
