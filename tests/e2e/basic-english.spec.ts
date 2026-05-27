@@ -1,6 +1,6 @@
 import { expect, test, type Page, type Route } from '@playwright/test';
 import { basicEnglishCourse } from '../../src/content/course';
-import type { Day, Exercise, OutputTask } from '../../src/domain/types';
+import type { Day, Exercise } from '../../src/domain/types';
 
 async function clearAppStorage(page: Page) {
   const blankPage = (route: Route) =>
@@ -113,21 +113,6 @@ function getCourseDay(dayId: string): Day {
   return day;
 }
 
-function getOutputText(task: OutputTask) {
-  const replacements = ['room', 'clean', 'bed', 'chair', 'table', 'book'];
-  let replacementIndex = 0;
-  return task.template
-    .slice(0, task.requiredSentenceCount)
-    .map((line) =>
-      line.replace(/___/g, () => {
-        const replacement = replacements[replacementIndex] ?? 'thing';
-        replacementIndex += 1;
-        return replacement;
-      }),
-    )
-    .join('\n');
-}
-
 async function completeWords(page: Page, day: Day) {
   for (const wordId of day.wordIds) {
     const word = basicEnglishCourse.words.find((item) => item.id === wordId);
@@ -195,13 +180,23 @@ async function completeTranslation(page: Page, day: Day) {
   await page.getByLabel('Close enough').check();
 }
 
-async function completeOutput(page: Page, day: Day) {
-  await page.getByLabel('Daily output').fill(getOutputText(day.outputTask));
-  await page.getByLabel("I used today's pattern.").check();
-  await page.getByLabel('I used lesson words.').check();
-  await page.getByLabel('Each sentence has a subject.').check();
-  await page.getByLabel('My meaning is clear.').check();
-  await page.getByLabel('OK').check();
+async function completeSceneOutput(page: Page, scene: 'self' | 'room') {
+  if (scene === 'self') {
+    await page.getByLabel('Scene sentence 1').fill('My name is Li.');
+    await page.getByLabel('Scene sentence 2').fill('I am from China.');
+    await page.getByLabel('Scene sentence 3').fill('I am a student.');
+    await page.getByLabel('Scene sentence 4').fill('I study English.');
+    await page.getByLabel('Scene description').fill('My name is Li. I am from China. I am a student. I study English.');
+    await page.getByLabel('Scene dialogue').fill('A: What is your name?\nB: My name is Li.');
+    return;
+  }
+
+  await page.getByLabel('Scene sentence 1').fill('This is my room.');
+  await page.getByLabel('Scene sentence 2').fill('My room is small.');
+  await page.getByLabel('Scene sentence 3').fill('I have a bed.');
+  await page.getByLabel('Scene sentence 4').fill('There is a table in my room.');
+  await page.getByLabel('Scene description').fill('This is my room. My room is small. I have a bed. There is a table in my room.');
+  await page.getByLabel('Scene dialogue').fill('A: Is this your room?\nB: Yes. This is my room.');
 }
 
 async function completeCurrentDay(page: Page, dayId: string) {
@@ -221,8 +216,8 @@ async function completeCurrentDay(page: Page, dayId: string) {
   await page.getByRole('button', { name: 'Continue' }).click();
   await completeTranslation(page, day);
 
-  await continueTo(page, day.outputTask.topic, 3);
-  await completeOutput(page, day);
+  await continueTo(page, 'Build Sentences');
+  await completeSceneOutput(page, 'room');
 
   await page.getByRole('button', { name: 'Continue' }).click();
 }
@@ -307,12 +302,7 @@ async function completeDayOneTranslationWithReview(page: Page) {
 }
 
 async function completeDayOneOutput(page: Page) {
-  await page.getByLabel('Daily output').fill('My name is Li.\nI am from China.\nI am a student.\nI study English.');
-  await page.getByLabel("I used today's pattern.").check();
-  await page.getByLabel('I used lesson words.').check();
-  await page.getByLabel('Each sentence has a subject.').check();
-  await page.getByLabel('My meaning is clear.').check();
-  await page.getByLabel('OK').check();
+  await completeSceneOutput(page, 'self');
 }
 
 test.describe('Basic English MVP e2e', () => {
@@ -348,7 +338,9 @@ test.describe('Basic English MVP e2e', () => {
     await page.getByRole('button', { name: 'Continue' }).click();
     await completeDayOneTranslationWithReview(page);
 
-    await continueTo(page, 'My Name', 3);
+    await continueTo(page, 'Build Sentences');
+    await expect(page.getByRole('heading', { name: 'Build Sentences' })).toBeVisible();
+    await expect(page.getByText('I can describe myself.')).toBeVisible();
     await completeDayOneOutput(page);
 
     await continueTo(page, 'Day 1 complete');
@@ -388,7 +380,11 @@ test.describe('Basic English MVP e2e', () => {
     await page.getByRole('button', { name: 'Me', exact: true }).click();
     await expect(page.getByText('Completed days: 1')).toBeVisible();
     await expect(page.getByText('Review items: 2')).toBeVisible();
-    await expect(page.getByText('My name is Li.\nI am from China.\nI am a student.\nI study English.')).toBeVisible();
+    await expect(page.getByRole('listitem', { name: /Self Completed/ })).toBeVisible();
+
+    await page.reload();
+    await page.getByRole('button', { name: 'Me', exact: true }).click();
+    await expect(page.getByRole('listitem', { name: /Self Completed/ })).toBeVisible();
   });
 
   test('navigates course and word bank views with configurable Chinese help', async ({ page }) => {
@@ -434,6 +430,7 @@ test.describe('Basic English MVP e2e', () => {
 
     await page.getByRole('button', { name: 'Me', exact: true }).click();
     await expect(page.getByText('I can describe my room.')).toBeVisible();
+    await expect(page.getByRole('listitem', { name: /Room Completed/ })).toBeVisible();
   });
 
   test('exposes primary navigation on a mobile viewport', async ({ page }) => {
