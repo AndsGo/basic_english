@@ -7,6 +7,7 @@ import { TodayPage } from './components/TodayPage';
 import { WordsPage } from './components/WordsPage';
 import { basicEnglishCourse } from './content/course';
 import { scenarioCapabilities } from './content/scenarioCapabilities';
+import { sceneGoalsByDayId } from './content/sceneGoals';
 import { getActiveReviewDayIds } from './domain/review';
 import { SpeechProvider } from './speech/SpeechProvider';
 import type { SpeechRate } from './speech/speechService';
@@ -96,6 +97,7 @@ export default function App() {
           <TodayPage
             course={basicEnglishCourse}
             repository={repository}
+            sceneGoalsByDayId={sceneGoalsByDayId}
             showChineseHelp={showChineseHelp}
             onProgressChange={() => void refreshProgressSummary()}
           />

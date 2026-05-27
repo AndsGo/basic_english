@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import type { ReactNode } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { basicEnglishCourse } from '../content/course';
+import { sceneGoalsByDayId } from '../content/sceneGoals';
 import { week1Course } from '../content/week1';
 import type { DayProgress } from '../domain/progress';
 import { startDay } from '../domain/progress';
@@ -140,7 +141,7 @@ function completedDayProgress(dayId: string, contentVersion: string): DayProgres
 }
 
 function renderWithSpeech(children: ReactNode) {
-  render(
+  return render(
     <SpeechProvider enabled rate="normal" service={createTestSpeechService()}>
       {children}
     </SpeechProvider>,
@@ -208,6 +209,15 @@ async function completeToOutput(user: ReturnType<typeof userEvent.setup>) {
   await completeTranslation(user);
 }
 
+async function completeDayOneThroughOutput(user: ReturnType<typeof userEvent.setup>) {
+  await waitFor(() => {
+    expect(screen.queryByText('Loading today...')).not.toBeInTheDocument();
+  });
+  if (screen.queryByLabelText('Scene sentence 1') || screen.queryByRole('textbox', { name: 'Daily output' })) return;
+
+  await completeToOutput(user);
+}
+
 async function satisfyOutputGate(user: ReturnType<typeof userEvent.setup>, text = 'My name is Mei. I am from China. I study English. I am happy.') {
   await user.type(screen.getByRole('textbox', { name: 'Daily output' }), text);
   for (const checkbox of screen.getAllByRole('checkbox')) {
@@ -227,6 +237,57 @@ function deferred<T>() {
 }
 
 describe('TodayPage', () => {
+  it('shows the scene goal banner for the current day', async () => {
+    const repo = createIndexedDbProgressRepository('today-scene-goal-banner');
+    renderWithSpeech(<TodayPage course={week1Course} repository={repo} sceneGoalsByDayId={sceneGoalsByDayId} />);
+
+    expect(await screen.findByLabelText('Today scene goal')).toHaveTextContent('I can describe myself.');
+  });
+
+  it('requires complete scene output before finishing the output step', async () => {
+    const user = userEvent.setup();
+    const repo = createIndexedDbProgressRepository('today-scene-output-gate');
+    renderWithSpeech(<TodayPage course={week1Course} repository={repo} sceneGoalsByDayId={sceneGoalsByDayId} />);
+
+    await completeDayOneThroughOutput(user);
+
+    expect(screen.getByRole('heading', { name: 'Build Sentences' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Continue' })).toBeDisabled();
+    expect(screen.getByText('Write at least 4 scene sentences.')).toBeInTheDocument();
+
+    await user.type(screen.getByLabelText('Scene sentence 1'), 'My name is Li.');
+    await user.type(screen.getByLabelText('Scene sentence 2'), 'I am from China.');
+    await user.type(screen.getByLabelText('Scene sentence 3'), 'I am a student.');
+    await user.type(screen.getByLabelText('Scene sentence 4'), 'I study English.');
+    await user.type(screen.getByLabelText('Scene description'), 'My name is Li. I am from China. I am a student. I study English.');
+    await user.type(screen.getByLabelText('Scene dialogue'), 'A: What is your name?\nB: My name is Li.');
+
+    expect(screen.getByRole('button', { name: 'Continue' })).toBeEnabled();
+  });
+
+  it('persists scene output drafts', async () => {
+    const user = userEvent.setup();
+    const repo = createIndexedDbProgressRepository('today-scene-output-persistence');
+    const { unmount } = renderWithSpeech(<TodayPage course={week1Course} repository={repo} sceneGoalsByDayId={sceneGoalsByDayId} />);
+
+    await completeDayOneThroughOutput(user);
+    await user.type(screen.getByLabelText('Scene sentence 1'), 'My name is Li.');
+    await user.click(screen.getByRole('radio', { name: 'Guided' }));
+
+    await waitFor(async () => {
+      await expect(repo.getUserOutput('day-001')).resolves.toMatchObject({
+        scene: { helpMode: 'guided', sentences: ['My name is Li.', '', '', ''] },
+      });
+    });
+
+    unmount();
+    renderWithSpeech(<TodayPage course={week1Course} repository={repo} sceneGoalsByDayId={sceneGoalsByDayId} />);
+    await completeDayOneThroughOutput(user);
+
+    expect(await screen.findByLabelText('Scene sentence 1')).toHaveValue('My name is Li.');
+    expect(screen.getByRole('radio', { name: 'Guided' })).toBeChecked();
+  });
+
   it('shows Week 2 Day 8 after Days 1-7 are completed', async () => {
     const completedWeek1Progress = basicEnglishCourse.weeks[0].days.map((courseDay) =>
       completedDayProgress(courseDay.id, basicEnglishCourse.contentVersion),

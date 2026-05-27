@@ -8,22 +8,27 @@ import {
   createWordReviewItem,
   type ReviewItem,
 } from '../domain/review';
+import { createInitialSceneOutput, normalizeSceneOutput } from '../domain/sceneOutput';
 import {
   getDrillsCompletion,
   getOutputCompletion,
   getPatternsCompletion,
+  getSceneOutputStepCompletion,
   getTranslationCompletion,
   getWordsCompletion,
   type TranslationDraft,
   type WordMark,
 } from '../domain/stepCompletion';
-import type { Course, Exercise, TranslationExercise, Word } from '../domain/types';
+import type { Course, Exercise, SceneGoal, SceneOutput, TranslationExercise, Word } from '../domain/types';
 import { useSpeech } from '../speech/SpeechProvider';
 import type { ProgressRepository, UserOutput } from '../storage/progressRepository';
 import { CompletionSummary } from './CompletionSummary';
 import { ExerciseRenderer } from './ExerciseRenderer';
 import { OutputTaskEditor } from './OutputTaskEditor';
 import { PatternCards } from './PatternCards';
+import { SceneGoalBanner } from './SceneGoalBanner';
+import { SceneMap } from './SceneMap';
+import { SceneOutputEditor } from './SceneOutputEditor';
 import { Stepper } from './Stepper';
 import { TranslationTask } from './TranslationTask';
 import { WordCards } from './WordCards';
@@ -42,6 +47,14 @@ function createInitialOutput(dayId: string): UserOutput {
       meaningIsClear: false,
     },
     updatedAt: new Date().toISOString(),
+  };
+}
+
+function withSceneOutput(output: UserOutput, sceneGoal: SceneGoal | undefined): UserOutput {
+  if (!sceneGoal) return output;
+  return {
+    ...output,
+    scene: normalizeSceneOutput(output.scene ?? createInitialSceneOutput(sceneGoal.id), sceneGoal.id),
   };
 }
 
@@ -81,11 +94,13 @@ function makeAttemptId(dayId: string, exerciseId: string, now: string): string {
 export function TodayPage({
   course,
   repository,
+  sceneGoalsByDayId = {},
   showChineseHelp = false,
   onProgressChange,
 }: {
   course: Course;
   repository: ProgressRepository;
+  sceneGoalsByDayId?: Partial<Record<string, SceneGoal>>;
   showChineseHelp?: boolean;
   onProgressChange?: () => void;
 }) {
@@ -93,6 +108,11 @@ export function TodayPage({
   const orderedDayIds = useMemo(() => allDays.map((courseDay) => courseDay.id), [allDays]);
   const [selectedDayId, setSelectedDayId] = useState(() => orderedDayIds[0]);
   const day = allDays.find((courseDay) => courseDay.id === selectedDayId) ?? allDays[0];
+  const sceneGoal = sceneGoalsByDayId[day.id];
+  const allSceneGoals = useMemo(
+    () => Object.values(sceneGoalsByDayId).filter((goal): goal is SceneGoal => Boolean(goal)),
+    [sceneGoalsByDayId],
+  );
   const [dayProgress, setDayProgress] = useState<DayProgress>(() =>
     startDay(day.id, course.contentVersion, new Date().toISOString()),
   );
@@ -163,7 +183,8 @@ export function TodayPage({
 
       if (!isMounted) return;
       setDayProgress(savedProgress ?? startDay(day.id, course.contentVersion, new Date().toISOString()));
-      setOutputDraft(savedOutput ?? createInitialOutput(day.id));
+      const nextOutput = savedOutput ?? createInitialOutput(day.id);
+      setOutputDraft(withSceneOutput(nextOutput, sceneGoal));
       setWordMarks({});
       setPracticedPatternIds(new Set());
       setDrillAnswers({});
@@ -176,13 +197,14 @@ export function TodayPage({
     return () => {
       isMounted = false;
     };
-  }, [day.id, repository]);
+  }, [course.contentVersion, day.id, repository, sceneGoal]);
 
   const currentGate = useMemo(() => {
     if (currentStep === 'words') return getWordsCompletion(day.wordIds, wordMarks);
     if (currentStep === 'patterns') return getPatternsCompletion(day.patternIds, practicedPatternIds);
     if (currentStep === 'drills') return getDrillsCompletion(drillExercises.map((exercise) => exercise.id), drillAnswers);
     if (currentStep === 'translate') return getTranslationCompletion(translationExercises.map((exercise) => exercise.id), translationDrafts);
+    if (currentStep === 'output' && sceneGoal && outputDraft.scene) return getSceneOutputStepCompletion(outputDraft.scene);
     if (currentStep === 'output') return getOutputCompletion(outputDraft, day.outputTask.requiredSentenceCount);
     return { isComplete: true, missingRequirements: [] };
   }, [
@@ -197,6 +219,7 @@ export function TodayPage({
     translationExercises,
     translationDrafts,
     outputDraft,
+    sceneGoal,
   ]);
 
   const nextDay = useMemo(() => allDays[allDays.findIndex((courseDay) => courseDay.id === day.id) + 1], [allDays, day.id]);
@@ -220,6 +243,14 @@ export function TodayPage({
   const saveOutputDraft = (output: UserOutput) => {
     setOutputDraft(output);
     void enqueueOutputSave(output);
+  };
+
+  const saveSceneOutputDraft = (scene: SceneOutput) => {
+    saveOutputDraft({
+      ...outputDraft,
+      scene,
+      updatedAt: new Date().toISOString(),
+    });
   };
 
   const markWord = (word: Word, mark: WordMark) => {
@@ -361,8 +392,11 @@ export function TodayPage({
         <h2>{day.title}</h2>
         <p>{day.goal}</p>
         <p className="time-label">{day.estimatedMinutes} minutes</p>
+        {sceneGoal && <SceneGoalBanner goal={sceneGoal} />}
         <Stepper currentStep={currentStep} />
       </div>
+
+      {allSceneGoals.length > 0 && sceneGoal && <SceneMap goals={allSceneGoals} completedSceneIds={[]} currentSceneId={sceneGoal.id} />}
 
       <div className="panel today-step-panel">
         {isHydrating ? (
@@ -403,7 +437,12 @@ export function TodayPage({
             {currentStep === 'translate' && (
               <TranslationTask exercises={translationExercises} drafts={translationDrafts} onDraftChange={handleTranslationDraftChange} />
             )}
-            {currentStep === 'output' && <OutputTaskEditor task={day.outputTask} value={outputDraft} onChange={saveOutputDraft} />}
+            {currentStep === 'output' &&
+              (sceneGoal && outputDraft.scene ? (
+                <SceneOutputEditor goal={sceneGoal} value={outputDraft.scene} onChange={saveSceneOutputDraft} />
+              ) : (
+                <OutputTaskEditor task={day.outputTask} value={outputDraft} onChange={saveOutputDraft} />
+              ))}
             {currentStep === 'done' && (
               <CompletionSummary
                 day={day}
