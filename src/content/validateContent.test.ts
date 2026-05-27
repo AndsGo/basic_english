@@ -2,8 +2,14 @@ import { describe, expect, it } from 'vitest';
 import type { Course, ScenarioCapability, ScenarioWeek } from '../domain/types';
 import { basicEnglishCourse } from './course';
 import { scenarioCapabilities, scenarioWeekMap } from './scenarioCapabilities';
+import { sceneGoalsByDayId } from './sceneGoals';
 import { week1Course } from './week1';
-import { validateCourseContent, validateScenarioCapabilities, validateScenarioWeekMap } from './validateContent';
+import {
+  validateCourseContent,
+  validateScenarioCapabilities,
+  validateScenarioWeekMap,
+  validateSceneGoals,
+} from './validateContent';
 
 function cloneCourse(): Course {
   return structuredClone(week1Course);
@@ -426,5 +432,57 @@ describe('scenario capabilities', () => {
         'blank-example must have non-empty example outputs',
       ]),
     );
+  });
+});
+
+describe('scene goals', () => {
+  it('validates scene goals for existing playable days', () => {
+    const result = validateSceneGoals(sceneGoalsByDayId, basicEnglishCourse);
+
+    expect(result.errors).toEqual([]);
+  });
+
+  it('reports scene goals that reference missing days', () => {
+    const result = validateSceneGoals(
+      {
+        'day-999': {
+          id: 'missing-day-scene',
+          title: 'Missing Day',
+          capability: 'I can describe a missing day.',
+          templates: ['This is ____.'],
+          guidedPrompts: ['Say one thing.'],
+          scenePrompt: 'Describe one thing.',
+          dialoguePrompts: ['Ask and answer one question.'],
+        },
+      },
+      basicEnglishCourse,
+    );
+
+    expect(result.errors).toContain('Scene goal day-999 references missing day');
+  });
+
+  it('reports incomplete scene goals', () => {
+    const result = validateSceneGoals(
+      {
+        'day-001': {
+          id: '',
+          title: '',
+          capability: '',
+          templates: [''],
+          guidedPrompts: [],
+          scenePrompt: '',
+          dialoguePrompts: [],
+        },
+      },
+      basicEnglishCourse,
+    );
+
+    expect(result.errors).toEqual([
+      'Scene goal for day-001 is missing id, title, or capability',
+      'Scene goal for day-001 must include non-empty templates',
+      'Scene goal for day-001 must include non-empty guided prompts',
+      'Scene goal for day-001 must include a scene prompt',
+      'Scene goal for day-001 must include non-empty dialogue prompts',
+    ]);
   });
 });

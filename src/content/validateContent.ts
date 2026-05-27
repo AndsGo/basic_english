@@ -1,4 +1,4 @@
-import type { Course, Exercise, Pattern, ScenarioCapability, ScenarioWeek, WeeklyCheckRubric } from '../domain/types';
+import type { Course, Exercise, Pattern, SceneGoal, ScenarioCapability, ScenarioWeek, WeeklyCheckRubric } from '../domain/types';
 
 export interface ValidationResult {
   errors: string[];
@@ -160,6 +160,32 @@ export function validateScenarioWeekMap(weeks: ScenarioWeek[]): ValidationResult
   if (!hasExpectedSequence) {
     errors.push('Scenario roadmap must define weeks 1 through 12');
   }
+
+  return { errors };
+}
+
+export function validateSceneGoals(sceneGoalsByDayId: Record<string, SceneGoal>, course: Course): ValidationResult {
+  const errors: string[] = [];
+  const dayIds = new Set(course.weeks.flatMap((week) => week.days.map((day) => day.id)));
+
+  Object.entries(sceneGoalsByDayId).forEach(([dayId, sceneGoal]) => {
+    if (!dayIds.has(dayId)) errors.push(`Scene goal ${dayId} references missing day`);
+    if (!sceneGoal.id.trim() || !sceneGoal.title.trim() || !sceneGoal.capability.trim()) {
+      errors.push(`Scene goal for ${dayId} is missing id, title, or capability`);
+    }
+    if (sceneGoal.templates.length === 0 || sceneGoal.templates.some((item) => !item.trim())) {
+      errors.push(`Scene goal for ${dayId} must include non-empty templates`);
+    }
+    if (sceneGoal.guidedPrompts.length === 0 || sceneGoal.guidedPrompts.some((item) => !item.trim())) {
+      errors.push(`Scene goal for ${dayId} must include non-empty guided prompts`);
+    }
+    if (!sceneGoal.scenePrompt.trim()) {
+      errors.push(`Scene goal for ${dayId} must include a scene prompt`);
+    }
+    if (sceneGoal.dialoguePrompts.length === 0 || sceneGoal.dialoguePrompts.some((item) => !item.trim())) {
+      errors.push(`Scene goal for ${dayId} must include non-empty dialogue prompts`);
+    }
+  });
 
   return { errors };
 }

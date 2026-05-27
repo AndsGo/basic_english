@@ -121,6 +121,27 @@ export interface OutputTask {
   requiredSentenceCount: number;
 }
 
+export type SceneHelpMode = 'template' | 'guided' | 'free';
+
+export interface SceneOutput {
+  sceneId: string;
+  helpMode: SceneHelpMode;
+  sentences: string[];
+  sceneText: string;
+  dialogue: string;
+  completedAt?: string;
+}
+
+export interface SceneGoal {
+  id: string;
+  title: string;
+  capability: string;
+  templates: string[];
+  guidedPrompts: string[];
+  scenePrompt: string;
+  dialoguePrompts: string[];
+}
+
 export interface WeeklyCheckRubric {
   scale: {
     min: 0;
