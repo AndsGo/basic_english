@@ -1,7 +1,8 @@
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { cleanup, render, screen } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { SceneGoal } from '../domain/types';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
+import type { ProgressRepository } from '../storage/progressRepository';
 import { MePage } from './MePage';
 
 const sceneGoalsByDayId: Record<string, SceneGoal> = {
@@ -25,7 +26,56 @@ const sceneGoalsByDayId: Record<string, SceneGoal> = {
   },
 };
 
+afterEach(() => {
+  cleanup();
+});
+
+function createMockRepository(overrides: Partial<ProgressRepository> = {}): ProgressRepository {
+  return {
+    getDayProgress: vi.fn(),
+    listDayProgress: vi.fn().mockResolvedValue([]),
+    saveDayProgress: vi.fn(),
+    saveStepProgress: vi.fn(),
+    saveStepCompletion: vi.fn(),
+    listStepCompletions: vi.fn(),
+    saveExerciseAttempt: vi.fn(),
+    listExerciseAttempts: vi.fn(),
+    saveUserOutput: vi.fn(),
+    getUserOutput: vi.fn(),
+    listUserOutputs: vi.fn().mockResolvedValue([]),
+    saveWordProgress: vi.fn(),
+    listReviewWords: vi.fn(),
+    saveReviewItem: vi.fn(),
+    listReviewItems: vi.fn().mockResolvedValue([]),
+    getReviewItem: vi.fn(),
+    saveStudyActivity: vi.fn(),
+    listStudyActivities: vi.fn().mockResolvedValue([]),
+    ...overrides,
+  };
+}
+
 describe('MePage scene map', () => {
+  it('does not render the scene map while progress is loading', () => {
+    const repository = createMockRepository({
+      listDayProgress: vi.fn().mockReturnValue(new Promise(() => {})),
+    });
+
+    render(<MePage repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
+
+    expect(screen.queryByText('Scenes I Can Describe')).not.toBeInTheDocument();
+  });
+
+  it('does not render the scene map when progress fails to load', async () => {
+    const repository = createMockRepository({
+      listDayProgress: vi.fn().mockRejectedValue(new Error('load failed')),
+    });
+
+    render(<MePage repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Progress could not be loaded.');
+    expect(screen.queryByText('Scenes I Can Describe')).not.toBeInTheDocument();
+  });
+
   it('highlights completed scenes from completed day outputs', async () => {
     const repository = createIndexedDbProgressRepository('me-scene-map');
     await repository.saveDayProgress({

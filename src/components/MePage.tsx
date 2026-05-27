@@ -214,7 +214,9 @@ export function MePage({
           )}
         </section>
       )}
-      {sceneGoals.length > 0 && <SceneMap goals={sceneGoals} completedSceneIds={completedSceneIds} />}
+      {hasLoadedProgress && !loadError && sceneGoals.length > 0 && (
+        <SceneMap goals={sceneGoals} completedSceneIds={completedSceneIds} />
+      )}
       <section>
         <h3>Saved Outputs</h3>
         {outputs.length > 0 ? (
