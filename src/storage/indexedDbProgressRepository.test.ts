@@ -250,6 +250,80 @@ describe('indexedDbProgressRepository V1.1', () => {
     ]);
   });
 
+  it('saves and reloads scene output with user output', async () => {
+    const repository = createIndexedDbProgressRepository('scene-output-persistence');
+
+    await repository.saveUserOutput({
+      id: 'output-day-001',
+      dayId: 'day-001',
+      text: 'My name is Li.',
+      sentenceCount: 4,
+      selfRating: 'ok',
+      checklist: {
+        usedTargetPattern: true,
+        usedLessonWords: true,
+        hasSubjects: true,
+        meaningIsClear: true,
+      },
+      scene: {
+        sceneId: 'self',
+        helpMode: 'guided',
+        sentences: ['My name is Li.', 'I am from China.', 'I am a student.', 'I study English.'],
+        sceneText: 'My name is Li. I am from China. I am a student. I study English.',
+        dialogue: 'A: What is your name?\nB: My name is Li.',
+        completedAt: '2026-05-27T00:00:00.000Z',
+      },
+      updatedAt: '2026-05-27T00:00:00.000Z',
+    });
+
+    await expect(repository.getUserOutput('day-001')).resolves.toMatchObject({
+      dayId: 'day-001',
+      scene: {
+        sceneId: 'self',
+        helpMode: 'guided',
+        sentences: ['My name is Li.', 'I am from China.', 'I am a student.', 'I study English.'],
+        sceneText: 'My name is Li. I am from China. I am a student. I study English.',
+        dialogue: 'A: What is your name?\nB: My name is Li.',
+      },
+    });
+  });
+
+  it('normalizes incomplete stored scene output', async () => {
+    const repository = createIndexedDbProgressRepository('scene-output-normalization');
+
+    await repository.saveUserOutput({
+      id: 'output-day-001',
+      dayId: 'day-001',
+      text: '',
+      sentenceCount: 0,
+      selfRating: 'ok',
+      checklist: {
+        usedTargetPattern: false,
+        usedLessonWords: false,
+        hasSubjects: false,
+        meaningIsClear: false,
+      },
+      scene: {
+        sceneId: 'self',
+        helpMode: 'template',
+        sentences: ['My name is Li.'],
+        sceneText: '',
+        dialogue: '',
+      },
+      updatedAt: '2026-05-27T00:00:00.000Z',
+    });
+
+    await expect(repository.getUserOutput('day-001')).resolves.toMatchObject({
+      scene: {
+        sceneId: 'self',
+        helpMode: 'template',
+        sentences: ['My name is Li.', '', '', ''],
+        sceneText: '',
+        dialogue: '',
+      },
+    });
+  });
+
   it('persists step completions, study activities, and retrieves review items by id', async () => {
     const repo = createIndexedDbProgressRepository('v1-1-completion-activity-test');
     const reviewItem = createWordReviewItem({

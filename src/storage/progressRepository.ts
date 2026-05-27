@@ -1,5 +1,6 @@
 import type { DayProgress, StepId } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
+import type { SceneOutput } from '../domain/types';
 
 export interface StepProgress {
   id: string;
@@ -36,6 +37,7 @@ export interface UserOutput {
   dayId: string;
   text: string;
   sentenceCount: number;
+  scene?: SceneOutput;
   selfRating: 'easy' | 'ok' | 'hard';
   checklist: {
     usedTargetPattern: boolean;

@@ -1,6 +1,7 @@
 import { openDB, type DBSchema, type IDBPDatabase } from 'idb';
 import type { DayProgress } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
+import { normalizeSceneOutput } from '../domain/sceneOutput';
 import type {
   ExerciseAttempt,
   ProgressRepository,
@@ -94,7 +95,11 @@ async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
 }
 
 function normalizeUserOutput(output: UserOutput): UserOutput {
-  return { ...output, sentenceCount: output.sentenceCount ?? 0 };
+  return {
+    ...output,
+    sentenceCount: output.sentenceCount ?? 0,
+    scene: output.scene ? normalizeSceneOutput(output.scene) : undefined,
+  };
 }
 
 export function createIndexedDbProgressRepository(dbName = 'basic-english-progress'): ProgressRepository {
@@ -143,11 +148,14 @@ export function createIndexedDbProgressRepository(dbName = 'basic-english-progre
 
     async saveUserOutput(output) {
       const db = await dbPromise;
-      await db.put('userOutputs', {
-        ...output,
-        id: output.id || `output-${output.dayId}`,
-        sentenceCount: output.sentenceCount ?? 0,
-      });
+      await db.put(
+        'userOutputs',
+        normalizeUserOutput({
+          ...output,
+          id: output.id || `output-${output.dayId}`,
+          sentenceCount: output.sentenceCount ?? 0,
+        }),
+      );
     },
 
     async getUserOutput(dayId) {
