@@ -221,12 +221,23 @@ export function MePage({
         <h3>Saved Outputs</h3>
         {outputs.length > 0 ? (
           <div className="output-list">
-            {outputs.map((output) => (
-              <article className="output-card" key={output.dayId}>
-                <strong>{output.dayId}</strong>
-                <p className="saved-output">{output.text}</p>
-              </article>
-            ))}
+            {outputs.map((output) => {
+              const hasSceneOutput = Boolean(output.scene?.sceneText.trim() || output.scene?.dialogue.trim());
+
+              return (
+                <article className="output-card" key={output.dayId}>
+                  <strong>{output.dayId}</strong>
+                  {output.scene && hasSceneOutput ? (
+                    <div className="saved-output">
+                      {output.scene.sceneText.trim() && <p>{output.scene.sceneText}</p>}
+                      {output.scene.dialogue.trim() && <p>{output.scene.dialogue}</p>}
+                    </div>
+                  ) : (
+                    <p className="saved-output">{output.text}</p>
+                  )}
+                </article>
+              );
+            })}
           </div>
         ) : (
           <p>No output saved yet.</p>

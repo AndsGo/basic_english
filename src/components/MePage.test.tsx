@@ -117,3 +117,38 @@ describe('MePage scene map', () => {
     expect(screen.getByRole('listitem', { name: /Room Next/ })).toBeInTheDocument();
   });
 });
+
+describe('MePage saved outputs', () => {
+  it('shows saved scene text and dialogue in Saved Outputs', async () => {
+    const repository = createMockRepository({
+      listUserOutputs: vi.fn().mockResolvedValue([
+        {
+          id: 'output-day-001',
+          dayId: 'day-001',
+          text: '',
+          sentenceCount: 0,
+          selfRating: 'ok',
+          checklist: {
+            usedTargetPattern: true,
+            usedLessonWords: true,
+            hasSubjects: true,
+            meaningIsClear: true,
+          },
+          scene: {
+            sceneId: 'self',
+            helpMode: 'template',
+            sentences: ['My name is Li.', 'I am from China.', 'I am a student.', 'I study English.'],
+            sceneText: 'My name is Li. I am from China. I am a student. I study English.',
+            dialogue: 'A: What is your name?\nB: My name is Li.',
+          },
+          updatedAt: '2026-05-27T00:00:00.000Z',
+        },
+      ]),
+    });
+
+    render(<MePage repository={repository} />);
+
+    expect(await screen.findByText('My name is Li. I am from China. I am a student. I study English.')).toBeInTheDocument();
+    expect(screen.getByText('A: What is your name? B: My name is Li.')).toBeInTheDocument();
+  });
+});
