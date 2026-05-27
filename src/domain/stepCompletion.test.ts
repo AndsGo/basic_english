@@ -4,6 +4,7 @@ import {
   getDrillsCompletion,
   getOutputCompletion,
   getPatternsCompletion,
+  getSceneOutputStepCompletion,
   getTranslationCompletion,
   getWordsCompletion,
 } from './stepCompletion';
@@ -78,6 +79,25 @@ describe('step completion gates', () => {
         'Check: I used lesson words.',
         'Check: Each sentence has a subject.',
         'Check: My meaning is clear.',
+      ],
+    });
+  });
+
+  it('uses scene output completion requirements when a scene output exists', () => {
+    const result = getSceneOutputStepCompletion({
+      sceneId: 'self',
+      helpMode: 'template',
+      sentences: ['My name is Li.', 'I am from China.', 'I am a student.', ''],
+      sceneText: '',
+      dialogue: '',
+    });
+
+    expect(result).toEqual({
+      isComplete: false,
+      missingRequirements: [
+        'Write at least 4 scene sentences.',
+        'Write the scene description.',
+        'Write the dialogue.',
       ],
     });
   });

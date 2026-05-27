@@ -1,5 +1,7 @@
 import type { UserOutput } from '../storage/progressRepository';
 import type { ExerciseAnswer } from './exercises';
+import { getSceneOutputCompletion } from './sceneOutput';
+import type { SceneOutput } from './types';
 
 export type WordMark = 'known' | 'review';
 export type TranslationSelfMark = 'close' | 'review';
@@ -67,4 +69,8 @@ export function getOutputCompletion(output: UserOutput, requiredSentenceCount: n
   if (!checklist?.meaningIsClear) missing.push('Check: My meaning is clear.');
   if (!output.selfRating) missing.push('Choose a self rating.');
   return done(missing);
+}
+
+export function getSceneOutputStepCompletion(scene: SceneOutput): CompletionGate {
+  return getSceneOutputCompletion(scene);
 }
