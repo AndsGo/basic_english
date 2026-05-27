@@ -220,6 +220,42 @@ textarea {
   gap: 12px;
 }
 
+.scene-output-editor {
+  display: grid;
+  gap: 20px;
+}
+
+.scene-output-editor section {
+  display: grid;
+  gap: 10px;
+}
+
+.scene-output-editor input[type='text'] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #c7d3cb;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.help-mode-control {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.help-mode-control label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid #c7d3cb;
+  border-radius: 6px;
+  background: #f8faf8;
+  font-weight: 700;
+}
+
 .exercise-card {
   display: grid;
   gap: 10px;
