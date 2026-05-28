@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import type { Course, ScenarioCapability, ScenarioWeek } from '../domain/types';
+import type { Course, SceneRemixTask, ScenarioCapability, ScenarioWeek } from '../domain/types';
 import { basicEnglishCourse } from './course';
 import { scenarioCapabilities, scenarioWeekMap } from './scenarioCapabilities';
+import { sceneRemixTasksByDayId } from './sceneRemixTasks';
 import { sceneGoalsByDayId } from './sceneGoals';
 import { week1Course } from './week1';
 import {
@@ -9,6 +10,7 @@ import {
   validateScenarioCapabilities,
   validateScenarioWeekMap,
   validateSceneGoals,
+  validateSceneRemixTasks,
 } from './validateContent';
 
 function cloneCourse(): Course {
@@ -513,5 +515,140 @@ describe('scene goals', () => {
     );
 
     expect(result.errors).toContain('Duplicate scene goal id: self');
+  });
+});
+
+describe('scene remix tasks', () => {
+  it('validates shipped remix tasks', () => {
+    const result = validateSceneRemixTasks(sceneRemixTasksByDayId, basicEnglishCourse);
+
+    expect(result).toEqual([]);
+  });
+
+  it('reports remix tasks for unknown days', () => {
+    const result = validateSceneRemixTasks(
+      {
+        'day-999': [
+          {
+            id: 'missing-day-remix',
+            type: 'replace',
+            prompt: 'Change one word.',
+            referenceAnswers: ['I am from Japan.'],
+          },
+        ],
+        'day-001': [
+          {
+            id: 'day-001-remix-valid',
+            type: 'replace',
+            prompt: 'Change China to Japan.',
+            referenceAnswers: ['I am from Japan.'],
+          },
+        ],
+        'day-008': [
+          {
+            id: 'day-008-remix-valid',
+            type: 'extend',
+            prompt: 'Describe your room.',
+            referenceAnswers: ['This is my room.'],
+          },
+        ],
+      },
+      basicEnglishCourse,
+    );
+
+    expect(result).toContain('Remix task day day-999 is not in the course.');
+  });
+
+  it('reports duplicate remix task ids', () => {
+    const result = validateSceneRemixTasks(
+      {
+        'day-001': [
+          {
+            id: 'duplicate-remix',
+            type: 'replace',
+            prompt: 'Change China to Japan.',
+            referenceAnswers: ['I am from Japan.'],
+          },
+        ],
+        'day-008': [
+          {
+            id: 'duplicate-remix',
+            type: 'extend',
+            prompt: 'Describe your room.',
+            referenceAnswers: ['This is my room.'],
+          },
+        ],
+      },
+      basicEnglishCourse,
+    );
+
+    expect(result).toContain('Remix task id duplicate-remix is duplicated.');
+  });
+
+  it('reports empty remix task ids', () => {
+    const result = validateSceneRemixTasks(
+      {
+        'day-001': [
+          {
+            id: ' ',
+            type: 'replace',
+            prompt: 'Change China to Japan.',
+            referenceAnswers: ['I am from Japan.'],
+          },
+        ],
+        'day-008': [
+          {
+            id: 'day-008-remix-valid',
+            type: 'extend',
+            prompt: 'Describe your room.',
+            referenceAnswers: ['This is my room.'],
+          },
+        ],
+      },
+      basicEnglishCourse,
+    );
+
+    expect(result).toContain('Remix task has an empty id.');
+  });
+
+  it('reports invalid type, empty prompt, and no non-empty references', () => {
+    const result = validateSceneRemixTasks(
+      {
+        'day-001': [
+          {
+            id: 'bad-remix',
+            type: 'free_write' as SceneRemixTask['type'],
+            prompt: ' ',
+            referenceAnswers: [' '],
+          },
+        ],
+        'day-008': [
+          {
+            id: 'day-008-remix-valid',
+            type: 'extend',
+            prompt: 'Describe your room.',
+            referenceAnswers: ['This is my room.'],
+          },
+        ],
+      },
+      basicEnglishCourse,
+    );
+
+    expect(result).toEqual(
+      expect.arrayContaining([
+        'Remix task bad-remix has invalid type free_write.',
+        'Remix task bad-remix has an empty prompt.',
+        'Remix task bad-remix has no non-empty reference answers.',
+      ]),
+    );
+  });
+
+  it('requires Day 1 and Day 8 remix tasks', () => {
+    const result = validateSceneRemixTasks({}, basicEnglishCourse);
+
+    expect(result).toEqual([
+      'Day day-001 must have at least one remix task.',
+      'Day day-008 must have at least one remix task.',
+    ]);
   });
 });

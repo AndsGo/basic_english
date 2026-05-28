@@ -142,6 +142,18 @@ export interface SceneGoal {
   dialoguePrompts: string[];
 }
 
+export type SceneRemixTaskType = 'replace' | 'extend' | 'dialogue';
+
+export interface SceneRemixTask {
+  id: string;
+  type: SceneRemixTaskType;
+  prompt: string;
+  source?: string;
+  referenceAnswers: string[];
+}
+
+export type SceneRemixSelfMark = 'close' | 'review';
+
 export interface WeeklyCheckRubric {
   scale: {
     min: 0;

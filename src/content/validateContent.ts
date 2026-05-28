@@ -1,4 +1,13 @@
-import type { Course, Exercise, Pattern, SceneGoal, ScenarioCapability, ScenarioWeek, WeeklyCheckRubric } from '../domain/types';
+import type {
+  Course,
+  Exercise,
+  Pattern,
+  SceneGoal,
+  SceneRemixTask,
+  ScenarioCapability,
+  ScenarioWeek,
+  WeeklyCheckRubric,
+} from '../domain/types';
 
 export interface ValidationResult {
   errors: string[];
@@ -193,6 +202,49 @@ export function validateSceneGoals(sceneGoalsByDayId: Record<string, SceneGoal>,
   });
 
   return { errors };
+}
+
+const validSceneRemixTaskTypes = new Set<SceneRemixTask['type']>(['replace', 'extend', 'dialogue']);
+
+export function validateSceneRemixTasks(tasksByDayId: Partial<Record<string, SceneRemixTask[]>>, course: Course): string[] {
+  const errors: string[] = [];
+  const validDayIds = new Set(course.weeks.flatMap((week) => week.days.map((day) => day.id)));
+  const seenTaskIds = new Set<string>();
+
+  for (const [dayId, tasks] of Object.entries(tasksByDayId)) {
+    if (!validDayIds.has(dayId)) {
+      errors.push(`Remix task day ${dayId} is not in the course.`);
+    }
+
+    for (const task of tasks ?? []) {
+      if (!task.id.trim()) {
+        errors.push('Remix task has an empty id.');
+      } else {
+        if (seenTaskIds.has(task.id)) {
+          errors.push(`Remix task id ${task.id} is duplicated.`);
+        }
+        seenTaskIds.add(task.id);
+      }
+
+      if (!validSceneRemixTaskTypes.has(task.type)) {
+        errors.push(`Remix task ${task.id} has invalid type ${task.type}.`);
+      }
+      if (!task.prompt.trim()) {
+        errors.push(`Remix task ${task.id} has an empty prompt.`);
+      }
+      if (task.referenceAnswers.filter((answer) => answer.trim().length > 0).length === 0) {
+        errors.push(`Remix task ${task.id} has no non-empty reference answers.`);
+      }
+    }
+  }
+
+  for (const requiredDayId of ['day-001', 'day-008']) {
+    if ((tasksByDayId[requiredDayId] ?? []).length === 0) {
+      errors.push(`Day ${requiredDayId} must have at least one remix task.`);
+    }
+  }
+
+  return errors;
 }
 
 function validateWeeklyCheckRubric(dayId: string, rubric: WeeklyCheckRubric, errors: string[]) {
