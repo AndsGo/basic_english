@@ -2,11 +2,14 @@ import { describe, expect, it } from 'vitest';
 import {
   createExerciseReviewItem,
   createOutputReviewItem,
+  createSceneRemixReviewItem,
   createTranslationReviewItem,
   createWordReviewItem,
   getActiveReviewDayIds,
+  hasActiveSceneRemixReviewItem,
   resolveReviewItem,
   selectReviewWordIds,
+  type ReviewItem,
 } from './review';
 
 describe('review domain', () => {
@@ -117,5 +120,49 @@ describe('review items', () => {
         },
       ]),
     ).toEqual(['day-001']);
+  });
+});
+
+describe('scene remix review items', () => {
+  it('creates a stable active scene remix review item', () => {
+    const item = createSceneRemixReviewItem({
+      sourceDayId: 'day-008',
+      taskId: 'day-008-remix-room-office',
+      prompt: 'Change room to office.',
+      source: 'My room is small.',
+      userAnswer: 'My office is big.',
+      referenceAnswer: 'My office is small.',
+      now: '2026-05-28T00:00:00.000Z',
+    });
+
+    expect(item).toMatchObject({
+      id: 'review-scene-remix-day-008-day-008-remix-room-office',
+      type: 'scene_remix',
+      sourceDayId: 'day-008',
+      sourceStepId: 'output',
+      taskId: 'day-008-remix-room-office',
+      prompt: 'Change room to office.',
+      source: 'My room is small.',
+      userAnswer: 'My office is big.',
+      referenceAnswer: 'My office is small.',
+      priority: 'normal',
+      status: 'active',
+    });
+  });
+
+  it('detects duplicate active scene remix review items by task id', () => {
+    const activeItem = createSceneRemixReviewItem({
+      sourceDayId: 'day-001',
+      taskId: 'day-001-remix-country-japan',
+      prompt: 'Change China to Japan.',
+      userAnswer: 'I am from China.',
+      referenceAnswer: 'I am from Japan.',
+      now: '2026-05-28T00:00:00.000Z',
+    });
+    const knownItem: ReviewItem = resolveReviewItem(activeItem, '2026-05-28T00:01:00.000Z');
+
+    expect(hasActiveSceneRemixReviewItem([activeItem], 'day-001-remix-country-japan')).toBe(true);
+    expect(hasActiveSceneRemixReviewItem([knownItem], 'day-001-remix-country-japan')).toBe(false);
+    expect(hasActiveSceneRemixReviewItem([activeItem], 'day-001-remix-job-teacher')).toBe(false);
   });
 });

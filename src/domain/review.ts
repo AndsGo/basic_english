@@ -26,7 +26,7 @@ export function selectReviewWordIds(words: ReviewWordState[], count: number): st
     .map((word) => word.wordId);
 }
 
-export type ReviewItemType = 'word' | 'pattern' | 'exercise' | 'translation' | 'output';
+export type ReviewItemType = 'word' | 'pattern' | 'exercise' | 'translation' | 'output' | 'scene_remix';
 export type ReviewPriority = 'low' | 'normal' | 'high';
 export type ReviewStatus = 'active' | 'known';
 
@@ -35,6 +35,8 @@ export interface ReviewItem {
   type: ReviewItemType;
   sourceDayId: string;
   sourceStepId: StepId;
+  source?: string;
+  taskId?: string;
   prompt: string;
   userAnswer?: string;
   referenceAnswer?: string;
@@ -151,10 +153,48 @@ export function createOutputReviewItem({
   };
 }
 
+export function createSceneRemixReviewItem({
+  sourceDayId,
+  taskId,
+  prompt,
+  source,
+  userAnswer,
+  referenceAnswer,
+  now,
+}: {
+  sourceDayId: string;
+  taskId: string;
+  prompt: string;
+  source?: string;
+  userAnswer: string;
+  referenceAnswer?: string;
+  now: string;
+}): ReviewItem {
+  return {
+    id: `review-scene-remix-${sourceDayId}-${taskId}`,
+    type: 'scene_remix',
+    sourceDayId,
+    sourceStepId: 'output',
+    taskId,
+    prompt,
+    source,
+    userAnswer,
+    referenceAnswer,
+    priority: 'normal',
+    status: 'active',
+    createdAt: now,
+    updatedAt: now,
+  };
+}
+
 export function resolveReviewItem(item: ReviewItem, now: string): ReviewItem {
   return { ...item, status: 'known', updatedAt: now };
 }
 
 export function getActiveReviewDayIds(items: ReviewItem[]): string[] {
   return Array.from(new Set(items.filter((item) => item.status === 'active').map((item) => item.sourceDayId)));
+}
+
+export function hasActiveSceneRemixReviewItem(items: ReviewItem[], taskId: string): boolean {
+  return items.some((item) => item.type === 'scene_remix' && item.status === 'active' && item.taskId === taskId);
 }
