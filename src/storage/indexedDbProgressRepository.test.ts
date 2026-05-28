@@ -1,9 +1,9 @@
-import { openDB } from 'idb';
+import { openDB, type DBSchema } from 'idb';
 import { describe, expect, it } from 'vitest';
 import type { DayProgress } from '../domain/progress';
-import { createWordReviewItem, resolveReviewItem } from '../domain/review';
+import { createSceneRemixReviewItem, createWordReviewItem, resolveReviewItem } from '../domain/review';
 import { createIndexedDbProgressRepository } from './indexedDbProgressRepository';
-import type { ExerciseAttempt, UserOutput, WordProgress } from './progressRepository';
+import type { ExerciseAttempt, SceneRemixAttempt, UserOutput, WordProgress } from './progressRepository';
 
 let dbCounter = 0;
 
@@ -57,6 +57,44 @@ function wordProgress(overrides: Partial<WordProgress> = {}): WordProgress {
   };
 }
 
+interface OldV3ProgressDb extends DBSchema {
+  dayProgress: {
+    key: string;
+    value: DayProgress;
+  };
+  stepProgress: {
+    key: string;
+    value: unknown;
+  };
+  stepCompletions: {
+    key: string;
+    value: unknown;
+    indexes: { byDayId: string };
+  };
+  exerciseAttempts: {
+    key: string;
+    value: ExerciseAttempt;
+    indexes: { byDayId: string };
+  };
+  userOutputs: {
+    key: string;
+    value: UserOutput;
+  };
+  wordProgress: {
+    key: string;
+    value: WordProgress;
+  };
+  reviewItems: {
+    key: string;
+    value: unknown;
+    indexes: { byStatus: string; bySourceDayId: string };
+  };
+  studyActivities: {
+    key: string;
+    value: unknown;
+  };
+}
+
 describe('indexedDbProgressRepository', () => {
   it('saves and loads day progress', async () => {
     const repo = createIndexedDbProgressRepository(nextDbName());
@@ -95,7 +133,7 @@ describe('indexedDbProgressRepository', () => {
       text: 'Second draft.',
     });
 
-    const db = await openDB(dbName, 3);
+    const db = await openDB(dbName, 4);
     await expect(db.getAll('userOutputs')).resolves.toEqual([
       userOutput({ id: 'second-output-id', text: 'Second draft.' }),
     ]);
@@ -123,7 +161,7 @@ describe('indexedDbProgressRepository', () => {
       dayId: 'day-001',
     });
 
-    const db = await openDB(dbName, 3);
+    const db = await openDB(dbName, 4);
     await expect(db.getAll('userOutputs')).resolves.toEqual([userOutput({ id: 'upgraded-output-id' })]);
     db.close();
   });
@@ -154,7 +192,7 @@ describe('indexedDbProgressRepository', () => {
 
     await repo.saveExerciseAttempt(attempt);
 
-    const db = await openDB(dbName, 3);
+    const db = await openDB(dbName, 4);
     await expect(db.get('exerciseAttempts', attempt.id)).resolves.toEqual(attempt);
     db.close();
   });
@@ -171,6 +209,103 @@ describe('indexedDbProgressRepository', () => {
       wordProgress({ id: 'word-review', wordId: 'review', status: 'review' }),
       wordProgress({ id: 'word-seen', wordId: 'seen', status: 'seen' }),
     ]);
+  });
+});
+
+describe('indexedDbProgressRepository V1.4 scene remix', () => {
+  it('saves and lists scene remix attempts', async () => {
+    const repo = createIndexedDbProgressRepository('scene-remix-attempts-test');
+    const first: SceneRemixAttempt = {
+      id: 'remix-attempt-1',
+      dayId: 'day-001',
+      taskId: 'day-001-remix-country-japan',
+      userAnswer: 'I am from Japan.',
+      selfMark: 'close',
+      createdAt: '2026-05-28T00:00:00.000Z',
+    };
+    const second: SceneRemixAttempt = {
+      id: 'remix-attempt-2',
+      dayId: 'day-008',
+      taskId: 'day-008-remix-room-office',
+      userAnswer: 'My office is small.',
+      selfMark: 'review',
+      createdAt: '2026-05-28T00:01:00.000Z',
+    };
+
+    await repo.saveSceneRemixAttempt(first);
+    await repo.saveSceneRemixAttempt(second);
+
+    expect(await repo.listSceneRemixAttempts()).toEqual([first, second]);
+    expect(await repo.listSceneRemixAttempts('day-001')).toEqual([first]);
+  });
+
+  it('persists scene remix review items', async () => {
+    const repo = createIndexedDbProgressRepository('scene-remix-review-test');
+    const item = createSceneRemixReviewItem({
+      sourceDayId: 'day-001',
+      taskId: 'day-001-remix-country-japan',
+      prompt: 'Change China to Japan.',
+      userAnswer: 'I am from China.',
+      referenceAnswer: 'I am from Japan.',
+      now: '2026-05-28T00:00:00.000Z',
+    });
+
+    await repo.saveReviewItem(item);
+
+    expect(await repo.getReviewItem(item.id)).toEqual(item);
+    expect(await repo.listReviewItems('active')).toEqual([item]);
+  });
+
+  it('keeps existing user output data readable when the database version upgrades', async () => {
+    const dbName = nextDbName();
+    const oldOutput: UserOutput = {
+      id: 'output-day-001',
+      dayId: 'day-001',
+      text: 'I am from China.',
+      sentenceCount: 1,
+      selfRating: 'ok',
+      checklist: {
+        usedTargetPattern: true,
+        usedLessonWords: true,
+        hasSubjects: true,
+        meaningIsClear: true,
+      },
+      updatedAt: '2026-05-28T00:00:00.000Z',
+    };
+    const oldDb = await openDB<OldV3ProgressDb>(dbName, 3, {
+      upgrade(db) {
+        db.createObjectStore('dayProgress', { keyPath: 'id' });
+        db.createObjectStore('stepProgress', { keyPath: 'id' });
+        db.createObjectStore('stepCompletions', { keyPath: 'id' }).createIndex('byDayId', 'dayId');
+        db.createObjectStore('exerciseAttempts', { keyPath: 'id' }).createIndex('byDayId', 'dayId');
+        db.createObjectStore('userOutputs', { keyPath: 'dayId' });
+        db.createObjectStore('wordProgress', { keyPath: 'id' });
+        const reviewItemsStore = db.createObjectStore('reviewItems', { keyPath: 'id' });
+        reviewItemsStore.createIndex('byStatus', 'status');
+        reviewItemsStore.createIndex('bySourceDayId', 'sourceDayId');
+        db.createObjectStore('studyActivities', { keyPath: 'id' });
+      },
+    });
+    await oldDb.put('userOutputs', oldOutput);
+    oldDb.close();
+
+    const repo = createIndexedDbProgressRepository(dbName);
+    const attempt: SceneRemixAttempt = {
+      id: 'remix-attempt-after-upgrade',
+      dayId: 'day-001',
+      taskId: 'day-001-remix-country-japan',
+      userAnswer: 'I am from Japan.',
+      selfMark: 'close',
+      createdAt: '2026-05-28T00:01:00.000Z',
+    };
+
+    expect(await repo.getUserOutput('day-001')).toMatchObject({
+      dayId: 'day-001',
+      text: 'I am from China.',
+      sentenceCount: 1,
+    });
+    await repo.saveSceneRemixAttempt(attempt);
+    expect(await repo.listSceneRemixAttempts('day-001')).toEqual([attempt]);
   });
 });
 
@@ -228,7 +363,7 @@ describe('indexedDbProgressRepository V1.1', () => {
     const repo = createIndexedDbProgressRepository(dbName);
     await repo.listUserOutputs();
 
-    const db = await openDB(dbName, 3);
+    const db = await openDB(dbName, 4);
     await db.put('userOutputs', {
       id: 'legacy-output-day-001',
       dayId: 'day-001',

@@ -1,4 +1,4 @@
-import { act, cleanup, render, screen, waitFor } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ReactNode } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -12,6 +12,7 @@ import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressR
 import type {
   ExerciseAttempt,
   ProgressRepository,
+  SceneRemixAttempt,
   StepCompletion,
   StepProgress,
   StudyActivity,
@@ -57,6 +58,7 @@ function createTestRepository({
 } = {}): ProgressRepository {
   const progressByDay = new Map(dayProgress.map((progress) => [progress.dayId, progress]));
   const outputsByDay = new Map(userOutputs.map((output) => [output.dayId, output]));
+  const sceneRemixAttempts: SceneRemixAttempt[] = [];
 
   return {
     async getDayProgress(dayId) {
@@ -82,6 +84,12 @@ function createTestRepository({
     },
     async listExerciseAttempts(_dayId: string) {
       return [];
+    },
+    async saveSceneRemixAttempt(attempt: SceneRemixAttempt) {
+      sceneRemixAttempts.push(attempt);
+    },
+    async listSceneRemixAttempts(dayId?: string) {
+      return sceneRemixAttempts.filter((attempt) => (dayId ? attempt.dayId === dayId : true));
     },
     async saveUserOutput(output) {
       outputsByDay.set(output.dayId, output);
@@ -242,6 +250,10 @@ async function satisfyOutputGate(user: ReturnType<typeof userEvent.setup>, text 
   }
 }
 
+function changeTextbox(label: string, value: string) {
+  fireEvent.change(screen.getByLabelText(label), { target: { value } });
+}
+
 function deferred<T>() {
   let resolve!: (value: T | PromiseLike<T>) => void;
   let reject!: (reason?: unknown) => void;
@@ -272,12 +284,12 @@ describe('TodayPage', () => {
     expect(screen.getByRole('button', { name: 'Continue' })).toBeDisabled();
     expect(screen.getByText('Write at least 4 scene sentences.')).toBeInTheDocument();
 
-    await user.type(screen.getByLabelText('Scene sentence 1'), 'My name is Li.');
-    await user.type(screen.getByLabelText('Scene sentence 2'), 'I am from China.');
-    await user.type(screen.getByLabelText('Scene sentence 3'), 'I am a student.');
-    await user.type(screen.getByLabelText('Scene sentence 4'), 'I study English.');
-    await user.type(screen.getByLabelText('Scene description'), 'My name is Li. I am from China. I am a student. I study English.');
-    await user.type(screen.getByLabelText('Scene dialogue'), 'A: What is your name?\nB: My name is Li.');
+    changeTextbox('Scene sentence 1', 'My name is Li.');
+    changeTextbox('Scene sentence 2', 'I am from China.');
+    changeTextbox('Scene sentence 3', 'I am a student.');
+    changeTextbox('Scene sentence 4', 'I study English.');
+    changeTextbox('Scene description', 'My name is Li. I am from China. I am a student. I study English.');
+    changeTextbox('Scene dialogue', 'A: What is your name?\nB: My name is Li.');
 
     expect(screen.getByRole('button', { name: 'Continue' })).toBeEnabled();
   });

@@ -1,6 +1,6 @@
 import type { DayProgress, StepId } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
-import type { SceneOutput } from '../domain/types';
+import type { SceneOutput, SceneRemixSelfMark } from '../domain/types';
 
 export interface StepProgress {
   id: string;
@@ -29,6 +29,15 @@ export interface ExerciseAttempt {
   dayId: string;
   answer: unknown;
   result: 'correct' | 'incorrect' | 'self_mark_close' | 'self_mark_review';
+  createdAt: string;
+}
+
+export interface SceneRemixAttempt {
+  id: string;
+  dayId: string;
+  taskId: string;
+  userAnswer: string;
+  selfMark: SceneRemixSelfMark;
   createdAt: string;
 }
 
@@ -73,6 +82,8 @@ export interface ProgressRepository {
   listStepCompletions(dayId: string): Promise<StepCompletion[]>;
   saveExerciseAttempt(attempt: ExerciseAttempt): Promise<void>;
   listExerciseAttempts(dayId: string): Promise<ExerciseAttempt[]>;
+  saveSceneRemixAttempt(attempt: SceneRemixAttempt): Promise<void>;
+  listSceneRemixAttempts(dayId?: string): Promise<SceneRemixAttempt[]>;
   saveUserOutput(output: UserOutput): Promise<void>;
   getUserOutput(dayId: string): Promise<UserOutput | null>;
   listUserOutputs(): Promise<UserOutput[]>;

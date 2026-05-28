@@ -40,6 +40,8 @@ function createMockRepository(overrides: Partial<ProgressRepository> = {}): Prog
     listStepCompletions: vi.fn(),
     saveExerciseAttempt: vi.fn(),
     listExerciseAttempts: vi.fn(),
+    saveSceneRemixAttempt: vi.fn(),
+    listSceneRemixAttempts: vi.fn().mockResolvedValue([]),
     saveUserOutput: vi.fn(),
     getUserOutput: vi.fn(),
     listUserOutputs: vi.fn().mockResolvedValue([]),

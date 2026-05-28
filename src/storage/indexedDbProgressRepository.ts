@@ -5,6 +5,7 @@ import { normalizeSceneOutput } from '../domain/sceneOutput';
 import type {
   ExerciseAttempt,
   ProgressRepository,
+  SceneRemixAttempt,
   StepCompletion,
   StepProgress,
   StudyActivity,
@@ -12,7 +13,7 @@ import type {
   WordProgress,
 } from './progressRepository';
 
-const DB_VERSION = 3;
+const DB_VERSION = 4;
 
 interface ProgressDb extends DBSchema {
   dayProgress: {
@@ -31,6 +32,11 @@ interface ProgressDb extends DBSchema {
   exerciseAttempts: {
     key: string;
     value: ExerciseAttempt;
+    indexes: { byDayId: string };
+  };
+  sceneRemixAttempts: {
+    key: string;
+    value: SceneRemixAttempt;
     indexes: { byDayId: string };
   };
   userOutputs: {
@@ -67,6 +73,10 @@ async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
       }
       if (!db.objectStoreNames.contains('exerciseAttempts')) {
         const store = db.createObjectStore('exerciseAttempts', { keyPath: 'id' });
+        store.createIndex('byDayId', 'dayId');
+      }
+      if (!db.objectStoreNames.contains('sceneRemixAttempts')) {
+        const store = db.createObjectStore('sceneRemixAttempts', { keyPath: 'id' });
         store.createIndex('byDayId', 'dayId');
       }
       if (db.objectStoreNames.contains('userOutputs')) {
@@ -144,6 +154,19 @@ export function createIndexedDbProgressRepository(dbName = 'basic-english-progre
     async listExerciseAttempts(dayId) {
       const db = await dbPromise;
       return (await db.getAll('exerciseAttempts')).filter((attempt) => attempt.dayId === dayId);
+    },
+
+    async saveSceneRemixAttempt(attempt) {
+      const db = await dbPromise;
+      await db.put('sceneRemixAttempts', attempt);
+    },
+
+    async listSceneRemixAttempts(dayId) {
+      const db = await dbPromise;
+      const attempts = await db.getAll('sceneRemixAttempts');
+      return attempts
+        .filter((attempt) => (dayId ? attempt.dayId === dayId : true))
+        .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
     },
 
     async saveUserOutput(output) {
