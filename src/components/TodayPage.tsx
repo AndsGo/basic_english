@@ -4,8 +4,10 @@ import { completeStep, getCurrentDayId, type DayProgress, startDay, type StepId 
 import {
   createExerciseReviewItem,
   createOutputReviewItem,
+  createSceneRemixReviewItem,
   createTranslationReviewItem,
   createWordReviewItem,
+  hasActiveSceneRemixReviewItem,
   type ReviewItem,
 } from '../domain/review';
 import { createInitialSceneOutput, normalizeSceneOutput } from '../domain/sceneOutput';
@@ -19,7 +21,7 @@ import {
   type TranslationDraft,
   type WordMark,
 } from '../domain/stepCompletion';
-import type { Course, Exercise, SceneGoal, SceneOutput, TranslationExercise, Word } from '../domain/types';
+import type { Course, Exercise, SceneGoal, SceneOutput, SceneRemixTask, TranslationExercise, Word } from '../domain/types';
 import { useSpeech } from '../speech/SpeechProvider';
 import type { ProgressRepository, UserOutput } from '../storage/progressRepository';
 import { CompletionSummary } from './CompletionSummary';
@@ -29,6 +31,7 @@ import { PatternCards } from './PatternCards';
 import { SceneGoalBanner } from './SceneGoalBanner';
 import { SceneMap } from './SceneMap';
 import { SceneOutputEditor } from './SceneOutputEditor';
+import type { SceneRemixSubmitResult } from './SceneRemixCard';
 import { Stepper } from './Stepper';
 import { TranslationTask } from './TranslationTask';
 import { WordCards } from './WordCards';
@@ -91,16 +94,22 @@ function makeAttemptId(dayId: string, exerciseId: string, now: string): string {
   return `attempt-${dayId}-${exerciseId}-${now}`;
 }
 
+function makeSceneRemixAttemptId(dayId: string, taskId: string, now: string): string {
+  return `scene-remix-attempt-${dayId}-${taskId}-${now}`;
+}
+
 export function TodayPage({
   course,
   repository,
   sceneGoalsByDayId = {},
+  sceneRemixTasksByDayId = {},
   showChineseHelp = false,
   onProgressChange,
 }: {
   course: Course;
   repository: ProgressRepository;
   sceneGoalsByDayId?: Partial<Record<string, SceneGoal>>;
+  sceneRemixTasksByDayId?: Partial<Record<string, SceneRemixTask[]>>;
   showChineseHelp?: boolean;
   onProgressChange?: () => void;
 }) {
@@ -109,6 +118,7 @@ export function TodayPage({
   const [selectedDayId, setSelectedDayId] = useState(() => orderedDayIds[0]);
   const day = allDays.find((courseDay) => courseDay.id === selectedDayId) ?? allDays[0];
   const sceneGoal = sceneGoalsByDayId[day.id];
+  const remixTask = sceneRemixTasksByDayId[day.id]?.[0];
   const allSceneGoals = useMemo(
     () => Object.values(sceneGoalsByDayId).filter((goal): goal is SceneGoal => Boolean(goal)),
     [sceneGoalsByDayId],
@@ -325,6 +335,37 @@ export function TodayPage({
     );
   };
 
+  const handleSceneRemixSubmit = async (task: SceneRemixTask, result: SceneRemixSubmitResult) => {
+    const now = new Date().toISOString();
+    await repository.saveSceneRemixAttempt({
+      id: makeSceneRemixAttemptId(day.id, task.id, now),
+      dayId: day.id,
+      taskId: task.id,
+      userAnswer: result.userAnswer,
+      selfMark: result.selfMark,
+      createdAt: now,
+    });
+
+    if (result.selfMark === 'review') {
+      const activeItems = await repository.listReviewItems('active');
+      if (!hasActiveSceneRemixReviewItem(activeItems, task.id)) {
+        await repository.saveReviewItem(
+          createSceneRemixReviewItem({
+            sourceDayId: day.id,
+            taskId: task.id,
+            prompt: task.prompt,
+            source: task.source,
+            userAnswer: result.userAnswer,
+            referenceAnswer: task.referenceAnswers[0],
+            now,
+          }),
+        );
+      }
+      setActiveReviewItems(await repository.listReviewItems('active'));
+      onProgressChange?.();
+    }
+  };
+
   const moveNext = async () => {
     if (isHydrating || isAdvancing || !currentGate.isComplete) return;
 
@@ -450,6 +491,8 @@ export function TodayPage({
                 reviewCount={dayReviewCount}
                 nextDay={nextDay}
                 onStartNextDay={startNextDay}
+                remixTask={remixTask}
+                onSceneRemixSubmit={handleSceneRemixSubmit}
               />
             )}
           </>

@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import type { ReactNode } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { basicEnglishCourse } from '../content/course';
+import { sceneRemixTasksByDayId } from '../content/sceneRemixTasks';
 import { sceneGoalsByDayId } from '../content/sceneGoals';
 import { week1Course } from '../content/week1';
 import type { DayProgress } from '../domain/progress';
@@ -59,6 +60,7 @@ function createTestRepository({
   const progressByDay = new Map(dayProgress.map((progress) => [progress.dayId, progress]));
   const outputsByDay = new Map(userOutputs.map((output) => [output.dayId, output]));
   const sceneRemixAttempts: SceneRemixAttempt[] = [];
+  const reviewItems = new Map<string, ReviewItem>();
 
   return {
     async getDayProgress(dayId) {
@@ -106,14 +108,14 @@ function createTestRepository({
     async listReviewWords() {
       return [];
     },
-    async saveReviewItem(_item: ReviewItem) {
-      return undefined;
+    async saveReviewItem(item: ReviewItem) {
+      reviewItems.set(item.id, item);
     },
-    async listReviewItems(_status?: ReviewItem['status']) {
-      return [];
+    async listReviewItems(status?: ReviewItem['status']) {
+      return [...reviewItems.values()].filter((item) => (status ? item.status === status : true));
     },
-    async getReviewItem(_id: string) {
-      return null;
+    async getReviewItem(id: string) {
+      return reviewItems.get(id) ?? null;
     },
     async saveStudyActivity(_activity: StudyActivity) {
       return undefined;
@@ -250,6 +252,32 @@ async function satisfyOutputGate(user: ReturnType<typeof userEvent.setup>, text 
   }
 }
 
+const singleDayCourse = {
+  ...week1Course,
+  weeks: [
+    {
+      ...week1Course.weeks[0],
+      days: [day],
+    },
+  ],
+};
+
+const completedDay1Progress = [completedDayProgress(day.id, week1Course.contentVersion)];
+
+const completedDay1Outputs = [
+  outputDraft({
+    id: 'output-day-001',
+    text: 'I am from China.',
+    sentenceCount: 1,
+    checklist: {
+      usedTargetPattern: true,
+      usedLessonWords: true,
+      hasSubjects: true,
+      meaningIsClear: true,
+    },
+  }),
+];
+
 function changeTextbox(label: string, value: string) {
   fireEvent.change(screen.getByLabelText(label), { target: { value } });
 }
@@ -266,6 +294,123 @@ function deferred<T>() {
 }
 
 describe('TodayPage', () => {
+  it('shows a remix task on completed days with remix content', async () => {
+    const repository = createTestRepository({
+      dayProgress: completedDay1Progress,
+      userOutputs: completedDay1Outputs,
+    });
+
+    renderWithSpeech(<TodayPage course={singleDayCourse} repository={repository} sceneRemixTasksByDayId={sceneRemixTasksByDayId} />);
+
+    expect(await screen.findByRole('heading', { name: 'Try Another Scene' })).toBeInTheDocument();
+    expect(screen.getByText('Change China to Japan.')).toBeInTheDocument();
+  });
+
+  it('saves a close-enough remix attempt without creating review', async () => {
+    const repository = createTestRepository({
+      dayProgress: completedDay1Progress,
+      userOutputs: completedDay1Outputs,
+    });
+
+    renderWithSpeech(<TodayPage course={singleDayCourse} repository={repository} sceneRemixTasksByDayId={sceneRemixTasksByDayId} />);
+
+    await userEvent.type(await screen.findByLabelText('Scene remix answer'), 'I am from Japan.');
+    await userEvent.click(screen.getByRole('button', { name: 'Show reference' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Close enough' }));
+
+    await waitFor(async () => {
+      await expect(repository.listSceneRemixAttempts('day-001')).resolves.toHaveLength(1);
+    });
+    expect(await repository.listReviewItems('active')).toHaveLength(0);
+  });
+
+  it('saves a review remix attempt and creates one active scene remix review item', async () => {
+    const repository = createTestRepository({
+      dayProgress: completedDay1Progress,
+      userOutputs: completedDay1Outputs,
+    });
+    const onProgressChange = vi.fn();
+
+    renderWithSpeech(
+      <TodayPage
+        course={singleDayCourse}
+        repository={repository}
+        sceneRemixTasksByDayId={sceneRemixTasksByDayId}
+        onProgressChange={onProgressChange}
+      />,
+    );
+
+    await userEvent.type(await screen.findByLabelText('Scene remix answer'), 'I am from China.');
+    await userEvent.click(screen.getByRole('button', { name: 'Show reference' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Need review' }));
+
+    await waitFor(async () => {
+      await expect(repository.listSceneRemixAttempts('day-001')).resolves.toHaveLength(1);
+    });
+    const reviews = await repository.listReviewItems('active');
+    expect(reviews).toHaveLength(1);
+    expect(reviews[0]).toMatchObject({
+      type: 'scene_remix',
+      sourceDayId: 'day-001',
+      taskId: 'day-001-remix-country-japan',
+      prompt: 'Change China to Japan.',
+      source: 'I am from China.',
+      userAnswer: 'I am from China.',
+      referenceAnswer: 'I am from Japan.',
+    });
+    expect(onProgressChange).toHaveBeenCalled();
+    await waitFor(() => expect(screen.getByText('Review tomorrow: 1')).toBeInTheDocument());
+  });
+
+  it('does not create duplicate active remix review items for the same task', async () => {
+    const repository = createTestRepository({
+      dayProgress: completedDay1Progress,
+      userOutputs: completedDay1Outputs,
+    });
+
+    renderWithSpeech(<TodayPage course={singleDayCourse} repository={repository} sceneRemixTasksByDayId={sceneRemixTasksByDayId} />);
+
+    await userEvent.type(await screen.findByLabelText('Scene remix answer'), 'I am from China.');
+    await userEvent.click(screen.getByRole('button', { name: 'Show reference' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Need review' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Need review' }));
+
+    await waitFor(async () => {
+      await expect(repository.listSceneRemixAttempts('day-001')).resolves.toHaveLength(2);
+    });
+    expect(await repository.listReviewItems('active')).toHaveLength(1);
+  });
+
+  it('does not show a remix task on completed days by default', async () => {
+    const repository = createTestRepository({
+      dayProgress: completedDay1Progress,
+      userOutputs: completedDay1Outputs,
+    });
+
+    renderWithSpeech(<TodayPage course={singleDayCourse} repository={repository} />);
+
+    await screen.findByRole('heading', { name: 'Day 1 complete' });
+    expect(screen.queryByRole('heading', { name: 'Try Another Scene' })).not.toBeInTheDocument();
+  });
+
+  it('does not show a remix task when only another day has remix content', async () => {
+    const repository = createTestRepository({
+      dayProgress: completedDay1Progress,
+      userOutputs: completedDay1Outputs,
+    });
+
+    renderWithSpeech(
+      <TodayPage
+        course={singleDayCourse}
+        repository={repository}
+        sceneRemixTasksByDayId={{ 'day-008': sceneRemixTasksByDayId['day-008'] }}
+      />,
+    );
+
+    await screen.findByRole('heading', { name: 'Day 1 complete' });
+    expect(screen.queryByRole('heading', { name: 'Try Another Scene' })).not.toBeInTheDocument();
+  });
+
   it('shows the scene goal banner for the current day', async () => {
     const repo = createIndexedDbProgressRepository('today-scene-goal-banner');
     renderWithSpeech(<TodayPage course={week1Course} repository={repo} sceneGoalsByDayId={sceneGoalsByDayId} />);

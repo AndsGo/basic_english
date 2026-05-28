@@ -1,10 +1,13 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { basicEnglishCourse } from '../content/course';
+import type { SceneRemixTask } from '../domain/types';
 import type { UserOutput } from '../storage/progressRepository';
 import { CompletionSummary } from './CompletionSummary';
 
 afterEach(() => cleanup());
+
+const day1 = basicEnglishCourse.weeks[0].days[0];
 
 const output: UserOutput = {
   id: 'day-014',
@@ -21,22 +24,29 @@ const output: UserOutput = {
   updatedAt: '2026-05-26T00:00:00.000Z',
 };
 
+const sceneOutput: UserOutput = {
+  ...output,
+  dayId: day1.id,
+  text: '',
+  scene: {
+    sceneId: 'self',
+    helpMode: 'template',
+    sentences: ['My name is Li.', 'I am from China.', 'I am a student.', 'I study English.'],
+    sceneText: 'My name is Li. I am from China. I am a student. I study English.',
+    dialogue: 'A: What is your name?\nB: My name is Li.',
+  },
+};
+
+const remixTask: SceneRemixTask = {
+  id: 'day-001-remix-country-japan',
+  type: 'replace',
+  prompt: 'Change China to Japan.',
+  source: 'I am from China.',
+  referenceAnswers: ['I am from Japan.'],
+};
+
 describe('CompletionSummary', () => {
   it('shows saved scene output instead of empty legacy output text', () => {
-    const day1 = basicEnglishCourse.weeks[0].days[0];
-    const sceneOutput: UserOutput = {
-      ...output,
-      dayId: day1.id,
-      text: '',
-      scene: {
-        sceneId: 'self',
-        helpMode: 'template',
-        sentences: ['My name is Li.', 'I am from China.', 'I am a student.', 'I study English.'],
-        sceneText: 'My name is Li. I am from China. I am a student. I study English.',
-        dialogue: 'A: What is your name?\nB: My name is Li.',
-      },
-    };
-
     render(<CompletionSummary day={day1} output={sceneOutput} reviewCount={0} onStartNextDay={vi.fn()} />);
 
     expect(screen.getByText('Scene')).toBeInTheDocument();
@@ -75,5 +85,20 @@ describe('CompletionSummary', () => {
 
     expect(screen.getByText('View course result')).toBeInTheDocument();
     expect(screen.queryByText('View Week 1 result')).not.toBeInTheDocument();
+  });
+
+  it('renders a remix card after day completion when a task is provided', () => {
+    render(
+      <CompletionSummary
+        day={day1}
+        output={sceneOutput}
+        reviewCount={0}
+        remixTask={remixTask}
+        onSceneRemixSubmit={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByRole('heading', { name: 'Try Another Scene' })).toBeInTheDocument();
+    expect(screen.getByText('Change China to Japan.')).toBeInTheDocument();
   });
 });

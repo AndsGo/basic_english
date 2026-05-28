@@ -1,5 +1,6 @@
-import type { Day } from '../domain/types';
+import type { Day, SceneRemixTask } from '../domain/types';
 import type { UserOutput } from '../storage/progressRepository';
+import { SceneRemixCard, type SceneRemixSubmitResult } from './SceneRemixCard';
 
 const completedChecklistLabels: Record<keyof UserOutput['checklist'], string> = {
   usedTargetPattern: "Used today's pattern",
@@ -14,12 +15,16 @@ export function CompletionSummary({
   reviewCount,
   nextDay,
   onStartNextDay,
+  remixTask,
+  onSceneRemixSubmit,
 }: {
   day: Day;
   output: UserOutput;
   reviewCount: number;
   nextDay?: Day;
   onStartNextDay?: () => void;
+  remixTask?: SceneRemixTask;
+  onSceneRemixSubmit?: (task: SceneRemixTask, result: SceneRemixSubmitResult) => void | Promise<void>;
 }) {
   const completedChecklist = Object.entries(output.checklist)
     .filter(([, isComplete]) => isComplete)
@@ -55,6 +60,9 @@ export function CompletionSummary({
         </ul>
       )}
       <p>Review tomorrow: {reviewCount}</p>
+      {remixTask && onSceneRemixSubmit && (
+        <SceneRemixCard task={remixTask} onSubmit={(result) => onSceneRemixSubmit(remixTask, result)} />
+      )}
       {nextDay ? (
         <button type="button" className="primary-button" onClick={onStartNextDay}>
           Start Day {nextDay.dayNumber}

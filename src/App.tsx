@@ -7,6 +7,7 @@ import { TodayPage } from './components/TodayPage';
 import { WordsPage } from './components/WordsPage';
 import { basicEnglishCourse } from './content/course';
 import { scenarioCapabilities } from './content/scenarioCapabilities';
+import { sceneRemixTasksByDayId } from './content/sceneRemixTasks';
 import { sceneGoalsByDayId } from './content/sceneGoals';
 import { getActiveReviewDayIds } from './domain/review';
 import { SpeechProvider } from './speech/SpeechProvider';
@@ -98,6 +99,7 @@ export default function App() {
             course={basicEnglishCourse}
             repository={repository}
             sceneGoalsByDayId={sceneGoalsByDayId}
+            sceneRemixTasksByDayId={sceneRemixTasksByDayId}
             showChineseHelp={showChineseHelp}
             onProgressChange={() => void refreshProgressSummary()}
           />
