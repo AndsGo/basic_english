@@ -225,6 +225,21 @@ textarea {
   gap: 20px;
 }
 
+.scene-remix-card {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.scene-remix-card textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+.scene-remix-source,
+.scene-remix-reference {
+  margin: 0;
+}
+
 .scene-output-editor section {
   display: grid;
   gap: 10px;
