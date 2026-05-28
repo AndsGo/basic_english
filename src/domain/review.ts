@@ -37,6 +37,7 @@ export interface ReviewItem {
   sourceStepId: StepId;
   source?: string;
   taskId?: string;
+  wordId?: string;
   prompt: string;
   userAnswer?: string;
   referenceAnswer?: string;
@@ -62,6 +63,7 @@ export function createWordReviewItem({
     type: 'word',
     sourceDayId,
     sourceStepId: 'words',
+    wordId,
     prompt: wordText,
     priority: 'normal',
     status: 'active',
@@ -197,4 +199,13 @@ export function getActiveReviewDayIds(items: ReviewItem[]): string[] {
 
 export function hasActiveSceneRemixReviewItem(items: ReviewItem[], taskId: string): boolean {
   return items.some((item) => item.type === 'scene_remix' && item.status === 'active' && item.taskId === taskId);
+}
+
+export function hasActiveWordReviewItem(items: ReviewItem[], wordId: string): boolean {
+  return items.some(
+    (item) =>
+      item.type === 'word' &&
+      item.status === 'active' &&
+      (item.wordId !== undefined ? item.wordId === wordId : item.id.endsWith(`-${wordId}`)),
+  );
 }
