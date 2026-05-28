@@ -122,6 +122,19 @@ textarea {
   color: #496454;
 }
 
+.section-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.segmented-control {
+  display: inline-flex;
+  gap: 8px;
+}
+
 .stepper {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -116,7 +116,14 @@ export default function App() {
         {activeTab === 'review' && (
           <ReviewPage repository={repository} onStartToday={() => handleTabChange('today')} onReviewChange={() => void refreshProgressSummary()} />
         )}
-        {activeTab === 'words' && <WordsPage course={basicEnglishCourse} showChineseHelp={showChineseHelp} />}
+        {activeTab === 'words' && (
+          <WordsPage
+            course={basicEnglishCourse}
+            repository={repository}
+            showChineseHelp={showChineseHelp}
+            onProgressChange={() => void refreshProgressSummary()}
+          />
+        )}
         {activeTab === 'me' && (
           <MePage
             repository={repository}

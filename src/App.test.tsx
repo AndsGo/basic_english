@@ -87,6 +87,8 @@ describe('App shell', () => {
     expect(screen.getByRole('button', { name: 'Read word name' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read definition for name' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read example for name' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'List' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('button', { name: 'Flashcards' })).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Review' }));
     expect(screen.getByRole('heading', { name: 'Review today' })).toBeInTheDocument();
