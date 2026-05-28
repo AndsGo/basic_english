@@ -187,12 +187,12 @@ Actions:
 
 ```text
 Know -> saveWordProgress(status: 'known')
-Review -> saveWordProgress(status: 'review')
+Review -> saveWordProgress(status: 'review') + create a word ReviewItem
 ```
 
 Use timestamps consistent with Today word learning.
 
-V1.5 does not need to create a separate `ReviewItem` when a word is marked `Review` from Words Flashcards. Existing Review and Me surfaces already use `listReviewWords()` for word progress. This keeps Words flashcards aligned with existing word progress storage without duplicating review item rows.
+When a word is marked `Review` from Words Flashcards, V1.5 should also create the existing `word` type `ReviewItem`, using the same domain helper as Today word learning. This keeps the learner's visible feedback honest: after `Added to Review`, the item can appear in the Review page. The implementation should avoid duplicate active word review items for repeated clicks on the same word.
 
 ## Components
 
@@ -256,7 +256,7 @@ Cover `WordsPage` and `WordFlashcards`:
 - Chinese text is hidden by default.
 - Chinese text appears when `showChineseHelp` is true.
 - `Know` saves known progress and shows `Marked Known`.
-- `Review` saves review progress and shows `Added to Review`.
+- `Review` saves review progress, creates a word review item, and shows `Added to Review`.
 - `Next` and `Previous` change cards and reset to the front side.
 - Today word learning tests continue to pass.
 
@@ -283,7 +283,7 @@ V1.5 is complete when:
 - card front shows image and word.
 - card back shows definition, example, speech controls, and optional Chinese.
 - `Know` writes known word progress.
-- `Review` writes review word progress and shows `Added to Review`.
+- `Review` writes review word progress, creates a word review item, and shows `Added to Review`.
 - flashcard navigation works.
 - existing Today Words flow still works.
 - `npm test` passes.
