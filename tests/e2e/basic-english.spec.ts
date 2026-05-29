@@ -415,6 +415,16 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByText('what a person is called')).toBeVisible();
     await expect(page.getByText(/Chinese:/)).toHaveCount(0);
     await expect(page.getByText('My name is Li.')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'List' })).toHaveAttribute('aria-pressed', 'true');
+    await page.getByRole('button', { name: 'Flashcards' }).click();
+    const flashcards = page.getByLabel('Word flashcards');
+    await expect(flashcards).toBeVisible();
+    await expect(flashcards.getByRole('img', { name: /flashcard illustration/ }).first()).toBeVisible();
+    await flashcards.getByRole('button', { name: 'Flip' }).click();
+    await expect(flashcards.getByRole('button', { name: 'Review' })).toBeVisible();
+    await flashcards.getByRole('button', { name: 'Review' }).click();
+    await expect(page.getByText('Added to Review')).toBeVisible();
+    await page.getByRole('button', { name: 'List' }).click();
 
     await page.getByRole('button', { name: 'Me', exact: true }).click();
     await expect(page.getByLabel('Enable reading aloud')).toBeChecked();
@@ -423,6 +433,10 @@ test.describe('Basic English MVP e2e', () => {
     await page.getByRole('button', { name: 'Words' }).click();
     await expect(page.getByRole('button', { name: 'Read word name' })).toBeDisabled();
     await expect(page.getByText(/Chinese:/).first()).toBeVisible();
+    await page.getByRole('button', { name: 'Flashcards' }).click();
+    await page.getByLabel('Word flashcards').getByRole('button', { name: 'Flip' }).click();
+    await expect(page.getByText(/Chinese:/).first()).toBeVisible();
+    await page.getByRole('button', { name: 'List' }).click();
 
     await goToReview(page);
     await expect(page.getByRole('heading', { name: 'Review today' })).toBeVisible();

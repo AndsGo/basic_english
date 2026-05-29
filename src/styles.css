@@ -122,6 +122,19 @@ textarea {
   color: #496454;
 }
 
+.section-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.segmented-control {
+  display: inline-flex;
+  gap: 8px;
+}
+
 .stepper {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -416,6 +429,62 @@ textarea {
 
 .speech-button:disabled {
   opacity: 0.45;
+}
+
+.word-flashcards {
+  display: grid;
+  gap: 12px;
+}
+
+.flashcard-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  color: #496454;
+  font-weight: 700;
+}
+
+.flashcard {
+  display: grid;
+  min-height: 360px;
+  border: 1px solid #e5dfd1;
+  border-radius: 8px;
+  background: white;
+  overflow: hidden;
+}
+
+.flashcard-front,
+.flashcard-back {
+  display: grid;
+  gap: 14px;
+  align-content: center;
+  padding: 18px;
+}
+
+.flashcard-front {
+  text-align: center;
+}
+
+.flashcard-image {
+  width: min(100%, 420px);
+  aspect-ratio: 1;
+  justify-self: center;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #f4f7fb;
+}
+
+.flashcard-image--fallback {
+  display: grid;
+  place-items: center;
+  border: 1px dashed #cfc7b8;
+  color: #496454;
+  font-weight: 800;
+}
+
+.flashcard-navigation {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .sticky-next {

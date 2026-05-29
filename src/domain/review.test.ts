@@ -7,6 +7,7 @@ import {
   createWordReviewItem,
   getActiveReviewDayIds,
   hasActiveSceneRemixReviewItem,
+  hasActiveWordReviewItem,
   resolveReviewItem,
   selectReviewWordIds,
   type ReviewItem,
@@ -164,5 +165,44 @@ describe('scene remix review items', () => {
     expect(hasActiveSceneRemixReviewItem([activeItem], 'day-001-remix-country-japan')).toBe(true);
     expect(hasActiveSceneRemixReviewItem([knownItem], 'day-001-remix-country-japan')).toBe(false);
     expect(hasActiveSceneRemixReviewItem([activeItem], 'day-001-remix-job-teacher')).toBe(false);
+  });
+});
+
+describe('word review duplicate detection', () => {
+  it('stores word id on word review items', () => {
+    const item = createWordReviewItem({
+      wordId: 'room',
+      wordText: 'room',
+      sourceDayId: 'words-page',
+      now: '2026-05-28T00:00:00.000Z',
+    });
+
+    expect(item).toMatchObject({
+      id: 'review-word-words-page-room',
+      type: 'word',
+      sourceDayId: 'words-page',
+      sourceStepId: 'words',
+      wordId: 'room',
+      prompt: 'room',
+      status: 'active',
+    });
+  });
+
+  it('detects active word review items by stored word id or legacy stable id', () => {
+    const activeItem = createWordReviewItem({
+      wordId: 'room',
+      wordText: 'room',
+      sourceDayId: 'words-page',
+      now: '2026-05-28T00:00:00.000Z',
+    });
+    const legacyItem = { ...activeItem, id: 'review-word-day-008-table', wordId: undefined, prompt: 'table' };
+    const suffixedModernItem = { ...activeItem, id: 'review-word-day-008-living-room', wordId: 'living-room' };
+    const knownItem = resolveReviewItem(activeItem, '2026-05-28T00:01:00.000Z');
+
+    expect(hasActiveWordReviewItem([activeItem], 'room')).toBe(true);
+    expect(hasActiveWordReviewItem([legacyItem], 'table')).toBe(true);
+    expect(hasActiveWordReviewItem([suffixedModernItem], 'room')).toBe(false);
+    expect(hasActiveWordReviewItem([knownItem], 'room')).toBe(false);
+    expect(hasActiveWordReviewItem([activeItem], 'book')).toBe(false);
   });
 });
