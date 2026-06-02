@@ -2,6 +2,7 @@ import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ReactNode } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { basicEnglishCourse } from '../content/course';
 import { week1Course } from '../content/week1';
 import type { ReviewItem } from '../domain/review';
 import { SpeechProvider } from '../speech/SpeechProvider';
@@ -99,6 +100,15 @@ describe('WordsPage', () => {
 
     expect(screen.getByLabelText('Word flashcards')).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'student flashcard illustration' })).toBeInTheDocument();
+  });
+
+  it('does not show missing-image fallback for real course flashcards', async () => {
+    renderWithSpeech(<WordsPage course={basicEnglishCourse} repository={createRepository()} />);
+
+    await userEvent.click(screen.getByRole('button', { name: 'Flashcards' }));
+
+    expect(screen.queryByText('No image yet')).not.toBeInTheDocument();
+    expect(screen.getByRole('img')).toHaveAttribute('alt', expect.stringContaining('flashcard illustration'));
   });
 
   it('shows Chinese help on the flashcard back when enabled', async () => {
