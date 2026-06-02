@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Course, SceneRemixTask, ScenarioCapability, ScenarioWeek } from '../domain/types';
 import { basicEnglishCourse } from './course';
+import { pictureDescribeTasksByDayId } from './pictureDescribeTasks';
 import { scenarioCapabilities, scenarioWeekMap } from './scenarioCapabilities';
 import { sceneRemixTasksByDayId } from './sceneRemixTasks';
 import { sceneGoalsByDayId } from './sceneGoals';
@@ -650,5 +651,26 @@ describe('scene remix tasks', () => {
       'Day day-001 must have at least one remix task.',
       'Day day-008 must have at least one remix task.',
     ]);
+  });
+});
+
+describe('picture describe tasks', () => {
+  it('has one task for every Week 1 and Week 2 day', () => {
+    const firstTwoWeekDayIds = basicEnglishCourse.weeks.slice(0, 2).flatMap((week) => week.days.map((day) => day.id));
+
+    expect(Object.keys(pictureDescribeTasksByDayId).sort()).toEqual([...firstTwoWeekDayIds].sort());
+  });
+
+  it('uses complete English-first task data', () => {
+    for (const [dayId, task] of Object.entries(pictureDescribeTasksByDayId)) {
+      expect(task.dayId).toBe(dayId);
+      expect(task.title).toMatch(/\S/);
+      expect(task.goal).toMatch(/\S/);
+      expect(task.image).toMatch(/\S/);
+      expect(task.targetWords.length).toBeGreaterThanOrEqual(3);
+      expect(task.suggestedPatterns.length).toBeGreaterThanOrEqual(2);
+      expect(task.requiredSentenceCount).toBe(3);
+      expect(task.simpleVersion).toHaveLength(3);
+    }
   });
 });

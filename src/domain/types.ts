@@ -121,6 +121,18 @@ export interface OutputTask {
   requiredSentenceCount: number;
 }
 
+export interface PictureDescribeTask {
+  id: string;
+  dayId: string;
+  title: string;
+  goal: string;
+  image: string;
+  targetWords: string[];
+  suggestedPatterns: string[];
+  requiredSentenceCount: number;
+  simpleVersion: string[];
+}
+
 export type SceneHelpMode = 'template' | 'guided' | 'free';
 
 export interface SceneOutput {
