@@ -621,6 +621,14 @@ textarea {
   background: #f4f7fb;
 }
 
+.picture-review-image {
+  width: min(100%, 360px);
+  aspect-ratio: 1;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #f4f7fb;
+}
+
 .picture-describe-body,
 .picture-support {
   display: grid;

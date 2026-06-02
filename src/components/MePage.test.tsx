@@ -121,6 +121,51 @@ describe('MePage scene map', () => {
     expect(await screen.findByRole('listitem', { name: /Self Completed/ })).toHaveClass('scene-map-item--completed');
     expect(screen.getByRole('listitem', { name: /Room Next/ })).toBeInTheDocument();
   });
+
+  it('shows checked picture descriptions in My Descriptions', async () => {
+    const repository = createMockRepository({
+      listPictureDescriptions: vi.fn().mockResolvedValue([
+        {
+          id: 'picture-description-day-008',
+          dayId: 'day-008',
+          taskId: 'picture-day-008-my-room',
+          text: 'This is my room. There is a bed. I can see a table.',
+          checkedAt: '2026-06-02T00:00:00.000Z',
+          feedback: {
+            status: 'ready',
+            messages: ['Clear enough. You can continue.'],
+            simpleVersion: ['This is my room.', 'There is a bed.', 'I can see a table.'],
+          },
+          updatedAt: '2026-06-02T00:00:00.000Z',
+        },
+      ]),
+    });
+
+    render(
+      <MePage
+        repository={repository}
+        pictureDescribeTasksByDayId={{
+          'day-008': {
+            id: 'picture-day-008-my-room',
+            dayId: 'day-008',
+            title: 'My Room',
+            goal: 'Say what you can see in this room.',
+            image: '/room.png',
+            targetWords: ['room', 'bed', 'table'],
+            suggestedPatterns: ['This is ...'],
+            requiredSentenceCount: 3,
+            simpleVersion: ['This is my room.', 'There is a bed.', 'I can see a table.'],
+          },
+        }}
+      />,
+    );
+
+    expect(await screen.findByRole('heading', { name: 'My Descriptions' })).toBeInTheDocument();
+    expect(screen.getByText('My Room')).toBeInTheDocument();
+    expect(screen.getByText('Day 8')).toBeInTheDocument();
+    expect(screen.getByText('This is my room. There is a bed. I can see a table.')).toBeInTheDocument();
+    expect(screen.getByText('ready')).toBeInTheDocument();
+  });
 });
 
 describe('MePage saved outputs', () => {

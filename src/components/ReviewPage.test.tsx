@@ -1,7 +1,7 @@
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { createSceneRemixReviewItem, createWordReviewItem } from '../domain/review';
+import { createPictureDescriptionReviewItem, createSceneRemixReviewItem, createWordReviewItem } from '../domain/review';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
 import { ReviewPage } from './ReviewPage';
 
@@ -137,5 +137,35 @@ describe('ReviewPage', () => {
       userAnswer: 'I am from China.',
       status: 'active',
     });
+  });
+
+  it('renders and completes an active picture description review item', async () => {
+    const user = userEvent.setup();
+    const repo = createIndexedDbProgressRepository('review-page-picture-description');
+    const onReviewChange = vi.fn();
+    await repo.saveReviewItem(
+      createPictureDescriptionReviewItem({
+        sourceDayId: 'day-008',
+        taskId: 'picture-day-008-my-room',
+        title: 'My Room',
+        image: '/room.png',
+        targetWords: ['room', 'bed', 'table'],
+        userAnswer: 'This is my room. There is a bed. I can see a table.',
+        simpleVersion: ['This is my room.', 'There is a bed.', 'I can see a table.'],
+        now: '2026-06-02T00:00:00.000Z',
+      }),
+    );
+
+    render(<ReviewPage repository={repo} onReviewChange={onReviewChange} />);
+
+    expect(await screen.findByRole('heading', { name: 'Review Picture Description' })).toBeInTheDocument();
+    expect(screen.getByText('This is my room. There is a bed. I can see a table.')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'I know this' }));
+
+    await waitFor(async () => {
+      await expect(repo.listReviewItems('active')).resolves.toHaveLength(0);
+    });
+    expect(onReviewChange).toHaveBeenCalled();
   });
 });

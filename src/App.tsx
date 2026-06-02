@@ -6,6 +6,7 @@ import { ReviewPage } from './components/ReviewPage';
 import { TodayPage } from './components/TodayPage';
 import { WordsPage } from './components/WordsPage';
 import { basicEnglishCourse } from './content/course';
+import { pictureDescribeTasksByDayId } from './content/pictureDescribeTasks';
 import { scenarioCapabilities } from './content/scenarioCapabilities';
 import { sceneRemixTasksByDayId } from './content/sceneRemixTasks';
 import { sceneGoalsByDayId } from './content/sceneGoals';
@@ -100,6 +101,7 @@ export default function App() {
             repository={repository}
             sceneGoalsByDayId={sceneGoalsByDayId}
             sceneRemixTasksByDayId={sceneRemixTasksByDayId}
+            pictureDescribeTasksByDayId={pictureDescribeTasksByDayId}
             showChineseHelp={showChineseHelp}
             onProgressChange={() => void refreshProgressSummary()}
           />
@@ -129,6 +131,7 @@ export default function App() {
             repository={repository}
             scenarioCapabilities={scenarioCapabilities}
             sceneGoalsByDayId={sceneGoalsByDayId}
+            pictureDescribeTasksByDayId={pictureDescribeTasksByDayId}
             showChineseHelp={showChineseHelp}
             onShowChineseHelpChange={setShowChineseHelp}
             readingEnabled={readingEnabled}

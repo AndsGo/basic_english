@@ -3,9 +3,9 @@ import { getCapabilityStates } from '../domain/capabilities';
 import type { DayProgress } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
 import { getCompletedSceneIds } from '../domain/sceneOutput';
-import type { ScenarioCapability, SceneGoal } from '../domain/types';
+import type { PictureDescribeTask, ScenarioCapability, SceneGoal } from '../domain/types';
 import type { SpeechRate } from '../speech/speechService';
-import type { ProgressRepository, StudyActivity, UserOutput } from '../storage/progressRepository';
+import type { PictureDescription, ProgressRepository, StudyActivity, UserOutput } from '../storage/progressRepository';
 import { SceneMap } from './SceneMap';
 
 const DEFAULT_TOTAL_DAY_COUNT = 7;
@@ -46,6 +46,7 @@ export function MePage({
   repository,
   scenarioCapabilities,
   sceneGoalsByDayId,
+  pictureDescribeTasksByDayId = {},
   showChineseHelp = false,
   onShowChineseHelpChange,
   readingEnabled = true,
@@ -57,6 +58,7 @@ export function MePage({
   repository: ProgressRepository;
   scenarioCapabilities?: ScenarioCapability[];
   sceneGoalsByDayId?: Partial<Record<string, SceneGoal>>;
+  pictureDescribeTasksByDayId?: Partial<Record<string, PictureDescribeTask>>;
   showChineseHelp?: boolean;
   onShowChineseHelpChange?: (showChineseHelp: boolean) => void;
   readingEnabled?: boolean;
@@ -67,6 +69,7 @@ export function MePage({
 }) {
   const [days, setDays] = useState<DayProgress[]>([]);
   const [outputs, setOutputs] = useState<UserOutput[]>([]);
+  const [pictureDescriptions, setPictureDescriptions] = useState<PictureDescription[]>([]);
   const [reviewItems, setReviewItems] = useState<ReviewItem[]>([]);
   const [activities, setActivities] = useState<StudyActivity[]>([]);
   const [loadError, setLoadError] = useState(false);
@@ -78,9 +81,10 @@ export function MePage({
 
     async function loadProgress() {
       try {
-        const [savedDays, savedOutputs, activeReviewItems, savedActivities] = await Promise.all([
+        const [savedDays, savedOutputs, savedPictureDescriptions, activeReviewItems, savedActivities] = await Promise.all([
           repository.listDayProgress(),
           repository.listUserOutputs(),
+          repository.listPictureDescriptions(),
           repository.listReviewItems('active'),
           repository.listStudyActivities(),
         ]);
@@ -88,6 +92,7 @@ export function MePage({
         if (!isMounted) return;
         setDays(savedDays);
         setOutputs(savedOutputs);
+        setPictureDescriptions(savedPictureDescriptions);
         setReviewItems(activeReviewItems);
         setActivities(savedActivities);
         setLoadError(false);
@@ -96,6 +101,7 @@ export function MePage({
         if (!isMounted) return;
         setDays([]);
         setOutputs([]);
+        setPictureDescriptions([]);
         setReviewItems([]);
         setActivities([]);
         setLoadError(true);
@@ -120,6 +126,7 @@ export function MePage({
     capabilityStates?.next?.unlockedByDayIds.filter((dayId) => !completedDayIds.includes(dayId)) ?? [];
   const sceneGoals = sceneGoalsByDayId ? Object.values(sceneGoalsByDayId).filter((goal): goal is SceneGoal => Boolean(goal)) : [];
   const completedSceneIds = getCompletedSceneIds(days, outputs);
+  const checkedPictureDescriptions = pictureDescriptions.filter((description) => Boolean(description.checkedAt));
 
   return (
     <section className="panel">
@@ -217,6 +224,27 @@ export function MePage({
       {hasLoadedProgress && !loadError && sceneGoals.length > 0 && (
         <SceneMap goals={sceneGoals} completedSceneIds={completedSceneIds} />
       )}
+      <section>
+        <h3>My Descriptions</h3>
+        {checkedPictureDescriptions.length > 0 ? (
+          <div className="output-list">
+            {checkedPictureDescriptions.map((description) => {
+              const task = pictureDescribeTasksByDayId[description.dayId];
+
+              return (
+                <article className="output-card" key={description.dayId}>
+                  <strong>{task?.title ?? description.taskId}</strong>
+                  <small>{formatDayId(description.dayId)}</small>
+                  <p className="saved-output">{description.text}</p>
+                  {description.feedback?.status && <span className="status-pill">{description.feedback.status}</span>}
+                </article>
+              );
+            })}
+          </div>
+        ) : (
+          <p>No picture descriptions saved yet.</p>
+        )}
+      </section>
       <section>
         <h3>Saved Outputs</h3>
         {outputs.length > 0 ? (

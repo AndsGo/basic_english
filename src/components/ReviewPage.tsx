@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { resolveReviewItem, type ReviewItem } from '../domain/review';
 import type { SceneRemixTask } from '../domain/types';
 import type { ProgressRepository } from '../storage/progressRepository';
+import { PictureDescriptionReviewCard } from './PictureDescriptionReviewCard';
 import { SceneRemixCard, type SceneRemixSubmitResult } from './SceneRemixCard';
 
 function makeSceneRemixTaskFromReviewItem(item: ReviewItem): SceneRemixTask {
@@ -127,6 +128,8 @@ export function ReviewPage({
               initialAnswer=""
               onSubmit={(result) => markSceneRemix(item, result)}
             />
+          ) : item.type === 'picture_description' ? (
+            <PictureDescriptionReviewCard key={item.id} item={item} onKnown={() => markKnown(item)} />
           ) : (
             <article className="review-card" key={item.id}>
               <p className="eyebrow">
