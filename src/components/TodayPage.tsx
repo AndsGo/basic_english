@@ -4,9 +4,11 @@ import { completeStep, getCurrentDayId, type DayProgress, startDay, type StepId 
 import {
   createExerciseReviewItem,
   createOutputReviewItem,
+  createPictureDescriptionReviewItem,
   createSceneRemixReviewItem,
   createTranslationReviewItem,
   createWordReviewItem,
+  hasActivePictureDescriptionReviewItem,
   hasActiveSceneRemixReviewItem,
   type ReviewItem,
 } from '../domain/review';
@@ -21,13 +23,14 @@ import {
   type TranslationDraft,
   type WordMark,
 } from '../domain/stepCompletion';
-import type { Course, Exercise, SceneGoal, SceneOutput, SceneRemixTask, TranslationExercise, Word } from '../domain/types';
+import type { Course, Exercise, PictureDescribeTask, SceneGoal, SceneOutput, SceneRemixTask, TranslationExercise, Word } from '../domain/types';
 import { useSpeech } from '../speech/SpeechProvider';
-import type { ProgressRepository, UserOutput } from '../storage/progressRepository';
+import type { PictureDescription, ProgressRepository, UserOutput } from '../storage/progressRepository';
 import { CompletionSummary } from './CompletionSummary';
 import { ExerciseRenderer } from './ExerciseRenderer';
 import { OutputTaskEditor } from './OutputTaskEditor';
 import { PatternCards } from './PatternCards';
+import { PictureDescribeStep } from './PictureDescribeStep';
 import { SceneGoalBanner } from './SceneGoalBanner';
 import { SceneMap } from './SceneMap';
 import { SceneOutputEditor } from './SceneOutputEditor';
@@ -49,6 +52,16 @@ function createInitialOutput(dayId: string): UserOutput {
       hasSubjects: false,
       meaningIsClear: false,
     },
+    updatedAt: new Date().toISOString(),
+  };
+}
+
+function createInitialPictureDescription(dayId: string, taskId = `picture-${dayId}`): PictureDescription {
+  return {
+    id: `picture-description-${dayId}`,
+    dayId,
+    taskId,
+    text: '',
     updatedAt: new Date().toISOString(),
   };
 }
@@ -103,6 +116,7 @@ export function TodayPage({
   repository,
   sceneGoalsByDayId = {},
   sceneRemixTasksByDayId = {},
+  pictureDescribeTasksByDayId = {},
   showChineseHelp = false,
   onProgressChange,
 }: {
@@ -110,6 +124,7 @@ export function TodayPage({
   repository: ProgressRepository;
   sceneGoalsByDayId?: Partial<Record<string, SceneGoal>>;
   sceneRemixTasksByDayId?: Partial<Record<string, SceneRemixTask[]>>;
+  pictureDescribeTasksByDayId?: Partial<Record<string, PictureDescribeTask>>;
   showChineseHelp?: boolean;
   onProgressChange?: () => void;
 }) {
@@ -119,6 +134,7 @@ export function TodayPage({
   const day = allDays.find((courseDay) => courseDay.id === selectedDayId) ?? allDays[0];
   const sceneGoal = sceneGoalsByDayId[day.id];
   const remixTask = sceneRemixTasksByDayId[day.id]?.[0];
+  const pictureTask = pictureDescribeTasksByDayId[day.id];
   const allSceneGoals = useMemo(
     () => Object.values(sceneGoalsByDayId).filter((goal): goal is SceneGoal => Boolean(goal)),
     [sceneGoalsByDayId],
@@ -127,6 +143,9 @@ export function TodayPage({
     startDay(day.id, course.contentVersion, new Date().toISOString()),
   );
   const [outputDraft, setOutputDraft] = useState<UserOutput>(() => createInitialOutput(day.id));
+  const [pictureDescriptionDraft, setPictureDescriptionDraft] = useState<PictureDescription>(() =>
+    createInitialPictureDescription(day.id, pictureTask?.id),
+  );
   const [wordMarks, setWordMarks] = useState<Record<string, WordMark | undefined>>({});
   const [practicedPatternIds, setPracticedPatternIds] = useState<Set<string>>(() => new Set());
   const [drillAnswers, setDrillAnswers] = useState<Record<string, ExerciseAnswer | undefined>>({});
@@ -186,15 +205,17 @@ export function TodayPage({
 
     async function loadSavedProgress() {
       setIsDayHydrating(true);
-      const [savedProgress, savedOutput] = await Promise.all([
+      const [savedProgress, savedOutput, savedPictureDescription] = await Promise.all([
         repository.getDayProgress(day.id),
         repository.getUserOutput(day.id),
+        repository.getPictureDescription(day.id),
       ]);
 
       if (!isMounted) return;
       setDayProgress(savedProgress ?? startDay(day.id, course.contentVersion, new Date().toISOString()));
       const nextOutput = savedOutput ?? createInitialOutput(day.id);
       setOutputDraft(withSceneOutput(nextOutput, sceneGoal));
+      setPictureDescriptionDraft(savedPictureDescription ?? createInitialPictureDescription(day.id, pictureTask?.id));
       setWordMarks({});
       setPracticedPatternIds(new Set());
       setDrillAnswers({});
@@ -207,13 +228,19 @@ export function TodayPage({
     return () => {
       isMounted = false;
     };
-  }, [course.contentVersion, day.id, repository, sceneGoal]);
+  }, [course.contentVersion, day.id, repository, sceneGoal, pictureTask?.id]);
 
   const currentGate = useMemo(() => {
     if (currentStep === 'words') return getWordsCompletion(day.wordIds, wordMarks);
     if (currentStep === 'patterns') return getPatternsCompletion(day.patternIds, practicedPatternIds);
     if (currentStep === 'drills') return getDrillsCompletion(drillExercises.map((exercise) => exercise.id), drillAnswers);
     if (currentStep === 'translate') return getTranslationCompletion(translationExercises.map((exercise) => exercise.id), translationDrafts);
+    if (currentStep === 'picture') {
+      if (!pictureTask) return { isComplete: true, missingRequirements: [] };
+      return pictureDescriptionDraft.checkedAt
+        ? { isComplete: true, missingRequirements: [] }
+        : { isComplete: false, missingRequirements: ['Check your picture description.'] };
+    }
     if (currentStep === 'output' && sceneGoal && outputDraft.scene) return getSceneOutputStepCompletion(outputDraft.scene);
     if (currentStep === 'output') return getOutputCompletion(outputDraft, day.outputTask.requiredSentenceCount);
     return { isComplete: true, missingRequirements: [] };
@@ -230,6 +257,8 @@ export function TodayPage({
     translationDrafts,
     outputDraft,
     sceneGoal,
+    pictureTask,
+    pictureDescriptionDraft.checkedAt,
   ]);
 
   const nextDay = useMemo(() => allDays[allDays.findIndex((courseDay) => courseDay.id === day.id) + 1], [allDays, day.id]);
@@ -261,6 +290,41 @@ export function TodayPage({
       scene,
       updatedAt: new Date().toISOString(),
     });
+  };
+
+  const savePictureDescriptionDraft = (description: PictureDescription) => {
+    setPictureDescriptionDraft(description);
+    void repository.savePictureDescription(description);
+  };
+
+  const handlePictureChecked = (description: PictureDescription) => {
+    savePictureDescriptionDraft(description);
+  };
+
+  const handleAddPictureReview = async (description: PictureDescription) => {
+    if (!pictureTask || description.text.trim().length === 0) return;
+
+    const now = new Date().toISOString();
+    const activeItems = await repository.listReviewItems('active');
+    if (!hasActivePictureDescriptionReviewItem(activeItems, pictureTask.id)) {
+      await repository.saveReviewItem(
+        createPictureDescriptionReviewItem({
+          sourceDayId: day.id,
+          taskId: pictureTask.id,
+          title: pictureTask.title,
+          image: pictureTask.image,
+          targetWords: pictureTask.targetWords,
+          userAnswer: description.text,
+          simpleVersion: description.feedback?.simpleVersion ?? pictureTask.simpleVersion,
+          now,
+        }),
+      );
+    }
+    const nextDescription = { ...description, addedToReviewAt: description.addedToReviewAt ?? now, updatedAt: now };
+    await repository.savePictureDescription(nextDescription);
+    setPictureDescriptionDraft(nextDescription);
+    setActiveReviewItems(await repository.listReviewItems('active'));
+    onProgressChange?.();
   };
 
   const markWord = (word: Word, mark: WordMark) => {
@@ -478,6 +542,22 @@ export function TodayPage({
             {currentStep === 'translate' && (
               <TranslationTask exercises={translationExercises} drafts={translationDrafts} onDraftChange={handleTranslationDraftChange} />
             )}
+            {currentStep === 'picture' &&
+              (pictureTask ? (
+                <PictureDescribeStep
+                  task={pictureTask}
+                  value={pictureDescriptionDraft}
+                  onChange={savePictureDescriptionDraft}
+                  onChecked={handlePictureChecked}
+                  onAddToReview={handleAddPictureReview}
+                  isReviewAdded={hasActivePictureDescriptionReviewItem(activeReviewItems, pictureTask.id)}
+                />
+              ) : (
+                <section>
+                  <h3>Describe the picture</h3>
+                  <p>No picture task today.</p>
+                </section>
+              ))}
             {currentStep === 'output' &&
               (sceneGoal && outputDraft.scene ? (
                 <SceneOutputEditor goal={sceneGoal} value={outputDraft.scene} onChange={saveSceneOutputDraft} />

@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import type { ReactNode } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { basicEnglishCourse } from '../content/course';
+import { pictureDescribeTasksByDayId } from '../content/pictureDescribeTasks';
 import { sceneRemixTasksByDayId } from '../content/sceneRemixTasks';
 import { sceneGoalsByDayId } from '../content/sceneGoals';
 import { week1Course } from '../content/week1';
@@ -12,6 +13,7 @@ import type { ReviewItem } from '../domain/review';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
 import type {
   ExerciseAttempt,
+  PictureDescription,
   ProgressRepository,
   SceneRemixAttempt,
   StepCompletion,
@@ -60,6 +62,7 @@ function createTestRepository({
   const progressByDay = new Map(dayProgress.map((progress) => [progress.dayId, progress]));
   const outputsByDay = new Map(userOutputs.map((output) => [output.dayId, output]));
   const sceneRemixAttempts: SceneRemixAttempt[] = [];
+  const pictureDescriptions = new Map<string, PictureDescription>();
   const reviewItems = new Map<string, ReviewItem>();
 
   return {
@@ -102,6 +105,15 @@ function createTestRepository({
     async listUserOutputs() {
       return [...outputsByDay.values()];
     },
+    async savePictureDescription(description: PictureDescription) {
+      pictureDescriptions.set(description.dayId, description);
+    },
+    async getPictureDescription(dayId: string) {
+      return pictureDescriptions.get(dayId) ?? null;
+    },
+    async listPictureDescriptions() {
+      return [...pictureDescriptions.values()];
+    },
     async saveWordProgress(_progress: WordProgress) {
       return undefined;
     },
@@ -142,7 +154,7 @@ function completedDayProgress(dayId: string, contentVersion: string): DayProgres
     dayId,
     status: 'completed',
     currentStep: 'done',
-    completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'output'],
+    completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'picture', 'output'],
     startedAt: '2026-05-26T00:00:00.000Z',
     completedAt: '2026-05-26T00:10:00.000Z',
     updatedAt: '2026-05-26T00:10:00.000Z',
@@ -159,12 +171,12 @@ function renderWithSpeech(children: ReactNode) {
 }
 
 function renderToday(repository = createTestRepository()) {
-  renderWithSpeech(<TodayPage course={week1Course} repository={repository} />);
+  renderWithSpeech(<TodayPage course={week1Course} repository={repository} pictureDescribeTasksByDayId={pictureDescribeTasksByDayId} />);
   return repository;
 }
 
 function renderTodayWithChineseHelp(repository = createTestRepository()) {
-  renderWithSpeech(<TodayPage course={week1Course} repository={repository} showChineseHelp />);
+  renderWithSpeech(<TodayPage course={week1Course} repository={repository} pictureDescribeTasksByDayId={pictureDescribeTasksByDayId} showChineseHelp />);
   return repository;
 }
 
@@ -211,12 +223,26 @@ async function completeTranslation(user: ReturnType<typeof userEvent.setup>) {
   await user.click(await getEnabledContinueButton());
 }
 
+async function completePicture(user: ReturnType<typeof userEvent.setup>, text = 'My name is Li. I am a student. I study English.') {
+  await screen.findByRole('heading', { name: 'Describe the picture' });
+  const textbox = screen.queryByLabelText('Picture description');
+  if (!textbox) {
+    await user.click(await getEnabledContinueButton());
+    return;
+  }
+  await user.clear(textbox);
+  await user.type(textbox, text);
+  await user.click(screen.getByRole('button', { name: 'Check' }));
+  await user.click(await getEnabledContinueButton());
+}
+
 async function completeToOutput(user: ReturnType<typeof userEvent.setup>) {
   await user.click(await getEnabledContinueButton());
   await completeWords(user);
   await completePatterns(user);
   await completeDrills(user);
   await completeTranslation(user);
+  await completePicture(user);
 }
 
 async function completeDayOneThroughOutput(user: ReturnType<typeof userEvent.setup>) {
@@ -240,6 +266,8 @@ async function completeDayOneThroughOutput(user: ReturnType<typeof userEvent.set
   expect(await screen.findByRole('heading', { name: translationExercise.chinesePrompt })).toBeInTheDocument();
 
   await completeTranslation(user);
+  expect(await screen.findByRole('heading', { name: 'Describe the picture' })).toBeInTheDocument();
+  await completePicture(user);
   await waitFor(() => {
     expect(screen.queryByLabelText('Scene sentence 1') || screen.queryByRole('textbox', { name: 'Daily output' })).toBeTruthy();
   });
@@ -336,6 +364,7 @@ describe('TodayPage', () => {
         course={singleDayCourse}
         repository={repository}
         sceneRemixTasksByDayId={sceneRemixTasksByDayId}
+        pictureDescribeTasksByDayId={pictureDescribeTasksByDayId}
         onProgressChange={onProgressChange}
       />,
     );
@@ -482,7 +511,7 @@ describe('TodayPage', () => {
       dayId: 'day-001',
       status: 'completed',
       currentStep: 'done',
-      completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'output'],
+      completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'picture', 'output'],
       startedAt: '2026-05-26T00:00:00.000Z',
       completedAt: '2026-05-26T00:10:00.000Z',
       updatedAt: '2026-05-26T00:10:00.000Z',
@@ -761,6 +790,12 @@ describe('TodayPage', () => {
     await user.click(screen.getByRole('radio', { name: 'Close enough' }));
 
     await user.click(await getEnabledContinueButton());
+    expect(screen.getByRole('heading', { name: 'Describe the picture' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Continue' })).toBeDisabled();
+    await user.type(screen.getByLabelText('Picture description'), 'My name is Li. I am a student. I study English.');
+    await user.click(screen.getByRole('button', { name: 'Check' }));
+    expect(screen.getByText('Clear enough. You can continue.')).toBeInTheDocument();
+    await user.click(await getEnabledContinueButton());
     expect(screen.getByRole('heading', { level: 3, name: 'My Name' })).toBeInTheDocument();
     await satisfyOutputGate(user, 'My name is Mei.\nI am from China.\nI study English.\nI am happy.');
 
@@ -821,6 +856,64 @@ describe('TodayPage', () => {
     expect(await screen.findByRole('textbox', { name: 'Daily output' })).toHaveValue('My name is Lin.');
     expect(screen.getByRole('radio', { name: 'Hard' })).toBeChecked();
     expect(screen.getByRole('checkbox', { name: /I used today's pattern/i })).toBeChecked();
+  });
+
+  it('adds a checked picture description to review without duplicates', async () => {
+    const user = userEvent.setup();
+    const repository = createTestRepository({
+      dayProgress: [
+        {
+          ...startDay(day.id, week1Course.contentVersion, '2026-06-02T00:00:00.000Z'),
+          currentStep: 'picture',
+        },
+      ],
+    });
+
+    renderToday(repository);
+
+    await user.type(await screen.findByLabelText('Picture description'), 'My name is Li. I am a student. I study English.');
+    await user.click(screen.getByRole('button', { name: 'Check' }));
+    await user.click(screen.getByRole('button', { name: 'Add to Review' }));
+    await user.click(screen.getByRole('button', { name: 'Added to Review' }));
+
+    const reviews = await repository.listReviewItems('active');
+    expect(reviews).toHaveLength(1);
+    expect(reviews[0]).toMatchObject({
+      type: 'picture_description',
+      sourceDayId: 'day-001',
+      pictureDescriptionTaskId: 'picture-day-001-self-introduction',
+      userAnswer: 'My name is Li. I am a student. I study English.',
+    });
+  });
+
+  it('restores a saved picture description draft and checked state', async () => {
+    const repository = createTestRepository({
+      dayProgress: [
+        {
+          ...startDay(day.id, week1Course.contentVersion, '2026-06-02T00:00:00.000Z'),
+          currentStep: 'picture',
+        },
+      ],
+    });
+    await repository.savePictureDescription({
+      id: 'picture-description-day-001',
+      dayId: day.id,
+      taskId: 'picture-day-001-self-introduction',
+      text: 'My name is Li. I am a student. I study English.',
+      checkedAt: '2026-06-02T00:01:00.000Z',
+      feedback: {
+        status: 'ready',
+        messages: ['Clear enough. You can continue.'],
+        simpleVersion: ['My name is Li.', 'I am a student.', 'I study English.'],
+      },
+      updatedAt: '2026-06-02T00:01:00.000Z',
+    });
+
+    renderToday(repository);
+
+    expect(await screen.findByLabelText('Picture description')).toHaveValue('My name is Li. I am a student. I study English.');
+    expect(screen.getByText('Clear enough. You can continue.')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Continue' })).toBeEnabled();
   });
 
   it('loads progress and saved output after a new render uses the same repository', async () => {
@@ -906,6 +999,7 @@ describe('TodayPage', () => {
     await completePatterns(user);
     await completeDrills(user);
     await completeTranslation(user);
+    await completePicture(user);
 
     await satisfyOutputGate(user, 'My name is Mei. I am from China. I study English. I am happy.');
     await user.click(screen.getByRole('radio', { name: 'Easy' }));

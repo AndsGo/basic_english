@@ -45,6 +45,9 @@ function createRepository(): ProgressRepository {
     saveUserOutput: vi.fn().mockResolvedValue(undefined),
     getUserOutput: vi.fn().mockResolvedValue(null),
     listUserOutputs: vi.fn().mockResolvedValue([]),
+    savePictureDescription: vi.fn().mockResolvedValue(undefined),
+    getPictureDescription: vi.fn().mockResolvedValue(null),
+    listPictureDescriptions: vi.fn().mockResolvedValue([]),
     async saveWordProgress(progress) {
       const existingIndex = wordProgress.findIndex((item) => item.id === progress.id);
 

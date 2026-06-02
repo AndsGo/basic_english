@@ -603,6 +603,67 @@ textarea {
   margin: 0;
 }
 
+.picture-describe {
+  display: grid;
+  gap: 16px;
+}
+
+.picture-describe-media {
+  display: grid;
+  place-items: center;
+}
+
+.picture-describe-image {
+  width: min(100%, 520px);
+  aspect-ratio: 1;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #f4f7fb;
+}
+
+.picture-describe-body,
+.picture-support {
+  display: grid;
+  gap: 12px;
+}
+
+.picture-word-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.picture-word-list span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 1px solid #d8e2dc;
+  border-radius: 8px;
+  color: #265c46;
+  background: #f7fbf8;
+  font-weight: 800;
+}
+
+.picture-feedback {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #d8e2dc;
+  border-radius: 8px;
+  background: #f7fbf8;
+}
+
+.picture-feedback.needs_work {
+  border-color: #e2d1a5;
+  background: #fff8e5;
+}
+
+.picture-feedback ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
 .button-row {
   display: flex;
   flex-wrap: wrap;
@@ -626,11 +687,16 @@ textarea {
   }
 
   .stepper {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 
   .card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .picture-describe {
+    grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1fr);
+    align-items: start;
   }
 
   .sticky-next {

@@ -93,6 +93,11 @@ interface OldV3ProgressDb extends DBSchema {
     value: ExerciseAttempt;
     indexes: { byDayId: string };
   };
+  sceneRemixAttempts: {
+    key: string;
+    value: SceneRemixAttempt;
+    indexes: { byDayId: string };
+  };
   userOutputs: {
     key: string;
     value: UserOutput;
