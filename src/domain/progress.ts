@@ -1,4 +1,4 @@
-export type StepId = 'review' | 'words' | 'patterns' | 'drills' | 'translate' | 'output' | 'done';
+export type StepId = 'review' | 'words' | 'patterns' | 'drills' | 'translate' | 'picture' | 'output' | 'done';
 
 export type DayProgressStatus = 'locked' | 'not_started' | 'in_progress' | 'completed';
 export type CourseDayState = 'completed' | 'current' | 'locked' | 'review_needed';
@@ -15,7 +15,7 @@ export interface DayProgress {
   contentVersion: string;
 }
 
-export const stepOrder: StepId[] = ['review', 'words', 'patterns', 'drills', 'translate', 'output', 'done'];
+export const stepOrder: StepId[] = ['review', 'words', 'patterns', 'drills', 'translate', 'picture', 'output', 'done'];
 
 export function startDay(dayId: string, contentVersion: string, now: string): DayProgress {
   return {

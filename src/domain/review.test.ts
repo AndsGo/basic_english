@@ -2,10 +2,12 @@ import { describe, expect, it } from 'vitest';
 import {
   createExerciseReviewItem,
   createOutputReviewItem,
+  createPictureDescriptionReviewItem,
   createSceneRemixReviewItem,
   createTranslationReviewItem,
   createWordReviewItem,
   getActiveReviewDayIds,
+  hasActivePictureDescriptionReviewItem,
   hasActiveSceneRemixReviewItem,
   hasActiveWordReviewItem,
   resolveReviewItem,
@@ -165,6 +167,57 @@ describe('scene remix review items', () => {
     expect(hasActiveSceneRemixReviewItem([activeItem], 'day-001-remix-country-japan')).toBe(true);
     expect(hasActiveSceneRemixReviewItem([knownItem], 'day-001-remix-country-japan')).toBe(false);
     expect(hasActiveSceneRemixReviewItem([activeItem], 'day-001-remix-job-teacher')).toBe(false);
+  });
+});
+
+describe('picture description review items', () => {
+  it('creates a stable active picture description review item', () => {
+    const item = createPictureDescriptionReviewItem({
+      sourceDayId: 'day-008',
+      taskId: 'picture-day-008-my-room',
+      title: 'My Room',
+      image: '/room.png',
+      targetWords: ['room', 'bed', 'table'],
+      userAnswer: 'This is my room. There is a bed. I can see a table.',
+      simpleVersion: ['This is my room.', 'There is a bed.', 'I can see a table.'],
+      now: '2026-06-02T00:00:00.000Z',
+    });
+
+    expect(item).toMatchObject({
+      id: 'review-picture-description-day-008-picture-day-008-my-room',
+      type: 'picture_description',
+      sourceDayId: 'day-008',
+      sourceStepId: 'picture',
+      pictureDescriptionTaskId: 'picture-day-008-my-room',
+      prompt: 'My Room',
+      image: '/room.png',
+      targetWords: ['room', 'bed', 'table'],
+      userAnswer: 'This is my room. There is a bed. I can see a table.',
+      referenceAnswer: 'This is my room. There is a bed. I can see a table.',
+      simpleVersion: ['This is my room.', 'There is a bed.', 'I can see a table.'],
+      priority: 'normal',
+      status: 'active',
+    });
+  });
+
+  it('detects duplicate active picture description review items by task id', () => {
+    const activeItem = createPictureDescriptionReviewItem({
+      sourceDayId: 'day-008',
+      taskId: 'picture-day-008-my-room',
+      title: 'My Room',
+      image: '/room.png',
+      targetWords: ['room'],
+      userAnswer: 'This is my room.',
+      simpleVersion: ['This is my room.'],
+      now: '2026-06-02T00:00:00.000Z',
+    });
+    const legacyItem: ReviewItem = { ...activeItem, pictureDescriptionTaskId: undefined };
+    const knownItem = resolveReviewItem(activeItem, '2026-06-02T00:01:00.000Z');
+
+    expect(hasActivePictureDescriptionReviewItem([activeItem], 'picture-day-008-my-room')).toBe(true);
+    expect(hasActivePictureDescriptionReviewItem([legacyItem], 'picture-day-008-my-room')).toBe(true);
+    expect(hasActivePictureDescriptionReviewItem([knownItem], 'picture-day-008-my-room')).toBe(false);
+    expect(hasActivePictureDescriptionReviewItem([activeItem], 'picture-day-009-things-on-table')).toBe(false);
   });
 });
 

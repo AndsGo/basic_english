@@ -34,7 +34,15 @@ describe('progress domain', () => {
 
     expect(progress.currentStep).toBe('done');
     expect(progress.status).toBe('completed');
-    expect(progress.completedAt).toBe('2026-05-25T12:06:00.000Z');
+    expect(progress.completedAt).toBe('2026-05-25T12:07:00.000Z');
+  });
+
+  it('places picture practice after translate and before output', () => {
+    const progress = startDay('day-001', '1.0.0', '2026-05-25T12:00:00.000Z');
+    const translated = completeStep(progress, 'translate', '2026-05-25T12:05:00.000Z');
+
+    expect(stepOrder).toEqual(['review', 'words', 'patterns', 'drills', 'translate', 'picture', 'output', 'done']);
+    expect(translated.currentStep).toBe('picture');
   });
 
   it('getNextUnlockedDayId returns first incomplete day', () => {

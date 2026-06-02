@@ -26,7 +26,7 @@ export function selectReviewWordIds(words: ReviewWordState[], count: number): st
     .map((word) => word.wordId);
 }
 
-export type ReviewItemType = 'word' | 'pattern' | 'exercise' | 'translation' | 'output' | 'scene_remix';
+export type ReviewItemType = 'word' | 'pattern' | 'exercise' | 'translation' | 'output' | 'scene_remix' | 'picture_description';
 export type ReviewPriority = 'low' | 'normal' | 'high';
 export type ReviewStatus = 'active' | 'known';
 
@@ -38,6 +38,10 @@ export interface ReviewItem {
   source?: string;
   taskId?: string;
   wordId?: string;
+  pictureDescriptionTaskId?: string;
+  image?: string;
+  targetWords?: string[];
+  simpleVersion?: string[];
   prompt: string;
   userAnswer?: string;
   referenceAnswer?: string;
@@ -189,6 +193,44 @@ export function createSceneRemixReviewItem({
   };
 }
 
+export function createPictureDescriptionReviewItem({
+  sourceDayId,
+  taskId,
+  title,
+  image,
+  targetWords,
+  userAnswer,
+  simpleVersion,
+  now,
+}: {
+  sourceDayId: string;
+  taskId: string;
+  title: string;
+  image: string;
+  targetWords: string[];
+  userAnswer: string;
+  simpleVersion: string[];
+  now: string;
+}): ReviewItem {
+  return {
+    id: `review-picture-description-${sourceDayId}-${taskId}`,
+    type: 'picture_description',
+    sourceDayId,
+    sourceStepId: 'picture',
+    pictureDescriptionTaskId: taskId,
+    prompt: title,
+    image,
+    targetWords,
+    userAnswer,
+    referenceAnswer: simpleVersion.join(' '),
+    simpleVersion,
+    priority: 'normal',
+    status: 'active',
+    createdAt: now,
+    updatedAt: now,
+  };
+}
+
 export function resolveReviewItem(item: ReviewItem, now: string): ReviewItem {
   return { ...item, status: 'known', updatedAt: now };
 }
@@ -199,6 +241,15 @@ export function getActiveReviewDayIds(items: ReviewItem[]): string[] {
 
 export function hasActiveSceneRemixReviewItem(items: ReviewItem[], taskId: string): boolean {
   return items.some((item) => item.type === 'scene_remix' && item.status === 'active' && item.taskId === taskId);
+}
+
+export function hasActivePictureDescriptionReviewItem(items: ReviewItem[], taskId: string): boolean {
+  return items.some(
+    (item) =>
+      item.type === 'picture_description' &&
+      item.status === 'active' &&
+      (item.pictureDescriptionTaskId !== undefined ? item.pictureDescriptionTaskId === taskId : item.id.endsWith(`-${taskId}`)),
+  );
 }
 
 export function hasActiveWordReviewItem(items: ReviewItem[], wordId: string): boolean {
