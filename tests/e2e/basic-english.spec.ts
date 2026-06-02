@@ -88,7 +88,7 @@ async function seedCompletedDays(page: Page, dayIds: string[]) {
           dayId,
           status: 'completed',
           currentStep: 'done',
-          completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'output'],
+          completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'picture', 'output'],
           startedAt: now,
           completedAt: now,
           updatedAt: now,
@@ -187,6 +187,18 @@ async function completeTranslation(page: Page, day: Day) {
   await page.getByLabel('Close enough').check();
 }
 
+async function completePictureDescription(page: Page, text: string, addToReview = false) {
+  await expect(page.getByRole('heading', { name: 'Describe the picture' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Continue' })).toBeDisabled();
+  await page.getByLabel('Picture description').fill(text);
+  await page.getByRole('button', { name: 'Check' }).click();
+  await expect(page.getByText('Clear enough. You can continue.')).toBeVisible();
+  if (addToReview) {
+    await page.getByRole('button', { name: 'Add to Review' }).click();
+    await expect(page.getByRole('button', { name: 'Added to Review' })).toBeVisible();
+  }
+}
+
 async function completeSceneOutput(page: Page, scene: 'self' | 'room') {
   if (scene === 'self') {
     await page.getByLabel('Scene sentence 1').fill('My name is Li.');
@@ -222,6 +234,9 @@ async function completeCurrentDay(page: Page, dayId: string) {
 
   await page.getByRole('button', { name: 'Continue' }).click();
   await completeTranslation(page, day);
+
+  await continueTo(page, 'Describe the picture');
+  await completePictureDescription(page, 'This is my room. There is a bed. I can see a table.');
 
   await continueTo(page, 'Build Sentences');
   await completeSceneOutput(page, 'room');
@@ -345,6 +360,9 @@ test.describe('Basic English MVP e2e', () => {
     await page.getByRole('button', { name: 'Continue' }).click();
     await completeDayOneTranslationWithReview(page);
 
+    await continueTo(page, 'Describe the picture');
+    await completePictureDescription(page, 'My name is Li. I am a student. I study English.', true);
+
     await continueTo(page, 'Build Sentences');
     await expect(page.getByRole('heading', { name: 'Build Sentences' })).toBeVisible();
     await expect(page.getByText('I can describe myself.')).toBeVisible();
@@ -357,23 +375,27 @@ test.describe('Basic English MVP e2e', () => {
     await page.getByRole('button', { name: 'Show reference' }).click();
     await expect(page.getByText('I am from Japan.')).toBeVisible();
     await page.getByRole('button', { name: 'Need review' }).click();
-    await expect(page.getByText('Review tomorrow: 4')).toBeVisible();
+    await expect(page.getByText('Review tomorrow: 5')).toBeVisible();
     await page.getByRole('button', { name: 'Start Day 2' }).click();
     await expect(page.getByRole('heading', { name: 'I Am' })).toBeVisible();
 
     await page.getByRole('button', { name: 'Course' }).click();
     await expect(page.getByText('1 / 7 days completed')).toBeVisible();
-    await expect(page.getByText('Review: 4 items')).toBeVisible();
+    await expect(page.getByText('Review: 5 items')).toBeVisible();
 
     await goToReview(page);
     await expect(page.getByRole('heading', { name: 'Review today' })).toBeVisible();
-    await expect(page.getByText('4 items to review')).toBeVisible();
+    await expect(page.getByText('5 items to review')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Review Scene Remix' })).toBeVisible();
     await expect(page.getByText('Change China to Japan.')).toBeVisible();
     await page.getByLabel('Scene remix answer').fill('I am from Japan.');
     await page.getByRole('button', { name: 'Show reference' }).click();
     await page.getByRole('button', { name: 'Close enough' }).click();
     await expect(page.getByRole('heading', { name: 'Review Scene Remix' })).not.toBeVisible();
+    await expect(page.getByText('4 items to review')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Review Picture Description' })).toBeVisible();
+    await expect(page.getByText('My name is Li. I am a student. I study English.')).toBeVisible();
+    await page.getByRole('button', { name: 'I know this' }).first().click();
     await expect(page.getByText('3 items to review')).toBeVisible();
 
     const exerciseReview = page.getByRole('article').filter({
@@ -402,6 +424,8 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByText('Completed days: 1')).toBeVisible();
     await expect(page.getByText('Review items: 2')).toBeVisible();
     await expect(page.getByRole('listitem', { name: /Self Completed/ })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'My Descriptions' })).toBeVisible();
+    await expect(page.getByText('Self Introduction')).toBeVisible();
 
     await page.reload();
     await page.getByRole('button', { name: 'Me', exact: true }).click();
