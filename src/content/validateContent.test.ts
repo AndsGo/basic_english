@@ -13,6 +13,7 @@ import {
   validateSceneGoals,
   validateSceneRemixTasks,
 } from './validateContent';
+import { validWordImageKinds, wordFlashcardImages, wordImageAssets } from './wordFlashcardImages';
 
 function cloneCourse(): Course {
   return structuredClone(week1Course);
@@ -329,6 +330,32 @@ describe('basicEnglishCourse V1.2', () => {
     expect(day14).toBeDefined();
     expect(day14!.weeklyCheckRubric).toBeDefined();
     expect(day14!.outputTask.template.length).toBeGreaterThanOrEqual(day14!.weeklyCheckRubric!.pass.minimumSentenceCount);
+  });
+
+  it('has a flashcard image for every course word', () => {
+    const missingWordIds = basicEnglishCourse.words
+      .map((word) => word.id)
+      .filter((wordId) => !wordFlashcardImages[wordId]);
+
+    expect(missingWordIds).toEqual([]);
+  });
+
+  it('keeps word image metadata aligned with course words', () => {
+    const courseWordIds = new Set(basicEnglishCourse.words.map((word) => word.id));
+    const assetWordIds = wordImageAssets.map((asset) => asset.wordId);
+
+    expect(new Set(assetWordIds).size).toBe(assetWordIds.length);
+    expect(assetWordIds.filter((wordId) => !courseWordIds.has(wordId))).toEqual([]);
+    expect(assetWordIds.sort()).toEqual([...courseWordIds].sort());
+  });
+
+  it('uses valid word image taxonomy metadata', () => {
+    wordImageAssets.forEach((asset) => {
+      expect(validWordImageKinds).toContain(asset.kind);
+      expect(['none', 'english-keyword']).toContain(asset.labelPolicy);
+      expect(asset.prompt.trim()).toBeTruthy();
+      expect(asset.image).toMatch(/\S/);
+    });
   });
 });
 

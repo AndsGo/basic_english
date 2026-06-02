@@ -15,21 +15,144 @@ import studentImage from '../assets/word-flashcards/student.png';
 import tableImage from '../assets/word-flashcards/table.png';
 import windowImage from '../assets/word-flashcards/window.png';
 
-export const wordFlashcardImages: Partial<Record<string, string>> = {
-  bag: bagImage,
-  bed: bedImage,
-  book: bookImage,
-  box: boxImage,
-  chair: chairImage,
-  cup: cupImage,
-  door: doorImage,
-  friend: friendImage,
-  home: homeImage,
-  paper: paperImage,
-  pen: penImage,
-  phone: phoneImage,
-  room: roomImage,
-  student: studentImage,
-  table: tableImage,
-  window: windowImage,
-};
+export const validWordImageKinds = [
+  'object',
+  'place',
+  'person',
+  'position',
+  'quality',
+  'action',
+  'structure',
+  'time',
+  'abstract',
+] as const;
+
+export type WordImageKind = (typeof validWordImageKinds)[number];
+export type WordImageLabelPolicy = 'none' | 'english-keyword';
+
+export interface WordImageAsset {
+  wordId: string;
+  image: string;
+  kind: WordImageKind;
+  labelPolicy: WordImageLabelPolicy;
+  prompt: string;
+}
+
+export const wordImageAssets: WordImageAsset[] = [
+  {
+    wordId: 'bag',
+    image: bagImage,
+    kind: 'object',
+    labelPolicy: 'none',
+    prompt: 'A simple bag flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'bed',
+    image: bedImage,
+    kind: 'object',
+    labelPolicy: 'none',
+    prompt: 'A simple bed flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'book',
+    image: bookImage,
+    kind: 'object',
+    labelPolicy: 'none',
+    prompt: 'A simple book flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'box',
+    image: boxImage,
+    kind: 'object',
+    labelPolicy: 'none',
+    prompt: 'A simple box flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'chair',
+    image: chairImage,
+    kind: 'object',
+    labelPolicy: 'none',
+    prompt: 'A simple chair flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'cup',
+    image: cupImage,
+    kind: 'object',
+    labelPolicy: 'none',
+    prompt: 'A simple cup flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'door',
+    image: doorImage,
+    kind: 'object',
+    labelPolicy: 'none',
+    prompt: 'A simple door flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'friend',
+    image: friendImage,
+    kind: 'person',
+    labelPolicy: 'none',
+    prompt: 'A simple friend flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'home',
+    image: homeImage,
+    kind: 'place',
+    labelPolicy: 'none',
+    prompt: 'A simple home flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'paper',
+    image: paperImage,
+    kind: 'abstract',
+    labelPolicy: 'none',
+    prompt: 'A simple paper flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'pen',
+    image: penImage,
+    kind: 'object',
+    labelPolicy: 'none',
+    prompt: 'A simple pen flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'phone',
+    image: phoneImage,
+    kind: 'object',
+    labelPolicy: 'none',
+    prompt: 'A simple phone flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'room',
+    image: roomImage,
+    kind: 'place',
+    labelPolicy: 'none',
+    prompt: 'A simple room flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'student',
+    image: studentImage,
+    kind: 'person',
+    labelPolicy: 'none',
+    prompt: 'A simple student flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'table',
+    image: tableImage,
+    kind: 'object',
+    labelPolicy: 'none',
+    prompt: 'A simple table flashcard image for Basic English learners.',
+  },
+  {
+    wordId: 'window',
+    image: windowImage,
+    kind: 'object',
+    labelPolicy: 'none',
+    prompt: 'A simple window flashcard image for Basic English learners.',
+  },
+];
+
+export const wordFlashcardImages: Partial<Record<string, string>> = Object.fromEntries(
+  wordImageAssets.map((asset) => [asset.wordId, asset.image]),
+);
