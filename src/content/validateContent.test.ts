@@ -13,7 +13,13 @@ import {
   validateSceneGoals,
   validateSceneRemixTasks,
 } from './validateContent';
-import { validWordImageKinds, wordFlashcardImages, wordImageAssets } from './wordFlashcardImages';
+import {
+  validWordImageKinds,
+  validWordImageVisualStyles,
+  wordFlashcardImages,
+  wordImageAssets,
+  wordImageVisualStyleByWordId,
+} from './wordFlashcardImages';
 
 function cloneCourse(): Course {
   return structuredClone(week1Course);
@@ -349,6 +355,14 @@ describe('basicEnglishCourse V1.2', () => {
     expect(assetWordIds.sort()).toEqual([...courseWordIds].sort());
   });
 
+  it('assigns a visual style to every course word image', () => {
+    const courseWordIds = basicEnglishCourse.words.map((word) => word.id);
+    const missingVisualStyleWordIds = courseWordIds.filter((wordId) => !wordImageVisualStyleByWordId[wordId]);
+
+    expect(missingVisualStyleWordIds).toEqual([]);
+    expect(Object.keys(wordImageVisualStyleByWordId).sort()).toEqual([...courseWordIds].sort());
+  });
+
   it('uses valid word image taxonomy metadata', () => {
     wordImageAssets.forEach((asset) => {
       expect(validWordImageKinds).toContain(asset.kind);
@@ -356,6 +370,24 @@ describe('basicEnglishCourse V1.2', () => {
       expect(asset.prompt.trim()).toBeTruthy();
       expect(asset.image).toMatch(/\S/);
     });
+  });
+
+  it('uses valid word image visual styles', () => {
+    wordImageAssets.forEach((asset) => {
+      expect(validWordImageVisualStyles).toContain(asset.visualStyle);
+    });
+  });
+
+  it('limits English keyword labels to grammar cards', () => {
+    const nonGrammarWithEnglishLabels = wordImageAssets
+      .filter((asset) => asset.visualStyle !== 'grammar' && asset.labelPolicy !== 'none')
+      .map((asset) => asset.wordId);
+    const grammarWithoutEnglishLabels = wordImageAssets
+      .filter((asset) => asset.visualStyle === 'grammar' && asset.labelPolicy !== 'english-keyword')
+      .map((asset) => asset.wordId);
+
+    expect(nonGrammarWithEnglishLabels).toEqual([]);
+    expect(grammarWithoutEnglishLabels).toEqual([]);
   });
 });
 

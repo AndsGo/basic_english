@@ -64,13 +64,17 @@ export const validWordImageKinds = [
   'abstract',
 ] as const;
 
+export const validWordImageVisualStyles = ['concrete', 'scene', 'relation', 'grammar'] as const;
+
 export type WordImageKind = (typeof validWordImageKinds)[number];
+export type WordImageVisualStyle = (typeof validWordImageVisualStyles)[number];
 export type WordImageLabelPolicy = 'none' | 'english-keyword';
 
 export interface WordImageAsset {
   wordId: string;
   image: string;
   kind: WordImageKind;
+  visualStyle: WordImageVisualStyle;
   labelPolicy: WordImageLabelPolicy;
   prompt: string;
 }
@@ -79,67 +83,72 @@ function wordImageAsset(
   wordId: string,
   image: string,
   kind: WordImageKind,
+  visualStyle: WordImageVisualStyle,
   labelPolicy: WordImageLabelPolicy,
   prompt: string,
 ): WordImageAsset {
-  return { wordId, image, kind, labelPolicy, prompt };
+  return { wordId, image, kind, visualStyle, labelPolicy, prompt };
 }
 
 export const wordImageAssets: WordImageAsset[] = [
-  wordImageAsset('name', nameImage, 'abstract', 'english-keyword', 'A simple name card scene showing what a person is called.'),
-  wordImageAsset('my', myImage, 'structure', 'english-keyword', 'A simple ownership scene showing something belonging to me.'),
-  wordImageAsset('i', iImage, 'structure', 'english-keyword', 'A simple first-person cue for the person speaking.'),
-  wordImageAsset('am', amImage, 'structure', 'english-keyword', 'A simple be-verb cue for the sentence I am here.'),
-  wordImageAsset('from', fromImage, 'structure', 'english-keyword', 'A simple starting-place cue for coming from a place.'),
-  wordImageAsset('china', chinaImage, 'place', 'none', 'A simple China place flashcard image for Basic English learners.'),
-  wordImageAsset('student', studentImage, 'person', 'none', 'A simple student flashcard image for Basic English learners.'),
-  wordImageAsset('happy', happyImage, 'quality', 'none', 'A simple happy feeling scene for Basic English learners.'),
-  wordImageAsset('have', haveImage, 'action', 'none', 'A simple possession scene showing having a thing.'),
-  wordImageAsset('question', questionImage, 'abstract', 'none', 'A simple question scene with a clear asking cue.'),
-  wordImageAsset('friend', friendImage, 'person', 'none', 'A simple friend flashcard image for Basic English learners.'),
-  wordImageAsset('this', thisImage, 'structure', 'english-keyword', 'A simple near-object cue for the word this.'),
-  wordImageAsset('he', heImage, 'person', 'none', 'A simple male person cue for Basic English learners.'),
-  wordImageAsset('she', sheImage, 'person', 'none', 'A simple female person cue for Basic English learners.'),
-  wordImageAsset('kind', kindImage, 'quality', 'none', 'A simple helpful-person scene for the quality kind.'),
-  wordImageAsset('study', studyImage, 'action', 'none', 'A simple study scene with a learner and book.'),
-  wordImageAsset('english', englishImage, 'abstract', 'english-keyword', 'A simple English language cue with ABC lettering.'),
-  wordImageAsset('because', becauseImage, 'structure', 'english-keyword', 'A simple reason cue for the word because.'),
-  wordImageAsset('want', wantImage, 'action', 'none', 'A simple wish scene for wanting something.'),
-  wordImageAsset('learn', learnImage, 'action', 'none', 'A simple learning scene for getting knowledge or skill.'),
-  wordImageAsset('room', roomImage, 'place', 'none', 'A simple room flashcard image for Basic English learners.'),
-  wordImageAsset('home', homeImage, 'place', 'none', 'A simple home flashcard image for Basic English learners.'),
-  wordImageAsset('table', tableImage, 'object', 'none', 'A simple table flashcard image for Basic English learners.'),
-  wordImageAsset('chair', chairImage, 'object', 'none', 'A simple chair flashcard image for Basic English learners.'),
-  wordImageAsset('bed', bedImage, 'object', 'none', 'A simple bed flashcard image for Basic English learners.'),
-  wordImageAsset('door', doorImage, 'object', 'none', 'A simple door flashcard image for Basic English learners.'),
-  wordImageAsset('window', windowImage, 'object', 'none', 'A simple window flashcard image for Basic English learners.'),
-  wordImageAsset('book', bookImage, 'object', 'none', 'A simple book flashcard image for Basic English learners.'),
-  wordImageAsset('phone', phoneImage, 'object', 'none', 'A simple phone flashcard image for Basic English learners.'),
-  wordImageAsset('bag', bagImage, 'object', 'none', 'A simple bag flashcard image for Basic English learners.'),
-  wordImageAsset('box', boxImage, 'object', 'none', 'A simple box flashcard image for Basic English learners.'),
-  wordImageAsset('cup', cupImage, 'object', 'none', 'A simple cup flashcard image for Basic English learners.'),
-  wordImageAsset('pen', penImage, 'object', 'none', 'A simple pen flashcard image for Basic English learners.'),
-  wordImageAsset('paper', paperImage, 'abstract', 'none', 'A simple paper flashcard image for Basic English learners.'),
-  wordImageAsset('thing', thingImage, 'abstract', 'none', 'A simple object cue for a general thing.'),
-  wordImageAsset('in', inImage, 'position', 'english-keyword', 'A simple position diagram showing an object inside.'),
-  wordImageAsset('on', onImage, 'position', 'english-keyword', 'A simple position diagram showing an object on top.'),
-  wordImageAsset('under', underImage, 'position', 'english-keyword', 'A simple position diagram showing an object below.'),
-  wordImageAsset('near', nearImage, 'position', 'english-keyword', 'A simple position diagram showing an object not far away.'),
-  wordImageAsset('small', smallImage, 'quality', 'none', 'A simple size cue showing small.'),
-  wordImageAsset('big', bigImage, 'quality', 'none', 'A simple size cue showing big.'),
-  wordImageAsset('clean', cleanImage, 'quality', 'none', 'A simple clean state cue for Basic English learners.'),
-  wordImageAsset('new', newImage, 'quality', 'none', 'A simple new state cue for Basic English learners.'),
-  wordImageAsset('old', oldImage, 'quality', 'none', 'A simple old state cue for Basic English learners.'),
-  wordImageAsset('useful', usefulImage, 'quality', 'none', 'A simple useful object cue for Basic English learners.'),
-  wordImageAsset('important', importantImage, 'quality', 'none', 'A simple important value cue for Basic English learners.'),
-  wordImageAsset('good', goodImage, 'quality', 'none', 'A simple good quality cue for Basic English learners.'),
-  wordImageAsset('use', useImage, 'action', 'none', 'A simple action scene showing using a thing.'),
-  wordImageAsset('every', everyImage, 'structure', 'english-keyword', 'A simple each-one cue for the word every.'),
-  wordImageAsset('day', dayImage, 'time', 'english-keyword', 'A simple day cue from morning to night.'),
-  wordImageAsset('money', moneyImage, 'abstract', 'none', 'A simple money cue for buying things.'),
-  wordImageAsset('card', cardImage, 'abstract', 'none', 'A simple card cue for a small flat thing.'),
-  wordImageAsset('key', keyImage, 'object', 'none', 'A simple key flashcard image for Basic English learners.'),
+  wordImageAsset('name', nameImage, 'abstract', 'grammar', 'english-keyword', 'A simple name card scene showing what a person is called.'),
+  wordImageAsset('my', myImage, 'structure', 'grammar', 'english-keyword', 'A simple ownership scene showing something belonging to me.'),
+  wordImageAsset('i', iImage, 'structure', 'grammar', 'english-keyword', 'A simple first-person cue for the person speaking.'),
+  wordImageAsset('am', amImage, 'structure', 'grammar', 'english-keyword', 'A simple be-verb cue for the sentence I am here.'),
+  wordImageAsset('from', fromImage, 'structure', 'grammar', 'english-keyword', 'A simple starting-place cue for coming from a place.'),
+  wordImageAsset('china', chinaImage, 'place', 'scene', 'none', 'A simple China place flashcard image for Basic English learners.'),
+  wordImageAsset('student', studentImage, 'person', 'scene', 'none', 'A simple student flashcard image for Basic English learners.'),
+  wordImageAsset('happy', happyImage, 'quality', 'scene', 'none', 'A simple happy feeling scene for Basic English learners.'),
+  wordImageAsset('have', haveImage, 'action', 'scene', 'none', 'A simple possession scene showing having a thing.'),
+  wordImageAsset('question', questionImage, 'abstract', 'scene', 'none', 'A simple question scene with a clear asking cue.'),
+  wordImageAsset('friend', friendImage, 'person', 'scene', 'none', 'A simple friend flashcard image for Basic English learners.'),
+  wordImageAsset('this', thisImage, 'structure', 'grammar', 'english-keyword', 'A simple near-object cue for the word this.'),
+  wordImageAsset('he', heImage, 'person', 'scene', 'none', 'A simple male person cue for Basic English learners.'),
+  wordImageAsset('she', sheImage, 'person', 'scene', 'none', 'A simple female person cue for Basic English learners.'),
+  wordImageAsset('kind', kindImage, 'quality', 'scene', 'none', 'A simple helpful-person scene for the quality kind.'),
+  wordImageAsset('study', studyImage, 'action', 'scene', 'none', 'A simple study scene with a learner and book.'),
+  wordImageAsset('english', englishImage, 'abstract', 'scene', 'none', 'A simple English language cue with ABC lettering.'),
+  wordImageAsset('because', becauseImage, 'structure', 'grammar', 'english-keyword', 'A simple reason cue for the word because.'),
+  wordImageAsset('want', wantImage, 'action', 'scene', 'none', 'A simple wish scene for wanting something.'),
+  wordImageAsset('learn', learnImage, 'action', 'scene', 'none', 'A simple learning scene for getting knowledge or skill.'),
+  wordImageAsset('room', roomImage, 'place', 'scene', 'none', 'A simple room flashcard image for Basic English learners.'),
+  wordImageAsset('home', homeImage, 'place', 'scene', 'none', 'A simple home flashcard image for Basic English learners.'),
+  wordImageAsset('table', tableImage, 'object', 'concrete', 'none', 'A simple table flashcard image for Basic English learners.'),
+  wordImageAsset('chair', chairImage, 'object', 'concrete', 'none', 'A simple chair flashcard image for Basic English learners.'),
+  wordImageAsset('bed', bedImage, 'object', 'concrete', 'none', 'A simple bed flashcard image for Basic English learners.'),
+  wordImageAsset('door', doorImage, 'object', 'concrete', 'none', 'A simple door flashcard image for Basic English learners.'),
+  wordImageAsset('window', windowImage, 'object', 'concrete', 'none', 'A simple window flashcard image for Basic English learners.'),
+  wordImageAsset('book', bookImage, 'object', 'concrete', 'none', 'A simple book flashcard image for Basic English learners.'),
+  wordImageAsset('phone', phoneImage, 'object', 'concrete', 'none', 'A simple phone flashcard image for Basic English learners.'),
+  wordImageAsset('bag', bagImage, 'object', 'concrete', 'none', 'A simple bag flashcard image for Basic English learners.'),
+  wordImageAsset('box', boxImage, 'object', 'concrete', 'none', 'A simple box flashcard image for Basic English learners.'),
+  wordImageAsset('cup', cupImage, 'object', 'concrete', 'none', 'A simple cup flashcard image for Basic English learners.'),
+  wordImageAsset('pen', penImage, 'object', 'concrete', 'none', 'A simple pen flashcard image for Basic English learners.'),
+  wordImageAsset('paper', paperImage, 'abstract', 'concrete', 'none', 'A simple paper flashcard image for Basic English learners.'),
+  wordImageAsset('thing', thingImage, 'abstract', 'scene', 'none', 'A simple object cue for a general thing.'),
+  wordImageAsset('in', inImage, 'position', 'relation', 'none', 'A simple position diagram showing an object inside.'),
+  wordImageAsset('on', onImage, 'position', 'relation', 'none', 'A simple position diagram showing an object on top.'),
+  wordImageAsset('under', underImage, 'position', 'relation', 'none', 'A simple position diagram showing an object below.'),
+  wordImageAsset('near', nearImage, 'position', 'relation', 'none', 'A simple position diagram showing an object not far away.'),
+  wordImageAsset('small', smallImage, 'quality', 'scene', 'none', 'A simple size cue showing small.'),
+  wordImageAsset('big', bigImage, 'quality', 'scene', 'none', 'A simple size cue showing big.'),
+  wordImageAsset('clean', cleanImage, 'quality', 'scene', 'none', 'A simple clean state cue for Basic English learners.'),
+  wordImageAsset('new', newImage, 'quality', 'scene', 'none', 'A simple new state cue for Basic English learners.'),
+  wordImageAsset('old', oldImage, 'quality', 'scene', 'none', 'A simple old state cue for Basic English learners.'),
+  wordImageAsset('useful', usefulImage, 'quality', 'scene', 'none', 'A simple useful object cue for Basic English learners.'),
+  wordImageAsset('important', importantImage, 'quality', 'scene', 'none', 'A simple important value cue for Basic English learners.'),
+  wordImageAsset('good', goodImage, 'quality', 'scene', 'none', 'A simple good quality cue for Basic English learners.'),
+  wordImageAsset('use', useImage, 'action', 'scene', 'none', 'A simple action scene showing using a thing.'),
+  wordImageAsset('every', everyImage, 'structure', 'grammar', 'english-keyword', 'A simple each-one cue for the word every.'),
+  wordImageAsset('day', dayImage, 'time', 'scene', 'none', 'A simple day cue from morning to night.'),
+  wordImageAsset('money', moneyImage, 'abstract', 'concrete', 'none', 'A simple money cue for buying things.'),
+  wordImageAsset('card', cardImage, 'abstract', 'concrete', 'none', 'A simple card cue for a small flat thing.'),
+  wordImageAsset('key', keyImage, 'object', 'concrete', 'none', 'A simple key flashcard image for Basic English learners.'),
 ];
+
+export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(
+  wordImageAssets.map((asset) => [asset.wordId, asset.visualStyle]),
+);
 
 export const wordFlashcardImages: Partial<Record<string, string>> = Object.fromEntries(
   wordImageAssets.map((asset) => [asset.wordId, asset.image]),
