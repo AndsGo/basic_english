@@ -2,11 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Replace all current Words flashcard images with a unified semi-realistic image system and enforce the new visual-style rules with metadata tests.
+**Goal:** Replace all current Words flashcard images with a unified simple cartoon learning-card image system and enforce the new visual-style rules with metadata tests.
 
 **Architecture:** Keep `WordsPage` and `WordFlashcards` behavior unchanged. Upgrade `wordImageAssets` with `visualStyle` metadata, validate the new mapping in content tests, and replace the PNG files under `src/assets/word-flashcards/` after sample approval.
 
-**Tech Stack:** React, TypeScript, Vite image imports, Vitest, Playwright, PNG assets at `1024x1024`.
+**Tech Stack:** React, TypeScript, Vite image imports, Vitest, Playwright, PNG assets at `512x512`.
 
 ---
 
@@ -190,7 +190,7 @@ export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisua
 Update all 53 `wordImageAsset(...)` calls with the right visual style. Example:
 
 ```ts
-wordImageAsset('key', keyImage, 'object', 'concrete', 'none', 'A semi-realistic key object image with no text.'),
+wordImageAsset('key', keyImage, 'object', 'concrete', 'none', 'A simple cartoon key object image with no text.'),
 ```
 
 - [ ] **Step 4: Run content tests**
@@ -229,11 +229,11 @@ Prompt:
 ```text
 Use case: scientific-educational
 Asset type: Basic English word flashcard image
-Primary request: a clear semi-realistic image of a single small metal key
+Primary request: a clear simple cartoon image of a single small metal key
 Scene/backdrop: simple clean tabletop or soft neutral background
 Subject: one key, easy to recognize
-Style/medium: semi-realistic educational product image, close to a clean app flashcard asset
-Composition/framing: centered square composition, generous padding, 1024x1024
+Style/medium: simple polished cartoon educational product image, close to a clean app flashcard asset
+Composition/framing: centered square composition, generous padding, 512x512
 Lighting/mood: soft natural light, calm learning-product feel
 Constraints: no text, no letters, no Chinese, no watermark, no extra objects, not a flat icon
 Avoid: abstract symbols, line art, cartoon geometry, labels, clutter
@@ -251,8 +251,8 @@ Asset type: Basic English word flashcard image
 Primary request: a student studying English at a desk with an open book
 Scene/backdrop: simple room or study desk
 Subject: one learner, open book, pen or notebook
-Style/medium: semi-realistic educational scene, not flat icon art
-Composition/framing: centered square composition, readable at flashcard size, 1024x1024
+Style/medium: simple polished cartoon educational scene, not abstract symbol art
+Composition/framing: centered square composition, readable at flashcard size, 512x512
 Lighting/mood: soft natural light, focused and calm
 Constraints: no visible text, no readable book text, no Chinese, no watermark
 Avoid: abstract symbols, flat vector card, labels, overly busy classroom
@@ -270,8 +270,8 @@ Asset type: Basic English word flashcard image
 Primary request: a book clearly under a small table
 Scene/backdrop: simple floor and neutral wall
 Subject: one book placed under one table
-Style/medium: semi-realistic educational relation image, clear spatial relation
-Composition/framing: square, centered, object relation easy to read at small size, 1024x1024
+Style/medium: simple polished cartoon educational relation image, clear spatial relation
+Composition/framing: square, centered, object relation easy to read at small size, 512x512
 Lighting/mood: soft natural light
 Constraints: no text, no arrows, no labels, no Chinese, no watermark
 Avoid: flat diagram, abstract geometry, clutter, multiple books
@@ -290,7 +290,7 @@ Primary request: a clean grammar cue card for the word because
 Scene/backdrop: simple soft card-like background
 Subject: the English keyword "because" and a minimal reason cue such as a small arrow from action to reason
 Style/medium: polished grammar card, consistent with an educational app, not realistic photography
-Composition/framing: centered square composition, 1024x1024
+Composition/framing: centered square composition, 512x512
 Text: "because"
 Constraints: exact English text only, no Chinese, no extra sentence, no watermark
 Avoid: clutter, long explanations, illegible text, realistic object photo
@@ -307,8 +307,8 @@ Use `view_image` or a local contact sheet to inspect:
 
 Check:
 
-- key is semi-realistic and text-free.
-- study is a semi-realistic life scene and text-free.
+- key is simple cartoon, concrete, and text-free.
+- study is a simple cartoon life scene and text-free.
 - under clearly shows relation and is text-free.
 - because is a clean Grammar Card and includes only the English keyword.
 
@@ -343,7 +343,7 @@ Stop and show the four sample images to the user. Do not generate the remaining 
 
 - [ ] **Step 1: Replace concrete images**
 
-Generate or replace these images with semi-realistic, text-free object images:
+Generate or replace these images with simple cartoon, text-free object images:
 
 ```text
 book, table, chair, bed, door, window, phone, bag, box, cup, pen, paper, card, money
@@ -356,11 +356,11 @@ Use this prompt pattern:
 ```text
 Use case: scientific-educational
 Asset type: Basic English word flashcard image
-Primary request: a clear semi-realistic image of <word>
+Primary request: a clear simple cartoon image of <word>
 Scene/backdrop: simple clean tabletop, room corner, or neutral everyday setting appropriate for <word>
 Subject: <word>, easy to recognize
-Style/medium: semi-realistic educational product image, close to a clean app flashcard asset
-Composition/framing: centered square composition, generous padding, 1024x1024
+Style/medium: simple polished cartoon educational product image, close to a clean app flashcard asset
+Composition/framing: centered square composition, generous padding, 512x512
 Lighting/mood: soft natural light, calm learning-product feel
 Constraints: no text, no letters, no Chinese, no watermark, no extra unrelated objects, not a flat icon
 Avoid: abstract symbols, line art, cartoon geometry, labels, clutter
@@ -397,7 +397,7 @@ git commit -m "feat: unify concrete word images"
 
 - [ ] **Step 1: Replace scene images**
 
-Generate or replace these images with semi-realistic, text-free scene images:
+Generate or replace these images with simple cartoon, text-free scene images:
 
 ```text
 room, home, china, student, friend, he, she, happy, kind, learn, want, use, have, small, big, clean, new, old, useful, important, good, question, english, thing, day
@@ -410,11 +410,11 @@ Use this prompt pattern:
 ```text
 Use case: scientific-educational
 Asset type: Basic English word flashcard image
-Primary request: a simple semi-realistic scene showing <word meaning>
+Primary request: a simple cartoon scene showing <word meaning>
 Scene/backdrop: everyday life setting appropriate for the word
 Subject: one clear main subject or action
-Style/medium: semi-realistic educational scene, not flat icon art
-Composition/framing: centered square composition, readable at flashcard size, 1024x1024
+Style/medium: simple polished cartoon educational scene, not abstract symbol art
+Composition/framing: centered square composition, readable at flashcard size, 512x512
 Lighting/mood: soft natural light, calm and clear
 Constraints: no visible text, no Chinese, no watermark, simple scene, easy to describe in Basic English
 Avoid: abstract symbols, flat vector card, labels, clutter, complicated story
@@ -550,7 +550,7 @@ Use available local tooling to assemble or inspect all 53 word images. Do not co
 Verify:
 
 - 53 word images exist.
-- all images are `1024x1024`.
+- all images are `512x512`.
 - Concrete Visual images have no text and are object-focused.
 - Scene Visual images have no text and are life-scene-focused.
 - Relation Diagram images have no text and clearly show spatial relation.

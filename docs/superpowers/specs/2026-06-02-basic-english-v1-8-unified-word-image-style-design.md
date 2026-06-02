@@ -2,15 +2,15 @@
 
 ## Goal
 
-Unify the Words flashcard image system so all current course words have a consistent visual language. V1.7 solved image coverage, but the added images are too flat and abstract compared with the older semi-realistic word images. V1.8 should replace all 53 current word images with a coherent style system.
+Unify the Words flashcard image system so all current course words have a consistent visual language. V1.7 solved image coverage, but the added images are too flat and abstract compared with the older word images. V1.8 should replace all 53 current word images with a coherent style system.
 
 The product goal remains English-first daily-life expression: learners should see an image and be able to recall or produce a simple Basic English sentence about the word.
 
 ## Decisions
 
 - Rebuild all 53 word flashcard images, including the older images.
-- Keep every image square at `1024x1024`.
-- Use a semi-realistic, clear, life-oriented visual style close to the stronger older assets.
+- Keep every image square at `512x512`.
+- Use a simple, clear, lightly cartoon-like learning-card visual style. Images should feel friendly and concrete, but less abstract than V1.7 symbol cards.
 - Do not put Chinese text in any image.
 - Only Grammar Card images may include English keyword text.
 - Concrete, scene, and relation images should not include English word labels.
@@ -20,7 +20,7 @@ The product goal remains English-first daily-life expression: learners should se
 
 ### Concrete Visual
 
-Use for directly visible objects. The image should show the object clearly, with simple lighting, little clutter, and no text.
+Use for directly visible objects. The image should show the object clearly, with simple cartoon-style lighting, little clutter, and no text.
 
 Words:
 
@@ -28,7 +28,7 @@ Words:
 
 ### Scene Visual
 
-Use for people, places, actions, qualities, and concept words that are better understood through a small life scene. The image should be semi-realistic and describeable with simple English. No text should appear in the image.
+Use for people, places, actions, qualities, and concept words that are better understood through a small life scene. The image should be simple, cartoon-like, and describeable with simple English. No text should appear in the image.
 
 Words:
 
@@ -36,7 +36,7 @@ Words:
 
 ### Relation Diagram
 
-Use for spatial relation words. The image should use semi-realistic objects to show the relationship clearly. It should avoid text labels unless future testing proves the relation cannot be recognized.
+Use for spatial relation words. The image should use simple cartoon-style objects to show the relationship clearly. It should avoid text labels unless future testing proves the relation cannot be recognized.
 
 Words:
 
@@ -171,14 +171,14 @@ Run:
 - Adding image comparison UI.
 - Generating or mapping the full C.K. Ogden 850 words.
 - Adding Chinese labels to images.
-- Making all images photorealistic photos. The target is semi-realistic consistency, not strict photography.
+- Making all images photorealistic photos or detailed semi-realistic renders. The target is simple cartoon clarity for flashcards.
 
 ## Completion Criteria
 
 V1.8 is complete when:
 
 - Four sample images are generated and accepted.
-- All 53 word flashcard images are replaced with the approved unified style system.
+- All 53 word flashcard images are replaced with the approved unified `512x512` style system.
 - `wordImageAssets` includes `visualStyle` metadata for every word.
 - Tests enforce the visual style and label policy rules.
 - Unit tests, build, and E2E tests pass.
