@@ -35,7 +35,7 @@ async function clearAppStorage(page: Page) {
 async function seedCompletedDays(page: Page, dayIds: string[]) {
   await page.evaluate(
     async ({ contentVersion, dayIdsToSeed }) => {
-      const openRequest = indexedDB.open('basic-english-progress', 4);
+      const openRequest = indexedDB.open('basic-english-progress', 5);
 
       const db = await new Promise<IDBDatabase>((resolve, reject) => {
         openRequest.onerror = () => reject(openRequest.error);
@@ -61,6 +61,9 @@ async function seedCompletedDays(page: Page, dayIds: string[]) {
           }
           if (!db.objectStoreNames.contains('userOutputs')) {
             db.createObjectStore('userOutputs', { keyPath: 'dayId' });
+          }
+          if (!db.objectStoreNames.contains('pictureDescriptions')) {
+            db.createObjectStore('pictureDescriptions', { keyPath: 'dayId' });
           }
           if (!db.objectStoreNames.contains('wordProgress')) {
             db.createObjectStore('wordProgress', { keyPath: 'id' });

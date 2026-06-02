@@ -4,6 +4,7 @@ import type { ReviewItem } from '../domain/review';
 import { normalizeSceneOutput } from '../domain/sceneOutput';
 import type {
   ExerciseAttempt,
+  PictureDescription,
   ProgressRepository,
   SceneRemixAttempt,
   StepCompletion,
@@ -13,7 +14,7 @@ import type {
   WordProgress,
 } from './progressRepository';
 
-const DB_VERSION = 4;
+const DB_VERSION = 5;
 
 interface ProgressDb extends DBSchema {
   dayProgress: {
@@ -42,6 +43,10 @@ interface ProgressDb extends DBSchema {
   userOutputs: {
     key: string;
     value: UserOutput;
+  };
+  pictureDescriptions: {
+    key: string;
+    value: PictureDescription;
   };
   wordProgress: {
     key: string;
@@ -91,6 +96,9 @@ async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
       }
       if (!db.objectStoreNames.contains('wordProgress')) {
         db.createObjectStore('wordProgress', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains('pictureDescriptions')) {
+        db.createObjectStore('pictureDescriptions', { keyPath: 'dayId' });
       }
       if (!db.objectStoreNames.contains('reviewItems')) {
         const store = db.createObjectStore('reviewItems', { keyPath: 'id' });
@@ -190,6 +198,21 @@ export function createIndexedDbProgressRepository(dbName = 'basic-english-progre
     async listUserOutputs() {
       const db = await dbPromise;
       return (await db.getAll('userOutputs')).map(normalizeUserOutput);
+    },
+
+    async savePictureDescription(description) {
+      const db = await dbPromise;
+      await db.put('pictureDescriptions', description);
+    },
+
+    async getPictureDescription(dayId) {
+      const db = await dbPromise;
+      return (await db.get('pictureDescriptions', dayId)) ?? null;
+    },
+
+    async listPictureDescriptions() {
+      const db = await dbPromise;
+      return db.getAll('pictureDescriptions');
     },
 
     async saveWordProgress(progress) {

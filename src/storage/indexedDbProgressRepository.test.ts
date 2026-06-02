@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import type { DayProgress } from '../domain/progress';
 import { createSceneRemixReviewItem, createWordReviewItem, resolveReviewItem } from '../domain/review';
 import { createIndexedDbProgressRepository } from './indexedDbProgressRepository';
-import type { ExerciseAttempt, SceneRemixAttempt, UserOutput, WordProgress } from './progressRepository';
+import type { ExerciseAttempt, PictureDescription, SceneRemixAttempt, UserOutput, WordProgress } from './progressRepository';
 
 let dbCounter = 0;
 
@@ -53,6 +53,23 @@ function wordProgress(overrides: Partial<WordProgress> = {}): WordProgress {
     correctCount: 0,
     lastSeenAt: '2026-05-25T12:00:00.000Z',
     updatedAt: '2026-05-25T12:00:00.000Z',
+    ...overrides,
+  };
+}
+
+function pictureDescription(overrides: Partial<PictureDescription> = {}): PictureDescription {
+  return {
+    id: 'picture-description-day-008',
+    dayId: 'day-008',
+    taskId: 'picture-day-008-my-room',
+    text: 'This is my room. There is a bed. I can see a table.',
+    checkedAt: '2026-06-02T00:00:00.000Z',
+    feedback: {
+      status: 'ready',
+      messages: ['Clear enough. You can continue.'],
+      simpleVersion: ['This is my room.', 'There is a bed.', 'I can see a table.'],
+    },
+    updatedAt: '2026-06-02T00:00:00.000Z',
     ...overrides,
   };
 }
@@ -133,7 +150,7 @@ describe('indexedDbProgressRepository', () => {
       text: 'Second draft.',
     });
 
-    const db = await openDB(dbName, 4);
+    const db = await openDB(dbName, 5);
     await expect(db.getAll('userOutputs')).resolves.toEqual([
       userOutput({ id: 'second-output-id', text: 'Second draft.' }),
     ]);
@@ -161,7 +178,7 @@ describe('indexedDbProgressRepository', () => {
       dayId: 'day-001',
     });
 
-    const db = await openDB(dbName, 4);
+    const db = await openDB(dbName, 5);
     await expect(db.getAll('userOutputs')).resolves.toEqual([userOutput({ id: 'upgraded-output-id' })]);
     db.close();
   });
@@ -192,7 +209,7 @@ describe('indexedDbProgressRepository', () => {
 
     await repo.saveExerciseAttempt(attempt);
 
-    const db = await openDB(dbName, 4);
+    const db = await openDB(dbName, 5);
     await expect(db.get('exerciseAttempts', attempt.id)).resolves.toEqual(attempt);
     db.close();
   });
@@ -309,6 +326,46 @@ describe('indexedDbProgressRepository V1.4 scene remix', () => {
   });
 });
 
+describe('indexedDbProgressRepository V1.6 picture descriptions', () => {
+  it('saves, gets, and lists picture descriptions', async () => {
+    const repository = createIndexedDbProgressRepository(nextDbName());
+    const description = pictureDescription();
+
+    await repository.savePictureDescription(description);
+
+    await expect(repository.getPictureDescription('day-008')).resolves.toEqual(description);
+    await expect(repository.listPictureDescriptions()).resolves.toEqual([description]);
+  });
+
+  it('keeps existing data readable when adding the picture description store', async () => {
+    const dbName = nextDbName();
+    const oldOutput = userOutput({ text: 'My name is Li.' });
+    const oldDb = await openDB<OldV3ProgressDb>(dbName, 4, {
+      upgrade(db) {
+        db.createObjectStore('dayProgress', { keyPath: 'id' });
+        db.createObjectStore('stepProgress', { keyPath: 'id' });
+        db.createObjectStore('stepCompletions', { keyPath: 'id' }).createIndex('byDayId', 'dayId');
+        db.createObjectStore('exerciseAttempts', { keyPath: 'id' }).createIndex('byDayId', 'dayId');
+        db.createObjectStore('sceneRemixAttempts', { keyPath: 'id' }).createIndex('byDayId', 'dayId');
+        db.createObjectStore('userOutputs', { keyPath: 'dayId' });
+        db.createObjectStore('wordProgress', { keyPath: 'id' });
+        const reviewItemsStore = db.createObjectStore('reviewItems', { keyPath: 'id' });
+        reviewItemsStore.createIndex('byStatus', 'status');
+        reviewItemsStore.createIndex('bySourceDayId', 'sourceDayId');
+        db.createObjectStore('studyActivities', { keyPath: 'id' });
+      },
+    });
+    await oldDb.put('userOutputs', oldOutput);
+    oldDb.close();
+
+    const repository = createIndexedDbProgressRepository(dbName);
+    await repository.savePictureDescription(pictureDescription());
+
+    await expect(repository.getUserOutput('day-001')).resolves.toEqual(oldOutput);
+    await expect(repository.listPictureDescriptions()).resolves.toEqual([pictureDescription()]);
+  });
+});
+
 describe('indexedDbProgressRepository V1.1', () => {
   it('persists and resolves review items', async () => {
     const repo = createIndexedDbProgressRepository('v1-1-review-test');
@@ -363,7 +420,7 @@ describe('indexedDbProgressRepository V1.1', () => {
     const repo = createIndexedDbProgressRepository(dbName);
     await repo.listUserOutputs();
 
-    const db = await openDB(dbName, 4);
+    const db = await openDB(dbName, 5);
     await db.put('userOutputs', {
       id: 'legacy-output-day-001',
       dayId: 'day-001',

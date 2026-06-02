@@ -57,6 +57,21 @@ export interface UserOutput {
   updatedAt: string;
 }
 
+export interface PictureDescription {
+  id: string;
+  dayId: string;
+  taskId: string;
+  text: string;
+  checkedAt?: string;
+  feedback?: {
+    status: 'ready' | 'needs_work';
+    messages: string[];
+    simpleVersion: string[];
+  };
+  addedToReviewAt?: string;
+  updatedAt: string;
+}
+
 export interface WordProgress {
   id: string;
   wordId: string;
@@ -87,6 +102,9 @@ export interface ProgressRepository {
   saveUserOutput(output: UserOutput): Promise<void>;
   getUserOutput(dayId: string): Promise<UserOutput | null>;
   listUserOutputs(): Promise<UserOutput[]>;
+  savePictureDescription(description: PictureDescription): Promise<void>;
+  getPictureDescription(dayId: string): Promise<PictureDescription | null>;
+  listPictureDescriptions(): Promise<PictureDescription[]>;
   saveWordProgress(progress: WordProgress): Promise<void>;
   listReviewWords(): Promise<WordProgress[]>;
   saveReviewItem(item: ReviewItem): Promise<void>;
