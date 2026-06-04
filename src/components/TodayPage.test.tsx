@@ -526,14 +526,13 @@ describe('TodayPage', () => {
   });
 
   it('renders a Week 4 Today lesson without changing the existing flow', async () => {
+    const week3DayIds = basicEnglishCourse.weeks[2]?.days.map((courseDay) => courseDay.id) ?? [];
     const completedThroughWeek3Progress = [
       ...basicEnglishCourse.weeks
         .slice(0, 2)
         .flatMap((week) => week.days)
         .map((courseDay) => completedDayProgress(courseDay.id, basicEnglishCourse.contentVersion)),
-      ...['day-015', 'day-016', 'day-017', 'day-018', 'day-019', 'day-020', 'day-021'].map((dayId) =>
-        completedDayProgress(dayId, basicEnglishCourse.contentVersion),
-      ),
+      ...week3DayIds.map((dayId) => completedDayProgress(dayId, basicEnglishCourse.contentVersion)),
     ];
     const repository = createTestRepository({ dayProgress: completedThroughWeek3Progress });
 
