@@ -785,10 +785,10 @@ describe('scene remix tasks', () => {
 });
 
 describe('picture describe tasks', () => {
-  it('has one task for every Week 1 and Week 2 day', () => {
-    const firstTwoWeekDayIds = basicEnglishCourse.weeks.slice(0, 2).flatMap((week) => week.days.map((day) => day.id));
+  it('has one task for every playable course day', () => {
+    const playableDayIds = basicEnglishCourse.weeks.flatMap((week) => week.days.map((day) => day.id));
 
-    expect(Object.keys(pictureDescribeTasksByDayId).sort()).toEqual([...firstTwoWeekDayIds].sort());
+    expect(Object.keys(pictureDescribeTasksByDayId).sort()).toEqual([...playableDayIds].sort());
   });
 
   it('uses complete English-first task data', () => {
