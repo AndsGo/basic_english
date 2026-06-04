@@ -504,6 +504,54 @@ describe('TodayPage', () => {
     expect(screen.getByText('Describe your room with simple sentences.')).toBeInTheDocument();
   });
 
+  it('renders a Week 3 Today lesson without changing the existing flow', async () => {
+    const completedFirstTwoWeeksProgress = basicEnglishCourse.weeks
+      .slice(0, 2)
+      .flatMap((week) => week.days)
+      .map((courseDay) => completedDayProgress(courseDay.id, basicEnglishCourse.contentVersion));
+    const repository = createTestRepository({ dayProgress: completedFirstTwoWeeksProgress });
+
+    renderWithSpeech(
+      <TodayPage
+        course={basicEnglishCourse}
+        repository={repository}
+        pictureDescribeTasksByDayId={pictureDescribeTasksByDayId}
+      />,
+    );
+
+    expect(await screen.findByRole('heading', { name: /Morning Routine/i })).toBeInTheDocument();
+    expect(screen.getByText(/Week 3 \/ Day 15/i)).toBeInTheDocument();
+    expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Words');
+    expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Picture');
+  });
+
+  it('renders a Week 4 Today lesson without changing the existing flow', async () => {
+    const completedThroughWeek3Progress = [
+      ...basicEnglishCourse.weeks
+        .slice(0, 2)
+        .flatMap((week) => week.days)
+        .map((courseDay) => completedDayProgress(courseDay.id, basicEnglishCourse.contentVersion)),
+      ...['day-015', 'day-016', 'day-017', 'day-018', 'day-019', 'day-020', 'day-021'].map((dayId) =>
+        completedDayProgress(dayId, basicEnglishCourse.contentVersion),
+      ),
+    ];
+    const repository = createTestRepository({ dayProgress: completedThroughWeek3Progress });
+
+    renderWithSpeech(
+      <TodayPage
+        course={basicEnglishCourse}
+        repository={repository}
+        sceneRemixTasksByDayId={sceneRemixTasksByDayId}
+        pictureDescribeTasksByDayId={pictureDescribeTasksByDayId}
+      />,
+    );
+
+    expect(await screen.findByRole('heading', { name: /Food and Drink/i })).toBeInTheDocument();
+    expect(screen.getByText(/Week 4 \/ Day 22/i)).toBeInTheDocument();
+    expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Scene Remix');
+    expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Output');
+  });
+
   it('shows Day 2 after Day 1 is completed', async () => {
     const repo = createIndexedDbProgressRepository('today-v1-1-current-day');
     await repo.saveDayProgress({
