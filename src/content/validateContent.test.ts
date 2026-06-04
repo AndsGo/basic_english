@@ -807,6 +807,7 @@ describe('picture describe tasks', () => {
         expect(task.requiredSentenceCount).toBe(3);
         expect(task.simpleVersion).toHaveLength(3);
       }
+      expect(task.simpleVersion).toHaveLength(task.requiredSentenceCount);
     }
   });
 });

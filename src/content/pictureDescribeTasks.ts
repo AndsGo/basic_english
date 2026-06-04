@@ -192,7 +192,7 @@ export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = 
     targetWords: ['morning', 'get', 'wash', 'face', 'water', 'clothes'],
     suggestedPatterns: ['I get up in the morning.', 'I wash my face.', 'I put on my clothes.'],
     requiredSentenceCount: 4,
-    simpleVersion: ['I get up in the morning.', 'I wash my face.', 'I put on my clothes.', 'I drink water.'],
+    simpleVersion: ['I get up in the morning.', 'I wash my face.', 'I put on my clothes.', 'I have water.'],
   },
   'day-016': {
     id: 'picture-day-016-going-to-school-work',
