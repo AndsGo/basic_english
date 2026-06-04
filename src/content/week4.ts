@@ -89,7 +89,7 @@ export const week4: Week = {
         id: 'day-022-output',
         topic: 'Food and Drink',
         prompts: ['What food do you eat?', 'What do you drink?'],
-        template: ['I eat ___.', 'I drink ___.', 'I have ___.', 'I need food.'],
+        template: ['I eat ___.', 'I drink ___.', 'I have ___.', 'I eat rice.'],
         requiredSentenceCount: 4,
       },
     },
