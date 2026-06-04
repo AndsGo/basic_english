@@ -71,4 +71,128 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
       referenceAnswers: ['The bag is near the chair.'],
     },
   ],
+  'day-015': [
+    {
+      id: 'day-015-remix-face-hands',
+      type: 'replace',
+      prompt: 'Change face to hands.',
+      source: 'I wash my face.',
+      referenceAnswers: ['I wash my hands.'],
+    },
+  ],
+  'day-016': [
+    {
+      id: 'day-016-remix-school-work',
+      type: 'replace',
+      prompt: 'Change school to work.',
+      source: 'I go to school.',
+      referenceAnswers: ['I go to work.'],
+    },
+  ],
+  'day-017': [
+    {
+      id: 'day-017-remix-pen-book',
+      type: 'replace',
+      prompt: 'Change pen to book.',
+      source: 'I use a pen to write.',
+      referenceAnswers: ['I use a book to study.'],
+    },
+  ],
+  'day-018': [
+    {
+      id: 'day-018-remix-morning-evening',
+      type: 'replace',
+      prompt: 'Change morning to evening.',
+      source: 'In the morning, I read.',
+      referenceAnswers: ['In the evening, I read.'],
+    },
+  ],
+  'day-019': [
+    {
+      id: 'day-019-remix-read-write',
+      type: 'replace',
+      prompt: 'Change read to write.',
+      source: 'Then I read.',
+      referenceAnswers: ['Then I write.'],
+    },
+  ],
+  'day-020': [
+    {
+      id: 'day-020-remix-often-sometimes',
+      type: 'replace',
+      prompt: 'Change often to sometimes.',
+      source: 'I often read.',
+      referenceAnswers: ['I sometimes read.'],
+    },
+  ],
+  'day-021': [
+    {
+      id: 'day-021-remix-normal-day',
+      type: 'extend',
+      prompt: 'Add two more sentences about your normal day.',
+      referenceAnswers: ['In the afternoon, I study.', 'In the evening, I am at home.'],
+    },
+  ],
+  'day-022': [
+    {
+      id: 'day-022-remix-bread-rice',
+      type: 'replace',
+      prompt: 'Change bread to rice.',
+      source: 'I eat bread.',
+      referenceAnswers: ['I eat rice.'],
+    },
+  ],
+  'day-023': [
+    {
+      id: 'day-023-remix-want-need',
+      type: 'replace',
+      prompt: 'Change want to need.',
+      source: 'I want some water.',
+      referenceAnswers: ['I need some water.'],
+    },
+  ],
+  'day-024': [
+    {
+      id: 'day-024-remix-bread-milk',
+      type: 'replace',
+      prompt: 'Change bread to milk.',
+      source: 'I buy bread.',
+      referenceAnswers: ['I buy milk.'],
+    },
+  ],
+  'day-025': [
+    {
+      id: 'day-025-remix-little-much',
+      type: 'replace',
+      prompt: 'Change little to much.',
+      source: 'It costs little.',
+      referenceAnswers: ['It costs much.'],
+    },
+  ],
+  'day-026': [
+    {
+      id: 'day-026-remix-show-bring',
+      type: 'replace',
+      prompt: 'Change show to bring.',
+      source: 'Can you show me the book?',
+      referenceAnswers: ['Can you bring me the book?'],
+    },
+  ],
+  'day-027': [
+    {
+      id: 'day-027-remix-full-empty',
+      type: 'replace',
+      prompt: 'Change full to empty.',
+      source: 'The cup is full.',
+      referenceAnswers: ['The cup is empty.'],
+    },
+  ],
+  'day-028': [
+    {
+      id: 'day-028-remix-shopping-scene',
+      type: 'extend',
+      prompt: 'Add two more sentences to the shopping scene.',
+      referenceAnswers: ['I need more water.', 'The food is good.'],
+    },
+  ],
 };
