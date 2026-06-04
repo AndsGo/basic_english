@@ -73,11 +73,11 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
   ],
   'day-015': [
     {
-      id: 'day-015-remix-face-hands',
+      id: 'day-015-remix-wash-put-on',
       type: 'replace',
-      prompt: 'Change face to hands.',
+      prompt: 'Change wash my face to put on my clothes.',
       source: 'I wash my face.',
-      referenceAnswers: ['I wash my hands.'],
+      referenceAnswers: ['I put on my clothes.'],
     },
   ],
   'day-016': [
@@ -91,11 +91,11 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
   ],
   'day-017': [
     {
-      id: 'day-017-remix-pen-book',
+      id: 'day-017-remix-open-close',
       type: 'replace',
-      prompt: 'Change pen to book.',
-      source: 'I use a pen to write.',
-      referenceAnswers: ['I use a book to study.'],
+      prompt: 'Change open to close.',
+      source: 'I open the book.',
+      referenceAnswers: ['I close the book.'],
     },
   ],
   'day-018': [
