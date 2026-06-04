@@ -142,7 +142,7 @@ describe('scene remix review items', () => {
       id: 'review-scene-remix-day-008-day-008-remix-room-office',
       type: 'scene_remix',
       sourceDayId: 'day-008',
-      sourceStepId: 'output',
+      sourceStepId: 'scene-remix',
       taskId: 'day-008-remix-room-office',
       prompt: 'Change room to office.',
       source: 'My room is small.',

@@ -180,7 +180,7 @@ export function createSceneRemixReviewItem({
     id: `review-scene-remix-${sourceDayId}-${taskId}`,
     type: 'scene_remix',
     sourceDayId,
-    sourceStepId: 'output',
+    sourceStepId: 'scene-remix',
     taskId,
     prompt,
     source,
