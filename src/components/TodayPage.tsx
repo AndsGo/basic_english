@@ -591,8 +591,6 @@ export function TodayPage({
                 reviewCount={dayReviewCount}
                 nextDay={nextDay}
                 onStartNextDay={startNextDay}
-                remixTask={remixTask}
-                onSceneRemixSubmit={handleSceneRemixSubmit}
               />
             )}
           </>

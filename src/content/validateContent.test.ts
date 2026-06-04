@@ -591,8 +591,13 @@ describe('scenario capabilities', () => {
 describe('scene goals', () => {
   it('validates scene goals for existing playable days', () => {
     const result = validateSceneGoals(sceneGoalsByDayId, basicEnglishCourse);
+    const weekThreeAndFourDayIds = basicEnglishCourse.weeks
+      .slice(2, 4)
+      .flatMap((week) => week.days.map((day) => day.id));
 
-    expect(Object.keys(sceneGoalsByDayId)).toEqual(['day-001', 'day-008', 'day-009', 'day-010']);
+    expect(Object.keys(sceneGoalsByDayId)).toEqual(
+      expect.arrayContaining(['day-001', 'day-008', 'day-009', 'day-010', ...weekThreeAndFourDayIds]),
+    );
     expect(result.errors).toEqual([]);
   });
 

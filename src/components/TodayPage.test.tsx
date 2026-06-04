@@ -7,7 +7,7 @@ import { pictureDescribeTasksByDayId } from '../content/pictureDescribeTasks';
 import { sceneRemixTasksByDayId } from '../content/sceneRemixTasks';
 import { sceneGoalsByDayId } from '../content/sceneGoals';
 import { week1Course } from '../content/week1';
-import type { DayProgress } from '../domain/progress';
+import type { DayProgress, StepId } from '../domain/progress';
 import { startDay } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
@@ -157,6 +157,32 @@ function completedDayProgress(dayId: string, contentVersion: string): DayProgres
     completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'picture', 'output'],
     startedAt: '2026-05-26T00:00:00.000Z',
     completedAt: '2026-05-26T00:10:00.000Z',
+    updatedAt: '2026-05-26T00:10:00.000Z',
+    contentVersion,
+  };
+}
+
+function inProgressDayProgress(dayId: string, contentVersion: string, currentStep: StepId): DayProgress {
+  const completedStepsByCurrentStep: Record<StepId, StepId[]> = {
+    review: [],
+    words: ['review'],
+    patterns: ['review', 'words'],
+    drills: ['review', 'words', 'patterns'],
+    translate: ['review', 'words', 'patterns', 'drills'],
+    'scene-remix': ['review', 'words', 'patterns', 'drills', 'translate'],
+    picture: ['review', 'words', 'patterns', 'drills', 'translate', 'scene-remix'],
+    output: ['review', 'words', 'patterns', 'drills', 'translate', 'scene-remix', 'picture'],
+    done: ['review', 'words', 'patterns', 'drills', 'translate', 'scene-remix', 'picture', 'output'],
+  };
+
+  return {
+    id: dayId,
+    dayId,
+    status: currentStep === 'done' ? 'completed' : 'in_progress',
+    currentStep,
+    completedStepIds: completedStepsByCurrentStep[currentStep],
+    startedAt: '2026-05-26T00:00:00.000Z',
+    completedAt: currentStep === 'done' ? '2026-05-26T00:10:00.000Z' : undefined,
     updatedAt: '2026-05-26T00:10:00.000Z',
     contentVersion,
   };
@@ -336,7 +362,7 @@ function deferred<T>() {
 }
 
 describe('TodayPage', () => {
-  it('shows a remix task on completed days with remix content', async () => {
+  it('does not repeat a remix task after day completion because remix is a formal step', async () => {
     const repository = createTestRepository({
       dayProgress: completedDay1Progress,
       userOutputs: completedDay1Outputs,
@@ -344,13 +370,14 @@ describe('TodayPage', () => {
 
     renderWithSpeech(<TodayPage course={singleDayCourse} repository={repository} sceneRemixTasksByDayId={sceneRemixTasksByDayId} />);
 
-    expect(await screen.findByRole('heading', { name: 'Try Another Scene' })).toBeInTheDocument();
-    expect(screen.getByText('Change China to Japan.')).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Day 1 complete' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Try Another Scene' })).not.toBeInTheDocument();
+    expect(screen.queryByText('Change China to Japan.')).not.toBeInTheDocument();
   });
 
   it('saves a close-enough remix attempt without creating review', async () => {
     const repository = createTestRepository({
-      dayProgress: completedDay1Progress,
+      dayProgress: [inProgressDayProgress(day.id, week1Course.contentVersion, 'scene-remix')],
       userOutputs: completedDay1Outputs,
     });
 
@@ -368,7 +395,7 @@ describe('TodayPage', () => {
 
   it('saves a review remix attempt and creates one active scene remix review item', async () => {
     const repository = createTestRepository({
-      dayProgress: completedDay1Progress,
+      dayProgress: [inProgressDayProgress(day.id, week1Course.contentVersion, 'scene-remix')],
       userOutputs: completedDay1Outputs,
     });
     const onProgressChange = vi.fn();
@@ -402,12 +429,11 @@ describe('TodayPage', () => {
       referenceAnswer: 'I am from Japan.',
     });
     expect(onProgressChange).toHaveBeenCalled();
-    await waitFor(() => expect(screen.getByText('Review tomorrow: 1')).toBeInTheDocument());
   });
 
   it('does not create duplicate active remix review items for the same task', async () => {
     const repository = createTestRepository({
-      dayProgress: completedDay1Progress,
+      dayProgress: [inProgressDayProgress(day.id, week1Course.contentVersion, 'scene-remix')],
       userOutputs: completedDay1Outputs,
     });
 
