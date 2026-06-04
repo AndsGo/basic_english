@@ -1,3 +1,6 @@
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { Course, SceneRemixTask, ScenarioCapability, ScenarioWeek } from '../domain/types';
 import { basicEnglishCourse } from './course';
@@ -459,6 +462,23 @@ describe('basicEnglishCourse V1.2', () => {
 
     expect(nonGrammarWithEnglishLabels).toEqual([]);
     expect(grammarWithoutEnglishLabels).toEqual([]);
+  });
+
+  it('uses distinct image files for Week 3 and Week 4 flashcards', () => {
+    const newWordIds = new Set(
+      basicEnglishCourse.words.filter((word) => word.weekIntroduced === 3 || word.weekIntroduced === 4).map((word) => word.id),
+    );
+    const hashesByWordId = wordImageAssets
+      .filter((asset) => newWordIds.has(asset.wordId))
+      .map((asset) => {
+        const bytes = readFileSync(join(process.cwd(), 'src', 'assets', 'word-flashcards', `${asset.wordId}.png`));
+        return [asset.wordId, createHash('sha256').update(bytes).digest('hex')] as const;
+      });
+    const duplicateWordIds = hashesByWordId
+      .filter(([_wordId, hash], index) => hashesByWordId.findIndex(([_otherWordId, otherHash]) => otherHash === hash) !== index)
+      .map(([wordId]) => wordId);
+
+    expect(duplicateWordIds).toEqual([]);
   });
 });
 

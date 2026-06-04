@@ -54,7 +54,7 @@ describe('CoursePage', () => {
 
     expect(screen.getByRole('heading', { name: 'Week 1: People, Identity, and Basic Sentences' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Week 2: Home & Things' })).toBeInTheDocument();
-    expect(screen.getAllByText('0 / 7 days completed')).toHaveLength(2);
+    expect(screen.getAllByText('0 / 7 days completed')).toHaveLength(basicEnglishCourse.weeks.length);
 
     const day8Card = screen.getByText('Day 8: My Room').closest('article');
     expect(day8Card).not.toBeNull();
@@ -77,7 +77,7 @@ describe('CoursePage', () => {
     );
 
     expect(screen.getByText('7 / 7 days completed')).toBeInTheDocument();
-    expect(screen.getByText('0 / 7 days completed')).toBeInTheDocument();
+    expect(screen.getAllByText('0 / 7 days completed').length).toBeGreaterThan(0);
     expect(screen.queryByText('Complete Week 1 to unlock Home & Things.')).not.toBeInTheDocument();
 
     const day8Card = screen.getByText('Day 8: My Room').closest('article');

@@ -223,6 +223,17 @@ async function completeTranslation(user: ReturnType<typeof userEvent.setup>) {
   await user.click(await getEnabledContinueButton());
 }
 
+async function completeSceneRemix(user: ReturnType<typeof userEvent.setup>) {
+  await screen.findByRole('heading', { name: 'Scene Remix' });
+  const textbox = screen.queryByLabelText('Scene remix answer');
+  if (textbox) {
+    await user.type(textbox, 'This is my scene. I can say it another way.');
+    await user.click(screen.getByRole('button', { name: 'Show reference' }));
+    await user.click(screen.getByRole('button', { name: 'Close enough' }));
+  }
+  await user.click(await getEnabledContinueButton());
+}
+
 async function completePicture(user: ReturnType<typeof userEvent.setup>, text = 'My name is Li. I am a student. I study English.') {
   await screen.findByRole('heading', { name: 'Describe the picture' });
   const textbox = screen.queryByLabelText('Picture description');
@@ -242,6 +253,7 @@ async function completeToOutput(user: ReturnType<typeof userEvent.setup>) {
   await completePatterns(user);
   await completeDrills(user);
   await completeTranslation(user);
+  await completeSceneRemix(user);
   await completePicture(user);
 }
 
@@ -266,6 +278,8 @@ async function completeDayOneThroughOutput(user: ReturnType<typeof userEvent.set
   expect(await screen.findByRole('heading', { name: translationExercise.chinesePrompt })).toBeInTheDocument();
 
   await completeTranslation(user);
+  expect(await screen.findByRole('heading', { name: 'Scene Remix' })).toBeInTheDocument();
+  await completeSceneRemix(user);
   expect(await screen.findByRole('heading', { name: 'Describe the picture' })).toBeInTheDocument();
   await completePicture(user);
   await waitFor(() => {
@@ -837,6 +851,8 @@ describe('TodayPage', () => {
     await user.click(screen.getByRole('radio', { name: 'Close enough' }));
 
     await user.click(await getEnabledContinueButton());
+    expect(screen.getByRole('heading', { name: 'Scene Remix' })).toBeInTheDocument();
+    await completeSceneRemix(user);
     expect(screen.getByRole('heading', { name: 'Describe the picture' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Continue' })).toBeDisabled();
     await user.type(screen.getByLabelText('Picture description'), 'My name is Li. I am a student. I study English.');
@@ -1046,6 +1062,7 @@ describe('TodayPage', () => {
     await completePatterns(user);
     await completeDrills(user);
     await completeTranslation(user);
+    await completeSceneRemix(user);
     await completePicture(user);
 
     await satisfyOutputGate(user, 'My name is Mei. I am from China. I study English. I am happy.');

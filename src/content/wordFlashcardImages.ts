@@ -278,7 +278,7 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('usually', usuallyImage, 'structure', 'grammar', 'english-keyword', 'A simple English keyword card showing the structure word usually.'),
   wordImageAsset('again', againImage, 'structure', 'grammar', 'english-keyword', 'A simple English keyword card showing the structure word again.'),
   wordImageAsset('practice', practiceImage, 'action', 'scene', 'none', 'A simple action scene showing practice for Basic English learners.'),
-  wordImageAsset('habit', habitImage, 'action', 'scene', 'none', 'A simple action scene showing habit for Basic English learners.'),
+  wordImageAsset('habit', habitImage, 'abstract', 'scene', 'none', 'A simple repeated-routine scene for the concept habit.'),
   wordImageAsset('food', foodImage, 'abstract', 'scene', 'none', 'A simple food flashcard image for Basic English learners.'),
   wordImageAsset('drink', drinkImage, 'action', 'scene', 'none', 'A simple action scene showing drink for Basic English learners.'),
   wordImageAsset('bread', breadImage, 'object', 'concrete', 'none', 'A simple bread flashcard image for Basic English learners.'),
