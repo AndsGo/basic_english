@@ -799,8 +799,14 @@ describe('picture describe tasks', () => {
       expect(task.image).toMatch(/\S/);
       expect(task.targetWords.length).toBeGreaterThanOrEqual(3);
       expect(task.suggestedPatterns.length).toBeGreaterThanOrEqual(2);
-      expect(task.requiredSentenceCount).toBe(3);
-      expect(task.simpleVersion).toHaveLength(3);
+      const dayNumber = Number(dayId.replace('day-', ''));
+      if (dayNumber >= 15) {
+        expect(task.requiredSentenceCount).toBeGreaterThanOrEqual(4);
+        expect(task.simpleVersion.length).toBeGreaterThanOrEqual(4);
+      } else {
+        expect(task.requiredSentenceCount).toBe(3);
+        expect(task.simpleVersion).toHaveLength(3);
+      }
     }
   });
 });
