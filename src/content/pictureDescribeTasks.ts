@@ -12,6 +12,20 @@ import day011Image from '../assets/picture-describe/day-011-kitchen-breakfast.pn
 import day012Image from '../assets/picture-describe/day-012-cleaning-room.png';
 import day013Image from '../assets/picture-describe/day-013-evening-at-home.png';
 import day014Image from '../assets/picture-describe/day-014-home-check.png';
+import day015Image from '../assets/picture-describe/day-015-morning-routine.png';
+import day016Image from '../assets/picture-describe/day-016-going-to-school-work.png';
+import day017Image from '../assets/picture-describe/day-017-useful-actions.png';
+import day018Image from '../assets/picture-describe/day-018-time-of-day.png';
+import day019Image from '../assets/picture-describe/day-019-action-order.png';
+import day020Image from '../assets/picture-describe/day-020-everyday-habits.png';
+import day021Image from '../assets/picture-describe/day-021-normal-day-check.png';
+import day022Image from '../assets/picture-describe/day-022-food-and-drink.png';
+import day023Image from '../assets/picture-describe/day-023-want-and-need.png';
+import day024Image from '../assets/picture-describe/day-024-buying-simple-things.png';
+import day025Image from '../assets/picture-describe/day-025-money-and-price.png';
+import day026Image from '../assets/picture-describe/day-026-asking-for-help.png';
+import day027Image from '../assets/picture-describe/day-027-more-enough-good.png';
+import day028Image from '../assets/picture-describe/day-028-meal-shopping-check.png';
 import type { PictureDescribeTask } from '../domain/types';
 
 export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = {
@@ -168,5 +182,159 @@ export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = 
     suggestedPatterns: ['This is ...', 'There is ...', 'I have ...'],
     requiredSentenceCount: 3,
     simpleVersion: ['This is my home.', 'There is a room.', 'I have a table.'],
+  },
+  'day-015': {
+    id: 'picture-day-015-morning-routine',
+    dayId: 'day-015',
+    title: 'Morning Routine',
+    goal: 'Describe what the learner does in the morning.',
+    image: day015Image,
+    targetWords: ['morning', 'get', 'wash', 'face', 'water', 'clothes'],
+    suggestedPatterns: ['I get up in the morning.', 'I wash my face.', 'I put on my clothes.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['I get up in the morning.', 'I wash my face.', 'I put on my clothes.'],
+  },
+  'day-016': {
+    id: 'picture-day-016-going-to-school-work',
+    dayId: 'day-016',
+    title: 'Going to School or Work',
+    goal: 'Say where the learner goes and what the learner takes.',
+    image: day016Image,
+    targetWords: ['go', 'school', 'work', 'take', 'bag', 'road'],
+    suggestedPatterns: ['I go to school.', 'I go to work.', 'I take my bag.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['I go to school.', 'I take my bag.', 'I walk on the road.'],
+  },
+  'day-017': {
+    id: 'picture-day-017-useful-actions',
+    dayId: 'day-017',
+    title: 'Doing Useful Things',
+    goal: 'Describe useful actions with things on the desk.',
+    image: day017Image,
+    targetWords: ['open', 'read', 'write', 'book', 'pen', 'paper'],
+    suggestedPatterns: ['I open the book.', 'I read a book.', 'I use a pen to write.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['I open the book.', 'I read a book.', 'I write on paper.'],
+  },
+  'day-018': {
+    id: 'picture-day-018-time-of-day',
+    dayId: 'day-018',
+    title: 'Time of Day',
+    goal: 'Describe actions at different times of day.',
+    image: day018Image,
+    targetWords: ['morning', 'afternoon', 'evening', 'night', 'study', 'sleep'],
+    suggestedPatterns: ['In the morning, I get up.', 'In the afternoon, I study.', 'At night, I sleep.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['In the morning, I get up.', 'In the afternoon, I study.', 'At night, I sleep.'],
+  },
+  'day-019': {
+    id: 'picture-day-019-action-order',
+    dayId: 'day-019',
+    title: 'Action Order',
+    goal: 'Put the learner actions in a simple order.',
+    image: day019Image,
+    targetWords: ['first', 'then', 'next', 'last', 'open', 'close'],
+    suggestedPatterns: ['First, I open the book.', 'Then I read.', 'Last, I close the book.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['First, I open the book.', 'Then I read.', 'Last, I close the book.'],
+  },
+  'day-020': {
+    id: 'picture-day-020-everyday-habits',
+    dayId: 'day-020',
+    title: 'Everyday Habits',
+    goal: 'Describe everyday study and practice habits.',
+    image: day020Image,
+    targetWords: ['often', 'sometimes', 'practice', 'habit', 'English', 'day'],
+    suggestedPatterns: ['I practice English every day.', 'I often read.', 'I sometimes walk.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['I practice English every day.', 'I often read.', 'This is a good habit.'],
+  },
+  'day-021': {
+    id: 'picture-day-021-normal-day-check',
+    dayId: 'day-021',
+    title: 'One Normal Day',
+    goal: 'Describe one normal day from morning to evening.',
+    image: day021Image,
+    targetWords: ['morning', 'afternoon', 'evening', 'go', 'study', 'home'],
+    suggestedPatterns: ['I get up in the morning.', 'In the afternoon, I study.', 'In the evening, I am at home.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['I get up in the morning.', 'In the afternoon, I study.', 'In the evening, I am at home.'],
+  },
+  'day-022': {
+    id: 'picture-day-022-food-and-drink',
+    dayId: 'day-022',
+    title: 'Food and Drink',
+    goal: 'Describe food and drink on the table.',
+    image: day022Image,
+    targetWords: ['food', 'drink', 'bread', 'milk', 'rice', 'fruit'],
+    suggestedPatterns: ['I eat bread.', 'I drink milk.', 'I have fruit.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['I eat bread.', 'I drink milk.', 'I have fruit.'],
+  },
+  'day-023': {
+    id: 'picture-day-023-want-and-need',
+    dayId: 'day-023',
+    title: 'Want and Need',
+    goal: 'Say what the learner wants, needs, and needs help with.',
+    image: day023Image,
+    targetWords: ['want', 'need', 'water', 'food', 'help', 'problem'],
+    suggestedPatterns: ['I want some water.', 'I need food.', 'Please help me.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['I want some water.', 'I need food.', 'Please help me.'],
+  },
+  'day-024': {
+    id: 'picture-day-024-buying-simple-things',
+    dayId: 'day-024',
+    title: 'Buying Simple Things',
+    goal: 'Describe buying simple things at a shop.',
+    image: day024Image,
+    targetWords: ['shop', 'buy', 'bread', 'milk', 'money', 'thing'],
+    suggestedPatterns: ['I go to the shop.', 'I buy bread.', 'I get milk from the shop.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['I go to the shop.', 'I buy bread.', 'I have money.'],
+  },
+  'day-025': {
+    id: 'picture-day-025-money-and-price',
+    dayId: 'day-025',
+    title: 'Money and Price',
+    goal: 'Describe price, paying, and change at a shop.',
+    image: day025Image,
+    targetWords: ['money', 'price', 'pay', 'cheap', 'dear', 'change'],
+    suggestedPatterns: ['The price is cheap.', 'I pay for food.', 'I get change.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['The price is good.', 'I pay for food.', 'I get change.'],
+  },
+  'day-026': {
+    id: 'picture-day-026-asking-for-help',
+    dayId: 'day-026',
+    title: 'Asking for Help',
+    goal: 'Ask another person for simple help.',
+    image: day026Image,
+    targetWords: ['ask', 'help', 'please', 'find', 'show', 'bring'],
+    suggestedPatterns: ['Please help me.', 'Can you show me the book?', 'I ask for help.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['Please help me.', 'Can you show me the book?', 'I ask for help.'],
+  },
+  'day-027': {
+    id: 'picture-day-027-more-enough-good',
+    dayId: 'day-027',
+    title: 'More, Enough, and Good',
+    goal: 'Describe if food and drink are enough, full, empty, or good.',
+    image: day027Image,
+    targetWords: ['more', 'enough', 'full', 'empty', 'food', 'good'],
+    suggestedPatterns: ['I need more water.', 'I have enough food.', 'The cup is empty.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['I need more water.', 'I have enough food.', 'The food is good.'],
+  },
+  'day-028': {
+    id: 'picture-day-028-meal-shopping-check',
+    dayId: 'day-028',
+    title: 'Meal and Shopping Check',
+    goal: 'Describe a simple meal and shopping scene.',
+    image: day028Image,
+    targetWords: ['food', 'drink', 'shop', 'buy', 'need', 'help'],
+    suggestedPatterns: ['I go to the shop.', 'I buy food.', 'Please help me.'],
+    requiredSentenceCount: 3,
+    simpleVersion: ['I go to the shop.', 'I buy food.', 'I need help.'],
   },
 };
