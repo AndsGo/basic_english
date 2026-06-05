@@ -34,7 +34,7 @@ import { PictureDescribeStep } from './PictureDescribeStep';
 import { SceneGoalBanner } from './SceneGoalBanner';
 import { SceneMap } from './SceneMap';
 import { SceneOutputEditor } from './SceneOutputEditor';
-import type { SceneRemixSubmitResult } from './SceneRemixCard';
+import { SceneRemixCard, type SceneRemixSubmitResult } from './SceneRemixCard';
 import { Stepper } from './Stepper';
 import { TranslationTask } from './TranslationTask';
 import { WordCards } from './WordCards';
@@ -150,6 +150,7 @@ export function TodayPage({
   const [practicedPatternIds, setPracticedPatternIds] = useState<Set<string>>(() => new Set());
   const [drillAnswers, setDrillAnswers] = useState<Record<string, ExerciseAnswer | undefined>>({});
   const [translationDrafts, setTranslationDrafts] = useState<Record<string, TranslationDraft | undefined>>({});
+  const [isSceneRemixSubmitted, setIsSceneRemixSubmitted] = useState(false);
   const [activeReviewItems, setActiveReviewItems] = useState<ReviewItem[]>([]);
   const [isCourseHydrating, setIsCourseHydrating] = useState(true);
   const [isDayHydrating, setIsDayHydrating] = useState(true);
@@ -220,6 +221,7 @@ export function TodayPage({
       setPracticedPatternIds(new Set());
       setDrillAnswers({});
       setTranslationDrafts({});
+      setIsSceneRemixSubmitted(false);
       setIsDayHydrating(false);
     }
 
@@ -235,6 +237,12 @@ export function TodayPage({
     if (currentStep === 'patterns') return getPatternsCompletion(day.patternIds, practicedPatternIds);
     if (currentStep === 'drills') return getDrillsCompletion(drillExercises.map((exercise) => exercise.id), drillAnswers);
     if (currentStep === 'translate') return getTranslationCompletion(translationExercises.map((exercise) => exercise.id), translationDrafts);
+    if (currentStep === 'scene-remix') {
+      if (!remixTask) return { isComplete: true, missingRequirements: [] };
+      return isSceneRemixSubmitted
+        ? { isComplete: true, missingRequirements: [] }
+        : { isComplete: false, missingRequirements: ['Submit the scene remix.'] };
+    }
     if (currentStep === 'picture') {
       if (!pictureTask) return { isComplete: true, missingRequirements: [] };
       return pictureDescriptionDraft.checkedAt
@@ -257,6 +265,8 @@ export function TodayPage({
     translationDrafts,
     outputDraft,
     sceneGoal,
+    remixTask,
+    isSceneRemixSubmitted,
     pictureTask,
     pictureDescriptionDraft.checkedAt,
   ]);
@@ -428,6 +438,7 @@ export function TodayPage({
       setActiveReviewItems(await repository.listReviewItems('active'));
       onProgressChange?.();
     }
+    setIsSceneRemixSubmitted(true);
   };
 
   const moveNext = async () => {
@@ -542,6 +553,15 @@ export function TodayPage({
             {currentStep === 'translate' && (
               <TranslationTask exercises={translationExercises} drafts={translationDrafts} onDraftChange={handleTranslationDraftChange} />
             )}
+            {currentStep === 'scene-remix' &&
+              (remixTask ? (
+                <SceneRemixCard task={remixTask} title="Scene Remix" onSubmit={(result) => handleSceneRemixSubmit(remixTask, result)} />
+              ) : (
+                <section>
+                  <h3>Scene Remix</h3>
+                  <p>No scene remix task today.</p>
+                </section>
+              ))}
             {currentStep === 'picture' &&
               (pictureTask ? (
                 <PictureDescribeStep
@@ -571,8 +591,6 @@ export function TodayPage({
                 reviewCount={dayReviewCount}
                 nextDay={nextDay}
                 onStartNextDay={startNextDay}
-                remixTask={remixTask}
-                onSceneRemixSubmit={handleSceneRemixSubmit}
               />
             )}
           </>

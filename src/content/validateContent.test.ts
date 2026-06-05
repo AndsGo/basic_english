@@ -1,3 +1,6 @@
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { Course, SceneRemixTask, ScenarioCapability, ScenarioWeek } from '../domain/types';
 import { basicEnglishCourse } from './course';
@@ -285,7 +288,7 @@ describe('week1Course', () => {
 
 describe('basicEnglishCourse V1.2', () => {
   it('contains Week 1 and a complete Week 2', () => {
-    expect(basicEnglishCourse.weeks).toHaveLength(2);
+    expect(basicEnglishCourse.weeks.length).toBeGreaterThanOrEqual(2);
     expect(basicEnglishCourse.weeks[1]).toMatchObject({
       id: 'week-02',
       number: 2,
@@ -304,6 +307,77 @@ describe('basicEnglishCourse V1.2', () => {
 
   it('validates the combined course content', () => {
     expect(validateCourseContent(basicEnglishCourse).errors).toEqual([]);
+  });
+
+  it('includes playable Week 3 and Week 4 content for V1.9', () => {
+    const result = validateCourseContent(basicEnglishCourse);
+
+    expect(result.errors).toEqual([]);
+    expect(basicEnglishCourse.weeks).toHaveLength(4);
+    expect(basicEnglishCourse.weeks.map((week) => week.days.length)).toEqual([7, 7, 7, 7]);
+    expect(basicEnglishCourse.weeks[2]).toMatchObject({
+      id: 'week-03',
+      number: 3,
+      title: 'Daily Routine & Time',
+    });
+    expect(basicEnglishCourse.weeks[3]).toMatchObject({
+      id: 'week-04',
+      number: 4,
+      title: 'Food, Shopping & Needs',
+    });
+    expect(basicEnglishCourse.weeks[2].days[0]).toMatchObject({ id: 'day-015', dayNumber: 15 });
+    expect(basicEnglishCourse.weeks[3].days[6]).toMatchObject({ id: 'day-028', dayNumber: 28 });
+  });
+
+  it('gives every Week 3 and Week 4 day a complete Today content set', () => {
+    const newDays = basicEnglishCourse.weeks.slice(2).flatMap((week) => week.days);
+
+    expect(newDays.map((day) => day.id)).toEqual([
+      'day-015',
+      'day-016',
+      'day-017',
+      'day-018',
+      'day-019',
+      'day-020',
+      'day-021',
+      'day-022',
+      'day-023',
+      'day-024',
+      'day-025',
+      'day-026',
+      'day-027',
+      'day-028',
+    ]);
+
+    for (const day of newDays) {
+      const translationCount = day.exercises.filter((exercise) => exercise.type === 'translation').length;
+
+      expect(day.wordIds.length, `${day.id} word count`).toBeGreaterThanOrEqual(6);
+      expect(day.patternIds.length, `${day.id} pattern count`).toBeGreaterThanOrEqual(1);
+      expect(day.exercises.length, `${day.id} exercise count`).toBeGreaterThanOrEqual(5);
+      expect(translationCount, `${day.id} translation count`).toBeGreaterThanOrEqual(1);
+      expect(day.outputTask.requiredSentenceCount, `${day.id} output sentences`).toBeGreaterThanOrEqual(4);
+      expect(sceneRemixTasksByDayId[day.id]?.length, `${day.id} remix task`).toBeGreaterThanOrEqual(1);
+      expect(pictureDescribeTasksByDayId[day.id], `${day.id} picture task`).toBeDefined();
+    }
+  });
+
+  it('adds image-backed flashcards for every Week 3 and Week 4 word', () => {
+    const newWords = basicEnglishCourse.words.filter((word) => word.weekIntroduced === 3 || word.weekIntroduced === 4);
+
+    expect(newWords.length).toBeGreaterThanOrEqual(70);
+
+    for (const word of newWords) {
+      expect(wordFlashcardImages[word.id], `${word.id} image`).toBeDefined();
+      expect(wordImageVisualStyleByWordId[word.id], `${word.id} visual style`).toBeDefined();
+    }
+  });
+
+  it('keeps Day 28 as the course completion day', () => {
+    const allDays = basicEnglishCourse.weeks.flatMap((week) => week.days);
+
+    expect(allDays.at(-1)?.id).toBe('day-028');
+    expect(allDays.at(-1)?.weeklyCheckRubric).toBeDefined();
   });
 
   it('keeps Week 2 learner-facing sentences within taught beginner language', () => {
@@ -388,6 +462,23 @@ describe('basicEnglishCourse V1.2', () => {
 
     expect(nonGrammarWithEnglishLabels).toEqual([]);
     expect(grammarWithoutEnglishLabels).toEqual([]);
+  });
+
+  it('uses distinct image files for Week 3 and Week 4 flashcards', () => {
+    const newWordIds = new Set(
+      basicEnglishCourse.words.filter((word) => word.weekIntroduced === 3 || word.weekIntroduced === 4).map((word) => word.id),
+    );
+    const hashesByWordId = wordImageAssets
+      .filter((asset) => newWordIds.has(asset.wordId))
+      .map((asset) => {
+        const bytes = readFileSync(join(process.cwd(), 'src', 'assets', 'word-flashcards', `${asset.wordId}.png`));
+        return [asset.wordId, createHash('sha256').update(bytes).digest('hex')] as const;
+      });
+    const duplicateWordIds = hashesByWordId
+      .filter(([_wordId, hash], index) => hashesByWordId.findIndex(([_otherWordId, otherHash]) => otherHash === hash) !== index)
+      .map(([wordId]) => wordId);
+
+    expect(duplicateWordIds).toEqual([]);
   });
 });
 
@@ -500,8 +591,13 @@ describe('scenario capabilities', () => {
 describe('scene goals', () => {
   it('validates scene goals for existing playable days', () => {
     const result = validateSceneGoals(sceneGoalsByDayId, basicEnglishCourse);
+    const weekThreeAndFourDayIds = basicEnglishCourse.weeks
+      .slice(2, 4)
+      .flatMap((week) => week.days.map((day) => day.id));
 
-    expect(Object.keys(sceneGoalsByDayId)).toEqual(['day-001', 'day-008', 'day-009', 'day-010']);
+    expect(Object.keys(sceneGoalsByDayId)).toEqual(
+      expect.arrayContaining(['day-001', 'day-008', 'day-009', 'day-010', ...weekThreeAndFourDayIds]),
+    );
     expect(result.errors).toEqual([]);
   });
 
@@ -714,10 +810,10 @@ describe('scene remix tasks', () => {
 });
 
 describe('picture describe tasks', () => {
-  it('has one task for every Week 1 and Week 2 day', () => {
-    const firstTwoWeekDayIds = basicEnglishCourse.weeks.slice(0, 2).flatMap((week) => week.days.map((day) => day.id));
+  it('has one task for every playable course day', () => {
+    const playableDayIds = basicEnglishCourse.weeks.flatMap((week) => week.days.map((day) => day.id));
 
-    expect(Object.keys(pictureDescribeTasksByDayId).sort()).toEqual([...firstTwoWeekDayIds].sort());
+    expect(Object.keys(pictureDescribeTasksByDayId).sort()).toEqual([...playableDayIds].sort());
   });
 
   it('uses complete English-first task data', () => {
@@ -728,8 +824,15 @@ describe('picture describe tasks', () => {
       expect(task.image).toMatch(/\S/);
       expect(task.targetWords.length).toBeGreaterThanOrEqual(3);
       expect(task.suggestedPatterns.length).toBeGreaterThanOrEqual(2);
-      expect(task.requiredSentenceCount).toBe(3);
-      expect(task.simpleVersion).toHaveLength(3);
+      const dayNumber = Number(dayId.replace('day-', ''));
+      if (dayNumber >= 15) {
+        expect(task.requiredSentenceCount).toBeGreaterThanOrEqual(4);
+        expect(task.simpleVersion.length).toBeGreaterThanOrEqual(4);
+      } else {
+        expect(task.requiredSentenceCount).toBe(3);
+        expect(task.simpleVersion).toHaveLength(3);
+      }
+      expect(task.simpleVersion).toHaveLength(task.requiredSentenceCount);
     }
   });
 });

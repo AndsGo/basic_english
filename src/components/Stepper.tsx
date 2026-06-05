@@ -6,6 +6,7 @@ const stepLabels: Record<StepId, string> = {
   patterns: 'Patterns',
   drills: 'Drills',
   translate: 'Translate',
+  'scene-remix': 'Scene Remix',
   picture: 'Picture',
   output: 'Output',
   done: 'Done',
