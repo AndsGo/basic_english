@@ -7,6 +7,8 @@ import { CoursePage } from './CoursePage';
 afterEach(() => cleanup());
 
 describe('CoursePage', () => {
+  const allBasicEnglishDays = basicEnglishCourse.weeks.flatMap((week) => week.days);
+
   it('shows week progress, review count, and course day states', () => {
     render(
       <CoursePage
@@ -90,5 +92,47 @@ describe('CoursePage', () => {
     expect(day1Card).not.toBeNull();
     expect(within(day1Card!).getByText('Completed')).toBeInTheDocument();
     expect(within(day1Card!).queryByRole('button')).not.toBeInTheDocument();
+  });
+
+  it('makes Day 42 current after the first 41 days are complete', () => {
+    const completedThroughDay41 = allBasicEnglishDays.filter((day) => day.dayNumber < 42).map((day) => day.id);
+
+    render(
+      <CoursePage
+        course={basicEnglishCourse}
+        completedDayIds={completedThroughDay41}
+        activeReviewDayIds={[]}
+        reviewCount={0}
+        onStartDay={vi.fn()}
+      />,
+    );
+
+    expect(screen.getAllByText('7 / 7 days completed')).toHaveLength(5);
+    expect(screen.getByText('6 / 7 days completed')).toBeInTheDocument();
+
+    const day42Card = screen.getByText('Day 42: Week 6 Check').closest('article');
+    expect(day42Card).not.toBeNull();
+    expect(within(day42Card!).getByText('Current')).toBeInTheDocument();
+    expect(within(day42Card!).getByRole('button', { name: 'Open Today' })).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: 'Open Today' })).toHaveLength(1);
+  });
+
+  it('shows all six weeks complete after Day 42 is complete', () => {
+    render(
+      <CoursePage
+        course={basicEnglishCourse}
+        completedDayIds={allBasicEnglishDays.map((day) => day.id)}
+        activeReviewDayIds={[]}
+        reviewCount={0}
+        onStartDay={vi.fn()}
+      />,
+    );
+
+    expect(screen.getAllByText('7 / 7 days completed')).toHaveLength(6);
+    expect(screen.queryByRole('button', { name: 'Open Today' })).not.toBeInTheDocument();
+
+    const day42Card = screen.getByText('Day 42: Week 6 Check').closest('article');
+    expect(day42Card).not.toBeNull();
+    expect(within(day42Card!).getByText('Completed')).toBeInTheDocument();
   });
 });

@@ -1,4 +1,4 @@
-import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ReactNode } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -186,6 +186,13 @@ function inProgressDayProgress(dayId: string, contentVersion: string, currentSte
     updatedAt: '2026-05-26T00:10:00.000Z',
     contentVersion,
   };
+}
+
+function completedProgressBeforeDay(dayNumber: number) {
+  return basicEnglishCourse.weeks
+    .flatMap((week) => week.days)
+    .filter((courseDay) => courseDay.dayNumber < dayNumber)
+    .map((courseDay) => completedDayProgress(courseDay.id, basicEnglishCourse.contentVersion));
 }
 
 function renderWithSpeech(children: ReactNode) {
@@ -589,6 +596,78 @@ describe('TodayPage', () => {
     expect(screen.getByText(/Week 4 \/ Day 22/i)).toBeInTheDocument();
     expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Scene Remix');
     expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Output');
+  });
+
+  it('renders the Week 5 Day 29 Today story sentence flow', async () => {
+    const day29 = basicEnglishCourse.weeks.flatMap((week) => week.days).find((courseDay) => courseDay.id === 'day-029');
+    if (!day29) throw new Error('Day 29 test content is missing.');
+    const repository = createTestRepository({
+      dayProgress: [
+        ...completedProgressBeforeDay(29),
+        inProgressDayProgress(day29.id, basicEnglishCourse.contentVersion, 'output'),
+      ],
+    });
+
+    renderWithSpeech(
+      <TodayPage
+        course={basicEnglishCourse}
+        repository={repository}
+        sceneRemixTasksByDayId={sceneRemixTasksByDayId}
+        pictureDescribeTasksByDayId={pictureDescribeTasksByDayId}
+      />,
+    );
+
+    expect(await screen.findByRole('heading', { level: 2, name: day29.title })).toBeInTheDocument();
+    expect(screen.getByText(/Week 5 \/ Day 29/i)).toBeInTheDocument();
+    expect(screen.getByText('Today story sentence')).toBeInTheDocument();
+    expect(screen.getByText('Make a short story about going outside and stopping at a place.')).toBeInTheDocument();
+    const todaySteps = screen.getByRole('list', { name: 'Today steps' });
+    expect(todaySteps).toHaveTextContent('Picture');
+    expect(todaySteps).toHaveTextContent('Scene Remix');
+    expect(todaySteps).toHaveTextContent('Output');
+  });
+
+  it('renders the Week 6 Day 42 Today story recap flow', async () => {
+    const day42 = basicEnglishCourse.weeks.flatMap((week) => week.days).find((courseDay) => courseDay.id === 'day-042');
+    if (!day42) throw new Error('Day 42 test content is missing.');
+    const repository = createTestRepository({
+      dayProgress: [
+        ...completedProgressBeforeDay(42),
+        inProgressDayProgress(day42.id, basicEnglishCourse.contentVersion, 'output'),
+      ],
+    });
+
+    renderWithSpeech(
+      <TodayPage
+        course={basicEnglishCourse}
+        repository={repository}
+        sceneRemixTasksByDayId={sceneRemixTasksByDayId}
+        pictureDescribeTasksByDayId={pictureDescribeTasksByDayId}
+      />,
+    );
+
+    expect(await screen.findByRole('heading', { level: 2, name: day42.title })).toBeInTheDocument();
+    expect(screen.getByText(/Week 6 \/ Day 42/i)).toBeInTheDocument();
+    expect(screen.getByText('Story recap')).toBeInTheDocument();
+    expect(
+      screen.getByText('Make a full story about a problem outside, asking for another way, understanding, and being kind.'),
+    ).toBeInTheDocument();
+    const outputTemplate = screen.getByLabelText('Output template');
+    const templateLines = within(outputTemplate)
+      .getAllByText((_, element) => element?.tagName.toLowerCase() === 'code')
+      .map((element) => element.textContent);
+    expect(templateLines).toEqual([
+      'The way is not clear.',
+      'This way is wrong.',
+      'I need another way.',
+      'Please repeat.',
+      'I understand.',
+      'I am kind.',
+    ]);
+    const todaySteps = screen.getByRole('list', { name: 'Today steps' });
+    expect(todaySteps).toHaveTextContent('Picture');
+    expect(todaySteps).toHaveTextContent('Scene Remix');
+    expect(todaySteps).toHaveTextContent('Output');
   });
 
   it('shows Day 2 after Day 1 is completed', async () => {
