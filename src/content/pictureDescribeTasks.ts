@@ -33,10 +33,10 @@ import day032Image from '../assets/picture-describe/day-032-finding-things-in-st
 import day033Image from '../assets/picture-describe/day-033-waiting-and-paying.png';
 import day034Image from '../assets/picture-describe/day-034-coming-back-home.png';
 import day035Image from '../assets/picture-describe/day-035-errand-story-recap.png';
-import day036Image from '../assets/picture-describe/day-036-asking-the-way.png';
-import day037Image from '../assets/picture-describe/day-037-late-bus-time-problem.png';
-import day038Image from '../assets/picture-describe/day-038-store-does-not-have-it.png';
-import day039Image from '../assets/picture-describe/day-039-not-enough-money.png';
+import day036Image from '../assets/picture-describe/day-036-early-and-late-bus.png';
+import day037Image from '../assets/picture-describe/day-037-no-clear-way.png';
+import day038Image from '../assets/picture-describe/day-038-wrong-way.png';
+import day039Image from '../assets/picture-describe/day-039-please-repeat.png';
 import day040Image from '../assets/picture-describe/day-040-ask-again.png';
 import day041Image from '../assets/picture-describe/day-041-polite-help.png';
 import day042Image from '../assets/picture-describe/day-042-problem-story-recap.png';
@@ -436,7 +436,7 @@ export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = 
     ],
   },
   'day-036': {
-    id: 'picture-day-036-asking-the-way',
+    id: 'picture-day-036-early-and-late-bus',
     dayId: 'day-036',
     title: 'Early and Late Bus',
     goal: 'Say early, late, waiting, bus, and time.',
@@ -447,7 +447,7 @@ export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = 
     simpleVersion: ['I am early.', 'I am late.', 'I am waiting for the bus.', 'The bus is late.'],
   },
   'day-037': {
-    id: 'picture-day-037-late-bus-time-problem',
+    id: 'picture-day-037-no-clear-way',
     dayId: 'day-037',
     title: 'No Clear Way',
     goal: 'Say the way is not clear and you need help.',
@@ -458,7 +458,7 @@ export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = 
     simpleVersion: ['The way is not clear.', 'I need another way.', 'Please help me.', 'The way is clear.'],
   },
   'day-038': {
-    id: 'picture-day-038-store-does-not-have-it',
+    id: 'picture-day-038-wrong-way',
     dayId: 'day-038',
     title: 'Wrong Way',
     goal: 'Say this way is wrong and take another way.',
@@ -469,7 +469,7 @@ export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = 
     simpleVersion: ['This way is wrong.', 'I need another way.', 'I go straight.', 'I turn left.'],
   },
   'day-039': {
-    id: 'picture-day-039-not-enough-money',
+    id: 'picture-day-039-please-repeat',
     dayId: 'day-039',
     title: 'Please Repeat',
     goal: 'Ask for repeat in a help talk.',

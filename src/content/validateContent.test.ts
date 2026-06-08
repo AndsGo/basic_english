@@ -1287,4 +1287,12 @@ describe('picture describe tasks', () => {
       expect(task.simpleVersion).toHaveLength(task.requiredSentenceCount);
     }
   });
+
+  it('keeps Week 6 problem-story picture assets aligned with task topics', () => {
+    expect(pictureDescribeTasksByDayId['day-036'].image).toContain('day-036-early-and-late-bus');
+    expect(pictureDescribeTasksByDayId['day-037'].image).toContain('day-037-no-clear-way');
+    expect(pictureDescribeTasksByDayId['day-038'].image).toContain('day-038-wrong-way');
+    expect(pictureDescribeTasksByDayId['day-039'].image).toContain('day-039-please-repeat');
+    expect(pictureDescribeTasksByDayId['day-042'].image).toContain('day-042-problem-story-recap');
+  });
 });
