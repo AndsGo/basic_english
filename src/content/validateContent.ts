@@ -8,6 +8,7 @@ import type {
   ScenarioWeek,
   WeeklyCheckRubric,
 } from '../domain/types';
+import { validateBasicEnglishVocabulary } from './basicEnglish850';
 
 export interface ValidationResult {
   errors: string[];
@@ -116,6 +117,8 @@ export function validateCourseContent(course: Course): ValidationResult {
   if (mojibakePattern.test(JSON.stringify(course))) {
     errors.push('Content contains invalid Chinese text or mojibake');
   }
+
+  errors.push(...validateBasicEnglishVocabulary(course));
 
   return { errors };
 }

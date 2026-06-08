@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { Course, SceneRemixTask, ScenarioCapability, ScenarioWeek } from '../domain/types';
+import { validateBasicEnglishVocabulary } from './basicEnglish850';
 import { basicEnglishCourse } from './course';
 import { pictureDescribeTasksByDayId } from './pictureDescribeTasks';
 import { scenarioCapabilities, scenarioWeekMap } from './scenarioCapabilities';
@@ -479,6 +480,106 @@ describe('basicEnglishCourse V1.2', () => {
       .map(([wordId]) => wordId);
 
     expect(duplicateWordIds).toEqual([]);
+  });
+});
+
+describe('Basic English 850 validation', () => {
+  function cloneBasicEnglishCourse(): Course {
+    return structuredClone(basicEnglishCourse);
+  }
+
+  it('validates the existing shipped basicEnglishCourse', () => {
+    expect(validateBasicEnglishVocabulary(basicEnglishCourse)).toEqual([]);
+  });
+
+  it('reports a non-Basic English word added as course word text', () => {
+    const course = cloneBasicEnglishCourse();
+    course.words.push({
+      ...course.words[0],
+      id: 'airport',
+      text: 'airport',
+    });
+
+    expect(validateBasicEnglishVocabulary(course)).toContain('Non-Basic English word "airport" in word airport text');
+  });
+
+  it('reports non-Basic English words in word examples and output templates', () => {
+    const course = cloneBasicEnglishCourse();
+    course.words[0].example = 'I visit a museum.';
+    course.weeks[0].days[0].outputTask.template[0] = 'I visit a museum.';
+
+    expect(validateBasicEnglishVocabulary(course)).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "visit" in word name example',
+        'Non-Basic English word "museum" in word name example',
+        'Non-Basic English word "visit" in day-001 output template',
+        'Non-Basic English word "museum" in day-001 output template',
+      ]),
+    );
+  });
+
+  it('reports non-Basic English words in pattern use text', () => {
+    const course = cloneBasicEnglishCourse();
+    course.patterns[0].use = 'Use museum language.';
+
+    expect(validateBasicEnglishVocabulary(course)).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "museum" in pattern my-name-is use',
+      ]),
+    );
+  });
+
+  it('allows simple inflections from Basic English base words', () => {
+    const course = cloneBasicEnglishCourse();
+    course.words[0].example = 'I walked home.';
+    course.words[1].example = 'I am walking home.';
+    course.words[2].example = 'I have books.';
+
+    expect(validateBasicEnglishVocabulary(course)).toEqual([]);
+  });
+
+  it('allows doubled-consonant inflections from Basic English base words', () => {
+    const course = cloneBasicEnglishCourse();
+    course.words[0].example = 'I am running.';
+    course.words[1].example = 'I stopped here.';
+    course.words[2].example = 'I am swimming.';
+    course.patterns[0].examples = ['I am getting a book.'];
+    course.weeks[0].days[0].outputTask.template[0] = 'I am putting a book here.';
+
+    expect(validateBasicEnglishVocabulary(course)).toEqual([]);
+  });
+
+  it('splits common contractions without reporting contraction fragments', () => {
+    const course = cloneBasicEnglishCourse();
+    course.words[0].example = "I'm here. I don't have books.";
+
+    const errors = validateBasicEnglishVocabulary(course);
+
+    expect(errors).toEqual([]);
+    expect(errors).not.toEqual(expect.arrayContaining([
+      expect.stringContaining('"m"'),
+      expect.stringContaining('"don"'),
+      expect.stringContaining('"t"'),
+    ]));
+  });
+
+  it("splits common n't contractions into allowed helper words", () => {
+    const course = cloneBasicEnglishCourse();
+    course.words[0].example = "It isn't here.";
+    course.words[1].example = "They aren't here.";
+    course.words[2].example = "I haven't books.";
+    course.patterns[0].examples = ["It doesn't have a name."];
+
+    const errors = validateBasicEnglishVocabulary(course);
+
+    expect(errors).toEqual([]);
+    expect(errors).not.toEqual(expect.arrayContaining([
+      expect.stringContaining('"isn"'),
+      expect.stringContaining('"aren"'),
+      expect.stringContaining('"haven"'),
+      expect.stringContaining('"doesn"'),
+      expect.stringContaining('"t"'),
+    ]));
   });
 });
 
