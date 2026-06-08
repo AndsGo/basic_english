@@ -119,6 +119,8 @@ export interface OutputTask {
   prompts: string[];
   template: string[];
   requiredSentenceCount: number;
+  storyMode?: 'sentence' | 'recap';
+  storyPrompt?: string;
 }
 
 export interface PictureDescribeTask {

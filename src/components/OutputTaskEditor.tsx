@@ -34,6 +34,12 @@ export function OutputTaskEditor({
   return (
     <section className="output-editor">
       <h3>{task.topic}</h3>
+      {task.storyMode ? (
+        <div className="story-guidance">
+          <strong>{task.storyMode === 'recap' ? 'Story recap' : 'Today story sentence'}</strong>
+          {task.storyPrompt ? <p>{task.storyPrompt}</p> : null}
+        </div>
+      ) : null}
       <div className="prompt-list">
         {task.prompts.map((prompt) => (
           <p key={prompt}>{prompt}</p>
