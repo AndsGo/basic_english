@@ -18,7 +18,21 @@ type SceneGoalDayId =
   | 'day-025'
   | 'day-026'
   | 'day-027'
-  | 'day-028';
+  | 'day-028'
+  | 'day-029'
+  | 'day-030'
+  | 'day-031'
+  | 'day-032'
+  | 'day-033'
+  | 'day-034'
+  | 'day-035'
+  | 'day-036'
+  | 'day-037'
+  | 'day-038'
+  | 'day-039'
+  | 'day-040'
+  | 'day-041'
+  | 'day-042';
 
 export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   'day-001': {
@@ -182,5 +196,131 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
     guidedPrompts: ['Say where you go.', 'Say what you buy.', 'Say what you need.', 'Ask politely.'],
     scenePrompt: 'Describe a simple meal and shopping scene.',
     dialoguePrompts: ['Ask and answer about food.', 'Ask and answer about help at a shop.'],
+  },
+  'day-029': {
+    id: 'getting-ready-to-go-out',
+    title: 'Getting Ready to Go Out',
+    capability: 'I can say how I get ready to go out.',
+    templates: ['I am ready.', 'I have my bag.', 'I have a list.', 'I go outside.'],
+    guidedPrompts: ['Say you are ready.', 'Say what you have.', 'Say what is on your list.', 'Say you go outside.'],
+    scenePrompt: 'Describe getting ready and going outside.',
+    dialoguePrompts: ['Ask and answer about being ready.', 'Ask and answer about the list.'],
+  },
+  'day-030': {
+    id: 'walking-to-the-bus-place',
+    title: 'Walking to the Bus Place',
+    capability: 'I can say how I walk to the bus place.',
+    templates: ['I walk on the road.', 'The bus place is near.', 'I am waiting for the bus.', 'The seat is here.'],
+    guidedPrompts: ['Say where you walk.', 'Say where the bus place is.', 'Say what you are waiting for.', 'Say where the seat is.'],
+    scenePrompt: 'Describe walking to the bus place and waiting.',
+    dialoguePrompts: ['Ask and answer about the bus place.', 'Ask and answer about waiting for the bus.'],
+  },
+  'day-031': {
+    id: 'taking-the-bus',
+    title: 'Taking the Bus',
+    capability: 'I can describe taking the bus.',
+    templates: ['I go by bus.', 'I am on the bus.', 'I am on a seat.', 'I get off at the store.'],
+    guidedPrompts: ['Say how you go.', 'Say where you are.', 'Say where your seat is.', 'Say where you get off.'],
+    scenePrompt: 'Describe taking the bus to the store.',
+    dialoguePrompts: ['Ask and answer about going by bus.', 'Ask and answer about the seat.'],
+  },
+  'day-032': {
+    id: 'finding-things-in-store',
+    title: 'Finding Things in the Store',
+    capability: 'I can find things in a store.',
+    templates: ['I am in the store.', 'I find bread.', 'I find milk.', 'The thing is here.'],
+    guidedPrompts: ['Say where you are.', 'Say one thing you find.', 'Say another thing you find.', 'Say where the thing is.'],
+    scenePrompt: 'Describe finding things in a store.',
+    dialoguePrompts: ['Ask and answer about one thing in the store.', 'Ask and answer where a thing is.'],
+  },
+  'day-033': {
+    id: 'waiting-and-paying',
+    title: 'Waiting and Paying',
+    capability: 'I can be in line and pay in a store.',
+    templates: ['I am in line.', 'I am waiting in line.', 'I pay for food.', 'I get change.'],
+    guidedPrompts: ['Say where you are.', 'Say you are waiting in line.', 'Say what you pay for.', 'Say what you get.'],
+    scenePrompt: 'Describe waiting and paying in a store.',
+    dialoguePrompts: ['Ask and answer about the line.', 'Ask and answer about paying.'],
+  },
+  'day-034': {
+    id: 'coming-back-home',
+    title: 'Coming Back Home',
+    capability: 'I can say how I come back home.',
+    templates: ['I carry my bag.', 'The bag is light.', 'I go back home.', 'I put food on the table.'],
+    guidedPrompts: ['Say what you carry.', 'Say if the bag is light.', 'Say where you go back.', 'Say where you put the food.'],
+    scenePrompt: 'Describe coming back home with things.',
+    dialoguePrompts: ['Ask and answer about the bag.', 'Ask and answer about going back home.'],
+  },
+  'day-035': {
+    id: 'errand-story-recap',
+    title: 'Going Out Story',
+    capability: 'I can tell an outside story.',
+    templates: ['I go outside with my list.', 'I take the bus.', 'I buy food at the store.', 'I go back home.'],
+    guidedPrompts: ['Say how the story starts.', 'Say how you go.', 'Say what you buy.', 'Say how the story ends.'],
+    scenePrompt: 'Tell a simple outside story from home to the store and back home.',
+    dialoguePrompts: ['Ask and answer about the outside story.', 'Ask and answer what comes first and last.'],
+  },
+  'day-036': {
+    id: 'asking-the-way',
+    title: 'Asking the Way',
+    capability: 'I can ask the way outside.',
+    templates: ['Excuse me.', 'Where is the store?', 'Is this the way?', 'Please show me the way.'],
+    guidedPrompts: ['Use kind opening words.', 'Ask where the store is.', 'Ask if this is the way.', 'Ask a person to show the way.'],
+    scenePrompt: 'Ask another person for the way outside.',
+    dialoguePrompts: ['Ask and answer where the store is.', 'Ask and answer about the way.'],
+  },
+  'day-037': {
+    id: 'late-bus-time-problem',
+    title: 'Late Bus and Time Problem',
+    capability: 'I can say a bus and time problem.',
+    templates: ['The bus is late.', 'I am waiting for the bus.', 'I am late.', 'I need help.'],
+    guidedPrompts: ['Say the bus problem.', 'Say what you are waiting for.', 'Say your time problem.', 'Ask for help.'],
+    scenePrompt: 'Describe a late bus and time problem.',
+    dialoguePrompts: ['Ask and answer about the bus.', 'Ask and answer about being late.'],
+  },
+  'day-038': {
+    id: 'store-does-not-have-it',
+    title: 'The Store Does Not Have It',
+    capability: 'I can say the store does not have a thing.',
+    templates: ['I need bread.', 'The store does not have it.', 'I need another thing.', 'Please help me.'],
+    guidedPrompts: ['Say what you need.', 'Say the store does not have it.', 'Say another thing you need.', 'Ask for help.'],
+    scenePrompt: 'Describe a store problem when the thing is not there.',
+    dialoguePrompts: ['Ask and answer about what you need.', 'Ask and answer about another thing.'],
+  },
+  'day-039': {
+    id: 'not-enough-money',
+    title: 'Not Enough Money',
+    capability: 'I can say I do not have enough money.',
+    templates: ['I have money.', 'The price is much.', 'I do not have enough money.', 'I buy less food.'],
+    guidedPrompts: ['Say what you have.', 'Say the price problem.', 'Say the money problem.', 'Say what you do next.'],
+    scenePrompt: 'Describe a money problem in a store.',
+    dialoguePrompts: ['Ask and answer about the price.', 'Ask and answer about enough money.'],
+  },
+  'day-040': {
+    id: 'ask-again',
+    title: 'Ask Again',
+    capability: 'I can ask again when I do not understand.',
+    templates: ['I do not understand.', 'Please repeat.', 'Say it again, please.', 'I understand now.'],
+    guidedPrompts: ['Say you do not understand.', 'Ask the person to repeat.', 'Ask again with please.', 'Say you understand now.'],
+    scenePrompt: 'Ask again in a simple help talk.',
+    dialoguePrompts: ['Ask and answer with please repeat.', 'Ask and answer when something is not clear.'],
+  },
+  'day-041': {
+    id: 'polite-help',
+    title: 'Kind Help',
+    capability: 'I can use kind words when I need help.',
+    templates: ['Excuse me.', 'I am sorry.', 'Please help me.', 'You are kind.'],
+    guidedPrompts: ['Start with kind words.', 'Say sorry.', 'Ask for help.', 'Say the person is kind.'],
+    scenePrompt: 'Use kind words to ask for help outside.',
+    dialoguePrompts: ['Ask and answer with excuse me.', 'Ask and answer with please and kind words.'],
+  },
+  'day-042': {
+    id: 'problem-story-recap',
+    title: 'Problem Story',
+    capability: 'I can tell a simple outside problem story.',
+    templates: ['The way is not clear.', 'The bus is late.', 'I ask for help.', 'I go back home.'],
+    guidedPrompts: ['Say the way problem.', 'Say the bus problem.', 'Say how you ask for help.', 'Say how the story ends.'],
+    scenePrompt: 'Tell a simple outside problem story with kind words.',
+    dialoguePrompts: ['Ask and answer about the problem.', 'Ask and answer about the help.'],
   },
 };

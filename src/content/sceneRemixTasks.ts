@@ -195,4 +195,128 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
       referenceAnswers: ['I need more water.', 'The food is good.'],
     },
   ],
+  'day-029': [
+    {
+      id: 'day-029-remix-food-water',
+      type: 'replace',
+      prompt: 'Change food to water.',
+      source: 'I go out because I need food.',
+      referenceAnswers: ['I go out because I need water.'],
+    },
+  ],
+  'day-030': [
+    {
+      id: 'day-030-remix-stop-store',
+      type: 'replace',
+      prompt: 'Change bus stop to store.',
+      source: 'I walk to the bus stop.',
+      referenceAnswers: ['I walk to the store.'],
+    },
+  ],
+  'day-031': [
+    {
+      id: 'day-031-remix-store-home',
+      type: 'replace',
+      prompt: 'Change store to home.',
+      source: 'I take the bus to the store.',
+      referenceAnswers: ['I take the bus home.'],
+    },
+  ],
+  'day-032': [
+    {
+      id: 'day-032-remix-bread-milk',
+      type: 'replace',
+      prompt: 'Change bread to milk.',
+      source: 'I find bread in the store.',
+      referenceAnswers: ['I find milk in the store.'],
+    },
+  ],
+  'day-033': [
+    {
+      id: 'day-033-remix-food-bread',
+      type: 'replace',
+      prompt: 'Change food to bread.',
+      source: 'I am in line and pay for food.',
+      referenceAnswers: ['I am in line and pay for bread.'],
+    },
+  ],
+  'day-034': [
+    {
+      id: 'day-034-remix-food-bag',
+      type: 'replace',
+      prompt: 'Change food to bag.',
+      source: 'I carry food home.',
+      referenceAnswers: ['I carry the bag home.'],
+    },
+  ],
+  'day-035': [
+    {
+      id: 'day-035-remix-errand-story',
+      type: 'extend',
+      prompt: 'Put more sentences in the outside story.',
+      referenceAnswers: ['I am in line.', 'I come back home.'],
+    },
+  ],
+  'day-036': [
+    {
+      id: 'day-036-remix-left-right',
+      type: 'replace',
+      prompt: 'Change left to right.',
+      source: 'Go left.',
+      referenceAnswers: ['Go right.'],
+    },
+  ],
+  'day-037': [
+    {
+      id: 'day-037-remix-bus-time',
+      type: 'replace',
+      prompt: 'Change bus to time.',
+      source: 'I need the bus.',
+      referenceAnswers: ['I need more time.'],
+    },
+  ],
+  'day-038': [
+    {
+      id: 'day-038-remix-bread-cup',
+      type: 'replace',
+      prompt: 'Change bread to cup.',
+      source: 'I can not find bread.',
+      referenceAnswers: ['I can not find a cup.'],
+    },
+  ],
+  'day-039': [
+    {
+      id: 'day-039-remix-money-time',
+      type: 'replace',
+      prompt: 'Change money to time.',
+      source: 'I do not have enough money.',
+      referenceAnswers: ['I do not have enough time.'],
+    },
+  ],
+  'day-040': [
+    {
+      id: 'day-040-remix-understand-hear',
+      type: 'replace',
+      prompt: 'Change understand to get the answer.',
+      source: 'I do not understand.',
+      referenceAnswers: ['I do not get the answer.'],
+    },
+  ],
+  'day-041': [
+    {
+      id: 'day-041-remix-help-answer',
+      type: 'replace',
+      prompt: 'Change help to answer.',
+      source: 'I am kind and ask for help.',
+      referenceAnswers: ['I am kind and ask for an answer.'],
+    },
+  ],
+  'day-042': [
+    {
+      id: 'day-042-remix-problem-story',
+      type: 'extend',
+      prompt: 'Put more sentences in the problem story.',
+      referenceAnswers: ['I ask for help.', 'I say please.'],
+    },
+  ],
 };

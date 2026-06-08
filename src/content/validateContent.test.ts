@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { Course, SceneRemixTask, ScenarioCapability, ScenarioWeek } from '../domain/types';
-import { validateBasicEnglishVocabulary } from './basicEnglish850';
+import { isAllowedBasicEnglishToken, tokenizeBasicEnglishText, validateBasicEnglishVocabulary } from './basicEnglish850';
 import { basicEnglishCourse } from './course';
 import { pictureDescribeTasksByDayId } from './pictureDescribeTasks';
 import { scenarioCapabilities, scenarioWeekMap } from './scenarioCapabilities';
@@ -27,6 +27,20 @@ import {
 
 function cloneCourse(): Course {
   return structuredClone(week1Course);
+}
+
+function validateBasicEnglishTexts(texts: Array<{ text: string; label: string }>): string[] {
+  const errors: string[] = [];
+
+  for (const { text, label } of texts) {
+    for (const token of tokenizeBasicEnglishText(text)) {
+      if (!isAllowedBasicEnglishToken(token)) {
+        errors.push(`Non-Basic English word "${token}" in ${label}`);
+      }
+    }
+  }
+
+  return [...new Set(errors)];
 }
 
 describe('week1Course', () => {
@@ -557,6 +571,47 @@ describe('Basic English 850 validation', () => {
     expect(validateBasicEnglishVocabulary(basicEnglishCourse)).toEqual([]);
   });
 
+  it('validates learner-facing scene goals and remix tasks', () => {
+    const taskFourDayIds = new Set(
+      basicEnglishCourse.weeks.slice(4, 6).flatMap((week) => week.days.map((day) => day.id)),
+    );
+    const scenarioWeekTexts = scenarioWeekMap
+      .filter((week) => week.weekNumber === 5 || week.weekNumber === 6)
+      .flatMap((week) => [
+        { text: week.theme, label: `scenario week ${week.weekNumber} theme` },
+        { text: week.expressionOutcome, label: `scenario week ${week.weekNumber} expression outcome` },
+      ]);
+    const scenarioCapabilityTexts = scenarioCapabilities
+      .filter((capability) => capability.id === 'errand-story' || capability.id === 'outside-problems')
+      .flatMap((capability) => [
+        { text: capability.title, label: `scenario capability ${capability.id} title` },
+        { text: capability.description, label: `scenario capability ${capability.id} description` },
+        ...capability.exampleOutputs.map((text, index) => ({
+          text,
+          label: `scenario capability ${capability.id} example ${index + 1}`,
+        })),
+      ]);
+    const sceneGoalTexts = Object.entries(sceneGoalsByDayId)
+      .filter(([dayId]) => taskFourDayIds.has(dayId))
+      .flatMap(([dayId, sceneGoal]) => [
+        { text: sceneGoal.title, label: `${dayId} scene goal title` },
+        { text: sceneGoal.capability, label: `${dayId} scene goal capability` },
+        ...sceneGoal.templates.map((text, index) => ({ text, label: `${dayId} scene goal template ${index + 1}` })),
+        ...sceneGoal.guidedPrompts.map((text, index) => ({ text, label: `${dayId} scene goal guided prompt ${index + 1}` })),
+        { text: sceneGoal.scenePrompt, label: `${dayId} scene goal scene prompt` },
+        ...sceneGoal.dialoguePrompts.map((text, index) => ({ text, label: `${dayId} scene goal dialogue prompt ${index + 1}` })),
+      ]);
+    const remixTaskTexts = Object.entries(sceneRemixTasksByDayId).flatMap(([dayId, tasks]) =>
+      taskFourDayIds.has(dayId) ? (tasks ?? []).flatMap((task) => [
+        { text: task.prompt, label: `${dayId} remix ${task.id} prompt` },
+        ...(task.source ? [{ text: task.source, label: `${dayId} remix ${task.id} source` }] : []),
+        ...task.referenceAnswers.map((text, index) => ({ text, label: `${dayId} remix ${task.id} reference ${index + 1}` })),
+      ]) : [],
+    );
+
+    expect(validateBasicEnglishTexts([...scenarioWeekTexts, ...scenarioCapabilityTexts, ...sceneGoalTexts, ...remixTaskTexts])).toEqual([]);
+  });
+
   it('reports a non-Basic English word added as course word text', () => {
     const course = cloneBasicEnglishCourse();
     course.words.push({
@@ -708,6 +763,35 @@ describe('scenario capabilities', () => {
     expect(validateScenarioCapabilities(scenarioCapabilities, basicEnglishCourse).errors).toEqual([]);
   });
 
+  it('includes Week 5 and Week 6 scenario capabilities', () => {
+    expect(scenarioWeekMap[4]).toEqual({
+      weekNumber: 5,
+      theme: 'Going Out Story',
+      expressionOutcome: 'Tell a complete going out story.',
+    });
+    expect(scenarioWeekMap[5]).toEqual({
+      weekNumber: 6,
+      theme: 'Problems Outside',
+      expressionOutcome: 'Describe outside problems and ask for help in a kind way.',
+    });
+    // Some examples use Basic English 850-compatible wording instead of written-plan wording.
+    expect(scenarioCapabilities.find((capability) => capability.id === 'errand-story')).toEqual({
+      id: 'errand-story',
+      title: 'I can tell a going out story.',
+      description: 'Tell how you go out, take a bus, buy things at a store, and come home.',
+      unlockedByDayIds: ['day-035'],
+      exampleOutputs: ['I go out with my list.', 'I take the bus.', 'I buy bread at the store.', 'I come home.'],
+    });
+    expect(scenarioCapabilities.find((capability) => capability.id === 'outside-problems')).toEqual({
+      id: 'outside-problems',
+      title: 'I can ask for help outside.',
+      description: 'Ask for help in a kind way when there is a problem outside.',
+      unlockedByDayIds: ['day-042'],
+      exampleOutputs: ['I have a problem outside.', 'Please help me.', 'I ask for help.', 'I am kind.'],
+    });
+    expect(validateScenarioCapabilities(scenarioCapabilities, basicEnglishCourse).errors).toEqual([]);
+  });
+
   it('rejects duplicate or empty capability ids and missing metadata', () => {
     const capabilities = [
       scenarioCapability({ id: '', title: ' ', description: 'Description' }),
@@ -757,13 +841,16 @@ describe('scenario capabilities', () => {
 describe('scene goals', () => {
   it('validates scene goals for existing playable days', () => {
     const result = validateSceneGoals(sceneGoalsByDayId, basicEnglishCourse);
-    const weekThreeAndFourDayIds = basicEnglishCourse.weeks
-      .slice(2, 4)
+    const weekThreeThroughSixDayIds = basicEnglishCourse.weeks
+      .slice(2, 6)
       .flatMap((week) => week.days.map((day) => day.id));
 
     expect(Object.keys(sceneGoalsByDayId)).toEqual(
-      expect.arrayContaining(['day-001', 'day-008', 'day-009', 'day-010', ...weekThreeAndFourDayIds]),
+      expect.arrayContaining(['day-001', 'day-008', 'day-009', 'day-010', ...weekThreeThroughSixDayIds]),
     );
+    expect(sceneGoalsByDayId['day-035'].title).toBe('Going Out Story');
+    expect(sceneGoalsByDayId['day-041'].title).toBe('Kind Help');
+    expect(sceneGoalsByDayId['day-042'].title).toBe('Problem Story');
     expect(result.errors).toEqual([]);
   });
 
@@ -843,7 +930,141 @@ describe('scene goals', () => {
 describe('scene remix tasks', () => {
   it('validates shipped remix tasks', () => {
     const result = validateSceneRemixTasks(sceneRemixTasksByDayId, basicEnglishCourse);
+    const weekFiveAndSixDayIds = basicEnglishCourse.weeks
+      .slice(4, 6)
+      .flatMap((week) => week.days.map((day) => day.id));
+    // A few written-plan references use Basic English 850-compatible wording to avoid ride, wait, and thank.
+    const expectedWeekFiveAndSixTasks: Record<string, SceneRemixTask[]> = {
+      'day-029': [
+        {
+          id: 'day-029-remix-food-water',
+          type: 'replace',
+          prompt: 'Change food to water.',
+          source: 'I go out because I need food.',
+          referenceAnswers: ['I go out because I need water.'],
+        },
+      ],
+      'day-030': [
+        {
+          id: 'day-030-remix-stop-store',
+          type: 'replace',
+          prompt: 'Change bus stop to store.',
+          source: 'I walk to the bus stop.',
+          referenceAnswers: ['I walk to the store.'],
+        },
+      ],
+      'day-031': [
+        {
+          id: 'day-031-remix-store-home',
+          type: 'replace',
+          prompt: 'Change store to home.',
+          source: 'I take the bus to the store.',
+          referenceAnswers: ['I take the bus home.'],
+        },
+      ],
+      'day-032': [
+        {
+          id: 'day-032-remix-bread-milk',
+          type: 'replace',
+          prompt: 'Change bread to milk.',
+          source: 'I find bread in the store.',
+          referenceAnswers: ['I find milk in the store.'],
+        },
+      ],
+      'day-033': [
+        {
+          id: 'day-033-remix-food-bread',
+          type: 'replace',
+          prompt: 'Change food to bread.',
+          source: 'I am in line and pay for food.',
+          referenceAnswers: ['I am in line and pay for bread.'],
+        },
+      ],
+      'day-034': [
+        {
+          id: 'day-034-remix-food-bag',
+          type: 'replace',
+          prompt: 'Change food to bag.',
+          source: 'I carry food home.',
+          referenceAnswers: ['I carry the bag home.'],
+        },
+      ],
+      'day-035': [
+        {
+          id: 'day-035-remix-errand-story',
+          type: 'extend',
+          prompt: 'Put more sentences in the outside story.',
+          referenceAnswers: ['I am in line.', 'I come back home.'],
+        },
+      ],
+      'day-036': [
+        {
+          id: 'day-036-remix-left-right',
+          type: 'replace',
+          prompt: 'Change left to right.',
+          source: 'Go left.',
+          referenceAnswers: ['Go right.'],
+        },
+      ],
+      'day-037': [
+        {
+          id: 'day-037-remix-bus-time',
+          type: 'replace',
+          prompt: 'Change bus to time.',
+          source: 'I need the bus.',
+          referenceAnswers: ['I need more time.'],
+        },
+      ],
+      'day-038': [
+        {
+          id: 'day-038-remix-bread-cup',
+          type: 'replace',
+          prompt: 'Change bread to cup.',
+          source: 'I can not find bread.',
+          referenceAnswers: ['I can not find a cup.'],
+        },
+      ],
+      'day-039': [
+        {
+          id: 'day-039-remix-money-time',
+          type: 'replace',
+          prompt: 'Change money to time.',
+          source: 'I do not have enough money.',
+          referenceAnswers: ['I do not have enough time.'],
+        },
+      ],
+      'day-040': [
+        {
+          id: 'day-040-remix-understand-hear',
+          type: 'replace',
+          prompt: 'Change understand to get the answer.',
+          source: 'I do not understand.',
+          referenceAnswers: ['I do not get the answer.'],
+        },
+      ],
+      'day-041': [
+        {
+          id: 'day-041-remix-help-answer',
+          type: 'replace',
+          prompt: 'Change help to answer.',
+          source: 'I am kind and ask for help.',
+          referenceAnswers: ['I am kind and ask for an answer.'],
+        },
+      ],
+      'day-042': [
+        {
+          id: 'day-042-remix-problem-story',
+          type: 'extend',
+          prompt: 'Put more sentences in the problem story.',
+          referenceAnswers: ['I ask for help.', 'I say please.'],
+        },
+      ],
+    };
 
+    for (const dayId of weekFiveAndSixDayIds) {
+      expect(sceneRemixTasksByDayId[dayId]?.length, `${dayId} remix task`).toBeGreaterThanOrEqual(1);
+      expect(sceneRemixTasksByDayId[dayId], `${dayId} planned remix task`).toEqual(expectedWeekFiveAndSixTasks[dayId]);
+    }
     expect(result).toEqual([]);
   });
 
