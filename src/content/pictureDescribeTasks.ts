@@ -26,6 +26,20 @@ import day025Image from '../assets/picture-describe/day-025-money-and-price.png'
 import day026Image from '../assets/picture-describe/day-026-asking-for-help.png';
 import day027Image from '../assets/picture-describe/day-027-more-enough-good.png';
 import day028Image from '../assets/picture-describe/day-028-meal-shopping-check.png';
+import day029Image from '../assets/picture-describe/day-029-getting-ready-to-go-out.png';
+import day030Image from '../assets/picture-describe/day-030-walking-to-the-bus-place.png';
+import day031Image from '../assets/picture-describe/day-031-taking-the-bus.png';
+import day032Image from '../assets/picture-describe/day-032-finding-things-in-store.png';
+import day033Image from '../assets/picture-describe/day-033-waiting-and-paying.png';
+import day034Image from '../assets/picture-describe/day-034-coming-back-home.png';
+import day035Image from '../assets/picture-describe/day-035-errand-story-recap.png';
+import day036Image from '../assets/picture-describe/day-036-asking-the-way.png';
+import day037Image from '../assets/picture-describe/day-037-late-bus-time-problem.png';
+import day038Image from '../assets/picture-describe/day-038-store-does-not-have-it.png';
+import day039Image from '../assets/picture-describe/day-039-not-enough-money.png';
+import day040Image from '../assets/picture-describe/day-040-ask-again.png';
+import day041Image from '../assets/picture-describe/day-041-polite-help.png';
+import day042Image from '../assets/picture-describe/day-042-problem-story-recap.png';
 import type { PictureDescribeTask } from '../domain/types';
 
 export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = {
@@ -336,5 +350,173 @@ export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = 
     suggestedPatterns: ['I go to the shop.', 'I buy food.', 'Please help me.'],
     requiredSentenceCount: 4,
     simpleVersion: ['I go to the shop.', 'I buy food.', 'I need help.', 'Please help me.'],
+  },
+  'day-029': {
+    id: 'picture-day-029-getting-ready-to-go-out',
+    dayId: 'day-029',
+    title: 'Getting Ready to Go Out',
+    goal: 'Say how you get ready to go out.',
+    image: day029Image,
+    targetWords: ['ready', 'bag', 'list', 'outside'],
+    suggestedPatterns: ['I am ready.', 'I have my bag.', 'I go outside.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I am ready.', 'I have my bag.', 'I have a list.', 'I go outside.'],
+  },
+  'day-030': {
+    id: 'picture-day-030-walking-to-the-bus-place',
+    dayId: 'day-030',
+    title: 'Walking to the Bus Place',
+    goal: 'Say how you walk to the bus place.',
+    image: day030Image,
+    targetWords: ['walk', 'road', 'bus', 'seat'],
+    suggestedPatterns: ['I walk on the road.', 'The bus place is near.', 'I am waiting for the bus.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I walk on the road.', 'The bus place is near.', 'I am waiting for the bus.', 'The seat is here.'],
+  },
+  'day-031': {
+    id: 'picture-day-031-taking-the-bus',
+    dayId: 'day-031',
+    title: 'Taking the Bus',
+    goal: 'Describe taking the bus to the store.',
+    image: day031Image,
+    targetWords: ['go', 'bus', 'seat', 'store'],
+    suggestedPatterns: ['I go by bus.', 'I am on the bus.', 'I get off at the store.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I go by bus.', 'I am on the bus.', 'I am on a seat.', 'I get off at the store.'],
+  },
+  'day-032': {
+    id: 'picture-day-032-finding-things-in-store',
+    dayId: 'day-032',
+    title: 'Finding Things in the Store',
+    goal: 'Describe finding things in a store.',
+    image: day032Image,
+    targetWords: ['store', 'find', 'bread', 'milk'],
+    suggestedPatterns: ['I am in the store.', 'I find bread.', 'The thing is here.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I am in the store.', 'I find bread.', 'I find milk.', 'The thing is here.'],
+  },
+  'day-033': {
+    id: 'picture-day-033-waiting-and-paying',
+    dayId: 'day-033',
+    title: 'Waiting and Paying',
+    goal: 'Describe being in line and paying in a store.',
+    image: day033Image,
+    targetWords: ['line', 'waiting', 'pay', 'change'],
+    suggestedPatterns: ['I am in line.', 'I am waiting in line.', 'I pay for food.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I am in line.', 'I am waiting in line.', 'I pay for food.', 'I get change.'],
+  },
+  'day-034': {
+    id: 'picture-day-034-coming-back-home',
+    dayId: 'day-034',
+    title: 'Coming Back Home',
+    goal: 'Say how you come back home.',
+    image: day034Image,
+    targetWords: ['carry', 'bag', 'light', 'home'],
+    suggestedPatterns: ['I carry my bag.', 'The bag is light.', 'I go back home.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I carry my bag.', 'The bag is light.', 'I go back home.', 'I put food on the table.'],
+  },
+  'day-035': {
+    id: 'picture-day-035-errand-story-recap',
+    dayId: 'day-035',
+    title: 'Going Out Story',
+    goal: 'Tell a simple outside story.',
+    image: day035Image,
+    targetWords: ['outside', 'list', 'bus', 'store', 'food', 'home'],
+    suggestedPatterns: ['I go outside with my list.', 'I take the bus.', 'I go back home.'],
+    requiredSentenceCount: 6,
+    simpleVersion: [
+      'I go outside with my list.',
+      'I take the bus.',
+      'I am in the store.',
+      'I buy food at the store.',
+      'I carry my bag.',
+      'I go back home.',
+    ],
+  },
+  'day-036': {
+    id: 'picture-day-036-asking-the-way',
+    dayId: 'day-036',
+    title: 'Asking the Way',
+    goal: 'Ask another person for the way outside.',
+    image: day036Image,
+    targetWords: ['excuse', 'way', 'store', 'show'],
+    suggestedPatterns: ['Excuse me.', 'Where is the store?', 'Please show me the way.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['Excuse me.', 'Where is the store?', 'Is this the way?', 'Please show me the way.'],
+  },
+  'day-037': {
+    id: 'picture-day-037-late-bus-time-problem',
+    dayId: 'day-037',
+    title: 'Late Bus and Time Problem',
+    goal: 'Describe a late bus and time problem.',
+    image: day037Image,
+    targetWords: ['bus', 'late', 'waiting', 'help'],
+    suggestedPatterns: ['The bus is late.', 'I am waiting for the bus.', 'I need help.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['The bus is late.', 'I am waiting for the bus.', 'I am late.', 'I need help.'],
+  },
+  'day-038': {
+    id: 'picture-day-038-store-does-not-have-it',
+    dayId: 'day-038',
+    title: 'The Store Does Not Have It',
+    goal: 'Describe a store problem when a thing is not there.',
+    image: day038Image,
+    targetWords: ['store', 'need', 'bread', 'another'],
+    suggestedPatterns: ['I need bread.', 'The store does not have it.', 'I need another thing.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I need bread.', 'The store does not have it.', 'I need another thing.', 'Please help me.'],
+  },
+  'day-039': {
+    id: 'picture-day-039-not-enough-money',
+    dayId: 'day-039',
+    title: 'Not Enough Money',
+    goal: 'Describe a money problem in a store.',
+    image: day039Image,
+    targetWords: ['money', 'price', 'enough', 'food'],
+    suggestedPatterns: ['I have money.', 'I do not have enough money.', 'I buy less food.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I have money.', 'The price is much.', 'I do not have enough money.', 'I buy less food.'],
+  },
+  'day-040': {
+    id: 'picture-day-040-ask-again',
+    dayId: 'day-040',
+    title: 'Ask Again',
+    goal: 'Ask again in a simple help talk.',
+    image: day040Image,
+    targetWords: ['understand', 'repeat', 'again', 'please'],
+    suggestedPatterns: ['I do not understand.', 'Please repeat.', 'Say it again, please.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I do not understand.', 'Please repeat.', 'Say it again, please.', 'I understand now.'],
+  },
+  'day-041': {
+    id: 'picture-day-041-polite-help',
+    dayId: 'day-041',
+    title: 'Kind Help',
+    goal: 'Use kind words when help is needed.',
+    image: day041Image,
+    targetWords: ['excuse', 'sorry', 'please', 'kind'],
+    suggestedPatterns: ['Excuse me.', 'I am sorry.', 'Please help me.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['Excuse me.', 'I am sorry.', 'Please help me.', 'You are kind.'],
+  },
+  'day-042': {
+    id: 'picture-day-042-problem-story-recap',
+    dayId: 'day-042',
+    title: 'Problem Story',
+    goal: 'Tell a simple outside problem story.',
+    image: day042Image,
+    targetWords: ['way', 'clear', 'bus', 'late', 'help', 'home'],
+    suggestedPatterns: ['The way is not clear.', 'The bus is late.', 'I ask for help.'],
+    requiredSentenceCount: 6,
+    simpleVersion: [
+      'The way is not clear.',
+      'The bus is late.',
+      'I ask for help.',
+      'Please repeat.',
+      'I understand now.',
+      'I go back home.',
+    ],
   },
 };

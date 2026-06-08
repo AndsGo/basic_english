@@ -612,6 +612,23 @@ describe('Basic English 850 validation', () => {
     expect(validateBasicEnglishTexts([...scenarioWeekTexts, ...scenarioCapabilityTexts, ...sceneGoalTexts, ...remixTaskTexts])).toEqual([]);
   });
 
+  it('validates Week 5 and Week 6 picture task visible text', () => {
+    const weekFiveAndSixDayIds = new Set(
+      basicEnglishCourse.weeks.slice(4, 6).flatMap((week) => week.days.map((day) => day.id)),
+    );
+    const pictureTaskTexts = Object.entries(pictureDescribeTasksByDayId)
+      .filter(([dayId]) => weekFiveAndSixDayIds.has(dayId))
+      .flatMap(([dayId, task]) => [
+        { text: task.title, label: `${dayId} picture title` },
+        { text: task.goal, label: `${dayId} picture goal` },
+        ...task.targetWords.map((text, index) => ({ text, label: `${dayId} picture target word ${index + 1}` })),
+        ...task.suggestedPatterns.map((text, index) => ({ text, label: `${dayId} picture suggested pattern ${index + 1}` })),
+        ...task.simpleVersion.map((text, index) => ({ text, label: `${dayId} picture simple version ${index + 1}` })),
+      ]);
+
+    expect(validateBasicEnglishTexts(pictureTaskTexts)).toEqual([]);
+  });
+
   it('reports a non-Basic English word added as course word text', () => {
     const course = cloneBasicEnglishCourse();
     course.words.push({
