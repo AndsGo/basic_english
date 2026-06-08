@@ -287,7 +287,7 @@ describe('week1Course', () => {
   });
 });
 
-describe('basicEnglishCourse V1.2', () => {
+describe('basicEnglishCourse V1.10', () => {
   it('contains Week 1 and a complete Week 2', () => {
     expect(basicEnglishCourse.weeks.length).toBeGreaterThanOrEqual(2);
     expect(basicEnglishCourse.weeks[1]).toMatchObject({
@@ -314,8 +314,7 @@ describe('basicEnglishCourse V1.2', () => {
     const result = validateCourseContent(basicEnglishCourse);
 
     expect(result.errors).toEqual([]);
-    expect(basicEnglishCourse.weeks).toHaveLength(4);
-    expect(basicEnglishCourse.weeks.map((week) => week.days.length)).toEqual([7, 7, 7, 7]);
+    expect(basicEnglishCourse.weeks.slice(0, 4).map((week) => week.days.length)).toEqual([7, 7, 7, 7]);
     expect(basicEnglishCourse.weeks[2]).toMatchObject({
       id: 'week-03',
       number: 3,
@@ -330,8 +329,74 @@ describe('basicEnglishCourse V1.2', () => {
     expect(basicEnglishCourse.weeks[3].days[6]).toMatchObject({ id: 'day-028', dayNumber: 28 });
   });
 
+  it('includes complete Week 5 and Week 6 course content for V1.10', () => {
+    const result = validateCourseContent(basicEnglishCourse);
+    const week5 = basicEnglishCourse.weeks[4];
+    const week6 = basicEnglishCourse.weeks[5];
+    const newDays = basicEnglishCourse.weeks.slice(4, 6).flatMap((week) => week.days);
+
+    expect(result.errors).toEqual([]);
+    expect(basicEnglishCourse.contentVersion).toBe('1.10.0');
+    expect(basicEnglishCourse.weeks).toHaveLength(6);
+    expect(basicEnglishCourse.weeks.map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7]);
+    expect(week5).toMatchObject({
+      id: 'week-05',
+      number: 5,
+      title: 'Going Out for an Errand',
+    });
+    expect(week6).toMatchObject({
+      id: 'week-06',
+      number: 6,
+      title: 'Problems Outside',
+    });
+    expect(week5.days[0]).toMatchObject({ id: 'day-029', dayNumber: 29 });
+    expect(week6.days[6]).toMatchObject({ id: 'day-042', dayNumber: 42 });
+    expect(newDays.map((day) => day.id)).toEqual([
+      'day-029',
+      'day-030',
+      'day-031',
+      'day-032',
+      'day-033',
+      'day-034',
+      'day-035',
+      'day-036',
+      'day-037',
+      'day-038',
+      'day-039',
+      'day-040',
+      'day-041',
+      'day-042',
+    ]);
+
+    for (const day of newDays) {
+      const translationCount = day.exercises.filter((exercise) => exercise.type === 'translation').length;
+      const expectedStoryMode = day.id === 'day-035' || day.id === 'day-042' ? 'recap' : 'sentence';
+
+      expect(day.wordIds.length, `${day.id} word count`).toBeGreaterThanOrEqual(6);
+      expect(day.patternIds.length, `${day.id} pattern count`).toBeGreaterThanOrEqual(1);
+      expect(day.exercises.length, `${day.id} exercise count`).toBeGreaterThanOrEqual(5);
+      expect(translationCount, `${day.id} translation count`).toBeGreaterThanOrEqual(1);
+      expect(day.outputTask.requiredSentenceCount, `${day.id} output sentences`).toBeGreaterThanOrEqual(4);
+      expect(day.outputTask.storyMode, `${day.id} story mode`).toBe(expectedStoryMode);
+      expect(day.outputTask.storyPrompt?.trim(), `${day.id} story prompt`).toBeTruthy();
+    }
+  });
+
+  it('uses Chinese learner prompts for Week 5 and Week 6 translation exercises', () => {
+    const newDays = basicEnglishCourse.weeks.slice(4, 6).flatMap((week) => week.days);
+
+    for (const day of newDays) {
+      const translationExercises = day.exercises.filter((exercise) => exercise.type === 'translation');
+
+      for (const exercise of translationExercises) {
+        expect(exercise.chinesePrompt, `${exercise.id} Chinese prompt`).toMatch(/\p{Script=Han}/u);
+        expect(exercise.chinesePrompt, `${exercise.id} Chinese prompt`).not.toMatch(/^[\x00-\x7F]+$/);
+      }
+    }
+  });
+
   it('gives every Week 3 and Week 4 day a complete Today content set', () => {
-    const newDays = basicEnglishCourse.weeks.slice(2).flatMap((week) => week.days);
+    const newDays = basicEnglishCourse.weeks.slice(2, 4).flatMap((week) => week.days);
 
     expect(newDays.map((day) => day.id)).toEqual([
       'day-015',
@@ -374,10 +439,10 @@ describe('basicEnglishCourse V1.2', () => {
     }
   });
 
-  it('keeps Day 28 as the course completion day', () => {
+  it('keeps Day 42 as the course completion day', () => {
     const allDays = basicEnglishCourse.weeks.flatMap((week) => week.days);
 
-    expect(allDays.at(-1)?.id).toBe('day-028');
+    expect(allDays.at(-1)?.id).toBe('day-042');
     expect(allDays.at(-1)?.weeklyCheckRubric).toBeDefined();
   });
 
