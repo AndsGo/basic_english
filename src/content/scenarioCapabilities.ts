@@ -1,32 +1,32 @@
 import type { ScenarioCapability, ScenarioWeek } from '../domain/types';
 
 export const scenarioWeekMap: ScenarioWeek[] = [
-  { weekNumber: 1, theme: 'People & Identity', expressionOutcome: 'Introduce yourself and another person.' },
+  { weekNumber: 1, theme: 'Person & Self', expressionOutcome: 'Say who you are and who another person is.' },
   { weekNumber: 2, theme: 'Home & Things', expressionOutcome: 'Describe your room, things, and where things are.' },
-  { weekNumber: 3, theme: 'Daily Life', expressionOutcome: 'Say what you do every day.' },
+  { weekNumber: 3, theme: 'Every Day', expressionOutcome: 'Say what you do every day.' },
   { weekNumber: 4, theme: 'Food & Shopping', expressionOutcome: 'Order food and buy simple things.' },
   { weekNumber: 5, theme: 'Going Out Story', expressionOutcome: 'Tell a complete going out story.' },
   { weekNumber: 6, theme: 'Problems Outside', expressionOutcome: 'Describe outside problems and ask for help in a kind way.' },
-  { weekNumber: 7, theme: 'Problems & Help', expressionOutcome: 'Explain a problem and ask for help.' },
-  { weekNumber: 8, theme: 'Health & Body', expressionOutcome: 'Describe simple health and body problems.' },
-  { weekNumber: 9, theme: 'Past Simple Ideas', expressionOutcome: 'Say what happened yesterday.' },
-  { weekNumber: 10, theme: 'Future Plans', expressionOutcome: 'Say what you will do tomorrow or later.' },
-  { weekNumber: 11, theme: 'Opinions & Reasons', expressionOutcome: 'Say what you like, dislike, and why.' },
-  { weekNumber: 12, theme: 'Final Scenario Practice', expressionOutcome: 'Answer daily-life scenario prompts.' },
+  { weekNumber: 7, theme: 'Problems & Help', expressionOutcome: 'Tell a problem and ask for help.' },
+  { weekNumber: 8, theme: 'Body', expressionOutcome: 'Describe simple body problems.' },
+  { weekNumber: 9, theme: 'Yesterday Ideas', expressionOutcome: 'Tell a yesterday story.' },
+  { weekNumber: 10, theme: 'Tomorrow', expressionOutcome: 'Say what you will do tomorrow or after tomorrow.' },
+  { weekNumber: 11, theme: 'Opinions & Reasons', expressionOutcome: 'Say what you like, do not like, and why.' },
+  { weekNumber: 12, theme: 'Last Practice', expressionOutcome: 'Answer daily practice questions.' },
 ];
 
 export const scenarioCapabilities: ScenarioCapability[] = [
   {
     id: 'introduce-myself',
-    title: 'I can introduce myself.',
-    description: 'Say your name, place, and learner identity.',
+    title: 'I can say who I am.',
+    description: 'Say your name, place, and student self.',
     unlockedByDayIds: ['day-001'],
     exampleOutputs: ['My name is Li.', 'I am from China.'],
   },
   {
     id: 'introduce-another-person',
     title: 'I can introduce another person.',
-    description: 'Introduce a friend or family member.',
+    description: 'Introduce a friend or family person.',
     unlockedByDayIds: ['day-004'],
     exampleOutputs: ['This is my friend.', 'She is kind.'],
   },
@@ -47,7 +47,7 @@ export const scenarioCapabilities: ScenarioCapability[] = [
   {
     id: 'say-things-in-my-room',
     title: 'I can say what things are in my room.',
-    description: 'Say what objects are in your room.',
+    description: 'Say what things are in your room.',
     unlockedByDayIds: ['day-009'],
     exampleOutputs: ['There is a book in my room.'],
   },
@@ -61,7 +61,7 @@ export const scenarioCapabilities: ScenarioCapability[] = [
   {
     id: 'describe-study-things',
     title: 'I can describe study things on my table.',
-    description: 'Describe a table and study objects.',
+    description: 'Describe a table and study things.',
     unlockedByDayIds: ['day-011'],
     exampleOutputs: ['There is a pen on my table.'],
   },
@@ -74,7 +74,7 @@ export const scenarioCapabilities: ScenarioCapability[] = [
   },
   {
     id: 'describe-important-things',
-    title: 'I can describe important things in my life.',
+    title: 'I can describe important things in my day.',
     description: 'Say why a thing is useful or important.',
     unlockedByDayIds: ['day-014'],
     exampleOutputs: ['It is important.', 'I use it every day.'],
@@ -82,7 +82,7 @@ export const scenarioCapabilities: ScenarioCapability[] = [
   {
     id: 'describe-my-morning',
     title: 'I can describe my morning.',
-    description: 'Say simple actions from getting up to leaving home.',
+    description: 'Say simple actions from getting up to going out from home.',
     unlockedByDayIds: ['day-015'],
     exampleOutputs: ['I get up in the morning.', 'I wash my face.'],
   },
@@ -96,7 +96,7 @@ export const scenarioCapabilities: ScenarioCapability[] = [
   {
     id: 'describe-common-actions',
     title: 'I can say what I do with common things.',
-    description: 'Use objects to describe simple daily actions.',
+    description: 'Use things to describe simple daily actions.',
     unlockedByDayIds: ['day-017'],
     exampleOutputs: ['I use a pen to write.', 'I open the book.'],
   },
@@ -138,7 +138,7 @@ export const scenarioCapabilities: ScenarioCapability[] = [
   {
     id: 'describe-meal-or-shopping-scene',
     title: 'I can describe a meal or shopping scene.',
-    description: 'Combine food, shopping, wants, needs, and help.',
+    description: 'Put together food, shopping, wants, needs, and help.',
     unlockedByDayIds: ['day-028'],
     exampleOutputs: ['I buy food.', 'I need more water.'],
   },

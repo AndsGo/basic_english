@@ -101,7 +101,7 @@ describe('App shell', () => {
     expect(screen.getByRole('heading', { name: 'I Can Say' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Next' })).toBeInTheDocument();
     expect(screen.getByText('No capabilities unlocked yet.')).toBeInTheDocument();
-    expect(screen.getByText('I can introduce myself.')).toBeInTheDocument();
+    expect(screen.getByText('I can say who I am.')).toBeInTheDocument();
     expect(screen.getByText('Complete Day 1.')).toBeInTheDocument();
   });
 
@@ -207,7 +207,7 @@ describe('Me capability progress', () => {
     const unlockedHeading = await screen.findByRole('heading', { name: 'Unlocked' });
     const unlockedSection = unlockedHeading.closest('section');
     expect(unlockedSection).not.toBeNull();
-    expect(within(unlockedSection!).getByText('I can introduce myself.')).toBeInTheDocument();
+    expect(within(unlockedSection!).getByText('I can say who I am.')).toBeInTheDocument();
     expect(within(unlockedSection!).queryByText('No capabilities unlocked yet.')).not.toBeInTheDocument();
   });
 });

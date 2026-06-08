@@ -38,10 +38,10 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   'day-001': {
     id: 'self',
     title: 'Self',
-    capability: 'I can describe myself.',
+    capability: 'I can say who I am.',
     templates: ['My name is ____.', 'I am from ____.', 'I am a ____.', 'I study English.'],
     guidedPrompts: ['Say your name.', 'Say where you are from.', 'Say what you do.', 'Say why you study English.'],
-    scenePrompt: 'Use your sentences to describe yourself clearly.',
+    scenePrompt: 'Use your sentences to say who you are clearly.',
     dialoguePrompts: ['Ask and answer about your name.', 'Ask and answer about where you are from.'],
   },
   'day-008': {
@@ -73,8 +73,8 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   },
   'day-015': {
     id: 'morning-routine',
-    title: 'Morning Routine',
-    capability: 'I can describe my morning routine.',
+    title: 'Morning Order',
+    capability: 'I can describe my morning order.',
     templates: ['I get up in the morning.', 'I wash my face.', 'I put on my clothes.', 'I have water.'],
     guidedPrompts: ['Say when you get up.', 'Say what you wash.', 'Say what you put on.', 'Say one thing you have.'],
     scenePrompt: 'Describe what you do in the morning.',
@@ -118,11 +118,11 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   },
   'day-020': {
     id: 'everyday-habits',
-    title: 'Everyday Habits',
+    title: 'Every Day Habits',
     capability: 'I can describe simple habits.',
     templates: ['I practice English every day.', 'I often read.', 'I sometimes walk.', 'This is a good habit.'],
     guidedPrompts: ['Say what you practice.', 'Say what you often do.', 'Say what you sometimes do.', 'Say one good habit.'],
-    scenePrompt: 'Describe your everyday habits.',
+    scenePrompt: 'Describe your every day habits.',
     dialoguePrompts: ['Ask and answer about practice.', 'Ask and answer about habits.'],
   },
   'day-021': {
@@ -175,7 +175,7 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
     title: 'Asking for Help',
     capability: 'I can ask for simple help.',
     templates: ['Please help me.', 'Can you show me the book?', 'Can you bring me the book?', 'I ask for help.'],
-    guidedPrompts: ['Ask for help.', 'Ask someone to show a thing.', 'Ask someone to bring a thing.', 'Say what you ask for.'],
+    guidedPrompts: ['Ask for help.', 'Ask a person to show a thing.', 'Ask a person to bring a thing.', 'Say what you ask for.'],
     scenePrompt: 'Ask another person for simple help.',
     dialoguePrompts: ['Ask and answer about help.', 'Ask and answer about showing a thing.'],
   },
@@ -190,7 +190,7 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   },
   'day-028': {
     id: 'meal-shopping-check',
-    title: 'Meal and Shopping Check',
+    title: 'Meal and Shopping Week',
     capability: 'I can describe a meal and shopping scene.',
     templates: ['I go to the shop.', 'I buy food.', 'I need help.', 'Please help me.'],
     guidedPrompts: ['Say where you go.', 'Say what you buy.', 'Say what you need.', 'Ask politely.'],

@@ -129,7 +129,7 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
     {
       id: 'day-021-remix-normal-day',
       type: 'extend',
-      prompt: 'Add two more sentences about your normal day.',
+      prompt: 'Put more sentences about your normal day.',
       referenceAnswers: ['In the afternoon, I study.', 'In the evening, I am at home.'],
     },
   ],
@@ -191,7 +191,7 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
     {
       id: 'day-028-remix-shopping-scene',
       type: 'extend',
-      prompt: 'Add two more sentences to the shopping scene.',
+      prompt: 'Put more sentences in the shopping scene.',
       referenceAnswers: ['I need more water.', 'The food is good.'],
     },
   ],

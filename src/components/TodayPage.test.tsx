@@ -491,7 +491,7 @@ describe('TodayPage', () => {
     const repo = createIndexedDbProgressRepository('today-scene-goal-banner');
     renderWithSpeech(<TodayPage course={week1Course} repository={repo} sceneGoalsByDayId={sceneGoalsByDayId} />);
 
-    expect(await screen.findByLabelText('Today scene goal')).toHaveTextContent('I can describe myself.');
+    expect(await screen.findByLabelText('Today scene goal')).toHaveTextContent('I can say who I am.');
   });
 
   it('requires complete scene output before finishing the output step', async () => {

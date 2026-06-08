@@ -195,12 +195,25 @@ function removeDoubledFinalConsonant(token: string): string {
   return token;
 }
 
+export interface BasicEnglishTextEntry {
+  text: string;
+  label: string;
+}
+
 function validateText(text: string, label: string, errors: string[]) {
   for (const token of tokenizeBasicEnglishText(text)) {
     if (!isAllowedBasicEnglishToken(token)) {
       errors.push(`Non-Basic English word "${token}" in ${label}`);
     }
   }
+}
+
+export function validateBasicEnglishTextEntries(texts: BasicEnglishTextEntry[]): string[] {
+  const errors: string[] = [];
+
+  texts.forEach(({ text, label }) => validateText(text, label, errors));
+
+  return [...new Set(errors)];
 }
 
 function collectExerciseTexts(exercise: Exercise): Array<{ text: string; label: string }> {

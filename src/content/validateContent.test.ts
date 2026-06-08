@@ -12,6 +12,7 @@ import { sceneGoalsByDayId } from './sceneGoals';
 import { week1Course } from './week1';
 import {
   validateCourseContent,
+  validatePictureDescribeTasks,
   validateScenarioCapabilities,
   validateScenarioWeekMap,
   validateSceneGoals,
@@ -990,6 +991,37 @@ describe('scene goals', () => {
 
     expect(result.errors).toContain('Duplicate scene goal id: self');
   });
+
+  it('reports non-Basic English words in visible scene goal text', () => {
+    const result = validateSceneGoals(
+      {
+        'day-001': {
+          id: 'bad-scene-goal',
+          title: 'Airport Visit',
+          capability: 'I can visit a museum.',
+          templates: ['I visit a museum.'],
+          guidedPrompts: ['Say the airport problem.'],
+          scenePrompt: 'Describe the museum visit.',
+          dialoguePrompts: ['Ask about the airport.'],
+        },
+      },
+      basicEnglishCourse,
+    );
+
+    expect(result.errors).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "airport" in day-001 scene goal title',
+        'Non-Basic English word "visit" in day-001 scene goal capability',
+        'Non-Basic English word "museum" in day-001 scene goal capability',
+        'Non-Basic English word "visit" in day-001 scene goal template 1',
+        'Non-Basic English word "museum" in day-001 scene goal template 1',
+        'Non-Basic English word "airport" in day-001 scene goal guided prompt 1',
+        'Non-Basic English word "museum" in day-001 scene goal scene prompt',
+        'Non-Basic English word "visit" in day-001 scene goal scene prompt',
+        'Non-Basic English word "airport" in day-001 scene goal dialogue prompt 1',
+      ]),
+    );
+  });
 });
 
 describe('scene remix tasks', () => {
@@ -1251,6 +1283,41 @@ describe('scene remix tasks', () => {
     );
   });
 
+  it('reports non-Basic English words in visible scene remix text', () => {
+    const result = validateSceneRemixTasks(
+      {
+        'day-001': [
+          {
+            id: 'bad-remix-visible-text',
+            type: 'replace',
+            prompt: 'Change store to airport.',
+            source: 'I visit a museum.',
+            referenceAnswers: ['I visit the airport.'],
+          },
+        ],
+        'day-008': [
+          {
+            id: 'day-008-remix-valid',
+            type: 'extend',
+            prompt: 'Describe your room.',
+            referenceAnswers: ['This is my room.'],
+          },
+        ],
+      },
+      basicEnglishCourse,
+    );
+
+    expect(result).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "airport" in day-001 remix bad-remix-visible-text prompt',
+        'Non-Basic English word "visit" in day-001 remix bad-remix-visible-text source',
+        'Non-Basic English word "museum" in day-001 remix bad-remix-visible-text source',
+        'Non-Basic English word "visit" in day-001 remix bad-remix-visible-text reference 1',
+        'Non-Basic English word "airport" in day-001 remix bad-remix-visible-text reference 1',
+      ]),
+    );
+  });
+
   it('requires Day 1 and Day 8 remix tasks', () => {
     const result = validateSceneRemixTasks({}, basicEnglishCourse);
 
@@ -1269,6 +1336,8 @@ describe('picture describe tasks', () => {
   });
 
   it('uses complete English-first task data', () => {
+    expect(validatePictureDescribeTasks(pictureDescribeTasksByDayId, basicEnglishCourse).errors).toEqual([]);
+
     for (const [dayId, task] of Object.entries(pictureDescribeTasksByDayId)) {
       expect(task.dayId).toBe(dayId);
       expect(task.title).toMatch(/\S/);
@@ -1294,5 +1363,27 @@ describe('picture describe tasks', () => {
     expect(pictureDescribeTasksByDayId['day-038'].image).toContain('day-038-wrong-way');
     expect(pictureDescribeTasksByDayId['day-039'].image).toContain('day-039-please-repeat');
     expect(pictureDescribeTasksByDayId['day-042'].image).toContain('day-042-problem-story-recap');
+  });
+
+  it('reports non-Basic English words in visible picture describe task text', () => {
+    const tasks = structuredClone(pictureDescribeTasksByDayId);
+    tasks['day-001'].title = 'Airport Visit';
+    tasks['day-001'].goal = 'Describe a museum visit.';
+    tasks['day-001'].targetWords = ['airport'];
+    tasks['day-001'].suggestedPatterns = ['I visit a museum.'];
+    tasks['day-001'].simpleVersion = ['I visit a museum.', 'This is my room.', 'I am here.'];
+
+    expect(validatePictureDescribeTasks(tasks, basicEnglishCourse).errors).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "airport" in day-001 picture title',
+        'Non-Basic English word "museum" in day-001 picture goal',
+        'Non-Basic English word "visit" in day-001 picture goal',
+        'Non-Basic English word "airport" in day-001 picture target word 1',
+        'Non-Basic English word "visit" in day-001 picture suggested pattern 1',
+        'Non-Basic English word "museum" in day-001 picture suggested pattern 1',
+        'Non-Basic English word "visit" in day-001 picture simple version 1',
+        'Non-Basic English word "museum" in day-001 picture simple version 1',
+      ]),
+    );
   });
 });

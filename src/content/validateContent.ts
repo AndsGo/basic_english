@@ -2,13 +2,14 @@ import type {
   Course,
   Exercise,
   Pattern,
+  PictureDescribeTask,
   SceneGoal,
   SceneRemixTask,
   ScenarioCapability,
   ScenarioWeek,
   WeeklyCheckRubric,
 } from '../domain/types';
-import { validateBasicEnglishVocabulary } from './basicEnglish850';
+import { validateBasicEnglishTextEntries, validateBasicEnglishVocabulary } from './basicEnglish850';
 
 export interface ValidationResult {
   errors: string[];
@@ -127,6 +128,7 @@ export function validateScenarioCapabilities(capabilities: ScenarioCapability[],
   const errors: string[] = [];
   const dayIds = new Set(course.weeks.flatMap((week) => week.days.map((day) => day.id)));
   const capabilityIds = new Set<string>();
+  const basicTexts: Array<{ text: string; label: string }> = [];
 
   capabilities.forEach((capability) => {
     if (!capability.id.trim()) errors.push('Scenario capability has empty id');
@@ -145,7 +147,17 @@ export function validateScenarioCapabilities(capabilities: ScenarioCapability[],
     if (capability.exampleOutputs.length === 0 || capability.exampleOutputs.some((output) => !output.trim())) {
       errors.push(`${capability.id} must have non-empty example outputs`);
     }
+    basicTexts.push(
+      { text: capability.title, label: `scenario capability ${capability.id} title` },
+      { text: capability.description, label: `scenario capability ${capability.id} description` },
+      ...capability.exampleOutputs.map((text, index) => ({
+        text,
+        label: `scenario capability ${capability.id} example ${index + 1}`,
+      })),
+    );
   });
+
+  errors.push(...validateBasicEnglishTextEntries(basicTexts));
 
   return { errors };
 }
@@ -153,6 +165,7 @@ export function validateScenarioCapabilities(capabilities: ScenarioCapability[],
 export function validateScenarioWeekMap(weeks: ScenarioWeek[]): ValidationResult {
   const errors: string[] = [];
   const weekNumbers = new Set<number>();
+  const basicTexts: Array<{ text: string; label: string }> = [];
 
   weeks.forEach((week) => {
     if (weekNumbers.has(week.weekNumber)) {
@@ -166,12 +179,18 @@ export function validateScenarioWeekMap(weeks: ScenarioWeek[]): ValidationResult
     if (!week.theme.trim() || !week.expressionOutcome.trim()) {
       errors.push(`Scenario week ${week.weekNumber} is missing theme or expression outcome`);
     }
+    basicTexts.push(
+      { text: week.theme, label: `scenario week ${week.weekNumber} theme` },
+      { text: week.expressionOutcome, label: `scenario week ${week.weekNumber} expression outcome` },
+    );
   });
 
   const hasExpectedSequence = weeks.length === 12 && Array.from({ length: 12 }, (_, index) => index + 1).every((weekNumber) => weekNumbers.has(weekNumber));
   if (!hasExpectedSequence) {
     errors.push('Scenario roadmap must define weeks 1 through 12');
   }
+
+  errors.push(...validateBasicEnglishTextEntries(basicTexts));
 
   return { errors };
 }
@@ -180,6 +199,7 @@ export function validateSceneGoals(sceneGoalsByDayId: Record<string, SceneGoal>,
   const errors: string[] = [];
   const dayIds = new Set(course.weeks.flatMap((week) => week.days.map((day) => day.id)));
   const sceneGoalIds = new Set<string>();
+  const basicTexts: Array<{ text: string; label: string }> = [];
 
   Object.entries(sceneGoalsByDayId).forEach(([dayId, sceneGoal]) => {
     if (!dayIds.has(dayId)) errors.push(`Scene goal ${dayId} references missing day`);
@@ -202,7 +222,23 @@ export function validateSceneGoals(sceneGoalsByDayId: Record<string, SceneGoal>,
     if (sceneGoal.dialoguePrompts.length === 0 || sceneGoal.dialoguePrompts.some((item) => !item.trim())) {
       errors.push(`Scene goal for ${dayId} must include non-empty dialogue prompts`);
     }
+    basicTexts.push(
+      { text: sceneGoal.title, label: `${dayId} scene goal title` },
+      { text: sceneGoal.capability, label: `${dayId} scene goal capability` },
+      ...sceneGoal.templates.map((text, index) => ({ text, label: `${dayId} scene goal template ${index + 1}` })),
+      ...sceneGoal.guidedPrompts.map((text, index) => ({
+        text,
+        label: `${dayId} scene goal guided prompt ${index + 1}`,
+      })),
+      { text: sceneGoal.scenePrompt, label: `${dayId} scene goal scene prompt` },
+      ...sceneGoal.dialoguePrompts.map((text, index) => ({
+        text,
+        label: `${dayId} scene goal dialogue prompt ${index + 1}`,
+      })),
+    );
   });
+
+  errors.push(...validateBasicEnglishTextEntries(basicTexts));
 
   return { errors };
 }
@@ -213,6 +249,7 @@ export function validateSceneRemixTasks(tasksByDayId: Partial<Record<string, Sce
   const errors: string[] = [];
   const validDayIds = new Set(course.weeks.flatMap((week) => week.days.map((day) => day.id)));
   const seenTaskIds = new Set<string>();
+  const basicTexts: Array<{ text: string; label: string }> = [];
 
   for (const [dayId, tasks] of Object.entries(tasksByDayId)) {
     if (!validDayIds.has(dayId)) {
@@ -238,6 +275,14 @@ export function validateSceneRemixTasks(tasksByDayId: Partial<Record<string, Sce
       if (task.referenceAnswers.filter((answer) => answer.trim().length > 0).length === 0) {
         errors.push(`Remix task ${task.id} has no non-empty reference answers.`);
       }
+      basicTexts.push(
+        { text: task.prompt, label: `${dayId} remix ${task.id} prompt` },
+        ...(task.source ? [{ text: task.source, label: `${dayId} remix ${task.id} source` }] : []),
+        ...task.referenceAnswers.map((text, index) => ({
+          text,
+          label: `${dayId} remix ${task.id} reference ${index + 1}`,
+        })),
+      );
     }
   }
 
@@ -247,7 +292,61 @@ export function validateSceneRemixTasks(tasksByDayId: Partial<Record<string, Sce
     }
   }
 
-  return errors;
+  return [...errors, ...validateBasicEnglishTextEntries(basicTexts)];
+}
+
+export function validatePictureDescribeTasks(tasksByDayId: Record<string, PictureDescribeTask>, course: Course): ValidationResult {
+  const errors: string[] = [];
+  const validDayIds = new Set(course.weeks.flatMap((week) => week.days.map((day) => day.id)));
+  const seenTaskIds = new Set<string>();
+  const basicTexts: Array<{ text: string; label: string }> = [];
+
+  Object.entries(tasksByDayId).forEach(([dayId, task]) => {
+    if (!validDayIds.has(dayId)) {
+      errors.push(`Picture task ${dayId} references missing day`);
+    }
+    if (task.dayId !== dayId) {
+      errors.push(`Picture task ${task.id} has wrong dayId`);
+    }
+    if (!task.id.trim()) {
+      errors.push(`Picture task for ${dayId} has empty id`);
+    } else if (seenTaskIds.has(task.id)) {
+      errors.push(`Duplicate picture task id: ${task.id}`);
+    }
+    seenTaskIds.add(task.id);
+
+    if (!task.title.trim() || !task.goal.trim() || !task.image.trim()) {
+      errors.push(`Picture task for ${dayId} is missing title, goal, or image`);
+    }
+    if (task.targetWords.length < 3 || task.targetWords.some((word) => !word.trim())) {
+      errors.push(`Picture task for ${dayId} must include at least three target words`);
+    }
+    if (task.suggestedPatterns.length < 2 || task.suggestedPatterns.some((pattern) => !pattern.trim())) {
+      errors.push(`Picture task for ${dayId} must include at least two suggested patterns`);
+    }
+    if (task.requiredSentenceCount < 1) {
+      errors.push(`Picture task for ${dayId} must require at least one sentence`);
+    }
+    if (task.simpleVersion.length !== task.requiredSentenceCount || task.simpleVersion.some((sentence) => !sentence.trim())) {
+      errors.push(`Picture task for ${dayId} must include one non-empty simple sentence per required sentence`);
+    }
+
+    basicTexts.push(
+      { text: task.title, label: `${dayId} picture title` },
+      { text: task.goal, label: `${dayId} picture goal` },
+      ...task.targetWords.map((text, index) => ({ text, label: `${dayId} picture target word ${index + 1}` })),
+      ...task.suggestedPatterns.map((text, index) => ({
+        text,
+        label: `${dayId} picture suggested pattern ${index + 1}`,
+      })),
+      ...task.simpleVersion.map((text, index) => ({
+        text,
+        label: `${dayId} picture simple version ${index + 1}`,
+      })),
+    );
+  });
+
+  return { errors: [...errors, ...validateBasicEnglishTextEntries(basicTexts)] };
 }
 
 function validateWeeklyCheckRubric(dayId: string, rubric: WeeklyCheckRubric, errors: string[]) {
