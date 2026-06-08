@@ -259,38 +259,38 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
   ],
   'day-036': [
     {
-      id: 'day-036-remix-left-right',
+      id: 'day-036-remix-early-late',
       type: 'replace',
-      prompt: 'Change left to right.',
-      source: 'Go left.',
-      referenceAnswers: ['Go right.'],
+      prompt: 'Change early to late.',
+      source: 'I am early and waiting for the bus.',
+      referenceAnswers: ['I am late and waiting for the bus.'],
     },
   ],
   'day-037': [
     {
-      id: 'day-037-remix-bus-time',
+      id: 'day-037-remix-clear-way',
       type: 'replace',
-      prompt: 'Change bus to time.',
-      source: 'I need the bus.',
-      referenceAnswers: ['I need more time.'],
+      prompt: 'Change clear to not clear.',
+      source: 'The way is clear.',
+      referenceAnswers: ['The way is not clear.'],
     },
   ],
   'day-038': [
     {
-      id: 'day-038-remix-bread-cup',
+      id: 'day-038-remix-wrong-way',
       type: 'replace',
-      prompt: 'Change bread to cup.',
-      source: 'I can not find bread.',
-      referenceAnswers: ['I can not find a cup.'],
+      prompt: 'Change straight to turn right.',
+      source: 'I go straight.',
+      referenceAnswers: ['I turn right.'],
     },
   ],
   'day-039': [
     {
-      id: 'day-039-remix-money-time',
+      id: 'day-039-remix-repeat-please',
       type: 'replace',
-      prompt: 'Change money to time.',
-      source: 'I do not have enough money.',
-      referenceAnswers: ['I do not have enough time.'],
+      prompt: 'Change I understand to Please repeat.',
+      source: 'I understand.',
+      referenceAnswers: ['Please repeat.'],
     },
   ],
   'day-040': [
@@ -315,8 +315,8 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
     {
       id: 'day-042-remix-problem-story',
       type: 'extend',
-      prompt: 'Put more sentences in the problem story.',
-      referenceAnswers: ['I ask for help.', 'I say please.'],
+      prompt: 'Put the problem story in order.',
+      referenceAnswers: ['The way is not clear.', 'This way is wrong.', 'I need another way.', 'Please repeat.', 'I understand.', 'I am kind.'],
     },
   ],
 };

@@ -903,8 +903,19 @@ describe('scene goals', () => {
       expect.arrayContaining(['day-001', 'day-008', 'day-009', 'day-010', ...weekThreeThroughSixDayIds]),
     );
     expect(sceneGoalsByDayId['day-035'].title).toBe('Going Out Story');
+    expect(sceneGoalsByDayId['day-036'].title).toBe('Early and Late');
+    expect(sceneGoalsByDayId['day-038'].title).toBe('Wrong Way');
+    expect(sceneGoalsByDayId['day-039'].title).toBe('Repeat Please');
     expect(sceneGoalsByDayId['day-041'].title).toBe('Kind Help');
     expect(sceneGoalsByDayId['day-042'].title).toBe('Problem Story');
+    expect(sceneGoalsByDayId['day-042'].templates).toEqual([
+      'The way is not clear.',
+      'This way is wrong.',
+      'I need another way.',
+      'Please repeat.',
+      'I understand.',
+      'I am kind.',
+    ]);
     expect(result.errors).toEqual([]);
   });
 
@@ -1053,38 +1064,38 @@ describe('scene remix tasks', () => {
       ],
       'day-036': [
         {
-          id: 'day-036-remix-left-right',
+          id: 'day-036-remix-early-late',
           type: 'replace',
-          prompt: 'Change left to right.',
-          source: 'Go left.',
-          referenceAnswers: ['Go right.'],
+          prompt: 'Change early to late.',
+          source: 'I am early and waiting for the bus.',
+          referenceAnswers: ['I am late and waiting for the bus.'],
         },
       ],
       'day-037': [
         {
-          id: 'day-037-remix-bus-time',
+          id: 'day-037-remix-clear-way',
           type: 'replace',
-          prompt: 'Change bus to time.',
-          source: 'I need the bus.',
-          referenceAnswers: ['I need more time.'],
+          prompt: 'Change clear to not clear.',
+          source: 'The way is clear.',
+          referenceAnswers: ['The way is not clear.'],
         },
       ],
       'day-038': [
         {
-          id: 'day-038-remix-bread-cup',
+          id: 'day-038-remix-wrong-way',
           type: 'replace',
-          prompt: 'Change bread to cup.',
-          source: 'I can not find bread.',
-          referenceAnswers: ['I can not find a cup.'],
+          prompt: 'Change straight to turn right.',
+          source: 'I go straight.',
+          referenceAnswers: ['I turn right.'],
         },
       ],
       'day-039': [
         {
-          id: 'day-039-remix-money-time',
+          id: 'day-039-remix-repeat-please',
           type: 'replace',
-          prompt: 'Change money to time.',
-          source: 'I do not have enough money.',
-          referenceAnswers: ['I do not have enough time.'],
+          prompt: 'Change I understand to Please repeat.',
+          source: 'I understand.',
+          referenceAnswers: ['Please repeat.'],
         },
       ],
       'day-040': [
@@ -1109,8 +1120,8 @@ describe('scene remix tasks', () => {
         {
           id: 'day-042-remix-problem-story',
           type: 'extend',
-          prompt: 'Put more sentences in the problem story.',
-          referenceAnswers: ['I ask for help.', 'I say please.'],
+          prompt: 'Put the problem story in order.',
+          referenceAnswers: ['The way is not clear.', 'This way is wrong.', 'I need another way.', 'Please repeat.', 'I understand.', 'I am kind.'],
         },
       ],
     };
