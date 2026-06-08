@@ -11,7 +11,7 @@ const words: Word[] = [
     id: 'name',
     text: 'name',
     category: 'general_thing',
-    definition: 'what a person is called',
+    definition: 'the word for a person or thing',
     chinese: '名字',
     example: 'My name is Li.',
     weekIntroduced: 1,
@@ -126,7 +126,7 @@ describe('WordFlashcards', () => {
 
     expect(screen.getByRole('heading', { name: 'name' })).toBeInTheDocument();
     expect(screen.getByText('2 / 2')).toBeInTheDocument();
-    expect(screen.queryByText('what a person is called')).not.toBeInTheDocument();
+    expect(screen.queryByText('the word for a person or thing')).not.toBeInTheDocument();
     expect(screen.getByText('No image yet')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: 'Previous' }));

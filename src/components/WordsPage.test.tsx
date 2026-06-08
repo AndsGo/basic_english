@@ -86,7 +86,7 @@ describe('WordsPage', () => {
     renderWithSpeech(<WordsPage course={week1Course} repository={createRepository()} />);
 
     expect(screen.getByRole('heading', { name: 'Course Words' })).toBeInTheDocument();
-    expect(screen.getByText('what a person is called')).toBeInTheDocument();
+    expect(screen.getByText('the word for a person or thing')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'List' })).toHaveAttribute('aria-pressed', 'true');
     expect(screen.queryByLabelText('Word flashcards')).not.toBeInTheDocument();
   });

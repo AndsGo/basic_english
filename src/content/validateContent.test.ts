@@ -122,11 +122,11 @@ describe('week1Course', () => {
         {
           id: 'sentence-control',
           label: 'Sentence control',
-          scores: ['many missing parts', 'some complete sentences', 'mostly complete sentences'],
+          scores: ['not complete', 'some complete sentences', 'complete sentences'],
         },
-        { id: 'target-patterns', label: 'Target patterns', scores: ['not used', 'used with help', 'used independently'] },
-        { id: 'word-use', label: 'Word use', scores: ['few lesson words', 'some lesson words', 'several lesson words'] },
-        { id: 'independence', label: 'Independence', scores: ['copied template', 'partly changed template', 'mostly own content'] },
+        { id: 'target-patterns', label: 'Form use', scores: ['not used', 'used with help', 'used with no help'] },
+        { id: 'word-use', label: 'Word use', scores: ['little new words', 'some new words', 'much new words'] },
+        { id: 'independence', label: 'My words', scores: ['same as example', 'some change from example', 'all my words'] },
       ],
     });
   });
@@ -332,7 +332,7 @@ describe('basicEnglishCourse V1.10', () => {
     expect(basicEnglishCourse.weeks[2]).toMatchObject({
       id: 'week-03',
       number: 3,
-      title: 'Daily Routine & Time',
+      title: 'Every Day and Time',
     });
     expect(basicEnglishCourse.weeks[3]).toMatchObject({
       id: 'week-04',
@@ -356,7 +356,7 @@ describe('basicEnglishCourse V1.10', () => {
     expect(week5).toMatchObject({
       id: 'week-05',
       number: 5,
-      title: 'Going Out for an Errand',
+      title: 'Going Outside for Things',
     });
     expect(week6).toMatchObject({
       id: 'week-06',
@@ -651,6 +651,43 @@ describe('Basic English 850 validation', () => {
         'Non-Basic English word "museum" in word name example',
         'Non-Basic English word "visit" in day-001 output template',
         'Non-Basic English word "museum" in day-001 output template',
+      ]),
+    );
+  });
+
+  it('reports non-Basic English words in course visible titles goals definitions and output topics', () => {
+    const course = cloneBasicEnglishCourse();
+    course.words[0].definition = 'airport terminal';
+    course.weeks[0].title = 'Airport People';
+    course.weeks[0].goal = 'Visit a museum.';
+    course.weeks[0].days[0].title = 'Airport Day';
+    course.weeks[0].days[0].goal = 'Visit a museum.';
+    course.weeks[0].days[0].outputTask.topic = 'Airport Story';
+
+    expect(validateBasicEnglishVocabulary(course)).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "airport" in word name definition',
+        'Non-Basic English word "airport" in week week-01 title',
+        'Non-Basic English word "visit" in week week-01 goal',
+        'Non-Basic English word "museum" in week week-01 goal',
+        'Non-Basic English word "airport" in day-001 title',
+        'Non-Basic English word "visit" in day-001 goal',
+        'Non-Basic English word "museum" in day-001 goal',
+        'Non-Basic English word "airport" in day-001 output topic',
+      ]),
+    );
+  });
+
+  it('reports non-Basic English words in weekly check rubric visible text', () => {
+    const course = cloneBasicEnglishCourse();
+    const rubric = course.weeks[0].days[6].weeklyCheckRubric!;
+    rubric.criteria[0].label = 'Advanced meaning';
+    rubric.criteria[0].scores = ['advanced start', 'partly clear', 'clear'];
+
+    expect(validateBasicEnglishVocabulary(course)).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "advanced" in day-007 weekly check rubric criterion meaning label',
+        'Non-Basic English word "advanced" in day-007 weekly check rubric criterion meaning score 1',
       ]),
     );
   });

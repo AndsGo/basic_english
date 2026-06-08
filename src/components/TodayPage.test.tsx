@@ -566,7 +566,7 @@ describe('TodayPage', () => {
       />,
     );
 
-    expect(await screen.findByRole('heading', { name: /Morning Routine/i })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /Morning Acts/i })).toBeInTheDocument();
     expect(screen.getByText(/Week 3 \/ Day 15/i)).toBeInTheDocument();
     expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Words');
     expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Picture');
@@ -924,7 +924,7 @@ describe('TodayPage', () => {
     await user.click(await getEnabledContinueButton());
     expect(screen.getByRole('heading', { name: 'Words' })).toBeInTheDocument();
     expect(screen.getByText('name')).toBeInTheDocument();
-    expect(screen.getByText('what a person is called')).toBeInTheDocument();
+    expect(screen.getByText('the word for a person or thing')).toBeInTheDocument();
     expect(screen.queryByText(/名字/)).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read word name' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read definition for name' })).toBeInTheDocument();
@@ -997,7 +997,7 @@ describe('TodayPage', () => {
 
     await user.click(await getEnabledContinueButton());
 
-    expect(screen.getByText('what a person is called')).toBeInTheDocument();
+    expect(screen.getByText('the word for a person or thing')).toBeInTheDocument();
     expect(screen.getByText(/名字/)).toBeInTheDocument();
   });
 

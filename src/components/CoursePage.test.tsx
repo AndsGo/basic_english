@@ -54,7 +54,7 @@ describe('CoursePage', () => {
       />,
     );
 
-    expect(screen.getByRole('heading', { name: 'Week 1: People, Identity, and Basic Sentences' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Week 1: Persons and Basic Sentences' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Week 2: Home & Things' })).toBeInTheDocument();
     expect(screen.getAllByText('0 / 7 days completed')).toHaveLength(basicEnglishCourse.weeks.length);
 
@@ -110,7 +110,7 @@ describe('CoursePage', () => {
     expect(screen.getAllByText('7 / 7 days completed')).toHaveLength(5);
     expect(screen.getByText('6 / 7 days completed')).toBeInTheDocument();
 
-    const day42Card = screen.getByText('Day 42: Week 6 Check').closest('article');
+    const day42Card = screen.getByText('Day 42: Week 6 Story').closest('article');
     expect(day42Card).not.toBeNull();
     expect(within(day42Card!).getByText('Current')).toBeInTheDocument();
     expect(within(day42Card!).getByRole('button', { name: 'Open Today' })).toBeInTheDocument();
@@ -131,7 +131,7 @@ describe('CoursePage', () => {
     expect(screen.getAllByText('7 / 7 days completed')).toHaveLength(6);
     expect(screen.queryByRole('button', { name: 'Open Today' })).not.toBeInTheDocument();
 
-    const day42Card = screen.getByText('Day 42: Week 6 Check').closest('article');
+    const day42Card = screen.getByText('Day 42: Week 6 Story').closest('article');
     expect(day42Card).not.toBeNull();
     expect(within(day42Card!).getByText('Completed')).toBeInTheDocument();
   });

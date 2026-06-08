@@ -65,6 +65,7 @@ export const basicEnglishCourseExceptions = new Set([
   'below',
   'best',
   'big',
+  'basic',
   'belongs',
   'breakfast',
   'bring',
@@ -168,6 +169,7 @@ export function isAllowedBasicEnglishToken(token: string): boolean {
     const withoutEd = normalized.slice(0, -2);
     candidates.add(withoutEd);
     candidates.add(removeDoubledFinalConsonant(withoutEd));
+    candidates.add(normalized.slice(0, -1));
     candidates.add(`${normalized.slice(0, -1)}e`);
   }
   if (normalized.endsWith('ing') && normalized.length > 3) {
@@ -245,6 +247,7 @@ export function validateBasicEnglishVocabulary(course: Course): string[] {
 
   for (const word of course.words) {
     validateText(word.text, `word ${word.id} text`, errors);
+    validateText(word.definition, `word ${word.id} definition`, errors);
     validateText(word.example, `word ${word.id} example`, errors);
   }
 
@@ -256,10 +259,16 @@ export function validateBasicEnglishVocabulary(course: Course): string[] {
   }
 
   for (const week of course.weeks) {
+    validateText(week.title, `week ${week.id} title`, errors);
+    validateText(week.goal, `week ${week.id} goal`, errors);
+
     for (const day of week.days) {
+      validateText(day.title, `${day.id} title`, errors);
+      validateText(day.goal, `${day.id} goal`, errors);
       day.exercises.forEach((exercise) => {
         collectExerciseTexts(exercise).forEach(({ text, label }) => validateText(text, label, errors));
       });
+      validateText(day.outputTask.topic, `${day.id} output topic`, errors);
       day.outputTask.prompts.forEach((prompt) => validateText(prompt, `${day.id} output prompt`, errors));
       day.outputTask.template.forEach((template) => validateText(template, `${day.id} output template`, errors));
 
@@ -267,6 +276,13 @@ export function validateBasicEnglishVocabulary(course: Course): string[] {
       if (outputTaskWithStoryPrompt.storyPrompt) {
         validateText(outputTaskWithStoryPrompt.storyPrompt, `${day.id} story prompt`, errors);
       }
+
+      day.weeklyCheckRubric?.criteria.forEach((criterion) => {
+        validateText(criterion.label, `${day.id} weekly check rubric criterion ${criterion.id} label`, errors);
+        criterion.scores.forEach((score, index) => {
+          validateText(score, `${day.id} weekly check rubric criterion ${criterion.id} score ${index + 1}`, errors);
+        });
+      });
     }
   }
 
