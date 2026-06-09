@@ -62,6 +62,24 @@ describe('WordFlashcards', () => {
     expect(screen.queryByText('a part of a house')).not.toBeInTheDocument();
   });
 
+  it('shows phonetics on the front side', () => {
+    renderWithSpeech(
+      <WordFlashcards words={words} imageByWordId={{ room: '/room.png' }} onKnow={vi.fn()} onReview={vi.fn()} />,
+    );
+
+    expect(screen.getByText('/ru\u02d0m/')).toBeInTheDocument();
+  });
+
+  it('shows phonetics on the back side', async () => {
+    renderWithSpeech(
+      <WordFlashcards words={words} imageByWordId={{ room: '/room.png' }} onKnow={vi.fn()} onReview={vi.fn()} />,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: 'Flip' }));
+
+    expect(screen.getByText('/ru\u02d0m/')).toBeInTheDocument();
+  });
+
   it('flips to definition and example with optional Chinese hidden by default', async () => {
     renderWithSpeech(
       <WordFlashcards words={words} imageByWordId={{ room: '/room.png' }} onKnow={vi.fn()} onReview={vi.fn()} />,
