@@ -43,4 +43,15 @@ describe('PictureDescriptionReviewCard', () => {
 
     expect(onKnown).toHaveBeenCalledTimes(1);
   });
+
+  it('reschedules with Review again', async () => {
+    const onReviewAgain = vi.fn();
+    const user = userEvent.setup();
+
+    render(<PictureDescriptionReviewCard item={item} onKnown={vi.fn()} onReviewAgain={onReviewAgain} />);
+
+    await user.click(screen.getByRole('button', { name: 'Review again' }));
+
+    expect(onReviewAgain).toHaveBeenCalledTimes(1);
+  });
 });

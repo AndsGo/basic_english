@@ -10,6 +10,7 @@ import { week1Course } from '../content/week1';
 import type { DayProgress, StepId } from '../domain/progress';
 import { startDay } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
+import { toLocalDateString } from '../domain/studyActivity';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
 import type {
   ExerciseAttempt,
@@ -972,6 +973,26 @@ describe('TodayPage', () => {
     const savedOutput = screen.getByText((_, element) => element?.textContent === 'My name is Mei.\nI am from China.\nI study English.\nI am happy.');
     expect(savedOutput).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Continue' })).not.toBeInTheDocument();
+  });
+
+  it('records a study activity for today when the day is completed (drives the streak)', async () => {
+    const user = userEvent.setup();
+    const repo = createTestRepository();
+    const saveStudyActivity = vi.spyOn(repo, 'saveStudyActivity');
+
+    renderToday(repo);
+
+    await completeDayOneThroughOutput(user);
+    await satisfyOutputGate(user);
+    await user.click(await getEnabledContinueButton());
+
+    expect(await screen.findByRole('heading', { name: 'Day 1 complete' })).toBeInTheDocument();
+
+    await waitFor(() => expect(saveStudyActivity).toHaveBeenCalled());
+    expect(saveStudyActivity.mock.calls[0][0]).toMatchObject({
+      localDate: toLocalDateString(new Date()),
+      completedDayIds: ['day-001'],
+    });
   });
 
   it('propagates checklist and self-rating changes in the output draft', async () => {

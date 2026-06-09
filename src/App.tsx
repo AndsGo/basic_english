@@ -10,7 +10,7 @@ import { pictureDescribeTasksByDayId } from './content/pictureDescribeTasks';
 import { scenarioCapabilities } from './content/scenarioCapabilities';
 import { sceneRemixTasksByDayId } from './content/sceneRemixTasks';
 import { sceneGoalsByDayId } from './content/sceneGoals';
-import { getActiveReviewDayIds } from './domain/review';
+import { getActiveReviewDayIds, selectDueReviewItems } from './domain/review';
 import { SpeechProvider } from './speech/SpeechProvider';
 import type { SpeechRate } from './speech/speechService';
 import { createIndexedDbProgressRepository } from './storage/indexedDbProgressRepository';
@@ -67,8 +67,9 @@ export default function App() {
         .filter((progress) => progress.status === 'completed' || progress.currentStep === 'done')
         .map((progress) => progress.dayId),
     );
-    setReviewCount(activeReviews.length);
-    setActiveReviewDayIds(getActiveReviewDayIds(activeReviews));
+    const dueReviews = selectDueReviewItems(activeReviews, new Date().toISOString());
+    setReviewCount(dueReviews.length);
+    setActiveReviewDayIds(getActiveReviewDayIds(dueReviews));
   };
 
   useEffect(() => {

@@ -139,6 +139,49 @@ describe('ReviewPage', () => {
     });
   });
 
+  it('reschedules a generic item with Review again, removes it from today, and announces feedback', async () => {
+    const user = userEvent.setup();
+    const repo = createIndexedDbProgressRepository('review-page-review-again');
+    const onReviewChange = vi.fn();
+
+    await repo.saveReviewItem(
+      createWordReviewItem({ wordId: 'name', wordText: 'name', sourceDayId: 'day-001', now: '2026-05-26T00:00:00.000Z' }),
+    );
+
+    render(<ReviewPage repository={repo} onReviewChange={onReviewChange} />);
+
+    expect(await screen.findByText('name')).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Review again' }));
+
+    expect(await screen.findByRole('status')).toHaveTextContent(/later/i);
+    await waitFor(() => {
+      expect(screen.getByText("No review items. Start today's task.")).toBeInTheDocument();
+    });
+
+    const active = await repo.listReviewItems('active');
+    expect(active).toHaveLength(1);
+    expect(active[0].reviewStage).toBe(1);
+    expect(onReviewChange).toHaveBeenCalled();
+  });
+
+  it('only shows items that are due today', async () => {
+    const repo = createIndexedDbProgressRepository('review-page-due-filter');
+    await repo.saveReviewItem(
+      createWordReviewItem({ wordId: 'today-word', wordText: 'today-word', sourceDayId: 'day-001', now: '2026-05-26T00:00:00.000Z' }),
+    );
+    await repo.saveReviewItem({
+      ...createWordReviewItem({ wordId: 'later-word', wordText: 'later-word', sourceDayId: 'day-002', now: '2026-05-26T00:00:00.000Z' }),
+      dueAt: '2099-01-01T00:00:00.000Z',
+    });
+
+    render(<ReviewPage repository={repo} />);
+
+    expect(await screen.findByText('today-word')).toBeInTheDocument();
+    expect(screen.queryByText('later-word')).not.toBeInTheDocument();
+    expect(screen.getByText('1 item to review')).toBeInTheDocument();
+    expect(await repo.listReviewItems('active')).toHaveLength(2);
+  });
+
   it('renders and completes an active picture description review item', async () => {
     const user = userEvent.setup();
     const repo = createIndexedDbProgressRepository('review-page-picture-description');

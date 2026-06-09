@@ -47,6 +47,10 @@ export interface ReviewItem {
   referenceAnswer?: string;
   priority: ReviewPriority;
   status: ReviewStatus;
+  /** When this item next becomes due for review. Missing (legacy items) is treated as due now. */
+  dueAt?: string;
+  /** SM-2-lite ladder position: number of times the learner has rescheduled with "Review again". */
+  reviewStage?: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -71,6 +75,8 @@ export function createWordReviewItem({
     prompt: wordText,
     priority: 'normal',
     status: 'active',
+    dueAt: now,
+    reviewStage: 0,
     createdAt: now,
     updatedAt: now,
   };
@@ -101,6 +107,8 @@ export function createExerciseReviewItem({
     referenceAnswer,
     priority: 'high',
     status: 'active',
+    dueAt: now,
+    reviewStage: 0,
     createdAt: now,
     updatedAt: now,
   };
@@ -131,6 +139,8 @@ export function createTranslationReviewItem({
     referenceAnswer,
     priority: 'normal',
     status: 'active',
+    dueAt: now,
+    reviewStage: 0,
     createdAt: now,
     updatedAt: now,
   };
@@ -154,6 +164,8 @@ export function createOutputReviewItem({
     userAnswer: text,
     priority: 'normal',
     status: 'active',
+    dueAt: now,
+    reviewStage: 0,
     createdAt: now,
     updatedAt: now,
   };
@@ -188,6 +200,8 @@ export function createSceneRemixReviewItem({
     referenceAnswer,
     priority: 'normal',
     status: 'active',
+    dueAt: now,
+    reviewStage: 0,
     createdAt: now,
     updatedAt: now,
   };
@@ -226,6 +240,8 @@ export function createPictureDescriptionReviewItem({
     simpleVersion,
     priority: 'normal',
     status: 'active',
+    dueAt: now,
+    reviewStage: 0,
     createdAt: now,
     updatedAt: now,
   };
@@ -233,6 +249,29 @@ export function createPictureDescriptionReviewItem({
 
 export function resolveReviewItem(item: ReviewItem, now: string): ReviewItem {
   return { ...item, status: 'known', updatedAt: now };
+}
+
+/** SM-2-lite spacing ladder (in days) applied each time a learner taps "Review again". */
+export const REVIEW_INTERVAL_DAYS = [1, 3, 7];
+
+function addDays(iso: string, days: number): string {
+  return new Date(new Date(iso).getTime() + days * 24 * 60 * 60 * 1000).toISOString();
+}
+
+export function isReviewItemDue(item: ReviewItem, now: string): boolean {
+  if (item.status !== 'active') return false;
+  const due = item.dueAt ?? item.createdAt;
+  return !due || due <= now;
+}
+
+export function selectDueReviewItems(items: ReviewItem[], now: string): ReviewItem[] {
+  return items.filter((item) => isReviewItemDue(item, now));
+}
+
+export function rescheduleReviewItem(item: ReviewItem, now: string): ReviewItem {
+  const stage = item.reviewStage ?? 0;
+  const intervalDays = REVIEW_INTERVAL_DAYS[Math.min(stage, REVIEW_INTERVAL_DAYS.length - 1)];
+  return { ...item, status: 'active', reviewStage: stage + 1, dueAt: addDays(now, intervalDays), updatedAt: now };
 }
 
 export function getActiveReviewDayIds(items: ReviewItem[]): string[] {

@@ -10,7 +10,10 @@ import {
   hasActivePictureDescriptionReviewItem,
   hasActiveSceneRemixReviewItem,
   hasActiveWordReviewItem,
+  isReviewItemDue,
+  rescheduleReviewItem,
   resolveReviewItem,
+  selectDueReviewItems,
   selectReviewWordIds,
   type ReviewItem,
 } from './review';
@@ -218,6 +221,63 @@ describe('picture description review items', () => {
     expect(hasActivePictureDescriptionReviewItem([legacyItem], 'picture-day-008-my-room')).toBe(true);
     expect(hasActivePictureDescriptionReviewItem([knownItem], 'picture-day-008-my-room')).toBe(false);
     expect(hasActivePictureDescriptionReviewItem([activeItem], 'picture-day-009-things-on-table')).toBe(false);
+  });
+});
+
+describe('review scheduling', () => {
+  const now = '2026-06-09T08:00:00.000Z';
+
+  it('marks new review items due immediately at creation', () => {
+    const item = createWordReviewItem({ wordId: 'name', wordText: 'name', sourceDayId: 'day-001', now });
+
+    expect(item.dueAt).toBe(now);
+    expect(item.reviewStage).toBe(0);
+    expect(isReviewItemDue(item, now)).toBe(true);
+  });
+
+  it('treats legacy items without dueAt as due', () => {
+    const item = createWordReviewItem({ wordId: 'name', wordText: 'name', sourceDayId: 'day-001', now });
+    const legacy: ReviewItem = { ...item, dueAt: undefined, reviewStage: undefined };
+
+    expect(isReviewItemDue(legacy, now)).toBe(true);
+  });
+
+  it('hides items whose dueAt is in the future and known items', () => {
+    const item = createWordReviewItem({ wordId: 'name', wordText: 'name', sourceDayId: 'day-001', now });
+
+    expect(isReviewItemDue({ ...item, dueAt: '2099-01-01T00:00:00.000Z' }, now)).toBe(false);
+    expect(isReviewItemDue(resolveReviewItem(item, now), now)).toBe(false);
+  });
+
+  it('selects only active due items', () => {
+    const due = createWordReviewItem({ wordId: 'a', wordText: 'a', sourceDayId: 'day-001', now });
+    const notYet: ReviewItem = {
+      ...createWordReviewItem({ wordId: 'b', wordText: 'b', sourceDayId: 'day-001', now }),
+      dueAt: '2099-01-01T00:00:00.000Z',
+    };
+
+    expect(selectDueReviewItems([due, notYet], now).map((item) => item.id)).toEqual([due.id]);
+  });
+
+  it('reschedules with SM-2-lite growing intervals (1 -> 3 -> 7 days, then capped)', () => {
+    const base = createWordReviewItem({ wordId: 'name', wordText: 'name', sourceDayId: 'day-001', now });
+
+    const first = rescheduleReviewItem(base, now);
+    expect(first.status).toBe('active');
+    expect(first.reviewStage).toBe(1);
+    expect(first.dueAt).toBe('2026-06-10T08:00:00.000Z');
+    expect(isReviewItemDue(first, now)).toBe(false);
+
+    const second = rescheduleReviewItem(first, now);
+    expect(second.reviewStage).toBe(2);
+    expect(second.dueAt).toBe('2026-06-12T08:00:00.000Z');
+
+    const third = rescheduleReviewItem(second, now);
+    expect(third.reviewStage).toBe(3);
+    expect(third.dueAt).toBe('2026-06-16T08:00:00.000Z');
+
+    const fourth = rescheduleReviewItem(third, now);
+    expect(fourth.dueAt).toBe('2026-06-16T08:00:00.000Z');
   });
 });
 

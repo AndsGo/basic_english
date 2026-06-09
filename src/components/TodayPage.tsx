@@ -13,6 +13,7 @@ import {
   type ReviewItem,
 } from '../domain/review';
 import { createInitialSceneOutput, normalizeSceneOutput } from '../domain/sceneOutput';
+import { buildStudyActivity, toLocalDateString } from '../domain/studyActivity';
 import {
   getDrillsCompletion,
   getOutputCompletion,
@@ -458,6 +459,10 @@ export function TodayPage({
         if (outputDraft.selfRating === 'hard') {
           await saveReviewItem(createOutputReviewItem({ sourceDayId: day.id, text: outputDraft.text, now }));
         }
+        const localDate = toLocalDateString(new Date());
+        const activities = await repository.listStudyActivities();
+        const existingToday = activities.find((activity) => activity.localDate === localDate);
+        await repository.saveStudyActivity(buildStudyActivity(existingToday, day.id, localDate));
       }
       await repository.saveStepCompletion({
         id: makeStepCompletionId(day.id, currentStep),

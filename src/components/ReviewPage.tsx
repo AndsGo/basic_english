@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { resolveReviewItem, type ReviewItem } from '../domain/review';
+import {
+  REVIEW_INTERVAL_DAYS,
+  rescheduleReviewItem,
+  resolveReviewItem,
+  selectDueReviewItems,
+  type ReviewItem,
+} from '../domain/review';
 import type { SceneRemixTask } from '../domain/types';
 import type { ProgressRepository } from '../storage/progressRepository';
 import { PictureDescriptionReviewCard } from './PictureDescriptionReviewCard';
@@ -30,6 +36,7 @@ export function ReviewPage({
 }) {
   const [items, setItems] = useState<ReviewItem[]>([]);
   const [loadError, setLoadError] = useState(false);
+  const [feedback, setFeedback] = useState<string | null>(null);
 
   const loadItems = async () => {
     try {
@@ -70,6 +77,15 @@ export function ReviewPage({
     onReviewChange?.();
   };
 
+  const reviewAgain = async (item: ReviewItem) => {
+    const now = new Date().toISOString();
+    const days = REVIEW_INTERVAL_DAYS[Math.min(item.reviewStage ?? 0, REVIEW_INTERVAL_DAYS.length - 1)];
+    await repository.saveReviewItem(rescheduleReviewItem(item, now));
+    setFeedback(`Saved for later — back in ${days} day${days === 1 ? '' : 's'}.`);
+    await loadItems();
+    onReviewChange?.();
+  };
+
   const markSceneRemix = async (item: ReviewItem, result: SceneRemixSubmitResult) => {
     const now = new Date().toISOString();
     const taskId = item.taskId ?? item.id;
@@ -96,11 +112,18 @@ export function ReviewPage({
     onReviewChange?.();
   };
 
-  if (items.length === 0) {
+  const dueItems = selectDueReviewItems(items, new Date().toISOString());
+
+  if (dueItems.length === 0) {
     return (
       <section className="panel">
         <h2>Review today</h2>
         {loadError && <p role="alert">Review items could not be loaded.</p>}
+        {feedback && (
+          <p className="selection-status" role="status">
+            {feedback}
+          </p>
+        )}
         <p>No review items. Start today&apos;s task.</p>
         {onStartToday && (
           <button type="button" className="primary-button" onClick={onStartToday}>
@@ -115,11 +138,16 @@ export function ReviewPage({
     <section className="panel">
       <h2>Review today</h2>
       {loadError && <p role="alert">Review items could not be loaded.</p>}
+      {feedback && (
+        <p className="selection-status" role="status">
+          {feedback}
+        </p>
+      )}
       <p>
-        {items.length} {items.length === 1 ? 'item' : 'items'} to review
+        {dueItems.length} {dueItems.length === 1 ? 'item' : 'items'} to review
       </p>
       <div className="review-list">
-        {items.map((item) =>
+        {dueItems.map((item) =>
           item.type === 'scene_remix' ? (
             <SceneRemixCard
               key={item.id}
@@ -129,7 +157,12 @@ export function ReviewPage({
               onSubmit={(result) => markSceneRemix(item, result)}
             />
           ) : item.type === 'picture_description' ? (
-            <PictureDescriptionReviewCard key={item.id} item={item} onKnown={() => markKnown(item)} />
+            <PictureDescriptionReviewCard
+              key={item.id}
+              item={item}
+              onKnown={() => markKnown(item)}
+              onReviewAgain={() => reviewAgain(item)}
+            />
           ) : (
             <article className="review-card" key={item.id}>
               <p className="eyebrow">
@@ -142,7 +175,7 @@ export function ReviewPage({
                 <button type="button" className="primary-button" onClick={() => void markKnown(item)}>
                   I know this
                 </button>
-                <button type="button" className="secondary-button">
+                <button type="button" className="secondary-button" onClick={() => void reviewAgain(item)}>
                   Review again
                 </button>
               </div>

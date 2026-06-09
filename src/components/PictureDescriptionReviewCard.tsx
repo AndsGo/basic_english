@@ -1,6 +1,14 @@
 import type { ReviewItem } from '../domain/review';
 
-export function PictureDescriptionReviewCard({ item, onKnown }: { item: ReviewItem; onKnown: () => void | Promise<void> }) {
+export function PictureDescriptionReviewCard({
+  item,
+  onKnown,
+  onReviewAgain,
+}: {
+  item: ReviewItem;
+  onKnown: () => void | Promise<void>;
+  onReviewAgain?: () => void | Promise<void>;
+}) {
   return (
     <article className="review-card picture-review-card">
       <p className="eyebrow">picture / {item.sourceDayId}</p>
@@ -45,7 +53,7 @@ export function PictureDescriptionReviewCard({ item, onKnown }: { item: ReviewIt
         <button type="button" className="primary-button" onClick={() => void onKnown()}>
           I know this
         </button>
-        <button type="button" className="secondary-button">
+        <button type="button" className="secondary-button" onClick={() => void onReviewAgain?.()}>
           Review again
         </button>
       </div>
