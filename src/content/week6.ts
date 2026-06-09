@@ -1,16 +1,16 @@
 import type { Pattern, Week, Word } from '../domain/types';
 
 export const week6Words: Word[] = [
-  { id: 'late', text: 'late', category: 'quality', definition: 'after the right time', chinese: '迟到的；晚的', example: 'I am late.', weekIntroduced: 6, tags: ['problem'] },
-  { id: 'early', text: 'early', category: 'quality', definition: 'before the right time', chinese: '早的', example: 'I am early.', weekIntroduced: 6, tags: ['time'] },
-  { id: 'clear', text: 'clear', category: 'quality', definition: 'simple to see or understand', chinese: '清楚的', example: 'The way is clear.', weekIntroduced: 6, tags: ['problem'] },
-  { id: 'wrong', text: 'wrong', category: 'quality', definition: 'not right or not correct', chinese: '错误的', example: 'This way is wrong.', weekIntroduced: 6, tags: ['problem'] },
-  { id: 'another', text: 'another', category: 'structure', definition: 'one more or a different one', chinese: '另一个', example: 'I need another way.', weekIntroduced: 6, tags: ['problem'] },
-  { id: 'understand', text: 'understand', category: 'operation', definition: 'to get the meaning', chinese: '理解；明白', example: 'I understand.', weekIntroduced: 6, tags: ['communication'] },
-  { id: 'repeat', text: 'repeat', category: 'operation', definition: 'to say or do again', chinese: '重复；再说一遍', example: 'Please repeat.', weekIntroduced: 6, tags: ['communication'] },
-  { id: 'sorry', text: 'sorry', category: 'structure', definition: 'a word for a wrong act or trouble', chinese: '对不起', example: 'I am sorry.', weekIntroduced: 6, tags: ['polite'] },
-  { id: 'excuse', text: 'excuse', category: 'operation', definition: 'to ask politely for attention', chinese: '打扰一下', example: 'Excuse me.', weekIntroduced: 6, tags: ['polite'] },
-  { id: 'safe', text: 'safe', category: 'quality', definition: 'free from danger', chinese: '安全的', example: 'The way is safe.', weekIntroduced: 6, tags: ['problem'] },
+  { id: 'late', text: 'late', category: 'quality', definition: 'after the right time', phonetic: '/le\u026at/', chinese: '迟到的；晚的', example: 'I am late.', weekIntroduced: 6, tags: ['problem'] },
+  { id: 'early', text: 'early', category: 'quality', definition: 'before the right time', phonetic: '/\u02c8\u025c\u02d0li/', chinese: '早的', example: 'I am early.', weekIntroduced: 6, tags: ['time'] },
+  { id: 'clear', text: 'clear', category: 'quality', definition: 'simple to see or understand', phonetic: '/kl\u026a\u0259/', chinese: '清楚的', example: 'The way is clear.', weekIntroduced: 6, tags: ['problem'] },
+  { id: 'wrong', text: 'wrong', category: 'quality', definition: 'not right or not correct', phonetic: '/r\u0252\u014b/', chinese: '错误的', example: 'This way is wrong.', weekIntroduced: 6, tags: ['problem'] },
+  { id: 'another', text: 'another', category: 'structure', definition: 'one more or a different one', phonetic: '/\u0259\u02c8n\u028c\u00f0\u0259/', chinese: '另一个', example: 'I need another way.', weekIntroduced: 6, tags: ['problem'] },
+  { id: 'understand', text: 'understand', category: 'operation', definition: 'to get the meaning', phonetic: '/\u02cc\u028cnd\u0259\u02c8st\u00e6nd/', chinese: '理解；明白', example: 'I understand.', weekIntroduced: 6, tags: ['communication'] },
+  { id: 'repeat', text: 'repeat', category: 'operation', definition: 'to say or do again', phonetic: '/r\u026a\u02c8pi\u02d0t/', chinese: '重复；再说一遍', example: 'Please repeat.', weekIntroduced: 6, tags: ['communication'] },
+  { id: 'sorry', text: 'sorry', category: 'structure', definition: 'a word for a wrong act or trouble', phonetic: '/\u02c8s\u0252ri/', chinese: '对不起', example: 'I am sorry.', weekIntroduced: 6, tags: ['polite'] },
+  { id: 'excuse', text: 'excuse', category: 'operation', definition: 'to ask politely for attention', phonetic: '/\u026ak\u02c8skju\u02d0z/', chinese: '打扰一下', example: 'Excuse me.', weekIntroduced: 6, tags: ['polite'] },
+  { id: 'safe', text: 'safe', category: 'quality', definition: 'free from danger', phonetic: '/se\u026af/', chinese: '安全的', example: 'The way is safe.', weekIntroduced: 6, tags: ['problem'] },
 ];
 
 export const week6Patterns: Pattern[] = [
