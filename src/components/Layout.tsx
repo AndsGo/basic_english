@@ -22,8 +22,8 @@ export function Layout({ activeTab, onTabChange, reviewCount, children }: Layout
     <div className="layout">
       <header className="topbar">
         <div>
-          <p className="eyebrow">Basic English 12 Weeks</p>
-          <h1>Week 1 MVP</h1>
+          <p className="eyebrow">12-Week Course</p>
+          <h1>Basic English</h1>
         </div>
       </header>
       <main className="page-content">{children}</main>

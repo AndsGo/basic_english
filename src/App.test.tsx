@@ -105,6 +105,13 @@ describe('App shell', () => {
     expect(screen.getByText('Complete Day 1.')).toBeInTheDocument();
   });
 
+  it('shows a real product title in the top bar instead of a dev placeholder', () => {
+    render(<App />);
+
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Basic English');
+    expect(screen.queryByText(/MVP/)).not.toBeInTheDocument();
+  });
+
   it('shows Chinese word help only after the learner enables it', async () => {
     const user = userEvent.setup();
 

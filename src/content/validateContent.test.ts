@@ -355,6 +355,14 @@ describe('basicEnglishCourse V1.10', () => {
     expect(validateCourseContent(basicEnglishCourse).errors).toEqual([]);
   });
 
+  it('keeps pattern use hints in English so Chinese stays behind the help toggle', () => {
+    const patternsWithChineseUse = basicEnglishCourse.patterns
+      .filter((pattern) => /[一-鿿]/.test(pattern.use))
+      .map((pattern) => pattern.id);
+
+    expect(patternsWithChineseUse).toEqual([]);
+  });
+
   it('includes playable Week 3 and Week 4 content for V1.9', () => {
     const result = validateCourseContent(basicEnglishCourse);
 

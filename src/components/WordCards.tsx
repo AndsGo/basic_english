@@ -27,7 +27,11 @@ export function WordCards({ words, showChineseHelp = false, marks = {}, onReview
                 {word.definition}
                 <SpeechButton text={word.definition} label={`Read definition for ${word.text}`} />
               </p>
-              {showChineseHelp && <p className="muted">Chinese: {word.chinese}</p>}
+              {showChineseHelp && (
+                <p className="muted">
+                  Chinese: <span lang="zh">{word.chinese}</span>
+                </p>
+              )}
             </div>
             <p className="example">
               {word.example}
@@ -38,20 +42,20 @@ export function WordCards({ words, showChineseHelp = false, marks = {}, onReview
               <button
                 type="button"
                 className={`secondary-button${marks[word.id] === 'review' ? ' selected-button' : ''}`}
-                aria-label={`Review ${word.text}`}
+                aria-label={`Add to review: ${word.text}`}
                 aria-pressed={marks[word.id] === 'review'}
                 onClick={() => onReview(word.id)}
               >
-                Review
+                Add to review
               </button>
               <button
                 type="button"
                 className={`secondary-button${marks[word.id] === 'known' ? ' selected-button' : ''}`}
-                aria-label={`Know ${word.text}`}
+                aria-label={`I know this: ${word.text}`}
                 aria-pressed={marks[word.id] === 'known'}
                 onClick={() => onKnow(word.id)}
               >
-                Know
+                I know this
               </button>
             </div>
           </article>

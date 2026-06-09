@@ -59,8 +59,10 @@ textarea {
 }
 
 .primary-button:focus-visible,
-.secondary-button:focus-visible {
-  outline: 3px solid #9ccbb7;
+.secondary-button:focus-visible,
+.nav-item:focus-visible,
+.option-list button:focus-visible {
+  outline: 3px solid #265c46;
   outline-offset: 2px;
 }
 
@@ -422,6 +424,7 @@ textarea {
 }
 
 .speech-button {
+  position: relative;
   display: inline-grid;
   width: 32px;
   height: 32px;
@@ -432,6 +435,13 @@ textarea {
   color: #265c46;
   background: #eef6f1;
   vertical-align: middle;
+}
+
+/* Expand the touch target to the 44px recommendation without growing the visual icon. */
+.speech-button::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
 }
 
 .speech-button svg {
@@ -447,7 +457,7 @@ textarea {
 }
 
 .speech-button:focus-visible {
-  outline: 3px solid #9ccbb7;
+  outline: 3px solid #265c46;
   outline-offset: 2px;
 }
 
@@ -788,4 +798,11 @@ textarea {
 
 .scene-map-item--current {
   border-color: #265c46;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-button:active:not(:disabled),
+  .secondary-button:active:not(:disabled) {
+    transform: none;
+  }
 }

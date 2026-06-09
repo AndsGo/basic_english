@@ -55,6 +55,8 @@ describe('WordCards', () => {
     renderWordCards(true);
 
     expect(screen.getByText('/neɪm/')).toBeInTheDocument();
-    expect(screen.getByText('Chinese: 名字')).toBeInTheDocument();
+    const chinese = screen.getByText('名字');
+    expect(chinese).toHaveAttribute('lang', 'zh');
+    expect(screen.getByText(/Chinese:/)).toBeInTheDocument();
   });
 });

@@ -90,7 +90,7 @@ describe('WordFlashcards', () => {
     expect(screen.getByText('a part of a house')).toBeInTheDocument();
     expect(screen.getByText('My room is small.')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read word room' })).toBeInTheDocument();
-    expect(screen.queryByText('Chinese: 房间')).not.toBeInTheDocument();
+    expect(screen.queryByText('房间')).not.toBeInTheDocument();
   });
 
   it('shows Chinese on the back when enabled', async () => {
@@ -106,7 +106,9 @@ describe('WordFlashcards', () => {
 
     await userEvent.click(screen.getByRole('button', { name: 'Flip' }));
 
-    expect(screen.getByText('Chinese: 房间')).toBeInTheDocument();
+    const chinese = screen.getByText('房间');
+    expect(chinese).toHaveAttribute('lang', 'zh');
+    expect(screen.getByText(/Chinese:/)).toBeInTheDocument();
   });
 
   it('saves review feedback and keeps the learner in the deck', async () => {
@@ -116,7 +118,7 @@ describe('WordFlashcards', () => {
     );
 
     await userEvent.click(screen.getByRole('button', { name: 'Flip' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Review' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Add to review' }));
 
     expect(onReview).toHaveBeenCalledWith(words[1]);
     expect(await screen.findByText('Added to Review')).toBeInTheDocument();
@@ -130,7 +132,7 @@ describe('WordFlashcards', () => {
     );
 
     await userEvent.click(screen.getByRole('button', { name: 'Flip' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Know' }));
+    await userEvent.click(screen.getByRole('button', { name: 'I know this' }));
 
     expect(onKnow).toHaveBeenCalledWith(words[1]);
     expect(await screen.findByText('Marked Known')).toBeInTheDocument();
@@ -186,7 +188,7 @@ describe('WordFlashcards', () => {
     );
 
     await userEvent.click(screen.getByRole('button', { name: 'Flip' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Review' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Add to review' }));
 
     expect(screen.getByRole('button', { name: 'Flip' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Next' })).toBeDisabled();
@@ -195,5 +197,31 @@ describe('WordFlashcards', () => {
 
     expect(await screen.findByText('Added to Review')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Next' })).not.toBeDisabled();
+  });
+
+  it('announces save feedback to assistive technology via a status role', async () => {
+    const onReview = vi.fn().mockResolvedValue(undefined);
+    renderWithSpeech(
+      <WordFlashcards words={words} imageByWordId={{ room: '/room.png' }} onKnow={vi.fn()} onReview={onReview} />,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: 'Flip' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Add to review' }));
+
+    const status = await screen.findByRole('status');
+    expect(status).toHaveTextContent('Added to Review');
+  });
+
+  it('announces save errors assertively via an alert role', async () => {
+    const onReview = vi.fn().mockRejectedValue(new Error('offline'));
+    renderWithSpeech(
+      <WordFlashcards words={words} imageByWordId={{ room: '/room.png' }} onKnow={vi.fn()} onReview={onReview} />,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: 'Flip' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Add to review' }));
+
+    const alert = await screen.findByRole('alert');
+    expect(alert).toHaveTextContent('Could not save. Try again.');
   });
 });

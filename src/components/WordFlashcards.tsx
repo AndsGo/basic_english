@@ -95,7 +95,11 @@ export function WordFlashcards({
               {currentWord.definition}
               <SpeechButton text={currentWord.definition} label={`Read definition for ${currentWord.text}`} />
             </p>
-            {showChineseHelp && <p className="muted">Chinese: {currentWord.chinese}</p>}
+            {showChineseHelp && (
+              <p className="muted">
+                Chinese: <span lang="zh">{currentWord.chinese}</span>
+              </p>
+            )}
             <p className="example">
               {currentWord.example}
               <SpeechButton text={currentWord.example} label={`Read example for ${currentWord.text}`} />
@@ -103,18 +107,18 @@ export function WordFlashcards({
             <SpeechButton text={currentWord.text} label={`Read word ${currentWord.text}`} />
             <div className="card-actions">
               <button type="button" className="secondary-button" onClick={() => void save('review')} disabled={isSaving}>
-                Review
+                Add to review
               </button>
               <button type="button" className="secondary-button" onClick={() => void save('known')} disabled={isSaving}>
-                Know
+                I know this
               </button>
             </div>
           </div>
         )}
       </article>
-      {feedback === 'review' && <p className="selection-status">Added to Review</p>}
-      {feedback === 'known' && <p className="selection-status">Marked Known</p>}
-      {feedback === 'error' && <p className="requirement-list">Could not save. Try again.</p>}
+      {feedback === 'review' && <p className="selection-status" role="status">Added to Review</p>}
+      {feedback === 'known' && <p className="selection-status" role="status">Marked Known</p>}
+      {feedback === 'error' && <p className="requirement-list" role="alert">Could not save. Try again.</p>}
       <div className="flashcard-navigation">
         <button
           type="button"

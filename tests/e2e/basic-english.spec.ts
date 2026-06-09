@@ -124,7 +124,7 @@ async function completeWords(page: Page, day: Day) {
   for (const wordId of day.wordIds) {
     const word = basicEnglishCourse.words.find((item) => item.id === wordId);
     if (!word) throw new Error(`Could not find word "${wordId}".`);
-    await page.getByRole('button', { name: `Know ${word.text}` }).click();
+    await page.getByRole('button', { name: `I know this: ${word.text}` }).click();
   }
 }
 
@@ -266,12 +266,12 @@ async function goToReview(page: Page) {
 }
 
 async function markDayOneWords(page: Page) {
-  await page.getByRole('button', { name: 'Review name' }).click();
-  await page.getByRole('button', { name: 'Know my' }).click();
-  await page.getByRole('button', { name: 'Know I' }).click();
-  await page.getByRole('button', { name: 'Know am' }).click();
-  await page.getByRole('button', { name: 'Know from' }).click();
-  await page.getByRole('button', { name: 'Know China' }).click();
+  await page.getByRole('button', { name: 'Add to review: name' }).click();
+  await page.getByRole('button', { name: 'I know this: my' }).click();
+  await page.getByRole('button', { name: 'I know this: I' }).click();
+  await page.getByRole('button', { name: 'I know this: am' }).click();
+  await page.getByRole('button', { name: 'I know this: from' }).click();
+  await page.getByRole('button', { name: 'I know this: China' }).click();
 }
 
 async function completeDayOnePatterns(page: Page) {
@@ -354,7 +354,7 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByRole('button', { name: 'Read word name' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Read definition for name' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Read example for name' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Review name' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Add to review: name' })).toBeVisible();
     await markDayOneWords(page);
 
     await continueTo(page, 'Patterns');
@@ -454,8 +454,8 @@ test.describe('Basic English MVP e2e', () => {
     await expect(flashcardCard.getByText('/ne\u026am/')).toBeVisible();
     await flashcards.getByRole('button', { name: 'Flip' }).click();
     await expect(flashcardCard.getByText('/ne\u026am/')).toBeVisible();
-    await expect(flashcards.getByRole('button', { name: 'Review' })).toBeVisible();
-    await flashcards.getByRole('button', { name: 'Review' }).click();
+    await expect(flashcards.getByRole('button', { name: 'Add to review' })).toBeVisible();
+    await flashcards.getByRole('button', { name: 'Add to review' }).click();
     await expect(page.getByText('Added to Review')).toBeVisible();
     await page.getByRole('button', { name: 'List', exact: true }).click();
 

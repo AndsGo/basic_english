@@ -149,7 +149,7 @@ describe('WordsPage', () => {
 
     await userEvent.click(screen.getByRole('button', { name: 'Flashcards' }));
     await userEvent.click(screen.getByRole('button', { name: 'Flip' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Know' }));
+    await userEvent.click(screen.getByRole('button', { name: 'I know this' }));
 
     await waitFor(async () => {
       await expect(repository.listReviewWords()).resolves.toHaveLength(0);
@@ -166,8 +166,8 @@ describe('WordsPage', () => {
 
     await userEvent.click(screen.getByRole('button', { name: 'Flashcards' }));
     await userEvent.click(screen.getByRole('button', { name: 'Flip' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Review' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Review' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Add to review' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Add to review' }));
 
     expect(await repository.listReviewWords()).toHaveLength(1);
     const activeReviews = await repository.listReviewItems('active');
@@ -184,10 +184,10 @@ describe('WordsPage', () => {
 
     await userEvent.click(screen.getByRole('button', { name: 'Flashcards' }));
     await userEvent.click(screen.getByRole('button', { name: 'Flip' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Review' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Add to review' }));
     expect(await repository.listReviewItems('active')).toHaveLength(1);
 
-    await userEvent.click(screen.getByRole('button', { name: 'Know' }));
+    await userEvent.click(screen.getByRole('button', { name: 'I know this' }));
 
     expect(await repository.listReviewItems('active')).toHaveLength(0);
     expect(await repository.listReviewItems('known')).toHaveLength(1);

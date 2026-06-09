@@ -220,7 +220,7 @@ async function getEnabledContinueButton() {
 }
 
 async function completeWords(user: ReturnType<typeof userEvent.setup>) {
-  for (const button of screen.getAllByRole('button', { name: /^Know / })) {
+  for (const button of screen.getAllByRole('button', { name: /^I know this/ })) {
     await user.click(button);
   }
   await user.click(await getEnabledContinueButton());
@@ -697,7 +697,7 @@ describe('TodayPage', () => {
 
     await user.click(await getEnabledContinueButton());
     expect(screen.getByRole('button', { name: 'Continue' })).toBeDisabled();
-    expect(screen.getByText(/Mark name as Know or Review/)).toBeInTheDocument();
+    expect(screen.getByText(/Mark name as "I know this" or "Add to review"/)).toBeInTheDocument();
   });
 
   it('creates a review item when a word is marked Review', async () => {
@@ -706,7 +706,7 @@ describe('TodayPage', () => {
     renderWithSpeech(<TodayPage course={week1Course} repository={repo} />);
 
     await user.click(await getEnabledContinueButton());
-    await user.click(await screen.findByRole('button', { name: 'Review name' }));
+    await user.click(await screen.findByRole('button', { name: 'Add to review: name' }));
 
     await waitFor(async () => {
       expect(await repo.listReviewItems('active')).toHaveLength(1);
@@ -720,14 +720,14 @@ describe('TodayPage', () => {
 
     await user.click(await getEnabledContinueButton());
 
-    const knowName = await screen.findByRole('button', { name: 'Know name' });
+    const knowName = await screen.findByRole('button', { name: 'I know this: name' });
     await user.click(knowName);
 
     expect(knowName).toHaveAttribute('aria-pressed', 'true');
     expect(knowName).toHaveClass('selected-button');
     expect(screen.getByText('Known')).toBeInTheDocument();
 
-    for (const button of screen.getAllByRole('button', { name: /^Know / })) {
+    for (const button of screen.getAllByRole('button', { name: /^I know this/ })) {
       if (button !== knowName) await user.click(button);
     }
     await user.click(await getEnabledContinueButton());
@@ -748,7 +748,7 @@ describe('TodayPage', () => {
     renderWithSpeech(<TodayPage course={week1Course} repository={repo} onProgressChange={onProgressChange} />);
 
     await user.click(await getEnabledContinueButton());
-    await user.click(await screen.findByRole('button', { name: 'Review name' }));
+    await user.click(await screen.findByRole('button', { name: 'Add to review: name' }));
 
     await waitFor(() => {
       expect(onProgressChange).toHaveBeenCalled();
@@ -929,8 +929,8 @@ describe('TodayPage', () => {
     expect(screen.getByRole('button', { name: 'Read word name' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read definition for name' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read example for name' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Review name' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Know name' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add to review: name' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'I know this: name' })).toBeInTheDocument();
 
     await completeWords(user);
     expect(screen.getByRole('heading', { name: 'Patterns' })).toBeInTheDocument();

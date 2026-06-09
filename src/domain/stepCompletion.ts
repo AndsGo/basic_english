@@ -29,7 +29,7 @@ function hasAnswerInput(answer: ExerciseAnswer | undefined): answer is ExerciseA
 
 export function getWordsCompletion(wordIds: string[], marks: Record<string, WordMark | undefined>): CompletionGate {
   const missing = wordIds.filter((wordId) => !marks[wordId]);
-  return done(missing.map((wordId) => `Mark ${wordId} as Know or Review.`));
+  return done(missing.map((wordId) => `Mark ${wordId} as "I know this" or "Add to review".`));
 }
 
 export function getPatternsCompletion(patternIds: string[], practicedPatternIds: Set<string>): CompletionGate {

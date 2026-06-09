@@ -76,13 +76,13 @@ const words: Word[] = wordsWithoutDefinitions.map((word) => ({
 }));
 
 const patterns: Pattern[] = [
-  { id: 'my-name-is', title: 'My name is ___.', use: '说出自己的名字。', structure: 'My name is {name}.', examples: ['My name is Li.', 'My name is Anna.'], slots: ['name'] },
-  { id: 'i-am-from', title: 'I am from ___.', use: '说明自己来自哪里。', structure: 'I am from {place}.', examples: ['I am from China.', 'I am from Shanghai.'], slots: ['place'] },
-  { id: 'i-am', title: 'I am ___.', use: '描述身份或状态。', structure: 'I am {description}.', examples: ['I am a student.', 'I am happy today.'], slots: ['description'] },
-  { id: 'i-have', title: 'I have ___.', use: '表达自己有什么。', structure: 'I have {thing}.', examples: ['I have a question.', 'I have a friend.'], slots: ['thing'] },
-  { id: 'this-is', title: 'This is ___.', use: '介绍一个人或物。', structure: 'This is {personOrThing}.', examples: ['This is my friend.', 'This is my book.'], slots: ['personOrThing'] },
-  { id: 'he-she-is', title: 'He/She is ___.', use: '描述另一个人。', structure: '{pronoun} is {description}.', examples: ['He is kind.', 'She is a student.'], slots: ['pronoun', 'description'] },
-  { id: 'study-because', title: 'I study English because ___.', use: '说明学习英语的原因。', structure: 'I study English because {reason}.', examples: ['I study English because it is useful.', 'I study English because I want to speak.'], slots: ['reason'] },
+  { id: 'my-name-is', title: 'My name is ___.', use: 'Say your name.', structure: 'My name is {name}.', examples: ['My name is Li.', 'My name is Anna.'], slots: ['name'] },
+  { id: 'i-am-from', title: 'I am from ___.', use: 'Say the place you are from.', structure: 'I am from {place}.', examples: ['I am from China.', 'I am from Shanghai.'], slots: ['place'] },
+  { id: 'i-am', title: 'I am ___.', use: 'Say one thing about you.', structure: 'I am {description}.', examples: ['I am a student.', 'I am happy today.'], slots: ['description'] },
+  { id: 'i-have', title: 'I have ___.', use: 'Say one thing you have.', structure: 'I have {thing}.', examples: ['I have a question.', 'I have a friend.'], slots: ['thing'] },
+  { id: 'this-is', title: 'This is ___.', use: 'Introduce one person or thing.', structure: 'This is {personOrThing}.', examples: ['This is my friend.', 'This is my book.'], slots: ['personOrThing'] },
+  { id: 'he-she-is', title: 'He/She is ___.', use: 'Describe a different person.', structure: '{pronoun} is {description}.', examples: ['He is kind.', 'She is a student.'], slots: ['pronoun', 'description'] },
+  { id: 'study-because', title: 'I study English because ___.', use: 'Give the reason you study English.', structure: 'I study English because {reason}.', examples: ['I study English because it is useful.', 'I study English because I want to speak.'], slots: ['reason'] },
 ];
 
 export const week1Course: Course = {
