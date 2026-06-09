@@ -1,4 +1,5 @@
 import type { Word } from '../domain/types';
+import { PhoneticText } from './PhoneticText';
 import { SpeechButton } from './SpeechButton';
 
 interface WordCardsProps {
@@ -17,8 +18,9 @@ export function WordCards({ words, showChineseHelp = false, marks = {}, onReview
         {words.map((word) => (
           <article className="learning-card word-card" key={word.id}>
             <div>
-              <p className="word-text">
-                {word.text}
+              <p className="word-text word-heading">
+                <span>{word.text}</span>
+                <PhoneticText value={word.phonetic} />
                 <SpeechButton text={word.text} label={`Read word ${word.text}`} />
               </p>
               <p className="muted">
