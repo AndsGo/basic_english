@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { Word } from '../domain/types';
+import { PhoneticText } from './PhoneticText';
 import { SpeechButton } from './SpeechButton';
 
 type FlashcardFeedback = 'review' | 'known' | 'error' | null;
@@ -84,10 +85,12 @@ export function WordFlashcards({
               <div className="flashcard-image flashcard-image--fallback">No image yet</div>
             )}
             <h3>{currentWord.text}</h3>
+            <PhoneticText value={currentWord.phonetic} />
           </div>
         ) : (
           <div className="flashcard-back">
             <h3>{currentWord.text}</h3>
+            <PhoneticText value={currentWord.phonetic} />
             <p>
               {currentWord.definition}
               <SpeechButton text={currentWord.definition} label={`Read definition for ${currentWord.text}`} />

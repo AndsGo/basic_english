@@ -91,6 +91,19 @@ describe('WordsPage', () => {
     expect(screen.queryByLabelText('Word flashcards')).not.toBeInTheDocument();
   });
 
+  it('shows phonetics in list mode', () => {
+    renderWithSpeech(<WordsPage course={week1Course} repository={createRepository()} />);
+
+    expect(screen.getByText('/neɪm/')).toBeInTheDocument();
+  });
+
+  it('keeps phonetics visible when Chinese help is off', () => {
+    renderWithSpeech(<WordsPage course={week1Course} repository={createRepository()} />);
+
+    expect(screen.getByText('/neɪm/')).toBeInTheDocument();
+    expect(screen.queryByText(/Chinese:/)).not.toBeInTheDocument();
+  });
+
   it('switches to flashcards and renders image-backed content', async () => {
     renderWithSpeech(
       <WordsPage course={week1Course} repository={createRepository()} imageByWordId={{ student: '/student.png' }} />,

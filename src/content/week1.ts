@@ -1,6 +1,6 @@
 import type { Course, Pattern, Word } from '../domain/types';
 
-const wordsWithoutDefinitions: Array<Omit<Word, 'definition'>> = [
+const wordsWithoutDefinitions: Array<Omit<Word, 'definition' | 'phonetic'>> = [
   { id: 'name', text: 'name', category: 'general_thing', chinese: '名字', example: 'My name is Li.', weekIntroduced: 1, tags: ['identity'] },
   { id: 'my', text: 'my', category: 'structure', chinese: '我的', example: 'My friend is here.', weekIntroduced: 1, tags: ['pronoun'] },
   { id: 'i', text: 'I', category: 'structure', chinese: '我', example: 'I am a student.', weekIntroduced: 1, tags: ['pronoun'] },
@@ -22,6 +22,29 @@ const wordsWithoutDefinitions: Array<Omit<Word, 'definition'>> = [
   { id: 'want', text: 'want', category: 'operation', chinese: '想要', example: 'I want to learn English.', weekIntroduced: 1, tags: ['desire'] },
   { id: 'learn', text: 'learn', category: 'operation', chinese: '学习', example: 'I want to learn English.', weekIntroduced: 1, tags: ['study'] },
 ];
+
+const phoneticByWordId: Record<string, string> = {
+  name: '/ne\u026am/',
+  my: '/ma\u026a/',
+  i: '/a\u026a/',
+  am: '/\u00e6m/',
+  from: '/fr\u0252m/',
+  china: '/\u02c8t\u0283a\u026an\u0259/',
+  student: '/\u02c8stju\u02d0d\u0259nt/',
+  happy: '/\u02c8h\u00e6pi/',
+  have: '/h\u00e6v/',
+  question: '/\u02c8kwest\u0283\u0259n/',
+  friend: '/frend/',
+  this: '/\u00f0\u026as/',
+  he: '/hi\u02d0/',
+  she: '/\u0283i\u02d0/',
+  kind: '/ka\u026and/',
+  study: '/\u02c8st\u028cdi/',
+  english: '/\u02c8\u026a\u014b\u0261l\u026a\u0283/',
+  because: '/b\u026a\u02c8k\u0252z/',
+  want: '/w\u0252nt/',
+  learn: '/l\u025c\u02d0n/',
+};
 
 const wordDefinitions: Record<string, string> = {
   name: 'the word for a person or thing',
@@ -48,6 +71,7 @@ const wordDefinitions: Record<string, string> = {
 
 const words: Word[] = wordsWithoutDefinitions.map((word) => ({
   ...word,
+  phonetic: phoneticByWordId[word.id] ?? '',
   definition: wordDefinitions[word.id] ?? '',
 }));
 

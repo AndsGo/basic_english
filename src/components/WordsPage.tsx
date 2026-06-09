@@ -3,6 +3,7 @@ import { wordFlashcardImages } from '../content/wordFlashcardImages';
 import { createWordReviewItem, hasActiveWordReviewItem, resolveReviewItem } from '../domain/review';
 import type { Course, Word } from '../domain/types';
 import type { ProgressRepository } from '../storage/progressRepository';
+import { PhoneticText } from './PhoneticText';
 import { SpeechButton } from './SpeechButton';
 import { WordFlashcards } from './WordFlashcards';
 
@@ -90,8 +91,9 @@ export function WordsPage({
         <div className="word-bank">
           {course.words.map((word) => (
             <article className="word-bank-item" key={word.id}>
-              <strong>
-                {word.text}
+              <strong className="word-heading">
+                <span>{word.text}</span>
+                <PhoneticText value={word.phonetic} />
                 <SpeechButton text={word.text} label={`Read word ${word.text}`} />
               </strong>
               <span>

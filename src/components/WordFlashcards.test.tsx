@@ -12,6 +12,7 @@ const words: Word[] = [
     text: 'name',
     category: 'general_thing',
     definition: 'the word for a person or thing',
+    phonetic: '/ne\u026am/',
     chinese: '名字',
     example: 'My name is Li.',
     weekIntroduced: 1,
@@ -22,6 +23,7 @@ const words: Word[] = [
     text: 'room',
     category: 'picturable_thing',
     definition: 'a part of a house',
+    phonetic: '/ru\u02d0m/',
     chinese: '房间',
     example: 'My room is small.',
     weekIntroduced: 2,
@@ -58,6 +60,24 @@ describe('WordFlashcards', () => {
     expect(screen.getByRole('heading', { name: 'room' })).toBeInTheDocument();
     expect(screen.getByText('1 / 2')).toBeInTheDocument();
     expect(screen.queryByText('a part of a house')).not.toBeInTheDocument();
+  });
+
+  it('shows phonetics on the front side', () => {
+    renderWithSpeech(
+      <WordFlashcards words={words} imageByWordId={{ room: '/room.png' }} onKnow={vi.fn()} onReview={vi.fn()} />,
+    );
+
+    expect(screen.getByText('/ru\u02d0m/')).toBeInTheDocument();
+  });
+
+  it('shows phonetics on the back side', async () => {
+    renderWithSpeech(
+      <WordFlashcards words={words} imageByWordId={{ room: '/room.png' }} onKnow={vi.fn()} onReview={vi.fn()} />,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: 'Flip' }));
+
+    expect(screen.getByText('/ru\u02d0m/')).toBeInTheDocument();
   });
 
   it('flips to definition and example with optional Chinese hidden by default', async () => {
