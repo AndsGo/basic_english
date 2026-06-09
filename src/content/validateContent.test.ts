@@ -94,12 +94,19 @@ describe('week1Course', () => {
     expect(validateCourseContent(course).errors).toContain(`Word ${course.words[0].id} phonetic must be wrapped in /.../`);
   });
 
+  it('requires word phonetics to include content between slashes', () => {
+    const course = cloneCourse();
+    course.words[0].phonetic = '//';
+
+    expect(validateCourseContent(course).errors).toContain(`Word ${course.words[0].id} phonetic must be wrapped in /.../`);
+  });
+
   it('does not treat IPA phonetics as Basic English prose', () => {
     const course = cloneCourse();
     course.words[0].phonetic = '/ˈkwestʃən/';
 
-    expect(validateCourseContent(course).errors).not.toContain(
-      `Non-Basic English word "kwestʃən" in word ${course.words[0].id} phonetic`,
+    expect(validateCourseContent(course).errors).not.toEqual(
+      expect.arrayContaining([expect.stringContaining(`word ${course.words[0].id} phonetic`)]),
     );
   });
 

@@ -46,9 +46,10 @@ export function validateCourseContent(course: Course): ValidationResult {
     if (!word.text || !word.definition || !word.chinese || !word.example) {
       errors.push(`Word ${word.id} is missing text, definition, chinese, or example`);
     }
-    if (!word.phonetic || !word.phonetic.trim()) {
+    const phonetic = word.phonetic?.trim() ?? '';
+    if (!phonetic) {
       errors.push(`Word ${word.id} is missing phonetic`);
-    } else if (!word.phonetic.startsWith('/') || !word.phonetic.endsWith('/')) {
+    } else if (!phonetic.startsWith('/') || !phonetic.endsWith('/') || !phonetic.slice(1, -1).trim()) {
       errors.push(`Word ${word.id} phonetic must be wrapped in /.../`);
     }
   });
