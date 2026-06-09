@@ -1,5 +1,6 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { basicEnglishCourse } from '../content/course';
 import type { SceneGoal } from '../domain/types';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
 import type { ProgressRepository } from '../storage/progressRepository';
@@ -169,6 +170,30 @@ describe('MePage scene map', () => {
 });
 
 describe('MePage saved outputs', () => {
+  it('shows the V1.10 total progress out of 42 days', async () => {
+    const repository = createMockRepository({
+      listDayProgress: vi.fn().mockResolvedValue([
+        {
+          id: 'progress-day-042',
+          dayId: 'day-042',
+          currentStep: 'done',
+          status: 'completed',
+          completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'scene-remix', 'picture', 'output'],
+          startedAt: '2026-06-08T00:00:00.000Z',
+          completedAt: '2026-06-08T00:10:00.000Z',
+          updatedAt: '2026-06-08T00:10:00.000Z',
+          contentVersion: basicEnglishCourse.contentVersion,
+        },
+      ]),
+    });
+    const totalDayCount = basicEnglishCourse.weeks.flatMap((week) => week.days).length;
+
+    render(<MePage repository={repository} totalDayCount={totalDayCount} />);
+
+    expect(await screen.findByText('Completed days: 1')).toBeInTheDocument();
+    expect(screen.getByText('/ 42')).toBeInTheDocument();
+  });
+
   it('shows saved scene text and dialogue in Saved Outputs', async () => {
     const repository = createMockRepository({
       listUserOutputs: vi.fn().mockResolvedValue([

@@ -92,6 +92,7 @@ import finishImage from '../assets/word-flashcards/finish.png';
 import sameImage from '../assets/word-flashcards/same.png';
 import orderImage from '../assets/word-flashcards/order.png';
 import alwaysImage from '../assets/word-flashcards/always.png';
+import anotherImage from '../assets/word-flashcards/another.png';
 import oftenImage from '../assets/word-flashcards/often.png';
 import sometimesImage from '../assets/word-flashcards/sometimes.png';
 import neverImage from '../assets/word-flashcards/never.png';
@@ -127,7 +128,33 @@ import littleImage from '../assets/word-flashcards/little.png';
 import muchImage from '../assets/word-flashcards/much.png';
 import askImage from '../assets/word-flashcards/ask.png';
 import answerImage from '../assets/word-flashcards/answer.png';
+import backImage from '../assets/word-flashcards/back.png';
+import carryImage from '../assets/word-flashcards/carry.png';
+import clearImage from '../assets/word-flashcards/clear.png';
+import earlyImage from '../assets/word-flashcards/early.png';
+import excuseImage from '../assets/word-flashcards/excuse.png';
+import farImage from '../assets/word-flashcards/far.png';
 import findImage from '../assets/word-flashcards/find.png';
+import lateImage from '../assets/word-flashcards/late.png';
+import leftImage from '../assets/word-flashcards/left.png';
+import lightImage from '../assets/word-flashcards/light.png';
+import lineImage from '../assets/word-flashcards/line.png';
+import listImage from '../assets/word-flashcards/list.png';
+import outsideImage from '../assets/word-flashcards/outside.png';
+import repeatImage from '../assets/word-flashcards/repeat.png';
+import rightImage from '../assets/word-flashcards/right.png';
+import safeImage from '../assets/word-flashcards/safe.png';
+import seatImage from '../assets/word-flashcards/seat.png';
+import sorryImage from '../assets/word-flashcards/sorry.png';
+import stopImage from '../assets/word-flashcards/stop.png';
+import straightImage from '../assets/word-flashcards/straight.png';
+import transportImage from '../assets/word-flashcards/transport.png';
+import turnImage from '../assets/word-flashcards/turn.png';
+import understandImage from '../assets/word-flashcards/understand.png';
+import waitingImage from '../assets/word-flashcards/waiting.png';
+import wayImage from '../assets/word-flashcards/way.png';
+import weightImage from '../assets/word-flashcards/weight.png';
+import wrongImage from '../assets/word-flashcards/wrong.png';
 import showImage from '../assets/word-flashcards/show.png';
 import bringImage from '../assets/word-flashcards/bring.png';
 import tellImage from '../assets/word-flashcards/tell.png';
@@ -318,6 +345,33 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('empty', emptyImage, 'quality', 'scene', 'none', 'A simple visual quality cue for the word empty.'),
   wordImageAsset('taste', tasteImage, 'action', 'scene', 'none', 'A simple action scene showing taste for Basic English learners.'),
   wordImageAsset('bad', badImage, 'quality', 'scene', 'none', 'A simple visual quality cue for the word bad.'),
+  wordImageAsset('outside', outsideImage, 'place', 'scene', 'none', 'A simple outdoor scene showing outside for Basic English learners.'),
+  wordImageAsset('way', wayImage, 'object', 'scene', 'none', 'A simple path scene showing the way to go.'),
+  wordImageAsset('stop', stopImage, 'action', 'scene', 'none', 'A simple action scene showing a person stopping safely.'),
+  wordImageAsset('far', farImage, 'quality', 'scene', 'none', 'A simple distance scene showing one place far away.'),
+  wordImageAsset('transport', transportImage, 'abstract', 'scene', 'none', 'A simple daily travel scene showing transport.'),
+  wordImageAsset('waiting', waitingImage, 'action', 'scene', 'none', 'A simple scene showing a person waiting.'),
+  wordImageAsset('seat', seatImage, 'object', 'concrete', 'none', 'A simple seat flashcard image for Basic English learners.'),
+  wordImageAsset('left', leftImage, 'position', 'relation', 'none', 'A simple relation scene showing an object on the left.'),
+  wordImageAsset('right', rightImage, 'position', 'relation', 'none', 'A simple relation scene showing an object on the right.'),
+  wordImageAsset('straight', straightImage, 'quality', 'scene', 'none', 'A simple scene showing a straight road or path.'),
+  wordImageAsset('line', lineImage, 'structure', 'scene', 'none', 'A simple scene showing people standing in a line.'),
+  wordImageAsset('turn', turnImage, 'action', 'scene', 'none', 'A simple action scene showing a turn on a path.'),
+  wordImageAsset('list', listImage, 'object', 'concrete', 'none', 'A simple paper list flashcard image for Basic English learners.'),
+  wordImageAsset('carry', carryImage, 'action', 'scene', 'none', 'A simple action scene showing a person carrying a bag.'),
+  wordImageAsset('back', backImage, 'structure', 'scene', 'none', 'A simple scene showing the back side of a person or object.'),
+  wordImageAsset('weight', weightImage, 'abstract', 'scene', 'none', 'A simple scene showing a heavy bag and its weight.'),
+  wordImageAsset('light', lightImage, 'quality', 'scene', 'none', 'A simple scene showing a light bag that is easy to carry.'),
+  wordImageAsset('late', lateImage, 'time', 'scene', 'none', 'A simple time scene showing someone arriving late.'),
+  wordImageAsset('early', earlyImage, 'time', 'scene', 'none', 'A simple time scene showing someone arriving early.'),
+  wordImageAsset('clear', clearImage, 'quality', 'scene', 'none', 'A simple scene showing a clear path or view.'),
+  wordImageAsset('wrong', wrongImage, 'quality', 'scene', 'none', 'A simple scene showing the wrong item or way.'),
+  wordImageAsset('another', anotherImage, 'structure', 'grammar', 'english-keyword', 'A simple English keyword card showing the structure word another.'),
+  wordImageAsset('understand', understandImage, 'action', 'scene', 'none', 'A simple action scene showing a learner understanding.'),
+  wordImageAsset('repeat', repeatImage, 'action', 'scene', 'none', 'A simple action scene showing someone repeating words.'),
+  wordImageAsset('sorry', sorryImage, 'structure', 'grammar', 'english-keyword', 'A simple English keyword card showing the structure word sorry.'),
+  wordImageAsset('excuse', excuseImage, 'action', 'scene', 'none', 'A simple polite scene showing someone asking to pass.'),
+  wordImageAsset('safe', safeImage, 'quality', 'scene', 'none', 'A simple scene showing a safe place or action.'),
 ];
 
 export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(

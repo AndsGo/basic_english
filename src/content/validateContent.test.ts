@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { Course, SceneRemixTask, ScenarioCapability, ScenarioWeek } from '../domain/types';
+import { isAllowedBasicEnglishToken, tokenizeBasicEnglishText, validateBasicEnglishVocabulary } from './basicEnglish850';
 import { basicEnglishCourse } from './course';
 import { pictureDescribeTasksByDayId } from './pictureDescribeTasks';
 import { scenarioCapabilities, scenarioWeekMap } from './scenarioCapabilities';
@@ -11,6 +12,7 @@ import { sceneGoalsByDayId } from './sceneGoals';
 import { week1Course } from './week1';
 import {
   validateCourseContent,
+  validatePictureDescribeTasks,
   validateScenarioCapabilities,
   validateScenarioWeekMap,
   validateSceneGoals,
@@ -26,6 +28,20 @@ import {
 
 function cloneCourse(): Course {
   return structuredClone(week1Course);
+}
+
+function validateBasicEnglishTexts(texts: Array<{ text: string; label: string }>): string[] {
+  const errors: string[] = [];
+
+  for (const { text, label } of texts) {
+    for (const token of tokenizeBasicEnglishText(text)) {
+      if (!isAllowedBasicEnglishToken(token)) {
+        errors.push(`Non-Basic English word "${token}" in ${label}`);
+      }
+    }
+  }
+
+  return [...new Set(errors)];
 }
 
 describe('week1Course', () => {
@@ -107,11 +123,11 @@ describe('week1Course', () => {
         {
           id: 'sentence-control',
           label: 'Sentence control',
-          scores: ['many missing parts', 'some complete sentences', 'mostly complete sentences'],
+          scores: ['not complete', 'some complete sentences', 'complete sentences'],
         },
-        { id: 'target-patterns', label: 'Target patterns', scores: ['not used', 'used with help', 'used independently'] },
-        { id: 'word-use', label: 'Word use', scores: ['few lesson words', 'some lesson words', 'several lesson words'] },
-        { id: 'independence', label: 'Independence', scores: ['copied template', 'partly changed template', 'mostly own content'] },
+        { id: 'target-patterns', label: 'Form use', scores: ['not used', 'used with help', 'used with no help'] },
+        { id: 'word-use', label: 'Word use', scores: ['little new words', 'some new words', 'much new words'] },
+        { id: 'independence', label: 'My words', scores: ['same as example', 'some change from example', 'all my words'] },
       ],
     });
   });
@@ -286,7 +302,7 @@ describe('week1Course', () => {
   });
 });
 
-describe('basicEnglishCourse V1.2', () => {
+describe('basicEnglishCourse V1.10', () => {
   it('contains Week 1 and a complete Week 2', () => {
     expect(basicEnglishCourse.weeks.length).toBeGreaterThanOrEqual(2);
     expect(basicEnglishCourse.weeks[1]).toMatchObject({
@@ -313,12 +329,11 @@ describe('basicEnglishCourse V1.2', () => {
     const result = validateCourseContent(basicEnglishCourse);
 
     expect(result.errors).toEqual([]);
-    expect(basicEnglishCourse.weeks).toHaveLength(4);
-    expect(basicEnglishCourse.weeks.map((week) => week.days.length)).toEqual([7, 7, 7, 7]);
+    expect(basicEnglishCourse.weeks.slice(0, 4).map((week) => week.days.length)).toEqual([7, 7, 7, 7]);
     expect(basicEnglishCourse.weeks[2]).toMatchObject({
       id: 'week-03',
       number: 3,
-      title: 'Daily Routine & Time',
+      title: 'Every Day and Time',
     });
     expect(basicEnglishCourse.weeks[3]).toMatchObject({
       id: 'week-04',
@@ -329,8 +344,74 @@ describe('basicEnglishCourse V1.2', () => {
     expect(basicEnglishCourse.weeks[3].days[6]).toMatchObject({ id: 'day-028', dayNumber: 28 });
   });
 
+  it('includes complete Week 5 and Week 6 course content for V1.10', () => {
+    const result = validateCourseContent(basicEnglishCourse);
+    const week5 = basicEnglishCourse.weeks[4];
+    const week6 = basicEnglishCourse.weeks[5];
+    const newDays = basicEnglishCourse.weeks.slice(4, 6).flatMap((week) => week.days);
+
+    expect(result.errors).toEqual([]);
+    expect(basicEnglishCourse.contentVersion).toBe('1.10.0');
+    expect(basicEnglishCourse.weeks).toHaveLength(6);
+    expect(basicEnglishCourse.weeks.map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7]);
+    expect(week5).toMatchObject({
+      id: 'week-05',
+      number: 5,
+      title: 'Going Outside for Things',
+    });
+    expect(week6).toMatchObject({
+      id: 'week-06',
+      number: 6,
+      title: 'Problems Outside',
+    });
+    expect(week5.days[0]).toMatchObject({ id: 'day-029', dayNumber: 29 });
+    expect(week6.days[6]).toMatchObject({ id: 'day-042', dayNumber: 42 });
+    expect(newDays.map((day) => day.id)).toEqual([
+      'day-029',
+      'day-030',
+      'day-031',
+      'day-032',
+      'day-033',
+      'day-034',
+      'day-035',
+      'day-036',
+      'day-037',
+      'day-038',
+      'day-039',
+      'day-040',
+      'day-041',
+      'day-042',
+    ]);
+
+    for (const day of newDays) {
+      const translationCount = day.exercises.filter((exercise) => exercise.type === 'translation').length;
+      const expectedStoryMode = day.id === 'day-035' || day.id === 'day-042' ? 'recap' : 'sentence';
+
+      expect(day.wordIds.length, `${day.id} word count`).toBeGreaterThanOrEqual(6);
+      expect(day.patternIds.length, `${day.id} pattern count`).toBeGreaterThanOrEqual(1);
+      expect(day.exercises.length, `${day.id} exercise count`).toBeGreaterThanOrEqual(5);
+      expect(translationCount, `${day.id} translation count`).toBeGreaterThanOrEqual(1);
+      expect(day.outputTask.requiredSentenceCount, `${day.id} output sentences`).toBeGreaterThanOrEqual(4);
+      expect(day.outputTask.storyMode, `${day.id} story mode`).toBe(expectedStoryMode);
+      expect(day.outputTask.storyPrompt?.trim(), `${day.id} story prompt`).toBeTruthy();
+    }
+  });
+
+  it('uses Chinese learner prompts for Week 5 and Week 6 translation exercises', () => {
+    const newDays = basicEnglishCourse.weeks.slice(4, 6).flatMap((week) => week.days);
+
+    for (const day of newDays) {
+      const translationExercises = day.exercises.filter((exercise) => exercise.type === 'translation');
+
+      for (const exercise of translationExercises) {
+        expect(exercise.chinesePrompt, `${exercise.id} Chinese prompt`).toMatch(/\p{Script=Han}/u);
+        expect(exercise.chinesePrompt, `${exercise.id} Chinese prompt`).not.toMatch(/^[\x00-\x7F]+$/);
+      }
+    }
+  });
+
   it('gives every Week 3 and Week 4 day a complete Today content set', () => {
-    const newDays = basicEnglishCourse.weeks.slice(2).flatMap((week) => week.days);
+    const newDays = basicEnglishCourse.weeks.slice(2, 4).flatMap((week) => week.days);
 
     expect(newDays.map((day) => day.id)).toEqual([
       'day-015',
@@ -373,10 +454,10 @@ describe('basicEnglishCourse V1.2', () => {
     }
   });
 
-  it('keeps Day 28 as the course completion day', () => {
+  it('keeps Day 42 as the course completion day', () => {
     const allDays = basicEnglishCourse.weeks.flatMap((week) => week.days);
 
-    expect(allDays.at(-1)?.id).toBe('day-028');
+    expect(allDays.at(-1)?.id).toBe('day-042');
     expect(allDays.at(-1)?.weeklyCheckRubric).toBeDefined();
   });
 
@@ -482,6 +563,201 @@ describe('basicEnglishCourse V1.2', () => {
   });
 });
 
+describe('Basic English 850 validation', () => {
+  function cloneBasicEnglishCourse(): Course {
+    return structuredClone(basicEnglishCourse);
+  }
+
+  it('validates the existing shipped basicEnglishCourse', () => {
+    expect(validateBasicEnglishVocabulary(basicEnglishCourse)).toEqual([]);
+  });
+
+  it('validates learner-facing scene goals and remix tasks', () => {
+    const taskFourDayIds = new Set(
+      basicEnglishCourse.weeks.slice(4, 6).flatMap((week) => week.days.map((day) => day.id)),
+    );
+    const scenarioWeekTexts = scenarioWeekMap
+      .filter((week) => week.weekNumber === 5 || week.weekNumber === 6)
+      .flatMap((week) => [
+        { text: week.theme, label: `scenario week ${week.weekNumber} theme` },
+        { text: week.expressionOutcome, label: `scenario week ${week.weekNumber} expression outcome` },
+      ]);
+    const scenarioCapabilityTexts = scenarioCapabilities
+      .filter((capability) => capability.id === 'errand-story' || capability.id === 'outside-problems')
+      .flatMap((capability) => [
+        { text: capability.title, label: `scenario capability ${capability.id} title` },
+        { text: capability.description, label: `scenario capability ${capability.id} description` },
+        ...capability.exampleOutputs.map((text, index) => ({
+          text,
+          label: `scenario capability ${capability.id} example ${index + 1}`,
+        })),
+      ]);
+    const sceneGoalTexts = Object.entries(sceneGoalsByDayId)
+      .filter(([dayId]) => taskFourDayIds.has(dayId))
+      .flatMap(([dayId, sceneGoal]) => [
+        { text: sceneGoal.title, label: `${dayId} scene goal title` },
+        { text: sceneGoal.capability, label: `${dayId} scene goal capability` },
+        ...sceneGoal.templates.map((text, index) => ({ text, label: `${dayId} scene goal template ${index + 1}` })),
+        ...sceneGoal.guidedPrompts.map((text, index) => ({ text, label: `${dayId} scene goal guided prompt ${index + 1}` })),
+        { text: sceneGoal.scenePrompt, label: `${dayId} scene goal scene prompt` },
+        ...sceneGoal.dialoguePrompts.map((text, index) => ({ text, label: `${dayId} scene goal dialogue prompt ${index + 1}` })),
+      ]);
+    const remixTaskTexts = Object.entries(sceneRemixTasksByDayId).flatMap(([dayId, tasks]) =>
+      taskFourDayIds.has(dayId) ? (tasks ?? []).flatMap((task) => [
+        { text: task.prompt, label: `${dayId} remix ${task.id} prompt` },
+        ...(task.source ? [{ text: task.source, label: `${dayId} remix ${task.id} source` }] : []),
+        ...task.referenceAnswers.map((text, index) => ({ text, label: `${dayId} remix ${task.id} reference ${index + 1}` })),
+      ]) : [],
+    );
+
+    expect(validateBasicEnglishTexts([...scenarioWeekTexts, ...scenarioCapabilityTexts, ...sceneGoalTexts, ...remixTaskTexts])).toEqual([]);
+  });
+
+  it('validates Week 5 and Week 6 picture task visible text', () => {
+    const weekFiveAndSixDayIds = new Set(
+      basicEnglishCourse.weeks.slice(4, 6).flatMap((week) => week.days.map((day) => day.id)),
+    );
+    const pictureTaskTexts = Object.entries(pictureDescribeTasksByDayId)
+      .filter(([dayId]) => weekFiveAndSixDayIds.has(dayId))
+      .flatMap(([dayId, task]) => [
+        { text: task.title, label: `${dayId} picture title` },
+        { text: task.goal, label: `${dayId} picture goal` },
+        ...task.targetWords.map((text, index) => ({ text, label: `${dayId} picture target word ${index + 1}` })),
+        ...task.suggestedPatterns.map((text, index) => ({ text, label: `${dayId} picture suggested pattern ${index + 1}` })),
+        ...task.simpleVersion.map((text, index) => ({ text, label: `${dayId} picture simple version ${index + 1}` })),
+      ]);
+
+    expect(validateBasicEnglishTexts(pictureTaskTexts)).toEqual([]);
+  });
+
+  it('reports a non-Basic English word added as course word text', () => {
+    const course = cloneBasicEnglishCourse();
+    course.words.push({
+      ...course.words[0],
+      id: 'airport',
+      text: 'airport',
+    });
+
+    expect(validateBasicEnglishVocabulary(course)).toContain('Non-Basic English word "airport" in word airport text');
+  });
+
+  it('reports non-Basic English words in word examples and output templates', () => {
+    const course = cloneBasicEnglishCourse();
+    course.words[0].example = 'I visit a museum.';
+    course.weeks[0].days[0].outputTask.template[0] = 'I visit a museum.';
+
+    expect(validateBasicEnglishVocabulary(course)).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "visit" in word name example',
+        'Non-Basic English word "museum" in word name example',
+        'Non-Basic English word "visit" in day-001 output template',
+        'Non-Basic English word "museum" in day-001 output template',
+      ]),
+    );
+  });
+
+  it('reports non-Basic English words in course visible titles goals definitions and output topics', () => {
+    const course = cloneBasicEnglishCourse();
+    course.words[0].definition = 'airport terminal';
+    course.weeks[0].title = 'Airport People';
+    course.weeks[0].goal = 'Visit a museum.';
+    course.weeks[0].days[0].title = 'Airport Day';
+    course.weeks[0].days[0].goal = 'Visit a museum.';
+    course.weeks[0].days[0].outputTask.topic = 'Airport Story';
+
+    expect(validateBasicEnglishVocabulary(course)).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "airport" in word name definition',
+        'Non-Basic English word "airport" in week week-01 title',
+        'Non-Basic English word "visit" in week week-01 goal',
+        'Non-Basic English word "museum" in week week-01 goal',
+        'Non-Basic English word "airport" in day-001 title',
+        'Non-Basic English word "visit" in day-001 goal',
+        'Non-Basic English word "museum" in day-001 goal',
+        'Non-Basic English word "airport" in day-001 output topic',
+      ]),
+    );
+  });
+
+  it('reports non-Basic English words in weekly check rubric visible text', () => {
+    const course = cloneBasicEnglishCourse();
+    const rubric = course.weeks[0].days[6].weeklyCheckRubric!;
+    rubric.criteria[0].label = 'Advanced meaning';
+    rubric.criteria[0].scores = ['advanced start', 'partly clear', 'clear'];
+
+    expect(validateBasicEnglishVocabulary(course)).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "advanced" in day-007 weekly check rubric criterion meaning label',
+        'Non-Basic English word "advanced" in day-007 weekly check rubric criterion meaning score 1',
+      ]),
+    );
+  });
+
+  it('reports non-Basic English words in pattern use text', () => {
+    const course = cloneBasicEnglishCourse();
+    course.patterns[0].use = 'Use museum language.';
+
+    expect(validateBasicEnglishVocabulary(course)).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "museum" in pattern my-name-is use',
+      ]),
+    );
+  });
+
+  it('allows simple inflections from Basic English base words', () => {
+    const course = cloneBasicEnglishCourse();
+    course.words[0].example = 'I walked home.';
+    course.words[1].example = 'I am walking home.';
+    course.words[2].example = 'I have books.';
+
+    expect(validateBasicEnglishVocabulary(course)).toEqual([]);
+  });
+
+  it('allows doubled-consonant inflections from Basic English base words', () => {
+    const course = cloneBasicEnglishCourse();
+    course.words[0].example = 'I am running.';
+    course.words[1].example = 'I stopped here.';
+    course.words[2].example = 'I am swimming.';
+    course.patterns[0].examples = ['I am getting a book.'];
+    course.weeks[0].days[0].outputTask.template[0] = 'I am putting a book here.';
+
+    expect(validateBasicEnglishVocabulary(course)).toEqual([]);
+  });
+
+  it('splits common contractions without reporting contraction fragments', () => {
+    const course = cloneBasicEnglishCourse();
+    course.words[0].example = "I'm here. I don't have books.";
+
+    const errors = validateBasicEnglishVocabulary(course);
+
+    expect(errors).toEqual([]);
+    expect(errors).not.toEqual(expect.arrayContaining([
+      expect.stringContaining('"m"'),
+      expect.stringContaining('"don"'),
+      expect.stringContaining('"t"'),
+    ]));
+  });
+
+  it("splits common n't contractions into allowed helper words", () => {
+    const course = cloneBasicEnglishCourse();
+    course.words[0].example = "It isn't here.";
+    course.words[1].example = "They aren't here.";
+    course.words[2].example = "I haven't books.";
+    course.patterns[0].examples = ["It doesn't have a name."];
+
+    const errors = validateBasicEnglishVocabulary(course);
+
+    expect(errors).toEqual([]);
+    expect(errors).not.toEqual(expect.arrayContaining([
+      expect.stringContaining('"isn"'),
+      expect.stringContaining('"aren"'),
+      expect.stringContaining('"haven"'),
+      expect.stringContaining('"doesn"'),
+      expect.stringContaining('"t"'),
+    ]));
+  });
+});
+
 describe('scenario capabilities', () => {
   function scenarioWeek(overrides: Partial<ScenarioWeek> = {}): ScenarioWeek {
     return {
@@ -542,6 +818,35 @@ describe('scenario capabilities', () => {
     expect(validateScenarioCapabilities(scenarioCapabilities, basicEnglishCourse).errors).toEqual([]);
   });
 
+  it('includes Week 5 and Week 6 scenario capabilities', () => {
+    expect(scenarioWeekMap[4]).toEqual({
+      weekNumber: 5,
+      theme: 'Going Out Story',
+      expressionOutcome: 'Tell a complete going out story.',
+    });
+    expect(scenarioWeekMap[5]).toEqual({
+      weekNumber: 6,
+      theme: 'Problems Outside',
+      expressionOutcome: 'Describe outside problems and ask for help in a kind way.',
+    });
+    // Some examples use Basic English 850-compatible wording instead of written-plan wording.
+    expect(scenarioCapabilities.find((capability) => capability.id === 'errand-story')).toEqual({
+      id: 'errand-story',
+      title: 'I can tell a going out story.',
+      description: 'Tell how you go out, take a bus, buy things at a store, and come home.',
+      unlockedByDayIds: ['day-035'],
+      exampleOutputs: ['I go out with my list.', 'I take the bus.', 'I buy bread at the store.', 'I come home.'],
+    });
+    expect(scenarioCapabilities.find((capability) => capability.id === 'outside-problems')).toEqual({
+      id: 'outside-problems',
+      title: 'I can ask for help outside.',
+      description: 'Ask for help in a kind way when there is a problem outside.',
+      unlockedByDayIds: ['day-042'],
+      exampleOutputs: ['I have a problem outside.', 'Please help me.', 'I ask for help.', 'I am kind.'],
+    });
+    expect(validateScenarioCapabilities(scenarioCapabilities, basicEnglishCourse).errors).toEqual([]);
+  });
+
   it('rejects duplicate or empty capability ids and missing metadata', () => {
     const capabilities = [
       scenarioCapability({ id: '', title: ' ', description: 'Description' }),
@@ -591,13 +896,27 @@ describe('scenario capabilities', () => {
 describe('scene goals', () => {
   it('validates scene goals for existing playable days', () => {
     const result = validateSceneGoals(sceneGoalsByDayId, basicEnglishCourse);
-    const weekThreeAndFourDayIds = basicEnglishCourse.weeks
-      .slice(2, 4)
+    const weekThreeThroughSixDayIds = basicEnglishCourse.weeks
+      .slice(2, 6)
       .flatMap((week) => week.days.map((day) => day.id));
 
     expect(Object.keys(sceneGoalsByDayId)).toEqual(
-      expect.arrayContaining(['day-001', 'day-008', 'day-009', 'day-010', ...weekThreeAndFourDayIds]),
+      expect.arrayContaining(['day-001', 'day-008', 'day-009', 'day-010', ...weekThreeThroughSixDayIds]),
     );
+    expect(sceneGoalsByDayId['day-035'].title).toBe('Going Out Story');
+    expect(sceneGoalsByDayId['day-036'].title).toBe('Early and Late');
+    expect(sceneGoalsByDayId['day-038'].title).toBe('Wrong Way');
+    expect(sceneGoalsByDayId['day-039'].title).toBe('Repeat Please');
+    expect(sceneGoalsByDayId['day-041'].title).toBe('Kind Help');
+    expect(sceneGoalsByDayId['day-042'].title).toBe('Problem Story');
+    expect(sceneGoalsByDayId['day-042'].templates).toEqual([
+      'The way is not clear.',
+      'This way is wrong.',
+      'I need another way.',
+      'Please repeat.',
+      'I understand.',
+      'I am kind.',
+    ]);
     expect(result.errors).toEqual([]);
   });
 
@@ -672,12 +991,177 @@ describe('scene goals', () => {
 
     expect(result.errors).toContain('Duplicate scene goal id: self');
   });
+
+  it('reports non-Basic English words in visible scene goal text', () => {
+    const result = validateSceneGoals(
+      {
+        'day-001': {
+          id: 'bad-scene-goal',
+          title: 'Airport Visit',
+          capability: 'I can visit a museum.',
+          templates: ['I visit a museum.'],
+          guidedPrompts: ['Say the airport problem.'],
+          scenePrompt: 'Describe the museum visit.',
+          dialoguePrompts: ['Ask about the airport.'],
+        },
+      },
+      basicEnglishCourse,
+    );
+
+    expect(result.errors).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "airport" in day-001 scene goal title',
+        'Non-Basic English word "visit" in day-001 scene goal capability',
+        'Non-Basic English word "museum" in day-001 scene goal capability',
+        'Non-Basic English word "visit" in day-001 scene goal template 1',
+        'Non-Basic English word "museum" in day-001 scene goal template 1',
+        'Non-Basic English word "airport" in day-001 scene goal guided prompt 1',
+        'Non-Basic English word "museum" in day-001 scene goal scene prompt',
+        'Non-Basic English word "visit" in day-001 scene goal scene prompt',
+        'Non-Basic English word "airport" in day-001 scene goal dialogue prompt 1',
+      ]),
+    );
+  });
 });
 
 describe('scene remix tasks', () => {
   it('validates shipped remix tasks', () => {
     const result = validateSceneRemixTasks(sceneRemixTasksByDayId, basicEnglishCourse);
+    const weekFiveAndSixDayIds = basicEnglishCourse.weeks
+      .slice(4, 6)
+      .flatMap((week) => week.days.map((day) => day.id));
+    // A few written-plan references use Basic English 850-compatible wording to avoid ride, wait, and thank.
+    const expectedWeekFiveAndSixTasks: Record<string, SceneRemixTask[]> = {
+      'day-029': [
+        {
+          id: 'day-029-remix-food-water',
+          type: 'replace',
+          prompt: 'Change food to water.',
+          source: 'I go out because I need food.',
+          referenceAnswers: ['I go out because I need water.'],
+        },
+      ],
+      'day-030': [
+        {
+          id: 'day-030-remix-stop-store',
+          type: 'replace',
+          prompt: 'Change bus stop to store.',
+          source: 'I walk to the bus stop.',
+          referenceAnswers: ['I walk to the store.'],
+        },
+      ],
+      'day-031': [
+        {
+          id: 'day-031-remix-store-home',
+          type: 'replace',
+          prompt: 'Change store to home.',
+          source: 'I take the bus to the store.',
+          referenceAnswers: ['I take the bus home.'],
+        },
+      ],
+      'day-032': [
+        {
+          id: 'day-032-remix-bread-milk',
+          type: 'replace',
+          prompt: 'Change bread to milk.',
+          source: 'I find bread in the store.',
+          referenceAnswers: ['I find milk in the store.'],
+        },
+      ],
+      'day-033': [
+        {
+          id: 'day-033-remix-food-bread',
+          type: 'replace',
+          prompt: 'Change food to bread.',
+          source: 'I am in line and pay for food.',
+          referenceAnswers: ['I am in line and pay for bread.'],
+        },
+      ],
+      'day-034': [
+        {
+          id: 'day-034-remix-food-bag',
+          type: 'replace',
+          prompt: 'Change food to bag.',
+          source: 'I carry food home.',
+          referenceAnswers: ['I carry the bag home.'],
+        },
+      ],
+      'day-035': [
+        {
+          id: 'day-035-remix-errand-story',
+          type: 'extend',
+          prompt: 'Put more sentences in the outside story.',
+          referenceAnswers: ['I am in line.', 'I come back home.'],
+        },
+      ],
+      'day-036': [
+        {
+          id: 'day-036-remix-early-late',
+          type: 'replace',
+          prompt: 'Change early to late.',
+          source: 'I am early and waiting for the bus.',
+          referenceAnswers: ['I am late and waiting for the bus.'],
+        },
+      ],
+      'day-037': [
+        {
+          id: 'day-037-remix-clear-way',
+          type: 'replace',
+          prompt: 'Change clear to not clear.',
+          source: 'The way is clear.',
+          referenceAnswers: ['The way is not clear.'],
+        },
+      ],
+      'day-038': [
+        {
+          id: 'day-038-remix-wrong-way',
+          type: 'replace',
+          prompt: 'Change straight to turn right.',
+          source: 'I go straight.',
+          referenceAnswers: ['I turn right.'],
+        },
+      ],
+      'day-039': [
+        {
+          id: 'day-039-remix-repeat-please',
+          type: 'replace',
+          prompt: 'Change I understand to Please repeat.',
+          source: 'I understand.',
+          referenceAnswers: ['Please repeat.'],
+        },
+      ],
+      'day-040': [
+        {
+          id: 'day-040-remix-understand-hear',
+          type: 'replace',
+          prompt: 'Change understand to get the answer.',
+          source: 'I do not understand.',
+          referenceAnswers: ['I do not get the answer.'],
+        },
+      ],
+      'day-041': [
+        {
+          id: 'day-041-remix-help-answer',
+          type: 'replace',
+          prompt: 'Change help to answer.',
+          source: 'I am kind and ask for help.',
+          referenceAnswers: ['I am kind and ask for an answer.'],
+        },
+      ],
+      'day-042': [
+        {
+          id: 'day-042-remix-problem-story',
+          type: 'extend',
+          prompt: 'Put the problem story in order.',
+          referenceAnswers: ['The way is not clear.', 'This way is wrong.', 'I need another way.', 'Please repeat.', 'I understand.', 'I am kind.'],
+        },
+      ],
+    };
 
+    for (const dayId of weekFiveAndSixDayIds) {
+      expect(sceneRemixTasksByDayId[dayId]?.length, `${dayId} remix task`).toBeGreaterThanOrEqual(1);
+      expect(sceneRemixTasksByDayId[dayId], `${dayId} planned remix task`).toEqual(expectedWeekFiveAndSixTasks[dayId]);
+    }
     expect(result).toEqual([]);
   });
 
@@ -799,6 +1283,41 @@ describe('scene remix tasks', () => {
     );
   });
 
+  it('reports non-Basic English words in visible scene remix text', () => {
+    const result = validateSceneRemixTasks(
+      {
+        'day-001': [
+          {
+            id: 'bad-remix-visible-text',
+            type: 'replace',
+            prompt: 'Change store to airport.',
+            source: 'I visit a museum.',
+            referenceAnswers: ['I visit the airport.'],
+          },
+        ],
+        'day-008': [
+          {
+            id: 'day-008-remix-valid',
+            type: 'extend',
+            prompt: 'Describe your room.',
+            referenceAnswers: ['This is my room.'],
+          },
+        ],
+      },
+      basicEnglishCourse,
+    );
+
+    expect(result).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "airport" in day-001 remix bad-remix-visible-text prompt',
+        'Non-Basic English word "visit" in day-001 remix bad-remix-visible-text source',
+        'Non-Basic English word "museum" in day-001 remix bad-remix-visible-text source',
+        'Non-Basic English word "visit" in day-001 remix bad-remix-visible-text reference 1',
+        'Non-Basic English word "airport" in day-001 remix bad-remix-visible-text reference 1',
+      ]),
+    );
+  });
+
   it('requires Day 1 and Day 8 remix tasks', () => {
     const result = validateSceneRemixTasks({}, basicEnglishCourse);
 
@@ -817,6 +1336,8 @@ describe('picture describe tasks', () => {
   });
 
   it('uses complete English-first task data', () => {
+    expect(validatePictureDescribeTasks(pictureDescribeTasksByDayId, basicEnglishCourse).errors).toEqual([]);
+
     for (const [dayId, task] of Object.entries(pictureDescribeTasksByDayId)) {
       expect(task.dayId).toBe(dayId);
       expect(task.title).toMatch(/\S/);
@@ -834,5 +1355,35 @@ describe('picture describe tasks', () => {
       }
       expect(task.simpleVersion).toHaveLength(task.requiredSentenceCount);
     }
+  });
+
+  it('keeps Week 6 problem-story picture assets aligned with task topics', () => {
+    expect(pictureDescribeTasksByDayId['day-036'].image).toContain('day-036-early-and-late-bus');
+    expect(pictureDescribeTasksByDayId['day-037'].image).toContain('day-037-no-clear-way');
+    expect(pictureDescribeTasksByDayId['day-038'].image).toContain('day-038-wrong-way');
+    expect(pictureDescribeTasksByDayId['day-039'].image).toContain('day-039-please-repeat');
+    expect(pictureDescribeTasksByDayId['day-042'].image).toContain('day-042-problem-story-recap');
+  });
+
+  it('reports non-Basic English words in visible picture describe task text', () => {
+    const tasks = structuredClone(pictureDescribeTasksByDayId);
+    tasks['day-001'].title = 'Airport Visit';
+    tasks['day-001'].goal = 'Describe a museum visit.';
+    tasks['day-001'].targetWords = ['airport'];
+    tasks['day-001'].suggestedPatterns = ['I visit a museum.'];
+    tasks['day-001'].simpleVersion = ['I visit a museum.', 'This is my room.', 'I am here.'];
+
+    expect(validatePictureDescribeTasks(tasks, basicEnglishCourse).errors).toEqual(
+      expect.arrayContaining([
+        'Non-Basic English word "airport" in day-001 picture title',
+        'Non-Basic English word "museum" in day-001 picture goal',
+        'Non-Basic English word "visit" in day-001 picture goal',
+        'Non-Basic English word "airport" in day-001 picture target word 1',
+        'Non-Basic English word "visit" in day-001 picture suggested pattern 1',
+        'Non-Basic English word "museum" in day-001 picture suggested pattern 1',
+        'Non-Basic English word "visit" in day-001 picture simple version 1',
+        'Non-Basic English word "museum" in day-001 picture simple version 1',
+      ]),
+    );
   });
 });

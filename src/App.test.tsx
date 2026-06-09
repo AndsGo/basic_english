@@ -84,7 +84,7 @@ describe('App shell', () => {
     await user.click(screen.getByRole('button', { name: 'Words' }));
     expect(screen.getByRole('heading', { name: 'Course Words' })).toBeInTheDocument();
     expect(screen.getByText('name')).toBeInTheDocument();
-    expect(screen.getByText('what a person is called')).toBeInTheDocument();
+    expect(screen.getByText('the word for a person or thing')).toBeInTheDocument();
     expect(screen.queryByText(/名字/)).not.toBeInTheDocument();
     expect(screen.getByText('My name is Li.')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Read word name' })).toBeInTheDocument();
@@ -101,7 +101,7 @@ describe('App shell', () => {
     expect(screen.getByRole('heading', { name: 'I Can Say' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Next' })).toBeInTheDocument();
     expect(screen.getByText('No capabilities unlocked yet.')).toBeInTheDocument();
-    expect(screen.getByText('I can introduce myself.')).toBeInTheDocument();
+    expect(screen.getByText('I can say who I am.')).toBeInTheDocument();
     expect(screen.getByText('Complete Day 1.')).toBeInTheDocument();
   });
 
@@ -111,14 +111,14 @@ describe('App shell', () => {
     render(<App />);
 
     await user.click(screen.getByRole('button', { name: 'Words' }));
-    expect(screen.getByText('what a person is called')).toBeInTheDocument();
+    expect(screen.getByText('the word for a person or thing')).toBeInTheDocument();
     expect(screen.queryByText(/名字/)).not.toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Me' }));
     await user.click(screen.getByRole('checkbox', { name: 'Show Chinese help' }));
     await user.click(screen.getByRole('button', { name: 'Words' }));
 
-    expect(screen.getByText('what a person is called')).toBeInTheDocument();
+    expect(screen.getByText('the word for a person or thing')).toBeInTheDocument();
     expect(screen.getByText(/名字/)).toBeInTheDocument();
   });
 
@@ -207,7 +207,7 @@ describe('Me capability progress', () => {
     const unlockedHeading = await screen.findByRole('heading', { name: 'Unlocked' });
     const unlockedSection = unlockedHeading.closest('section');
     expect(unlockedSection).not.toBeNull();
-    expect(within(unlockedSection!).getByText('I can introduce myself.')).toBeInTheDocument();
+    expect(within(unlockedSection!).getByText('I can say who I am.')).toBeInTheDocument();
     expect(within(unlockedSection!).queryByText('No capabilities unlocked yet.')).not.toBeInTheDocument();
   });
 });

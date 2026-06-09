@@ -129,7 +129,7 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
     {
       id: 'day-021-remix-normal-day',
       type: 'extend',
-      prompt: 'Add two more sentences about your normal day.',
+      prompt: 'Put more sentences about your normal day.',
       referenceAnswers: ['In the afternoon, I study.', 'In the evening, I am at home.'],
     },
   ],
@@ -191,8 +191,132 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
     {
       id: 'day-028-remix-shopping-scene',
       type: 'extend',
-      prompt: 'Add two more sentences to the shopping scene.',
+      prompt: 'Put more sentences in the shopping scene.',
       referenceAnswers: ['I need more water.', 'The food is good.'],
+    },
+  ],
+  'day-029': [
+    {
+      id: 'day-029-remix-food-water',
+      type: 'replace',
+      prompt: 'Change food to water.',
+      source: 'I go out because I need food.',
+      referenceAnswers: ['I go out because I need water.'],
+    },
+  ],
+  'day-030': [
+    {
+      id: 'day-030-remix-stop-store',
+      type: 'replace',
+      prompt: 'Change bus stop to store.',
+      source: 'I walk to the bus stop.',
+      referenceAnswers: ['I walk to the store.'],
+    },
+  ],
+  'day-031': [
+    {
+      id: 'day-031-remix-store-home',
+      type: 'replace',
+      prompt: 'Change store to home.',
+      source: 'I take the bus to the store.',
+      referenceAnswers: ['I take the bus home.'],
+    },
+  ],
+  'day-032': [
+    {
+      id: 'day-032-remix-bread-milk',
+      type: 'replace',
+      prompt: 'Change bread to milk.',
+      source: 'I find bread in the store.',
+      referenceAnswers: ['I find milk in the store.'],
+    },
+  ],
+  'day-033': [
+    {
+      id: 'day-033-remix-food-bread',
+      type: 'replace',
+      prompt: 'Change food to bread.',
+      source: 'I am in line and pay for food.',
+      referenceAnswers: ['I am in line and pay for bread.'],
+    },
+  ],
+  'day-034': [
+    {
+      id: 'day-034-remix-food-bag',
+      type: 'replace',
+      prompt: 'Change food to bag.',
+      source: 'I carry food home.',
+      referenceAnswers: ['I carry the bag home.'],
+    },
+  ],
+  'day-035': [
+    {
+      id: 'day-035-remix-errand-story',
+      type: 'extend',
+      prompt: 'Put more sentences in the outside story.',
+      referenceAnswers: ['I am in line.', 'I come back home.'],
+    },
+  ],
+  'day-036': [
+    {
+      id: 'day-036-remix-early-late',
+      type: 'replace',
+      prompt: 'Change early to late.',
+      source: 'I am early and waiting for the bus.',
+      referenceAnswers: ['I am late and waiting for the bus.'],
+    },
+  ],
+  'day-037': [
+    {
+      id: 'day-037-remix-clear-way',
+      type: 'replace',
+      prompt: 'Change clear to not clear.',
+      source: 'The way is clear.',
+      referenceAnswers: ['The way is not clear.'],
+    },
+  ],
+  'day-038': [
+    {
+      id: 'day-038-remix-wrong-way',
+      type: 'replace',
+      prompt: 'Change straight to turn right.',
+      source: 'I go straight.',
+      referenceAnswers: ['I turn right.'],
+    },
+  ],
+  'day-039': [
+    {
+      id: 'day-039-remix-repeat-please',
+      type: 'replace',
+      prompt: 'Change I understand to Please repeat.',
+      source: 'I understand.',
+      referenceAnswers: ['Please repeat.'],
+    },
+  ],
+  'day-040': [
+    {
+      id: 'day-040-remix-understand-hear',
+      type: 'replace',
+      prompt: 'Change understand to get the answer.',
+      source: 'I do not understand.',
+      referenceAnswers: ['I do not get the answer.'],
+    },
+  ],
+  'day-041': [
+    {
+      id: 'day-041-remix-help-answer',
+      type: 'replace',
+      prompt: 'Change help to answer.',
+      source: 'I am kind and ask for help.',
+      referenceAnswers: ['I am kind and ask for an answer.'],
+    },
+  ],
+  'day-042': [
+    {
+      id: 'day-042-remix-problem-story',
+      type: 'extend',
+      prompt: 'Put the problem story in order.',
+      referenceAnswers: ['The way is not clear.', 'This way is wrong.', 'I need another way.', 'Please repeat.', 'I understand.', 'I am kind.'],
     },
   ],
 };

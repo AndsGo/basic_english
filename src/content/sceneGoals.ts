@@ -18,16 +18,30 @@ type SceneGoalDayId =
   | 'day-025'
   | 'day-026'
   | 'day-027'
-  | 'day-028';
+  | 'day-028'
+  | 'day-029'
+  | 'day-030'
+  | 'day-031'
+  | 'day-032'
+  | 'day-033'
+  | 'day-034'
+  | 'day-035'
+  | 'day-036'
+  | 'day-037'
+  | 'day-038'
+  | 'day-039'
+  | 'day-040'
+  | 'day-041'
+  | 'day-042';
 
 export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   'day-001': {
     id: 'self',
     title: 'Self',
-    capability: 'I can describe myself.',
+    capability: 'I can say who I am.',
     templates: ['My name is ____.', 'I am from ____.', 'I am a ____.', 'I study English.'],
     guidedPrompts: ['Say your name.', 'Say where you are from.', 'Say what you do.', 'Say why you study English.'],
-    scenePrompt: 'Use your sentences to describe yourself clearly.',
+    scenePrompt: 'Use your sentences to say who you are clearly.',
     dialoguePrompts: ['Ask and answer about your name.', 'Ask and answer about where you are from.'],
   },
   'day-008': {
@@ -59,8 +73,8 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   },
   'day-015': {
     id: 'morning-routine',
-    title: 'Morning Routine',
-    capability: 'I can describe my morning routine.',
+    title: 'Morning Order',
+    capability: 'I can describe my morning order.',
     templates: ['I get up in the morning.', 'I wash my face.', 'I put on my clothes.', 'I have water.'],
     guidedPrompts: ['Say when you get up.', 'Say what you wash.', 'Say what you put on.', 'Say one thing you have.'],
     scenePrompt: 'Describe what you do in the morning.',
@@ -104,11 +118,11 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   },
   'day-020': {
     id: 'everyday-habits',
-    title: 'Everyday Habits',
+    title: 'Every Day Habits',
     capability: 'I can describe simple habits.',
     templates: ['I practice English every day.', 'I often read.', 'I sometimes walk.', 'This is a good habit.'],
     guidedPrompts: ['Say what you practice.', 'Say what you often do.', 'Say what you sometimes do.', 'Say one good habit.'],
-    scenePrompt: 'Describe your everyday habits.',
+    scenePrompt: 'Describe your every day habits.',
     dialoguePrompts: ['Ask and answer about practice.', 'Ask and answer about habits.'],
   },
   'day-021': {
@@ -161,7 +175,7 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
     title: 'Asking for Help',
     capability: 'I can ask for simple help.',
     templates: ['Please help me.', 'Can you show me the book?', 'Can you bring me the book?', 'I ask for help.'],
-    guidedPrompts: ['Ask for help.', 'Ask someone to show a thing.', 'Ask someone to bring a thing.', 'Say what you ask for.'],
+    guidedPrompts: ['Ask for help.', 'Ask a person to show a thing.', 'Ask a person to bring a thing.', 'Say what you ask for.'],
     scenePrompt: 'Ask another person for simple help.',
     dialoguePrompts: ['Ask and answer about help.', 'Ask and answer about showing a thing.'],
   },
@@ -176,11 +190,137 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   },
   'day-028': {
     id: 'meal-shopping-check',
-    title: 'Meal and Shopping Check',
+    title: 'Meal and Shopping Week',
     capability: 'I can describe a meal and shopping scene.',
     templates: ['I go to the shop.', 'I buy food.', 'I need help.', 'Please help me.'],
     guidedPrompts: ['Say where you go.', 'Say what you buy.', 'Say what you need.', 'Ask politely.'],
     scenePrompt: 'Describe a simple meal and shopping scene.',
     dialoguePrompts: ['Ask and answer about food.', 'Ask and answer about help at a shop.'],
+  },
+  'day-029': {
+    id: 'getting-ready-to-go-out',
+    title: 'Getting Ready to Go Out',
+    capability: 'I can say how I get ready to go out.',
+    templates: ['I am ready.', 'I have my bag.', 'I have a list.', 'I go outside.'],
+    guidedPrompts: ['Say you are ready.', 'Say what you have.', 'Say what is on your list.', 'Say you go outside.'],
+    scenePrompt: 'Describe getting ready and going outside.',
+    dialoguePrompts: ['Ask and answer about being ready.', 'Ask and answer about the list.'],
+  },
+  'day-030': {
+    id: 'walking-to-the-bus-place',
+    title: 'Walking to the Bus Place',
+    capability: 'I can say how I walk to the bus place.',
+    templates: ['I walk on the road.', 'The bus place is near.', 'I am waiting for the bus.', 'The seat is here.'],
+    guidedPrompts: ['Say where you walk.', 'Say where the bus place is.', 'Say what you are waiting for.', 'Say where the seat is.'],
+    scenePrompt: 'Describe walking to the bus place and waiting.',
+    dialoguePrompts: ['Ask and answer about the bus place.', 'Ask and answer about waiting for the bus.'],
+  },
+  'day-031': {
+    id: 'taking-the-bus',
+    title: 'Taking the Bus',
+    capability: 'I can describe taking the bus.',
+    templates: ['I go by bus.', 'I am on the bus.', 'I am on a seat.', 'I get off at the store.'],
+    guidedPrompts: ['Say how you go.', 'Say where you are.', 'Say where your seat is.', 'Say where you get off.'],
+    scenePrompt: 'Describe taking the bus to the store.',
+    dialoguePrompts: ['Ask and answer about going by bus.', 'Ask and answer about the seat.'],
+  },
+  'day-032': {
+    id: 'finding-things-in-store',
+    title: 'Finding Things in the Store',
+    capability: 'I can find things in a store.',
+    templates: ['I am in the store.', 'I find bread.', 'I find milk.', 'The thing is here.'],
+    guidedPrompts: ['Say where you are.', 'Say one thing you find.', 'Say another thing you find.', 'Say where the thing is.'],
+    scenePrompt: 'Describe finding things in a store.',
+    dialoguePrompts: ['Ask and answer about one thing in the store.', 'Ask and answer where a thing is.'],
+  },
+  'day-033': {
+    id: 'waiting-and-paying',
+    title: 'Waiting and Paying',
+    capability: 'I can be in line and pay in a store.',
+    templates: ['I am in line.', 'I am waiting in line.', 'I pay for food.', 'I get change.'],
+    guidedPrompts: ['Say where you are.', 'Say you are waiting in line.', 'Say what you pay for.', 'Say what you get.'],
+    scenePrompt: 'Describe waiting and paying in a store.',
+    dialoguePrompts: ['Ask and answer about the line.', 'Ask and answer about paying.'],
+  },
+  'day-034': {
+    id: 'coming-back-home',
+    title: 'Coming Back Home',
+    capability: 'I can say how I come back home.',
+    templates: ['I carry my bag.', 'The bag is light.', 'I go back home.', 'I put food on the table.'],
+    guidedPrompts: ['Say what you carry.', 'Say if the bag is light.', 'Say where you go back.', 'Say where you put the food.'],
+    scenePrompt: 'Describe coming back home with things.',
+    dialoguePrompts: ['Ask and answer about the bag.', 'Ask and answer about going back home.'],
+  },
+  'day-035': {
+    id: 'errand-story-recap',
+    title: 'Going Out Story',
+    capability: 'I can tell an outside story.',
+    templates: ['I go outside with my list.', 'I take the bus.', 'I buy food at the store.', 'I go back home.'],
+    guidedPrompts: ['Say how the story starts.', 'Say how you go.', 'Say what you buy.', 'Say how the story ends.'],
+    scenePrompt: 'Tell a simple outside story from home to the store and back home.',
+    dialoguePrompts: ['Ask and answer about the outside story.', 'Ask and answer what comes first and last.'],
+  },
+  'day-036': {
+    id: 'early-late-bus',
+    title: 'Early and Late',
+    capability: 'I can say early, late, and waiting time.',
+    templates: ['I am early.', 'I am late.', 'I am waiting for the bus.', 'The bus is late.'],
+    guidedPrompts: ['Say if you are early.', 'Say if you are late.', 'Say what you are waiting for.', 'Say the bus time.'],
+    scenePrompt: 'Describe waiting for the bus early or late.',
+    dialoguePrompts: ['Ask and answer about the bus time.', 'Ask and answer about being early or late.'],
+  },
+  'day-037': {
+    id: 'no-clear-way',
+    title: 'No Clear Way',
+    capability: 'I can ask for help when the way is not clear.',
+    templates: ['The way is not clear.', 'I need another way.', 'Please help me.', 'The way is clear.'],
+    guidedPrompts: ['Say the way is not clear.', 'Say you need another way.', 'Ask for help.', 'Say when the way is clear.'],
+    scenePrompt: 'Describe a way that is not clear and ask for help.',
+    dialoguePrompts: ['Ask and answer about the way.', 'Ask and answer about another way.'],
+  },
+  'day-038': {
+    id: 'wrong-way',
+    title: 'Wrong Way',
+    capability: 'I can change from a wrong way to another way.',
+    templates: ['This way is wrong.', 'I need another way.', 'I go straight.', 'I turn right.'],
+    guidedPrompts: ['Say this way is wrong.', 'Say you need another way.', 'Say you go straight.', 'Say where you turn.'],
+    scenePrompt: 'Describe a wrong way and another way.',
+    dialoguePrompts: ['Ask and answer about the wrong way.', 'Ask and answer about turning.'],
+  },
+  'day-039': {
+    id: 'repeat-please',
+    title: 'Repeat Please',
+    capability: 'I can ask a person to repeat.',
+    templates: ['I do not understand.', 'Please repeat.', 'I understand now.', 'Please help me.'],
+    guidedPrompts: ['Say you do not understand.', 'Ask the person to repeat.', 'Say you understand now.', 'Ask for help.'],
+    scenePrompt: 'Ask a person to repeat in a help talk.',
+    dialoguePrompts: ['Ask and answer with please repeat.', 'Ask and answer when you do not understand.'],
+  },
+  'day-040': {
+    id: 'ask-again',
+    title: 'Ask Again',
+    capability: 'I can ask again when I do not understand.',
+    templates: ['I do not understand.', 'Please repeat.', 'Say it again, please.', 'I understand now.'],
+    guidedPrompts: ['Say you do not understand.', 'Ask the person to repeat.', 'Ask again with please.', 'Say you understand now.'],
+    scenePrompt: 'Ask again in a simple help talk.',
+    dialoguePrompts: ['Ask and answer with please repeat.', 'Ask and answer when something is not clear.'],
+  },
+  'day-041': {
+    id: 'polite-help',
+    title: 'Kind Help',
+    capability: 'I can use kind words when I need help.',
+    templates: ['Excuse me.', 'I am sorry.', 'Please help me.', 'You are kind.'],
+    guidedPrompts: ['Start with kind words.', 'Say sorry.', 'Ask for help.', 'Say the person is kind.'],
+    scenePrompt: 'Use kind words to ask for help outside.',
+    dialoguePrompts: ['Ask and answer with excuse me.', 'Ask and answer with please and kind words.'],
+  },
+  'day-042': {
+    id: 'problem-story-recap',
+    title: 'Problem Story',
+    capability: 'I can tell a simple outside problem story.',
+    templates: ['The way is not clear.', 'This way is wrong.', 'I need another way.', 'Please repeat.', 'I understand.', 'I am kind.'],
+    guidedPrompts: ['Say the way is not clear.', 'Say this way is wrong.', 'Say you need another way.', 'Ask the person to repeat.', 'Say you understand.', 'Say you are kind.'],
+    scenePrompt: 'Tell the outside problem story in order with kind words.',
+    dialoguePrompts: ['Ask and answer about the way problem.', 'Ask and answer with please repeat and kind words.'],
   },
 };
