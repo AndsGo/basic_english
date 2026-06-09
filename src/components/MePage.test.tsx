@@ -1,4 +1,5 @@
 import { cleanup, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { basicEnglishCourse } from '../content/course';
 import type { SceneGoal } from '../domain/types';
@@ -166,6 +167,27 @@ describe('MePage scene map', () => {
     expect(screen.getByText('Day 8')).toBeInTheDocument();
     expect(screen.getByText('This is my room. There is a bed. I can see a table.')).toBeInTheDocument();
     expect(screen.getByText('ready')).toBeInTheDocument();
+  });
+});
+
+describe('MePage theme control', () => {
+  it('lets the learner choose a theme preference', async () => {
+    const user = userEvent.setup();
+    const onThemePreferenceChange = vi.fn();
+
+    render(
+      <MePage
+        repository={createMockRepository()}
+        themePreference="system"
+        onThemePreferenceChange={onThemePreferenceChange}
+      />,
+    );
+
+    expect(screen.getByRole('radio', { name: 'System' })).toBeChecked();
+
+    await user.click(screen.getByRole('radio', { name: 'Dark' }));
+
+    expect(onThemePreferenceChange).toHaveBeenCalledWith('dark');
   });
 });
 

@@ -5,6 +5,7 @@ import type { ReviewItem } from '../domain/review';
 import { getCompletedSceneIds } from '../domain/sceneOutput';
 import type { PictureDescribeTask, ScenarioCapability, SceneGoal } from '../domain/types';
 import type { SpeechRate } from '../speech/speechService';
+import type { ThemePreference } from '../theme';
 import type { PictureDescription, ProgressRepository, StudyActivity, UserOutput } from '../storage/progressRepository';
 import { SceneMap } from './SceneMap';
 
@@ -53,6 +54,8 @@ export function MePage({
   onReadingEnabledChange,
   speechRate = 'normal',
   onSpeechRateChange,
+  themePreference = 'system',
+  onThemePreferenceChange,
   totalDayCount = DEFAULT_TOTAL_DAY_COUNT,
 }: {
   repository: ProgressRepository;
@@ -65,6 +68,8 @@ export function MePage({
   onReadingEnabledChange?: (readingEnabled: boolean) => void;
   speechRate?: SpeechRate;
   onSpeechRateChange?: (speechRate: SpeechRate) => void;
+  themePreference?: ThemePreference;
+  onThemePreferenceChange?: (themePreference: ThemePreference) => void;
   totalDayCount?: number;
 }) {
   const [days, setDays] = useState<DayProgress[]>([]);
@@ -118,7 +123,9 @@ export function MePage({
 
   const completedDayCount = days.filter(isCompletedDay).length;
   const currentStreakDays = getCurrentStreakDays(activities);
-  const hasSettings = Boolean(onShowChineseHelpChange || onReadingEnabledChange || onSpeechRateChange);
+  const hasSettings = Boolean(
+    onShowChineseHelpChange || onReadingEnabledChange || onSpeechRateChange || onThemePreferenceChange,
+  );
   const completedDayIds = days.filter(isCompletedDay).map((day) => day.dayId);
   const capabilityStates =
     scenarioCapabilities && hasLoadedProgress && !loadError ? getCapabilityStates(scenarioCapabilities, completedDayIds) : null;
@@ -216,6 +223,41 @@ export function MePage({
                   onChange={() => onSpeechRateChange('slow')}
                 />{' '}
                 Slow
+              </label>
+            </fieldset>
+          )}
+          {onThemePreferenceChange && (
+            <fieldset className="self-rating">
+              <legend>Theme</legend>
+              <label>
+                <input
+                  type="radio"
+                  name="theme"
+                  value="system"
+                  checked={themePreference === 'system'}
+                  onChange={() => onThemePreferenceChange('system')}
+                />{' '}
+                System
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="theme"
+                  value="light"
+                  checked={themePreference === 'light'}
+                  onChange={() => onThemePreferenceChange('light')}
+                />{' '}
+                Light
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="theme"
+                  value="dark"
+                  checked={themePreference === 'dark'}
+                  onChange={() => onThemePreferenceChange('dark')}
+                />{' '}
+                Dark
               </label>
             </fieldset>
           )}

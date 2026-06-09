@@ -129,6 +129,20 @@ describe('App shell', () => {
     expect(screen.getByText(/名字/)).toBeInTheDocument();
   });
 
+  it('applies the chosen theme preference to the document root', async () => {
+    const user = userEvent.setup();
+
+    render(<App />);
+
+    await user.click(screen.getByRole('button', { name: 'Me' }));
+    await user.click(screen.getByRole('radio', { name: 'Dark' }));
+    expect(document.documentElement.dataset.theme).toBe('dark');
+
+    await user.click(screen.getByRole('radio', { name: 'Light' }));
+    expect(document.documentElement.dataset.theme).toBe('light');
+    expect(window.localStorage.getItem('basic-english-theme')).toBe('light');
+  });
+
   it('persists reading aloud settings from the Me page', async () => {
     const user = userEvent.setup();
 
