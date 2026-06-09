@@ -451,9 +451,9 @@ test.describe('Basic English MVP e2e', () => {
     const flashcardCard = flashcards.getByRole('article');
     await expect(flashcards).toBeVisible();
     await expect(flashcards.getByRole('img', { name: /flashcard illustration/ }).first()).toBeVisible();
-    await expect(flashcardCard.locator('.phonetic-text', { hasText: '/ne\u026am/' })).toBeVisible();
+    await expect(flashcardCard.getByText('/ne\u026am/')).toBeVisible();
     await flashcards.getByRole('button', { name: 'Flip' }).click();
-    await expect(flashcardCard.locator('.phonetic-text', { hasText: '/ne\u026am/' })).toBeVisible();
+    await expect(flashcardCard.getByText('/ne\u026am/')).toBeVisible();
     await expect(flashcards.getByRole('button', { name: 'Review' })).toBeVisible();
     await flashcards.getByRole('button', { name: 'Review' }).click();
     await expect(page.getByText('Added to Review')).toBeVisible();
@@ -471,7 +471,7 @@ test.describe('Basic English MVP e2e', () => {
     const chineseHelpFlashcards = page.getByLabel('Word flashcards');
     const chineseHelpFlashcardCard = chineseHelpFlashcards.getByRole('article');
     await chineseHelpFlashcards.getByRole('button', { name: 'Flip' }).click();
-    await expect(chineseHelpFlashcardCard.locator('.phonetic-text', { hasText: '/ne\u026am/' })).toBeVisible();
+    await expect(chineseHelpFlashcardCard.getByText('/ne\u026am/')).toBeVisible();
     await expect(chineseHelpFlashcardCard.getByText(/Chinese:/)).toBeVisible();
     await page.getByRole('button', { name: 'List', exact: true }).click();
 
