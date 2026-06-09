@@ -448,11 +448,12 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByRole('button', { name: 'List', exact: true })).toHaveAttribute('aria-pressed', 'true');
     await page.getByRole('button', { name: 'Flashcards' }).click();
     const flashcards = page.getByLabel('Word flashcards');
+    const flashcardCard = flashcards.getByRole('article');
     await expect(flashcards).toBeVisible();
     await expect(flashcards.getByRole('img', { name: /flashcard illustration/ }).first()).toBeVisible();
-    await expect(flashcards.locator('.phonetic-text')).toBeVisible();
+    await expect(flashcardCard.locator('.phonetic-text', { hasText: '/ne\u026am/' })).toBeVisible();
     await flashcards.getByRole('button', { name: 'Flip' }).click();
-    await expect(flashcards.locator('.phonetic-text')).toBeVisible();
+    await expect(flashcardCard.locator('.phonetic-text', { hasText: '/ne\u026am/' })).toBeVisible();
     await expect(flashcards.getByRole('button', { name: 'Review' })).toBeVisible();
     await flashcards.getByRole('button', { name: 'Review' }).click();
     await expect(page.getByText('Added to Review')).toBeVisible();
@@ -467,8 +468,11 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByText('/ne\u026am/')).toBeVisible();
     await expect(page.getByText(/Chinese:/).first()).toBeVisible();
     await page.getByRole('button', { name: 'Flashcards' }).click();
-    await page.getByLabel('Word flashcards').getByRole('button', { name: 'Flip' }).click();
-    await expect(page.getByText(/Chinese:/).first()).toBeVisible();
+    const chineseHelpFlashcards = page.getByLabel('Word flashcards');
+    const chineseHelpFlashcardCard = chineseHelpFlashcards.getByRole('article');
+    await chineseHelpFlashcards.getByRole('button', { name: 'Flip' }).click();
+    await expect(chineseHelpFlashcardCard.locator('.phonetic-text', { hasText: '/ne\u026am/' })).toBeVisible();
+    await expect(chineseHelpFlashcardCard.getByText(/Chinese:/)).toBeVisible();
     await page.getByRole('button', { name: 'List', exact: true }).click();
 
     await goToReview(page);
