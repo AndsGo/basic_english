@@ -187,6 +187,13 @@ async function completeTranslation(page: Page, day: Day) {
   await page.getByLabel('Close enough').check();
 }
 
+async function completeSceneRemix(page: Page) {
+  await expect(page.getByRole('heading', { name: 'Scene Remix' })).toBeVisible();
+  await page.getByLabel('Scene remix answer').fill('This is my office.');
+  await page.getByRole('button', { name: 'Show reference' }).click();
+  await page.getByRole('button', { name: 'Close enough' }).click();
+}
+
 async function completePictureDescription(page: Page, text: string, addToReview = false) {
   await expect(page.getByRole('heading', { name: 'Describe the picture' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Continue' })).toBeDisabled();
@@ -234,6 +241,9 @@ async function completeCurrentDay(page: Page, dayId: string) {
 
   await page.getByRole('button', { name: 'Continue' }).click();
   await completeTranslation(page, day);
+
+  await continueTo(page, 'Scene Remix');
+  await completeSceneRemix(page);
 
   await continueTo(page, 'Describe the picture');
   await completePictureDescription(page, 'This is my room. There is a bed. I can see a table.');
@@ -338,7 +348,8 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByText('Day 1 has no review')).toBeVisible();
 
     await continueTo(page, 'name');
-    await expect(page.getByText('what a person is called')).toBeVisible();
+    await expect(page.getByText('/ne\u026am/')).toBeVisible();
+    await expect(page.getByText('the word for a person or thing')).toBeVisible();
     await expect(page.getByText(/Chinese:/)).toHaveCount(0);
     await expect(page.getByRole('button', { name: 'Read word name' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Read definition for name' })).toBeVisible();
@@ -360,38 +371,29 @@ test.describe('Basic English MVP e2e', () => {
     await page.getByRole('button', { name: 'Continue' }).click();
     await completeDayOneTranslationWithReview(page);
 
+    await continueTo(page, 'Scene Remix');
+    await completeSceneRemix(page);
+
     await continueTo(page, 'Describe the picture');
     await completePictureDescription(page, 'My name is Li. I am a student. I study English.', true);
 
     await continueTo(page, 'Build Sentences');
     await expect(page.getByRole('heading', { name: 'Build Sentences' })).toBeVisible();
-    await expect(page.getByText('I can describe myself.')).toBeVisible();
+    await expect(page.getByText('I can say who I am.')).toBeVisible();
     await completeDayOneOutput(page);
 
     await continueTo(page, 'Day 1 complete');
     await expect(page.getByText('My name is Li.\nI am from China.\nI am a student.\nI study English.')).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Try Another Scene' })).toBeVisible();
-    await page.getByLabel('Scene remix answer').fill('I am from China.');
-    await page.getByRole('button', { name: 'Show reference' }).click();
-    await expect(page.getByText('I am from Japan.')).toBeVisible();
-    await page.getByRole('button', { name: 'Need review' }).click();
-    await expect(page.getByText('Review tomorrow: 5')).toBeVisible();
+    await expect(page.getByText('Review tomorrow: 4')).toBeVisible();
     await page.getByRole('button', { name: 'Start Day 2' }).click();
     await expect(page.getByRole('heading', { name: 'I Am' })).toBeVisible();
 
     await page.getByRole('button', { name: 'Course' }).click();
     await expect(page.getByText('1 / 7 days completed')).toBeVisible();
-    await expect(page.getByText('Review: 5 items')).toBeVisible();
+    await expect(page.getByText('Review: 4 items')).toBeVisible();
 
     await goToReview(page);
     await expect(page.getByRole('heading', { name: 'Review today' })).toBeVisible();
-    await expect(page.getByText('5 items to review')).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Review Scene Remix' })).toBeVisible();
-    await expect(page.getByText('Change China to Japan.')).toBeVisible();
-    await page.getByLabel('Scene remix answer').fill('I am from Japan.');
-    await page.getByRole('button', { name: 'Show reference' }).click();
-    await page.getByRole('button', { name: 'Close enough' }).click();
-    await expect(page.getByRole('heading', { name: 'Review Scene Remix' })).not.toBeVisible();
     await expect(page.getByText('4 items to review')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Review Picture Description' })).toBeVisible();
     await expect(page.getByText('My name is Li. I am a student. I study English.')).toBeVisible();
@@ -434,24 +436,27 @@ test.describe('Basic English MVP e2e', () => {
 
   test('navigates course and word bank views with configurable Chinese help', async ({ page }) => {
     await page.getByRole('button', { name: 'Course' }).click();
-    await expect(page.getByRole('heading', { name: 'Week 1: People, Identity, and Basic Sentences' })).toBeVisible();
-    await expect(page.getByText('Day 7: Weekly Check')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Week 1: Persons and Basic Sentences' })).toBeVisible();
+    await expect(page.getByText('Day 7: Week 1 Story')).toBeVisible();
 
     await page.getByRole('button', { name: 'Words' }).click();
     await expect(page.getByRole('heading', { name: 'Course Words' })).toBeVisible();
-    await expect(page.getByText('what a person is called')).toBeVisible();
+    await expect(page.getByText('the word for a person or thing')).toBeVisible();
+    await expect(page.getByText('/ne\u026am/')).toBeVisible();
     await expect(page.getByText(/Chinese:/)).toHaveCount(0);
     await expect(page.getByText('My name is Li.')).toBeVisible();
-    await expect(page.getByRole('button', { name: 'List' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.getByRole('button', { name: 'List', exact: true })).toHaveAttribute('aria-pressed', 'true');
     await page.getByRole('button', { name: 'Flashcards' }).click();
     const flashcards = page.getByLabel('Word flashcards');
     await expect(flashcards).toBeVisible();
     await expect(flashcards.getByRole('img', { name: /flashcard illustration/ }).first()).toBeVisible();
+    await expect(flashcards.locator('.phonetic-text')).toBeVisible();
     await flashcards.getByRole('button', { name: 'Flip' }).click();
+    await expect(flashcards.locator('.phonetic-text')).toBeVisible();
     await expect(flashcards.getByRole('button', { name: 'Review' })).toBeVisible();
     await flashcards.getByRole('button', { name: 'Review' }).click();
     await expect(page.getByText('Added to Review')).toBeVisible();
-    await page.getByRole('button', { name: 'List' }).click();
+    await page.getByRole('button', { name: 'List', exact: true }).click();
 
     await page.getByRole('button', { name: 'Me', exact: true }).click();
     await expect(page.getByLabel('Enable reading aloud')).toBeChecked();
@@ -459,11 +464,12 @@ test.describe('Basic English MVP e2e', () => {
     await page.getByLabel('Show Chinese help').check();
     await page.getByRole('button', { name: 'Words' }).click();
     await expect(page.getByRole('button', { name: 'Read word name' })).toBeDisabled();
+    await expect(page.getByText('/ne\u026am/')).toBeVisible();
     await expect(page.getByText(/Chinese:/).first()).toBeVisible();
     await page.getByRole('button', { name: 'Flashcards' }).click();
     await page.getByLabel('Word flashcards').getByRole('button', { name: 'Flip' }).click();
     await expect(page.getByText(/Chinese:/).first()).toBeVisible();
-    await page.getByRole('button', { name: 'List' }).click();
+    await page.getByRole('button', { name: 'List', exact: true }).click();
 
     await goToReview(page);
     await expect(page.getByRole('heading', { name: 'Review today' })).toBeVisible();
