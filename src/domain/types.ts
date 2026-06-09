@@ -48,6 +48,7 @@ export interface Word {
   id: string;
   text: string;
   category: WordCategory;
+  phonetic: string;
   definition: string;
   chinese: string;
   example: string;

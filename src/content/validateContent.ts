@@ -46,6 +46,11 @@ export function validateCourseContent(course: Course): ValidationResult {
     if (!word.text || !word.definition || !word.chinese || !word.example) {
       errors.push(`Word ${word.id} is missing text, definition, chinese, or example`);
     }
+    if (!word.phonetic || !word.phonetic.trim()) {
+      errors.push(`Word ${word.id} is missing phonetic`);
+    } else if (!word.phonetic.startsWith('/') || !word.phonetic.endsWith('/')) {
+      errors.push(`Word ${word.id} phonetic must be wrapped in /.../`);
+    }
   });
 
   course.patterns.forEach((pattern) => {

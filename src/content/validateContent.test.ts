@@ -80,6 +80,29 @@ describe('week1Course', () => {
     );
   });
 
+  it('requires every word to include British IPA phonetics', () => {
+    const course = cloneCourse();
+    delete (course.words[0] as Partial<(typeof course.words)[number]>).phonetic;
+
+    expect(validateCourseContent(course).errors).toContain(`Word ${course.words[0].id} is missing phonetic`);
+  });
+
+  it('requires word phonetics to be slash wrapped', () => {
+    const course = cloneCourse();
+    course.words[0].phonetic = 'neɪm';
+
+    expect(validateCourseContent(course).errors).toContain(`Word ${course.words[0].id} phonetic must be wrapped in /.../`);
+  });
+
+  it('does not treat IPA phonetics as Basic English prose', () => {
+    const course = cloneCourse();
+    course.words[0].phonetic = '/ˈkwestʃən/';
+
+    expect(validateCourseContent(course).errors).not.toContain(
+      `Non-Basic English word "kwestʃən" in word ${course.words[0].id} phonetic`,
+    );
+  });
+
   it('detects replacement characters and known mojibake sequences', () => {
     const course = cloneCourse();
     course.words[0].chinese = '鎴戠殑';
