@@ -203,6 +203,24 @@ textarea {
   font-weight: 800;
 }
 
+.word-heading {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.phonetic-text {
+  color: #66766c;
+  font-size: 0.92rem;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.flashcard .phonetic-text {
+  justify-self: center;
+}
+
 .structure {
   padding: 10px;
   border-radius: 8px;
