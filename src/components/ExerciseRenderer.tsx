@@ -10,6 +10,14 @@ function tokenAnswer(answer: ExerciseAnswer | undefined): string[] {
   return Array.isArray(answer) ? answer : [];
 }
 
+function tokenOccurrence(tokens: string[], token: string, index: number): number {
+  return tokens.slice(0, index + 1).filter((item) => item === token).length;
+}
+
+function isTokenSelected(selectedTokens: string[], tokens: string[], token: string, index: number): boolean {
+  return selectedTokens.filter((item) => item === token).length >= tokenOccurrence(tokens, token, index);
+}
+
 export function ExerciseRenderer({
   exercises,
   answers: controlledAnswers,
@@ -84,18 +92,22 @@ export function ExerciseRenderer({
             <>
               <h3>Put the words in order</h3>
               <div className="option-list">
-                {exercise.tokens.map((token, index) => (
-                  <button
-                    type="button"
-                    key={`${exercise.id}-${token}-${index}`}
-                    onClick={() => {
-                      const existing = tokenAnswer(answers[exercise.id]);
-                      setAnswer(exercise, [...existing, token]);
-                    }}
-                  >
-                    {token}
-                  </button>
-                ))}
+                {exercise.tokens.map((token, index) => {
+                  const selectedTokens = tokenAnswer(answers[exercise.id]);
+                  const isSelected = isTokenSelected(selectedTokens, exercise.tokens, token, index);
+
+                  return (
+                    <button
+                      type="button"
+                      key={`${exercise.id}-${token}-${index}`}
+                      className={isSelected ? 'selected-order-token' : ''}
+                      disabled={isSelected}
+                      onClick={() => setAnswer(exercise, [...selectedTokens, token])}
+                    >
+                      {token}
+                    </button>
+                  );
+                })}
               </div>
               <p className="example" aria-label="Selected sentence">
                 {tokenAnswer(answers[exercise.id]).join(' ')}

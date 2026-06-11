@@ -417,6 +417,14 @@ textarea {
   background: var(--color-primary);
 }
 
+.option-list .selected-order-token:disabled {
+  color: var(--color-text-faint);
+  border-color: var(--color-border);
+  background: var(--color-surface-sunken);
+  opacity: 1;
+  cursor: not-allowed;
+}
+
 .exercise-card input,
 .output-editor textarea {
   box-sizing: border-box;

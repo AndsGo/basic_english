@@ -157,6 +157,8 @@ export function TodayPage({
   const [isDayHydrating, setIsDayHydrating] = useState(true);
   const [isAdvancing, setIsAdvancing] = useState(false);
   const selectedDayIdRef = useRef(selectedDayId);
+  const todayTopRef = useRef<HTMLElement | null>(null);
+  const previousStepPositionRef = useRef({ dayId: day.id, step: dayProgress.currentStep });
   const outputSaveQueue = useRef<Promise<void>>(Promise.resolve());
   const { stop: stopSpeech } = useSpeech();
   const words = useMemo(() => course.words.filter((word) => day.wordIds.includes(word.id)), [course.words, day.wordIds]);
@@ -499,6 +501,20 @@ export function TodayPage({
 
   const hasStickyNext = currentStep !== 'done';
 
+  useEffect(() => {
+    if (isHydrating) {
+      previousStepPositionRef.current = { dayId: day.id, step: currentStep };
+      return;
+    }
+
+    const previous = previousStepPositionRef.current;
+    previousStepPositionRef.current = { dayId: day.id, step: currentStep };
+    if (previous.dayId === day.id && previous.step === currentStep) return;
+
+    if (typeof todayTopRef.current?.scrollIntoView !== 'function') return;
+    todayTopRef.current.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  }, [currentStep, day.id, isHydrating]);
+
   useEffect(
     () => () => {
       stopSpeech();
@@ -507,7 +523,7 @@ export function TodayPage({
   );
 
   return (
-    <section className={hasStickyNext ? 'today today--with-sticky-next' : 'today'}>
+    <section ref={todayTopRef} className={hasStickyNext ? 'today today--with-sticky-next' : 'today'}>
       <div className="today-header panel">
         <p className="eyebrow">Week {currentWeek.number} / Day {day.dayNumber}</p>
         <h2>{day.title}</h2>

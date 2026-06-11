@@ -701,6 +701,25 @@ describe('TodayPage', () => {
     expect(screen.getByText(/Mark name as "I know this" or "Add to review"/)).toBeInTheDocument();
   });
 
+  it('returns to the Today top when Continue advances to the next step', async () => {
+    const user = userEvent.setup();
+    const scrollIntoView = vi.fn();
+    const originalScrollIntoView = Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView = scrollIntoView;
+
+    try {
+      const repo = createTestRepository({ dayProgress: [inProgressDayProgress(day.id, week1Course.contentVersion, 'review')] });
+      renderWithSpeech(<TodayPage course={week1Course} repository={repo} />);
+
+      await user.click(await getEnabledContinueButton());
+
+      await waitFor(() => expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Words'));
+      expect(scrollIntoView).toHaveBeenCalledWith({ block: 'start', behavior: 'smooth' });
+    } finally {
+      Element.prototype.scrollIntoView = originalScrollIntoView;
+    }
+  });
+
   it('creates a review item when a word is marked Review', async () => {
     const user = userEvent.setup();
     const repo = createIndexedDbProgressRepository('today-v1-1-word-review');
@@ -1337,6 +1356,27 @@ describe('TodayPage', () => {
 
     expect(correctOption).toHaveAttribute('aria-pressed', 'true');
     expect(screen.getByRole('status')).toHaveTextContent('Correct');
+  });
+
+  it('disables sentence order tokens after they are selected', async () => {
+    const sentenceOrderExercise = day.exercises.find((exercise) => exercise.type === 'sentence_order');
+    if (!sentenceOrderExercise) throw new Error('Day 1 sentence order test content is incomplete.');
+    const user = userEvent.setup();
+
+    render(<ExerciseRenderer exercises={day.exercises} />);
+
+    const selectedToken = screen.getByRole('button', { name: sentenceOrderExercise.correctOrder[0] });
+    const availableToken = screen.getByRole('button', { name: sentenceOrderExercise.correctOrder[1] });
+    await user.click(selectedToken);
+
+    expect(selectedToken).toBeDisabled();
+    expect(selectedToken).toHaveClass('selected-order-token');
+    expect(availableToken).toBeEnabled();
+    expect(screen.getByLabelText('Selected sentence')).toHaveTextContent(sentenceOrderExercise.correctOrder[0]);
+
+    await user.click(selectedToken);
+
+    expect(screen.getByLabelText('Selected sentence')).toHaveTextContent(sentenceOrderExercise.correctOrder[0]);
   });
 
   it('hides drill reference answers until requested', async () => {
