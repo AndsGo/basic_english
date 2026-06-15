@@ -859,6 +859,23 @@ textarea {
   list-style: none;
 }
 
+.scene-map-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scene-map-header h3 {
+  margin: 0;
+}
+
+.scene-map-toggle {
+  min-height: 36px;
+  padding: 0 12px;
+}
+
 .scene-map-item {
   display: flex;
   justify-content: space-between;
@@ -876,6 +893,12 @@ textarea {
 
 .scene-map-item--current {
   border-color: var(--color-primary);
+}
+
+.scene-map-summary {
+  margin: 8px 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
