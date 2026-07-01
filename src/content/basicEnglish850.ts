@@ -54,6 +54,7 @@ export const basicEnglishCourseExceptions = new Set([
   'they',
   'what',
   'which',
+  'was',
   'your',
 
   // Existing beginner-course vocabulary intentionally used before a stricter Basic English rewrite.

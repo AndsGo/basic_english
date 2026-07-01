@@ -332,7 +332,7 @@ describe('week1Course', () => {
   });
 });
 
-describe('basicEnglishCourse V1.11', () => {
+describe('basicEnglishCourse V1.12', () => {
   it('contains Week 1 and a complete Week 2', () => {
     expect(basicEnglishCourse.weeks.length).toBeGreaterThanOrEqual(2);
     expect(basicEnglishCourse.weeks[1]).toMatchObject({
@@ -389,7 +389,7 @@ describe('basicEnglishCourse V1.11', () => {
     const newDays = basicEnglishCourse.weeks.slice(4, 6).flatMap((week) => week.days);
 
     expect(result.errors).toEqual([]);
-    expect(basicEnglishCourse.contentVersion).toBe('1.11.0');
+    expect(basicEnglishCourse.contentVersion).toBe('1.12.0');
     expect(basicEnglishCourse.weeks.length).toBeGreaterThanOrEqual(6);
     expect(basicEnglishCourse.weeks.slice(0, 6).map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7]);
     expect(week5).toMatchObject({
@@ -440,9 +440,9 @@ describe('basicEnglishCourse V1.11', () => {
     const week7 = basicEnglishCourse.weeks[6];
 
     expect(result.errors).toEqual([]);
-    expect(basicEnglishCourse.contentVersion).toBe('1.11.0');
-    expect(basicEnglishCourse.weeks).toHaveLength(7);
-    expect(basicEnglishCourse.weeks.map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7, 7]);
+    expect(basicEnglishCourse.contentVersion).toBe('1.12.0');
+    expect(basicEnglishCourse.weeks.length).toBeGreaterThanOrEqual(7);
+    expect(basicEnglishCourse.weeks.slice(0, 7).map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7, 7]);
     expect(week7).toMatchObject({
       id: 'week-07',
       number: 7,
@@ -463,6 +463,36 @@ describe('basicEnglishCourse V1.11', () => {
     for (const day of week7.days) {
       const translationCount = day.exercises.filter((exercise) => exercise.type === 'translation').length;
       const expectedStoryMode = day.id === 'day-049' ? 'recap' : 'sentence';
+
+      expect(day.wordIds.length, `${day.id} word count`).toBeGreaterThanOrEqual(6);
+      expect(day.patternIds.length, `${day.id} pattern count`).toBeGreaterThanOrEqual(1);
+      expect(day.exercises.length, `${day.id} exercise count`).toBeGreaterThanOrEqual(5);
+      expect(translationCount, `${day.id} translation count`).toBeGreaterThanOrEqual(1);
+      expect(day.outputTask.requiredSentenceCount, `${day.id} output sentences`).toBeGreaterThanOrEqual(4);
+      expect(day.outputTask.storyMode, `${day.id} story mode`).toBe(expectedStoryMode);
+      expect(day.outputTask.storyPrompt?.trim(), `${day.id} story prompt`).toBeTruthy();
+      expect(sceneGoalsByDayId[day.id as keyof typeof sceneGoalsByDayId], `${day.id} scene goal`).toBeDefined();
+      expect(sceneRemixTasksByDayId[day.id]?.length, `${day.id} remix task`).toBeGreaterThanOrEqual(1);
+      expect(pictureDescribeTasksByDayId[day.id], `${day.id} picture task`).toBeDefined();
+    }
+  });
+
+  it('includes complete Week 8 through Week 12 course content for V1.12', () => {
+    const result = validateCourseContent(basicEnglishCourse);
+    const newWeeks = basicEnglishCourse.weeks.slice(7, 12);
+    const newDays = newWeeks.flatMap((week) => week.days);
+
+    expect(result.errors).toEqual([]);
+    expect(basicEnglishCourse.contentVersion).toBe('1.12.0');
+    expect(basicEnglishCourse.weeks).toHaveLength(12);
+    expect(basicEnglishCourse.weeks.map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7]);
+    expect(newWeeks.map((week) => week.id)).toEqual(['week-08', 'week-09', 'week-10', 'week-11', 'week-12']);
+    expect(newDays[0]).toMatchObject({ id: 'day-050', dayNumber: 50 });
+    expect(newDays.at(-1)).toMatchObject({ id: 'day-084', dayNumber: 84 });
+
+    for (const day of newDays) {
+      const translationCount = day.exercises.filter((exercise) => exercise.type === 'translation').length;
+      const expectedStoryMode = day.dayNumber % 7 === 0 ? 'recap' : 'sentence';
 
       expect(day.wordIds.length, `${day.id} word count`).toBeGreaterThanOrEqual(6);
       expect(day.patternIds.length, `${day.id} pattern count`).toBeGreaterThanOrEqual(1);
@@ -534,10 +564,10 @@ describe('basicEnglishCourse V1.11', () => {
     }
   });
 
-  it('keeps Day 49 as the course completion day', () => {
+  it('keeps Day 84 as the course completion day', () => {
     const allDays = basicEnglishCourse.weeks.flatMap((week) => week.days);
 
-    expect(allDays.at(-1)?.id).toBe('day-049');
+    expect(allDays.at(-1)?.id).toBe('day-084');
     expect(allDays.at(-1)?.weeklyCheckRubric).toBeDefined();
   });
 

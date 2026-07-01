@@ -1,4 +1,5 @@
 import type { SceneRemixTask } from '../domain/types';
+import { week8to12SceneRemixTasksByDayId } from './week8to12LearningTasks';
 
 export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> = {
   'day-001': [
@@ -475,4 +476,5 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
       referenceAnswers: ['I feel ill.', 'I have pain in my head.', 'I need rest.', 'I need water.', 'I need care.'],
     },
   ],
+  ...week8to12SceneRemixTasksByDayId,
 };

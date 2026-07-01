@@ -175,6 +175,56 @@ import tiredImage from '../assets/word-flashcards/tired.png';
 import restImage from '../assets/word-flashcards/rest.png';
 import careImage from '../assets/word-flashcards/care.png';
 import warmImage from '../assets/word-flashcards/warm.png';
+import familyImage from '../assets/word-flashcards/family.png';
+import motherImage from '../assets/word-flashcards/mother.png';
+import fatherImage from '../assets/word-flashcards/father.png';
+import brotherImage from '../assets/word-flashcards/brother.png';
+import sisterImage from '../assets/word-flashcards/sister.png';
+import babyImage from '../assets/word-flashcards/baby.png';
+import boyImage from '../assets/word-flashcards/boy.png';
+import girlImage from '../assets/word-flashcards/girl.png';
+import manImage from '../assets/word-flashcards/man.png';
+import womanImage from '../assets/word-flashcards/woman.png';
+import sunImage from '../assets/word-flashcards/sun.png';
+import rainImage from '../assets/word-flashcards/rain.png';
+import cloudImage from '../assets/word-flashcards/cloud.png';
+import windImage from '../assets/word-flashcards/wind.png';
+import weatherImage from '../assets/word-flashcards/weather.png';
+import coldImage from '../assets/word-flashcards/cold.png';
+import heatImage from '../assets/word-flashcards/heat.png';
+import gardenImage from '../assets/word-flashcards/garden.png';
+import treeImage from '../assets/word-flashcards/tree.png';
+import flowerImage from '../assets/word-flashcards/flower.png';
+import officeImage from '../assets/word-flashcards/office.png';
+import meetingImage from '../assets/word-flashcards/meeting.png';
+import letterImage from '../assets/word-flashcards/letter.png';
+import pageImage from '../assets/word-flashcards/page.png';
+import copyImage from '../assets/word-flashcards/copy.png';
+import printImage from '../assets/word-flashcards/print.png';
+import recordImage from '../assets/word-flashcards/record.png';
+import numberImage from '../assets/word-flashcards/number.png';
+import markImage from '../assets/word-flashcards/mark.png';
+import accountImage from '../assets/word-flashcards/account.png';
+import likeImage from '../assets/word-flashcards/like.png';
+import loveImage from '../assets/word-flashcards/love.png';
+import fearImage from '../assets/word-flashcards/fear.png';
+import hopeImage from '../assets/word-flashcards/hope.png';
+import ideaImage from '../assets/word-flashcards/idea.png';
+import thoughtImage from '../assets/word-flashcards/thought.png';
+import reasonImage from '../assets/word-flashcards/reason.png';
+import trueImage from '../assets/word-flashcards/true.png';
+import falseImage from '../assets/word-flashcards/false.png';
+import possibleImage from '../assets/word-flashcards/possible.png';
+import willImage from '../assets/word-flashcards/will.png';
+import tomorrowImage from '../assets/word-flashcards/tomorrow.png';
+import yesterdayImage from '../assets/word-flashcards/yesterday.png';
+import weekImage from '../assets/word-flashcards/week.png';
+import monthImage from '../assets/word-flashcards/month.png';
+import yearImage from '../assets/word-flashcards/year.png';
+import summerImage from '../assets/word-flashcards/summer.png';
+import winterImage from '../assets/word-flashcards/winter.png';
+import northImage from '../assets/word-flashcards/north.png';
+import southImage from '../assets/word-flashcards/south.png';
 
 export const validWordImageKinds = [
   'object',
@@ -392,6 +442,56 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('rest', restImage, 'action', 'scene', 'none', 'A simple rest scene for Basic English learners.'),
   wordImageAsset('care', careImage, 'action', 'scene', 'none', 'A simple care and help scene for Basic English learners.'),
   wordImageAsset('warm', warmImage, 'quality', 'scene', 'none', 'A simple warm care scene for Basic English learners.'),
+  wordImageAsset('family', familyImage, 'person', 'scene', 'none', 'A simple family group scene for Basic English learners.'),
+  wordImageAsset('mother', motherImage, 'person', 'scene', 'none', 'A simple mother scene for Basic English learners.'),
+  wordImageAsset('father', fatherImage, 'person', 'scene', 'none', 'A simple father scene for Basic English learners.'),
+  wordImageAsset('brother', brotherImage, 'person', 'scene', 'none', 'A simple brother scene for Basic English learners.'),
+  wordImageAsset('sister', sisterImage, 'person', 'scene', 'none', 'A simple sister scene for Basic English learners.'),
+  wordImageAsset('baby', babyImage, 'person', 'scene', 'none', 'A simple baby scene for Basic English learners.'),
+  wordImageAsset('boy', boyImage, 'person', 'scene', 'none', 'A simple boy scene for Basic English learners.'),
+  wordImageAsset('girl', girlImage, 'person', 'scene', 'none', 'A simple girl scene for Basic English learners.'),
+  wordImageAsset('man', manImage, 'person', 'scene', 'none', 'A simple man scene for Basic English learners.'),
+  wordImageAsset('woman', womanImage, 'person', 'scene', 'none', 'A simple woman scene for Basic English learners.'),
+  wordImageAsset('sun', sunImage, 'object', 'concrete', 'none', 'A simple sun flashcard image for Basic English learners.'),
+  wordImageAsset('rain', rainImage, 'abstract', 'scene', 'none', 'A simple rain scene for Basic English learners.'),
+  wordImageAsset('cloud', cloudImage, 'object', 'concrete', 'none', 'A simple cloud flashcard image for Basic English learners.'),
+  wordImageAsset('wind', windImage, 'abstract', 'scene', 'none', 'A simple wind scene for Basic English learners.'),
+  wordImageAsset('weather', weatherImage, 'abstract', 'scene', 'none', 'A simple weather scene for Basic English learners.'),
+  wordImageAsset('cold', coldImage, 'quality', 'scene', 'none', 'A simple cold weather scene for Basic English learners.'),
+  wordImageAsset('heat', heatImage, 'abstract', 'scene', 'none', 'A simple heat scene for Basic English learners.'),
+  wordImageAsset('garden', gardenImage, 'place', 'scene', 'none', 'A simple garden scene for Basic English learners.'),
+  wordImageAsset('tree', treeImage, 'object', 'concrete', 'none', 'A simple tree flashcard image for Basic English learners.'),
+  wordImageAsset('flower', flowerImage, 'object', 'concrete', 'none', 'A simple flower flashcard image for Basic English learners.'),
+  wordImageAsset('office', officeImage, 'place', 'scene', 'none', 'A simple office scene for Basic English learners.'),
+  wordImageAsset('meeting', meetingImage, 'abstract', 'scene', 'none', 'A simple meeting scene for Basic English learners.'),
+  wordImageAsset('letter', letterImage, 'object', 'concrete', 'none', 'A simple letter flashcard image for Basic English learners.'),
+  wordImageAsset('page', pageImage, 'object', 'concrete', 'none', 'A simple page flashcard image for Basic English learners.'),
+  wordImageAsset('copy', copyImage, 'action', 'scene', 'none', 'A simple copy action scene for Basic English learners.'),
+  wordImageAsset('print', printImage, 'action', 'scene', 'none', 'A simple print action scene for Basic English learners.'),
+  wordImageAsset('record', recordImage, 'abstract', 'scene', 'none', 'A simple record scene for Basic English learners.'),
+  wordImageAsset('number', numberImage, 'abstract', 'grammar', 'english-keyword', 'A simple English keyword card showing the word number.'),
+  wordImageAsset('mark', markImage, 'action', 'scene', 'none', 'A simple mark action scene for Basic English learners.'),
+  wordImageAsset('account', accountImage, 'abstract', 'scene', 'none', 'A simple account record scene for Basic English learners.'),
+  wordImageAsset('like', likeImage, 'action', 'scene', 'none', 'A simple like feeling scene for Basic English learners.'),
+  wordImageAsset('love', loveImage, 'action', 'scene', 'none', 'A simple love family scene for Basic English learners.'),
+  wordImageAsset('fear', fearImage, 'abstract', 'scene', 'none', 'A simple fear feeling scene for Basic English learners.'),
+  wordImageAsset('hope', hopeImage, 'abstract', 'scene', 'none', 'A simple hope feeling scene for Basic English learners.'),
+  wordImageAsset('idea', ideaImage, 'abstract', 'scene', 'none', 'A simple idea scene for Basic English learners.'),
+  wordImageAsset('thought', thoughtImage, 'abstract', 'scene', 'none', 'A simple thought scene for Basic English learners.'),
+  wordImageAsset('reason', reasonImage, 'abstract', 'grammar', 'english-keyword', 'A simple English keyword card showing the word reason.'),
+  wordImageAsset('true', trueImage, 'abstract', 'grammar', 'english-keyword', 'A simple English keyword card showing the word true.'),
+  wordImageAsset('false', falseImage, 'abstract', 'grammar', 'english-keyword', 'A simple English keyword card showing the word false.'),
+  wordImageAsset('possible', possibleImage, 'abstract', 'grammar', 'english-keyword', 'A simple English keyword card showing the word possible.'),
+  wordImageAsset('will', willImage, 'structure', 'grammar', 'english-keyword', 'A simple English keyword card showing the word will.'),
+  wordImageAsset('tomorrow', tomorrowImage, 'time', 'scene', 'none', 'A simple tomorrow scene for Basic English learners.'),
+  wordImageAsset('yesterday', yesterdayImage, 'time', 'scene', 'none', 'A simple yesterday scene for Basic English learners.'),
+  wordImageAsset('week', weekImage, 'time', 'scene', 'none', 'A simple week time scene for Basic English learners.'),
+  wordImageAsset('month', monthImage, 'time', 'scene', 'none', 'A simple month time scene for Basic English learners.'),
+  wordImageAsset('year', yearImage, 'time', 'scene', 'none', 'A simple year time scene for Basic English learners.'),
+  wordImageAsset('summer', summerImage, 'time', 'scene', 'none', 'A simple summer scene for Basic English learners.'),
+  wordImageAsset('winter', winterImage, 'time', 'scene', 'none', 'A simple winter scene for Basic English learners.'),
+  wordImageAsset('north', northImage, 'place', 'grammar', 'english-keyword', 'A simple English keyword card showing the word north.'),
+  wordImageAsset('south', southImage, 'place', 'grammar', 'english-keyword', 'A simple English keyword card showing the word south.'),
 ];
 
 export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(

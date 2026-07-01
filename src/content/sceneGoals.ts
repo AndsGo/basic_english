@@ -1,4 +1,5 @@
 import type { SceneGoal } from '../domain/types';
+import { week8to12SceneGoalsByDayId } from './week8to12LearningTasks';
 
 type SceneGoalDayId =
   | 'day-001'
@@ -49,7 +50,8 @@ type SceneGoalDayId =
   | 'day-046'
   | 'day-047'
   | 'day-048'
-  | 'day-049';
+  | 'day-049'
+  | keyof typeof week8to12SceneGoalsByDayId;
 
 export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   'day-001': {
@@ -493,4 +495,5 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
     scenePrompt: 'Tell the body care story in order.',
     dialoguePrompts: ['Ask and answer about the body care story.', 'Ask and answer about rest, water, and care.'],
   },
+  ...week8to12SceneGoalsByDayId,
 };

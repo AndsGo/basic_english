@@ -213,7 +213,7 @@ describe('MePage saved outputs', () => {
     render(<MePage repository={repository} totalDayCount={totalDayCount} />);
 
     expect(await screen.findByText('Completed days: 1')).toBeInTheDocument();
-    expect(screen.getByText('/ 49')).toBeInTheDocument();
+    expect(screen.getByText(`/ ${totalDayCount}`)).toBeInTheDocument();
   });
 
   it('shows saved scene text and dialogue in Saved Outputs', async () => {

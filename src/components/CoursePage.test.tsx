@@ -140,7 +140,7 @@ describe('CoursePage', () => {
     expect(screen.getAllByRole('button', { name: 'Open Today' })).toHaveLength(1);
   });
 
-  it('shows all seven weeks complete after Day 49 is complete', () => {
+  it('shows all twelve weeks complete after Day 84 is complete', () => {
     render(
       <CoursePage
         course={basicEnglishCourse}
@@ -151,11 +151,11 @@ describe('CoursePage', () => {
       />,
     );
 
-    expect(screen.getAllByText('7 / 7 days completed')).toHaveLength(7);
+    expect(screen.getAllByText('7 / 7 days completed')).toHaveLength(12);
     expect(screen.queryByRole('button', { name: 'Open Today' })).not.toBeInTheDocument();
 
-    const day49Card = screen.getByText('Day 49: Week 7 Care Story').closest('article');
-    expect(day49Card).not.toBeNull();
-    expect(within(day49Card!).getByText('Completed')).toBeInTheDocument();
+    const day84Card = screen.getByText('Day 84: Week 12 Time Story').closest('article');
+    expect(day84Card).not.toBeNull();
+    expect(within(day84Card!).getByText('Completed')).toBeInTheDocument();
   });
 });
