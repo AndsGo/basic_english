@@ -40,6 +40,13 @@ import day039Image from '../assets/picture-describe/day-039-please-repeat.png';
 import day040Image from '../assets/picture-describe/day-040-ask-again.png';
 import day041Image from '../assets/picture-describe/day-041-polite-help.png';
 import day042Image from '../assets/picture-describe/day-042-problem-story-recap.png';
+import day043Image from '../assets/picture-describe/day-043-body-parts.png';
+import day044Image from '../assets/picture-describe/day-044-feel-ill.png';
+import day045Image from '../assets/picture-describe/day-045-body-pain.png';
+import day046Image from '../assets/picture-describe/day-046-need-rest.png';
+import day047Image from '../assets/picture-describe/day-047-warm-care.png';
+import day048Image from '../assets/picture-describe/day-048-tell-body-problem.png';
+import day049Image from '../assets/picture-describe/day-049-body-care-story.png';
 import type { PictureDescribeTask } from '../domain/types';
 
 export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = {
@@ -518,5 +525,82 @@ export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = 
       'I understand.',
       'I am kind.',
     ],
+  },
+  'day-043': {
+    id: 'picture-day-043-body-parts',
+    dayId: 'day-043',
+    title: 'Body Parts',
+    goal: 'Name simple body parts.',
+    image: day043Image,
+    targetWords: ['body', 'head', 'hand', 'foot'],
+    suggestedPatterns: ['This is my head.', 'This is my hand.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['This is my head.', 'This is my hand.', 'This is my foot.', 'This is my body.'],
+  },
+  'day-044': {
+    id: 'picture-day-044-feel-ill',
+    dayId: 'day-044',
+    title: 'Feel Ill',
+    goal: 'Say how the body feels.',
+    image: day044Image,
+    targetWords: ['ill', 'tired', 'rest', 'water'],
+    suggestedPatterns: ['I feel ill.', 'I am tired.', 'I need rest.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I feel ill.', 'I am tired.', 'I need rest.', 'I need water.'],
+  },
+  'day-045': {
+    id: 'picture-day-045-body-pain',
+    dayId: 'day-045',
+    title: 'Body Pain',
+    goal: 'Say where the body pain is.',
+    image: day045Image,
+    targetWords: ['pain', 'head', 'hand', 'foot'],
+    suggestedPatterns: ['I have pain in my head.', 'I need care.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I have pain in my head.', 'I have pain in my hand.', 'I have pain in my foot.', 'I need care.'],
+  },
+  'day-046': {
+    id: 'picture-day-046-need-rest',
+    dayId: 'day-046',
+    title: 'Need Rest',
+    goal: 'Ask for rest, water, and help.',
+    image: day046Image,
+    targetWords: ['rest', 'water', 'tired', 'help'],
+    suggestedPatterns: ['I need rest.', 'I need water.', 'Please help me.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I am tired.', 'I need rest.', 'I need water.', 'Please help me.'],
+  },
+  'day-047': {
+    id: 'picture-day-047-warm-care',
+    dayId: 'day-047',
+    title: 'Warm Care',
+    goal: 'Say simple care for an ill body.',
+    image: day047Image,
+    targetWords: ['warm', 'care', 'body', 'rest'],
+    suggestedPatterns: ['I keep warm.', 'I need care.', 'I need rest.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I feel ill.', 'I need care.', 'I need rest.', 'I keep warm.'],
+  },
+  'day-048': {
+    id: 'picture-day-048-tell-body-problem',
+    dayId: 'day-048',
+    title: 'Tell the Body Problem',
+    goal: 'Tell a person what is wrong with your body.',
+    image: day048Image,
+    targetWords: ['tell', 'problem', 'body', 'help'],
+    suggestedPatterns: ['I feel ill.', 'I have pain in my head.', 'Please help me.'],
+    requiredSentenceCount: 4,
+    simpleVersion: ['I have a body problem.', 'I feel ill.', 'I have pain in my head.', 'Please help me.'],
+  },
+  'day-049': {
+    id: 'picture-day-049-body-care-story',
+    dayId: 'day-049',
+    title: 'Body Care Story',
+    goal: 'Tell a body problem story from pain to care.',
+    image: day049Image,
+    targetWords: ['body', 'pain', 'ill', 'care', 'rest'],
+    suggestedPatterns: ['I feel ill.', 'I have pain in my head.', 'I need care.'],
+    requiredSentenceCount: 6,
+    simpleVersion: ['I feel ill.', 'I am tired.', 'I have pain in my head.', 'I need rest.', 'I need water.', 'I need care.'],
   },
 };

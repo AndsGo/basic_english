@@ -143,6 +143,7 @@ export function TodayPage({
   const [dayProgress, setDayProgress] = useState<DayProgress>(() =>
     startDay(day.id, course.contentVersion, new Date().toISOString()),
   );
+  const [completedDayIds, setCompletedDayIds] = useState<string[]>([]);
   const [outputDraft, setOutputDraft] = useState<UserOutput>(() => createInitialOutput(day.id));
   const [pictureDescriptionDraft, setPictureDescriptionDraft] = useState<PictureDescription>(() =>
     createInitialPictureDescription(day.id, pictureTask?.id),
@@ -171,6 +172,17 @@ export function TodayPage({
   );
   const currentStep = dayProgress.currentStep;
   const isHydrating = isCourseHydrating || isDayHydrating;
+  const completedSceneIds = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          completedDayIds
+            .map((completedDayId) => sceneGoalsByDayId[completedDayId]?.id)
+            .filter((sceneId): sceneId is string => Boolean(sceneId)),
+        ),
+      ),
+    [completedDayIds, sceneGoalsByDayId],
+  );
 
   useEffect(() => {
     selectedDayIdRef.current = selectedDayId;
@@ -190,6 +202,7 @@ export function TodayPage({
       const completedDayIds = allProgress
         .filter((progress) => progress.status === 'completed' || progress.currentStep === 'done')
         .map((progress) => progress.dayId);
+      setCompletedDayIds(completedDayIds);
       setActiveReviewItems(activeReviews);
       const nextDayId = getCurrentDayId(completedDayIds, orderedDayIds);
       if (nextDayId !== selectedDayIdRef.current) setIsDayHydrating(true);
@@ -485,7 +498,10 @@ export function TodayPage({
       });
       await repository.saveDayProgress(updatedProgress);
       setDayProgress(updatedProgress);
-      if (updatedProgress.currentStep === 'done') onProgressChange?.();
+      if (updatedProgress.currentStep === 'done') {
+        setCompletedDayIds((current) => Array.from(new Set([...current, day.id])));
+        onProgressChange?.();
+      }
     } finally {
       setIsAdvancing(false);
     }
@@ -533,7 +549,7 @@ export function TodayPage({
         <Stepper currentStep={currentStep} />
       </div>
 
-      {allSceneGoals.length > 0 && sceneGoal && <SceneMap goals={allSceneGoals} completedSceneIds={[]} currentSceneId={sceneGoal.id} />}
+      {allSceneGoals.length > 0 && sceneGoal && <SceneMap goals={allSceneGoals} completedSceneIds={completedSceneIds} currentSceneId={sceneGoal.id} />}
 
       <div className="panel today-step-panel">
         {isHydrating ? (

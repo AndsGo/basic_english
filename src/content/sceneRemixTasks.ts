@@ -17,6 +17,65 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
       referenceAnswers: ['I am a teacher.'],
     },
   ],
+  'day-002': [
+    {
+      id: 'day-002-remix-student-happy',
+      type: 'replace',
+      prompt: 'Change student to happy.',
+      source: 'I am a student.',
+      referenceAnswers: ['I am happy.'],
+    },
+    {
+      id: 'day-002-remix-study-english',
+      type: 'extend',
+      prompt: 'Put one more sentence about English.',
+      referenceAnswers: ['I study English.'],
+    },
+  ],
+  'day-003': [
+    {
+      id: 'day-003-remix-question-friend',
+      type: 'replace',
+      prompt: 'Change question to friend.',
+      source: 'I have a question.',
+      referenceAnswers: ['I have a friend.'],
+    },
+  ],
+  'day-004': [
+    {
+      id: 'day-004-remix-friend-student',
+      type: 'replace',
+      prompt: 'Change friend to student.',
+      source: 'This is my friend.',
+      referenceAnswers: ['This is my student.'],
+    },
+  ],
+  'day-005': [
+    {
+      id: 'day-005-remix-he-she',
+      type: 'replace',
+      prompt: 'Change He to She.',
+      source: 'He is kind.',
+      referenceAnswers: ['She is kind.'],
+    },
+  ],
+  'day-006': [
+    {
+      id: 'day-006-remix-want-learn',
+      type: 'replace',
+      prompt: 'Change I have a question to I want to learn.',
+      source: 'I have a question.',
+      referenceAnswers: ['I want to learn.'],
+    },
+  ],
+  'day-007': [
+    {
+      id: 'day-007-remix-self-story',
+      type: 'extend',
+      prompt: 'Put more sentences in the self story.',
+      referenceAnswers: ['I am a student.', 'I have a friend.', 'I study English because I want to learn.'],
+    },
+  ],
   'day-008': [
     {
       id: 'day-008-remix-room-office',
@@ -69,6 +128,41 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
       prompt: 'Change table to chair.',
       source: 'The bag is near the table.',
       referenceAnswers: ['The bag is near the chair.'],
+    },
+  ],
+  'day-011': [
+    {
+      id: 'day-011-remix-pen-paper',
+      type: 'replace',
+      prompt: 'Change pen to paper.',
+      source: 'The pen is on my table.',
+      referenceAnswers: ['The paper is on my table.'],
+    },
+  ],
+  'day-012': [
+    {
+      id: 'day-012-remix-phone-bag',
+      type: 'replace',
+      prompt: 'Change phone to bag.',
+      source: 'This is my phone.',
+      referenceAnswers: ['This is my bag.'],
+    },
+  ],
+  'day-013': [
+    {
+      id: 'day-013-remix-useful-important',
+      type: 'replace',
+      prompt: 'Change useful to important.',
+      source: 'It is useful.',
+      referenceAnswers: ['It is important.'],
+    },
+  ],
+  'day-014': [
+    {
+      id: 'day-014-remix-room-story',
+      type: 'extend',
+      prompt: 'Put more sentences in the room story.',
+      referenceAnswers: ['The book is on the table.', 'I use it because it is useful.'],
     },
   ],
   'day-015': [
@@ -317,6 +411,68 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
       type: 'extend',
       prompt: 'Put the problem story in order.',
       referenceAnswers: ['The way is not clear.', 'This way is wrong.', 'I need another way.', 'Please repeat.', 'I understand.', 'I am kind.'],
+    },
+  ],
+  'day-043': [
+    {
+      id: 'day-043-remix-head-hand',
+      type: 'replace',
+      prompt: 'Change head to hand.',
+      source: 'This is my head.',
+      referenceAnswers: ['This is my hand.'],
+    },
+  ],
+  'day-044': [
+    {
+      id: 'day-044-remix-ill-tired',
+      type: 'replace',
+      prompt: 'Change ill to tired.',
+      source: 'I feel ill.',
+      referenceAnswers: ['I am tired.'],
+    },
+  ],
+  'day-045': [
+    {
+      id: 'day-045-remix-head-foot',
+      type: 'replace',
+      prompt: 'Change head to foot.',
+      source: 'I have pain in my head.',
+      referenceAnswers: ['I have pain in my foot.'],
+    },
+  ],
+  'day-046': [
+    {
+      id: 'day-046-remix-rest-water',
+      type: 'replace',
+      prompt: 'Change rest to water.',
+      source: 'I need rest.',
+      referenceAnswers: ['I need water.'],
+    },
+  ],
+  'day-047': [
+    {
+      id: 'day-047-remix-care-rest',
+      type: 'replace',
+      prompt: 'Change care to rest.',
+      source: 'I need care.',
+      referenceAnswers: ['I need rest.'],
+    },
+  ],
+  'day-048': [
+    {
+      id: 'day-048-remix-help-care',
+      type: 'replace',
+      prompt: 'Change help to care.',
+      source: 'Please help me.',
+      referenceAnswers: ['I need care.'],
+    },
+  ],
+  'day-049': [
+    {
+      id: 'day-049-remix-body-care-story',
+      type: 'extend',
+      prompt: 'Put the body care story in order.',
+      referenceAnswers: ['I feel ill.', 'I have pain in my head.', 'I need rest.', 'I need water.', 'I need care.'],
     },
   ],
 };

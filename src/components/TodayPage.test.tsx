@@ -552,6 +552,19 @@ describe('TodayPage', () => {
     expect(screen.getByText('Describe your room with simple sentences.')).toBeInTheDocument();
   });
 
+  it('marks completed scene goals from completed day progress', async () => {
+    const completedWeek1Progress = basicEnglishCourse.weeks[0].days.map((courseDay) =>
+      completedDayProgress(courseDay.id, basicEnglishCourse.contentVersion),
+    );
+    const repository = createTestRepository({ dayProgress: completedWeek1Progress });
+
+    renderWithSpeech(<TodayPage course={basicEnglishCourse} repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
+
+    expect(await screen.findByRole('heading', { level: 2, name: 'My Room' })).toBeInTheDocument();
+    expect(screen.getByRole('listitem', { name: /Week 1 Self Story Completed/ })).toHaveClass('scene-map-item--completed');
+    expect(screen.getByRole('listitem', { name: /Room Today/ })).toHaveClass('scene-map-item--current');
+  });
+
   it('renders a Week 3 Today lesson without changing the existing flow', async () => {
     const completedFirstTwoWeeksProgress = basicEnglishCourse.weeks
       .slice(0, 2)
@@ -620,7 +633,7 @@ describe('TodayPage', () => {
 
     expect(await screen.findByRole('heading', { level: 2, name: day29.title })).toBeInTheDocument();
     expect(screen.getByText(/Week 5 \/ Day 29/i)).toBeInTheDocument();
-    expect(screen.getByText('Today story sentence')).toBeInTheDocument();
+    expect(await screen.findByText('Today story sentence')).toBeInTheDocument();
     expect(screen.getByText('Make a short story about going outside and stopping at a place.')).toBeInTheDocument();
     const todaySteps = screen.getByRole('list', { name: 'Today steps' });
     expect(todaySteps).toHaveTextContent('Picture');
@@ -649,7 +662,7 @@ describe('TodayPage', () => {
 
     expect(await screen.findByRole('heading', { level: 2, name: day42.title })).toBeInTheDocument();
     expect(screen.getByText(/Week 6 \/ Day 42/i)).toBeInTheDocument();
-    expect(screen.getByText('Story recap')).toBeInTheDocument();
+    expect(await screen.findByText('Story recap')).toBeInTheDocument();
     expect(
       screen.getByText('Make a full story about a problem outside, asking for another way, understanding, and being kind.'),
     ).toBeInTheDocument();

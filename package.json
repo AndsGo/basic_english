@@ -2,6 +2,7 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "tsc -b && vite build",
+    "content:health": "node scripts/course-health-report.cjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test"

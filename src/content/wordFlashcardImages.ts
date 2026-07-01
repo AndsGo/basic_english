@@ -165,6 +165,16 @@ import fullImage from '../assets/word-flashcards/full.png';
 import emptyImage from '../assets/word-flashcards/empty.png';
 import tasteImage from '../assets/word-flashcards/taste.png';
 import badImage from '../assets/word-flashcards/bad.png';
+import bodyImage from '../assets/word-flashcards/body.png';
+import headImage from '../assets/word-flashcards/head.png';
+import handImage from '../assets/word-flashcards/hand.png';
+import footImage from '../assets/word-flashcards/foot.png';
+import painImage from '../assets/word-flashcards/pain.png';
+import illImage from '../assets/word-flashcards/ill.png';
+import tiredImage from '../assets/word-flashcards/tired.png';
+import restImage from '../assets/word-flashcards/rest.png';
+import careImage from '../assets/word-flashcards/care.png';
+import warmImage from '../assets/word-flashcards/warm.png';
 
 export const validWordImageKinds = [
   'object',
@@ -372,6 +382,16 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('sorry', sorryImage, 'structure', 'grammar', 'english-keyword', 'A simple English keyword card showing the structure word sorry.'),
   wordImageAsset('excuse', excuseImage, 'action', 'scene', 'none', 'A simple polite scene showing someone asking to pass.'),
   wordImageAsset('safe', safeImage, 'quality', 'scene', 'none', 'A simple scene showing a safe place or action.'),
+  wordImageAsset('body', bodyImage, 'person', 'scene', 'none', 'A full-body child image for naming body parts.'),
+  wordImageAsset('head', headImage, 'object', 'concrete', 'none', 'A clear head image for naming the head.'),
+  wordImageAsset('hand', handImage, 'object', 'concrete', 'none', 'A clear hand image for naming the hand.'),
+  wordImageAsset('foot', footImage, 'object', 'concrete', 'none', 'A clear foot image for naming the foot.'),
+  wordImageAsset('pain', painImage, 'abstract', 'scene', 'none', 'A simple body pain scene for Basic English learners.'),
+  wordImageAsset('ill', illImage, 'quality', 'scene', 'none', 'A simple ill feeling scene for Basic English learners.'),
+  wordImageAsset('tired', tiredImage, 'quality', 'scene', 'none', 'A simple tired feeling scene for Basic English learners.'),
+  wordImageAsset('rest', restImage, 'action', 'scene', 'none', 'A simple rest scene for Basic English learners.'),
+  wordImageAsset('care', careImage, 'action', 'scene', 'none', 'A simple care and help scene for Basic English learners.'),
+  wordImageAsset('warm', warmImage, 'quality', 'scene', 'none', 'A simple warm care scene for Basic English learners.'),
 ];
 
 export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(

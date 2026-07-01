@@ -192,7 +192,7 @@ describe('MePage theme control', () => {
 });
 
 describe('MePage saved outputs', () => {
-  it('shows the V1.10 total progress out of 42 days', async () => {
+  it('shows the V1.11 total progress out of 49 days', async () => {
     const repository = createMockRepository({
       listDayProgress: vi.fn().mockResolvedValue([
         {
@@ -213,7 +213,7 @@ describe('MePage saved outputs', () => {
     render(<MePage repository={repository} totalDayCount={totalDayCount} />);
 
     expect(await screen.findByText('Completed days: 1')).toBeInTheDocument();
-    expect(screen.getByText('/ 42')).toBeInTheDocument();
+    expect(screen.getByText('/ 49')).toBeInTheDocument();
   });
 
   it('shows saved scene text and dialogue in Saved Outputs', async () => {

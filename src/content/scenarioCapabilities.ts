@@ -7,7 +7,7 @@ export const scenarioWeekMap: ScenarioWeek[] = [
   { weekNumber: 4, theme: 'Food & Shopping', expressionOutcome: 'Order food and buy simple things.' },
   { weekNumber: 5, theme: 'Going Out Story', expressionOutcome: 'Tell a complete going out story.' },
   { weekNumber: 6, theme: 'Problems Outside', expressionOutcome: 'Describe outside problems and ask for help in a kind way.' },
-  { weekNumber: 7, theme: 'Problems & Help', expressionOutcome: 'Tell a problem and ask for help.' },
+  { weekNumber: 7, theme: 'Body and Care', expressionOutcome: 'Tell a body problem and ask for care.' },
   { weekNumber: 8, theme: 'Body', expressionOutcome: 'Describe simple body problems.' },
   { weekNumber: 9, theme: 'Yesterday Ideas', expressionOutcome: 'Tell a yesterday story.' },
   { weekNumber: 10, theme: 'Tomorrow', expressionOutcome: 'Say what you will do tomorrow or after tomorrow.' },
@@ -155,5 +155,12 @@ export const scenarioCapabilities: ScenarioCapability[] = [
     description: 'Ask for help in a kind way when there is a problem outside.',
     unlockedByDayIds: ['day-042'],
     exampleOutputs: ['I have a problem outside.', 'Please help me.', 'I ask for help.', 'I am kind.'],
+  },
+  {
+    id: 'body-care-story',
+    title: 'I can tell a body care story.',
+    description: 'Tell how your body feels and what care you need.',
+    unlockedByDayIds: ['day-049'],
+    exampleOutputs: ['I feel ill.', 'I have pain in my head.', 'I need rest.', 'I need care.'],
   },
 ];

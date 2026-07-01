@@ -2,9 +2,19 @@ import type { SceneGoal } from '../domain/types';
 
 type SceneGoalDayId =
   | 'day-001'
+  | 'day-002'
+  | 'day-003'
+  | 'day-004'
+  | 'day-005'
+  | 'day-006'
+  | 'day-007'
   | 'day-008'
   | 'day-009'
   | 'day-010'
+  | 'day-011'
+  | 'day-012'
+  | 'day-013'
+  | 'day-014'
   | 'day-015'
   | 'day-016'
   | 'day-017'
@@ -32,7 +42,14 @@ type SceneGoalDayId =
   | 'day-039'
   | 'day-040'
   | 'day-041'
-  | 'day-042';
+  | 'day-042'
+  | 'day-043'
+  | 'day-044'
+  | 'day-045'
+  | 'day-046'
+  | 'day-047'
+  | 'day-048'
+  | 'day-049';
 
 export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   'day-001': {
@@ -43,6 +60,60 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
     guidedPrompts: ['Say your name.', 'Say where you are from.', 'Say what you do.', 'Say why you study English.'],
     scenePrompt: 'Use your sentences to say who you are clearly.',
     dialoguePrompts: ['Ask and answer about your name.', 'Ask and answer about where you are from.'],
+  },
+  'day-002': {
+    id: 'i-am',
+    title: 'I Am',
+    capability: 'I can say one thing about me.',
+    templates: ['I am a student.', 'I am happy.', 'I study English.', 'I am from China.'],
+    guidedPrompts: ['Say who you are.', 'Say how you feel.', 'Say what you study.', 'Say where you are from.'],
+    scenePrompt: 'Use your sentences to say one thing about you.',
+    dialoguePrompts: ['Ask and answer about who you are.', 'Ask and answer about how you feel.'],
+  },
+  'day-003': {
+    id: 'what-i-have',
+    title: 'What I Have',
+    capability: 'I can say what I have.',
+    templates: ['I have a question.', 'I have a friend.', 'I have a book.', 'I study English.'],
+    guidedPrompts: ['Say one thing you have.', 'Say if you have a question.', 'Say if you have a friend.', 'Say what you study.'],
+    scenePrompt: 'Describe what you have for study.',
+    dialoguePrompts: ['Ask and answer about one thing you have.', 'Ask and answer about a question.'],
+  },
+  'day-004': {
+    id: 'my-friend',
+    title: 'My Friend',
+    capability: 'I can introduce another person.',
+    templates: ['This is my friend.', 'My friend is happy.', 'My friend is kind.', 'This is a student.'],
+    guidedPrompts: ['Say who this person is.', 'Say the person is your friend.', 'Say how the person feels.', 'Say the person is kind.'],
+    scenePrompt: 'Introduce a friend with simple sentences.',
+    dialoguePrompts: ['Ask and answer about a friend.', 'Ask and answer about a person.'],
+  },
+  'day-005': {
+    id: 'he-and-she',
+    title: 'He and She',
+    capability: 'I can describe another person with he or she.',
+    templates: ['He is a student.', 'She is kind.', 'He is happy.', 'She is my friend.'],
+    guidedPrompts: ['Say one sentence with he.', 'Say one sentence with she.', 'Say if the person is kind.', 'Say if the person is happy.'],
+    scenePrompt: 'Describe persons with he and she.',
+    dialoguePrompts: ['Ask and answer about he.', 'Ask and answer about she.'],
+  },
+  'day-006': {
+    id: 'why-i-study',
+    title: 'Why I Study',
+    capability: 'I can give a simple reason.',
+    templates: ['I study English.', 'I study English because I want to learn.', 'I have a question.', 'I want to learn.'],
+    guidedPrompts: ['Say what you study.', 'Say why you study.', 'Say what you want.', 'Say if you have a question.'],
+    scenePrompt: 'Say why you study English.',
+    dialoguePrompts: ['Ask and answer about English.', 'Ask and answer about why you study.'],
+  },
+  'day-007': {
+    id: 'week-1-self-story',
+    title: 'Week 1 Self Story',
+    capability: 'I can introduce me with Week 1 words.',
+    templates: ['My name is ____.', 'I am from ____.', 'I am a student.', 'I study English because I want to learn.'],
+    guidedPrompts: ['Say your name.', 'Say where you are from.', 'Say who you are.', 'Say why you study English.'],
+    scenePrompt: 'Tell a short self story.',
+    dialoguePrompts: ['Ask and answer about your self story.', 'Ask and answer about why you study English.'],
   },
   'day-008': {
     id: 'room',
@@ -70,6 +141,42 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
     guidedPrompts: ['Say one thing on a table.', 'Say one thing in a bag or box.', 'Say one thing under something.', 'Say one thing near something.'],
     scenePrompt: 'Describe where things are.',
     dialoguePrompts: ['Ask and answer where one thing is.'],
+  },
+  'day-011': {
+    id: 'my-table',
+    title: 'My Table',
+    capability: 'I can describe my table and study things.',
+    templates: ['This is my table.', 'My table is clean.', 'The pen is on my table.', 'There is paper on my table.'],
+    guidedPrompts: ['Say what your table is.', 'Say what your table is like.', 'Say one thing on it.', 'Say another thing on it.'],
+    scenePrompt: 'Describe your table and study things.',
+    dialoguePrompts: ['Ask and answer about a table.', 'Ask and answer about things on a table.'],
+  },
+  'day-012': {
+    id: 'phone-and-bag',
+    title: 'Phone and Bag',
+    capability: 'I can describe things I use every day.',
+    templates: ['This is my phone.', 'My bag is old.', 'The key is in my bag.', 'I use it every day.'],
+    guidedPrompts: ['Say one personal thing.', 'Say what is in your bag.', 'Say if it is new or old.', 'Say you use it every day.'],
+    scenePrompt: 'Describe your phone and bag.',
+    dialoguePrompts: ['Ask and answer about a phone.', 'Ask and answer about a bag.'],
+  },
+  'day-013': {
+    id: 'useful-important-things',
+    title: 'Useful Things',
+    capability: 'I can say why a thing is useful or important.',
+    templates: ['My key is important.', 'It is useful.', 'I use it every day.', 'I use it because it is useful.'],
+    guidedPrompts: ['Say one important thing.', 'Say one useful thing.', 'Say when you use it.', 'Say why you use it.'],
+    scenePrompt: 'Describe a useful or important thing.',
+    dialoguePrompts: ['Ask and answer about a useful thing.', 'Ask and answer about why you use it.'],
+  },
+  'day-014': {
+    id: 'room-and-things-story',
+    title: 'Room and Things Story',
+    capability: 'I can describe my room and things.',
+    templates: ['This is my room.', 'My room is clean.', 'The book is on the table.', 'I use it because it is useful.'],
+    guidedPrompts: ['Say what your room is like.', 'Say what is in your room.', 'Say where one thing is.', 'Say why one thing is useful.'],
+    scenePrompt: 'Tell a room and things story.',
+    dialoguePrompts: ['Ask and answer about a room.', 'Ask and answer about where things are.'],
   },
   'day-015': {
     id: 'morning-routine',
@@ -322,5 +429,68 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
     guidedPrompts: ['Say the way is not clear.', 'Say this way is wrong.', 'Say you need another way.', 'Ask the person to repeat.', 'Say you understand.', 'Say you are kind.'],
     scenePrompt: 'Tell the outside problem story in order with kind words.',
     dialoguePrompts: ['Ask and answer about the way problem.', 'Ask and answer with please repeat and kind words.'],
+  },
+  'day-043': {
+    id: 'body-parts',
+    title: 'Body Parts',
+    capability: 'I can name simple body parts.',
+    templates: ['This is my head.', 'This is my hand.', 'This is my foot.', 'This is my body.'],
+    guidedPrompts: ['Say your head.', 'Say your hand.', 'Say your foot.', 'Say your body.'],
+    scenePrompt: 'Name simple body parts in the scene.',
+    dialoguePrompts: ['Ask and answer about one body part.', 'Ask and answer about your head or hand.'],
+  },
+  'day-044': {
+    id: 'feel-ill',
+    title: 'Feel Ill',
+    capability: 'I can say how my body feels.',
+    templates: ['I feel ill.', 'I am tired.', 'I need rest.', 'I need water.'],
+    guidedPrompts: ['Say how you feel.', 'Say you are tired.', 'Say what you need.', 'Ask for water or rest.'],
+    scenePrompt: 'Describe feeling ill and needing rest.',
+    dialoguePrompts: ['Ask and answer about feeling ill.', 'Ask and answer about needing rest.'],
+  },
+  'day-045': {
+    id: 'body-pain',
+    title: 'Body Pain',
+    capability: 'I can say where I have pain.',
+    templates: ['I have pain in my head.', 'I have pain in my hand.', 'I have pain in my foot.', 'I need care.'],
+    guidedPrompts: ['Say where the pain is.', 'Say one body part.', 'Say another body part.', 'Say what care you need.'],
+    scenePrompt: 'Describe body pain and care.',
+    dialoguePrompts: ['Ask and answer about body pain.', 'Ask and answer about care.'],
+  },
+  'day-046': {
+    id: 'need-rest',
+    title: 'Need Rest',
+    capability: 'I can ask for rest, water, and help.',
+    templates: ['I am tired.', 'I need rest.', 'I need water.', 'Please help me.'],
+    guidedPrompts: ['Say you are tired.', 'Ask for rest.', 'Ask for water.', 'Ask for help.'],
+    scenePrompt: 'Ask for rest and help when the body is tired.',
+    dialoguePrompts: ['Ask and answer about rest.', 'Ask and answer about water and help.'],
+  },
+  'day-047': {
+    id: 'warm-care',
+    title: 'Warm Care',
+    capability: 'I can say simple care for an ill body.',
+    templates: ['I feel ill.', 'I need care.', 'I need rest.', 'I keep warm.'],
+    guidedPrompts: ['Say you feel ill.', 'Say you need care.', 'Say you need rest.', 'Say you keep warm.'],
+    scenePrompt: 'Describe simple care for an ill body.',
+    dialoguePrompts: ['Ask and answer about simple care.', 'Ask and answer about keeping warm.'],
+  },
+  'day-048': {
+    id: 'tell-body-problem',
+    title: 'Tell Body Problem',
+    capability: 'I can tell a person my body problem.',
+    templates: ['I have a body problem.', 'I feel ill.', 'I have pain in my head.', 'Please help me.'],
+    guidedPrompts: ['Say you have a body problem.', 'Say how you feel.', 'Say where the pain is.', 'Ask for help.'],
+    scenePrompt: 'Tell a person your body problem and ask for help.',
+    dialoguePrompts: ['Ask and answer about a body problem.', 'Ask and answer about help.'],
+  },
+  'day-049': {
+    id: 'body-care-story',
+    title: 'Body Care Story',
+    capability: 'I can tell a body care story.',
+    templates: ['I feel ill.', 'I am tired.', 'I have pain in my head.', 'I need rest.', 'I need water.', 'I need care.'],
+    guidedPrompts: ['Say how you feel.', 'Say you are tired.', 'Say where the pain is.', 'Say what you need.', 'Say what care you need.'],
+    scenePrompt: 'Tell the body care story in order.',
+    dialoguePrompts: ['Ask and answer about the body care story.', 'Ask and answer about rest, water, and care.'],
   },
 };

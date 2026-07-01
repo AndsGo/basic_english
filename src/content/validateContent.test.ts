@@ -332,7 +332,7 @@ describe('week1Course', () => {
   });
 });
 
-describe('basicEnglishCourse V1.10', () => {
+describe('basicEnglishCourse V1.11', () => {
   it('contains Week 1 and a complete Week 2', () => {
     expect(basicEnglishCourse.weeks.length).toBeGreaterThanOrEqual(2);
     expect(basicEnglishCourse.weeks[1]).toMatchObject({
@@ -389,9 +389,9 @@ describe('basicEnglishCourse V1.10', () => {
     const newDays = basicEnglishCourse.weeks.slice(4, 6).flatMap((week) => week.days);
 
     expect(result.errors).toEqual([]);
-    expect(basicEnglishCourse.contentVersion).toBe('1.10.0');
-    expect(basicEnglishCourse.weeks).toHaveLength(6);
-    expect(basicEnglishCourse.weeks.map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7]);
+    expect(basicEnglishCourse.contentVersion).toBe('1.11.0');
+    expect(basicEnglishCourse.weeks.length).toBeGreaterThanOrEqual(6);
+    expect(basicEnglishCourse.weeks.slice(0, 6).map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7]);
     expect(week5).toMatchObject({
       id: 'week-05',
       number: 5,
@@ -432,6 +432,48 @@ describe('basicEnglishCourse V1.10', () => {
       expect(day.outputTask.requiredSentenceCount, `${day.id} output sentences`).toBeGreaterThanOrEqual(4);
       expect(day.outputTask.storyMode, `${day.id} story mode`).toBe(expectedStoryMode);
       expect(day.outputTask.storyPrompt?.trim(), `${day.id} story prompt`).toBeTruthy();
+    }
+  });
+
+  it('includes complete Week 7 body and care course content for V1.11', () => {
+    const result = validateCourseContent(basicEnglishCourse);
+    const week7 = basicEnglishCourse.weeks[6];
+
+    expect(result.errors).toEqual([]);
+    expect(basicEnglishCourse.contentVersion).toBe('1.11.0');
+    expect(basicEnglishCourse.weeks).toHaveLength(7);
+    expect(basicEnglishCourse.weeks.map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7, 7]);
+    expect(week7).toMatchObject({
+      id: 'week-07',
+      number: 7,
+      title: 'Body and Care',
+    });
+    expect(week7.days[0]).toMatchObject({ id: 'day-043', dayNumber: 43 });
+    expect(week7.days[6]).toMatchObject({ id: 'day-049', dayNumber: 49 });
+    expect(week7.days.map((day) => day.id)).toEqual([
+      'day-043',
+      'day-044',
+      'day-045',
+      'day-046',
+      'day-047',
+      'day-048',
+      'day-049',
+    ]);
+
+    for (const day of week7.days) {
+      const translationCount = day.exercises.filter((exercise) => exercise.type === 'translation').length;
+      const expectedStoryMode = day.id === 'day-049' ? 'recap' : 'sentence';
+
+      expect(day.wordIds.length, `${day.id} word count`).toBeGreaterThanOrEqual(6);
+      expect(day.patternIds.length, `${day.id} pattern count`).toBeGreaterThanOrEqual(1);
+      expect(day.exercises.length, `${day.id} exercise count`).toBeGreaterThanOrEqual(5);
+      expect(translationCount, `${day.id} translation count`).toBeGreaterThanOrEqual(1);
+      expect(day.outputTask.requiredSentenceCount, `${day.id} output sentences`).toBeGreaterThanOrEqual(4);
+      expect(day.outputTask.storyMode, `${day.id} story mode`).toBe(expectedStoryMode);
+      expect(day.outputTask.storyPrompt?.trim(), `${day.id} story prompt`).toBeTruthy();
+      expect(sceneGoalsByDayId[day.id as keyof typeof sceneGoalsByDayId], `${day.id} scene goal`).toBeDefined();
+      expect(sceneRemixTasksByDayId[day.id]?.length, `${day.id} remix task`).toBeGreaterThanOrEqual(1);
+      expect(pictureDescribeTasksByDayId[day.id], `${day.id} picture task`).toBeDefined();
     }
   });
 
@@ -492,10 +534,10 @@ describe('basicEnglishCourse V1.10', () => {
     }
   });
 
-  it('keeps Day 42 as the course completion day', () => {
+  it('keeps Day 49 as the course completion day', () => {
     const allDays = basicEnglishCourse.weeks.flatMap((week) => week.days);
 
-    expect(allDays.at(-1)?.id).toBe('day-042');
+    expect(allDays.at(-1)?.id).toBe('day-049');
     expect(allDays.at(-1)?.weeklyCheckRubric).toBeDefined();
   });
 
