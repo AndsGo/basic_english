@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { CoursePage } from './components/CoursePage';
 import { Layout, type TabId } from './components/Layout';
 import { MePage } from './components/MePage';
 import { ReviewPage } from './components/ReviewPage';
 import { TodayPage } from './components/TodayPage';
-import { WordsPage } from './components/WordsPage';
 import { basicEnglishCourse } from './content/course';
 import { pictureDescribeTasksByDayId } from './content/pictureDescribeTasks';
 import { scenarioCapabilities } from './content/scenarioCapabilities';
@@ -15,6 +14,8 @@ import { SpeechProvider } from './speech/SpeechProvider';
 import type { SpeechRate } from './speech/speechService';
 import { resolveEffectiveTheme, type ThemePreference } from './theme';
 import { createIndexedDbProgressRepository } from './storage/indexedDbProgressRepository';
+
+const WordsPage = lazy(() => import('./components/WordsPage').then((module) => ({ default: module.WordsPage })));
 
 const CHINESE_HELP_STORAGE_KEY = 'basic-english-show-chinese-help';
 const READING_ENABLED_STORAGE_KEY = 'basic-english-reading-enabled';
@@ -143,12 +144,14 @@ export default function App() {
           <ReviewPage repository={repository} onStartToday={() => handleTabChange('today')} onReviewChange={() => void refreshProgressSummary()} />
         )}
         {activeTab === 'words' && (
-          <WordsPage
-            course={basicEnglishCourse}
-            repository={repository}
-            showChineseHelp={showChineseHelp}
-            onProgressChange={() => void refreshProgressSummary()}
-          />
+          <Suspense fallback={<section className="panel">Loading Words...</section>}>
+            <WordsPage
+              course={basicEnglishCourse}
+              repository={repository}
+              showChineseHelp={showChineseHelp}
+              onProgressChange={() => void refreshProgressSummary()}
+            />
+          </Suspense>
         )}
         {activeTab === 'me' && (
           <MePage
