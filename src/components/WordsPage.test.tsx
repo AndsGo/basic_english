@@ -115,6 +115,29 @@ describe('WordsPage', () => {
     expect(screen.getByRole('img', { name: 'student flashcard illustration' })).toBeInTheDocument();
   });
 
+  it('shows the Basic English 850 library with course coverage', async () => {
+    renderWithSpeech(<WordsPage course={basicEnglishCourse} repository={createRepository()} />);
+
+    await userEvent.click(screen.getByRole('button', { name: '850 Library' }));
+
+    expect(screen.getByRole('heading', { name: 'Basic English 850 Library' })).toBeInTheDocument();
+    expect(screen.getByText('176 / 855')).toBeInTheDocument();
+    expect(screen.getByText('20.6% course coverage')).toBeInTheDocument();
+    expect(screen.getByRole('listitem', { name: /account in course/i })).toBeInTheDocument();
+    expect(screen.getByRole('listitem', { name: /acid future/i })).toBeInTheDocument();
+  });
+
+  it('filters the Basic English 850 library by search and course status', async () => {
+    renderWithSpeech(<WordsPage course={basicEnglishCourse} repository={createRepository()} />);
+
+    await userEvent.click(screen.getByRole('button', { name: '850 Library' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Future' }));
+    await userEvent.type(screen.getByLabelText('Search Basic English 850 words'), 'acid');
+
+    expect(screen.getByRole('listitem', { name: /acid future/i })).toBeInTheDocument();
+    expect(screen.queryByRole('listitem', { name: /account in course/i })).not.toBeInTheDocument();
+  });
+
   it('does not show missing-image fallback for real course flashcards', async () => {
     renderWithSpeech(<WordsPage course={basicEnglishCourse} repository={createRepository()} />);
 

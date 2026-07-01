@@ -27,7 +27,11 @@ waiting walk wall war warm wash waste watch water wave wax way weather week weig
 year yellow yes yesterday you young
 `;
 
-export const basicEnglishAllowedWords = new Set(basicEnglish850Words.trim().split(/\s+/));
+export const basicEnglishWordList = [...new Set(basicEnglish850Words.trim().split(/\s+/))].sort((left, right) =>
+  left.localeCompare(right),
+);
+
+export const basicEnglishAllowedWords = new Set(basicEnglishWordList);
 
 export const basicEnglishCourseExceptions = new Set([
   // Product-approved proper nouns and learner-course terms already present in shipped V1.9 content.
