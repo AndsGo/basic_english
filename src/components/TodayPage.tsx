@@ -149,7 +149,9 @@ export function TodayPage({
     createInitialPictureDescription(day.id, pictureTask?.id),
   );
   const [wordMarks, setWordMarks] = useState<Record<string, WordMark | undefined>>({});
+  const [reviewWordMarks, setReviewWordMarks] = useState<Record<string, WordMark | undefined>>({});
   const [practicedPatternIds, setPracticedPatternIds] = useState<Set<string>>(() => new Set());
+  const [reviewPracticedPatternIds, setReviewPracticedPatternIds] = useState<Set<string>>(() => new Set());
   const [drillAnswers, setDrillAnswers] = useState<Record<string, ExerciseAnswer | undefined>>({});
   const [translationDrafts, setTranslationDrafts] = useState<Record<string, TranslationDraft | undefined>>({});
   const [isSceneRemixSubmitted, setIsSceneRemixSubmitted] = useState(false);
@@ -164,6 +166,15 @@ export function TodayPage({
   const { stop: stopSpeech } = useSpeech();
   const words = useMemo(() => course.words.filter((word) => day.wordIds.includes(word.id)), [course.words, day.wordIds]);
   const patterns = useMemo(() => course.patterns.filter((pattern) => day.patternIds.includes(pattern.id)), [course.patterns, day.patternIds]);
+  const previousDay = useMemo(() => allDays[allDays.findIndex((courseDay) => courseDay.id === day.id) - 1], [allDays, day.id]);
+  const reviewWords = useMemo(() => {
+    const wordIds = previousDay?.wordIds.slice(0, day.review.wordCount) ?? [];
+    return course.words.filter((word) => wordIds.includes(word.id));
+  }, [course.words, day.review.wordCount, previousDay]);
+  const reviewPatterns = useMemo(() => {
+    const patternIds = previousDay?.patternIds.slice(0, day.review.patternCount) ?? [];
+    return course.patterns.filter((pattern) => patternIds.includes(pattern.id));
+  }, [course.patterns, day.review.patternCount, previousDay]);
   const currentWeek = useMemo(() => course.weeks.find((week) => week.id === day.weekId) ?? course.weeks[0], [course.weeks, day.weekId]);
   const drillExercises = useMemo(() => day.exercises.filter((exercise) => exercise.type !== 'translation'), [day.exercises]);
   const translationExercises = useMemo(
@@ -234,7 +245,9 @@ export function TodayPage({
       setOutputDraft(withSceneOutput(nextOutput, sceneGoal));
       setPictureDescriptionDraft(savedPictureDescription ?? createInitialPictureDescription(day.id, pictureTask?.id));
       setWordMarks({});
+      setReviewWordMarks({});
       setPracticedPatternIds(new Set());
+      setReviewPracticedPatternIds(new Set());
       setDrillAnswers({});
       setTranslationDrafts({});
       setIsSceneRemixSubmitted(false);
@@ -367,6 +380,24 @@ export function TodayPage({
     });
     if (mark === 'review') {
       void saveReviewItem(createWordReviewItem({ wordId: word.id, wordText: word.text, sourceDayId: day.id, now }));
+    }
+  };
+
+  const markReviewWord = (word: Word, mark: WordMark) => {
+    const now = new Date().toISOString();
+    const sourceDayId = previousDay?.id ?? day.id;
+    setReviewWordMarks((current) => ({ ...current, [word.id]: mark }));
+    void repository.saveWordProgress({
+      id: word.id,
+      wordId: word.id,
+      status: mark,
+      seenCount: 1,
+      correctCount: mark === 'known' ? 1 : 0,
+      lastSeenAt: now,
+      updatedAt: now,
+    });
+    if (mark === 'review') {
+      void saveReviewItem(createWordReviewItem({ wordId: word.id, wordText: word.text, sourceDayId, now }));
     }
   };
 
@@ -561,7 +592,37 @@ export function TodayPage({
             {currentStep === 'review' && (
               <section>
                 <h3>Quick Review</h3>
-                <p>Day 1 has no review. Start with today&apos;s words.</p>
+                {previousDay && (reviewWords.length > 0 || reviewPatterns.length > 0) ? (
+                  <>
+                    <p>
+                      Review Day {previousDay.dayNumber}: {previousDay.title}
+                    </p>
+                    {reviewWords.length > 0 && (
+                      <WordCards
+                        words={reviewWords}
+                        showChineseHelp={showChineseHelp}
+                        marks={reviewWordMarks}
+                        onReview={(wordId) => {
+                          const word = reviewWords.find((item) => item.id === wordId);
+                          if (word) markReviewWord(word, 'review');
+                        }}
+                        onKnow={(wordId) => {
+                          const word = reviewWords.find((item) => item.id === wordId);
+                          if (word) markReviewWord(word, 'known');
+                        }}
+                      />
+                    )}
+                    {reviewPatterns.length > 0 && (
+                      <PatternCards
+                        patterns={reviewPatterns}
+                        practicedPatternIds={reviewPracticedPatternIds}
+                        onPractice={(patternId) => setReviewPracticedPatternIds((current) => new Set([...current, patternId]))}
+                      />
+                    )}
+                  </>
+                ) : (
+                  <p>Day 1 has no review. Start with today&apos;s words.</p>
+                )}
               </section>
             )}
             {currentStep === 'words' && (

@@ -24,7 +24,7 @@ import type {
   WordProgress,
 } from '../storage/progressRepository';
 import { SpeechProvider } from '../speech/SpeechProvider';
-import type { SpeechRate, SpeechService, SpeechUtterance } from '../speech/speechService';
+import type { SpeechLanguage, SpeechRate, SpeechService, SpeechUtterance } from '../speech/speechService';
 import { ExerciseRenderer } from './ExerciseRenderer';
 import { MePage } from './MePage';
 import { TodayPage } from './TodayPage';
@@ -142,8 +142,8 @@ function createTestRepository({
 function createTestSpeechService(): SpeechService {
   return {
     isSupported: vi.fn(() => true),
-    speak: vi.fn((text: string, rate: SpeechRate): SpeechUtterance => {
-      return { text, rate: rate === 'slow' ? 0.75 : 1, lang: 'en-US' };
+    speak: vi.fn((text: string, rate: SpeechRate, language: SpeechLanguage): SpeechUtterance => {
+      return { text, rate: rate === 'slow' ? 0.75 : 1, lang: language };
     }),
     stop: vi.fn(),
   };
@@ -198,7 +198,7 @@ function completedProgressBeforeDay(dayNumber: number) {
 
 function renderWithSpeech(children: ReactNode) {
   return render(
-    <SpeechProvider enabled rate="normal" service={createTestSpeechService()}>
+    <SpeechProvider enabled rate="normal" language="en-US" service={createTestSpeechService()}>
       {children}
     </SpeechProvider>,
   );
@@ -1043,6 +1043,25 @@ describe('TodayPage', () => {
     expect(screen.getByText("Used today's pattern")).toBeInTheDocument();
   });
 
+  it('shows the previous day words in Today review for the current day', async () => {
+    const repository = createTestRepository({
+      dayProgress: [
+        completedDayProgress('day-001', week1Course.contentVersion),
+        completedDayProgress('day-002', week1Course.contentVersion),
+      ],
+    });
+
+    renderToday(repository);
+
+    expect(await screen.findByRole('heading', { level: 2, name: 'I Have' })).toBeInTheDocument();
+    expect(screen.getByText(/Week 1 \/ Day 3/i)).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
+    expect(screen.getByText('Review Day 2: I Am')).toBeInTheDocument();
+    expect(screen.getByText('student')).toBeInTheDocument();
+    expect(screen.getByText('happy')).toBeInTheDocument();
+    expect(screen.queryByText('China')).not.toBeInTheDocument();
+  });
+
   it('shows Chinese word help when enabled', async () => {
     const user = userEvent.setup();
 
@@ -1444,6 +1463,7 @@ describe('MePage', () => {
     const repository = createTestRepository();
     const onReadingEnabledChange = vi.fn();
     const onSpeechRateChange = vi.fn();
+    const onSpeechLanguageChange = vi.fn();
     const user = userEvent.setup();
 
     render(
@@ -1453,14 +1473,18 @@ describe('MePage', () => {
         onReadingEnabledChange={onReadingEnabledChange}
         speechRate="normal"
         onSpeechRateChange={onSpeechRateChange}
+        speechLanguage="en-US"
+        onSpeechLanguageChange={onSpeechLanguageChange}
       />,
     );
 
     await user.click(screen.getByRole('checkbox', { name: 'Enable reading aloud' }));
     await user.click(screen.getByRole('radio', { name: 'Slow' }));
+    await user.click(screen.getByRole('radio', { name: 'British English' }));
 
     expect(onReadingEnabledChange).toHaveBeenCalledWith(false);
     expect(onSpeechRateChange).toHaveBeenCalledWith('slow');
+    expect(onSpeechLanguageChange).toHaveBeenCalledWith('en-GB');
   });
 
   it('shows an error without dropping the page shell when progress loading fails', async () => {

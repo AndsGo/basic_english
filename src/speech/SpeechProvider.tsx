@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import {
   browserSpeechService,
+  type SpeechLanguage,
   type SpeechRate,
   type SpeechService,
   type SpeechUtterance,
@@ -10,6 +11,7 @@ type SpeechProviderProps = {
   children: React.ReactNode;
   enabled: boolean;
   rate: SpeechRate;
+  language?: SpeechLanguage;
   service?: SpeechService;
 };
 
@@ -19,6 +21,7 @@ type SpeechContextValue = {
   enabled: boolean;
   isSupported: boolean;
   rate: SpeechRate;
+  language: SpeechLanguage;
   speak(text: string, activeId?: string): void;
   stop(): void;
 };
@@ -34,6 +37,7 @@ export function SpeechProvider({
   children,
   enabled,
   rate,
+  language = 'en-US',
   service = browserSpeechService,
 }: SpeechProviderProps) {
   const [activeText, setActiveText] = useState<string | null>(null);
@@ -82,7 +86,7 @@ export function SpeechProvider({
 
       const utteranceToken = utteranceTokenRef.current + 1;
       utteranceTokenRef.current = utteranceToken;
-      const utterance = service.speak(trimmedText, rate) as SpeechUtteranceWithEvents | null;
+      const utterance = service.speak(trimmedText, rate, language) as SpeechUtteranceWithEvents | null;
 
       if (utterance) {
         const clearIfCurrent = () => {
@@ -98,7 +102,7 @@ export function SpeechProvider({
         setTrackedActiveSpeech(null, null);
       }
     },
-    [enabled, isSupported, rate, service, setTrackedActiveSpeech, stop],
+    [enabled, isSupported, language, rate, service, setTrackedActiveSpeech, stop],
   );
 
   useEffect(() => {
@@ -119,8 +123,8 @@ export function SpeechProvider({
   );
 
   const value = useMemo<SpeechContextValue>(() => {
-    return { activeId, activeText, enabled, isSupported, rate, speak, stop };
-  }, [activeId, activeText, enabled, isSupported, rate, speak, stop]);
+    return { activeId, activeText, enabled, isSupported, language, rate, speak, stop };
+  }, [activeId, activeText, enabled, isSupported, language, rate, speak, stop]);
 
   return <SpeechContext.Provider value={value}>{children}</SpeechContext.Provider>;
 }

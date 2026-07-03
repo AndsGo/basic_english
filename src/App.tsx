@@ -11,7 +11,7 @@ import { sceneRemixTasksByDayId } from './content/sceneRemixTasks';
 import { sceneGoalsByDayId } from './content/sceneGoals';
 import { getActiveReviewDayIds, selectDueReviewItems } from './domain/review';
 import { SpeechProvider } from './speech/SpeechProvider';
-import type { SpeechRate } from './speech/speechService';
+import type { SpeechLanguage, SpeechRate } from './speech/speechService';
 import { resolveEffectiveTheme, type ThemePreference } from './theme';
 import { createIndexedDbProgressRepository } from './storage/indexedDbProgressRepository';
 
@@ -20,6 +20,7 @@ const WordsPage = lazy(() => import('./components/WordsPage').then((module) => (
 const CHINESE_HELP_STORAGE_KEY = 'basic-english-show-chinese-help';
 const READING_ENABLED_STORAGE_KEY = 'basic-english-reading-enabled';
 const READING_RATE_STORAGE_KEY = 'basic-english-reading-rate';
+const READING_LANGUAGE_STORAGE_KEY = 'basic-english-reading-language';
 const THEME_STORAGE_KEY = 'basic-english-theme';
 
 function safeGetLocalStorageItem(key: string) {
@@ -50,6 +51,11 @@ function readInitialSpeechRateSetting(): SpeechRate {
   return safeGetLocalStorageItem(READING_RATE_STORAGE_KEY) === 'slow' ? 'slow' : 'normal';
 }
 
+function readInitialSpeechLanguageSetting(): SpeechLanguage {
+  const stored = safeGetLocalStorageItem(READING_LANGUAGE_STORAGE_KEY);
+  return stored === 'en-GB' || stored === 'en-AU' || stored === 'en-CA' || stored === 'en-US' ? stored : 'en-US';
+}
+
 function readInitialThemePreference(): ThemePreference {
   const stored = safeGetLocalStorageItem(THEME_STORAGE_KEY);
   return stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system';
@@ -60,6 +66,7 @@ export default function App() {
   const [showChineseHelp, setShowChineseHelp] = useState(readInitialChineseHelpSetting);
   const [readingEnabled, setReadingEnabled] = useState(readInitialReadingEnabledSetting);
   const [speechRate, setSpeechRate] = useState<SpeechRate>(readInitialSpeechRateSetting);
+  const [speechLanguage, setSpeechLanguage] = useState<SpeechLanguage>(readInitialSpeechLanguageSetting);
   const [themePreference, setThemePreference] = useState<ThemePreference>(readInitialThemePreference);
   const [reviewCount, setReviewCount] = useState(0);
   const [completedDayIds, setCompletedDayIds] = useState<string[]>([]);
@@ -103,6 +110,10 @@ export default function App() {
   }, [speechRate]);
 
   useEffect(() => {
+    safeSetLocalStorageItem(READING_LANGUAGE_STORAGE_KEY, speechLanguage);
+  }, [speechLanguage]);
+
+  useEffect(() => {
     safeSetLocalStorageItem(THEME_STORAGE_KEY, themePreference);
 
     if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return;
@@ -118,7 +129,7 @@ export default function App() {
   }, [themePreference]);
 
   return (
-    <SpeechProvider enabled={readingEnabled} rate={speechRate}>
+    <SpeechProvider enabled={readingEnabled} rate={speechRate} language={speechLanguage}>
       <Layout activeTab={activeTab} onTabChange={handleTabChange} reviewCount={reviewCount}>
         {activeTab === 'today' && (
           <TodayPage
@@ -165,6 +176,8 @@ export default function App() {
             onReadingEnabledChange={setReadingEnabled}
             speechRate={speechRate}
             onSpeechRateChange={setSpeechRate}
+            speechLanguage={speechLanguage}
+            onSpeechLanguageChange={setSpeechLanguage}
             themePreference={themePreference}
             onThemePreferenceChange={setThemePreference}
             totalDayCount={basicEnglishCourse.weeks.flatMap((week) => week.days).length}

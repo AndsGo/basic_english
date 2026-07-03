@@ -153,12 +153,15 @@ describe('App shell', () => {
     const readingCheckbox = screen.getByRole('checkbox', { name: 'Enable reading aloud' });
     expect(readingCheckbox).toBeChecked();
     expect(screen.getByRole('radio', { name: 'Normal' })).toBeChecked();
+    expect(screen.getByRole('radio', { name: 'American English' })).toBeChecked();
 
     await user.click(readingCheckbox);
     await user.click(screen.getByRole('radio', { name: 'Slow' }));
+    await user.click(screen.getByRole('radio', { name: 'British English' }));
 
     expect(window.localStorage.getItem('basic-english-reading-enabled')).toBe('false');
     expect(window.localStorage.getItem('basic-english-reading-rate')).toBe('slow');
+    expect(window.localStorage.getItem('basic-english-reading-language')).toBe('en-GB');
   });
 
   it('uses default reading settings when localStorage reads fail during initial render', async () => {
@@ -174,6 +177,7 @@ describe('App shell', () => {
     expect(screen.getByRole('heading', { name: 'My Progress' })).toBeInTheDocument();
     expect(screen.getByRole('checkbox', { name: 'Enable reading aloud' })).toBeChecked();
     expect(screen.getByRole('radio', { name: 'Normal' })).toBeChecked();
+    expect(screen.getByRole('radio', { name: 'American English' })).toBeChecked();
   });
 
   it('keeps reading settings in memory when localStorage writes fail after a change', async () => {
@@ -188,9 +192,11 @@ describe('App shell', () => {
 
     await user.click(screen.getByRole('checkbox', { name: 'Enable reading aloud' }));
     await user.click(screen.getByRole('radio', { name: 'Slow' }));
+    await user.click(screen.getByRole('radio', { name: 'Australian English' }));
 
     expect(screen.getByRole('checkbox', { name: 'Enable reading aloud' })).not.toBeChecked();
     expect(screen.getByRole('radio', { name: 'Slow' })).toBeChecked();
+    expect(screen.getByRole('radio', { name: 'Australian English' })).toBeChecked();
   });
 });
 

@@ -56,7 +56,7 @@ describe('speech service', () => {
     const { cancel, speak, utterances, windowRef } = createSupportedWindow();
     const service = createSpeechService(windowRef);
 
-    const utterance = service.speak('  hello world  ', 'slow');
+    const utterance = service.speak('  hello world  ', 'slow', 'en-GB');
 
     expect(cancel).toHaveBeenCalledTimes(1);
     expect(speak).toHaveBeenCalledTimes(1);
@@ -64,7 +64,7 @@ describe('speech service', () => {
     expect(utterance).toBe(utterances[0]);
     expect(utterance).toMatchObject({
       text: 'hello world',
-      lang: 'en-US',
+      lang: 'en-GB',
       rate: 0.75,
     });
   });
@@ -73,8 +73,8 @@ describe('speech service', () => {
     const { utterances, windowRef } = createSupportedWindow();
     const service = createSpeechService(windowRef);
 
-    service.speak('normal speed', 'normal');
-    service.speak('slow speed', 'slow');
+    service.speak('normal speed', 'normal', 'en-US');
+    service.speak('slow speed', 'slow', 'en-US');
 
     expect(utterances.map((utterance) => utterance.rate)).toEqual([1, 0.75]);
   });
@@ -83,7 +83,7 @@ describe('speech service', () => {
     const { cancel, speak, windowRef } = createSupportedWindow();
     const service = createSpeechService(windowRef);
 
-    expect(service.speak('   ', 'normal')).toBeNull();
+    expect(service.speak('   ', 'normal', 'en-US')).toBeNull();
 
     expect(cancel).not.toHaveBeenCalled();
     expect(speak).not.toHaveBeenCalled();
@@ -95,8 +95,8 @@ describe('speech service', () => {
     const service = createSpeechService({});
 
     expect(() => service.stop()).not.toThrow();
-    expect(() => service.speak('hello', 'normal')).not.toThrow();
-    expect(service.speak('hello', 'normal')).toBeNull();
+    expect(() => service.speak('hello', 'normal', 'en-US')).not.toThrow();
+    expect(service.speak('hello', 'normal', 'en-US')).toBeNull();
     expect(cancel).not.toHaveBeenCalled();
     expect(speak).not.toHaveBeenCalled();
   });

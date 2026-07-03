@@ -1,15 +1,15 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import type { SpeechRate, SpeechService, SpeechUtterance } from '../speech/speechService';
+import type { SpeechLanguage, SpeechRate, SpeechService, SpeechUtterance } from '../speech/speechService';
 import { SpeechProvider } from '../speech/SpeechProvider';
 import { SpeechButton } from './SpeechButton';
 
 function createTestService({ supported = true }: { supported?: boolean } = {}) {
   const service: SpeechService = {
     isSupported: vi.fn(() => supported),
-    speak: vi.fn((text: string, rate: SpeechRate): SpeechUtterance => {
-      return { text, rate: rate === 'slow' ? 0.75 : 1, lang: 'en-US' };
+    speak: vi.fn((text: string, rate: SpeechRate, language: SpeechLanguage): SpeechUtterance => {
+      return { text, rate: rate === 'slow' ? 0.75 : 1, lang: language };
     }),
     stop: vi.fn(),
   };
@@ -31,7 +31,7 @@ function renderSpeechButton({
   const service = createTestService({ supported });
 
   render(
-    <SpeechProvider enabled={enabled} rate="normal" service={service}>
+    <SpeechProvider enabled={enabled} rate="normal" language="en-US" service={service}>
       <SpeechButton text={text} label={label} />
     </SpeechProvider>,
   );
@@ -48,7 +48,7 @@ describe('SpeechButton', () => {
 
     await user.click(screen.getByRole('button', { name: 'Read hello' }));
 
-    expect(service.speak).toHaveBeenCalledWith('hello', 'normal');
+    expect(service.speak).toHaveBeenCalledWith('hello', 'normal', 'en-US');
   });
 
   it('is an icon-only button and sets aria-pressed true while active', async () => {
@@ -90,7 +90,7 @@ describe('SpeechButton', () => {
     const service = createTestService();
 
     render(
-      <SpeechProvider enabled rate="normal" service={service}>
+      <SpeechProvider enabled rate="normal" language="en-US" service={service}>
         <SpeechButton text="I am from China." label="Read example for from" />
         <SpeechButton text="I am from China." label="Read example for China" />
       </SpeechProvider>,

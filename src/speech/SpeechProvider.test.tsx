@@ -1,7 +1,7 @@
 import { act, cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import type { SpeechRate, SpeechService, SpeechUtterance } from './speechService';
+import type { SpeechLanguage, SpeechRate, SpeechService, SpeechUtterance } from './speechService';
 import { SpeechProvider, useSpeech } from './SpeechProvider';
 
 type TestUtterance = SpeechUtterance & {
@@ -19,12 +19,12 @@ function createTestService({
   const utterances: TestUtterance[] = [];
   const service: SpeechService = {
     isSupported: vi.fn(() => supported),
-    speak: vi.fn((text: string, rate: SpeechRate) => {
+    speak: vi.fn((text: string, rate: SpeechRate, language: SpeechLanguage) => {
       if (nullTexts.includes(text)) {
         return null;
       }
 
-      const utterance: TestUtterance = { text, rate: rate === 'slow' ? 0.75 : 1, lang: 'en-US' };
+      const utterance: TestUtterance = { text, rate: rate === 'slow' ? 0.75 : 1, lang: language };
       utterances.push(utterance);
       return utterance;
     }),
@@ -62,14 +62,16 @@ function SpeechProbe() {
 function renderSpeechProvider({
   enabled = true,
   rate = 'normal',
+  language = 'en-US',
   service = createTestService().service,
 }: {
   enabled?: boolean;
   rate?: SpeechRate;
+  language?: SpeechLanguage;
   service?: SpeechService;
 } = {}) {
   return render(
-    <SpeechProvider enabled={enabled} rate={rate} service={service}>
+    <SpeechProvider enabled={enabled} rate={rate} language={language} service={service}>
       <SpeechProbe />
     </SpeechProvider>,
   );
@@ -82,7 +84,7 @@ describe('SpeechProvider', () => {
     const user = userEvent.setup();
     const { service, utterances } = createTestService();
 
-    renderSpeechProvider({ rate: 'slow', service });
+    renderSpeechProvider({ rate: 'slow', language: 'en-GB', service });
 
     expect(screen.getByText('active: none')).toBeInTheDocument();
     expect(screen.getByText('enabled: true')).toBeInTheDocument();
@@ -91,7 +93,7 @@ describe('SpeechProvider', () => {
 
     await user.click(screen.getByRole('button', { name: 'Speak hello' }));
 
-    expect(service.speak).toHaveBeenCalledWith('hello', 'slow');
+    expect(service.speak).toHaveBeenCalledWith('hello', 'slow', 'en-GB');
     expect(screen.getByText('active: hello')).toBeInTheDocument();
 
     act(() => {
@@ -110,7 +112,7 @@ describe('SpeechProvider', () => {
     await user.click(screen.getByRole('button', { name: 'Speak goodbye' }));
 
     expect(service.stop).toHaveBeenCalledTimes(1);
-    expect(service.speak).toHaveBeenNthCalledWith(2, 'goodbye', 'normal');
+    expect(service.speak).toHaveBeenNthCalledWith(2, 'goodbye', 'normal', 'en-US');
     expect(screen.getByText('active: goodbye')).toBeInTheDocument();
   });
 
@@ -124,7 +126,7 @@ describe('SpeechProvider', () => {
     await user.click(screen.getByRole('button', { name: 'Speak goodbye' }));
 
     expect(service.stop).toHaveBeenCalledTimes(1);
-    expect(service.speak).toHaveBeenLastCalledWith('goodbye', 'normal');
+    expect(service.speak).toHaveBeenLastCalledWith('goodbye', 'normal', 'en-US');
     expect(screen.getByText('active: none')).toBeInTheDocument();
   });
 
@@ -137,7 +139,7 @@ describe('SpeechProvider', () => {
     await user.click(screen.getByRole('button', { name: 'Speak hello then goodbye' }));
 
     expect(service.stop).toHaveBeenCalledTimes(1);
-    expect(service.speak).toHaveBeenLastCalledWith('goodbye', 'normal');
+    expect(service.speak).toHaveBeenLastCalledWith('goodbye', 'normal', 'en-US');
     expect(vi.mocked(service.stop).mock.invocationCallOrder[0]).toBeLessThan(
       vi.mocked(service.speak).mock.invocationCallOrder[1],
     );

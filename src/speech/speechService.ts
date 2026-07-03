@@ -1,10 +1,11 @@
 export type SpeechRate = 'slow' | 'normal';
+export type SpeechLanguage = 'en-US' | 'en-GB' | 'en-AU' | 'en-CA';
 
 export type SpeechUtterance = Pick<SpeechSynthesisUtterance, 'lang' | 'rate' | 'text'>;
 
 export interface SpeechService {
   isSupported(): boolean;
-  speak(text: string, rate: SpeechRate): SpeechUtterance | null;
+  speak(text: string, rate: SpeechRate, language: SpeechLanguage): SpeechUtterance | null;
   stop(): void;
 }
 
@@ -29,7 +30,7 @@ export function createSpeechService(windowRef: SpeechWindow): SpeechService {
 
   return {
     isSupported,
-    speak(text, rate) {
+    speak(text, rate, language) {
       if (!isSupported()) {
         return null;
       }
@@ -42,7 +43,7 @@ export function createSpeechService(windowRef: SpeechWindow): SpeechService {
       windowRef.speechSynthesis?.cancel();
 
       const utterance = new windowRef.SpeechSynthesisUtterance!(trimmedText);
-      utterance.lang = 'en-US';
+      utterance.lang = language;
       utterance.rate = speechRates[rate];
 
       windowRef.speechSynthesis?.speak(utterance);

@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add MVP reading-aloud support for Words and Patterns using the browser Web Speech API, with settings for enabling/disabling reading and choosing slow/normal speed.
+**Goal:** Add MVP reading-aloud support for Words and Patterns using the browser Web Speech API, with settings for enabling/disabling reading, choosing slow/normal speed, and choosing the English voice language/accent.
 
 **Architecture:** Add a small `speech` module that wraps `window.speechSynthesis`, plus a React provider that owns the current speaking state. UI components render a reusable `SpeechButton` beside readable English content; buttons call the provider instead of touching browser APIs directly.
 
@@ -19,13 +19,26 @@
 - Create `src/components/SpeechButton.tsx`: accessible button for speaking/stopping text.
 - Create `src/components/SpeechButton.test.tsx`: component behavior tests.
 - Modify `src/App.tsx`: persist reading settings, wrap app in `SpeechProvider`, pass settings into `MePage`.
-- Modify `src/components/MePage.tsx`: add `Enable reading aloud` and `Voice speed` settings.
+- Modify `src/components/MePage.tsx`: add `Enable reading aloud`, `Voice speed`, and `Voice language` settings.
 - Modify `src/components/WordCards.tsx`: add speech buttons for word, English definition, and example.
 - Modify `src/components/WordsPage.tsx`: add speech buttons for word, English definition, and example.
 - Modify `src/components/PatternCards.tsx`: add speech buttons for pattern title, structure, and examples.
 - Modify `src/components/TodayPage.test.tsx`: cover speech buttons in Today words/patterns and Me settings.
 - Modify `src/App.test.tsx`: cover persisted reading setting flow.
 - Modify `tests/e2e/basic-english.spec.ts`: cover visible speech controls and settings without requiring real audio playback.
+
+## Current Behavior Notes
+
+- Reading uses the browser Web Speech API. The app does not bundle a fixed voice package.
+- `SpeechProvider` passes both rate and language into the speech service.
+- The speech service sets `SpeechSynthesisUtterance.lang` from the selected language.
+- Supported language options are:
+  - American English: `en-US`
+  - British English: `en-GB`
+  - Australian English: `en-AU`
+  - Canadian English: `en-CA`
+- The selected language is persisted in `localStorage` under `basic-english-reading-language`.
+- The default remains American English (`en-US`) so existing users keep the previous behavior unless they change it.
 
 ---
 

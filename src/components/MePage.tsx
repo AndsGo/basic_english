@@ -4,7 +4,7 @@ import type { DayProgress } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
 import { getCompletedSceneIds } from '../domain/sceneOutput';
 import type { PictureDescribeTask, ScenarioCapability, SceneGoal } from '../domain/types';
-import type { SpeechRate } from '../speech/speechService';
+import type { SpeechLanguage, SpeechRate } from '../speech/speechService';
 import type { ThemePreference } from '../theme';
 import type { PictureDescription, ProgressRepository, StudyActivity, UserOutput } from '../storage/progressRepository';
 import { SceneMap } from './SceneMap';
@@ -54,6 +54,8 @@ export function MePage({
   onReadingEnabledChange,
   speechRate = 'normal',
   onSpeechRateChange,
+  speechLanguage = 'en-US',
+  onSpeechLanguageChange,
   themePreference = 'system',
   onThemePreferenceChange,
   totalDayCount = DEFAULT_TOTAL_DAY_COUNT,
@@ -68,6 +70,8 @@ export function MePage({
   onReadingEnabledChange?: (readingEnabled: boolean) => void;
   speechRate?: SpeechRate;
   onSpeechRateChange?: (speechRate: SpeechRate) => void;
+  speechLanguage?: SpeechLanguage;
+  onSpeechLanguageChange?: (speechLanguage: SpeechLanguage) => void;
   themePreference?: ThemePreference;
   onThemePreferenceChange?: (themePreference: ThemePreference) => void;
   totalDayCount?: number;
@@ -124,7 +128,7 @@ export function MePage({
   const completedDayCount = days.filter(isCompletedDay).length;
   const currentStreakDays = getCurrentStreakDays(activities);
   const hasSettings = Boolean(
-    onShowChineseHelpChange || onReadingEnabledChange || onSpeechRateChange || onThemePreferenceChange,
+    onShowChineseHelpChange || onReadingEnabledChange || onSpeechRateChange || onSpeechLanguageChange || onThemePreferenceChange,
   );
   const completedDayIds = days.filter(isCompletedDay).map((day) => day.dayId);
   const capabilityStates =
@@ -223,6 +227,51 @@ export function MePage({
                   onChange={() => onSpeechRateChange('slow')}
                 />{' '}
                 Slow
+              </label>
+            </fieldset>
+          )}
+          {onSpeechLanguageChange && (
+            <fieldset className="self-rating">
+              <legend>Voice language</legend>
+              <label>
+                <input
+                  type="radio"
+                  name="speech-language"
+                  value="en-US"
+                  checked={speechLanguage === 'en-US'}
+                  onChange={() => onSpeechLanguageChange('en-US')}
+                />{' '}
+                American English
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="speech-language"
+                  value="en-GB"
+                  checked={speechLanguage === 'en-GB'}
+                  onChange={() => onSpeechLanguageChange('en-GB')}
+                />{' '}
+                British English
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="speech-language"
+                  value="en-AU"
+                  checked={speechLanguage === 'en-AU'}
+                  onChange={() => onSpeechLanguageChange('en-AU')}
+                />{' '}
+                Australian English
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="speech-language"
+                  value="en-CA"
+                  checked={speechLanguage === 'en-CA'}
+                  onChange={() => onSpeechLanguageChange('en-CA')}
+                />{' '}
+                Canadian English
               </label>
             </fieldset>
           )}
