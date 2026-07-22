@@ -56,10 +56,22 @@ describe('MasteryReviewPanel', () => {
     }));
   });
 
-  it('persists an incorrect answer and calls onChange after both saves', async () => {
+  it('persists an incorrect answer before its session and then notifies onChange', async () => {
     const user = userEvent.setup();
-    const onChange = vi.fn();
-    const repo = repository([masteryRecord('name')]);
+    const calls: string[] = [];
+    const repo = {
+      listMasteryProgress: vi.fn(async () => [masteryRecord('name')]),
+      getMasteryReviewSession: vi.fn(async () => null),
+      saveMasteryProgress: vi.fn(async () => {
+        calls.push('progress');
+      }),
+      saveMasteryReviewSession: vi.fn(async () => {
+        calls.push('session');
+      }),
+    } as unknown as ProgressRepository;
+    const onChange = () => {
+      calls.push('change');
+    };
 
     render(<MasteryReviewPanel course={basicEnglishCourse} repository={repo} now={now} onChange={onChange} />);
 
@@ -67,7 +79,8 @@ describe('MasteryReviewPanel', () => {
 
     await waitFor(() => {
       expect(repo.saveMasteryProgress).toHaveBeenCalledWith(expect.objectContaining({ contentId: 'name', consecutiveCorrect: 0, status: 'learning' }));
-      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(repo.saveMasteryReviewSession).toHaveBeenCalledTimes(1);
+      expect(calls).toEqual(['progress', 'session', 'change']);
     });
   });
 
@@ -75,6 +88,18 @@ describe('MasteryReviewPanel', () => {
     render(<MasteryReviewPanel course={basicEnglishCourse} repository={repository([])} now={now} />);
 
     expect(await screen.findByText('No mastery review due today.')).toBeInTheDocument();
+  });
+
+  it('does not repeat the load effect when now is omitted', async () => {
+    const repo = repository([{ ...masteryRecord('name'), dueAt: '2000-01-01T00:00:00.000Z' }]);
+
+    render(<MasteryReviewPanel course={basicEnglishCourse} repository={repo} />);
+
+    await screen.findByRole('heading', { name: 'Mastery review' });
+    await waitFor(() => {
+      expect(repo.listMasteryProgress).toHaveBeenCalledTimes(1);
+      expect(repo.getMasteryReviewSession).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('alerts when mastery records cannot be loaded', async () => {

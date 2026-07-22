@@ -9,6 +9,8 @@ type ScheduledQuestion = {
   question: MasteryQuestion;
 };
 
+const defaultNow = () => new Date();
+
 function answersMatch(question: MasteryQuestion, answer: string | string[]): boolean {
   if (Array.isArray(question.correctAnswer)) {
     return Array.isArray(answer) && answer.length === question.correctAnswer.length && answer.every((token, index) => token === question.correctAnswer[index]);
@@ -19,7 +21,7 @@ function answersMatch(question: MasteryQuestion, answer: string | string[]): boo
 export function MasteryReviewPanel({
   course,
   repository,
-  now = () => new Date(),
+  now = defaultNow,
   onChange,
 }: {
   course: Course;

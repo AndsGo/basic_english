@@ -34,3 +34,18 @@ Tests       10 passed (10)
 `git diff --check` passed with no whitespace errors.
 
 Full TypeScript verification remains blocked outside Task 3 scope. `npx tsc -b` fails because existing `App.test.tsx`, `MePage.test.tsx`, `TodayPage.test.tsx`, and `WordsPage.test.tsx` repository fixtures do not yet supply the required Task 2 mastery methods. Those files were intentionally not changed.
+
+## Reviewer Follow-up
+
+- Hoisted the default clock function so the omitted `now` prop has stable identity and cannot retrigger the load effect after panel state updates.
+- Added a regression test that renders without `now`; before the fix it reproduced 15,061 load calls within the test timeout, and after the fix it verifies one load of mastery records and session.
+- Strengthened the incorrect-answer persistence test to assert the observable order: mastery progress save, review-session save, then `onChange`.
+
+Passed after the follow-up:
+
+```text
+npx vitest run src/domain/masteryQuestions.test.ts src/components/MasteryReviewPanel.test.tsx
+
+Test Files  2 passed (2)
+Tests       11 passed (11)
+```
