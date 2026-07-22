@@ -62,11 +62,11 @@ it('prioritizes overdue reinforcement and returns at most eight unseen records',
   );
   records[9] = { ...records[9], status: 'needs_reinforcement', dueAt: '2026-07-20T08:00:00.000Z' };
 
-  const result = selectDueMasteryProgress(records, { now, completedContentIds: ['word-0'] });
+  const result = selectDueMasteryProgress(records, { now, completedProgressIds: ['mastery-word-word-0'] });
 
   expect(result).toHaveLength(8);
   expect(result[0].contentId).toBe('word-9');
-  expect(result.map((record) => record.contentId)).not.toContain('word-0');
+  expect(result.map((record) => record.id)).not.toContain('mastery-word-word-0');
 });
 
 it('promotes correct answers through learning, stable, and mastered', () => {
