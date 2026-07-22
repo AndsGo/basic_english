@@ -75,7 +75,7 @@ export function selectDueMasteryProgress(
   input: { now: string; completedProgressIds: string[]; limit?: number },
 ): MasteryProgress[] {
   const completed = new Set(input.completedProgressIds);
-  const limit = input.limit ?? 8;
+  const limit = Math.min(8, Math.max(0, input.limit ?? 8));
 
   return records
     .filter((record) => record.dueAt <= input.now && !completed.has(record.id))
@@ -88,7 +88,7 @@ export function selectDueMasteryProgress(
 
       return (left.lastAnsweredAt ?? '').localeCompare(right.lastAnsweredAt ?? '');
     })
-    .slice(0, Math.max(0, limit));
+    .slice(0, limit);
 }
 
 export function applyMasteryAnswer(record: MasteryProgress, input: { correct: boolean; now: string }): MasteryProgress {

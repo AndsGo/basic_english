@@ -37,6 +37,15 @@ describe('mastery scheduling', () => {
     expect(result.map((record) => record.id)).not.toContain('mastery-word-word-0');
   });
 
+  it('never exceeds the daily cap when a larger limit is requested', () => {
+    const records = Array.from({ length: 10 }, (_, index) => ({
+      ...createPendingMasteryProgress({ contentType: 'word', contentId: `cap-${index}`, sourceDayId: 'day-001', now }),
+      dueAt: now,
+    }));
+
+    expect(selectDueMasteryProgress(records, { now, completedProgressIds: [], limit: 9 })).toHaveLength(8);
+  });
+
   it('promotes correct answers through learning, stable, and mastered', () => {
     const pending = createPendingMasteryProgress({ contentType: 'word', contentId: 'name', sourceDayId: 'day-001', now });
     const learning = applyMasteryAnswer(pending, { correct: true, now });
@@ -73,6 +82,26 @@ describe('mastery scheduling', () => {
     const newer = { ...older, id: 'mastery-word-newer', contentId: 'newer', dueAt: now, lastAnsweredAt: '2026-07-22T07:00:00.000Z' };
 
     expect(selectDueMasteryProgress([newer, older], { now, completedProgressIds: [older.id] })).toEqual([newer]);
+  });
+
+  it('orders same-status same-due records by oldest last answer', () => {
+    const olderAnswer = {
+      ...createPendingMasteryProgress({ contentType: 'word', contentId: 'older-answer', sourceDayId: 'day-001', now }),
+      status: 'learning' as const,
+      dueAt: now,
+      lastAnsweredAt: '2026-07-20T08:00:00.000Z',
+    };
+    const newerAnswer = {
+      ...olderAnswer,
+      id: 'mastery-word-newer-answer',
+      contentId: 'newer-answer',
+      lastAnsweredAt: '2026-07-21T08:00:00.000Z',
+    };
+
+    expect(selectDueMasteryProgress([newerAnswer, olderAnswer], { now, completedProgressIds: [] }).map((record) => record.id)).toEqual([
+      olderAnswer.id,
+      newerAnswer.id,
+    ]);
   });
 });
 
