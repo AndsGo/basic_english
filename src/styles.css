@@ -982,6 +982,62 @@ textarea {
   font-size: 0.9rem;
 }
 
+.mastery-review-panel,
+.mastery-review-question,
+.mastery-review-options,
+.mastery-review-answer,
+.mastery-review-order {
+  display: grid;
+  gap: 12px;
+}
+
+.mastery-review-panel h2,
+.mastery-review-question p,
+.mastery-review-order p {
+  margin: 0;
+}
+
+.mastery-review-question {
+  padding: 12px;
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+}
+
+.mastery-review-options {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.mastery-review-options .secondary-button {
+  min-height: 44px;
+  text-align: left;
+}
+
+.mastery-review-answer input {
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  background: var(--color-surface-raised);
+}
+
+.mastery-review-count {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
+.mastery-review-feedback {
+  margin: 0;
+  color: var(--color-accent-text);
+  font-weight: 800;
+}
+
+.mastery-review-continue {
+  justify-self: start;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .primary-button:active:not(:disabled),
   .secondary-button:active:not(:disabled) {
