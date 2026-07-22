@@ -6,8 +6,9 @@ import {
   selectDueReviewItems,
   type ReviewItem,
 } from '../domain/review';
-import type { SceneRemixTask } from '../domain/types';
+import type { Course, SceneRemixTask } from '../domain/types';
 import type { ProgressRepository } from '../storage/progressRepository';
+import { MasteryReviewPanel } from './MasteryReviewPanel';
 import { PictureDescriptionReviewCard } from './PictureDescriptionReviewCard';
 import { SceneRemixCard, type SceneRemixSubmitResult } from './SceneRemixCard';
 
@@ -26,10 +27,12 @@ function makeSceneRemixReviewAttemptId(dayId: string, taskId: string, now: strin
 }
 
 export function ReviewPage({
+  course,
   repository,
   onStartToday,
   onReviewChange,
 }: {
+  course: Course;
   repository: ProgressRepository;
   onStartToday?: () => void;
   onReviewChange?: () => void;
@@ -114,40 +117,36 @@ export function ReviewPage({
 
   const dueItems = selectDueReviewItems(items, new Date().toISOString());
 
-  if (dueItems.length === 0) {
-    return (
-      <section className="panel">
-        <h2>Review today</h2>
+  return (
+    <section className="panel">
+      <h2>Review today</h2>
+      <section aria-label="Mastery review">
+        <MasteryReviewPanel course={course} repository={repository} onChange={onReviewChange} />
+      </section>
+      <section aria-label="Practice again">
+        <h2>Practice again</h2>
         {loadError && <p role="alert">Review items could not be loaded.</p>}
         {feedback && (
           <p className="selection-status" role="status">
             {feedback}
           </p>
         )}
-        <p>No review items. Start today&apos;s task.</p>
-        {onStartToday && (
-          <button type="button" className="primary-button" onClick={onStartToday}>
-            Start today
-          </button>
-        )}
-      </section>
-    );
-  }
-
-  return (
-    <section className="panel">
-      <h2>Review today</h2>
-      {loadError && <p role="alert">Review items could not be loaded.</p>}
-      {feedback && (
-        <p className="selection-status" role="status">
-          {feedback}
-        </p>
-      )}
-      <p>
-        {dueItems.length} {dueItems.length === 1 ? 'item' : 'items'} to review
-      </p>
-      <div className="review-list">
-        {dueItems.map((item) =>
+        {dueItems.length === 0 ? (
+          <>
+            <p>No practice items due today.</p>
+            {onStartToday && (
+              <button type="button" className="primary-button" onClick={onStartToday}>
+                Start today
+              </button>
+            )}
+          </>
+        ) : (
+          <>
+            <p>
+              {dueItems.length} {dueItems.length === 1 ? 'item' : 'items'} to review
+            </p>
+            <div className="review-list">
+              {dueItems.map((item) =>
           item.type === 'scene_remix' ? (
             <SceneRemixCard
               key={item.id}
@@ -181,8 +180,11 @@ export function ReviewPage({
               </div>
             </article>
           ),
+              )}
+            </div>
+          </>
         )}
-      </div>
+      </section>
     </section>
   );
 }

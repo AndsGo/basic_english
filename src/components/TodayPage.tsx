@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { checkExerciseAnswer, type ExerciseAnswer, type ExerciseResult } from '../domain/exercises';
+import { createPendingMasteryProgress, selectDueMasteryProgress } from '../domain/mastery';
 import { completeStep, getCurrentDayId, type DayProgress, startDay, type StepId } from '../domain/progress';
 import {
   createExerciseReviewItem,
@@ -29,6 +30,7 @@ import { useSpeech } from '../speech/SpeechProvider';
 import type { PictureDescription, ProgressRepository, UserOutput } from '../storage/progressRepository';
 import { CompletionSummary } from './CompletionSummary';
 import { ExerciseRenderer } from './ExerciseRenderer';
+import { MasteryReviewPanel } from './MasteryReviewPanel';
 import { OutputTaskEditor } from './OutputTaskEditor';
 import { PatternCards } from './PatternCards';
 import { PictureDescribeStep } from './PictureDescribeStep';
@@ -155,6 +157,7 @@ export function TodayPage({
   const [drillAnswers, setDrillAnswers] = useState<Record<string, ExerciseAnswer | undefined>>({});
   const [translationDrafts, setTranslationDrafts] = useState<Record<string, TranslationDraft | undefined>>({});
   const [isSceneRemixSubmitted, setIsSceneRemixSubmitted] = useState(false);
+  const [isMasteryReviewComplete, setIsMasteryReviewComplete] = useState(false);
   const [activeReviewItems, setActiveReviewItems] = useState<ReviewItem[]>([]);
   const [isCourseHydrating, setIsCourseHydrating] = useState(true);
   const [isDayHydrating, setIsDayHydrating] = useState(true);
@@ -194,6 +197,36 @@ export function TodayPage({
       ),
     [completedDayIds, sceneGoalsByDayId],
   );
+
+  const refreshMasteryReviewCompletion = useCallback(async () => {
+    const now = new Date();
+    const localDate = toLocalDateString(now);
+    const [records, session] = await Promise.all([
+      repository.listMasteryProgress(),
+      repository.getMasteryReviewSession(localDate),
+    ]);
+    const completedProgressIds = session?.completedProgressIds ?? [];
+    const due = selectDueMasteryProgress(records, {
+      now: now.toISOString(),
+      completedProgressIds,
+      limit: Math.max(0, 8 - completedProgressIds.length),
+    });
+    setIsMasteryReviewComplete(due.length === 0);
+  }, [repository]);
+
+  useEffect(() => {
+    if (currentStep !== 'mastery-review') return;
+
+    let isMounted = true;
+    setIsMasteryReviewComplete(false);
+    void refreshMasteryReviewCompletion().catch(() => {
+      if (isMounted) setIsMasteryReviewComplete(false);
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [currentStep, refreshMasteryReviewCompletion]);
 
   useEffect(() => {
     selectedDayIdRef.current = selectedDayId;
@@ -262,6 +295,11 @@ export function TodayPage({
   }, [course.contentVersion, day.id, repository, sceneGoal, pictureTask?.id]);
 
   const currentGate = useMemo(() => {
+    if (currentStep === 'mastery-review') {
+      return isMasteryReviewComplete
+        ? { isComplete: true, missingRequirements: [] }
+        : { isComplete: false, missingRequirements: ['Complete today\'s mastery review.'] };
+    }
     if (currentStep === 'words') return getWordsCompletion(day.wordIds, wordMarks);
     if (currentStep === 'patterns') return getPatternsCompletion(day.patternIds, practicedPatternIds);
     if (currentStep === 'drills') return getDrillsCompletion(drillExercises.map((exercise) => exercise.id), drillAnswers);
@@ -298,6 +336,7 @@ export function TodayPage({
     isSceneRemixSubmitted,
     pictureTask,
     pictureDescriptionDraft.checkedAt,
+    isMasteryReviewComplete,
   ]);
 
   const nextDay = useMemo(() => allDays[allDays.findIndex((courseDay) => courseDay.id === day.id) + 1], [allDays, day.id]);
@@ -436,6 +475,29 @@ export function TodayPage({
     return createdReviewCount;
   };
 
+  const seedMasteryProgress = async (now: string) => {
+    const existingRecords = await repository.listMasteryProgress();
+    const existing = new Set(existingRecords.map((record) => `${record.contentType}:${record.contentId}`));
+    const records = [
+      ...Array.from(new Set(day.wordIds)).map((contentId) => ({ contentType: 'word' as const, contentId })),
+      ...Array.from(new Set(day.patternIds)).map((contentId) => ({ contentType: 'pattern' as const, contentId })),
+    ];
+
+    for (const record of records) {
+      const key = `${record.contentType}:${record.contentId}`;
+      if (existing.has(key)) continue;
+      await repository.saveMasteryProgress(
+        createPendingMasteryProgress({
+          contentType: record.contentType,
+          contentId: record.contentId,
+          sourceDayId: day.id,
+          now,
+        }),
+      );
+      existing.add(key);
+    }
+  };
+
   const handleTranslationDraftChange = (exerciseId: string, draft: TranslationDraft) => {
     const exercise = translationExercises.find((item) => item.id === exerciseId);
     const previous = translationDrafts[exerciseId];
@@ -502,6 +564,7 @@ export function TodayPage({
       }
       if (updatedProgress.currentStep === 'done') {
         await enqueueOutputSave(outputDraft);
+        await seedMasteryProgress(now);
         if (outputDraft.selfRating === 'hard') {
           await saveReviewItem(createOutputReviewItem({ sourceDayId: day.id, text: outputDraft.text, now }));
         }
@@ -589,6 +652,16 @@ export function TodayPage({
           </section>
         ) : (
           <>
+            {currentStep === 'mastery-review' && (
+              <MasteryReviewPanel
+                course={course}
+                repository={repository}
+                onChange={() => {
+                  void refreshMasteryReviewCompletion();
+                  onProgressChange?.();
+                }}
+              />
+            )}
             {currentStep === 'review' && (
               <section>
                 <h3>Quick Review</h3>

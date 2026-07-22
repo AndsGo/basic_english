@@ -1,11 +1,14 @@
-import { cleanup, render, screen, within } from '@testing-library/react';
+import { cleanup, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { MePage } from './components/MePage';
 import { basicEnglishCourse } from './content/course';
 import { scenarioCapabilities } from './content/scenarioCapabilities';
+import { createPendingMasteryProgress } from './domain/mastery';
 import type { DayProgress } from './domain/progress';
+import { createWordReviewItem } from './domain/review';
+import * as indexedDbProgressRepository from './storage/indexedDbProgressRepository';
 import type { ProgressRepository } from './storage/progressRepository';
 
 afterEach(() => {
@@ -61,6 +64,11 @@ function createProgressRepository(overrides: Partial<ProgressRepository> = {}): 
     getReviewItem: vi.fn().mockResolvedValue(null),
     saveStudyActivity: vi.fn().mockResolvedValue(undefined),
     listStudyActivities: vi.fn().mockResolvedValue([]),
+    saveMasteryProgress: vi.fn().mockResolvedValue(undefined),
+    getMasteryProgress: vi.fn().mockResolvedValue(null),
+    listMasteryProgress: vi.fn().mockResolvedValue([]),
+    saveMasteryReviewSession: vi.fn().mockResolvedValue(undefined),
+    getMasteryReviewSession: vi.fn().mockResolvedValue(null),
     ...overrides,
   };
 }
@@ -72,6 +80,10 @@ describe('App shell', () => {
     render(<App />);
 
     expect(screen.getByRole('heading', { name: 'My Name' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Mastery review' })).toBeInTheDocument();
+    const continueButton = await screen.findByRole('button', { name: 'Continue' });
+    await waitFor(() => expect(continueButton).toBeEnabled());
+    await user.click(continueButton);
     expect(await screen.findByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Continue' })).toBeInTheDocument();
 
@@ -110,6 +122,23 @@ describe('App shell', () => {
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Basic English');
     expect(screen.queryByText(/MVP/)).not.toBeInTheDocument();
+  });
+
+  it('renders a combined Review badge for one manual and one mastery item due today', async () => {
+    const now = '2026-05-26T00:00:00.000Z';
+    const repository = createProgressRepository({
+      listReviewItems: vi.fn().mockResolvedValue([
+        createWordReviewItem({ wordId: 'name', wordText: 'name', sourceDayId: 'day-001', now }),
+      ]),
+      listMasteryProgress: vi.fn().mockResolvedValue([
+        createPendingMasteryProgress({ contentType: 'word', contentId: 'name', sourceDayId: 'day-001', now }),
+      ]),
+    });
+    vi.spyOn(indexedDbProgressRepository, 'createIndexedDbProgressRepository').mockReturnValue(repository);
+
+    render(<App />);
+
+    expect(await screen.findByText('2', { selector: '.nav-badge' })).toBeInTheDocument();
   });
 
   it('shows Chinese word help only after the learner enables it', async () => {
@@ -224,7 +253,7 @@ describe('Me capability progress', () => {
         createDayProgress({
           status: 'in_progress',
           currentStep: 'done',
-          completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'output'],
+          completedStepIds: ['mastery-review', 'review', 'words', 'patterns', 'drills', 'translate', 'output'],
         }),
       ]),
     });

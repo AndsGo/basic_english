@@ -9,6 +9,7 @@ import { sceneGoalsByDayId } from '../content/sceneGoals';
 import { week1Course } from '../content/week1';
 import type { DayProgress, StepId } from '../domain/progress';
 import { startDay } from '../domain/progress';
+import type { MasteryProgress, MasteryReviewSession } from '../domain/mastery';
 import type { ReviewItem } from '../domain/review';
 import { toLocalDateString } from '../domain/studyActivity';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
@@ -56,15 +57,19 @@ function outputDraft(overrides: Partial<UserOutput> = {}): UserOutput {
 function createTestRepository({
   dayProgress = [],
   userOutputs = [],
+  masteryProgress = [],
 }: {
   dayProgress?: DayProgress[];
   userOutputs?: UserOutput[];
+  masteryProgress?: MasteryProgress[];
 } = {}): ProgressRepository {
   const progressByDay = new Map(dayProgress.map((progress) => [progress.dayId, progress]));
   const outputsByDay = new Map(userOutputs.map((output) => [output.dayId, output]));
   const sceneRemixAttempts: SceneRemixAttempt[] = [];
   const pictureDescriptions = new Map<string, PictureDescription>();
   const reviewItems = new Map<string, ReviewItem>();
+  const masteryProgressById = new Map(masteryProgress.map((progress) => [progress.id, progress]));
+  const masterySessionsByDate = new Map<string, MasteryReviewSession>();
 
   return {
     async getDayProgress(dayId) {
@@ -136,6 +141,21 @@ function createTestRepository({
     async listStudyActivities() {
       return [];
     },
+    async saveMasteryProgress(progress) {
+      masteryProgressById.set(progress.id, progress);
+    },
+    async getMasteryProgress(contentType, contentId) {
+      return [...masteryProgressById.values()].find((progress) => progress.contentType === contentType && progress.contentId === contentId) ?? null;
+    },
+    async listMasteryProgress() {
+      return [...masteryProgressById.values()];
+    },
+    async saveMasteryReviewSession(session) {
+      masterySessionsByDate.set(session.localDate, session);
+    },
+    async getMasteryReviewSession(localDate) {
+      return masterySessionsByDate.get(localDate) ?? null;
+    },
   };
 }
 
@@ -155,7 +175,7 @@ function completedDayProgress(dayId: string, contentVersion: string): DayProgres
     dayId,
     status: 'completed',
     currentStep: 'done',
-    completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'picture', 'output'],
+    completedStepIds: ['mastery-review', 'review', 'words', 'patterns', 'drills', 'translate', 'picture', 'output'],
     startedAt: '2026-05-26T00:00:00.000Z',
     completedAt: '2026-05-26T00:10:00.000Z',
     updatedAt: '2026-05-26T00:10:00.000Z',
@@ -165,15 +185,16 @@ function completedDayProgress(dayId: string, contentVersion: string): DayProgres
 
 function inProgressDayProgress(dayId: string, contentVersion: string, currentStep: StepId): DayProgress {
   const completedStepsByCurrentStep: Record<StepId, StepId[]> = {
-    review: [],
-    words: ['review'],
-    patterns: ['review', 'words'],
-    drills: ['review', 'words', 'patterns'],
-    translate: ['review', 'words', 'patterns', 'drills'],
-    'scene-remix': ['review', 'words', 'patterns', 'drills', 'translate'],
-    picture: ['review', 'words', 'patterns', 'drills', 'translate', 'scene-remix'],
-    output: ['review', 'words', 'patterns', 'drills', 'translate', 'scene-remix', 'picture'],
-    done: ['review', 'words', 'patterns', 'drills', 'translate', 'scene-remix', 'picture', 'output'],
+    'mastery-review': [],
+    review: ['mastery-review'],
+    words: ['mastery-review', 'review'],
+    patterns: ['mastery-review', 'review', 'words'],
+    drills: ['mastery-review', 'review', 'words', 'patterns'],
+    translate: ['mastery-review', 'review', 'words', 'patterns', 'drills'],
+    'scene-remix': ['mastery-review', 'review', 'words', 'patterns', 'drills', 'translate'],
+    picture: ['mastery-review', 'review', 'words', 'patterns', 'drills', 'translate', 'scene-remix'],
+    output: ['mastery-review', 'review', 'words', 'patterns', 'drills', 'translate', 'scene-remix', 'picture'],
+    done: ['mastery-review', 'review', 'words', 'patterns', 'drills', 'translate', 'scene-remix', 'picture', 'output'],
   };
 
   return {
@@ -282,6 +303,8 @@ async function completePicture(user: ReturnType<typeof userEvent.setup>, text = 
 }
 
 async function completeToOutput(user: ReturnType<typeof userEvent.setup>) {
+  await screen.findByRole('heading', { name: 'Mastery review' });
+  await user.click(await getEnabledContinueButton());
   await user.click(await getEnabledContinueButton());
   await completeWords(user);
   await completePatterns(user);
@@ -299,6 +322,8 @@ async function completeDayOneThroughOutput(user: ReturnType<typeof userEvent.set
 
   if (!choiceExercise || !translationExercise) throw new Error('Day 1 test content is incomplete.');
 
+  await screen.findByRole('heading', { name: 'Mastery review' });
+  await user.click(await getEnabledContinueButton());
   await user.click(await getEnabledContinueButton());
   expect(await screen.findByRole('heading', { name: 'Words' })).toBeInTheDocument();
 
@@ -691,7 +716,7 @@ describe('TodayPage', () => {
       dayId: 'day-001',
       status: 'completed',
       currentStep: 'done',
-      completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'picture', 'output'],
+      completedStepIds: ['mastery-review', 'review', 'words', 'patterns', 'drills', 'translate', 'picture', 'output'],
       startedAt: '2026-05-26T00:00:00.000Z',
       completedAt: '2026-05-26T00:10:00.000Z',
       updatedAt: '2026-05-26T00:10:00.000Z',
@@ -709,6 +734,7 @@ describe('TodayPage', () => {
     const repo = createIndexedDbProgressRepository('today-v1-1-words-gate');
     renderWithSpeech(<TodayPage course={week1Course} repository={repo} />);
 
+    await user.click(await getEnabledContinueButton());
     await user.click(await getEnabledContinueButton());
     expect(screen.getByRole('button', { name: 'Continue' })).toBeDisabled();
     expect(screen.getByText(/Mark name as "I know this" or "Add to review"/)).toBeInTheDocument();
@@ -739,6 +765,7 @@ describe('TodayPage', () => {
     renderWithSpeech(<TodayPage course={week1Course} repository={repo} />);
 
     await user.click(await getEnabledContinueButton());
+    await user.click(await getEnabledContinueButton());
     await user.click(await screen.findByRole('button', { name: 'Add to review: name' }));
 
     await waitFor(async () => {
@@ -751,6 +778,7 @@ describe('TodayPage', () => {
     const repo = createIndexedDbProgressRepository('today-visible-selection-feedback');
     renderWithSpeech(<TodayPage course={week1Course} repository={repo} />);
 
+    await user.click(await getEnabledContinueButton());
     await user.click(await getEnabledContinueButton());
 
     const knowName = await screen.findByRole('button', { name: 'I know this: name' });
@@ -781,6 +809,7 @@ describe('TodayPage', () => {
     renderWithSpeech(<TodayPage course={week1Course} repository={repo} onProgressChange={onProgressChange} />);
 
     await user.click(await getEnabledContinueButton());
+    await user.click(await getEnabledContinueButton());
     await user.click(await screen.findByRole('button', { name: 'Add to review: name' }));
 
     await waitFor(() => {
@@ -810,7 +839,7 @@ describe('TodayPage', () => {
           dayId: 'day-001',
           status: 'completed',
           currentStep: 'done',
-          completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'output'],
+          completedStepIds: ['mastery-review', 'review', 'words', 'patterns', 'drills', 'translate', 'output'],
           startedAt: '2026-05-26T00:00:00.000Z',
           completedAt: '2026-05-26T00:10:00.000Z',
           updatedAt: '2026-05-26T00:10:00.000Z',
@@ -831,7 +860,7 @@ describe('TodayPage', () => {
       dayId: 'day-001',
       status: 'completed',
       currentStep: 'done',
-      completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'output'],
+      completedStepIds: ['mastery-review', 'review', 'words', 'patterns', 'drills', 'translate', 'output'],
       startedAt: '2026-05-26T00:00:00.000Z',
       completedAt: '2026-05-26T00:10:00.000Z',
       updatedAt: '2026-05-26T00:10:00.000Z',
@@ -892,6 +921,7 @@ describe('TodayPage', () => {
 
     renderToday(repository);
     await user.click(await getEnabledContinueButton());
+    await user.click(await getEnabledContinueButton());
     await completeWords(user);
     await completePatterns(user);
 
@@ -923,6 +953,7 @@ describe('TodayPage', () => {
 
     renderToday(repository);
     await user.click(await getEnabledContinueButton());
+    await user.click(await getEnabledContinueButton());
     await completeWords(user);
     await completePatterns(user);
 
@@ -950,10 +981,12 @@ describe('TodayPage', () => {
     renderToday();
 
     expect(screen.getByRole('heading', { level: 2, name: 'My Name' })).toBeInTheDocument();
-    expect(await screen.findByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Mastery review' })).toBeInTheDocument();
     expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Review');
     expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Output');
 
+    await user.click(await getEnabledContinueButton());
+    expect(screen.getByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
     await user.click(await getEnabledContinueButton());
     expect(screen.getByRole('heading', { name: 'Words' })).toBeInTheDocument();
     expect(screen.getByText('name')).toBeInTheDocument();
@@ -1027,6 +1060,26 @@ describe('TodayPage', () => {
     });
   });
 
+  it('seeds unique word and pattern mastery records with pending validation when output completes', async () => {
+    const user = userEvent.setup();
+    const repository = renderToday();
+
+    await completeDayOneThroughOutput(user);
+    await satisfyOutputGate(user);
+    await user.click(await getEnabledContinueButton());
+
+    await waitFor(async () => {
+      const records = await repository.listMasteryProgress();
+      expect(records).toHaveLength(new Set(day.wordIds).size + new Set(day.patternIds).size);
+      expect(records).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ contentType: 'word', contentId: day.wordIds[0], sourceDayId: day.id, status: 'pending_validation' }),
+          expect.objectContaining({ contentType: 'pattern', contentId: day.patternIds[0], sourceDayId: day.id, status: 'pending_validation' }),
+        ]),
+      );
+    });
+  });
+
   it('propagates checklist and self-rating changes in the output draft', async () => {
     const user = userEvent.setup();
 
@@ -1055,6 +1108,8 @@ describe('TodayPage', () => {
 
     expect(await screen.findByRole('heading', { level: 2, name: 'I Have' })).toBeInTheDocument();
     expect(screen.getByText(/Week 1 \/ Day 3/i)).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Mastery review' })).toBeInTheDocument();
+    await userEvent.click(await getEnabledContinueButton());
     expect(await screen.findByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
     expect(screen.getByText('Review Day 2: I Am')).toBeInTheDocument();
     expect(screen.getByText('student')).toBeInTheDocument();
@@ -1067,6 +1122,7 @@ describe('TodayPage', () => {
 
     renderTodayWithChineseHelp();
 
+    await user.click(await getEnabledContinueButton());
     await user.click(await getEnabledContinueButton());
 
     expect(screen.getByText('the word for a person or thing')).toBeInTheDocument();
@@ -1226,6 +1282,7 @@ describe('TodayPage', () => {
     const user = userEvent.setup();
     const repository = renderToday();
 
+    await user.click(await getEnabledContinueButton());
     await user.click(await getEnabledContinueButton());
     await waitFor(async () => {
       await expect(repository.getDayProgress(day.id)).resolves.toMatchObject({

@@ -10,6 +10,7 @@ import { scenarioCapabilities } from './content/scenarioCapabilities';
 import { sceneRemixTasksByDayId } from './content/sceneRemixTasks';
 import { sceneGoalsByDayId } from './content/sceneGoals';
 import { getActiveReviewDayIds, selectDueReviewItems } from './domain/review';
+import { selectDueMasteryProgress, toLocalDateString } from './domain/mastery';
 import { SpeechProvider } from './speech/SpeechProvider';
 import type { SpeechLanguage, SpeechRate } from './speech/speechService';
 import { resolveEffectiveTheme, type ThemePreference } from './theme';
@@ -74,17 +75,25 @@ export default function App() {
   const repository = useMemo(() => createIndexedDbProgressRepository(), []);
 
   const refreshProgressSummary = async () => {
-    const [dayProgress, activeReviews] = await Promise.all([
+    const now = new Date();
+    const localDate = toLocalDateString(now);
+    const [dayProgress, activeReviews, masteryProgress, masterySession] = await Promise.all([
       repository.listDayProgress(),
       repository.listReviewItems('active'),
+      repository.listMasteryProgress(),
+      repository.getMasteryReviewSession(localDate),
     ]);
     setCompletedDayIds(
       dayProgress
         .filter((progress) => progress.status === 'completed' || progress.currentStep === 'done')
         .map((progress) => progress.dayId),
     );
-    const dueReviews = selectDueReviewItems(activeReviews, new Date().toISOString());
-    setReviewCount(dueReviews.length);
+    const dueReviews = selectDueReviewItems(activeReviews, now.toISOString());
+    const dueMastery = selectDueMasteryProgress(masteryProgress, {
+      now: now.toISOString(),
+      completedProgressIds: masterySession?.completedProgressIds ?? [],
+    });
+    setReviewCount(dueReviews.length + dueMastery.length);
     setActiveReviewDayIds(getActiveReviewDayIds(dueReviews));
   };
 
@@ -152,7 +161,7 @@ export default function App() {
           />
         )}
         {activeTab === 'review' && (
-          <ReviewPage repository={repository} onStartToday={() => handleTabChange('today')} onReviewChange={() => void refreshProgressSummary()} />
+          <ReviewPage course={basicEnglishCourse} repository={repository} onStartToday={() => handleTabChange('today')} onReviewChange={() => void refreshProgressSummary()} />
         )}
         {activeTab === 'words' && (
           <Suspense fallback={<section className="panel">Loading Words...</section>}>

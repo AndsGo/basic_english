@@ -1,6 +1,7 @@
 import { type StepId, stepOrder } from '../domain/progress';
 
 const stepLabels: Record<StepId, string> = {
+  'mastery-review': 'Mastery',
   review: 'Review',
   words: 'Words',
   patterns: 'Patterns',

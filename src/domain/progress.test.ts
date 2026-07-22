@@ -10,19 +10,11 @@ import {
 } from './progress';
 
 describe('progress domain', () => {
-  it('starts a day at review step', () => {
+  it('starts with mastery review and proceeds to the existing previous-day review', () => {
     const progress = startDay('day-001', '1.0.0', '2026-05-25T12:00:00.000Z');
 
-    expect(progress).toEqual({
-      id: 'day-001',
-      dayId: 'day-001',
-      status: 'in_progress',
-      currentStep: 'review',
-      completedStepIds: [],
-      startedAt: '2026-05-25T12:00:00.000Z',
-      updatedAt: '2026-05-25T12:00:00.000Z',
-      contentVersion: '1.0.0',
-    });
+    expect(progress.currentStep).toBe('mastery-review');
+    expect(completeStep(progress, 'mastery-review', '2026-05-25T12:01:00.000Z').currentStep).toBe('review');
   });
 
   it('completeStep advances through steps and marks completed at done', () => {
@@ -34,7 +26,7 @@ describe('progress domain', () => {
 
     expect(progress.currentStep).toBe('done');
     expect(progress.status).toBe('completed');
-    expect(progress.completedAt).toBe('2026-05-25T12:08:00.000Z');
+    expect(progress.completedAt).toBe('2026-05-25T12:09:00.000Z');
   });
 
   it('places scene remix and picture practice after translate and before output', () => {
@@ -42,7 +34,7 @@ describe('progress domain', () => {
     const translated = completeStep(progress, 'translate', '2026-05-25T12:05:00.000Z');
     const remixed = completeStep(translated, 'scene-remix', '2026-05-25T12:06:00.000Z');
 
-    expect(stepOrder).toEqual(['review', 'words', 'patterns', 'drills', 'translate', 'scene-remix', 'picture', 'output', 'done']);
+    expect(stepOrder).toEqual(['mastery-review', 'review', 'words', 'patterns', 'drills', 'translate', 'scene-remix', 'picture', 'output', 'done']);
     expect(translated.currentStep).toBe('scene-remix');
     expect(remixed.currentStep).toBe('picture');
   });
@@ -103,10 +95,10 @@ describe('progress V1.1 rules', () => {
 
   it('records completed steps while moving through the day', () => {
     const started = startDay('day-001', '1.0.0', '2026-05-26T00:00:00.000Z');
-    const updated = completeStep(started, 'review', '2026-05-26T00:01:00.000Z');
+    const updated = completeStep(started, 'mastery-review', '2026-05-26T00:01:00.000Z');
 
-    expect(updated.completedStepIds).toContain('review');
-    expect(updated.currentStep).toBe('words');
+    expect(updated.completedStepIds).toContain('mastery-review');
+    expect(updated.currentStep).toBe('review');
     expect(updated.status).toBe('in_progress');
   });
 });
