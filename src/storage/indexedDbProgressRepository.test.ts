@@ -2,6 +2,7 @@ import { openDB, type DBSchema } from 'idb';
 import { describe, expect, it } from 'vitest';
 import type { DayProgress } from '../domain/progress';
 import { createSceneRemixReviewItem, createWordReviewItem, resolveReviewItem } from '../domain/review';
+import { createPendingMasteryProgress } from '../domain/mastery';
 import { createIndexedDbProgressRepository } from './indexedDbProgressRepository';
 import type { ExerciseAttempt, PictureDescription, SceneRemixAttempt, UserOutput, WordProgress } from './progressRepository';
 
@@ -155,7 +156,7 @@ describe('indexedDbProgressRepository', () => {
       text: 'Second draft.',
     });
 
-    const db = await openDB(dbName, 5);
+    const db = await openDB(dbName, 6);
     await expect(db.getAll('userOutputs')).resolves.toEqual([
       userOutput({ id: 'second-output-id', text: 'Second draft.' }),
     ]);
@@ -183,7 +184,7 @@ describe('indexedDbProgressRepository', () => {
       dayId: 'day-001',
     });
 
-    const db = await openDB(dbName, 5);
+    const db = await openDB(dbName, 6);
     await expect(db.getAll('userOutputs')).resolves.toEqual([userOutput({ id: 'upgraded-output-id' })]);
     db.close();
   });
@@ -214,7 +215,7 @@ describe('indexedDbProgressRepository', () => {
 
     await repo.saveExerciseAttempt(attempt);
 
-    const db = await openDB(dbName, 5);
+    const db = await openDB(dbName, 6);
     await expect(db.get('exerciseAttempts', attempt.id)).resolves.toEqual(attempt);
     db.close();
   });
@@ -425,7 +426,7 @@ describe('indexedDbProgressRepository V1.1', () => {
     const repo = createIndexedDbProgressRepository(dbName);
     await repo.listUserOutputs();
 
-    const db = await openDB(dbName, 5);
+    const db = await openDB(dbName, 6);
     await db.put('userOutputs', {
       id: 'legacy-output-day-001',
       dayId: 'day-001',
@@ -548,5 +549,83 @@ describe('indexedDbProgressRepository V1.1', () => {
     expect(await repo.listStepCompletions('day-001')).toHaveLength(1);
     expect(await repo.getReviewItem(reviewItem.id)).toEqual(reviewItem);
     expect(await repo.listStudyActivities()).toHaveLength(1);
+  });
+});
+
+describe('indexedDbProgressRepository mastery persistence', () => {
+  it('persists mastery records and a local-date session', async () => {
+    const repo = createIndexedDbProgressRepository(nextDbName());
+    const record = createPendingMasteryProgress({
+      contentType: 'word',
+      contentId: 'name',
+      sourceDayId: 'day-001',
+      now: '2026-07-22T08:00:00.000Z',
+    });
+
+    await repo.saveMasteryProgress(record);
+    await repo.saveMasteryReviewSession({
+      id: 'mastery-session-2026-07-22',
+      localDate: '2026-07-22',
+      completedProgressIds: ['mastery-word-name'],
+      updatedAt: '2026-07-22T08:05:00.000Z',
+    });
+
+    await expect(repo.getMasteryProgress('word', 'name')).resolves.toEqual(record);
+    await expect(repo.getMasteryReviewSession('2026-07-22')).resolves.toMatchObject({
+      completedProgressIds: ['mastery-word-name'],
+    });
+  });
+
+  it('lists mastery records by due date and then id', async () => {
+    const repo = createIndexedDbProgressRepository(nextDbName());
+    const later = createPendingMasteryProgress({
+      contentType: 'word',
+      contentId: 'later',
+      sourceDayId: 'day-001',
+      now: '2026-07-22T08:00:00.000Z',
+    });
+    const first = { ...later, id: 'mastery-word-first', contentId: 'first', dueAt: '2026-07-22T09:00:00.000Z' };
+    const second = { ...later, id: 'mastery-word-second', contentId: 'second', dueAt: '2026-07-22T09:00:00.000Z' };
+
+    await repo.saveMasteryProgress(later);
+    await repo.saveMasteryProgress(second);
+    await repo.saveMasteryProgress(first);
+
+    await expect(repo.listMasteryProgress()).resolves.toEqual([first, second, later]);
+  });
+
+  it('upgrades a v5 database without losing existing user outputs', async () => {
+    const dbName = nextDbName();
+    const oldOutput = userOutput({ text: 'I am from China.' });
+    const legacyDb = await openDB(dbName, 5, {
+      upgrade(db) {
+        db.createObjectStore('dayProgress', { keyPath: 'id' });
+        db.createObjectStore('stepProgress', { keyPath: 'id' });
+        db.createObjectStore('stepCompletions', { keyPath: 'id' }).createIndex('byDayId', 'dayId');
+        db.createObjectStore('exerciseAttempts', { keyPath: 'id' }).createIndex('byDayId', 'dayId');
+        db.createObjectStore('sceneRemixAttempts', { keyPath: 'id' }).createIndex('byDayId', 'dayId');
+        db.createObjectStore('userOutputs', { keyPath: 'dayId' });
+        db.createObjectStore('wordProgress', { keyPath: 'id' });
+        const reviewItemsStore = db.createObjectStore('reviewItems', { keyPath: 'id' });
+        reviewItemsStore.createIndex('byStatus', 'status');
+        reviewItemsStore.createIndex('bySourceDayId', 'sourceDayId');
+        db.createObjectStore('studyActivities', { keyPath: 'id' });
+        db.createObjectStore('pictureDescriptions', { keyPath: 'dayId' });
+      },
+    });
+    await legacyDb.put('userOutputs', oldOutput);
+    legacyDb.close();
+
+    const repo = createIndexedDbProgressRepository(dbName);
+    const record = createPendingMasteryProgress({
+      contentType: 'word',
+      contentId: 'name',
+      sourceDayId: 'day-001',
+      now: '2026-07-22T08:00:00.000Z',
+    });
+    await repo.saveMasteryProgress(record);
+
+    await expect(repo.getUserOutput('day-001')).resolves.toEqual(oldOutput);
+    await expect(repo.getMasteryProgress('word', 'name')).resolves.toEqual(record);
   });
 });
