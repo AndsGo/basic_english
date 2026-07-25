@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { basicEnglishCourse } from '../content/course';
 import { getCapabilityStates, getScenarioCapabilityMasteryState } from '../domain/capabilities';
 import type { MasteryProgress, ScenarioMasteryState } from '../domain/mastery';
 import type { DayProgress } from '../domain/progress';
@@ -64,7 +63,7 @@ function getCapabilityNextAction(state: ScenarioMasteryState, missingDayIds: str
 
 export function MePage({
   repository,
-  course = basicEnglishCourse,
+  course,
   scenarioCapabilities,
   sceneGoalsByDayId,
   pictureDescribeTasksByDayId = {},
@@ -81,7 +80,7 @@ export function MePage({
   totalDayCount = DEFAULT_TOTAL_DAY_COUNT,
 }: {
   repository: ProgressRepository;
-  course?: Course;
+  course: Course;
   scenarioCapabilities?: ScenarioCapability[];
   sceneGoalsByDayId?: Partial<Record<string, SceneGoal>>;
   pictureDescribeTasksByDayId?: Partial<Record<string, PictureDescribeTask>>;

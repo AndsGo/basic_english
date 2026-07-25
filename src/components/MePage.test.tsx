@@ -97,7 +97,7 @@ describe('MePage scene map', () => {
       listDayProgress: vi.fn().mockReturnValue(new Promise(() => {})),
     });
 
-    render(<MePage repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
 
     expect(screen.queryByText('Scenes I Can Describe')).not.toBeInTheDocument();
   });
@@ -107,7 +107,7 @@ describe('MePage scene map', () => {
       listDayProgress: vi.fn().mockRejectedValue(new Error('load failed')),
     });
 
-    render(<MePage repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Progress could not be loaded.');
     expect(screen.queryByText('Scenes I Can Describe')).not.toBeInTheDocument();
@@ -148,7 +148,7 @@ describe('MePage scene map', () => {
       updatedAt: '2026-05-27T00:00:00.000Z',
     });
 
-    render(<MePage repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
 
     expect(await screen.findByRole('listitem', { name: /Self Completed/ })).toHaveClass('scene-map-item--completed');
     expect(screen.getByRole('listitem', { name: /Room Next/ })).toBeInTheDocument();
@@ -175,6 +175,7 @@ describe('MePage scene map', () => {
 
     render(
       <MePage
+        course={basicEnglishCourse}
         repository={repository}
         pictureDescribeTasksByDayId={{
           'day-008': {
@@ -254,6 +255,7 @@ describe('MePage theme control', () => {
 
     render(
       <MePage
+        course={basicEnglishCourse}
         repository={createMockRepository()}
         themePreference="system"
         onThemePreferenceChange={onThemePreferenceChange}
@@ -287,7 +289,7 @@ describe('MePage saved outputs', () => {
     });
     const totalDayCount = basicEnglishCourse.weeks.flatMap((week) => week.days).length;
 
-    render(<MePage repository={repository} totalDayCount={totalDayCount} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} totalDayCount={totalDayCount} />);
 
     expect(await screen.findByText('Completed days: 1')).toBeInTheDocument();
     expect(screen.getByText(`/ ${totalDayCount}`)).toBeInTheDocument();
@@ -320,7 +322,7 @@ describe('MePage saved outputs', () => {
       ]),
     });
 
-    render(<MePage repository={repository} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} />);
 
     expect(await screen.findByText('My name is Li. I am from China. I am a student. I study English.')).toBeInTheDocument();
     expect(screen.getByText('A: What is your name? B: My name is Li.')).toBeInTheDocument();

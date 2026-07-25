@@ -258,7 +258,7 @@ describe('Me capability progress', () => {
       listDayProgress: vi.fn().mockReturnValue(dayProgress.promise),
     });
 
-    render(<MePage repository={repository} scenarioCapabilities={scenarioCapabilities} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} scenarioCapabilities={scenarioCapabilities} />);
 
     expect(screen.queryByText('No capabilities unlocked yet.')).not.toBeInTheDocument();
     expect(screen.queryByText('Complete Day 1.')).not.toBeInTheDocument();
@@ -280,7 +280,7 @@ describe('Me capability progress', () => {
       ]),
     });
 
-    render(<MePage repository={repository} scenarioCapabilities={scenarioCapabilities} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} scenarioCapabilities={scenarioCapabilities} />);
 
     const unlockedHeading = await screen.findByRole('heading', { name: 'Unlocked' });
     const unlockedSection = unlockedHeading.closest('section');

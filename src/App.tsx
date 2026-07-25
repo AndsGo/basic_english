@@ -177,6 +177,7 @@ export default function App() {
         {activeTab === 'me' && (
           <MePage
             repository={repository}
+            course={basicEnglishCourse}
             scenarioCapabilities={scenarioCapabilities}
             sceneGoalsByDayId={sceneGoalsByDayId}
             pictureDescribeTasksByDayId={pictureDescribeTasksByDayId}
