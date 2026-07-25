@@ -117,5 +117,6 @@ export interface ProgressRepository {
   getMasteryProgress(contentType: MasteryContentType, contentId: string): Promise<MasteryProgress | null>;
   listMasteryProgress(): Promise<MasteryProgress[]>;
   saveMasteryReviewSession(session: MasteryReviewSession): Promise<void>;
+  saveMasteryReviewResult?(progress: MasteryProgress, session: MasteryReviewSession): Promise<void>;
   getMasteryReviewSession(localDate: string): Promise<MasteryReviewSession | null>;
 }

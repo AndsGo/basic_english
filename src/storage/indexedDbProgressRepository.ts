@@ -300,6 +300,26 @@ export function createIndexedDbProgressRepository(dbName = 'basic-english-progre
       await db.put('masteryReviewSessions', session);
     },
 
+    async saveMasteryReviewResult(progress, session) {
+      const db = await dbPromise;
+      const transaction = db.transaction(['masteryProgress', 'masteryReviewSessions'], 'readwrite');
+      const transactionDone = transaction.done;
+      const progressWrite = transaction.objectStore('masteryProgress').put(progress);
+
+      try {
+        const sessionWrite = transaction.objectStore('masteryReviewSessions').put(session);
+        await Promise.all([progressWrite, sessionWrite, transactionDone]);
+      } catch (error) {
+        try {
+          transaction.abort();
+        } catch {
+          // IndexedDB may have already aborted the transaction after a request failure.
+        }
+        await Promise.allSettled([progressWrite, transactionDone]);
+        throw error;
+      }
+    },
+
     async getMasteryReviewSession(localDate) {
       const db = await dbPromise;
       return (await db.get('masteryReviewSessions', localDate)) ?? null;

@@ -9,6 +9,10 @@ import { MasteryReviewPanel } from './MasteryReviewPanel';
 
 const now = () => new Date('2026-07-22T08:00:00.000Z');
 
+type AtomicMasteryRepository = ProgressRepository & {
+  saveMasteryReviewResult: (progress: MasteryProgress, session: MasteryReviewSession) => Promise<void>;
+};
+
 afterEach(() => {
   cleanup();
 });
@@ -20,7 +24,7 @@ function masteryRecord(contentId: string, index = 0): MasteryProgress {
   };
 }
 
-function repository(records: MasteryProgress[], session: MasteryReviewSession | null = null): ProgressRepository {
+function repository(records: MasteryProgress[], session: MasteryReviewSession | null = null): AtomicMasteryRepository {
   const storedRecords = new Map(records.map((record) => [record.id, record]));
   let storedSession = session;
 
@@ -33,7 +37,11 @@ function repository(records: MasteryProgress[], session: MasteryReviewSession | 
     saveMasteryReviewSession: vi.fn(async (nextSession: MasteryReviewSession) => {
       storedSession = nextSession;
     }),
-  } as unknown as ProgressRepository;
+    saveMasteryReviewResult: vi.fn(async (record: MasteryProgress, nextSession: MasteryReviewSession) => {
+      storedRecords.set(record.id, record);
+      storedSession = nextSession;
+    }),
+  } as unknown as AtomicMasteryRepository;
 }
 
 describe('MasteryReviewPanel', () => {
@@ -49,26 +57,22 @@ describe('MasteryReviewPanel', () => {
     await user.click(screen.getByRole('button', { name: /the word for a person or thing/i }));
 
     expect(await screen.findByRole('status')).toHaveTextContent('Correct');
-    expect(repo.saveMasteryProgress).toHaveBeenCalledWith(expect.objectContaining({ contentId: 'name', status: 'learning' }));
-    expect(repo.saveMasteryReviewSession).toHaveBeenCalledWith(expect.objectContaining({
+    expect(repo.saveMasteryReviewResult).toHaveBeenCalledWith(expect.objectContaining({ contentId: 'name', status: 'learning' }), expect.objectContaining({
       localDate: '2026-07-22',
       completedProgressIds: ['mastery-word-name'],
     }));
   });
 
-  it('persists an incorrect answer before its session and then notifies onChange', async () => {
+  it('shows the correct answer after persisting an incorrect answer atomically', async () => {
     const user = userEvent.setup();
     const calls: string[] = [];
     const repo = {
       listMasteryProgress: vi.fn(async () => [masteryRecord('name')]),
       getMasteryReviewSession: vi.fn(async () => null),
-      saveMasteryProgress: vi.fn(async () => {
-        calls.push('progress');
+      saveMasteryReviewResult: vi.fn(async () => {
+        calls.push('result');
       }),
-      saveMasteryReviewSession: vi.fn(async () => {
-        calls.push('session');
-      }),
-    } as unknown as ProgressRepository;
+    } as unknown as AtomicMasteryRepository;
     const onChange = () => {
       calls.push('change');
     };
@@ -78,10 +82,26 @@ describe('MasteryReviewPanel', () => {
     await user.click(await screen.findByRole('button', { name: /to get or keep something/i }));
 
     await waitFor(() => {
-      expect(repo.saveMasteryProgress).toHaveBeenCalledWith(expect.objectContaining({ contentId: 'name', consecutiveCorrect: 0, status: 'learning' }));
-      expect(repo.saveMasteryReviewSession).toHaveBeenCalledTimes(1);
-      expect(calls).toEqual(['progress', 'session', 'change']);
+      expect(repo.saveMasteryReviewResult).toHaveBeenCalledWith(expect.objectContaining({ contentId: 'name', consecutiveCorrect: 0, status: 'learning' }), expect.objectContaining({
+        completedProgressIds: ['mastery-word-name'],
+      }));
+      expect(calls).toEqual(['result', 'change']);
     });
+    expect(screen.getByRole('status')).toHaveTextContent('Correct answer: the word for a person or thing');
+    expect(screen.getByText('Completed 1 of 8')).toBeInTheDocument();
+  });
+
+  it('displays the persisted completion count for the local day', async () => {
+    const session: MasteryReviewSession = {
+      id: 'mastery-session-2026-07-22',
+      localDate: '2026-07-22',
+      completedProgressIds: ['mastery-word-book', 'mastery-word-friend'],
+      updatedAt: now().toISOString(),
+    };
+
+    render(<MasteryReviewPanel course={basicEnglishCourse} repository={repository([masteryRecord('name')], session)} now={now} />);
+
+    expect(await screen.findByText('Completed 2 of 8')).toBeInTheDocument();
   });
 
   it('renders the empty due state', async () => {

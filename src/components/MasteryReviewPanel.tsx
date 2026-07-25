@@ -31,6 +31,7 @@ export function MasteryReviewPanel({
 }) {
   const [questions, setQuestions] = useState<ScheduledQuestion[]>([]);
   const [position, setPosition] = useState(0);
+  const [completedCount, setCompletedCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
   const [saveError, setSaveError] = useState(false);
@@ -61,6 +62,7 @@ export function MasteryReviewPanel({
         if (!isMounted) return;
         setQuestions(scheduled);
         setPosition(0);
+        setCompletedCount(completedProgressIds.length);
         setLoadError(false);
       } catch {
         if (!isMounted) return;
@@ -91,16 +93,18 @@ export function MasteryReviewPanel({
     setSaveError(false);
 
     try {
-      await repository.saveMasteryProgress(updatedProgress);
       const existingSession = await repository.getMasteryReviewSession(localDate);
-      await repository.saveMasteryReviewSession({
+      const updatedSession = {
         id: `mastery-session-${localDate}`,
         localDate,
         completedProgressIds: Array.from(new Set([...(existingSession?.completedProgressIds ?? []), scheduled.progress.id])),
         updatedAt: current.toISOString(),
-      });
+      };
+      if (!repository.saveMasteryReviewResult) throw new Error('Atomic mastery persistence is unavailable.');
+      await repository.saveMasteryReviewResult(updatedProgress, updatedSession);
+      setCompletedCount(updatedSession.completedProgressIds.length);
       setAnswered(true);
-      setFeedback(correct ? 'Correct. Well done.' : `Not quite. ${scheduled.question.explanation}`);
+      setFeedback(correct ? 'Correct. Well done.' : `Not quite. Correct answer: ${scheduled.question.correctAnswerText} ${scheduled.question.explanation}`);
       onChange?.();
     } catch {
       setSaveError(true);
@@ -134,6 +138,7 @@ export function MasteryReviewPanel({
     return (
       <section className="mastery-review-panel">
         <h2>Mastery review</h2>
+        <p className="mastery-review-completed">Completed {completedCount} of 8</p>
         <p>No mastery review due today.</p>
       </section>
     );
@@ -144,6 +149,7 @@ export function MasteryReviewPanel({
   return (
     <section className="mastery-review-panel">
       <h2>Mastery review</h2>
+      <p className="mastery-review-completed">Completed {completedCount} of 8</p>
       <p className="mastery-review-count">Question {position + 1} of {questions.length}</p>
       <article className="mastery-review-question">
         <p>{question.prompt}</p>

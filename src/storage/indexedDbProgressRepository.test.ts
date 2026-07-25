@@ -553,6 +553,39 @@ describe('indexedDbProgressRepository V1.1', () => {
 });
 
 describe('indexedDbProgressRepository mastery persistence', () => {
+  it('rolls back the mastery record when saving its session fails', async () => {
+    const repo = createIndexedDbProgressRepository(nextDbName());
+    const originalRecord = createPendingMasteryProgress({
+      contentType: 'word',
+      contentId: 'name',
+      sourceDayId: 'day-001',
+      now: '2026-07-22T08:00:00.000Z',
+    });
+    const updatedRecord = { ...originalRecord, status: 'learning' as const, consecutiveCorrect: 1 };
+    const previousSession = {
+      id: 'mastery-session-2026-07-22',
+      localDate: '2026-07-22',
+      completedProgressIds: ['mastery-word-old'],
+      updatedAt: '2026-07-22T08:00:00.000Z',
+    };
+
+    await repo.saveMasteryProgress(originalRecord);
+    await repo.saveMasteryReviewSession(previousSession);
+
+    const atomicRepo = repo as typeof repo & {
+      saveMasteryReviewResult: (progress: typeof updatedRecord, session: typeof previousSession) => Promise<void>;
+    };
+
+    await expect(atomicRepo.saveMasteryReviewResult(updatedRecord, {
+      ...previousSession,
+      completedProgressIds: ['mastery-word-old', originalRecord.id],
+      localDate: undefined as unknown as string,
+    })).rejects.toThrow();
+
+    await expect(repo.getMasteryProgress('word', 'name')).resolves.toEqual(originalRecord);
+    await expect(repo.getMasteryReviewSession('2026-07-22')).resolves.toEqual(previousSession);
+  });
+
   it('persists mastery records and a local-date session', async () => {
     const repo = createIndexedDbProgressRepository(nextDbName());
     const record = createPendingMasteryProgress({
