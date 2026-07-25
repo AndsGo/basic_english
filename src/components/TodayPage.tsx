@@ -166,6 +166,7 @@ export function TodayPage({
   const todayTopRef = useRef<HTMLElement | null>(null);
   const previousStepPositionRef = useRef({ dayId: day.id, step: dayProgress.currentStep });
   const outputSaveQueue = useRef<Promise<void>>(Promise.resolve());
+  const masteryRefreshVersion = useRef(0);
   const { stop: stopSpeech } = useSpeech();
   const words = useMemo(() => course.words.filter((word) => day.wordIds.includes(word.id)), [course.words, day.wordIds]);
   const patterns = useMemo(() => course.patterns.filter((pattern) => day.patternIds.includes(pattern.id)), [course.patterns, day.patternIds]);
@@ -199,32 +200,35 @@ export function TodayPage({
   );
 
   const refreshMasteryReviewCompletion = useCallback(async () => {
+    const refreshVersion = masteryRefreshVersion.current + 1;
+    masteryRefreshVersion.current = refreshVersion;
     const now = new Date();
     const localDate = toLocalDateString(now);
-    const [records, session] = await Promise.all([
-      repository.listMasteryProgress(),
-      repository.getMasteryReviewSession(localDate),
-    ]);
-    const completedProgressIds = session?.completedProgressIds ?? [];
-    const due = selectDueMasteryProgress(records, {
-      now: now.toISOString(),
-      completedProgressIds,
-      limit: Math.max(0, 8 - completedProgressIds.length),
-    });
-    setIsMasteryReviewComplete(due.length === 0);
+    try {
+      const [records, session] = await Promise.all([
+        repository.listMasteryProgress(),
+        repository.getMasteryReviewSession(localDate),
+      ]);
+      const completedProgressIds = session?.completedProgressIds ?? [];
+      const due = selectDueMasteryProgress(records, {
+        now: now.toISOString(),
+        completedProgressIds,
+        limit: Math.max(0, 8 - completedProgressIds.length),
+      });
+      if (refreshVersion === masteryRefreshVersion.current) setIsMasteryReviewComplete(due.length === 0);
+    } catch {
+      if (refreshVersion === masteryRefreshVersion.current) setIsMasteryReviewComplete(false);
+    }
   }, [repository]);
 
   useEffect(() => {
     if (currentStep !== 'mastery-review') return;
 
-    let isMounted = true;
     setIsMasteryReviewComplete(false);
-    void refreshMasteryReviewCompletion().catch(() => {
-      if (isMounted) setIsMasteryReviewComplete(false);
-    });
+    void refreshMasteryReviewCompletion();
 
     return () => {
-      isMounted = false;
+      masteryRefreshVersion.current += 1;
     };
   }, [currentStep, refreshMasteryReviewCompletion]);
 

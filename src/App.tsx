@@ -92,6 +92,7 @@ export default function App() {
     const dueMastery = selectDueMasteryProgress(masteryProgress, {
       now: now.toISOString(),
       completedProgressIds: masterySession?.completedProgressIds ?? [],
+      limit: Math.max(0, 8 - (masterySession?.completedProgressIds.length ?? 0)),
     });
     setReviewCount(dueReviews.length + dueMastery.length);
     setActiveReviewDayIds(getActiveReviewDayIds(dueReviews));

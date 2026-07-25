@@ -9,7 +9,7 @@ import { sceneGoalsByDayId } from '../content/sceneGoals';
 import { week1Course } from '../content/week1';
 import type { DayProgress, StepId } from '../domain/progress';
 import { startDay } from '../domain/progress';
-import type { MasteryProgress, MasteryReviewSession } from '../domain/mastery';
+import { createPendingMasteryProgress, type MasteryProgress, type MasteryReviewSession } from '../domain/mastery';
 import type { ReviewItem } from '../domain/review';
 import { toLocalDateString } from '../domain/studyActivity';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
@@ -1078,6 +1078,64 @@ describe('TodayPage', () => {
         ]),
       );
     });
+  });
+
+  it('does not reseed mastery progress when the output completion is re-entered', async () => {
+    const user = userEvent.setup();
+    const seededRecords = [
+      ...day.wordIds.map((contentId) => createPendingMasteryProgress({ contentType: 'word', contentId, sourceDayId: day.id, now: '2026-05-26T00:00:00.000Z' })),
+      ...day.patternIds.map((contentId) => createPendingMasteryProgress({ contentType: 'pattern', contentId, sourceDayId: day.id, now: '2026-05-26T00:00:00.000Z' })),
+    ];
+    const repository = createTestRepository({
+      dayProgress: [inProgressDayProgress(day.id, week1Course.contentVersion, 'output')],
+      masteryProgress: seededRecords,
+    });
+    const saveMasteryProgress = vi.spyOn(repository, 'saveMasteryProgress');
+
+    renderToday(repository);
+
+    await screen.findByRole('textbox', { name: 'Daily output' });
+    await satisfyOutputGate(user);
+    await user.click(await getEnabledContinueButton());
+
+    expect(await screen.findByRole('heading', { name: 'Day 1 complete' })).toBeInTheDocument();
+    expect(saveMasteryProgress).not.toHaveBeenCalled();
+    await expect(repository.listMasteryProgress()).resolves.toEqual(seededRecords);
+  });
+
+  it('keeps mastery completion true when a stale initial refresh resolves after the final answer', async () => {
+    const user = userEvent.setup();
+    const initialRefreshSession = deferred<MasteryReviewSession | null>();
+    const progress = {
+      ...createPendingMasteryProgress({ contentType: 'word', contentId: 'name', sourceDayId: day.id, now: '2026-05-26T00:00:00.000Z' }),
+      dueAt: '2000-01-01T00:00:00.000Z',
+    };
+    let storedSession: MasteryReviewSession | null = null;
+    let sessionLoadCount = 0;
+    const repository = {
+      ...createTestRepository({ masteryProgress: [progress] }),
+      getMasteryReviewSession: vi.fn(async () => {
+        sessionLoadCount += 1;
+        if (sessionLoadCount === 1) return initialRefreshSession.promise;
+        return storedSession;
+      }),
+      async saveMasteryReviewSession(session: MasteryReviewSession) {
+        storedSession = session;
+      },
+    };
+
+    renderToday(repository);
+
+    await user.click(await screen.findByRole('button', { name: /the word for a person or thing/i }));
+    await user.click(screen.getByRole('button', { name: 'Finish' }));
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Continue' })).toBeEnabled());
+
+    await act(async () => {
+      initialRefreshSession.resolve(null);
+      await initialRefreshSession.promise;
+    });
+
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Continue' })).toBeEnabled());
   });
 
   it('propagates checklist and self-rating changes in the output draft', async () => {

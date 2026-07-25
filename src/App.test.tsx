@@ -141,6 +141,28 @@ describe('App shell', () => {
     expect(await screen.findByText('2', { selector: '.nav-badge' })).toBeInTheDocument();
   });
 
+  it('counts only the remaining mastery capacity in the Review badge', async () => {
+    const now = '2026-05-26T00:00:00.000Z';
+    const masteryProgress = Array.from({ length: 10 }, (_, index) => ({
+      ...createPendingMasteryProgress({ contentType: 'word', contentId: `word-${index}`, sourceDayId: 'day-001', now }),
+      dueAt: '2000-01-01T00:00:00.000Z',
+    }));
+    const repository = createProgressRepository({
+      listMasteryProgress: vi.fn().mockResolvedValue(masteryProgress),
+      getMasteryReviewSession: vi.fn().mockResolvedValue({
+        id: 'mastery-session-2000-01-01',
+        localDate: '2000-01-01',
+        completedProgressIds: masteryProgress.slice(0, 7).map((progress) => progress.id),
+        updatedAt: now,
+      }),
+    });
+    vi.spyOn(indexedDbProgressRepository, 'createIndexedDbProgressRepository').mockReturnValue(repository);
+
+    render(<App />);
+
+    expect(await screen.findByText('1', { selector: '.nav-badge' })).toBeInTheDocument();
+  });
+
   it('shows Chinese word help only after the learner enables it', async () => {
     const user = userEvent.setup();
 
