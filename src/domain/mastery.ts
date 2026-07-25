@@ -29,8 +29,14 @@ export interface ScenarioMasteryState {
   stablePercent: number;
 }
 
-function addDays(iso: string, days: number): string {
-  return new Date(new Date(iso).getTime() + days * 24 * 60 * 60 * 1000).toISOString();
+export function addLocalCalendarDays(date: Date, days: number): Date {
+  const next = new Date(date);
+  next.setDate(next.getDate() + days);
+  return next;
+}
+
+function scheduleAfterLocalCalendarDays(iso: string, days: number): string {
+  return addLocalCalendarDays(new Date(iso), days).toISOString();
 }
 
 function progressId(contentType: MasteryContentType, contentId: string): string {
@@ -57,7 +63,7 @@ export function createPendingMasteryProgress(input: {
     sourceDayId: input.sourceDayId,
     status: 'pending_validation',
     consecutiveCorrect: 0,
-    dueAt: addDays(input.now, 1),
+    dueAt: scheduleAfterLocalCalendarDays(input.now, 1),
     updatedAt: input.now,
   };
 }
@@ -98,7 +104,7 @@ export function applyMasteryAnswer(record: MasteryProgress, input: { correct: bo
       ...record,
       status,
       consecutiveCorrect: 0,
-      dueAt: addDays(input.now, 1),
+      dueAt: scheduleAfterLocalCalendarDays(input.now, 1),
       lastAnsweredAt: input.now,
       updatedAt: input.now,
     };
@@ -113,7 +119,7 @@ export function applyMasteryAnswer(record: MasteryProgress, input: { correct: bo
     ...record,
     status,
     consecutiveCorrect,
-    dueAt: addDays(input.now, intervalDays),
+    dueAt: scheduleAfterLocalCalendarDays(input.now, intervalDays),
     lastAnsweredAt: input.now,
     updatedAt: input.now,
   };
@@ -125,7 +131,9 @@ export function getScenarioMasteryState(input: {
   contentIds: string[];
   records: MasteryProgress[];
 }): ScenarioMasteryState {
-  const prerequisitesComplete = input.prerequisiteDayIds.every((dayId) => input.completedDayIds.includes(dayId));
+  const completedDays = new Set(input.completedDayIds);
+  const completedPrerequisiteCount = input.prerequisiteDayIds.filter((dayId) => completedDays.has(dayId)).length;
+  const prerequisitesComplete = completedPrerequisiteCount === input.prerequisiteDayIds.length;
   const contentIds = [...new Set(input.contentIds)];
   const recordByContentId = new Map<string, MasteryProgress>(
     input.records.map((record) => [`${record.contentType}:${record.contentId}`, record]),
@@ -135,10 +143,20 @@ export function getScenarioMasteryState(input: {
   const stablePercent = contentIds.length === 0 ? 0 : Math.round((verifiedCount / contentIds.length) * 100);
   const hasReinforcement = relevantRecords.some((record) => record?.status === 'needs_reinforcement');
 
-  if (!prerequisitesComplete) {
+  if (input.prerequisiteDayIds.length > 0 && completedPrerequisiteCount === 0) {
     return { status: 'not_started', verifiedCount, totalCount: contentIds.length, stablePercent };
   }
 
-  const status = stablePercent >= 90 && !hasReinforcement ? 'strong' : stablePercent >= 70 ? 'ready' : 'building';
+  if (!prerequisitesComplete) {
+    return { status: 'building', verifiedCount, totalCount: contentIds.length, stablePercent };
+  }
+
+  if (contentIds.length === 0) {
+    return { status: 'building', verifiedCount, totalCount: 0, stablePercent };
+  }
+
+  const meetsReadyThreshold = verifiedCount * 10 >= contentIds.length * 7;
+  const meetsStrongThreshold = verifiedCount * 10 >= contentIds.length * 9;
+  const status = meetsStrongThreshold && !hasReinforcement ? 'strong' : meetsReadyThreshold ? 'ready' : 'building';
   return { status, verifiedCount, totalCount: contentIds.length, stablePercent };
 }

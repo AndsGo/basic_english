@@ -35,6 +35,7 @@ describe('buildMasteryQuestion', () => {
     expect(question.options).toContain('the title of a person or thing');
     expect(question.options).toHaveLength(3);
     expect(question.options?.filter((option) => option === question.correctAnswer)).toHaveLength(1);
+    expect(question.correctAnswerText).toBe('the title of a person or thing');
     expect(question.prompt).not.toContain('名字');
     expect(question.explanation).not.toContain('名字');
   });
@@ -53,16 +54,64 @@ describe('buildMasteryQuestion', () => {
 
     if (question.kind === 'pattern_sentence_choice') {
       expect(question.correctAnswer).toBe('This is my book.');
+      expect(question.correctAnswerText).toBe('This is my book.');
       expect(question.options).toContain('This is my book.');
     }
     if (question.kind === 'pattern_fill_blank') {
       expect(question.correctAnswer).toBeTypeOf('string');
+      expect(question.correctAnswerText).toBe(question.correctAnswer);
       expect(question.prompt).toContain('___');
     }
     if (question.kind === 'pattern_sentence_order') {
       expect(question.correctAnswer).toEqual(['This', 'is', 'my', 'book.']);
+      expect(question.correctAnswerText).toBe('This is my book.');
       expect(question.tokens).toHaveLength(4);
     }
+  });
+
+  it('falls back to a non-order objective when an order sentence has more than five tokens', () => {
+    const longOrderCourse: Course = {
+      ...course,
+      patterns: [
+        ...course.patterns,
+        {
+          id: 'long-order',
+          title: 'Long example',
+          use: 'Test the order fallback.',
+          structure: 'Long example',
+          examples: ['I am very happy to be here today.'],
+          slots: [],
+        },
+      ],
+    };
+
+    const question = buildMasteryQuestion(progress('pattern', 'long-order'), longOrderCourse);
+
+    expect(question.kind).not.toBe('pattern_sentence_order');
+    expect(question.correctAnswerText).toBe('I am very happy to be here today.');
+  });
+
+  it('uses sentence ordering only for an example with three to five tokens', () => {
+    const shortOrderCourse: Course = {
+      ...course,
+      patterns: [
+        ...course.patterns,
+        {
+          id: 'order-c',
+          title: 'Short order',
+          use: 'Test the order limit.',
+          structure: 'Short order',
+          examples: ['We are good friends.'],
+          slots: [],
+        },
+      ],
+    };
+
+    const question = buildMasteryQuestion(progress('pattern', 'order-c'), shortOrderCourse);
+
+    expect(question.kind).toBe('pattern_sentence_order');
+    expect(question.tokens).toHaveLength(4);
+    expect(question.correctAnswerText).toBe('We are good friends.');
   });
 
   it('throws a typed error when required course content is missing', () => {

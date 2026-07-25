@@ -9,6 +9,7 @@ export type MasteryQuestion = {
   options?: string[];
   tokens?: string[];
   correctAnswer: string | string[];
+  correctAnswerText: string;
   explanation: string;
 };
 
@@ -57,6 +58,7 @@ function wordQuestion(progress: MasteryProgress, word: Word, course: Course): Ma
     prompt: `What does "${word.text}" mean?`,
     options,
     correctAnswer: word.definition,
+    correctAnswerText: word.definition,
     explanation: `"${word.text}" means ${word.definition}.`,
   };
 }
@@ -94,6 +96,7 @@ function patternQuestion(progress: MasteryProgress, pattern: Pattern, course: Co
       prompt: `Choose a sentence that uses "${pattern.title}".`,
       options: rotate([example, ...patternDistractors(progress, pattern, course, example)], stableHash(`${progress.id}:options`)),
       correctAnswer: example,
+      correctAnswerText: example,
     };
   }
 
@@ -110,6 +113,18 @@ function patternQuestion(progress: MasteryProgress, pattern: Pattern, course: Co
       kind: 'pattern_fill_blank',
       prompt: `Complete the sentence: ${blankedTokens.join(' ')}`,
       correctAnswer: orderedTokens[blankIndex],
+      correctAnswerText: orderedTokens[blankIndex],
+    };
+  }
+
+  if (orderedTokens.length < 3 || orderedTokens.length > 5) {
+    return {
+      ...base,
+      kind: 'pattern_sentence_choice',
+      prompt: `Choose a sentence that uses "${pattern.title}".`,
+      options: rotate([example, ...patternDistractors(progress, pattern, course, example)], stableHash(`${progress.id}:options`)),
+      correctAnswer: example,
+      correctAnswerText: example,
     };
   }
 
@@ -120,6 +135,7 @@ function patternQuestion(progress: MasteryProgress, pattern: Pattern, course: Co
     prompt: 'Put the sentence in the correct order.',
     tokens: shuffledTokens,
     correctAnswer: orderedTokens,
+    correctAnswerText: example,
   };
 }
 
