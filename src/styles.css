@@ -1038,6 +1038,25 @@ textarea {
   justify-self: start;
 }
 
+.capability-status-list {
+  display: grid;
+  gap: 0.625rem;
+  margin: 0.75rem 0;
+}
+
+.capability-status {
+  border-left: 3px solid var(--color-primary);
+  padding: 0.5rem 0 0.5rem 0.75rem;
+}
+
+.capability-status p {
+  margin: 0.25rem 0;
+}
+
+.capability-next-action {
+  font-weight: 600;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .primary-button:active:not(:disabled),
   .secondary-button:active:not(:disabled) {

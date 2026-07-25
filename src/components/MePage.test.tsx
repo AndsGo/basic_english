@@ -2,7 +2,8 @@ import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { basicEnglishCourse } from '../content/course';
-import type { SceneGoal } from '../domain/types';
+import type { MasteryProgress } from '../domain/mastery';
+import type { Course, ScenarioCapability, SceneGoal } from '../domain/types';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
 import type { ProgressRepository } from '../storage/progressRepository';
 import { MePage } from './MePage';
@@ -57,9 +58,38 @@ function createMockRepository(overrides: Partial<ProgressRepository> = {}): Prog
     getReviewItem: vi.fn(),
     saveStudyActivity: vi.fn(),
     listStudyActivities: vi.fn().mockResolvedValue([]),
+    saveMasteryProgress: vi.fn(),
+    getMasteryProgress: vi.fn(),
+    listMasteryProgress: vi.fn().mockResolvedValue([]),
+    saveMasteryReviewSession: vi.fn(),
+    getMasteryReviewSession: vi.fn(),
     ...overrides,
   };
 }
+
+const capabilityCourse: Course = {
+  ...basicEnglishCourse,
+  weeks: [
+    {
+      ...basicEnglishCourse.weeks[0],
+      days: [
+        {
+          ...basicEnglishCourse.weeks[0].days[0],
+          wordIds: ['name'],
+          patternIds: ['i-am'],
+        },
+      ],
+    },
+  ],
+};
+
+const capability: ScenarioCapability = {
+  id: 'introduce-myself',
+  title: 'I can introduce myself.',
+  description: 'Say my name.',
+  unlockedByDayIds: ['day-001'],
+  exampleOutputs: ['My name is Li.'],
+};
 
 describe('MePage scene map', () => {
   it('does not render the scene map while progress is loading', () => {
@@ -167,6 +197,53 @@ describe('MePage scene map', () => {
     expect(screen.getByText('Day 8')).toBeInTheDocument();
     expect(screen.getByText('This is my room. There is a bed. I can see a table.')).toBeInTheDocument();
     expect(screen.getByText('ready')).toBeInTheDocument();
+  });
+});
+
+describe('MePage scenario mastery', () => {
+  it('shows status, verified ratio, and concrete next action', async () => {
+    const records: MasteryProgress[] = [
+      {
+        id: 'mastery-word-name',
+        contentType: 'word',
+        contentId: 'name',
+        sourceDayId: 'day-001',
+        status: 'stable',
+        consecutiveCorrect: 2,
+        dueAt: '2026-07-25T00:00:00.000Z',
+        updatedAt: '2026-07-22T00:00:00.000Z',
+      },
+      {
+        id: 'mastery-pattern-i-am',
+        contentType: 'pattern',
+        contentId: 'i-am',
+        sourceDayId: 'day-001',
+        status: 'learning',
+        consecutiveCorrect: 1,
+        dueAt: '2026-07-23T00:00:00.000Z',
+        updatedAt: '2026-07-22T00:00:00.000Z',
+      },
+    ];
+    const repository = createMockRepository({
+      listDayProgress: vi.fn().mockResolvedValue([
+        {
+          id: 'progress-day-001',
+          dayId: 'day-001',
+          currentStep: 'done',
+          status: 'completed',
+          completedStepIds: [],
+          updatedAt: '2026-07-22T00:00:00.000Z',
+          contentVersion: 'test',
+        },
+      ]),
+      listMasteryProgress: vi.fn().mockResolvedValue(records),
+    });
+
+    render(<MePage course={capabilityCourse} repository={repository} scenarioCapabilities={[capability]} />);
+
+    expect(await screen.findByText('Building')).toBeInTheDocument();
+    expect(screen.getByText('Verified: 1 / 2')).toBeInTheDocument();
+    expect(screen.getByText('Review 1 item')).toBeInTheDocument();
   });
 });
 

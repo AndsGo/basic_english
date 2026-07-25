@@ -35,7 +35,7 @@ async function clearAppStorage(page: Page) {
 async function seedCompletedDays(page: Page, dayIds: string[]) {
   await page.evaluate(
     async ({ contentVersion, dayIdsToSeed }) => {
-      const openRequest = indexedDB.open('basic-english-progress', 5);
+      const openRequest = indexedDB.open('basic-english-progress', 6);
 
       const db = await new Promise<IDBDatabase>((resolve, reject) => {
         openRequest.onerror = () => reject(openRequest.error);
@@ -76,6 +76,14 @@ async function seedCompletedDays(page: Page, dayIds: string[]) {
           if (!db.objectStoreNames.contains('studyActivities')) {
             db.createObjectStore('studyActivities', { keyPath: 'id' });
           }
+          if (!db.objectStoreNames.contains('masteryProgress')) {
+            const store = db.createObjectStore('masteryProgress', { keyPath: 'id' });
+            store.createIndex('byContentId', 'contentId');
+            store.createIndex('byDueAt', 'dueAt');
+          }
+          if (!db.objectStoreNames.contains('masteryReviewSessions')) {
+            db.createObjectStore('masteryReviewSessions', { keyPath: 'localDate' });
+          }
         };
         openRequest.onsuccess = () => resolve(openRequest.result);
       });
@@ -112,6 +120,52 @@ async function seedCompletedDays(page: Page, dayIds: string[]) {
     },
     { contentVersion: basicEnglishCourse.contentVersion, dayIdsToSeed: dayIds },
   );
+}
+
+async function seedMasteryProgress(
+  page: Page,
+  input: { contentId: string; sourceDayId: string; status: 'learning'; consecutiveCorrect: number },
+) {
+  await page.evaluate(async (progress) => {
+    const openRequest = indexedDB.open('basic-english-progress', 6);
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      openRequest.onerror = () => reject(openRequest.error);
+      openRequest.onupgradeneeded = () => {
+        const database = openRequest.result;
+        if (!database.objectStoreNames.contains('masteryProgress')) {
+          const store = database.createObjectStore('masteryProgress', { keyPath: 'id' });
+          store.createIndex('byContentId', 'contentId');
+          store.createIndex('byDueAt', 'dueAt');
+        }
+        if (!database.objectStoreNames.contains('masteryReviewSessions')) {
+          database.createObjectStore('masteryReviewSessions', { keyPath: 'localDate' });
+        }
+      };
+      openRequest.onsuccess = () => resolve(openRequest.result);
+    });
+    const now = new Date().toISOString();
+    const transaction = db.transaction('masteryProgress', 'readwrite');
+    transaction.objectStore('masteryProgress').put({
+      id: `mastery-word-${progress.contentId}`,
+      contentType: 'word',
+      contentId: progress.contentId,
+      sourceDayId: progress.sourceDayId,
+      status: progress.status,
+      consecutiveCorrect: progress.consecutiveCorrect,
+      dueAt: new Date(Date.now() - 60_000).toISOString(),
+      lastAnsweredAt: now,
+      updatedAt: now,
+    });
+
+    await new Promise<void>((resolve, reject) => {
+      transaction.oncomplete = () => {
+        db.close();
+        resolve();
+      };
+      transaction.onerror = () => reject(transaction.error);
+      transaction.onabort = () => reject(transaction.error);
+    });
+  }, input);
 }
 
 function getCourseDay(dayId: string): Day {
@@ -228,6 +282,7 @@ async function completeSceneOutput(page: Page, scene: 'self' | 'room') {
 async function completeCurrentDay(page: Page, dayId: string) {
   const day = getCourseDay(dayId);
 
+  await continueTo(page, 'Quick Review', 3);
   await continueTo(page, basicEnglishCourse.words.find((word) => word.id === day.wordIds[0])?.text ?? 'Words');
   await completeWords(page, day);
 
@@ -345,8 +400,10 @@ test.describe('Basic English MVP e2e', () => {
   test('completes the V1.1 Day 1 learning loop, creates review, unlocks Day 2, and persists progress', async ({ page }) => {
     await expect(page.getByRole('heading', { name: 'My Name' })).toBeVisible();
     await expect(page.getByText('Week 1 / Day 1')).toBeVisible();
-    await expect(page.getByText('Day 1 has no review')).toBeVisible();
+    await expect(page.getByText('No mastery review due today.')).toBeVisible();
 
+    await continueTo(page, 'Quick Review', 3);
+    await expect(page.getByText('Day 1 has no review')).toBeVisible();
     await continueTo(page, 'name');
     await expect(page.getByText('/ne\u026am/')).toBeVisible();
     await expect(page.getByText('the word for a person or thing')).toBeVisible();
@@ -498,12 +555,33 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByRole('heading', { name: 'Day 8 complete' })).toBeVisible();
 
     await page.getByRole('button', { name: 'Me', exact: true }).click();
-    await expect(page.getByText('I can describe my room.')).toBeVisible();
+    await expect(page.getByText('I can describe my room.', { exact: true })).toBeVisible();
     await expect(page.getByRole('listitem', { name: /Room Completed/ })).toBeVisible();
 
     await page.reload();
     await page.getByRole('button', { name: 'Me', exact: true }).click();
     await expect(page.getByRole('listitem', { name: /Room Completed/ })).toBeVisible();
+  });
+
+  test('updates scenario mastery after answering a mastery question', async ({ page }) => {
+    await seedCompletedDays(page, ['day-001']);
+    await seedMasteryProgress(page, {
+      contentId: 'name',
+      sourceDayId: 'day-001',
+      status: 'learning',
+      consecutiveCorrect: 1,
+    });
+    await page.reload();
+
+    await goToReview(page);
+    await expect(page.getByRole('heading', { name: 'Mastery review' })).toBeVisible();
+    await page.getByRole('button', { name: 'the word for a person or thing', exact: true }).click();
+    await expect(page.getByRole('status')).toHaveText('Correct. Well done.');
+
+    await page.getByRole('button', { name: 'Me', exact: true }).click();
+    await expect(page.getByText('Building')).toBeVisible();
+    await expect(page.getByText('Verified: 1 / 8')).toBeVisible();
+    await expect(page.getByText('Review 7 items')).toBeVisible();
   });
 
   test('exposes primary navigation on a mobile viewport', async ({ page }) => {
@@ -521,6 +599,6 @@ test.describe('Basic English MVP e2e', () => {
     await page.getByRole('button', { name: 'Me', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'My Progress' })).toBeVisible();
     await page.getByRole('button', { name: 'Today' }).click();
-    await expect(page.getByText('Day 1 has no review')).toBeVisible();
+    await expect(page.getByText('No mastery review due today.')).toBeVisible();
   });
 });

@@ -133,3 +133,13 @@ The daily limit is persisted by local calendar date and completed question IDs s
 - Unit tests cover selection, state transitions, scheduling, question construction, and capability calculations.
 - Component tests cover Today, Review, and My Progress behavior.
 - End-to-end tests cover completing a lesson, returning on a later day, answering mastery questions, and observing the updated capability map.
+
+## Implementation Notes
+
+- IndexedDB database version 6 adds the `masteryProgress` and `masteryReviewSessions` stores.
+- The Today sequence includes the `mastery-review` step before the existing previous-day review.
+- Final verification commands:
+  - `npx vitest run --exclude ".worktrees/**"`
+  - `npm run build`
+  - `npm run content:health`
+  - `npm run test:e2e`
