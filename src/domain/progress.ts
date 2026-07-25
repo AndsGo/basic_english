@@ -31,9 +31,15 @@ export function startDay(dayId: string, contentVersion: string, now: string): Da
 }
 
 export function normalizeDayProgress(progress: DayProgress): DayProgress {
+  const completedStepIds = progress.completedStepIds ?? [];
+
   return {
     ...progress,
-    completedStepIds: progress.completedStepIds ?? [],
+    completedStepIds,
+    currentStep:
+      progress.status === 'in_progress' && progress.currentStep === 'review' && !completedStepIds.includes('mastery-review')
+        ? 'mastery-review'
+        : progress.currentStep,
   };
 }
 

@@ -4,12 +4,41 @@ import {
   deriveCourseDayStates,
   getCurrentDayId,
   getNextUnlockedDayId,
+  normalizeDayProgress,
   startDay,
   stepOrder,
   updateStreak,
 } from './progress';
 
 describe('progress domain', () => {
+  it('normalizes legacy in-progress review progress to mastery review when it is incomplete', () => {
+    const progress = normalizeDayProgress({
+      id: 'day-001',
+      dayId: 'day-001',
+      status: 'in_progress',
+      currentStep: 'review',
+      completedStepIds: [],
+      updatedAt: '2026-05-25T12:00:00.000Z',
+      contentVersion: '1.0.0',
+    });
+
+    expect(progress.currentStep).toBe('mastery-review');
+  });
+
+  it('does not move in-progress users at words or later back to mastery review', () => {
+    const progress = normalizeDayProgress({
+      id: 'day-001',
+      dayId: 'day-001',
+      status: 'in_progress',
+      currentStep: 'words',
+      completedStepIds: ['mastery-review', 'review'],
+      updatedAt: '2026-05-25T12:00:00.000Z',
+      contentVersion: '1.0.0',
+    });
+
+    expect(progress.currentStep).toBe('words');
+  });
+
   it('starts with mastery review and proceeds to the existing previous-day review', () => {
     const progress = startDay('day-001', '1.0.0', '2026-05-25T12:00:00.000Z');
 
