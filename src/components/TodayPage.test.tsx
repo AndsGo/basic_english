@@ -153,6 +153,10 @@ function createTestRepository({
     async saveMasteryReviewSession(session) {
       masterySessionsByDate.set(session.localDate, session);
     },
+    async saveMasteryReviewResult(progress, session) {
+      masteryProgressById.set(progress.id, progress);
+      masterySessionsByDate.set(session.localDate, session);
+    },
     async getMasteryReviewSession(localDate) {
       return masterySessionsByDate.get(localDate) ?? null;
     },
@@ -1103,6 +1107,93 @@ describe('TodayPage', () => {
     await expect(repository.listMasteryProgress()).resolves.toEqual(seededRecords);
   });
 
+  it('backfills pending mastery records for completed course days only once', async () => {
+    const repository = createTestRepository({
+      dayProgress: [completedDayProgress(day.id, week1Course.contentVersion)],
+    });
+    const saveMasteryProgress = vi.spyOn(repository, 'saveMasteryProgress');
+    const { unmount } = renderWithSpeech(<TodayPage course={week1Course} repository={repository} />);
+
+    const expectedCount = new Set([
+      ...day.wordIds.map((contentId) => `word:${contentId}`),
+      ...day.patternIds.map((contentId) => `pattern:${contentId}`),
+    ]).size;
+    await waitFor(() => expect(saveMasteryProgress).toHaveBeenCalledTimes(expectedCount));
+    await expect(repository.listMasteryProgress()).resolves.toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ contentType: 'word', contentId: day.wordIds[0], sourceDayId: day.id, status: 'pending_validation' }),
+        expect.objectContaining({ contentType: 'pattern', contentId: day.patternIds[0], sourceDayId: day.id, status: 'pending_validation' }),
+      ]),
+    );
+
+    unmount();
+    renderWithSpeech(<TodayPage course={week1Course} repository={repository} />);
+    await screen.findByRole('heading', { level: 2, name: 'I Am' });
+
+    expect(saveMasteryProgress).toHaveBeenCalledTimes(expectedCount);
+  });
+
+  it('normalizes legacy review progress before hydrating the Today lesson', async () => {
+    const legacyProgress = {
+      ...inProgressDayProgress(day.id, week1Course.contentVersion, 'review'),
+      completedStepIds: [],
+    };
+    const repository = createTestRepository({ dayProgress: [legacyProgress] });
+
+    renderToday(repository);
+
+    expect(await screen.findByRole('heading', { name: 'Mastery review' })).toBeInTheDocument();
+    await userEvent.click(await getEnabledContinueButton());
+    expect(screen.getByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
+  });
+
+  it('shows a mastery load error without blocking lesson continuation', async () => {
+    const repository = {
+      ...createTestRepository(),
+      listMasteryProgress: vi.fn(async () => {
+        throw new Error('mastery storage unavailable');
+      }),
+    };
+
+    renderToday(repository);
+
+    expect(await screen.findByText('Mastery review could not be loaded.')).toBeInTheDocument();
+    await userEvent.click(await getEnabledContinueButton());
+    expect(screen.getByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
+  });
+
+  it('shows a mastery question error without blocking lesson continuation', async () => {
+    const invalidRecord = {
+      ...createPendingMasteryProgress({ contentType: 'word', contentId: 'missing-word', sourceDayId: day.id, now: '2026-05-26T00:00:00.000Z' }),
+      dueAt: '2000-01-01T00:00:00.000Z',
+    };
+    const repository = createTestRepository({ masteryProgress: [invalidRecord] });
+
+    renderToday(repository);
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Mastery review could not be loaded.');
+    await userEvent.click(await getEnabledContinueButton());
+    expect(screen.getByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
+  });
+
+  it('shows a mastery seeding error without blocking day completion', async () => {
+    const user = userEvent.setup();
+    const repository = {
+      ...createTestRepository(),
+      saveMasteryProgress: vi.fn(async () => {
+        throw new Error('mastery save unavailable');
+      }),
+    };
+
+    renderToday(repository);
+    await completeDayOneThroughOutput(user);
+    await satisfyOutputGate(user);
+    await user.click(await getEnabledContinueButton());
+
+    expect(await screen.findByRole('heading', { name: 'Day 1 complete' })).toBeInTheDocument();
+    expect(screen.getByRole('alert')).toHaveTextContent('Mastery review could not be updated. You can continue with today\'s lesson.');
+  });
+
   it('keeps mastery completion true when a stale initial refresh resolves after the final answer', async () => {
     const user = userEvent.setup();
     const initialRefreshSession = deferred<MasteryReviewSession | null>();
@@ -1567,7 +1658,7 @@ describe('MePage', () => {
       userOutputs: [outputDraft({ text: 'My name is Mei.' })],
     });
 
-    render(<MePage repository={repository} totalDayCount={14} />);
+    render(<MePage repository={repository} course={basicEnglishCourse} totalDayCount={14} />);
 
     expect(await screen.findByText('Completed days: 1')).toBeInTheDocument();
     expect(screen.getByText('/ 14')).toBeInTheDocument();
@@ -1584,6 +1675,7 @@ describe('MePage', () => {
     render(
       <MePage
         repository={repository}
+        course={basicEnglishCourse}
         readingEnabled
         onReadingEnabledChange={onReadingEnabledChange}
         speechRate="normal"
@@ -1613,7 +1705,7 @@ describe('MePage', () => {
       },
     };
 
-    render(<MePage repository={repository} />);
+    render(<MePage repository={repository} course={basicEnglishCourse} />);
 
     expect(screen.getByRole('heading', { name: 'My Progress' })).toBeInTheDocument();
     expect(await screen.findByText('Progress could not be loaded.')).toBeInTheDocument();

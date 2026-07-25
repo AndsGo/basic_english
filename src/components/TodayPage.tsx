@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { checkExerciseAnswer, type ExerciseAnswer, type ExerciseResult } from '../domain/exercises';
 import { createPendingMasteryProgress, selectDueMasteryProgress } from '../domain/mastery';
-import { completeStep, getCurrentDayId, type DayProgress, startDay, type StepId } from '../domain/progress';
+import { buildMasteryQuestion } from '../domain/masteryQuestions';
+import { completeStep, getCurrentDayId, normalizeDayProgress, type DayProgress, startDay, type StepId } from '../domain/progress';
 import {
   createExerciseReviewItem,
   createOutputReviewItem,
@@ -25,7 +26,7 @@ import {
   type TranslationDraft,
   type WordMark,
 } from '../domain/stepCompletion';
-import type { Course, Exercise, PictureDescribeTask, SceneGoal, SceneOutput, SceneRemixTask, TranslationExercise, Word } from '../domain/types';
+import type { Course, Day, Exercise, PictureDescribeTask, SceneGoal, SceneOutput, SceneRemixTask, TranslationExercise, Word } from '../domain/types';
 import { useSpeech } from '../speech/SpeechProvider';
 import type { PictureDescription, ProgressRepository, UserOutput } from '../storage/progressRepository';
 import { CompletionSummary } from './CompletionSummary';
@@ -114,6 +115,32 @@ function makeSceneRemixAttemptId(dayId: string, taskId: string, now: string): st
   return `scene-remix-attempt-${dayId}-${taskId}-${now}`;
 }
 
+async function seedMasteryProgressForDays(repository: ProgressRepository, days: Day[], now: string) {
+  const existingRecords = await repository.listMasteryProgress();
+  const existing = new Set(existingRecords.map((record) => `${record.contentType}:${record.contentId}`));
+
+  for (const courseDay of days) {
+    const records = [
+      ...Array.from(new Set(courseDay.wordIds)).map((contentId) => ({ contentType: 'word' as const, contentId })),
+      ...Array.from(new Set(courseDay.patternIds)).map((contentId) => ({ contentType: 'pattern' as const, contentId })),
+    ];
+
+    for (const record of records) {
+      const key = `${record.contentType}:${record.contentId}`;
+      if (existing.has(key)) continue;
+      await repository.saveMasteryProgress(
+        createPendingMasteryProgress({
+          contentType: record.contentType,
+          contentId: record.contentId,
+          sourceDayId: courseDay.id,
+          now,
+        }),
+      );
+      existing.add(key);
+    }
+  }
+}
+
 export function TodayPage({
   course,
   repository,
@@ -158,6 +185,7 @@ export function TodayPage({
   const [translationDrafts, setTranslationDrafts] = useState<Record<string, TranslationDraft | undefined>>({});
   const [isSceneRemixSubmitted, setIsSceneRemixSubmitted] = useState(false);
   const [isMasteryReviewComplete, setIsMasteryReviewComplete] = useState(false);
+  const [hasMasterySeedingError, setHasMasterySeedingError] = useState(false);
   const [activeReviewItems, setActiveReviewItems] = useState<ReviewItem[]>([]);
   const [isCourseHydrating, setIsCourseHydrating] = useState(true);
   const [isDayHydrating, setIsDayHydrating] = useState(true);
@@ -215,11 +243,12 @@ export function TodayPage({
         completedProgressIds,
         limit: Math.max(0, 8 - completedProgressIds.length),
       });
+      due.forEach((progress) => buildMasteryQuestion(progress, course));
       if (refreshVersion === masteryRefreshVersion.current) setIsMasteryReviewComplete(due.length === 0);
     } catch {
-      if (refreshVersion === masteryRefreshVersion.current) setIsMasteryReviewComplete(false);
+      if (refreshVersion === masteryRefreshVersion.current) setIsMasteryReviewComplete(true);
     }
-  }, [repository]);
+  }, [course, repository]);
 
   useEffect(() => {
     if (currentStep !== 'mastery-review') return;
@@ -250,6 +279,16 @@ export function TodayPage({
       const completedDayIds = allProgress
         .filter((progress) => progress.status === 'completed' || progress.currentStep === 'done')
         .map((progress) => progress.dayId);
+      try {
+        await seedMasteryProgressForDays(
+          repository,
+          allDays.filter((courseDay) => completedDayIds.includes(courseDay.id)),
+          new Date().toISOString(),
+        );
+      } catch {
+        if (isMounted) setHasMasterySeedingError(true);
+      }
+      if (!isMounted) return;
       setCompletedDayIds(completedDayIds);
       setActiveReviewItems(activeReviews);
       const nextDayId = getCurrentDayId(completedDayIds, orderedDayIds);
@@ -263,7 +302,7 @@ export function TodayPage({
     return () => {
       isMounted = false;
     };
-  }, [orderedDayIds, repository]);
+  }, [allDays, orderedDayIds, repository]);
 
   useEffect(() => {
     let isMounted = true;
@@ -277,7 +316,7 @@ export function TodayPage({
       ]);
 
       if (!isMounted) return;
-      setDayProgress(savedProgress ?? startDay(day.id, course.contentVersion, new Date().toISOString()));
+      setDayProgress(normalizeDayProgress(savedProgress ?? startDay(day.id, course.contentVersion, new Date().toISOString())));
       const nextOutput = savedOutput ?? createInitialOutput(day.id);
       setOutputDraft(withSceneOutput(nextOutput, sceneGoal));
       setPictureDescriptionDraft(savedPictureDescription ?? createInitialPictureDescription(day.id, pictureTask?.id));
@@ -479,29 +518,6 @@ export function TodayPage({
     return createdReviewCount;
   };
 
-  const seedMasteryProgress = async (now: string) => {
-    const existingRecords = await repository.listMasteryProgress();
-    const existing = new Set(existingRecords.map((record) => `${record.contentType}:${record.contentId}`));
-    const records = [
-      ...Array.from(new Set(day.wordIds)).map((contentId) => ({ contentType: 'word' as const, contentId })),
-      ...Array.from(new Set(day.patternIds)).map((contentId) => ({ contentType: 'pattern' as const, contentId })),
-    ];
-
-    for (const record of records) {
-      const key = `${record.contentType}:${record.contentId}`;
-      if (existing.has(key)) continue;
-      await repository.saveMasteryProgress(
-        createPendingMasteryProgress({
-          contentType: record.contentType,
-          contentId: record.contentId,
-          sourceDayId: day.id,
-          now,
-        }),
-      );
-      existing.add(key);
-    }
-  };
-
   const handleTranslationDraftChange = (exerciseId: string, draft: TranslationDraft) => {
     const exercise = translationExercises.find((item) => item.id === exerciseId);
     const previous = translationDrafts[exerciseId];
@@ -568,7 +584,11 @@ export function TodayPage({
       }
       if (updatedProgress.currentStep === 'done') {
         await enqueueOutputSave(outputDraft);
-        await seedMasteryProgress(now);
+        try {
+          await seedMasteryProgressForDays(repository, [day], now);
+        } catch {
+          setHasMasterySeedingError(true);
+        }
         if (outputDraft.selfRating === 'hard') {
           await saveReviewItem(createOutputReviewItem({ sourceDayId: day.id, text: outputDraft.text, now }));
         }
@@ -771,6 +791,8 @@ export function TodayPage({
           </>
         )}
       </div>
+
+      {hasMasterySeedingError && <p role="alert">Mastery review could not be updated. You can continue with today&apos;s lesson.</p>}
 
       {!isHydrating && !currentGate.isComplete && (
         <div className="requirement-list" role="status">

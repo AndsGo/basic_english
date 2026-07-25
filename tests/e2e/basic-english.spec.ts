@@ -1,5 +1,6 @@
 import { expect, test, type Page, type Route } from '@playwright/test';
 import { basicEnglishCourse } from '../../src/content/course';
+import { buildMasteryQuestion, type MasteryQuestion } from '../../src/domain/masteryQuestions';
 import type { Day, Exercise } from '../../src/domain/types';
 
 async function clearAppStorage(page: Page) {
@@ -122,56 +123,56 @@ async function seedCompletedDays(page: Page, dayIds: string[]) {
   );
 }
 
-async function seedMasteryProgress(
-  page: Page,
-  input: { contentId: string; sourceDayId: string; status: 'learning'; consecutiveCorrect: number },
-) {
-  await page.evaluate(async (progress) => {
-    const openRequest = indexedDB.open('basic-english-progress', 6);
-    const db = await new Promise<IDBDatabase>((resolve, reject) => {
-      openRequest.onerror = () => reject(openRequest.error);
-      openRequest.onupgradeneeded = () => {
-        const database = openRequest.result;
-        if (!database.objectStoreNames.contains('masteryProgress')) {
-          const store = database.createObjectStore('masteryProgress', { keyPath: 'id' });
-          store.createIndex('byContentId', 'contentId');
-          store.createIndex('byDueAt', 'dueAt');
-        }
-        if (!database.objectStoreNames.contains('masteryReviewSessions')) {
-          database.createObjectStore('masteryReviewSessions', { keyPath: 'localDate' });
-        }
-      };
-      openRequest.onsuccess = () => resolve(openRequest.result);
-    });
-    const now = new Date().toISOString();
-    const transaction = db.transaction('masteryProgress', 'readwrite');
-    transaction.objectStore('masteryProgress').put({
-      id: `mastery-word-${progress.contentId}`,
-      contentType: 'word',
-      contentId: progress.contentId,
-      sourceDayId: progress.sourceDayId,
-      status: progress.status,
-      consecutiveCorrect: progress.consecutiveCorrect,
-      dueAt: new Date(Date.now() - 60_000).toISOString(),
-      lastAnsweredAt: now,
-      updatedAt: now,
-    });
-
-    await new Promise<void>((resolve, reject) => {
-      transaction.oncomplete = () => {
-        db.close();
-        resolve();
-      };
-      transaction.onerror = () => reject(transaction.error);
-      transaction.onabort = () => reject(transaction.error);
-    });
-  }, input);
-}
-
 function getCourseDay(dayId: string): Day {
   const day = basicEnglishCourse.weeks.flatMap((week) => week.days).find((courseDay) => courseDay.id === dayId);
   if (!day) throw new Error(`Could not find course day "${dayId}".`);
   return day;
+}
+
+function firstMasteryQuestionForDay(day: Day): MasteryQuestion {
+  const firstRecord = [
+    ...day.wordIds.map((contentId) => ({ contentType: 'word' as const, contentId })),
+    ...day.patternIds.map((contentId) => ({ contentType: 'pattern' as const, contentId })),
+  ]
+    .sort((left, right) => `mastery-${left.contentType}-${left.contentId}`.localeCompare(`mastery-${right.contentType}-${right.contentId}`))[0];
+  if (!firstRecord) throw new Error(`Expected ${day.id} to include mastery content.`);
+
+  return buildMasteryQuestion(
+    {
+      id: `mastery-${firstRecord.contentType}-${firstRecord.contentId}`,
+      contentType: firstRecord.contentType,
+      contentId: firstRecord.contentId,
+      sourceDayId: day.id,
+      status: 'pending_validation',
+      consecutiveCorrect: 0,
+      dueAt: '2026-07-21T09:00:00.000Z',
+      updatedAt: '2026-07-20T09:00:00.000Z',
+    },
+    basicEnglishCourse,
+  );
+}
+
+async function answerMasteryQuestion(page: Page, question: MasteryQuestion) {
+  if (question.options && typeof question.correctAnswer === 'string') {
+    await page.getByRole('button', { name: question.correctAnswer, exact: true }).click();
+    return;
+  }
+
+  if (question.kind === 'pattern_fill_blank' && typeof question.correctAnswer === 'string') {
+    await page.getByLabel('Your answer').fill(question.correctAnswer);
+    await page.getByRole('button', { name: 'Submit answer' }).click();
+    return;
+  }
+
+  if (question.kind === 'pattern_sentence_order' && Array.isArray(question.correctAnswer)) {
+    for (const token of question.correctAnswer) {
+      await page.getByRole('button', { name: token, exact: true }).click();
+    }
+    await page.getByRole('button', { name: 'Submit answer' }).click();
+    return;
+  }
+
+  throw new Error(`Unsupported mastery question kind: ${question.kind}`);
 }
 
 async function completeWords(page: Page, day: Day) {
@@ -563,20 +564,25 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByRole('listitem', { name: /Room Completed/ })).toBeVisible();
   });
 
-  test('updates scenario mastery after answering a mastery question', async ({ page }) => {
-    await seedCompletedDays(page, ['day-001']);
-    await seedMasteryProgress(page, {
-      contentId: 'name',
-      sourceDayId: 'day-001',
-      status: 'learning',
-      consecutiveCorrect: 1,
-    });
+  test('updates scenario mastery after completing a lesson and returning for mastery review', async ({ page }) => {
+    const masteryQuestion = firstMasteryQuestionForDay(getCourseDay('day-001'));
+
+    await page.clock.setFixedTime('2026-07-20T09:00:00.000Z');
+    await completeCurrentDay(page, 'day-001');
+    await expect(page.getByRole('heading', { name: 'Day 1 complete' })).toBeVisible();
+
+    await page.clock.setFixedTime('2026-07-21T09:00:00.000Z');
     await page.reload();
 
-    await goToReview(page);
     await expect(page.getByRole('heading', { name: 'Mastery review' })).toBeVisible();
-    await page.getByRole('button', { name: 'the word for a person or thing', exact: true }).click();
-    await expect(page.getByRole('status')).toHaveText('Correct. Well done.');
+    await answerMasteryQuestion(page, masteryQuestion);
+    await expect(page.getByText('Correct. Well done.')).toBeVisible();
+
+    await page.clock.setFixedTime('2026-07-22T09:00:00.000Z');
+    await page.reload();
+    await expect(page.getByRole('heading', { name: 'Mastery review' })).toBeVisible();
+    await answerMasteryQuestion(page, masteryQuestion);
+    await expect(page.getByText('Correct. Well done.')).toBeVisible();
 
     await page.getByRole('button', { name: 'Me', exact: true }).click();
     await expect(page.getByText('Building')).toBeVisible();
