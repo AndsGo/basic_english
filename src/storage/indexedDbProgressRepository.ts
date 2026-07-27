@@ -7,6 +7,7 @@ import type {
   ExerciseAttempt,
   PictureDescription,
   ProgressRepository,
+  ReinforcementPracticeSession,
   SceneRemixAttempt,
   StepCompletion,
   StepProgress,
@@ -15,7 +16,7 @@ import type {
   WordProgress,
 } from './progressRepository';
 
-const DB_VERSION = 6;
+const DB_VERSION = 7;
 
 interface ProgressDb extends DBSchema {
   dayProgress: {
@@ -71,6 +72,11 @@ interface ProgressDb extends DBSchema {
     key: string;
     value: MasteryReviewSession;
   };
+  reinforcementPracticeSessions: {
+    key: string;
+    value: ReinforcementPracticeSession;
+    indexes: { byLocalDate: string };
+  };
 }
 
 async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
@@ -125,6 +131,10 @@ async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
       }
       if (!db.objectStoreNames.contains('masteryReviewSessions')) {
         db.createObjectStore('masteryReviewSessions', { keyPath: 'localDate' });
+      }
+      if (!db.objectStoreNames.contains('reinforcementPracticeSessions')) {
+        const store = db.createObjectStore('reinforcementPracticeSessions', { keyPath: 'id' });
+        store.createIndex('byLocalDate', 'localDate');
       }
     },
   });
@@ -323,6 +333,24 @@ export function createIndexedDbProgressRepository(dbName = 'basic-english-progre
     async getMasteryReviewSession(localDate) {
       const db = await dbPromise;
       return (await db.get('masteryReviewSessions', localDate)) ?? null;
+    },
+
+    async saveReinforcementPracticeSession(session) {
+      const db = await dbPromise;
+      await db.put('reinforcementPracticeSessions', session);
+    },
+
+    async getReinforcementPracticeSession(localDate, insightId) {
+      const db = await dbPromise;
+      const sessions = await db.getAllFromIndex('reinforcementPracticeSessions', 'byLocalDate', localDate);
+      return sessions.find((session) => session.insightId === insightId) ?? null;
+    },
+
+    async listReinforcementPracticeSessions() {
+      const db = await dbPromise;
+      return (await db.getAll('reinforcementPracticeSessions')).sort(
+        (left, right) => left.localDate.localeCompare(right.localDate) || left.id.localeCompare(right.id),
+      );
     },
   };
 }

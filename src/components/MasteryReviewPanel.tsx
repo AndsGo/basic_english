@@ -94,10 +94,17 @@ export function MasteryReviewPanel({
 
     try {
       const existingSession = await repository.getMasteryReviewSession(localDate);
+      const incorrectProgressIds = Array.from(
+        new Set([
+          ...(existingSession?.incorrectProgressIds ?? []),
+          ...(correct ? [] : [scheduled.progress.id]),
+        ]),
+      );
       const updatedSession = {
         id: `mastery-session-${localDate}`,
         localDate,
         completedProgressIds: Array.from(new Set([...(existingSession?.completedProgressIds ?? []), scheduled.progress.id])),
+        ...(existingSession?.incorrectProgressIds || !correct ? { incorrectProgressIds } : {}),
         updatedAt: current.toISOString(),
       };
       if (!repository.saveMasteryReviewResult) throw new Error('Atomic mastery persistence is unavailable.');

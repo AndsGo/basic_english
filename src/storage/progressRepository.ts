@@ -89,6 +89,22 @@ export interface StudyActivity {
   completedDayIds: string[];
 }
 
+export interface ReinforcementPracticeAnswer {
+  progressId: string;
+  correct: boolean;
+  answeredAt: string;
+}
+
+export interface ReinforcementPracticeSession {
+  id: string;
+  localDate: string;
+  insightId: string;
+  contentKeys: string[];
+  answers: ReinforcementPracticeAnswer[];
+  status: 'in_progress' | 'completed' | 'skipped';
+  updatedAt: string;
+}
+
 export interface ProgressRepository {
   getDayProgress(dayId: string): Promise<DayProgress | null>;
   listDayProgress(): Promise<DayProgress[]>;
@@ -119,4 +135,7 @@ export interface ProgressRepository {
   saveMasteryReviewSession(session: MasteryReviewSession): Promise<void>;
   saveMasteryReviewResult?(progress: MasteryProgress, session: MasteryReviewSession): Promise<void>;
   getMasteryReviewSession(localDate: string): Promise<MasteryReviewSession | null>;
+  saveReinforcementPracticeSession?(session: ReinforcementPracticeSession): Promise<void>;
+  getReinforcementPracticeSession?(localDate: string, insightId: string): Promise<ReinforcementPracticeSession | null>;
+  listReinforcementPracticeSessions?(): Promise<ReinforcementPracticeSession[]>;
 }

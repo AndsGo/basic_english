@@ -91,6 +91,50 @@ describe('MasteryReviewPanel', () => {
     expect(screen.getByText('Completed 1 of 8')).toBeInTheDocument();
   });
 
+  it('adds an incorrect progress ID once while retaining earlier incorrect IDs', async () => {
+    const user = userEvent.setup();
+    const session: MasteryReviewSession = {
+      id: 'mastery-session-2026-07-22',
+      localDate: '2026-07-22',
+      completedProgressIds: ['mastery-word-book'],
+      incorrectProgressIds: ['mastery-word-book', 'mastery-word-book'],
+      updatedAt: now().toISOString(),
+    };
+    const repo = repository([masteryRecord('name')], session);
+
+    render(<MasteryReviewPanel course={basicEnglishCourse} repository={repo} now={now} />);
+
+    await user.click(await screen.findByRole('button', { name: /to get or keep something/i }));
+
+    await waitFor(() => {
+      expect(repo.saveMasteryReviewResult).toHaveBeenCalledWith(expect.anything(), expect.objectContaining({
+        incorrectProgressIds: ['mastery-word-book', 'mastery-word-name'],
+      }));
+    });
+  });
+
+  it('does not add a correct answer to incorrect progress IDs', async () => {
+    const user = userEvent.setup();
+    const session: MasteryReviewSession = {
+      id: 'mastery-session-2026-07-22',
+      localDate: '2026-07-22',
+      completedProgressIds: ['mastery-word-book'],
+      incorrectProgressIds: ['mastery-word-book'],
+      updatedAt: now().toISOString(),
+    };
+    const repo = repository([masteryRecord('name')], session);
+
+    render(<MasteryReviewPanel course={basicEnglishCourse} repository={repo} now={now} />);
+
+    await user.click(await screen.findByRole('button', { name: /the word for a person or thing/i }));
+
+    await waitFor(() => {
+      expect(repo.saveMasteryReviewResult).toHaveBeenCalledWith(expect.anything(), expect.objectContaining({
+        incorrectProgressIds: ['mastery-word-book'],
+      }));
+    });
+  });
+
   it('displays the persisted completion count for the local day', async () => {
     const session: MasteryReviewSession = {
       id: 'mastery-session-2026-07-22',

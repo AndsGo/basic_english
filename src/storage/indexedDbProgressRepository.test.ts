@@ -2,9 +2,22 @@ import { openDB, type DBSchema } from 'idb';
 import { describe, expect, it } from 'vitest';
 import type { DayProgress } from '../domain/progress';
 import { createSceneRemixReviewItem, createWordReviewItem, resolveReviewItem } from '../domain/review';
-import { createPendingMasteryProgress } from '../domain/mastery';
+import { createPendingMasteryProgress, type MasteryProgress, type MasteryReviewSession } from '../domain/mastery';
 import { createIndexedDbProgressRepository } from './indexedDbProgressRepository';
-import type { ExerciseAttempt, PictureDescription, SceneRemixAttempt, UserOutput, WordProgress } from './progressRepository';
+import type {
+  ExerciseAttempt,
+  PictureDescription,
+  ProgressRepository,
+  ReinforcementPracticeSession,
+  SceneRemixAttempt,
+  UserOutput,
+  WordProgress,
+} from './progressRepository';
+
+type ReinforcementPracticeRepository = ProgressRepository & Required<Pick<
+  ProgressRepository,
+  'saveReinforcementPracticeSession' | 'getReinforcementPracticeSession' | 'listReinforcementPracticeSessions'
+>>;
 
 let dbCounter = 0;
 
@@ -75,6 +88,19 @@ function pictureDescription(overrides: Partial<PictureDescription> = {}): Pictur
   };
 }
 
+function reinforcementPracticeSession(overrides: Partial<ReinforcementPracticeSession> = {}): ReinforcementPracticeSession {
+  return {
+    id: 'reinforcement-2026-07-27-daily-learning-insight-2026-07-27',
+    localDate: '2026-07-27',
+    insightId: 'daily-learning-insight-2026-07-27',
+    contentKeys: ['word:name', 'pattern:i-am'],
+    answers: [],
+    status: 'in_progress',
+    updatedAt: '2026-07-27T08:00:00.000Z',
+    ...overrides,
+  };
+}
+
 interface OldV3ProgressDb extends DBSchema {
   dayProgress: {
     key: string;
@@ -118,6 +144,21 @@ interface OldV3ProgressDb extends DBSchema {
   };
 }
 
+interface OldV6ProgressDb extends DBSchema {
+  dayProgress: { key: string; value: DayProgress };
+  stepProgress: { key: string; value: unknown };
+  stepCompletions: { key: string; value: unknown; indexes: { byDayId: string } };
+  exerciseAttempts: { key: string; value: ExerciseAttempt; indexes: { byDayId: string } };
+  sceneRemixAttempts: { key: string; value: SceneRemixAttempt; indexes: { byDayId: string } };
+  userOutputs: { key: string; value: UserOutput };
+  pictureDescriptions: { key: string; value: PictureDescription };
+  wordProgress: { key: string; value: WordProgress };
+  reviewItems: { key: string; value: unknown; indexes: { byStatus: string; bySourceDayId: string } };
+  studyActivities: { key: string; value: unknown };
+  masteryProgress: { key: string; value: MasteryProgress; indexes: { byContentId: string; byDueAt: string } };
+  masteryReviewSessions: { key: string; value: MasteryReviewSession };
+}
+
 describe('indexedDbProgressRepository', () => {
   it('saves and loads day progress', async () => {
     const repo = createIndexedDbProgressRepository(nextDbName());
@@ -156,7 +197,7 @@ describe('indexedDbProgressRepository', () => {
       text: 'Second draft.',
     });
 
-    const db = await openDB(dbName, 6);
+    const db = await openDB(dbName, 7);
     await expect(db.getAll('userOutputs')).resolves.toEqual([
       userOutput({ id: 'second-output-id', text: 'Second draft.' }),
     ]);
@@ -184,7 +225,7 @@ describe('indexedDbProgressRepository', () => {
       dayId: 'day-001',
     });
 
-    const db = await openDB(dbName, 6);
+    const db = await openDB(dbName, 7);
     await expect(db.getAll('userOutputs')).resolves.toEqual([userOutput({ id: 'upgraded-output-id' })]);
     db.close();
   });
@@ -215,7 +256,7 @@ describe('indexedDbProgressRepository', () => {
 
     await repo.saveExerciseAttempt(attempt);
 
-    const db = await openDB(dbName, 6);
+    const db = await openDB(dbName, 7);
     await expect(db.get('exerciseAttempts', attempt.id)).resolves.toEqual(attempt);
     db.close();
   });
@@ -426,7 +467,7 @@ describe('indexedDbProgressRepository V1.1', () => {
     const repo = createIndexedDbProgressRepository(dbName);
     await repo.listUserOutputs();
 
-    const db = await openDB(dbName, 6);
+    const db = await openDB(dbName, 7);
     await db.put('userOutputs', {
       id: 'legacy-output-day-001',
       dayId: 'day-001',
@@ -660,5 +701,70 @@ describe('indexedDbProgressRepository mastery persistence', () => {
 
     await expect(repo.getUserOutput('day-001')).resolves.toEqual(oldOutput);
     await expect(repo.getMasteryProgress('word', 'name')).resolves.toEqual(record);
+  });
+});
+
+describe('indexedDbProgressRepository reinforcement practice persistence', () => {
+  it('persists, gets, and lists reinforcement practice sessions', async () => {
+    const repository = createIndexedDbProgressRepository(nextDbName()) as ReinforcementPracticeRepository;
+    const first = reinforcementPracticeSession();
+    const second = reinforcementPracticeSession({
+      id: 'reinforcement-2026-07-28-daily-learning-insight-2026-07-28',
+      localDate: '2026-07-28',
+      insightId: 'daily-learning-insight-2026-07-28',
+    });
+
+    await repository.saveReinforcementPracticeSession(second);
+    await repository.saveReinforcementPracticeSession(first);
+
+    await expect(repository.getReinforcementPracticeSession(first.localDate, first.insightId)).resolves.toEqual(first);
+    await expect(repository.listReinforcementPracticeSessions()).resolves.toEqual([first, second]);
+  });
+
+  it('upgrades v6 mastery data while adding reinforcement practice sessions', async () => {
+    const dbName = nextDbName();
+    const progress = createPendingMasteryProgress({
+      contentType: 'word',
+      contentId: 'name',
+      sourceDayId: 'day-001',
+      now: '2026-07-27T08:00:00.000Z',
+    });
+    const session: MasteryReviewSession = {
+      id: 'mastery-session-2026-07-27',
+      localDate: '2026-07-27',
+      completedProgressIds: [progress.id],
+      updatedAt: '2026-07-27T08:05:00.000Z',
+    };
+    const legacyDb = await openDB<OldV6ProgressDb>(dbName, 6, {
+      upgrade(db) {
+        db.createObjectStore('dayProgress', { keyPath: 'id' });
+        db.createObjectStore('stepProgress', { keyPath: 'id' });
+        db.createObjectStore('stepCompletions', { keyPath: 'id' }).createIndex('byDayId', 'dayId');
+        db.createObjectStore('exerciseAttempts', { keyPath: 'id' }).createIndex('byDayId', 'dayId');
+        db.createObjectStore('sceneRemixAttempts', { keyPath: 'id' }).createIndex('byDayId', 'dayId');
+        db.createObjectStore('userOutputs', { keyPath: 'dayId' });
+        db.createObjectStore('pictureDescriptions', { keyPath: 'dayId' });
+        db.createObjectStore('wordProgress', { keyPath: 'id' });
+        const reviewItemsStore = db.createObjectStore('reviewItems', { keyPath: 'id' });
+        reviewItemsStore.createIndex('byStatus', 'status');
+        reviewItemsStore.createIndex('bySourceDayId', 'sourceDayId');
+        db.createObjectStore('studyActivities', { keyPath: 'id' });
+        const masteryProgressStore = db.createObjectStore('masteryProgress', { keyPath: 'id' });
+        masteryProgressStore.createIndex('byContentId', 'contentId');
+        masteryProgressStore.createIndex('byDueAt', 'dueAt');
+        db.createObjectStore('masteryReviewSessions', { keyPath: 'localDate' });
+      },
+    });
+    await legacyDb.put('masteryProgress', progress);
+    await legacyDb.put('masteryReviewSessions', session);
+    legacyDb.close();
+
+    const repository = createIndexedDbProgressRepository(dbName) as ReinforcementPracticeRepository;
+    const reinforcementSession = reinforcementPracticeSession();
+    await repository.saveReinforcementPracticeSession(reinforcementSession);
+
+    await expect(repository.getMasteryProgress('word', 'name')).resolves.toEqual(progress);
+    await expect(repository.getMasteryReviewSession('2026-07-27')).resolves.toEqual(session);
+    await expect(repository.getReinforcementPracticeSession(reinforcementSession.localDate, reinforcementSession.insightId)).resolves.toEqual(reinforcementSession);
   });
 });
