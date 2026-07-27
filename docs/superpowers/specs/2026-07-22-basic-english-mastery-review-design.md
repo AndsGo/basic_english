@@ -138,6 +138,10 @@ The daily limit is persisted by local calendar date and completed question IDs s
 
 - IndexedDB database version 6 adds the `masteryProgress` and `masteryReviewSessions` stores.
 - The Today sequence includes the `mastery-review` step before the existing previous-day review.
+- A completed lesson seeds unique word and pattern records idempotently. Existing completed lessons are backfilled gradually, so returning learners begin later verification without being marked as mastered.
+- Mastery transitions use local calendar days for next-day scheduling. The persisted session records completed item IDs, preserving the eight-question limit and preventing same-day repetition after refresh.
+- Saving an answer updates its mastery record and local-date session in one IndexedDB transaction. Hydrated legacy day progress is normalized before the Today flow uses it.
+- Mastery loading, question creation, and backfill errors are visible but non-blocking: the learner can continue to the previous-day review and new lesson.
 - Final verification commands:
   - `npx vitest run --exclude ".worktrees/**"`
   - `npm run build`
