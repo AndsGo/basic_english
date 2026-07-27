@@ -17,6 +17,7 @@ export interface MasteryReviewSession {
   id: string;
   localDate: string;
   completedProgressIds: string[];
+  incorrectProgressIds?: string[];
   updatedAt: string;
 }
 

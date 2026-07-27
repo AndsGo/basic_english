@@ -97,6 +97,7 @@ describe('daily learning insights', () => {
       id: `mastery-session-${localDate}`,
       localDate,
       completedProgressIds: [missedName.id],
+      incorrectProgressIds: [missedName.id],
       updatedAt: now,
     };
 
@@ -121,6 +122,62 @@ describe('daily learning insights', () => {
     expect(result.items[2]).toMatchObject({
       source: 'scenario_gap',
       reason: 'This scenario is still building.',
+    });
+  });
+
+  it('keeps a completed learning record as mastery learning when it was not recorded as incorrect', () => {
+    const learningName = masteryProgress({
+      contentType: 'word', contentId: 'name', status: 'learning', lastAnsweredAt: now,
+    });
+    const session: MasteryReviewSession = {
+      id: `mastery-session-${localDate}`,
+      localDate,
+      completedProgressIds: [learningName.id],
+      incorrectProgressIds: [],
+      updatedAt: now,
+    };
+
+    const result = buildDailyLearningInsight({
+      course,
+      capabilities: [],
+      completedDayIds: [],
+      masteryProgress: [learningName],
+      activeReviewItems: [],
+      masterySessions: [session],
+      localDate,
+    });
+
+    expect(result.items).toEqual([expect.objectContaining({
+      contentKey: 'word:name',
+      source: 'mastery_learning',
+      reason: 'Keep practicing this word.',
+    })]);
+  });
+
+  it('does not infer misses from a legacy completed session without incorrect progress IDs', () => {
+    const learningName = masteryProgress({
+      contentType: 'word', contentId: 'name', status: 'learning', lastAnsweredAt: now,
+    });
+    const session: MasteryReviewSession = {
+      id: `mastery-session-${localDate}`,
+      localDate,
+      completedProgressIds: [learningName.id],
+      updatedAt: now,
+    };
+
+    const result = buildDailyLearningInsight({
+      course,
+      capabilities: [],
+      completedDayIds: [],
+      masteryProgress: [learningName],
+      activeReviewItems: [],
+      masterySessions: [session],
+      localDate,
+    });
+
+    expect(result.items[0]).toMatchObject({
+      source: 'mastery_learning',
+      reason: 'Keep practicing this word.',
     });
   });
 

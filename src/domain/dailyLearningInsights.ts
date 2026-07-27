@@ -133,8 +133,13 @@ export function buildDailyLearningInsight(input: DailyLearningInsightInput): Dai
   const latestSession = latestApplicableSession(input.masterySessions, input.localDate);
 
   if (latestSession) {
+    const incorrectProgressIds = new Set(latestSession.incorrectProgressIds ?? []);
     addCandidates(selected, input.masteryProgress
-      .filter((record) => (record.status === 'learning' || record.status === 'needs_reinforcement') && wasAnsweredInSession(record, latestSession))
+      .filter((record) => (
+        (record.status === 'learning' || record.status === 'needs_reinforcement')
+        && incorrectProgressIds.has(record.id)
+        && wasAnsweredInSession(record, latestSession)
+      ))
       .map((record) => createCandidate({ ...record, source: 'mastery_miss', capabilities: input.capabilities })));
   }
 
