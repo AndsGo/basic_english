@@ -148,6 +148,7 @@ export default function App() {
             sceneGoalsByDayId={sceneGoalsByDayId}
             sceneRemixTasksByDayId={sceneRemixTasksByDayId}
             pictureDescribeTasksByDayId={pictureDescribeTasksByDayId}
+            scenarioCapabilities={scenarioCapabilities}
             showChineseHelp={showChineseHelp}
             onProgressChange={() => void refreshProgressSummary()}
           />

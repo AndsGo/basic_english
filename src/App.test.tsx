@@ -11,10 +11,27 @@ import { createWordReviewItem } from './domain/review';
 import * as indexedDbProgressRepository from './storage/indexedDbProgressRepository';
 import type { ProgressRepository } from './storage/progressRepository';
 
+const { todayPageProps } = vi.hoisted(() => ({
+  todayPageProps: { current: undefined as unknown },
+}));
+
+vi.mock('./components/TodayPage', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./components/TodayPage')>();
+
+  return {
+    ...actual,
+    TodayPage: (props: Parameters<typeof actual.TodayPage>[0]) => {
+      todayPageProps.current = props;
+      return <actual.TodayPage {...props} />;
+    },
+  };
+});
+
 afterEach(() => {
   cleanup();
   window.localStorage.clear();
   vi.restoreAllMocks();
+  todayPageProps.current = undefined;
 });
 
 function createDeferred<T>() {
@@ -125,6 +142,12 @@ describe('App shell', () => {
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Basic English');
     expect(screen.queryByText(/MVP/)).not.toBeInTheDocument();
+  });
+
+  it('passes production scenario capabilities to TodayPage', () => {
+    render(<App />);
+
+    expect(todayPageProps.current).toEqual(expect.objectContaining({ scenarioCapabilities }));
   });
 
   it('renders a combined Review badge for one manual and one mastery item due today', async () => {
