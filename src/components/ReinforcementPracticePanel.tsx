@@ -151,18 +151,23 @@ export function ReinforcementPracticePanel({
       correct,
       answeredAt: current.toISOString(),
     }];
-    const completed = nextAnswers.length === questions.length;
     const saved = await saveSession({
       ...session,
       answers: nextAnswers,
-      status: completed ? 'completed' : 'in_progress',
+      status: 'in_progress',
       updatedAt: current.toISOString(),
     });
 
     if (!saved) return;
     setAnswered(true);
     setFeedback(correct ? 'Correct.' : `Not quite. Correct answer: ${currentQuestion.question.correctAnswerText}`);
-    if (completed) onComplete?.();
+  };
+
+  const finishPractice = async () => {
+    if (!session || saving || session.status !== 'in_progress' || session.answers.length !== questions.length) return;
+    const current = now();
+    const saved = await saveSession({ ...session, status: 'completed', updatedAt: current.toISOString() });
+    if (saved) onComplete?.();
   };
 
   const skipPractice = async () => {
@@ -196,6 +201,25 @@ export function ReinforcementPracticePanel({
 
   if (session?.status === 'skipped') {
     return <section className="reinforcement-practice"><p>Practice skipped.</p></section>;
+  }
+
+  const readyToFinish = session?.status === 'in_progress' && questions.length > 0 && session.answers.length === questions.length;
+
+  if (readyToFinish) {
+    return (
+      <section className="reinforcement-practice">
+        <div className="reinforcement-practice-header">
+          <h2>Reinforcement practice</h2>
+          <p className="reinforcement-practice-progress">{questions.length} of {questions.length}</p>
+        </div>
+        {saveError && <p role="alert">Reinforcement practice could not be saved.</p>}
+        {feedback && <p className="reinforcement-practice-feedback" role="status">{feedback}</p>}
+        <div className="reinforcement-practice-actions">
+          <button type="button" className="primary-button" disabled={saving} onClick={() => void finishPractice()}>Finish practice</button>
+          <button type="button" className="secondary-button" disabled={saving} onClick={() => void skipPractice()}>Skip practice</button>
+        </div>
+      </section>
+    );
   }
 
   if (!currentQuestion) {

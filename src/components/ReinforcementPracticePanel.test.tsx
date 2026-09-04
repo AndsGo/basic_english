@@ -35,7 +35,7 @@ function practiceRepository(session: ReinforcementPracticeSession | null = null)
 }
 
 describe('ReinforcementPracticePanel', () => {
-  it('completes two questions without changing mastery or review records', async () => {
+  it('waits for final feedback acknowledgement before completing two questions without changing mastery or review records', async () => {
     const user = userEvent.setup();
     const repository = practiceRepository();
     const onComplete = vi.fn();
@@ -55,6 +55,16 @@ describe('ReinforcementPracticePanel', () => {
     expect(await screen.findByRole('status')).toHaveTextContent('Correct');
     await user.click(screen.getByRole('button', { name: 'Next question' }));
     await user.click(screen.getByRole('button', { name: /pages with words or pictures/i }));
+
+    await waitFor(() => {
+      expect(screen.getByRole('status')).toHaveTextContent('Correct');
+      expect(screen.getByRole('button', { name: 'Finish practice' })).toBeEnabled();
+      expect(onComplete).not.toHaveBeenCalled();
+      expect(screen.queryByText('Practice complete')).not.toBeInTheDocument();
+    });
+    expect(repository.saveReinforcementPracticeSession).toHaveBeenLastCalledWith(expect.objectContaining({ status: 'in_progress' }));
+
+    await user.click(screen.getByRole('button', { name: 'Finish practice' }));
 
     await waitFor(() => {
       expect(screen.getByText('Practice complete')).toBeInTheDocument();
@@ -92,6 +102,84 @@ describe('ReinforcementPracticePanel', () => {
       expect(repository.saveReinforcementPracticeSession).toHaveBeenLastCalledWith(expect.objectContaining({ status: 'skipped' }));
       expect(onSkip).toHaveBeenCalledTimes(1);
     });
+  });
+
+  it('allows a rejected answer save to be retried', async () => {
+    const user = userEvent.setup();
+    const repository = practiceRepository();
+
+    render(<ReinforcementPracticePanel
+      insight={insight([{ contentType: 'word', contentId: 'name', contentKey: 'word:name', source: 'mastery_learning', reason: 'Practice this word.' }])}
+      course={basicEnglishCourse}
+      repository={repository}
+      now={now}
+    />);
+
+    const answer = await screen.findByRole('button', { name: /the word for a person or thing/i });
+    vi.mocked(repository.saveReinforcementPracticeSession).mockRejectedValueOnce(new Error('storage unavailable'));
+
+    await user.click(answer);
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Reinforcement practice could not be saved.');
+    expect(answer).toBeEnabled();
+
+    await user.click(answer);
+
+    expect(await screen.findByRole('button', { name: 'Finish practice' })).toBeEnabled();
+  });
+
+  it('allows a rejected final completion save to be retried', async () => {
+    const user = userEvent.setup();
+    const repository = practiceRepository();
+    const onComplete = vi.fn();
+
+    render(<ReinforcementPracticePanel
+      insight={insight([{ contentType: 'word', contentId: 'name', contentKey: 'word:name', source: 'mastery_learning', reason: 'Practice this word.' }])}
+      course={basicEnglishCourse}
+      repository={repository}
+      now={now}
+      onComplete={onComplete}
+    />);
+
+    await user.click(await screen.findByRole('button', { name: /the word for a person or thing/i }));
+    const finish = await screen.findByRole('button', { name: 'Finish practice' });
+    vi.mocked(repository.saveReinforcementPracticeSession).mockRejectedValueOnce(new Error('storage unavailable'));
+
+    await user.click(finish);
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Reinforcement practice could not be saved.');
+    expect(finish).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'Skip practice' })).toBeEnabled();
+    expect(onComplete).not.toHaveBeenCalled();
+
+    await user.click(finish);
+
+    expect(await screen.findByText('Practice complete')).toBeInTheDocument();
+    expect(onComplete).toHaveBeenCalledTimes(1);
+  });
+
+  it('allows a rejected skip save to be retried', async () => {
+    const user = userEvent.setup();
+    const repository = practiceRepository();
+
+    render(<ReinforcementPracticePanel
+      insight={insight([{ contentType: 'word', contentId: 'name', contentKey: 'word:name', source: 'mastery_learning', reason: 'Practice this word.' }])}
+      course={basicEnglishCourse}
+      repository={repository}
+      now={now}
+    />);
+
+    const skip = await screen.findByRole('button', { name: 'Skip practice' });
+    vi.mocked(repository.saveReinforcementPracticeSession).mockRejectedValueOnce(new Error('storage unavailable'));
+
+    await user.click(skip);
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Reinforcement practice could not be saved.');
+    expect(skip).toBeEnabled();
+
+    await user.click(skip);
+
+    expect(await screen.findByText('Practice skipped.')).toBeInTheDocument();
   });
 
   it('skips an invalid first item and presents a later valid question', async () => {
