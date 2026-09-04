@@ -1038,6 +1038,81 @@ textarea {
   justify-self: start;
 }
 
+.reinforcement-practice,
+.reinforcement-practice-question,
+.reinforcement-practice-options,
+.reinforcement-practice-answer,
+.reinforcement-practice-order {
+  display: grid;
+  gap: 12px;
+}
+
+.reinforcement-practice {
+  max-width: 560px;
+}
+
+.reinforcement-practice-header,
+.reinforcement-practice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.reinforcement-practice-header h2,
+.reinforcement-practice-question p,
+.reinforcement-practice-order p,
+.reinforcement-practice-complete,
+.reinforcement-practice-feedback {
+  margin: 0;
+}
+
+.reinforcement-practice-progress {
+  display: inline-grid;
+  width: 4.5rem;
+  height: 1.5rem;
+  place-items: center;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.reinforcement-practice-question {
+  padding: 12px;
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+}
+
+.reinforcement-practice-options {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.reinforcement-practice-options .secondary-button {
+  min-height: 44px;
+  text-align: left;
+}
+
+.reinforcement-practice-answer input {
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  background: var(--color-surface-raised);
+}
+
+.reinforcement-practice-feedback,
+.reinforcement-practice-complete {
+  color: var(--color-accent-text);
+  font-weight: 800;
+}
+
+.reinforcement-practice-actions {
+  justify-content: flex-start;
+}
+
 .capability-status-list {
   display: grid;
   gap: 0.625rem;
