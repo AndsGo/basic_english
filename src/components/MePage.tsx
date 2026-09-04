@@ -130,6 +130,9 @@ export function MePage({
         setReviewItems(activeReviewItems);
         setActivities(savedActivities);
         setMasteryProgress(savedMasteryProgress);
+        setLoadError(false);
+        setHasLoadedProgress(true);
+
         try {
           const localDate = toLocalDateString(new Date());
           const [masterySession, savedReinforcementSessions] = await Promise.all([
@@ -153,8 +156,6 @@ export function MePage({
           setDailyLearningInsight(undefined);
           setReinforcementSessions([]);
         }
-        setLoadError(false);
-        setHasLoadedProgress(true);
       } catch {
         if (!isMounted) return;
         setDays([]);

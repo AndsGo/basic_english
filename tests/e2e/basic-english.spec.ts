@@ -1,4 +1,4 @@
-import { expect, test, type Page, type Route } from '@playwright/test';
+import { expect, test, type Locator, type Page, type Route } from '@playwright/test';
 import { basicEnglishCourse } from '../../src/content/course';
 import { buildMasteryQuestion, type MasteryQuestion } from '../../src/domain/masteryQuestions';
 import type { Day, Exercise } from '../../src/domain/types';
@@ -36,7 +36,7 @@ async function clearAppStorage(page: Page) {
 async function seedCompletedDays(page: Page, dayIds: string[]) {
   await page.evaluate(
     async ({ contentVersion, dayIdsToSeed }) => {
-      const openRequest = indexedDB.open('basic-english-progress', 6);
+      const openRequest = indexedDB.open('basic-english-progress', 7);
 
       const db = await new Promise<IDBDatabase>((resolve, reject) => {
         openRequest.onerror = () => reject(openRequest.error);
@@ -85,6 +85,10 @@ async function seedCompletedDays(page: Page, dayIds: string[]) {
           if (!db.objectStoreNames.contains('masteryReviewSessions')) {
             db.createObjectStore('masteryReviewSessions', { keyPath: 'localDate' });
           }
+          if (!db.objectStoreNames.contains('reinforcementPracticeSessions')) {
+            const store = db.createObjectStore('reinforcementPracticeSessions', { keyPath: 'id' });
+            store.createIndex('byLocalDate', 'localDate');
+          }
         };
         openRequest.onsuccess = () => resolve(openRequest.result);
       });
@@ -121,6 +125,108 @@ async function seedCompletedDays(page: Page, dayIds: string[]) {
     },
     { contentVersion: basicEnglishCourse.contentVersion, dayIdsToSeed: dayIds },
   );
+}
+
+async function seedDailyLearningInsightData(page: Page, localDate: string) {
+  await page.evaluate(async ({ date }) => {
+    const openRequest = indexedDB.open('basic-english-progress', 7);
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      openRequest.onsuccess = () => resolve(openRequest.result);
+      openRequest.onerror = () => reject(openRequest.error);
+    });
+
+    const answeredAt = `${date}T08:00:00.000Z`;
+    const progressIds = ['mastery-word-name', 'mastery-word-my'];
+    const transaction = db.transaction(['masteryProgress', 'masteryReviewSessions'], 'readwrite');
+    const masteryProgress = transaction.objectStore('masteryProgress');
+    masteryProgress.put({
+      id: 'mastery-word-name',
+      contentType: 'word',
+      contentId: 'name',
+      sourceDayId: 'day-001',
+      status: 'learning',
+      consecutiveCorrect: 0,
+      dueAt: `${date}T20:00:00.000Z`,
+      lastAnsweredAt: answeredAt,
+      updatedAt: answeredAt,
+    });
+    masteryProgress.put({
+      id: 'mastery-word-my',
+      contentType: 'word',
+      contentId: 'my',
+      sourceDayId: 'day-001',
+      status: 'needs_reinforcement',
+      consecutiveCorrect: 0,
+      dueAt: `${date}T20:00:00.000Z`,
+      lastAnsweredAt: answeredAt,
+      updatedAt: answeredAt,
+    });
+    transaction.objectStore('masteryReviewSessions').put({
+      id: `mastery-review-${date}`,
+      localDate: date,
+      completedProgressIds: progressIds,
+      incorrectProgressIds: progressIds,
+      updatedAt: answeredAt,
+    });
+
+    await new Promise<void>((resolve, reject) => {
+      transaction.oncomplete = () => {
+        db.close();
+        resolve();
+      };
+      transaction.onerror = () => reject(transaction.error);
+      transaction.onabort = () => reject(transaction.error);
+    });
+  }, { date: localDate });
+}
+
+async function readLearningStores(page: Page) {
+  return page.evaluate(async () => {
+    const openRequest = indexedDB.open('basic-english-progress', 7);
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      openRequest.onsuccess = () => resolve(openRequest.result);
+      openRequest.onerror = () => reject(openRequest.error);
+    });
+    const transaction = db.transaction(['masteryProgress', 'reviewItems', 'reinforcementPracticeSessions'], 'readonly');
+    const [masteryProgress, reviewItems, reinforcementPracticeSessions] = await Promise.all([
+      new Promise<unknown[]>((resolve, reject) => {
+        const request = transaction.objectStore('masteryProgress').getAll();
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      }),
+      new Promise<unknown[]>((resolve, reject) => {
+        const request = transaction.objectStore('reviewItems').getAll();
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      }),
+      new Promise<unknown[]>((resolve, reject) => {
+        const request = transaction.objectStore('reinforcementPracticeSessions').getAll();
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      }),
+    ]);
+    db.close();
+    return { masteryProgress, reviewItems, reinforcementPracticeSessions };
+  });
+}
+
+async function answerReinforcementQuestion(practice: Locator) {
+  const order = practice.locator('.reinforcement-practice-order');
+  if (await order.count()) {
+    const tokens = order.locator('.reinforcement-practice-options button');
+    while (await tokens.count()) await tokens.first().click();
+    await order.getByRole('button', { name: 'Submit answer' }).click();
+    return;
+  }
+
+  const form = practice.locator('.reinforcement-practice-answer');
+  if (await form.count()) {
+    await form.getByLabel('Your answer').fill('practice');
+    await form.getByRole('button', { name: 'Submit answer' }).click();
+    return;
+  }
+
+  await practice.locator('.reinforcement-practice-options button').first().click();
 }
 
 function getCourseDay(dayId: string): Day {
@@ -280,7 +386,7 @@ async function completeSceneOutput(page: Page, scene: 'self' | 'room') {
   await page.getByLabel('Scene dialogue').fill('A: Is this your room?\nB: Yes. This is my room.');
 }
 
-async function completeCurrentDay(page: Page, dayId: string) {
+async function completeCurrentDay(page: Page, dayId: string, finish = true) {
   const day = getCourseDay(dayId);
 
   await continueTo(page, 'Quick Review', 3);
@@ -307,7 +413,7 @@ async function completeCurrentDay(page: Page, dayId: string) {
   await continueTo(page, 'Build Sentences');
   await completeSceneOutput(page, 'room');
 
-  await page.getByRole('button', { name: 'Continue' }).click();
+  if (finish) await page.getByRole('button', { name: 'Continue' }).click();
 }
 
 async function continueTo(page: Page, heading: string, level?: number) {
@@ -585,9 +691,70 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByText('Correct. Well done.')).toBeVisible();
 
     await page.getByRole('button', { name: 'Me', exact: true }).click();
-    await expect(page.getByText('Building')).toBeVisible();
+    await expect(page.getByText('Building', { exact: true })).toBeVisible();
     await expect(page.getByText('Verified: 1 / 8')).toBeVisible();
     await expect(page.getByText('Review 7 items')).toBeVisible();
+  });
+
+  test('shows a daily learning report and completes isolated reinforcement practice', async ({ page }) => {
+    await page.clock.setFixedTime('2026-07-27T08:00:00.000Z');
+    await completeCurrentDay(page, 'day-001', false);
+    await seedDailyLearningInsightData(page, '2026-07-27');
+
+    await page.getByRole('button', { name: 'Continue' }).click();
+    await expect(page.getByRole('heading', { name: 'Day 1 complete' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: "Today's Learning" })).toBeVisible();
+    await expect(page.getByText('Focus on 3 items')).toBeVisible();
+    await expect(page.getByText('You missed this word in mastery review.')).toHaveCount(2);
+    const beforePractice = await readLearningStores(page);
+
+    await page.getByRole('button', { name: 'Start 3-minute practice' }).click();
+    const practice = page.locator('.reinforcement-practice');
+    await expect(practice.getByRole('heading', { name: 'Reinforcement practice' })).toBeVisible();
+    const progress = await practice.locator('.reinforcement-practice-progress').textContent();
+    const questionCount = Number(progress?.split(' of ')[1]);
+    expect(questionCount).toBeGreaterThanOrEqual(2);
+    expect(questionCount).toBeLessThanOrEqual(3);
+    for (let index = 0; index < questionCount; index += 1) {
+      await answerReinforcementQuestion(practice);
+      await expect(practice.getByRole('status')).toBeVisible();
+      if (index < questionCount - 1) await practice.getByRole('button', { name: 'Next question' }).click();
+    }
+    await expect(practice.getByRole('button', { name: 'Finish practice' })).toBeEnabled();
+    await practice.getByRole('button', { name: 'Finish practice' }).click();
+    await expect(practice.getByText('Practice complete')).toBeVisible();
+
+    const afterPractice = await readLearningStores(page);
+    expect(afterPractice.masteryProgress).toEqual(beforePractice.masteryProgress);
+    expect(afterPractice.reviewItems).toEqual(beforePractice.reviewItems);
+    expect(afterPractice.reinforcementPracticeSessions).toHaveLength(1);
+    expect(afterPractice.reinforcementPracticeSessions[0]).toEqual(expect.objectContaining({
+      id: 'reinforcement-2026-07-27-daily-learning-insight-2026-07-27',
+      localDate: '2026-07-27',
+      insightId: 'daily-learning-insight-2026-07-27',
+      status: 'completed',
+    }));
+    expect((afterPractice.reinforcementPracticeSessions[0] as { answers: unknown[] }).answers).toHaveLength(questionCount);
+  });
+
+  test('keeps the next-day action available when reinforcement practice is skipped', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.clock.setFixedTime('2026-07-27T08:00:00.000Z');
+    await completeCurrentDay(page, 'day-001', false);
+    await seedDailyLearningInsightData(page, '2026-07-27');
+
+    await page.getByRole('button', { name: 'Continue' }).click();
+    await page.getByRole('button', { name: 'Start 3-minute practice' }).click();
+    const practice = page.locator('.reinforcement-practice');
+    await expect(practice.getByRole('heading', { name: 'Reinforcement practice' })).toBeVisible();
+    await practice.getByRole('button', { name: 'Skip practice' }).click();
+    await expect(practice.getByText('Practice skipped.')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Start Day 2' })).toBeEnabled();
+
+    const stores = await readLearningStores(page);
+    expect(stores.reinforcementPracticeSessions).toEqual([
+      expect.objectContaining({ status: 'skipped', answers: [] }),
+    ]);
   });
 
   test('exposes primary navigation on a mobile viewport', async ({ page }) => {

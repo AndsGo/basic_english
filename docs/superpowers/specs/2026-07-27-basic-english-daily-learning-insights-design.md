@@ -48,7 +48,7 @@ The learner can skip the practice without affecting lesson completion, manual re
 
 The model selects at most three unique content items using this priority order:
 
-1. A word or pattern answered incorrectly in today's or the latest available mastery-review session.
+1. A word or pattern explicitly recorded as incorrect in today's or the latest available mastery-review session.
 2. A learned item currently in `needs_reinforcement` or `learning` mastery state.
 3. A content item with an unresolved manual review item, including an item created by a drill, translation, scene remix, picture description, or output task.
 4. An item from a scenario whose prerequisite lessons are complete but whose verified mastery proportion is below the `Ready` threshold.
@@ -80,6 +80,8 @@ Add a separate persisted `reinforcementPracticeSessions` store for optional prac
 
 `dailyLearningInsight` itself is recalculated from the course and existing progress so that reports remain compatible with existing learners and update when their underlying mastery or manual-review records change.
 
+`masteryReviewSessions` gains an optional `incorrectProgressIds` field. New sessions persist the IDs answered incorrectly; legacy sessions without this field are treated as having unknown answer outcomes, never as incorrect answers.
+
 Existing data responsibilities remain unchanged:
 
 - `dayProgress`: lesson step and completion state.
@@ -96,6 +98,13 @@ All date limits use the learner's local calendar date. Legacy learners without m
 - Automatic assessment of free writing, scene remix, or picture descriptions.
 - Cloud sync, accounts, or cross-device persistence.
 - New curriculum weeks or image generation.
+
+## Implementation Notes
+
+- IndexedDB v7 adds `reinforcementPracticeSessions`, keyed by local date and insight identity.
+- Daily insights are derived from existing course and learner records at read time; they are not stored as a new source of truth.
+- Reinforcement answers and completion state never change `masteryProgress` or `reviewItems`.
+- Release verification runs `npx vitest run --exclude ".worktrees/**"`, `npm run build`, `npm run content:health`, and `npm run test:e2e`.
 
 ## Acceptance Criteria
 
