@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { getCapabilityStates, getScenarioCapabilityMasteryState } from '../domain/capabilities';
-import type { MasteryProgress, ScenarioMasteryState } from '../domain/mastery';
+import { buildDailyLearningInsight, type DailyLearningInsight } from '../domain/dailyLearningInsights';
+import { toLocalDateString, type MasteryProgress, type ScenarioMasteryState } from '../domain/mastery';
 import type { DayProgress } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
 import { getCompletedSceneIds } from '../domain/sceneOutput';
 import type { Course, PictureDescribeTask, ScenarioCapability, SceneGoal } from '../domain/types';
 import type { SpeechLanguage, SpeechRate } from '../speech/speechService';
 import type { ThemePreference } from '../theme';
-import type { PictureDescription, ProgressRepository, StudyActivity, UserOutput } from '../storage/progressRepository';
+import type { PictureDescription, ProgressRepository, ReinforcementPracticeSession, StudyActivity, UserOutput } from '../storage/progressRepository';
 import { SceneMap } from './SceneMap';
 
 const DEFAULT_TOTAL_DAY_COUNT = 7;
@@ -102,6 +103,8 @@ export function MePage({
   const [reviewItems, setReviewItems] = useState<ReviewItem[]>([]);
   const [activities, setActivities] = useState<StudyActivity[]>([]);
   const [masteryProgress, setMasteryProgress] = useState<MasteryProgress[]>([]);
+  const [dailyLearningInsight, setDailyLearningInsight] = useState<DailyLearningInsight | undefined>();
+  const [reinforcementSessions, setReinforcementSessions] = useState<ReinforcementPracticeSession[]>([]);
   const [loadError, setLoadError] = useState(false);
   const [hasLoadedProgress, setHasLoadedProgress] = useState(false);
 
@@ -127,6 +130,29 @@ export function MePage({
         setReviewItems(activeReviewItems);
         setActivities(savedActivities);
         setMasteryProgress(savedMasteryProgress);
+        try {
+          const localDate = toLocalDateString(new Date());
+          const [masterySession, savedReinforcementSessions] = await Promise.all([
+            repository.getMasteryReviewSession(localDate),
+            repository.listReinforcementPracticeSessions(),
+          ]);
+          if (!isMounted) return;
+          const completedDayIds = savedDays.filter(isCompletedDay).map((day) => day.dayId);
+          setDailyLearningInsight(buildDailyLearningInsight({
+            course,
+            capabilities: scenarioCapabilities ?? [],
+            completedDayIds,
+            masteryProgress: savedMasteryProgress,
+            activeReviewItems,
+            masterySessions: masterySession ? [masterySession] : [],
+            localDate,
+          }));
+          setReinforcementSessions(savedReinforcementSessions);
+        } catch {
+          if (!isMounted) return;
+          setDailyLearningInsight(undefined);
+          setReinforcementSessions([]);
+        }
         setLoadError(false);
         setHasLoadedProgress(true);
       } catch {
@@ -137,6 +163,8 @@ export function MePage({
         setReviewItems([]);
         setActivities([]);
         setMasteryProgress([]);
+        setDailyLearningInsight(undefined);
+        setReinforcementSessions([]);
         setLoadError(true);
         setHasLoadedProgress(true);
       }
@@ -147,7 +175,7 @@ export function MePage({
     return () => {
       isMounted = false;
     };
-  }, [repository]);
+  }, [course, repository, scenarioCapabilities]);
 
   const completedDayCount = days.filter(isCompletedDay).length;
   const currentStreakDays = getCurrentStreakDays(activities);
@@ -169,6 +197,16 @@ export function MePage({
   const sceneGoals = sceneGoalsByDayId ? Object.values(sceneGoalsByDayId).filter((goal): goal is SceneGoal => Boolean(goal)) : [];
   const completedSceneIds = getCompletedSceneIds(days, outputs);
   const checkedPictureDescriptions = pictureDescriptions.filter((description) => Boolean(description.checkedAt));
+  const latestReinforcementSession = dailyLearningInsight
+    ? reinforcementSessions
+      .filter((session) => session.insightId === dailyLearningInsight.id && session.localDate === dailyLearningInsight.localDate)
+      .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt))[0]
+    : undefined;
+  const practiceState = latestReinforcementSession?.status === 'completed'
+    ? 'Practice complete'
+    : latestReinforcementSession?.status === 'skipped'
+      ? 'Practice skipped'
+      : 'Practice available';
 
   return (
     <section className="panel">
@@ -179,6 +217,31 @@ export function MePage({
       </p>
       <p>Current streak: {currentStreakDays} days</p>
       <p>Review items: {reviewItems.length}</p>
+      {dailyLearningInsight && (
+        <section className="daily-learning-report">
+          <h3>Latest learning</h3>
+          <p className="daily-learning-report-outcome">
+            {dailyLearningInsight.items.length === 0
+              ? 'Strong today'
+              : dailyLearningInsight.items.length === 1
+                ? 'Keep practicing'
+                : `Focus on ${dailyLearningInsight.items.length} items`}
+          </p>
+          {dailyLearningInsight.items.length === 0 ? (
+            <p>No targeted practice due today.</p>
+          ) : (
+            <ul className="daily-learning-report-list">
+              {dailyLearningInsight.items.map((item) => (
+                <li key={item.contentKey}>
+                  <p>{item.reason}</p>
+                  {item.scenarioTitle && <p>Scenario: {item.scenarioTitle}</p>}
+                </li>
+              ))}
+            </ul>
+          )}
+          {dailyLearningInsight.items.length > 0 && <p>{practiceState}</p>}
+        </section>
+      )}
       {scenarioCapabilities && !hasLoadedProgress && (
         <section>
           <h3>I Can Say</h3>

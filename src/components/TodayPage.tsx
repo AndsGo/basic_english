@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { checkExerciseAnswer, type ExerciseAnswer, type ExerciseResult } from '../domain/exercises';
 import { createPendingMasteryProgress, selectDueMasteryProgress } from '../domain/mastery';
+import { buildDailyLearningInsight, type DailyLearningInsight } from '../domain/dailyLearningInsights';
 import { buildMasteryQuestion } from '../domain/masteryQuestions';
 import { completeStep, getCurrentDayId, normalizeDayProgress, type DayProgress, startDay, type StepId } from '../domain/progress';
 import {
@@ -26,10 +27,11 @@ import {
   type TranslationDraft,
   type WordMark,
 } from '../domain/stepCompletion';
-import type { Course, Day, Exercise, PictureDescribeTask, SceneGoal, SceneOutput, SceneRemixTask, TranslationExercise, Word } from '../domain/types';
+import type { Course, Day, Exercise, PictureDescribeTask, ScenarioCapability, SceneGoal, SceneOutput, SceneRemixTask, TranslationExercise, Word } from '../domain/types';
 import { useSpeech } from '../speech/SpeechProvider';
 import type { PictureDescription, ProgressRepository, UserOutput } from '../storage/progressRepository';
 import { CompletionSummary } from './CompletionSummary';
+import { DailyLearningReport } from './DailyLearningReport';
 import { ExerciseRenderer } from './ExerciseRenderer';
 import { MasteryReviewPanel } from './MasteryReviewPanel';
 import { OutputTaskEditor } from './OutputTaskEditor';
@@ -42,6 +44,8 @@ import { SceneRemixCard, type SceneRemixSubmitResult } from './SceneRemixCard';
 import { Stepper } from './Stepper';
 import { TranslationTask } from './TranslationTask';
 import { WordCards } from './WordCards';
+
+const emptyScenarioCapabilities: ScenarioCapability[] = [];
 
 function createInitialOutput(dayId: string): UserOutput {
   return {
@@ -147,6 +151,7 @@ export function TodayPage({
   sceneGoalsByDayId = {},
   sceneRemixTasksByDayId = {},
   pictureDescribeTasksByDayId = {},
+  scenarioCapabilities = emptyScenarioCapabilities,
   showChineseHelp = false,
   onProgressChange,
 }: {
@@ -155,6 +160,7 @@ export function TodayPage({
   sceneGoalsByDayId?: Partial<Record<string, SceneGoal>>;
   sceneRemixTasksByDayId?: Partial<Record<string, SceneRemixTask[]>>;
   pictureDescribeTasksByDayId?: Partial<Record<string, PictureDescribeTask>>;
+  scenarioCapabilities?: ScenarioCapability[];
   showChineseHelp?: boolean;
   onProgressChange?: () => void;
 }) {
@@ -187,6 +193,8 @@ export function TodayPage({
   const [isMasteryReviewComplete, setIsMasteryReviewComplete] = useState(false);
   const [hasMasterySeedingError, setHasMasterySeedingError] = useState(false);
   const [activeReviewItems, setActiveReviewItems] = useState<ReviewItem[]>([]);
+  const [dailyLearningReport, setDailyLearningReport] = useState<DailyLearningInsight | null>(null);
+  const [dailyLearningReportState, setDailyLearningReportState] = useState<'idle' | 'loaded' | 'error'>('idle');
   const [isCourseHydrating, setIsCourseHydrating] = useState(true);
   const [isDayHydrating, setIsDayHydrating] = useState(true);
   const [isAdvancing, setIsAdvancing] = useState(false);
@@ -250,6 +258,32 @@ export function TodayPage({
     }
   }, [course, repository]);
 
+  const refreshDailyLearningReport = useCallback(async () => {
+    const localDate = toLocalDateString(new Date());
+    try {
+      const [progress, reviews, masteryProgress, masterySession] = await Promise.all([
+        repository.listDayProgress(),
+        repository.listReviewItems('active'),
+        repository.listMasteryProgress(),
+        repository.getMasteryReviewSession(localDate),
+      ]);
+      setDailyLearningReport(buildDailyLearningInsight({
+        course,
+        capabilities: scenarioCapabilities,
+        completedDayIds: progress
+          .filter((item) => item.status === 'completed' || item.currentStep === 'done')
+          .map((item) => item.dayId),
+        masteryProgress,
+        activeReviewItems: reviews,
+        masterySessions: masterySession ? [masterySession] : [],
+        localDate,
+      }));
+      setDailyLearningReportState('loaded');
+    } catch {
+      setDailyLearningReportState('error');
+    }
+  }, [course, repository, scenarioCapabilities]);
+
   useEffect(() => {
     if (currentStep !== 'mastery-review') return;
 
@@ -260,6 +294,11 @@ export function TodayPage({
       masteryRefreshVersion.current += 1;
     };
   }, [currentStep, refreshMasteryReviewCompletion]);
+
+  useEffect(() => {
+    if (currentStep !== 'done') return;
+    void refreshDailyLearningReport();
+  }, [currentStep, refreshDailyLearningReport]);
 
   useEffect(() => {
     selectedDayIdRef.current = selectedDayId;
@@ -786,6 +825,18 @@ export function TodayPage({
                 reviewCount={dayReviewCount}
                 nextDay={nextDay}
                 onStartNextDay={startNextDay}
+                learningReport={
+                  dailyLearningReportState === 'error' ? (
+                    <p role="alert">Learning report is unavailable today.</p>
+                  ) : dailyLearningReportState === 'loaded' ? (
+                    <DailyLearningReport
+                      insight={dailyLearningReport}
+                      course={course}
+                      repository={repository}
+                      onPracticeChange={() => void refreshDailyLearningReport()}
+                    />
+                  ) : undefined
+                }
               />
             )}
           </>

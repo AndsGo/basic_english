@@ -1535,6 +1535,30 @@ describe('TodayPage', () => {
     expect(await screen.findByRole('heading', { name: 'Day 1 complete' })).toBeInTheDocument();
   });
 
+  it('keeps the next day available when the completion learning report cannot load', async () => {
+    const user = userEvent.setup();
+    const repository = createTestRepository();
+    const saveDayProgress = repository.saveDayProgress;
+    let reportShouldFail = false;
+    repository.saveDayProgress = async (progress) => {
+      await saveDayProgress(progress);
+      if (progress.currentStep === 'done') reportShouldFail = true;
+    };
+    repository.listMasteryProgress = vi.fn().mockImplementation(async () => {
+      if (reportShouldFail) throw new Error('report unavailable');
+      return [];
+    });
+
+    renderWithSpeech(<TodayPage course={week1Course} repository={repository} />);
+
+    await completeDayOneThroughOutput(user);
+    await satisfyOutputGate(user);
+    await user.click(await getEnabledContinueButton());
+    expect(await screen.findByRole('heading', { name: 'Day 1 complete' })).toBeInTheDocument();
+    expect(await screen.findByRole('alert')).toHaveTextContent('Learning report is unavailable today.');
+    expect(screen.getByRole('button', { name: 'Start Day 2' })).toBeEnabled();
+  });
+
   it('serializes output autosaves so an earlier delayed save cannot overwrite later output', async () => {
     const user = userEvent.setup();
     let savedOutput: UserOutput | null = null;

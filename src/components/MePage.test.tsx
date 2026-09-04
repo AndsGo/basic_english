@@ -2,7 +2,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { basicEnglishCourse } from '../content/course';
-import type { MasteryProgress } from '../domain/mastery';
+import { toLocalDateString, type MasteryProgress } from '../domain/mastery';
 import type { Course, ScenarioCapability, SceneGoal } from '../domain/types';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
 import type { ProgressRepository } from '../storage/progressRepository';
@@ -248,6 +248,48 @@ describe('MePage scenario mastery', () => {
     expect(await screen.findByText('Building')).toBeInTheDocument();
     expect(screen.getByText('Verified: 1 / 2')).toBeInTheDocument();
     expect(screen.getByText('Review 1 item')).toBeInTheDocument();
+  });
+
+  it('shows the latest completed learning practice state', async () => {
+    const localDate = toLocalDateString(new Date());
+    const repository = createMockRepository({
+      listDayProgress: vi.fn().mockResolvedValue([{
+        id: 'progress-day-001',
+        dayId: 'day-001',
+        currentStep: 'done',
+        status: 'completed',
+        completedStepIds: ['output'],
+        startedAt: '2026-07-27T00:00:00.000Z',
+        updatedAt: '2026-07-27T00:00:00.000Z',
+        contentVersion: capabilityCourse.contentVersion,
+      }]),
+      listMasteryProgress: vi.fn().mockResolvedValue([{
+        id: 'mastery-word-name',
+        contentType: 'word',
+        contentId: 'name',
+        sourceDayId: 'day-001',
+        status: 'learning',
+        consecutiveCorrect: 0,
+        dueAt: '2026-07-27T00:00:00.000Z',
+        updatedAt: '2026-07-27T00:00:00.000Z',
+      }]),
+      listReinforcementPracticeSessions: vi.fn().mockResolvedValue([{
+        id: 'reinforcement-session',
+        localDate,
+        insightId: `daily-learning-insight-${localDate}`,
+        contentKeys: ['word:name'],
+        answers: [],
+        status: 'completed',
+        updatedAt: '2026-07-27T00:00:00.000Z',
+      }]),
+    });
+
+    render(<MePage course={capabilityCourse} repository={repository} scenarioCapabilities={[capability]} />);
+
+    expect(await screen.findByRole('heading', { name: 'Latest learning' })).toBeInTheDocument();
+    expect(screen.getByText('Keep practicing')).toBeInTheDocument();
+    expect(screen.getAllByText('Scenario: I can introduce myself.')).toHaveLength(2);
+    expect(screen.getByText('Practice complete')).toBeInTheDocument();
   });
 });
 
