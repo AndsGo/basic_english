@@ -21,6 +21,11 @@ function insight(items: DailyLearningInsight['items']): DailyLearningInsight {
   };
 }
 
+const validPracticeItems: DailyLearningInsight['items'] = [
+  { contentType: 'word', contentId: 'name', contentKey: 'word:name', source: 'mastery_learning', reason: 'Practice this word.' },
+  { contentType: 'word', contentId: 'book', contentKey: 'word:book', source: 'mastery_learning', reason: 'Practice this word.' },
+];
+
 function practiceRepository(session: ReinforcementPracticeSession | null = null): ProgressRepository {
   let storedSession = session;
 
@@ -89,7 +94,7 @@ describe('ReinforcementPracticePanel', () => {
     const onSkip = vi.fn();
 
     render(<ReinforcementPracticePanel
-      insight={insight([{ contentType: 'word', contentId: 'name', contentKey: 'word:name', source: 'mastery_learning', reason: 'Practice this word.' }])}
+      insight={insight(validPracticeItems)}
       course={basicEnglishCourse}
       repository={repository}
       now={now}
@@ -109,7 +114,7 @@ describe('ReinforcementPracticePanel', () => {
     const repository = practiceRepository();
 
     render(<ReinforcementPracticePanel
-      insight={insight([{ contentType: 'word', contentId: 'name', contentKey: 'word:name', source: 'mastery_learning', reason: 'Practice this word.' }])}
+      insight={insight(validPracticeItems)}
       course={basicEnglishCourse}
       repository={repository}
       now={now}
@@ -124,6 +129,8 @@ describe('ReinforcementPracticePanel', () => {
     expect(answer).toBeEnabled();
 
     await user.click(answer);
+    await user.click(screen.getByRole('button', { name: 'Next question' }));
+    await user.click(screen.getByRole('button', { name: /pages with words or pictures/i }));
 
     expect(await screen.findByRole('button', { name: 'Finish practice' })).toBeEnabled();
   });
@@ -134,7 +141,7 @@ describe('ReinforcementPracticePanel', () => {
     const onComplete = vi.fn();
 
     render(<ReinforcementPracticePanel
-      insight={insight([{ contentType: 'word', contentId: 'name', contentKey: 'word:name', source: 'mastery_learning', reason: 'Practice this word.' }])}
+      insight={insight(validPracticeItems)}
       course={basicEnglishCourse}
       repository={repository}
       now={now}
@@ -142,6 +149,8 @@ describe('ReinforcementPracticePanel', () => {
     />);
 
     await user.click(await screen.findByRole('button', { name: /the word for a person or thing/i }));
+    await user.click(screen.getByRole('button', { name: 'Next question' }));
+    await user.click(screen.getByRole('button', { name: /pages with words or pictures/i }));
     const finish = await screen.findByRole('button', { name: 'Finish practice' });
     vi.mocked(repository.saveReinforcementPracticeSession).mockRejectedValueOnce(new Error('storage unavailable'));
 
@@ -163,7 +172,7 @@ describe('ReinforcementPracticePanel', () => {
     const repository = practiceRepository();
 
     render(<ReinforcementPracticePanel
-      insight={insight([{ contentType: 'word', contentId: 'name', contentKey: 'word:name', source: 'mastery_learning', reason: 'Practice this word.' }])}
+      insight={insight(validPracticeItems)}
       course={basicEnglishCourse}
       repository={repository}
       now={now}
@@ -182,11 +191,12 @@ describe('ReinforcementPracticePanel', () => {
     expect(await screen.findByText('Practice skipped.')).toBeInTheDocument();
   });
 
-  it('skips an invalid first item and presents a later valid question', async () => {
+  it('skips invalid content and presents two later valid questions', async () => {
     render(<ReinforcementPracticePanel
       insight={insight([
         { contentType: 'word', contentId: 'not-in-course', contentKey: 'word:not-in-course', source: 'mastery_learning', reason: 'Practice this word.' },
         { contentType: 'word', contentId: 'name', contentKey: 'word:name', source: 'mastery_learning', reason: 'Practice this word.' },
+        { contentType: 'word', contentId: 'book', contentKey: 'word:book', source: 'mastery_learning', reason: 'Practice this word.' },
       ])}
       course={basicEnglishCourse}
       repository={practiceRepository()}
@@ -194,7 +204,119 @@ describe('ReinforcementPracticePanel', () => {
     />);
 
     expect(await screen.findByText('What does "name" mean?')).toBeInTheDocument();
-    expect(screen.getByText('1 of 1')).toBeInTheDocument();
+    expect(screen.getByText('1 of 2')).toBeInTheDocument();
+  });
+
+  it('shows a non-error empty state without saving when fewer than two valid questions exist', async () => {
+    const repository = practiceRepository();
+    const onComplete = vi.fn();
+    const onSkip = vi.fn();
+
+    render(<ReinforcementPracticePanel
+      insight={insight([{ contentType: 'word', contentId: 'name', contentKey: 'word:name', source: 'mastery_learning', reason: 'Practice this word.' }])}
+      course={basicEnglishCourse}
+      repository={repository}
+      now={now}
+      onComplete={onComplete}
+      onSkip={onSkip}
+    />);
+
+    expect(await screen.findByText('No reinforcement practice available today.')).toBeInTheDocument();
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(repository.getReinforcementPracticeSession).not.toHaveBeenCalled();
+    expect(repository.saveReinforcementPracticeSession).not.toHaveBeenCalled();
+    expect(onComplete).not.toHaveBeenCalled();
+    expect(onSkip).not.toHaveBeenCalled();
+  });
+
+  it('does not duplicate insight content to create a practice session', async () => {
+    const repository = practiceRepository();
+
+    render(<ReinforcementPracticePanel
+      insight={insight([
+        { contentType: 'word', contentId: 'name', contentKey: 'word:name', source: 'mastery_learning', reason: 'Practice this word.' },
+        { contentType: 'word', contentId: 'name', contentKey: 'duplicate:name', source: 'manual_review', reason: 'Practice this word.' },
+      ])}
+      course={basicEnglishCourse}
+      repository={repository}
+      now={now}
+    />);
+
+    expect(await screen.findByText('No reinforcement practice available today.')).toBeInTheDocument();
+    expect(repository.saveReinforcementPracticeSession).not.toHaveBeenCalled();
+  });
+
+  it('retries initialization after a load failure', async () => {
+    const user = userEvent.setup();
+    const repository = practiceRepository();
+    vi.mocked(repository.getReinforcementPracticeSession).mockRejectedValueOnce(new Error('storage unavailable'));
+
+    render(<ReinforcementPracticePanel
+      insight={insight(validPracticeItems)}
+      course={basicEnglishCourse}
+      repository={repository}
+      now={now}
+    />);
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Reinforcement practice could not be loaded.');
+    await user.click(screen.getByRole('button', { name: 'Try again' }));
+
+    expect(await screen.findByText('What does "name" mean?')).toBeInTheDocument();
+    expect(repository.getReinforcementPracticeSession).toHaveBeenCalledTimes(2);
+  });
+
+  it('retries initialization after an initial session save failure', async () => {
+    const user = userEvent.setup();
+    const repository = practiceRepository();
+    vi.mocked(repository.saveReinforcementPracticeSession).mockRejectedValueOnce(new Error('storage unavailable'));
+
+    render(<ReinforcementPracticePanel
+      insight={insight(validPracticeItems)}
+      course={basicEnglishCourse}
+      repository={repository}
+      now={now}
+    />);
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Reinforcement practice could not be loaded.');
+    await user.click(screen.getByRole('button', { name: 'Try again' }));
+
+    expect(await screen.findByText('What does "name" mean?')).toBeInTheDocument();
+    expect(repository.saveReinforcementPracticeSession).toHaveBeenCalledTimes(2);
+  });
+
+  it('uses the canonical session ID when creating a session', async () => {
+    const repository = practiceRepository();
+
+    render(<ReinforcementPracticePanel
+      insight={insight(validPracticeItems)}
+      course={basicEnglishCourse}
+      repository={repository}
+      now={now}
+    />);
+
+    await screen.findByText('What does "name" mean?');
+    expect(repository.saveReinforcementPracticeSession).toHaveBeenCalledWith(expect.objectContaining({
+      id: 'reinforcement-2026-07-22-daily-learning-insight-2026-07-22',
+    }));
+  });
+
+  it('alerts when unexpected question construction fails', async () => {
+    const course = new Proxy(basicEnglishCourse, {
+      get(target, property, receiver) {
+        if (property === 'words') throw new Error('unexpected content failure');
+        return Reflect.get(target, property, receiver);
+      },
+    });
+
+    render(<ReinforcementPracticePanel
+      insight={insight(validPracticeItems)}
+      course={course}
+      repository={practiceRepository()}
+      now={now}
+    />);
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Reinforcement practice could not be loaded.');
+    expect(screen.getByRole('button', { name: 'Try again' })).toBeInTheDocument();
   });
 
   it('alerts when the practice session cannot be loaded', async () => {
@@ -202,7 +324,7 @@ describe('ReinforcementPracticePanel', () => {
     vi.mocked(repository.getReinforcementPracticeSession).mockRejectedValue(new Error('storage unavailable'));
 
     render(<ReinforcementPracticePanel
-      insight={insight([{ contentType: 'word', contentId: 'name', contentKey: 'word:name', source: 'mastery_learning', reason: 'Practice this word.' }])}
+      insight={insight(validPracticeItems)}
       course={basicEnglishCourse}
       repository={repository}
       now={now}
