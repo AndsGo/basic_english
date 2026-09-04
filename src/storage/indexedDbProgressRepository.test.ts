@@ -7,17 +7,11 @@ import { createIndexedDbProgressRepository } from './indexedDbProgressRepository
 import type {
   ExerciseAttempt,
   PictureDescription,
-  ProgressRepository,
   ReinforcementPracticeSession,
   SceneRemixAttempt,
   UserOutput,
   WordProgress,
 } from './progressRepository';
-
-type ReinforcementPracticeRepository = ProgressRepository & Required<Pick<
-  ProgressRepository,
-  'saveReinforcementPracticeSession' | 'getReinforcementPracticeSession' | 'listReinforcementPracticeSessions'
->>;
 
 let dbCounter = 0;
 
@@ -706,7 +700,7 @@ describe('indexedDbProgressRepository mastery persistence', () => {
 
 describe('indexedDbProgressRepository reinforcement practice persistence', () => {
   it('persists, gets, and lists reinforcement practice sessions', async () => {
-    const repository = createIndexedDbProgressRepository(nextDbName()) as ReinforcementPracticeRepository;
+    const repository = createIndexedDbProgressRepository(nextDbName());
     const first = reinforcementPracticeSession();
     const second = reinforcementPracticeSession({
       id: 'reinforcement-2026-07-28-daily-learning-insight-2026-07-28',
@@ -719,6 +713,33 @@ describe('indexedDbProgressRepository reinforcement practice persistence', () =>
 
     await expect(repository.getReinforcementPracticeSession(first.localDate, first.insightId)).resolves.toEqual(first);
     await expect(repository.listReinforcementPracticeSessions()).resolves.toEqual([first, second]);
+  });
+
+  it('keeps an active review item byte-for-byte unchanged when a reinforcement session is replaced', async () => {
+    const repository = createIndexedDbProgressRepository(nextDbName());
+    const reviewItem = createWordReviewItem({
+      wordId: 'name',
+      wordText: 'name',
+      sourceDayId: 'day-001',
+      now: '2026-07-27T08:00:00.000Z',
+    });
+    const initialSession = reinforcementPracticeSession();
+
+    await repository.saveReviewItem(reviewItem);
+    const savedReviewItem = await repository.getReviewItem(reviewItem.id);
+    const reviewItemBytes = JSON.stringify(savedReviewItem);
+
+    await repository.saveReinforcementPracticeSession(initialSession);
+    await repository.saveReinforcementPracticeSession(reinforcementPracticeSession({
+      ...initialSession,
+      answers: [{ progressId: 'word:name', correct: true, answeredAt: '2026-07-27T08:01:00.000Z' }],
+      status: 'completed',
+      updatedAt: '2026-07-27T08:01:00.000Z',
+    }));
+
+    await expect(repository.getReviewItem(reviewItem.id)).resolves.toSatisfy(
+      (item) => JSON.stringify(item) === reviewItemBytes,
+    );
   });
 
   it('upgrades v6 mastery data while adding reinforcement practice sessions', async () => {
@@ -759,7 +780,7 @@ describe('indexedDbProgressRepository reinforcement practice persistence', () =>
     await legacyDb.put('masteryReviewSessions', session);
     legacyDb.close();
 
-    const repository = createIndexedDbProgressRepository(dbName) as ReinforcementPracticeRepository;
+    const repository = createIndexedDbProgressRepository(dbName);
     const reinforcementSession = reinforcementPracticeSession();
     await repository.saveReinforcementPracticeSession(reinforcementSession);
 

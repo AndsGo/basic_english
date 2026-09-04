@@ -160,6 +160,13 @@ function createTestRepository({
     async getMasteryReviewSession(localDate) {
       return masterySessionsByDate.get(localDate) ?? null;
     },
+    async saveReinforcementPracticeSession() {},
+    async getReinforcementPracticeSession() {
+      return null;
+    },
+    async listReinforcementPracticeSessions() {
+      return [];
+    },
   };
 }
 

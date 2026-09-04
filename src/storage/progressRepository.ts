@@ -135,7 +135,7 @@ export interface ProgressRepository {
   saveMasteryReviewSession(session: MasteryReviewSession): Promise<void>;
   saveMasteryReviewResult?(progress: MasteryProgress, session: MasteryReviewSession): Promise<void>;
   getMasteryReviewSession(localDate: string): Promise<MasteryReviewSession | null>;
-  saveReinforcementPracticeSession?(session: ReinforcementPracticeSession): Promise<void>;
-  getReinforcementPracticeSession?(localDate: string, insightId: string): Promise<ReinforcementPracticeSession | null>;
-  listReinforcementPracticeSessions?(): Promise<ReinforcementPracticeSession[]>;
+  saveReinforcementPracticeSession(session: ReinforcementPracticeSession): Promise<void>;
+  getReinforcementPracticeSession(localDate: string, insightId: string): Promise<ReinforcementPracticeSession | null>;
+  listReinforcementPracticeSessions(): Promise<ReinforcementPracticeSession[]>;
 }

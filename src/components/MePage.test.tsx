@@ -63,6 +63,9 @@ function createMockRepository(overrides: Partial<ProgressRepository> = {}): Prog
     listMasteryProgress: vi.fn().mockResolvedValue([]),
     saveMasteryReviewSession: vi.fn(),
     getMasteryReviewSession: vi.fn(),
+    saveReinforcementPracticeSession: vi.fn(),
+    getReinforcementPracticeSession: vi.fn(),
+    listReinforcementPracticeSessions: vi.fn().mockResolvedValue([]),
     ...overrides,
   };
 }

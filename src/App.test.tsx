@@ -69,6 +69,9 @@ function createProgressRepository(overrides: Partial<ProgressRepository> = {}): 
     listMasteryProgress: vi.fn().mockResolvedValue([]),
     saveMasteryReviewSession: vi.fn().mockResolvedValue(undefined),
     getMasteryReviewSession: vi.fn().mockResolvedValue(null),
+    saveReinforcementPracticeSession: vi.fn().mockResolvedValue(undefined),
+    getReinforcementPracticeSession: vi.fn().mockResolvedValue(null),
+    listReinforcementPracticeSessions: vi.fn().mockResolvedValue([]),
     ...overrides,
   };
 }
