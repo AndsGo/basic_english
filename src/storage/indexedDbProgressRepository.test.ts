@@ -742,6 +742,26 @@ describe('indexedDbProgressRepository reinforcement practice persistence', () =>
     );
   });
 
+  it('uses one canonical record when callers save the same report identity with different IDs', async () => {
+    const repository = createIndexedDbProgressRepository(nextDbName());
+    const initial = reinforcementPracticeSession({ id: 'client-generated-session' });
+    const replacement = reinforcementPracticeSession({
+      id: 'retry-generated-session',
+      answers: [{ progressId: 'word:name', correct: true, answeredAt: '2026-07-27T08:01:00.000Z' }],
+      status: 'completed',
+      updatedAt: '2026-07-27T08:01:00.000Z',
+    });
+
+    await repository.saveReinforcementPracticeSession(initial);
+    await repository.saveReinforcementPracticeSession(replacement);
+
+    await expect(repository.getReinforcementPracticeSession(initial.localDate, initial.insightId)).resolves.toEqual({
+      ...replacement,
+      id: 'reinforcement-2026-07-27-daily-learning-insight-2026-07-27',
+    });
+    await expect(repository.listReinforcementPracticeSessions()).resolves.toHaveLength(1);
+  });
+
   it('upgrades v6 mastery data while adding reinforcement practice sessions', async () => {
     const dbName = nextDbName();
     const progress = createPendingMasteryProgress({

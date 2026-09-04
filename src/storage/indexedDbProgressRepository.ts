@@ -148,6 +148,10 @@ function normalizeUserOutput(output: UserOutput): UserOutput {
   };
 }
 
+function reinforcementPracticeSessionId(localDate: string, insightId: string): string {
+  return `reinforcement-${localDate}-${insightId}`;
+}
+
 export function createIndexedDbProgressRepository(dbName = 'basic-english-progress'): ProgressRepository {
   const dbPromise = openProgressDb(dbName);
 
@@ -337,13 +341,15 @@ export function createIndexedDbProgressRepository(dbName = 'basic-english-progre
 
     async saveReinforcementPracticeSession(session) {
       const db = await dbPromise;
-      await db.put('reinforcementPracticeSessions', session);
+      await db.put('reinforcementPracticeSessions', {
+        ...session,
+        id: reinforcementPracticeSessionId(session.localDate, session.insightId),
+      });
     },
 
     async getReinforcementPracticeSession(localDate, insightId) {
       const db = await dbPromise;
-      const sessions = await db.getAllFromIndex('reinforcementPracticeSessions', 'byLocalDate', localDate);
-      return sessions.find((session) => session.insightId === insightId) ?? null;
+      return (await db.get('reinforcementPracticeSessions', reinforcementPracticeSessionId(localDate, insightId))) ?? null;
     },
 
     async listReinforcementPracticeSessions() {
