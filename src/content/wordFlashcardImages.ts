@@ -100,7 +100,6 @@ import nowWeek21Image from '../assets/word-flashcards/now-week21.png';
 import onlyWeek21Image from '../assets/word-flashcards/only-week21.png';
 import frequentWeek21Image from '../assets/word-flashcards/frequent-week21.png';
 import interestWeek21Image from '../assets/word-flashcards/interest-week21.png';
-import orderWeek21Image from '../assets/word-flashcards/order-week21.png';
 import actWeek22Image from '../assets/word-flashcards/act-week22.png';
 import attentionWeek22Image from '../assets/word-flashcards/attention-week22.png';
 import educationWeek22Image from '../assets/word-flashcards/education-week22.png';
@@ -117,7 +116,6 @@ import testWeek22Image from '../assets/word-flashcards/test-week22.png';
 import writingWeek22Image from '../assets/word-flashcards/writing-week22.png';
 import knowledgeWeek22Image from '../assets/word-flashcards/knowledge-week22.png';
 import exampleWeek22Image from '../assets/word-flashcards/example-week22.png';
-import studyWeek22Image from '../assets/word-flashcards/study-week22.png';
 import bottleWeek14Image from '../assets/word-flashcards/bottle-week14.png';
 import brushWeek14Image from '../assets/word-flashcards/brush-week14.png';
 import bucketWeek14Image from '../assets/word-flashcards/bucket-week14.png';
@@ -830,8 +828,8 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('writing', writingWeek22Image, 'object', 'concrete', 'none', 'A simple writing flashcard image for Basic English learners.'),
   wordImageAsset('knowledge', knowledgeWeek22Image, 'object', 'concrete', 'none', 'A simple knowledge flashcard image for Basic English learners.'),
   wordImageAsset('example', exampleWeek22Image, 'object', 'concrete', 'none', 'A simple example flashcard image for Basic English learners.'),
-  wordImageAsset('event', orderWeek21Image, 'object', 'concrete', 'none', 'A simple event flashcard image for Basic English learners.'),
-  wordImageAsset('business', studyWeek22Image, 'object', 'concrete', 'none', 'A simple business flashcard image for Basic English learners.'),
+  wordImageAsset('event', orderImage, 'action', 'scene', 'none', 'A simple event flashcard image for Basic English learners.'),
+  wordImageAsset('business', studyImage, 'action', 'scene', 'none', 'A simple business flashcard image for Basic English learners.'),
 ];
 
 export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(
