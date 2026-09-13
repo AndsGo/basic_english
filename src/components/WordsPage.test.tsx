@@ -15,6 +15,23 @@ const speechService = {
   stop: vi.fn(),
 };
 
+it('can browse beyond the first library batch and resets when searching', async () => {
+  const user = userEvent.setup();
+  renderWithSpeech(<WordsPage course={basicEnglishCourse} repository={createRepository()} />);
+  await user.click(screen.getByRole('button', { name: '850 Library' }));
+  expect(screen.getAllByRole('listitem')).toHaveLength(120);
+  await user.click(screen.getByRole('button', { name: 'Show more' }));
+  expect(screen.getAllByRole('listitem')).toHaveLength(240);
+  while (screen.queryByRole('button', { name: 'Show more' })) {
+    await user.click(screen.getByRole('button', { name: 'Show more' }));
+  }
+  expect(screen.getByRole('listitem', { name: /^young / })).toBeInTheDocument();
+  await user.type(screen.getByRole('searchbox'), 'young');
+  expect(screen.getAllByRole('listitem')).toHaveLength(1);
+  await user.clear(screen.getByRole('searchbox'));
+  expect(screen.getAllByRole('listitem')).toHaveLength(120);
+});
+
 afterEach(() => {
   cleanup();
   vi.clearAllMocks();
@@ -129,8 +146,8 @@ describe('WordsPage', () => {
     await userEvent.click(screen.getByRole('button', { name: '850 Library' }));
 
     expect(screen.getByRole('heading', { name: 'Basic English 850 Library' })).toBeInTheDocument();
-    expect(screen.getByText('176 / 855')).toBeInTheDocument();
-    expect(screen.getByText('20.6% course coverage')).toBeInTheDocument();
+    expect(screen.getByText('174 / 850')).toBeInTheDocument();
+    expect(screen.getByText('20.5% course coverage')).toBeInTheDocument();
     expect(screen.getByRole('listitem', { name: /account in course/i })).toBeInTheDocument();
     expect(screen.getByRole('listitem', { name: /acid future/i })).toBeInTheDocument();
   });

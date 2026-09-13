@@ -29,9 +29,9 @@ describe('courseHealth', () => {
     expect(metrics.courseWeeks).toBe(12);
     expect(metrics.courseDays).toBe(84);
     expect(metrics.courseWords).toBe(227);
-    expect(metrics.basicEnglishCourseWords).toBe(176);
-    expect(metrics.basicEnglishWordCount).toBe(855);
-    expect(metrics.basicEnglishCoveragePercent).toBe(20.6);
+    expect(metrics.basicEnglishCourseWords).toBe(174);
+    expect(metrics.basicEnglishWordCount).toBe(850);
+    expect(metrics.basicEnglishCoveragePercent).toBe(20.5);
     expect(metrics.pictureDescribe.covered).toBe(84);
     expect(metrics.sceneGoals.covered).toBe(84);
     expect(metrics.sceneRemix.covered).toBe(84);

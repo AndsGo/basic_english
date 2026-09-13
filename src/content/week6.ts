@@ -234,7 +234,7 @@ export const week6: Week = {
           { id: 'meaning', label: 'Meaning', scores: ['hard to understand', 'partly clear', 'clear'] },
           { id: 'problem-handling', label: 'Problem answer', scores: ['problem is not clear', 'some problem and help language', 'clear problem and help order'] },
           { id: 'target-patterns', label: 'Form use', scores: ['not used', 'used with help', 'used with no help'] },
-          { id: 'word-use', label: 'Word use', scores: ['little problem words', 'some problem words', 'much problem words'] },
+              { id: 'word-use', label: 'Word use', scores: ['not enough problem words', 'some problem words', 'enough problem words'] },
           { id: 'independence', label: 'My words', scores: ['same as example', 'some change from example', 'all my words'] },
         ],
       },
