@@ -67,6 +67,57 @@ import tinWeek19Image from '../assets/word-flashcards/tin-week19.png';
 import trayWeek19Image from '../assets/word-flashcards/tray-week19.png';
 import corkWeek19Image from '../assets/word-flashcards/cork-week19.png';
 import orangeWeek19Image from '../assets/word-flashcards/orange-week19.png';
+import airWeek20Image from '../assets/word-flashcards/air-week20.png';
+import boardWeek20Image from '../assets/word-flashcards/board-week20.png';
+import coverWeek20Image from '../assets/word-flashcards/cover-week20.png';
+import curtainWeek20Image from '../assets/word-flashcards/curtain-week20.png';
+import cushionWeek20Image from '../assets/word-flashcards/cushion-week20.png';
+import drawerWeek20Image from '../assets/word-flashcards/drawer-week20.png';
+import floorWeek20Image from '../assets/word-flashcards/floor-week20.png';
+import frameWeek20Image from '../assets/word-flashcards/frame-week20.png';
+import hookWeek20Image from '../assets/word-flashcards/hook-week20.png';
+import houseWeek20Image from '../assets/word-flashcards/house-week20.png';
+import lockWeek20Image from '../assets/word-flashcards/lock-week20.png';
+import roofWeek20Image from '../assets/word-flashcards/roof-week20.png';
+import shelfWeek20Image from '../assets/word-flashcards/shelf-week20.png';
+import wallWeek20Image from '../assets/word-flashcards/wall-week20.png';
+import woodWeek20Image from '../assets/word-flashcards/wood-week20.png';
+import buildingWeek20Image from '../assets/word-flashcards/building-week20.png';
+import mapWeek20Image from '../assets/word-flashcards/map-week20.png';
+import almostWeek21Image from '../assets/word-flashcards/almost-week21.png';
+import everWeek21Image from '../assets/word-flashcards/ever-week21.png';
+import futureWeek21Image from '../assets/word-flashcards/future-week21.png';
+import minuteWeek21Image from '../assets/word-flashcards/minute-week21.png';
+import pastWeek21Image from '../assets/word-flashcards/past-week21.png';
+import regularWeek21Image from '../assets/word-flashcards/regular-week21.png';
+import secondWeek21Image from '../assets/word-flashcards/second-week21.png';
+import stillWeek21Image from '../assets/word-flashcards/still-week21.png';
+import tillWeek21Image from '../assets/word-flashcards/till-week21.png';
+import togetherWeek21Image from '../assets/word-flashcards/together-week21.png';
+import whenWeek21Image from '../assets/word-flashcards/when-week21.png';
+import whileWeek21Image from '../assets/word-flashcards/while-week21.png';
+import nowWeek21Image from '../assets/word-flashcards/now-week21.png';
+import onlyWeek21Image from '../assets/word-flashcards/only-week21.png';
+import frequentWeek21Image from '../assets/word-flashcards/frequent-week21.png';
+import interestWeek21Image from '../assets/word-flashcards/interest-week21.png';
+import orderWeek21Image from '../assets/word-flashcards/order-week21.png';
+import actWeek22Image from '../assets/word-flashcards/act-week22.png';
+import attentionWeek22Image from '../assets/word-flashcards/attention-week22.png';
+import educationWeek22Image from '../assets/word-flashcards/education-week22.png';
+import factWeek22Image from '../assets/word-flashcards/fact-week22.png';
+import guideWeek22Image from '../assets/word-flashcards/guide-week22.png';
+import languageWeek22Image from '../assets/word-flashcards/language-week22.png';
+import learningWeek22Image from '../assets/word-flashcards/learning-week22.png';
+import libraryWeek22Image from '../assets/word-flashcards/library-week22.png';
+import noteWeek22Image from '../assets/word-flashcards/note-week22.png';
+import readingWeek22Image from '../assets/word-flashcards/reading-week22.png';
+import statementWeek22Image from '../assets/word-flashcards/statement-week22.png';
+import teachingWeek22Image from '../assets/word-flashcards/teaching-week22.png';
+import testWeek22Image from '../assets/word-flashcards/test-week22.png';
+import writingWeek22Image from '../assets/word-flashcards/writing-week22.png';
+import knowledgeWeek22Image from '../assets/word-flashcards/knowledge-week22.png';
+import exampleWeek22Image from '../assets/word-flashcards/example-week22.png';
+import studyWeek22Image from '../assets/word-flashcards/study-week22.png';
 import bottleWeek14Image from '../assets/word-flashcards/bottle-week14.png';
 import brushWeek14Image from '../assets/word-flashcards/brush-week14.png';
 import bucketWeek14Image from '../assets/word-flashcards/bucket-week14.png';
@@ -730,6 +781,57 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('tray', trayWeek19Image, 'object', 'concrete', 'none', 'A simple tray flashcard image for Basic English learners.'),
   wordImageAsset('cork', corkWeek19Image, 'object', 'concrete', 'none', 'A simple cork flashcard image for Basic English learners.'),
   wordImageAsset('orange', orangeWeek19Image, 'object', 'concrete', 'none', 'A simple orange flashcard image for Basic English learners.'),
+  wordImageAsset('air', airWeek20Image, 'object', 'concrete', 'none', 'A simple air flashcard image for Basic English learners.'),
+  wordImageAsset('board', boardWeek20Image, 'object', 'concrete', 'none', 'A simple board flashcard image for Basic English learners.'),
+  wordImageAsset('cover', coverWeek20Image, 'object', 'concrete', 'none', 'A simple cover flashcard image for Basic English learners.'),
+  wordImageAsset('curtain', curtainWeek20Image, 'object', 'concrete', 'none', 'A simple curtain flashcard image for Basic English learners.'),
+  wordImageAsset('cushion', cushionWeek20Image, 'object', 'concrete', 'none', 'A simple cushion flashcard image for Basic English learners.'),
+  wordImageAsset('drawer', drawerWeek20Image, 'object', 'concrete', 'none', 'A simple drawer flashcard image for Basic English learners.'),
+  wordImageAsset('floor', floorWeek20Image, 'object', 'concrete', 'none', 'A simple floor flashcard image for Basic English learners.'),
+  wordImageAsset('frame', frameWeek20Image, 'object', 'concrete', 'none', 'A simple frame flashcard image for Basic English learners.'),
+  wordImageAsset('hook', hookWeek20Image, 'object', 'concrete', 'none', 'A simple hook flashcard image for Basic English learners.'),
+  wordImageAsset('house', houseWeek20Image, 'object', 'concrete', 'none', 'A simple house flashcard image for Basic English learners.'),
+  wordImageAsset('lock', lockWeek20Image, 'object', 'concrete', 'none', 'A simple lock flashcard image for Basic English learners.'),
+  wordImageAsset('roof', roofWeek20Image, 'object', 'concrete', 'none', 'A simple roof flashcard image for Basic English learners.'),
+  wordImageAsset('shelf', shelfWeek20Image, 'object', 'concrete', 'none', 'A simple shelf flashcard image for Basic English learners.'),
+  wordImageAsset('wall', wallWeek20Image, 'object', 'concrete', 'none', 'A simple wall flashcard image for Basic English learners.'),
+  wordImageAsset('wood', woodWeek20Image, 'object', 'concrete', 'none', 'A simple wood flashcard image for Basic English learners.'),
+  wordImageAsset('building', buildingWeek20Image, 'object', 'concrete', 'none', 'A simple building flashcard image for Basic English learners.'),
+  wordImageAsset('map', mapWeek20Image, 'object', 'concrete', 'none', 'A simple map flashcard image for Basic English learners.'),
+  wordImageAsset('almost', almostWeek21Image, 'object', 'concrete', 'none', 'A simple almost flashcard image for Basic English learners.'),
+  wordImageAsset('ever', everWeek21Image, 'object', 'concrete', 'none', 'A simple ever flashcard image for Basic English learners.'),
+  wordImageAsset('future', futureWeek21Image, 'object', 'concrete', 'none', 'A simple future flashcard image for Basic English learners.'),
+  wordImageAsset('minute', minuteWeek21Image, 'object', 'concrete', 'none', 'A simple minute flashcard image for Basic English learners.'),
+  wordImageAsset('past', pastWeek21Image, 'object', 'concrete', 'none', 'A simple past flashcard image for Basic English learners.'),
+  wordImageAsset('regular', regularWeek21Image, 'object', 'concrete', 'none', 'A simple regular flashcard image for Basic English learners.'),
+  wordImageAsset('second', secondWeek21Image, 'object', 'concrete', 'none', 'A simple second flashcard image for Basic English learners.'),
+  wordImageAsset('still', stillWeek21Image, 'object', 'concrete', 'none', 'A simple still flashcard image for Basic English learners.'),
+  wordImageAsset('till', tillWeek21Image, 'object', 'concrete', 'none', 'A simple till flashcard image for Basic English learners.'),
+  wordImageAsset('together', togetherWeek21Image, 'object', 'concrete', 'none', 'A simple together flashcard image for Basic English learners.'),
+  wordImageAsset('when', whenWeek21Image, 'object', 'concrete', 'none', 'A simple when flashcard image for Basic English learners.'),
+  wordImageAsset('while', whileWeek21Image, 'object', 'concrete', 'none', 'A simple while flashcard image for Basic English learners.'),
+  wordImageAsset('now', nowWeek21Image, 'object', 'concrete', 'none', 'A simple now flashcard image for Basic English learners.'),
+  wordImageAsset('only', onlyWeek21Image, 'object', 'concrete', 'none', 'A simple only flashcard image for Basic English learners.'),
+  wordImageAsset('frequent', frequentWeek21Image, 'object', 'concrete', 'none', 'A simple frequent flashcard image for Basic English learners.'),
+  wordImageAsset('interest', interestWeek21Image, 'object', 'concrete', 'none', 'A simple interest flashcard image for Basic English learners.'),
+  wordImageAsset('act', actWeek22Image, 'object', 'concrete', 'none', 'A simple act flashcard image for Basic English learners.'),
+  wordImageAsset('attention', attentionWeek22Image, 'object', 'concrete', 'none', 'A simple attention flashcard image for Basic English learners.'),
+  wordImageAsset('education', educationWeek22Image, 'object', 'concrete', 'none', 'A simple education flashcard image for Basic English learners.'),
+  wordImageAsset('fact', factWeek22Image, 'object', 'concrete', 'none', 'A simple fact flashcard image for Basic English learners.'),
+  wordImageAsset('guide', guideWeek22Image, 'object', 'concrete', 'none', 'A simple guide flashcard image for Basic English learners.'),
+  wordImageAsset('language', languageWeek22Image, 'object', 'concrete', 'none', 'A simple language flashcard image for Basic English learners.'),
+  wordImageAsset('learning', learningWeek22Image, 'object', 'concrete', 'none', 'A simple learning flashcard image for Basic English learners.'),
+  wordImageAsset('library', libraryWeek22Image, 'object', 'concrete', 'none', 'A simple library flashcard image for Basic English learners.'),
+  wordImageAsset('note', noteWeek22Image, 'object', 'concrete', 'none', 'A simple note flashcard image for Basic English learners.'),
+  wordImageAsset('reading', readingWeek22Image, 'object', 'concrete', 'none', 'A simple reading flashcard image for Basic English learners.'),
+  wordImageAsset('statement', statementWeek22Image, 'object', 'concrete', 'none', 'A simple statement flashcard image for Basic English learners.'),
+  wordImageAsset('teaching', teachingWeek22Image, 'object', 'concrete', 'none', 'A simple teaching flashcard image for Basic English learners.'),
+  wordImageAsset('test', testWeek22Image, 'object', 'concrete', 'none', 'A simple test flashcard image for Basic English learners.'),
+  wordImageAsset('writing', writingWeek22Image, 'object', 'concrete', 'none', 'A simple writing flashcard image for Basic English learners.'),
+  wordImageAsset('knowledge', knowledgeWeek22Image, 'object', 'concrete', 'none', 'A simple knowledge flashcard image for Basic English learners.'),
+  wordImageAsset('example', exampleWeek22Image, 'object', 'concrete', 'none', 'A simple example flashcard image for Basic English learners.'),
+  wordImageAsset('event', orderWeek21Image, 'object', 'concrete', 'none', 'A simple event flashcard image for Basic English learners.'),
+  wordImageAsset('business', studyWeek22Image, 'object', 'concrete', 'none', 'A simple business flashcard image for Basic English learners.'),
 ];
 
 export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(
