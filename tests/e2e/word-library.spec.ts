@@ -6,7 +6,7 @@ test('browse every core word and reset the library search', async ({ page }) => 
   await page.getByRole('button', { name: '850 Library' }).click();
   const entries = page.locator('.basic-library-item');
   await expect(entries).toHaveCount(120);
-  await expect(page.getByText('191 / 850')).toBeVisible();
+  await expect(page.getByText('242 / 850')).toBeVisible();
   for (let batch = 0; batch < 7; batch += 1) {
     await page.getByRole('button', { name: 'Show more' }).click();
   }

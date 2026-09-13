@@ -50,6 +50,7 @@ import day049Image from '../assets/picture-describe/day-049-body-care-story.png'
 import type { PictureDescribeTask } from '../domain/types';
 import { week8to12PictureDescribeTasksByDayId } from './week8to12LearningTasks';
 import { week13PictureDescribeTasksByDayId } from './week13LearningTasks';
+import { week14to16PictureDescribeTasksByDayId } from './week14to16LearningTasks';
 
 export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = {
   'day-001': {
@@ -607,4 +608,5 @@ export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = 
   },
   ...week8to12PictureDescribeTasksByDayId,
   ...week13PictureDescribeTasksByDayId,
+  ...week14to16PictureDescribeTasksByDayId,
 };

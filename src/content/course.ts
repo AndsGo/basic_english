@@ -8,11 +8,12 @@ import { week6, week6Patterns, week6Words } from './week6';
 import { week7, week7Patterns, week7Words } from './week7';
 import { week8to12, week8to12Patterns, week8to12Words } from './week8to12';
 import { week13, week13Patterns, week13Words } from './week13';
+import { week14, week14to16Patterns, week14Words, week15, week15Words, week16, week16Words } from './week14to16';
 
 export const basicEnglishCourse: Course = {
-  id: 'basic-english-13-weeks',
-  title: 'Basic English 13 Weeks',
-  contentVersion: '1.13.0',
+  id: 'basic-english-16-weeks',
+  title: 'Basic English 16 Weeks',
+  contentVersion: '1.16.0',
   schemaVersion: 1,
   words: [
     ...week1Words,
@@ -24,6 +25,9 @@ export const basicEnglishCourse: Course = {
     ...week7Words,
     ...week8to12Words,
     ...week13Words,
+    ...week14Words,
+    ...week15Words,
+    ...week16Words,
   ],
   patterns: [
     ...week1Patterns,
@@ -35,6 +39,7 @@ export const basicEnglishCourse: Course = {
     ...week7Patterns,
     ...week8to12Patterns,
     ...week13Patterns,
+    ...week14to16Patterns,
   ],
-  weeks: [week1, week2, week3, week4, week5, week6, week7, ...week8to12, week13],
+  weeks: [week1, week2, week3, week4, week5, week6, week7, ...week8to12, week13, week14, week15, week16],
 };
