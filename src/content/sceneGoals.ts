@@ -2,6 +2,7 @@ import type { SceneGoal } from '../domain/types';
 import { week8to12SceneGoalsByDayId } from './week8to12LearningTasks';
 import { week13SceneGoalsByDayId } from './week13LearningTasks';
 import { week14to16SceneGoalsByDayId } from './week14to16LearningTasks';
+import { week17to19SceneGoalsByDayId } from './week17to19LearningTasks';
 
 type SceneGoalDayId =
   | 'day-001'
@@ -500,4 +501,5 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   ...week8to12SceneGoalsByDayId,
   ...week13SceneGoalsByDayId,
   ...week14to16SceneGoalsByDayId,
+  ...week17to19SceneGoalsByDayId,
 };

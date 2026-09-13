@@ -389,7 +389,7 @@ describe('basicEnglishCourse V1.12', () => {
     const newDays = basicEnglishCourse.weeks.slice(4, 6).flatMap((week) => week.days);
 
     expect(result.errors).toEqual([]);
-    expect(basicEnglishCourse.contentVersion).toBe('1.16.0');
+    expect(basicEnglishCourse.contentVersion).toBe('1.19.0');
     expect(basicEnglishCourse.weeks.length).toBeGreaterThanOrEqual(6);
     expect(basicEnglishCourse.weeks.slice(0, 6).map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7]);
     expect(week5).toMatchObject({
@@ -440,7 +440,7 @@ describe('basicEnglishCourse V1.12', () => {
     const week7 = basicEnglishCourse.weeks[6];
 
     expect(result.errors).toEqual([]);
-    expect(basicEnglishCourse.contentVersion).toBe('1.16.0');
+    expect(basicEnglishCourse.contentVersion).toBe('1.19.0');
     expect(basicEnglishCourse.weeks.length).toBeGreaterThanOrEqual(7);
     expect(basicEnglishCourse.weeks.slice(0, 7).map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7, 7]);
     expect(week7).toMatchObject({
@@ -483,9 +483,9 @@ describe('basicEnglishCourse V1.12', () => {
     const newDays = newWeeks.flatMap((week) => week.days);
 
     expect(result.errors).toEqual([]);
-    expect(basicEnglishCourse.contentVersion).toBe('1.16.0');
-    expect(basicEnglishCourse.weeks).toHaveLength(16);
-    expect(basicEnglishCourse.weeks.map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7]);
+    expect(basicEnglishCourse.contentVersion).toBe('1.19.0');
+    expect(basicEnglishCourse.weeks).toHaveLength(19);
+    expect(basicEnglishCourse.weeks.map((week) => week.days.length)).toEqual([7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7]);
     expect(newWeeks.map((week) => week.id)).toEqual(['week-08', 'week-09', 'week-10', 'week-11', 'week-12']);
     expect(newDays[0]).toMatchObject({ id: 'day-050', dayNumber: 50 });
     expect(newDays.at(-1)).toMatchObject({ id: 'day-084', dayNumber: 84 });
@@ -567,7 +567,7 @@ describe('basicEnglishCourse V1.12', () => {
   it('keeps Day 112 as the course completion day', () => {
     const allDays = basicEnglishCourse.weeks.flatMap((week) => week.days);
 
-    expect(allDays.at(-1)?.id).toBe('day-112');
+    expect(allDays.at(-1)?.id).toBe('day-133');
     expect(allDays.at(-1)?.weeklyCheckRubric).toBeDefined();
   });
 
@@ -1497,4 +1497,5 @@ describe('picture describe tasks', () => {
     );
   });
 });
+
 

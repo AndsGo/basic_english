@@ -2,6 +2,7 @@ import type { SceneRemixTask } from '../domain/types';
 import { week8to12SceneRemixTasksByDayId } from './week8to12LearningTasks';
 import { week13SceneRemixTasksByDayId } from './week13LearningTasks';
 import { week14to16SceneRemixTasksByDayId } from './week14to16LearningTasks';
+import { week17to19SceneRemixTasksByDayId } from './week17to19LearningTasks';
 
 export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> = {
   'day-001': [
@@ -481,4 +482,5 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
   ...week8to12SceneRemixTasksByDayId,
   ...week13SceneRemixTasksByDayId,
   ...week14to16SceneRemixTasksByDayId,
+  ...week17to19SceneRemixTasksByDayId,
 };

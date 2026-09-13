@@ -151,11 +151,11 @@ describe('CoursePage', () => {
       />,
     );
 
-    expect(screen.getAllByText('7 / 7 days completed')).toHaveLength(16);
+    expect(screen.getAllByText('7 / 7 days completed')).toHaveLength(19);
     expect(screen.queryByRole('button', { name: 'Open Today' })).not.toBeInTheDocument();
 
-    const day112Card = screen.getByText('Day 112: Week 16 Comparison Story').closest('article');
-    expect(day112Card).not.toBeNull();
-    expect(within(day112Card!).getByText('Completed')).toBeInTheDocument();
+    const day133Card = screen.getByText('Day 133: Week 19 Food Story').closest('article');
+    expect(day133Card).not.toBeNull();
+    expect(within(day133Card!).getByText('Completed')).toBeInTheDocument();
   });
 });

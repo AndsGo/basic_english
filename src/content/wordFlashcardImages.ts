@@ -16,6 +16,57 @@ import cameraWeek13Image from '../assets/word-flashcards/camera-week13.png';
 import catWeek13Image from '../assets/word-flashcards/cat-week13.png';
 import chainWeek13Image from '../assets/word-flashcards/chain-week13.png';
 import chalkWeek13Image from '../assets/word-flashcards/chalk-week13.png';
+import blackWeek17Image from '../assets/word-flashcards/black-week17.png';
+import blueWeek17Image from '../assets/word-flashcards/blue-week17.png';
+import brownWeek17Image from '../assets/word-flashcards/brown-week17.png';
+import brightWeek17Image from '../assets/word-flashcards/bright-week17.png';
+import colorWeek17Image from '../assets/word-flashcards/color-week17.png';
+import darkWeek17Image from '../assets/word-flashcards/dark-week17.png';
+import greenWeek17Image from '../assets/word-flashcards/green-week17.png';
+import grayWeek17Image from '../assets/word-flashcards/gray-week17.png';
+import redWeek17Image from '../assets/word-flashcards/red-week17.png';
+import shadeWeek17Image from '../assets/word-flashcards/shade-week17.png';
+import whiteWeek17Image from '../assets/word-flashcards/white-week17.png';
+import yellowWeek17Image from '../assets/word-flashcards/yellow-week17.png';
+import eyeWeek17Image from '../assets/word-flashcards/eye-week17.png';
+import hairWeek17Image from '../assets/word-flashcards/hair-week17.png';
+import smileWeek17Image from '../assets/word-flashcards/smile-week17.png';
+import softWeek17Image from '../assets/word-flashcards/soft-week17.png';
+import loudWeek17Image from '../assets/word-flashcards/loud-week17.png';
+import dressWeek18Image from '../assets/word-flashcards/dress-week18.png';
+import collarWeek18Image from '../assets/word-flashcards/collar-week18.png';
+import pocketWeek18Image from '../assets/word-flashcards/pocket-week18.png';
+import skirtWeek18Image from '../assets/word-flashcards/skirt-week18.png';
+import stockingWeek18Image from '../assets/word-flashcards/stocking-week18.png';
+import trousersWeek18Image from '../assets/word-flashcards/trousers-week18.png';
+import fingerWeek18Image from '../assets/word-flashcards/finger-week18.png';
+import kneeWeek18Image from '../assets/word-flashcards/knee-week18.png';
+import legWeek18Image from '../assets/word-flashcards/leg-week18.png';
+import lipWeek18Image from '../assets/word-flashcards/lip-week18.png';
+import neckWeek18Image from '../assets/word-flashcards/neck-week18.png';
+import noseWeek18Image from '../assets/word-flashcards/nose-week18.png';
+import toothWeek18Image from '../assets/word-flashcards/tooth-week18.png';
+import thumbWeek18Image from '../assets/word-flashcards/thumb-week18.png';
+import toeWeek18Image from '../assets/word-flashcards/toe-week18.png';
+import watchWeek18Image from '../assets/word-flashcards/watch-week18.png';
+import ringWeek18Image from '../assets/word-flashcards/ring-week18.png';
+import cookWeek19Image from '../assets/word-flashcards/cook-week19.png';
+import cheeseWeek19Image from '../assets/word-flashcards/cheese-week19.png';
+import butterWeek19Image from '../assets/word-flashcards/butter-week19.png';
+import eggWeek19Image from '../assets/word-flashcards/egg-week19.png';
+import meatWeek19Image from '../assets/word-flashcards/meat-week19.png';
+import ovenWeek19Image from '../assets/word-flashcards/oven-week19.png';
+import potWeek19Image from '../assets/word-flashcards/pot-week19.png';
+import potatoWeek19Image from '../assets/word-flashcards/potato-week19.png';
+import saltWeek19Image from '../assets/word-flashcards/salt-week19.png';
+import sugarWeek19Image from '../assets/word-flashcards/sugar-week19.png';
+import soupWeek19Image from '../assets/word-flashcards/soup-week19.png';
+import oilWeek19Image from '../assets/word-flashcards/oil-week19.png';
+import pasteWeek19Image from '../assets/word-flashcards/paste-week19.png';
+import tinWeek19Image from '../assets/word-flashcards/tin-week19.png';
+import trayWeek19Image from '../assets/word-flashcards/tray-week19.png';
+import corkWeek19Image from '../assets/word-flashcards/cork-week19.png';
+import orangeWeek19Image from '../assets/word-flashcards/orange-week19.png';
 import bottleWeek14Image from '../assets/word-flashcards/bottle-week14.png';
 import brushWeek14Image from '../assets/word-flashcards/brush-week14.png';
 import bucketWeek14Image from '../assets/word-flashcards/bucket-week14.png';
@@ -628,6 +679,57 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('long', longWeek16Image, 'object', 'concrete', 'none', 'A simple long flashcard image for Basic English learners.'),
   wordImageAsset('wide', wideWeek16Image, 'object', 'concrete', 'none', 'A simple wide flashcard image for Basic English learners.'),
   wordImageAsset('deep', deepWeek16Image, 'object', 'concrete', 'none', 'A simple deep flashcard image for Basic English learners.'),
+  wordImageAsset('black', blackWeek17Image, 'object', 'concrete', 'none', 'A simple black flashcard image for Basic English learners.'),
+  wordImageAsset('blue', blueWeek17Image, 'object', 'concrete', 'none', 'A simple blue flashcard image for Basic English learners.'),
+  wordImageAsset('brown', brownWeek17Image, 'object', 'concrete', 'none', 'A simple brown flashcard image for Basic English learners.'),
+  wordImageAsset('bright', brightWeek17Image, 'object', 'concrete', 'none', 'A simple bright flashcard image for Basic English learners.'),
+  wordImageAsset('color', colorWeek17Image, 'object', 'concrete', 'none', 'A simple color flashcard image for Basic English learners.'),
+  wordImageAsset('dark', darkWeek17Image, 'object', 'concrete', 'none', 'A simple dark flashcard image for Basic English learners.'),
+  wordImageAsset('green', greenWeek17Image, 'object', 'concrete', 'none', 'A simple green flashcard image for Basic English learners.'),
+  wordImageAsset('gray', grayWeek17Image, 'object', 'concrete', 'none', 'A simple gray flashcard image for Basic English learners.'),
+  wordImageAsset('red', redWeek17Image, 'object', 'concrete', 'none', 'A simple red flashcard image for Basic English learners.'),
+  wordImageAsset('shade', shadeWeek17Image, 'object', 'concrete', 'none', 'A simple shade flashcard image for Basic English learners.'),
+  wordImageAsset('white', whiteWeek17Image, 'object', 'concrete', 'none', 'A simple white flashcard image for Basic English learners.'),
+  wordImageAsset('yellow', yellowWeek17Image, 'object', 'concrete', 'none', 'A simple yellow flashcard image for Basic English learners.'),
+  wordImageAsset('eye', eyeWeek17Image, 'object', 'concrete', 'none', 'A simple eye flashcard image for Basic English learners.'),
+  wordImageAsset('hair', hairWeek17Image, 'object', 'concrete', 'none', 'A simple hair flashcard image for Basic English learners.'),
+  wordImageAsset('smile', smileWeek17Image, 'object', 'concrete', 'none', 'A simple smile flashcard image for Basic English learners.'),
+  wordImageAsset('soft', softWeek17Image, 'object', 'concrete', 'none', 'A simple soft flashcard image for Basic English learners.'),
+  wordImageAsset('loud', loudWeek17Image, 'object', 'concrete', 'none', 'A simple loud flashcard image for Basic English learners.'),
+  wordImageAsset('dress', dressWeek18Image, 'object', 'concrete', 'none', 'A simple dress flashcard image for Basic English learners.'),
+  wordImageAsset('collar', collarWeek18Image, 'object', 'concrete', 'none', 'A simple collar flashcard image for Basic English learners.'),
+  wordImageAsset('pocket', pocketWeek18Image, 'object', 'concrete', 'none', 'A simple pocket flashcard image for Basic English learners.'),
+  wordImageAsset('skirt', skirtWeek18Image, 'object', 'concrete', 'none', 'A simple skirt flashcard image for Basic English learners.'),
+  wordImageAsset('stocking', stockingWeek18Image, 'object', 'concrete', 'none', 'A simple stocking flashcard image for Basic English learners.'),
+  wordImageAsset('trousers', trousersWeek18Image, 'object', 'concrete', 'none', 'A simple trousers flashcard image for Basic English learners.'),
+  wordImageAsset('finger', fingerWeek18Image, 'object', 'concrete', 'none', 'A simple finger flashcard image for Basic English learners.'),
+  wordImageAsset('knee', kneeWeek18Image, 'object', 'concrete', 'none', 'A simple knee flashcard image for Basic English learners.'),
+  wordImageAsset('leg', legWeek18Image, 'object', 'concrete', 'none', 'A simple leg flashcard image for Basic English learners.'),
+  wordImageAsset('lip', lipWeek18Image, 'object', 'concrete', 'none', 'A simple lip flashcard image for Basic English learners.'),
+  wordImageAsset('neck', neckWeek18Image, 'object', 'concrete', 'none', 'A simple neck flashcard image for Basic English learners.'),
+  wordImageAsset('nose', noseWeek18Image, 'object', 'concrete', 'none', 'A simple nose flashcard image for Basic English learners.'),
+  wordImageAsset('tooth', toothWeek18Image, 'object', 'concrete', 'none', 'A simple tooth flashcard image for Basic English learners.'),
+  wordImageAsset('thumb', thumbWeek18Image, 'object', 'concrete', 'none', 'A simple thumb flashcard image for Basic English learners.'),
+  wordImageAsset('toe', toeWeek18Image, 'object', 'concrete', 'none', 'A simple toe flashcard image for Basic English learners.'),
+  wordImageAsset('watch', watchWeek18Image, 'object', 'concrete', 'none', 'A simple watch flashcard image for Basic English learners.'),
+  wordImageAsset('ring', ringWeek18Image, 'object', 'concrete', 'none', 'A simple ring flashcard image for Basic English learners.'),
+  wordImageAsset('cook', cookWeek19Image, 'object', 'concrete', 'none', 'A simple cook flashcard image for Basic English learners.'),
+  wordImageAsset('cheese', cheeseWeek19Image, 'object', 'concrete', 'none', 'A simple cheese flashcard image for Basic English learners.'),
+  wordImageAsset('butter', butterWeek19Image, 'object', 'concrete', 'none', 'A simple butter flashcard image for Basic English learners.'),
+  wordImageAsset('egg', eggWeek19Image, 'object', 'concrete', 'none', 'A simple egg flashcard image for Basic English learners.'),
+  wordImageAsset('meat', meatWeek19Image, 'object', 'concrete', 'none', 'A simple meat flashcard image for Basic English learners.'),
+  wordImageAsset('oven', ovenWeek19Image, 'object', 'concrete', 'none', 'A simple oven flashcard image for Basic English learners.'),
+  wordImageAsset('pot', potWeek19Image, 'object', 'concrete', 'none', 'A simple pot flashcard image for Basic English learners.'),
+  wordImageAsset('potato', potatoWeek19Image, 'object', 'concrete', 'none', 'A simple potato flashcard image for Basic English learners.'),
+  wordImageAsset('salt', saltWeek19Image, 'object', 'concrete', 'none', 'A simple salt flashcard image for Basic English learners.'),
+  wordImageAsset('sugar', sugarWeek19Image, 'object', 'concrete', 'none', 'A simple sugar flashcard image for Basic English learners.'),
+  wordImageAsset('soup', soupWeek19Image, 'object', 'concrete', 'none', 'A simple soup flashcard image for Basic English learners.'),
+  wordImageAsset('oil', oilWeek19Image, 'object', 'concrete', 'none', 'A simple oil flashcard image for Basic English learners.'),
+  wordImageAsset('paste', pasteWeek19Image, 'object', 'concrete', 'none', 'A simple paste flashcard image for Basic English learners.'),
+  wordImageAsset('tin', tinWeek19Image, 'object', 'concrete', 'none', 'A simple tin flashcard image for Basic English learners.'),
+  wordImageAsset('tray', trayWeek19Image, 'object', 'concrete', 'none', 'A simple tray flashcard image for Basic English learners.'),
+  wordImageAsset('cork', corkWeek19Image, 'object', 'concrete', 'none', 'A simple cork flashcard image for Basic English learners.'),
+  wordImageAsset('orange', orangeWeek19Image, 'object', 'concrete', 'none', 'A simple orange flashcard image for Basic English learners.'),
 ];
 
 export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(

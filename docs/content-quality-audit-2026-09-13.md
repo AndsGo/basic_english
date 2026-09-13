@@ -3,7 +3,7 @@
 ## Delivered
 
 - Corrected the core inventory from 855 entries to 850 headwords. The extra entries `less`, `least`, `most`, `she`, and `un` remain accepted course exceptions; no lesson or progress IDs changed.
-- Before Week 13, scheduled course coverage was 174/850 (20.5%). After Weeks 13-16, coverage is 242/850 (28.5%), with 608 missing core headwords and 53 supplementary course words. All 295 course words occur in day word lists.
+- Before Week 13, scheduled course coverage was 174/850 (20.5%). After Weeks 13-19, coverage is 293/850 (34.5%), with 557 missing core headwords and 53 supplementary course words. All 346 course words occur in day word lists.
 - Replaced spelling-based placeholder phonetics for all 50 Week 8-12 words with British IPA. The typed pronunciation map makes missing entries a compile-time error.
 - Corrected countable-word language in all weekly assessment rubrics. Scores, criteria IDs, and pass thresholds are unchanged.
 - Corrected Day 80's `much days` model answer, cloze and Chinese prompt together: `A week has 7 days.`
@@ -11,6 +11,7 @@
 - Added machine-readable health output with exact missing/supplementary words, unscheduled IDs, and first-introduction lists for every day.
 - Added Week 13 (Days 85-91), with 17 new core words, 4 patterns, a complete home-object picture scene, and all day-level scene/remix assets.
 - Added Weeks 14-16 (Days 92-112), with 51 new core words, three daily-life picture scenes, word flashcards, and complete scene/remix assets.
+- Added Weeks 17-19 (Days 113-133), with 51 new core words, three daily-life picture scenes, word flashcards, and complete scene/remix assets.
 
 ## Audit Method
 
@@ -39,7 +40,7 @@ The JSON report derives scheduled coverage from actual day references, independe
 This closes the bounded content-correctness and library-access repair, not the entire future curriculum backlog.
 
 - Weeks 2-4 remain uneven: Week 2 introduces 33 words and averages 11.7 active references/day; Weeks 3 and 4 introduce 48 and 39 words. The warnings were not suppressed or thresholds relaxed. A future lesson-load revision must account for prerequisite patterns and existing progress.
-- The 16-week course is not full coverage of all 850 words, nor a guarantee of describing every possible life situation. The 608 missing headwords need authored teaching content and reviewed assets before they can be called delivered.
+- The 19-week course is not full coverage of all 850 words, nor a guarantee of describing every possible life situation. The 557 missing headwords need authored teaching content and reviewed assets before they can be called delivered.
 - The pre-existing Weeks 13-52 proposal remains the long-term expansion plan. Its capacity is 679 slots, above the current remaining inventory; Weeks 14-16 are now shipped curriculum and the remaining weeks remain planned work.
 - This audit checks targeted grammar defects and pronunciation placeholders. It is not a complete linguistic certification of all prompts.
 - Initial bundle optimization remains open. No image was regenerated, redrawn, resized, or compressed in this repair.
