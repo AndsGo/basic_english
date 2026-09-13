@@ -213,7 +213,7 @@ async function readLearningStores(page: Page) {
 async function answerReinforcementQuestion(practice: Locator) {
   const order = practice.locator('.reinforcement-practice-order');
   if (await order.count()) {
-    const tokens = order.locator('.reinforcement-practice-options button');
+    const tokens = order.locator('.reinforcement-practice-options button:enabled');
     while (await tokens.count()) await tokens.first().click();
     await order.getByRole('button', { name: 'Submit answer' }).click();
     return;

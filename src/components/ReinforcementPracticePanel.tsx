@@ -161,7 +161,10 @@ export function ReinforcementPracticePanel({
   };
 
   const answeredProgressIds = new Set(session?.answers.map((answer) => answer.progressId));
-  const position = questions.findIndex(({ question }) => !answeredProgressIds.has(question.progressId));
+  const lastAnswerId = session?.answers.at(-1)?.progressId;
+  const position = questions.findIndex(({ question }) => answered
+    ? question.progressId === lastAnswerId
+    : !answeredProgressIds.has(question.progressId));
   const currentQuestion = position >= 0 ? questions[position] : undefined;
 
   const saveSession = async (nextSession: ReinforcementPracticeSession): Promise<boolean> => {

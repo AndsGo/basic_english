@@ -58,7 +58,10 @@ describe('ReinforcementPracticePanel', () => {
 
     await user.click(await screen.findByRole('button', { name: /the word for a person or thing/i }));
     expect(await screen.findByRole('status')).toHaveTextContent('Correct');
+    expect(screen.getByText('What does "name" mean?')).toBeInTheDocument();
+    expect(screen.queryByText('What does "book" mean?')).not.toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Next question' }));
+    expect(screen.getByText('What does "book" mean?')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: /pages with words or pictures/i }));
 
     await waitFor(() => {
