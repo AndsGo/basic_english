@@ -1,5 +1,6 @@
 import type { SceneGoal } from '../domain/types';
 import { week8to12SceneGoalsByDayId } from './week8to12LearningTasks';
+import { week13SceneGoalsByDayId } from './week13LearningTasks';
 
 type SceneGoalDayId =
   | 'day-001'
@@ -496,4 +497,5 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
     dialoguePrompts: ['Ask and answer about the body care story.', 'Ask and answer about rest, water, and care.'],
   },
   ...week8to12SceneGoalsByDayId,
+  ...week13SceneGoalsByDayId,
 };

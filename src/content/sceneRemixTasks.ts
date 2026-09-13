@@ -1,5 +1,6 @@
 import type { SceneRemixTask } from '../domain/types';
 import { week8to12SceneRemixTasksByDayId } from './week8to12LearningTasks';
+import { week13SceneRemixTasksByDayId } from './week13LearningTasks';
 
 export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> = {
   'day-001': [
@@ -477,4 +478,5 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
     },
   ],
   ...week8to12SceneRemixTasksByDayId,
+  ...week13SceneRemixTasksByDayId,
 };

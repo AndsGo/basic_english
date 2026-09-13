@@ -79,7 +79,8 @@ describe('MasteryReviewPanel', () => {
 
     render(<MasteryReviewPanel course={basicEnglishCourse} repository={repo} now={now} onChange={onChange} />);
 
-    await user.click(await screen.findByRole('button', { name: /to get or keep something/i }));
+    const options = await screen.findAllByRole('button');
+    await user.click(options.find((button) => !button.textContent?.includes('the word for a person or thing'))!);
 
     await waitFor(() => {
       expect(repo.saveMasteryReviewResult).toHaveBeenCalledWith(expect.objectContaining({ contentId: 'name', consecutiveCorrect: 0, status: 'learning' }), expect.objectContaining({
@@ -104,7 +105,8 @@ describe('MasteryReviewPanel', () => {
 
     render(<MasteryReviewPanel course={basicEnglishCourse} repository={repo} now={now} />);
 
-    await user.click(await screen.findByRole('button', { name: /to get or keep something/i }));
+    const options = await screen.findAllByRole('button');
+    await user.click(options.find((button) => !button.textContent?.includes('the word for a person or thing'))!);
 
     await waitFor(() => {
       expect(repo.saveMasteryReviewResult).toHaveBeenCalledWith(expect.anything(), expect.objectContaining({

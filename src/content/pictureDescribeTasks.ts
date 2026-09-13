@@ -49,6 +49,7 @@ import day048Image from '../assets/picture-describe/day-048-tell-body-problem.pn
 import day049Image from '../assets/picture-describe/day-049-body-care-story.png';
 import type { PictureDescribeTask } from '../domain/types';
 import { week8to12PictureDescribeTasksByDayId } from './week8to12LearningTasks';
+import { week13PictureDescribeTasksByDayId } from './week13LearningTasks';
 
 export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = {
   'day-001': {
@@ -605,4 +606,5 @@ export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = 
     simpleVersion: ['I feel ill.', 'I am tired.', 'I have pain in my head.', 'I need rest.', 'I need water.', 'I need care.'],
   },
   ...week8to12PictureDescribeTasksByDayId,
+  ...week13PictureDescribeTasksByDayId,
 };

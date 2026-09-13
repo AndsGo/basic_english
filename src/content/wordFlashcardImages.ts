@@ -1,4 +1,21 @@
 import amImage from '../assets/word-flashcards/am.png';
+import appleWeek13Image from '../assets/word-flashcards/apple-week13.png';
+import armWeek13Image from '../assets/word-flashcards/arm-week13.png';
+import animalWeek13Image from '../assets/word-flashcards/animal-week13.png';
+import antWeek13Image from '../assets/word-flashcards/ant-week13.png';
+import ballWeek13Image from '../assets/word-flashcards/ball-week13.png';
+import basketWeek13Image from '../assets/word-flashcards/basket-week13.png';
+import bathWeek13Image from '../assets/word-flashcards/bath-week13.png';
+import branchWeek13Image from '../assets/word-flashcards/branch-week13.png';
+import brickWeek13Image from '../assets/word-flashcards/brick-week13.png';
+import boatWeek13Image from '../assets/word-flashcards/boat-week13.png';
+import boneWeek13Image from '../assets/word-flashcards/bone-week13.png';
+import bootWeek13Image from '../assets/word-flashcards/boot-week13.png';
+import cakeWeek13Image from '../assets/word-flashcards/cake-week13.png';
+import cameraWeek13Image from '../assets/word-flashcards/camera-week13.png';
+import catWeek13Image from '../assets/word-flashcards/cat-week13.png';
+import chainWeek13Image from '../assets/word-flashcards/chain-week13.png';
+import chalkWeek13Image from '../assets/word-flashcards/chalk-week13.png';
 import bagImage from '../assets/word-flashcards/bag.png';
 import becauseImage from '../assets/word-flashcards/because.png';
 import bedImage from '../assets/word-flashcards/bed.png';
@@ -492,6 +509,23 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('winter', winterImage, 'time', 'scene', 'none', 'A simple winter scene for Basic English learners.'),
   wordImageAsset('north', northImage, 'place', 'grammar', 'english-keyword', 'A simple English keyword card showing the word north.'),
   wordImageAsset('south', southImage, 'place', 'grammar', 'english-keyword', 'A simple English keyword card showing the word south.'),
+  wordImageAsset('apple', appleWeek13Image, 'object', 'concrete', 'none', 'A simple apple flashcard image for Week 13.'),
+  wordImageAsset('arm', armWeek13Image, 'object', 'concrete', 'none', 'A simple arm flashcard image for Week 13.'),
+  wordImageAsset('animal', animalWeek13Image, 'object', 'concrete', 'none', 'A simple animal flashcard image for Week 13.'),
+  wordImageAsset('ant', antWeek13Image, 'object', 'concrete', 'none', 'A simple ant flashcard image for Week 13.'),
+  wordImageAsset('ball', ballWeek13Image, 'object', 'concrete', 'none', 'A simple ball flashcard image for Week 13.'),
+  wordImageAsset('basket', basketWeek13Image, 'object', 'concrete', 'none', 'A simple basket flashcard image for Week 13.'),
+  wordImageAsset('bath', bathWeek13Image, 'object', 'concrete', 'none', 'A simple bath flashcard image for Week 13.'),
+  wordImageAsset('branch', branchWeek13Image, 'object', 'concrete', 'none', 'A simple branch flashcard image for Week 13.'),
+  wordImageAsset('brick', brickWeek13Image, 'object', 'concrete', 'none', 'A simple brick flashcard image for Week 13.'),
+  wordImageAsset('boat', boatWeek13Image, 'object', 'concrete', 'none', 'A simple boat flashcard image for Week 13.'),
+  wordImageAsset('bone', boneWeek13Image, 'object', 'concrete', 'none', 'A simple bone flashcard image for Week 13.'),
+  wordImageAsset('boot', bootWeek13Image, 'object', 'concrete', 'none', 'A simple boot flashcard image for Week 13.'),
+  wordImageAsset('cake', cakeWeek13Image, 'object', 'concrete', 'none', 'A simple cake flashcard image for Week 13.'),
+  wordImageAsset('camera', cameraWeek13Image, 'object', 'concrete', 'none', 'A simple camera flashcard image for Week 13.'),
+  wordImageAsset('cat', catWeek13Image, 'object', 'concrete', 'none', 'A simple cat flashcard image for Week 13.'),
+  wordImageAsset('chain', chainWeek13Image, 'object', 'concrete', 'none', 'A simple chain flashcard image for Week 13.'),
+  wordImageAsset('chalk', chalkWeek13Image, 'object', 'concrete', 'none', 'A simple chalk flashcard image for Week 13.'),
 ];
 
 export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(
