@@ -4,6 +4,7 @@ import { week13SceneRemixTasksByDayId } from './week13LearningTasks';
 import { week14to16SceneRemixTasksByDayId } from './week14to16LearningTasks';
 import { week17to19SceneRemixTasksByDayId } from './week17to19LearningTasks';
 import { week20to22SceneRemixTasksByDayId } from './week20to22LearningTasks';
+import { week23to25SceneRemixTasksByDayId } from './week23to25LearningTasks';
 
 export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> = {
   'day-001': [
@@ -485,4 +486,5 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
   ...week14to16SceneRemixTasksByDayId,
   ...week17to19SceneRemixTasksByDayId,
   ...week20to22SceneRemixTasksByDayId,
+  ...week23to25SceneRemixTasksByDayId,
 };
