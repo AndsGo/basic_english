@@ -101,4 +101,19 @@ describe('CompletionSummary', () => {
     expect(screen.getByRole('heading', { name: 'Try Another Scene' })).toBeInTheDocument();
     expect(screen.getByText('Change China to Japan.')).toBeInTheDocument();
   });
+
+  it('renders the learning report after the review tomorrow summary', () => {
+    render(
+      <CompletionSummary
+        day={day1}
+        output={sceneOutput}
+        reviewCount={2}
+        learningReport={<p>Today&apos;s Learning</p>}
+      />,
+    );
+
+    const review = screen.getByText('Review tomorrow: 2');
+    const report = screen.getByText("Today's Learning");
+    expect(review.compareDocumentPosition(report) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
 });

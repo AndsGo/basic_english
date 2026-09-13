@@ -48,7 +48,7 @@
 - Produces \`MasteryContentType\`, \`MasteryStatus\`, \`MasteryProgress\`, \`MasteryReviewSession\`, \`createPendingMasteryProgress\`, \`selectDueMasteryProgress\`, \`applyMasteryAnswer\`, \`toLocalDateString\`, and \`getScenarioMasteryState\`.
 - Consumed by Tasks 2-6.
 
-- [ ] **Step 1: Write failing transition and selection tests.**
+- [x] **Step 1: Write failing transition and selection tests.**
 
 \`\`\`ts
 import { describe, expect, it } from 'vitest';
@@ -82,13 +82,13 @@ it('promotes correct answers through learning, stable, and mastered', () => {
 
 Add tests for incorrect \`stable\` and \`mastered\` records becoming \`needs_reinforcement\` on the next day, a session exclusion preventing same-day repetition, and capability thresholds: incomplete prerequisite is \`not_started\`; 70% stable/mastered is \`ready\`; 90% plus reinforcement is not \`strong\`.
 
-- [ ] **Step 2: Run the test and verify failure.**
+- [x] **Step 2: Run the test and verify failure.**
 
 Run: \`npx vitest run src/domain/mastery.test.ts\`
 
 Expected: FAIL because \`./mastery\` does not exist.
 
-- [ ] **Step 3: Implement exact core interfaces and pure rules.**
+- [x] **Step 3: Implement exact core interfaces and pure rules.**
 
 \`\`\`ts
 export type MasteryContentType = 'word' | 'pattern';
@@ -130,13 +130,13 @@ export function applyMasteryAnswer(
 
 Use a private ISO-safe \`addDays\`. Correct answers schedule 1, 3, then 7 days while moving \`pending_validation -> learning -> stable -> mastered\`. Any incorrect answer resets \`consecutiveCorrect\`, schedules tomorrow, and sets \`needs_reinforcement\` if the previous state was \`stable\` or \`mastered\`; otherwise retain \`learning\`. Select due records only, order by reinforcement, learning/stable, pending, mastered, then oldest \`dueAt\`, then oldest \`lastAnsweredAt\`; exclude session IDs and slice at eight.
 
-- [ ] **Step 4: Run focused tests.**
+- [x] **Step 4: Run focused tests.**
 
 Run: \`npx vitest run src/domain/mastery.test.ts\`
 
 Expected: PASS.
 
-- [ ] **Step 5: Commit.**
+- [x] **Step 5: Commit.**
 
 \`\`\`bash
 git add src/domain/mastery.ts src/domain/mastery.test.ts
@@ -154,7 +154,7 @@ git commit -m "feat: add mastery scheduling rules"
 - Consumes Task 1 types.
 - Produces \`saveMasteryProgress\`, \`getMasteryProgress\`, \`listMasteryProgress\`, \`saveMasteryReviewSession\`, \`getMasteryReviewSession\`.
 
-- [ ] **Step 1: Write failing persistence and migration tests.**
+- [x] **Step 1: Write failing persistence and migration tests.**
 
 \`\`\`ts
 it('persists mastery records and a local-date session', async () => {
@@ -175,13 +175,13 @@ it('persists mastery records and a local-date session', async () => {
 
 Add a v5 fixture using the existing legacy-store pattern. Open it through the new repository, write mastery data, and assert the pre-existing \`userOutputs\` record is still readable.
 
-- [ ] **Step 2: Run the test and verify failure.**
+- [x] **Step 2: Run the test and verify failure.**
 
 Run: \`npx vitest run src/storage/indexedDbProgressRepository.test.ts\`
 
 Expected: FAIL because mastery methods and stores do not exist.
 
-- [ ] **Step 3: Add contracts and v6 stores.**
+- [x] **Step 3: Add contracts and v6 stores.**
 
 \`\`\`ts
 export interface ProgressRepository {
@@ -196,7 +196,7 @@ export interface ProgressRepository {
 
 Set \`DB_VERSION = 6\`. Add \`masteryProgress\` keyed by \`id\`, indexed by \`contentId\` and \`dueAt\`; add \`masteryReviewSessions\` keyed by \`localDate\`. In the existing \`upgrade\`, create only stores that are missing. Sort \`listMasteryProgress\` by \`dueAt\`, then \`id\`.
 
-- [ ] **Step 4: Run tests and commit.**
+- [x] **Step 4: Run tests and commit.**
 
 Run: \`npx vitest run src/storage/indexedDbProgressRepository.test.ts\`
 
@@ -220,7 +220,7 @@ git commit -m "feat: persist mastery review progress"
 - Produces \`MasteryQuestion\`, \`buildMasteryQuestion\`, and \`<MasteryReviewPanel course repository now? onChange?>\`.
 - Consumes Tasks 1-2 and \`Course\`.
 
-- [ ] **Step 1: Write failing factory and panel tests.**
+- [x] **Step 1: Write failing factory and panel tests.**
 
 \`\`\`ts
 it('builds an English word definition choice with exactly one correct definition', () => {
@@ -243,13 +243,13 @@ it('records a correct answer, announces feedback, and never presents more than e
 
 Also test empty due state, storage error alert, incorrect answer persistence, and a completed session item being absent after rerender.
 
-- [ ] **Step 2: Run targeted tests and verify failure.**
+- [x] **Step 2: Run targeted tests and verify failure.**
 
 Run: \`npx vitest run src/domain/masteryQuestions.test.ts src/components/MasteryReviewPanel.test.tsx\`
 
 Expected: FAIL because factory and panel do not exist.
 
-- [ ] **Step 3: Implement deterministic questions.**
+- [x] **Step 3: Implement deterministic questions.**
 
 \`\`\`ts
 export type MasteryQuestion = {
@@ -268,7 +268,7 @@ export function buildMasteryQuestion(progress: MasteryProgress, course: Course):
 
 Pick a question kind from a stable hash of \`progress.id\`. For words, use target \`definition\` and two distinct definitions from other course words. For patterns, rotate among correct \`examples[0]\` plus two other examples, one token blank in that example, and its ordered tokens. Reject missing content with a typed error; never read \`chinese\`.
 
-- [ ] **Step 4: Implement panel persistence and accessible feedback.**
+- [x] **Step 4: Implement panel persistence and accessible feedback.**
 
 \`\`\`tsx
 export function MasteryReviewPanel({
@@ -283,7 +283,7 @@ export function MasteryReviewPanel({
 
 Use \`toLocalDateString(now())\` to load a session. Render \`No mastery review due today.\` when empty, \`Question {completed + 1} of {total}\` while active, and a \`role=\"status\"\` result after answer. Disable controls during save and after answer. Save the updated record first, then a session whose \`completedProgressIds\` includes the record ID. Add only \`mastery-review-*\` CSS selectors and reuse existing button styles.
 
-- [ ] **Step 5: Run tests and commit.**
+- [x] **Step 5: Run tests and commit.**
 
 Run: \`npx vitest run src/domain/masteryQuestions.test.ts src/components/MasteryReviewPanel.test.tsx\`
 
@@ -311,7 +311,7 @@ git commit -m "feat: add mastery review questions"
 - Consumes Task 3 panel and Task 1 scheduler.
 - Produces a first Today step, idempotent lesson seeding, separated Review sections, and a combined due badge.
 
-- [ ] **Step 1: Add failing progress, Today, Review, and App tests.**
+- [x] **Step 1: Add failing progress, Today, Review, and App tests.**
 
 \`\`\`ts
 it('starts with mastery review and proceeds to the existing previous-day review', () => {
@@ -332,13 +332,13 @@ it('keeps mastery review separate from manual Practice again', async () => {
 
 Add a Today completion test asserting unique word and pattern records were seeded with \`pending_validation\`; add an App test asserting one manual due item plus one due mastery record renders Review badge \`2\`.
 
-- [ ] **Step 2: Run tests and verify failure.**
+- [x] **Step 2: Run tests and verify failure.**
 
 Run: \`npx vitest run src/domain/progress.test.ts src/components/TodayPage.test.tsx src/components/ReviewPage.test.tsx src/App.test.tsx\`
 
 Expected: FAIL because \`mastery-review\` and the new props do not exist.
 
-- [ ] **Step 3: Add the step and idempotent seed.**
+- [x] **Step 3: Add the step and idempotent seed.**
 
 \`\`\`ts
 export type StepId = 'mastery-review' | 'review' | 'words' | 'patterns' | 'drills' | 'translate' | 'scene-remix' | 'picture' | 'output' | 'done';
@@ -347,11 +347,11 @@ export const stepOrder: StepId[] = ['mastery-review', 'review', 'words', 'patter
 
 Add \`mastery-review: 'Mastery'\` in \`Stepper\`. In Today, render the Task 3 panel during the new step; it is passable only after all selected questions are answered, or immediately when none are due. When output completes a day, load records, use \`new Set(day.wordIds)\` and \`new Set(day.patternIds)\`, and save only IDs absent from stored mastery records. Keep the existing \`review\` branch untouched for previous-day recap. Update complete-day fixtures to include \`mastery-review\`.
 
-- [ ] **Step 4: Split Review and update badge.**
+- [x] **Step 4: Split Review and update badge.**
 
 Pass \`course: Course\` into \`ReviewPage\`. Render a \`Mastery review\` section containing the panel and a \`Practice again\` section containing existing manual due items. Change only manual empty copy to \`No practice items due today.\`. In \`App.refreshProgressSummary\`, load mastery records and today's session together with active manual items, then set the badge to \`selectDueReviewItems(...).length + selectDueMasteryProgress(...).length\`. Pass \`basicEnglishCourse\` to ReviewPage.
 
-- [ ] **Step 5: Run tests and commit.**
+- [x] **Step 5: Run tests and commit.**
 
 Run: \`npx vitest run src/domain/progress.test.ts src/components/TodayPage.test.tsx src/components/ReviewPage.test.tsx src/App.test.tsx\`
 
@@ -377,7 +377,7 @@ git commit -m "feat: integrate daily mastery review"
 - Consumes Task 1 state calculation, course days, scenario capabilities, and persisted mastery data.
 - Produces visible \`Not started\`, \`Building\`, \`Ready\`, \`Strong\` states with verified counts and next actions.
 
-- [ ] **Step 1: Write failing capability and Me page tests.**
+- [x] **Step 1: Write failing capability and Me page tests.**
 
 \`\`\`ts
 it('returns Ready at the 70 percent threshold', () => {
@@ -398,17 +398,17 @@ it('shows status, verified ratio, and concrete next action', async () => {
 });
 \`\`\`
 
-- [ ] **Step 2: Run tests and verify failure.**
+- [x] **Step 2: Run tests and verify failure.**
 
 Run: \`npx vitest run src/domain/capabilities.test.ts src/components/MePage.test.tsx\`
 
 Expected: FAIL because capability state currently considers completed days only.
 
-- [ ] **Step 3: Implement mapping and My Progress display.**
+- [x] **Step 3: Implement mapping and My Progress display.**
 
 Add a capability helper accepting \`Course\`, a \`ScenarioCapability\`, completed day IDs, and mastery records. Collect unique word/pattern IDs from every \`unlockedByDayIds\` day; prefix them with \`word:\` or \`pattern:\` before comparing. Use Task 1 thresholds. In MePage, accept required \`course: Course\`, load \`listMasteryProgress()\` in its existing \`Promise.all\`, and show each capability's exact status, \`Verified: {verifiedCount} / {totalCount}\`, and next action. For incomplete prerequisites say \`Complete Day N\`; for weak verified content say \`Review N item(s)\`; for Strong say \`Keep it strong with future review.\` Pass \`basicEnglishCourse\` from App and add compact \`capability-status\` / \`capability-next-action\` CSS.
 
-- [ ] **Step 4: Add failing E2E then implement seed helper.**
+- [x] **Step 4: Add failing E2E then implement seed helper.**
 
 Add a \`seedMasteryProgress\` helper next to existing IndexedDB helpers. It opens database version 6, creates missing \`masteryProgress\` and \`masteryReviewSessions\` stores, and writes a due word record. Add a test that opens Review, answers the word question, observes \`Correct\`, opens Me, and observes the scenario state update.
 
@@ -416,7 +416,7 @@ Run: \`npx playwright test tests/e2e/basic-english.spec.ts --grep \"mastery ques
 
 Expected: PASS after all prior tasks are integrated.
 
-- [ ] **Step 5: Append implementation notes and run the complete verification suite.**
+- [x] **Step 5: Append implementation notes and run the complete verification suite.**
 
 Append \`## Implementation Notes\` to the approved spec with database version 6, both new store names, the \`mastery-review\` step, and the final verification commands.
 
@@ -436,7 +436,7 @@ Run: \`npm run test:e2e\`
 
 Expected: PASS on chromium and mobile-chrome.
 
-- [ ] **Step 6: Commit.**
+- [x] **Step 6: Commit.**
 
 \`\`\`bash
 git add src/domain/capabilities.ts src/domain/capabilities.test.ts src/components/MePage.tsx src/components/MePage.test.tsx src/styles.css tests/e2e/basic-english.spec.ts docs/superpowers/specs/2026-07-22-basic-english-mastery-review-design.md

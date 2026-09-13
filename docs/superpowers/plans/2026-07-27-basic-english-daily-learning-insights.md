@@ -18,6 +18,8 @@
 | --- | --- |
 | `src/domain/dailyLearningInsights.ts` | Insight types, deterministic candidate selection, outcome text, and report identity. |
 | `src/domain/dailyLearningInsights.test.ts` | Priority, de-duplication, scenario mapping, and empty-state tests. |
+| `src/domain/mastery.ts` | Optional incorrect-answer IDs on persisted mastery sessions. |
+| `src/components/MasteryReviewPanel.tsx` | Records incorrect mastery IDs in the session without changing scheduling behavior. |
 | `src/storage/progressRepository.ts` | Reinforcement session contracts. |
 | `src/storage/indexedDbProgressRepository.ts` | IndexedDB v7 store and repository methods. |
 | `src/storage/indexedDbProgressRepository.test.ts` | Session persistence and v6-to-v7 migration coverage. |
@@ -127,6 +129,10 @@ git commit -m "feat: derive daily learning insights"
 ### Task 2: Persist Optional Reinforcement Sessions
 
 **Files:**
+- Modify: `src/domain/mastery.ts`
+- Modify: `src/domain/mastery.test.ts`
+- Modify: `src/components/MasteryReviewPanel.tsx`
+- Modify: `src/components/MasteryReviewPanel.test.tsx`
 - Modify: `src/storage/progressRepository.ts`
 - Modify: `src/storage/indexedDbProgressRepository.ts`
 - Modify: `src/storage/indexedDbProgressRepository.test.ts`
@@ -151,7 +157,7 @@ it('persists an optional reinforcement session by local date and report identity
 });
 ```
 
-Add a v6 fixture containing `masteryProgress` and `masteryReviewSessions`, open it through the v7 repository, save a reinforcement session, and verify the v6 records remain readable.
+Add a mastery-panel test that answers one question incorrectly and verifies that its progress ID is appended to `incorrectProgressIds`; a correct answer must not append it. Add a v6 fixture containing `masteryProgress` and `masteryReviewSessions`, open it through the v7 repository, save a reinforcement session, and verify the v6 records remain readable.
 
 - [ ] **Step 2: Run the storage test to verify failure.**
 
@@ -167,6 +173,9 @@ export interface ReinforcementPracticeAnswer {
   correct: boolean;
   answeredAt: string;
 }
+
+// MasteryReviewSession addition. Legacy sessions omit this field.
+incorrectProgressIds?: string[];
 
 export interface ReinforcementPracticeSession {
   id: string;
@@ -184,7 +193,7 @@ getReinforcementPracticeSession(localDate: string, insightId: string): Promise<R
 listReinforcementPracticeSessions(): Promise<ReinforcementPracticeSession[]>;
 ```
 
-Set `DB_VERSION = 7`. Add `reinforcementPracticeSessions` keyed by `id`, with an index `byLocalDate`. Use `id = \`reinforcement-${localDate}-${insightId}\``. All saves are full session replacements; no method writes to `masteryProgress` or `reviewItems`.
+Set `DB_VERSION = 7`. Add `reinforcementPracticeSessions` keyed by `id`, with an index `byLocalDate`. Use `id = \`reinforcement-${localDate}-${insightId}\``. In `MasteryReviewPanel`, add a question's progress ID to `incorrectProgressIds` only when the answer is incorrect, retaining existing IDs and excluding duplicates. All reinforcement-session saves are full replacements; no reinforcement method writes to `masteryProgress` or `reviewItems`.
 
 - [ ] **Step 4: Run focused storage tests.**
 

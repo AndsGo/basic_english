@@ -2,7 +2,8 @@ import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { basicEnglishCourse } from '../content/course';
-import type { SceneGoal } from '../domain/types';
+import { toLocalDateString, type MasteryProgress } from '../domain/mastery';
+import type { Course, ScenarioCapability, SceneGoal } from '../domain/types';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
 import type { ProgressRepository } from '../storage/progressRepository';
 import { MePage } from './MePage';
@@ -57,9 +58,41 @@ function createMockRepository(overrides: Partial<ProgressRepository> = {}): Prog
     getReviewItem: vi.fn(),
     saveStudyActivity: vi.fn(),
     listStudyActivities: vi.fn().mockResolvedValue([]),
+    saveMasteryProgress: vi.fn(),
+    getMasteryProgress: vi.fn(),
+    listMasteryProgress: vi.fn().mockResolvedValue([]),
+    saveMasteryReviewSession: vi.fn(),
+    getMasteryReviewSession: vi.fn(),
+    saveReinforcementPracticeSession: vi.fn(),
+    getReinforcementPracticeSession: vi.fn(),
+    listReinforcementPracticeSessions: vi.fn().mockResolvedValue([]),
     ...overrides,
   };
 }
+
+const capabilityCourse: Course = {
+  ...basicEnglishCourse,
+  weeks: [
+    {
+      ...basicEnglishCourse.weeks[0],
+      days: [
+        {
+          ...basicEnglishCourse.weeks[0].days[0],
+          wordIds: ['name'],
+          patternIds: ['i-am'],
+        },
+      ],
+    },
+  ],
+};
+
+const capability: ScenarioCapability = {
+  id: 'introduce-myself',
+  title: 'I can introduce myself.',
+  description: 'Say my name.',
+  unlockedByDayIds: ['day-001'],
+  exampleOutputs: ['My name is Li.'],
+};
 
 describe('MePage scene map', () => {
   it('does not render the scene map while progress is loading', () => {
@@ -67,7 +100,7 @@ describe('MePage scene map', () => {
       listDayProgress: vi.fn().mockReturnValue(new Promise(() => {})),
     });
 
-    render(<MePage repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
 
     expect(screen.queryByText('Scenes I Can Describe')).not.toBeInTheDocument();
   });
@@ -77,7 +110,7 @@ describe('MePage scene map', () => {
       listDayProgress: vi.fn().mockRejectedValue(new Error('load failed')),
     });
 
-    render(<MePage repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Progress could not be loaded.');
     expect(screen.queryByText('Scenes I Can Describe')).not.toBeInTheDocument();
@@ -118,7 +151,7 @@ describe('MePage scene map', () => {
       updatedAt: '2026-05-27T00:00:00.000Z',
     });
 
-    render(<MePage repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
 
     expect(await screen.findByRole('listitem', { name: /Self Completed/ })).toHaveClass('scene-map-item--completed');
     expect(screen.getByRole('listitem', { name: /Room Next/ })).toBeInTheDocument();
@@ -145,6 +178,7 @@ describe('MePage scene map', () => {
 
     render(
       <MePage
+        course={basicEnglishCourse}
         repository={repository}
         pictureDescribeTasksByDayId={{
           'day-008': {
@@ -170,6 +204,95 @@ describe('MePage scene map', () => {
   });
 });
 
+describe('MePage scenario mastery', () => {
+  it('shows status, verified ratio, and concrete next action', async () => {
+    const records: MasteryProgress[] = [
+      {
+        id: 'mastery-word-name',
+        contentType: 'word',
+        contentId: 'name',
+        sourceDayId: 'day-001',
+        status: 'stable',
+        consecutiveCorrect: 2,
+        dueAt: '2026-07-25T00:00:00.000Z',
+        updatedAt: '2026-07-22T00:00:00.000Z',
+      },
+      {
+        id: 'mastery-pattern-i-am',
+        contentType: 'pattern',
+        contentId: 'i-am',
+        sourceDayId: 'day-001',
+        status: 'learning',
+        consecutiveCorrect: 1,
+        dueAt: '2026-07-23T00:00:00.000Z',
+        updatedAt: '2026-07-22T00:00:00.000Z',
+      },
+    ];
+    const repository = createMockRepository({
+      listDayProgress: vi.fn().mockResolvedValue([
+        {
+          id: 'progress-day-001',
+          dayId: 'day-001',
+          currentStep: 'done',
+          status: 'completed',
+          completedStepIds: [],
+          updatedAt: '2026-07-22T00:00:00.000Z',
+          contentVersion: 'test',
+        },
+      ]),
+      listMasteryProgress: vi.fn().mockResolvedValue(records),
+    });
+
+    render(<MePage course={capabilityCourse} repository={repository} scenarioCapabilities={[capability]} />);
+
+    expect(await screen.findByText('Building')).toBeInTheDocument();
+    expect(screen.getByText('Verified: 1 / 2')).toBeInTheDocument();
+    expect(screen.getByText('Review 1 item')).toBeInTheDocument();
+  });
+
+  it('shows the latest completed learning practice state', async () => {
+    const localDate = toLocalDateString(new Date());
+    const repository = createMockRepository({
+      listDayProgress: vi.fn().mockResolvedValue([{
+        id: 'progress-day-001',
+        dayId: 'day-001',
+        currentStep: 'done',
+        status: 'completed',
+        completedStepIds: ['output'],
+        startedAt: '2026-07-27T00:00:00.000Z',
+        updatedAt: '2026-07-27T00:00:00.000Z',
+        contentVersion: capabilityCourse.contentVersion,
+      }]),
+      listMasteryProgress: vi.fn().mockResolvedValue([{
+        id: 'mastery-word-name',
+        contentType: 'word',
+        contentId: 'name',
+        sourceDayId: 'day-001',
+        status: 'learning',
+        consecutiveCorrect: 0,
+        dueAt: '2026-07-27T00:00:00.000Z',
+        updatedAt: '2026-07-27T00:00:00.000Z',
+      }]),
+      listReinforcementPracticeSessions: vi.fn().mockResolvedValue([{
+        id: 'reinforcement-session',
+        localDate,
+        insightId: `daily-learning-insight-${localDate}`,
+        contentKeys: ['word:name'],
+        answers: [],
+        status: 'completed',
+        updatedAt: '2026-07-27T00:00:00.000Z',
+      }]),
+    });
+
+    render(<MePage course={capabilityCourse} repository={repository} scenarioCapabilities={[capability]} />);
+
+    expect(await screen.findByRole('heading', { name: 'Latest learning' })).toBeInTheDocument();
+    expect(screen.getByText('Keep practicing')).toBeInTheDocument();
+    expect(screen.getAllByText('Scenario: I can introduce myself.')).toHaveLength(2);
+    expect(screen.getByText('Practice complete')).toBeInTheDocument();
+  });
+});
+
 describe('MePage theme control', () => {
   it('lets the learner choose a theme preference', async () => {
     const user = userEvent.setup();
@@ -177,6 +300,7 @@ describe('MePage theme control', () => {
 
     render(
       <MePage
+        course={basicEnglishCourse}
         repository={createMockRepository()}
         themePreference="system"
         onThemePreferenceChange={onThemePreferenceChange}
@@ -210,7 +334,7 @@ describe('MePage saved outputs', () => {
     });
     const totalDayCount = basicEnglishCourse.weeks.flatMap((week) => week.days).length;
 
-    render(<MePage repository={repository} totalDayCount={totalDayCount} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} totalDayCount={totalDayCount} />);
 
     expect(await screen.findByText('Completed days: 1')).toBeInTheDocument();
     expect(screen.getByText(`/ ${totalDayCount}`)).toBeInTheDocument();
@@ -243,7 +367,7 @@ describe('MePage saved outputs', () => {
       ]),
     });
 
-    render(<MePage repository={repository} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} />);
 
     expect(await screen.findByText('My name is Li. I am from China. I am a student. I study English.')).toBeInTheDocument();
     expect(screen.getByText('A: What is your name? B: My name is Li.')).toBeInTheDocument();

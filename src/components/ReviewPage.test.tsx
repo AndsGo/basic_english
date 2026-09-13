@@ -1,6 +1,8 @@
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { basicEnglishCourse } from '../content/course';
+import { createPendingMasteryProgress } from '../domain/mastery';
 import { createPictureDescriptionReviewItem, createSceneRemixReviewItem, createWordReviewItem } from '../domain/review';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
 import { ReviewPage } from './ReviewPage';
@@ -23,14 +25,14 @@ describe('ReviewPage', () => {
       }),
     );
 
-    render(<ReviewPage repository={repo} />);
+    render(<ReviewPage course={basicEnglishCourse} repository={repo} />);
 
     expect(await screen.findByText('name')).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'I know this' }));
 
     await waitFor(() => {
-      expect(screen.getByText("No review items. Start today's task.")).toBeInTheDocument();
+      expect(screen.getByText('No practice items due today.')).toBeInTheDocument();
     });
   });
 
@@ -48,7 +50,7 @@ describe('ReviewPage', () => {
       }),
     );
 
-    render(<ReviewPage repository={repo} onReviewChange={onReviewChange} />);
+    render(<ReviewPage course={basicEnglishCourse} repository={repo} onReviewChange={onReviewChange} />);
 
     await user.click(await screen.findByRole('button', { name: 'I know this' }));
 
@@ -72,7 +74,7 @@ describe('ReviewPage', () => {
     });
     await repo.saveReviewItem(item);
 
-    render(<ReviewPage repository={repo} onReviewChange={onReviewChange} />);
+    render(<ReviewPage course={basicEnglishCourse} repository={repo} onReviewChange={onReviewChange} />);
 
     expect(await screen.findByRole('heading', { name: 'Review Scene Remix' })).toBeInTheDocument();
     expect(screen.getByText('Source: I am from China.')).toBeInTheDocument();
@@ -110,7 +112,7 @@ describe('ReviewPage', () => {
     });
     await repo.saveReviewItem(item);
 
-    render(<ReviewPage repository={repo} />);
+    render(<ReviewPage course={basicEnglishCourse} repository={repo} />);
 
     expect(await screen.findByRole('heading', { name: 'Review Scene Remix' })).toBeInTheDocument();
 
@@ -148,14 +150,14 @@ describe('ReviewPage', () => {
       createWordReviewItem({ wordId: 'name', wordText: 'name', sourceDayId: 'day-001', now: '2026-05-26T00:00:00.000Z' }),
     );
 
-    render(<ReviewPage repository={repo} onReviewChange={onReviewChange} />);
+    render(<ReviewPage course={basicEnglishCourse} repository={repo} onReviewChange={onReviewChange} />);
 
     expect(await screen.findByText('name')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Review again' }));
 
     expect(await screen.findByRole('status')).toHaveTextContent(/later/i);
     await waitFor(() => {
-      expect(screen.getByText("No review items. Start today's task.")).toBeInTheDocument();
+      expect(screen.getByText('No practice items due today.')).toBeInTheDocument();
     });
 
     const active = await repo.listReviewItems('active');
@@ -174,7 +176,7 @@ describe('ReviewPage', () => {
       dueAt: '2099-01-01T00:00:00.000Z',
     });
 
-    render(<ReviewPage repository={repo} />);
+    render(<ReviewPage course={basicEnglishCourse} repository={repo} />);
 
     expect(await screen.findByText('today-word')).toBeInTheDocument();
     expect(screen.queryByText('later-word')).not.toBeInTheDocument();
@@ -199,7 +201,7 @@ describe('ReviewPage', () => {
       }),
     );
 
-    render(<ReviewPage repository={repo} onReviewChange={onReviewChange} />);
+    render(<ReviewPage course={basicEnglishCourse} repository={repo} onReviewChange={onReviewChange} />);
 
     expect(await screen.findByRole('heading', { name: 'Review Picture Description' })).toBeInTheDocument();
     expect(screen.getByText('This is my room. There is a bed. I can see a table.')).toBeInTheDocument();
@@ -210,5 +212,31 @@ describe('ReviewPage', () => {
       await expect(repo.listReviewItems('active')).resolves.toHaveLength(0);
     });
     expect(onReviewChange).toHaveBeenCalled();
+  });
+
+  it('keeps mastery review separate from manual Practice again', async () => {
+    const repo = createIndexedDbProgressRepository('review-page-separate-mastery-and-practice');
+    await repo.saveMasteryProgress(
+      createPendingMasteryProgress({
+        contentType: 'word',
+        contentId: 'name',
+        sourceDayId: 'day-001',
+        now: '2026-05-26T00:00:00.000Z',
+      }),
+    );
+    await repo.saveReviewItem(
+      createWordReviewItem({
+        wordId: 'name',
+        wordText: 'name',
+        sourceDayId: 'day-001',
+        now: '2026-05-26T00:00:00.000Z',
+      }),
+    );
+
+    render(<ReviewPage course={basicEnglishCourse} repository={repo} />);
+
+    expect(await screen.findByRole('heading', { name: 'Mastery review' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Practice again' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'name' })).toBeInTheDocument();
   });
 });

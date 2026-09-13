@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { Day, SceneRemixTask } from '../domain/types';
 import type { UserOutput } from '../storage/progressRepository';
 import { SceneRemixCard, type SceneRemixSubmitResult } from './SceneRemixCard';
@@ -17,6 +18,7 @@ export function CompletionSummary({
   onStartNextDay,
   remixTask,
   onSceneRemixSubmit,
+  learningReport,
 }: {
   day: Day;
   output: UserOutput;
@@ -25,6 +27,7 @@ export function CompletionSummary({
   onStartNextDay?: () => void;
   remixTask?: SceneRemixTask;
   onSceneRemixSubmit?: (task: SceneRemixTask, result: SceneRemixSubmitResult) => void | Promise<void>;
+  learningReport?: ReactNode;
 }) {
   const completedChecklist = Object.entries(output.checklist)
     .filter(([, isComplete]) => isComplete)
@@ -60,6 +63,7 @@ export function CompletionSummary({
         </ul>
       )}
       <p>Review tomorrow: {reviewCount}</p>
+      {learningReport}
       {remixTask && onSceneRemixSubmit && (
         <SceneRemixCard task={remixTask} onSubmit={(result) => onSceneRemixSubmit(remixTask, result)} />
       )}

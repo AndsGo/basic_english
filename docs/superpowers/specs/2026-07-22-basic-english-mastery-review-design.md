@@ -133,3 +133,17 @@ The daily limit is persisted by local calendar date and completed question IDs s
 - Unit tests cover selection, state transitions, scheduling, question construction, and capability calculations.
 - Component tests cover Today, Review, and My Progress behavior.
 - End-to-end tests cover completing a lesson, returning on a later day, answering mastery questions, and observing the updated capability map.
+
+## Implementation Notes
+
+- IndexedDB database version 6 adds the `masteryProgress` and `masteryReviewSessions` stores.
+- The Today sequence includes the `mastery-review` step before the existing previous-day review.
+- A completed lesson seeds unique word and pattern records idempotently. Existing completed lessons are backfilled gradually, so returning learners begin later verification without being marked as mastered.
+- Mastery transitions use local calendar days for next-day scheduling. The persisted session records completed item IDs, preserving the eight-question limit and preventing same-day repetition after refresh.
+- Saving an answer updates its mastery record and local-date session in one IndexedDB transaction. Hydrated legacy day progress is normalized before the Today flow uses it.
+- Mastery loading, question creation, and backfill errors are visible but non-blocking: the learner can continue to the previous-day review and new lesson.
+- Final verification commands:
+  - `npx vitest run --exclude ".worktrees/**"`
+  - `npm run build`
+  - `npm run content:health`
+  - `npm run test:e2e`

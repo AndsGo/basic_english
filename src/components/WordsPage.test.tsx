@@ -78,6 +78,14 @@ function createRepository(): ProgressRepository {
     },
     saveStudyActivity: vi.fn().mockResolvedValue(undefined),
     listStudyActivities: vi.fn().mockResolvedValue([]),
+    saveMasteryProgress: vi.fn().mockResolvedValue(undefined),
+    getMasteryProgress: vi.fn().mockResolvedValue(null),
+    listMasteryProgress: vi.fn().mockResolvedValue([]),
+    saveMasteryReviewSession: vi.fn().mockResolvedValue(undefined),
+    getMasteryReviewSession: vi.fn().mockResolvedValue(null),
+    saveReinforcementPracticeSession: vi.fn().mockResolvedValue(undefined),
+    getReinforcementPracticeSession: vi.fn().mockResolvedValue(null),
+    listReinforcementPracticeSessions: vi.fn().mockResolvedValue([]),
   };
 }
 

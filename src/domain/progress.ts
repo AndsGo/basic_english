@@ -1,4 +1,4 @@
-export type StepId = 'review' | 'words' | 'patterns' | 'drills' | 'translate' | 'scene-remix' | 'picture' | 'output' | 'done';
+export type StepId = 'mastery-review' | 'review' | 'words' | 'patterns' | 'drills' | 'translate' | 'scene-remix' | 'picture' | 'output' | 'done';
 
 export type DayProgressStatus = 'locked' | 'not_started' | 'in_progress' | 'completed';
 export type CourseDayState = 'completed' | 'current' | 'locked' | 'review_needed';
@@ -15,14 +15,14 @@ export interface DayProgress {
   contentVersion: string;
 }
 
-export const stepOrder: StepId[] = ['review', 'words', 'patterns', 'drills', 'translate', 'scene-remix', 'picture', 'output', 'done'];
+export const stepOrder: StepId[] = ['mastery-review', 'review', 'words', 'patterns', 'drills', 'translate', 'scene-remix', 'picture', 'output', 'done'];
 
 export function startDay(dayId: string, contentVersion: string, now: string): DayProgress {
   return {
     id: dayId,
     dayId,
     status: 'in_progress',
-    currentStep: 'review',
+    currentStep: 'mastery-review',
     completedStepIds: [],
     startedAt: now,
     updatedAt: now,
@@ -31,9 +31,15 @@ export function startDay(dayId: string, contentVersion: string, now: string): Da
 }
 
 export function normalizeDayProgress(progress: DayProgress): DayProgress {
+  const completedStepIds = progress.completedStepIds ?? [];
+
   return {
     ...progress,
-    completedStepIds: progress.completedStepIds ?? [],
+    completedStepIds,
+    currentStep:
+      progress.status === 'in_progress' && progress.currentStep === 'review' && !completedStepIds.includes('mastery-review')
+        ? 'mastery-review'
+        : progress.currentStep,
   };
 }
 

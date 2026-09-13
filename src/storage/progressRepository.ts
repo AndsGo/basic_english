@@ -1,4 +1,5 @@
 import type { DayProgress, StepId } from '../domain/progress';
+import type { MasteryContentType, MasteryProgress, MasteryReviewSession } from '../domain/mastery';
 import type { ReviewItem } from '../domain/review';
 import type { SceneOutput, SceneRemixSelfMark } from '../domain/types';
 
@@ -88,6 +89,22 @@ export interface StudyActivity {
   completedDayIds: string[];
 }
 
+export interface ReinforcementPracticeAnswer {
+  progressId: string;
+  correct: boolean;
+  answeredAt: string;
+}
+
+export interface ReinforcementPracticeSession {
+  id: string;
+  localDate: string;
+  insightId: string;
+  contentKeys: string[];
+  answers: ReinforcementPracticeAnswer[];
+  status: 'in_progress' | 'completed' | 'skipped';
+  updatedAt: string;
+}
+
 export interface ProgressRepository {
   getDayProgress(dayId: string): Promise<DayProgress | null>;
   listDayProgress(): Promise<DayProgress[]>;
@@ -112,4 +129,13 @@ export interface ProgressRepository {
   getReviewItem(id: string): Promise<ReviewItem | null>;
   saveStudyActivity(activity: StudyActivity): Promise<void>;
   listStudyActivities(): Promise<StudyActivity[]>;
+  saveMasteryProgress(progress: MasteryProgress): Promise<void>;
+  getMasteryProgress(contentType: MasteryContentType, contentId: string): Promise<MasteryProgress | null>;
+  listMasteryProgress(): Promise<MasteryProgress[]>;
+  saveMasteryReviewSession(session: MasteryReviewSession): Promise<void>;
+  saveMasteryReviewResult?(progress: MasteryProgress, session: MasteryReviewSession): Promise<void>;
+  getMasteryReviewSession(localDate: string): Promise<MasteryReviewSession | null>;
+  saveReinforcementPracticeSession(session: ReinforcementPracticeSession): Promise<void>;
+  getReinforcementPracticeSession(localDate: string, insightId: string): Promise<ReinforcementPracticeSession | null>;
+  listReinforcementPracticeSessions(): Promise<ReinforcementPracticeSession[]>;
 }

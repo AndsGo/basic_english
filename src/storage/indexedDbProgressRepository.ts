@@ -1,4 +1,5 @@
 import { openDB, type DBSchema, type IDBPDatabase } from 'idb';
+import type { MasteryContentType, MasteryProgress, MasteryReviewSession } from '../domain/mastery';
 import type { DayProgress } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
 import { normalizeSceneOutput } from '../domain/sceneOutput';
@@ -6,6 +7,7 @@ import type {
   ExerciseAttempt,
   PictureDescription,
   ProgressRepository,
+  ReinforcementPracticeSession,
   SceneRemixAttempt,
   StepCompletion,
   StepProgress,
@@ -14,7 +16,7 @@ import type {
   WordProgress,
 } from './progressRepository';
 
-const DB_VERSION = 5;
+const DB_VERSION = 7;
 
 interface ProgressDb extends DBSchema {
   dayProgress: {
@@ -60,6 +62,20 @@ interface ProgressDb extends DBSchema {
   studyActivities: {
     key: string;
     value: StudyActivity;
+  };
+  masteryProgress: {
+    key: string;
+    value: MasteryProgress;
+    indexes: { byContentId: string; byDueAt: string };
+  };
+  masteryReviewSessions: {
+    key: string;
+    value: MasteryReviewSession;
+  };
+  reinforcementPracticeSessions: {
+    key: string;
+    value: ReinforcementPracticeSession;
+    indexes: { byLocalDate: string };
   };
 }
 
@@ -108,6 +124,18 @@ async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
       if (!db.objectStoreNames.contains('studyActivities')) {
         db.createObjectStore('studyActivities', { keyPath: 'id' });
       }
+      if (!db.objectStoreNames.contains('masteryProgress')) {
+        const store = db.createObjectStore('masteryProgress', { keyPath: 'id' });
+        store.createIndex('byContentId', 'contentId');
+        store.createIndex('byDueAt', 'dueAt');
+      }
+      if (!db.objectStoreNames.contains('masteryReviewSessions')) {
+        db.createObjectStore('masteryReviewSessions', { keyPath: 'localDate' });
+      }
+      if (!db.objectStoreNames.contains('reinforcementPracticeSessions')) {
+        const store = db.createObjectStore('reinforcementPracticeSessions', { keyPath: 'id' });
+        store.createIndex('byLocalDate', 'localDate');
+      }
     },
   });
 }
@@ -118,6 +146,10 @@ function normalizeUserOutput(output: UserOutput): UserOutput {
     sentenceCount: output.sentenceCount ?? 0,
     scene: output.scene ? normalizeSceneOutput(output.scene) : undefined,
   };
+}
+
+function reinforcementPracticeSessionId(localDate: string, insightId: string): string {
+  return `reinforcement-${localDate}-${insightId}`;
 }
 
 export function createIndexedDbProgressRepository(dbName = 'basic-english-progress'): ProgressRepository {
@@ -257,6 +289,74 @@ export function createIndexedDbProgressRepository(dbName = 'basic-english-progre
     async listStudyActivities() {
       const db = await dbPromise;
       return db.getAll('studyActivities');
+    },
+
+    async saveMasteryProgress(progress) {
+      const db = await dbPromise;
+      await db.put('masteryProgress', progress);
+    },
+
+    async getMasteryProgress(contentType, contentId) {
+      const db = await dbPromise;
+      const records = await db.getAllFromIndex('masteryProgress', 'byContentId', contentId);
+      return records.find((record) => record.contentType === contentType) ?? null;
+    },
+
+    async listMasteryProgress() {
+      const db = await dbPromise;
+      return (await db.getAll('masteryProgress')).sort(
+        (left, right) => left.dueAt.localeCompare(right.dueAt) || left.id.localeCompare(right.id),
+      );
+    },
+
+    async saveMasteryReviewSession(session) {
+      const db = await dbPromise;
+      await db.put('masteryReviewSessions', session);
+    },
+
+    async saveMasteryReviewResult(progress, session) {
+      const db = await dbPromise;
+      const transaction = db.transaction(['masteryProgress', 'masteryReviewSessions'], 'readwrite');
+      const transactionDone = transaction.done;
+      const progressWrite = transaction.objectStore('masteryProgress').put(progress);
+
+      try {
+        const sessionWrite = transaction.objectStore('masteryReviewSessions').put(session);
+        await Promise.all([progressWrite, sessionWrite, transactionDone]);
+      } catch (error) {
+        try {
+          transaction.abort();
+        } catch {
+          // IndexedDB may have already aborted the transaction after a request failure.
+        }
+        await Promise.allSettled([progressWrite, transactionDone]);
+        throw error;
+      }
+    },
+
+    async getMasteryReviewSession(localDate) {
+      const db = await dbPromise;
+      return (await db.get('masteryReviewSessions', localDate)) ?? null;
+    },
+
+    async saveReinforcementPracticeSession(session) {
+      const db = await dbPromise;
+      await db.put('reinforcementPracticeSessions', {
+        ...session,
+        id: reinforcementPracticeSessionId(session.localDate, session.insightId),
+      });
+    },
+
+    async getReinforcementPracticeSession(localDate, insightId) {
+      const db = await dbPromise;
+      return (await db.get('reinforcementPracticeSessions', reinforcementPracticeSessionId(localDate, insightId))) ?? null;
+    },
+
+    async listReinforcementPracticeSessions() {
+      const db = await dbPromise;
+      return (await db.getAll('reinforcementPracticeSessions')).sort(
+        (left, right) => left.localDate.localeCompare(right.localDate) || left.id.localeCompare(right.id),
+      );
     },
   };
 }

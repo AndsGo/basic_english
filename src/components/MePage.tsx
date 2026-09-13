@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import { getCapabilityStates } from '../domain/capabilities';
+import { getCapabilityStates, getScenarioCapabilityMasteryState } from '../domain/capabilities';
+import { buildDailyLearningInsight, type DailyLearningInsight } from '../domain/dailyLearningInsights';
+import { toLocalDateString, type MasteryProgress, type ScenarioMasteryState } from '../domain/mastery';
 import type { DayProgress } from '../domain/progress';
 import type { ReviewItem } from '../domain/review';
 import { getCompletedSceneIds } from '../domain/sceneOutput';
-import type { PictureDescribeTask, ScenarioCapability, SceneGoal } from '../domain/types';
+import type { Course, PictureDescribeTask, ScenarioCapability, SceneGoal } from '../domain/types';
 import type { SpeechLanguage, SpeechRate } from '../speech/speechService';
 import type { ThemePreference } from '../theme';
-import type { PictureDescription, ProgressRepository, StudyActivity, UserOutput } from '../storage/progressRepository';
+import type { PictureDescription, ProgressRepository, ReinforcementPracticeSession, StudyActivity, UserOutput } from '../storage/progressRepository';
 import { SceneMap } from './SceneMap';
 
 const DEFAULT_TOTAL_DAY_COUNT = 7;
@@ -43,8 +45,26 @@ function formatDayCompletionHint(dayIds: string[]) {
   return `Complete ${formattedDays.slice(0, -1).join(', ')}, and ${formattedDays[formattedDays.length - 1]}.`;
 }
 
+function formatScenarioMasteryStatus(status: ScenarioMasteryState['status']) {
+  return {
+    not_started: 'Not started',
+    building: 'Building',
+    ready: 'Ready',
+    strong: 'Strong',
+  }[status];
+}
+
+function getCapabilityNextAction(state: ScenarioMasteryState, missingDayIds: string[]) {
+  if (missingDayIds.length > 0) return `Complete ${formatDayId(missingDayIds[0])}`;
+  if (state.status === 'strong') return 'Keep it strong with future review.';
+
+  const reviewCount = Math.max(0, state.totalCount - state.verifiedCount);
+  return `Review ${reviewCount} item${reviewCount === 1 ? '' : 's'}`;
+}
+
 export function MePage({
   repository,
+  course,
   scenarioCapabilities,
   sceneGoalsByDayId,
   pictureDescribeTasksByDayId = {},
@@ -61,6 +81,7 @@ export function MePage({
   totalDayCount = DEFAULT_TOTAL_DAY_COUNT,
 }: {
   repository: ProgressRepository;
+  course: Course;
   scenarioCapabilities?: ScenarioCapability[];
   sceneGoalsByDayId?: Partial<Record<string, SceneGoal>>;
   pictureDescribeTasksByDayId?: Partial<Record<string, PictureDescribeTask>>;
@@ -81,6 +102,9 @@ export function MePage({
   const [pictureDescriptions, setPictureDescriptions] = useState<PictureDescription[]>([]);
   const [reviewItems, setReviewItems] = useState<ReviewItem[]>([]);
   const [activities, setActivities] = useState<StudyActivity[]>([]);
+  const [masteryProgress, setMasteryProgress] = useState<MasteryProgress[]>([]);
+  const [dailyLearningInsight, setDailyLearningInsight] = useState<DailyLearningInsight | undefined>();
+  const [reinforcementSessions, setReinforcementSessions] = useState<ReinforcementPracticeSession[]>([]);
   const [loadError, setLoadError] = useState(false);
   const [hasLoadedProgress, setHasLoadedProgress] = useState(false);
 
@@ -90,12 +114,13 @@ export function MePage({
 
     async function loadProgress() {
       try {
-        const [savedDays, savedOutputs, savedPictureDescriptions, activeReviewItems, savedActivities] = await Promise.all([
+        const [savedDays, savedOutputs, savedPictureDescriptions, activeReviewItems, savedActivities, savedMasteryProgress] = await Promise.all([
           repository.listDayProgress(),
           repository.listUserOutputs(),
           repository.listPictureDescriptions(),
           repository.listReviewItems('active'),
           repository.listStudyActivities(),
+          repository.listMasteryProgress(),
         ]);
 
         if (!isMounted) return;
@@ -104,8 +129,33 @@ export function MePage({
         setPictureDescriptions(savedPictureDescriptions);
         setReviewItems(activeReviewItems);
         setActivities(savedActivities);
+        setMasteryProgress(savedMasteryProgress);
         setLoadError(false);
         setHasLoadedProgress(true);
+
+        try {
+          const localDate = toLocalDateString(new Date());
+          const [masterySession, savedReinforcementSessions] = await Promise.all([
+            repository.getMasteryReviewSession(localDate),
+            repository.listReinforcementPracticeSessions(),
+          ]);
+          if (!isMounted) return;
+          const completedDayIds = savedDays.filter(isCompletedDay).map((day) => day.dayId);
+          setDailyLearningInsight(buildDailyLearningInsight({
+            course,
+            capabilities: scenarioCapabilities ?? [],
+            completedDayIds,
+            masteryProgress: savedMasteryProgress,
+            activeReviewItems,
+            masterySessions: masterySession ? [masterySession] : [],
+            localDate,
+          }));
+          setReinforcementSessions(savedReinforcementSessions);
+        } catch {
+          if (!isMounted) return;
+          setDailyLearningInsight(undefined);
+          setReinforcementSessions([]);
+        }
       } catch {
         if (!isMounted) return;
         setDays([]);
@@ -113,6 +163,9 @@ export function MePage({
         setPictureDescriptions([]);
         setReviewItems([]);
         setActivities([]);
+        setMasteryProgress([]);
+        setDailyLearningInsight(undefined);
+        setReinforcementSessions([]);
         setLoadError(true);
         setHasLoadedProgress(true);
       }
@@ -123,7 +176,7 @@ export function MePage({
     return () => {
       isMounted = false;
     };
-  }, [repository]);
+  }, [course, repository, scenarioCapabilities]);
 
   const completedDayCount = days.filter(isCompletedDay).length;
   const currentStreakDays = getCurrentStreakDays(activities);
@@ -135,9 +188,26 @@ export function MePage({
     scenarioCapabilities && hasLoadedProgress && !loadError ? getCapabilityStates(scenarioCapabilities, completedDayIds) : null;
   const missingNextDayIds =
     capabilityStates?.next?.unlockedByDayIds.filter((dayId) => !completedDayIds.includes(dayId)) ?? [];
+  const capabilityMasteryStates =
+    scenarioCapabilities && hasLoadedProgress && !loadError
+      ? scenarioCapabilities.map((capability) => ({
+          capability,
+          state: getScenarioCapabilityMasteryState(course, capability, completedDayIds, masteryProgress),
+        }))
+      : null;
   const sceneGoals = sceneGoalsByDayId ? Object.values(sceneGoalsByDayId).filter((goal): goal is SceneGoal => Boolean(goal)) : [];
   const completedSceneIds = getCompletedSceneIds(days, outputs);
   const checkedPictureDescriptions = pictureDescriptions.filter((description) => Boolean(description.checkedAt));
+  const latestReinforcementSession = dailyLearningInsight
+    ? reinforcementSessions
+      .filter((session) => session.insightId === dailyLearningInsight.id && session.localDate === dailyLearningInsight.localDate)
+      .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt))[0]
+    : undefined;
+  const practiceState = latestReinforcementSession?.status === 'completed'
+    ? 'Practice complete'
+    : latestReinforcementSession?.status === 'skipped'
+      ? 'Practice skipped'
+      : 'Practice available';
 
   return (
     <section className="panel">
@@ -148,6 +218,31 @@ export function MePage({
       </p>
       <p>Current streak: {currentStreakDays} days</p>
       <p>Review items: {reviewItems.length}</p>
+      {dailyLearningInsight && (
+        <section className="daily-learning-report">
+          <h3>Latest learning</h3>
+          <p className="daily-learning-report-outcome">
+            {dailyLearningInsight.items.length === 0
+              ? 'Strong today'
+              : dailyLearningInsight.items.length === 1
+                ? 'Keep practicing'
+                : `Focus on ${dailyLearningInsight.items.length} items`}
+          </p>
+          {dailyLearningInsight.items.length === 0 ? (
+            <p>No targeted practice due today.</p>
+          ) : (
+            <ul className="daily-learning-report-list">
+              {dailyLearningInsight.items.map((item) => (
+                <li key={item.contentKey}>
+                  <p>{item.reason}</p>
+                  {item.scenarioTitle && <p>Scenario: {item.scenarioTitle}</p>}
+                </li>
+              ))}
+            </ul>
+          )}
+          {dailyLearningInsight.items.length > 0 && <p>{practiceState}</p>}
+        </section>
+      )}
       {scenarioCapabilities && !hasLoadedProgress && (
         <section>
           <h3>I Can Say</h3>
@@ -157,6 +252,22 @@ export function MePage({
       {capabilityStates && (
         <section>
           <h3>I Can Say</h3>
+          {capabilityMasteryStates && (
+            <div className="capability-status-list">
+              {capabilityMasteryStates.map(({ capability, state }) => {
+                const missingDayIds = capability.unlockedByDayIds.filter((dayId) => !completedDayIds.includes(dayId));
+
+                return (
+                  <article className="capability-status" key={capability.id}>
+                    <strong>Scenario: {capability.title}</strong>
+                    <p>{formatScenarioMasteryStatus(state.status)}</p>
+                    <p>Verified: {state.verifiedCount} / {state.totalCount}</p>
+                    <p className="capability-next-action">{getCapabilityNextAction(state, missingDayIds)}</p>
+                  </article>
+                );
+              })}
+            </div>
+          )}
           <section>
             <h4>Unlocked</h4>
             {capabilityStates.unlocked.length > 0 ? (

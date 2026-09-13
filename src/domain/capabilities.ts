@@ -1,4 +1,5 @@
-import type { ScenarioCapability } from './types';
+import { getScenarioMasteryState, type MasteryProgress, type ScenarioMasteryState } from './mastery';
+import type { Course, ScenarioCapability } from './types';
 
 export interface CapabilityStates {
   unlocked: ScenarioCapability[];
@@ -25,4 +26,27 @@ export function getCapabilityStates(capabilities: ScenarioCapability[], complete
     locked,
     next: locked[0] ?? null,
   };
+}
+
+export function getScenarioCapabilityMasteryState(
+  course: Course,
+  capability: ScenarioCapability,
+  completedDayIds: string[],
+  records: MasteryProgress[],
+): ScenarioMasteryState {
+  const prerequisiteDays = new Set(capability.unlockedByDayIds);
+  const contentIds = course.weeks
+    .flatMap((week) => week.days)
+    .filter((day) => prerequisiteDays.has(day.id))
+    .flatMap((day) => [
+      ...day.wordIds.map((wordId) => `word:${wordId}`),
+      ...day.patternIds.map((patternId) => `pattern:${patternId}`),
+    ]);
+
+  return getScenarioMasteryState({
+    prerequisiteDayIds: capability.unlockedByDayIds,
+    completedDayIds,
+    contentIds: [...new Set(contentIds)],
+    records,
+  });
 }

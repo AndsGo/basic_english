@@ -1,17 +1,37 @@
-import { cleanup, render, screen, within } from '@testing-library/react';
+import { cleanup, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { MePage } from './components/MePage';
 import { basicEnglishCourse } from './content/course';
 import { scenarioCapabilities } from './content/scenarioCapabilities';
+import { createPendingMasteryProgress } from './domain/mastery';
 import type { DayProgress } from './domain/progress';
+import { createWordReviewItem } from './domain/review';
+import * as indexedDbProgressRepository from './storage/indexedDbProgressRepository';
 import type { ProgressRepository } from './storage/progressRepository';
+
+const { todayPageProps } = vi.hoisted(() => ({
+  todayPageProps: { current: undefined as unknown },
+}));
+
+vi.mock('./components/TodayPage', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./components/TodayPage')>();
+
+  return {
+    ...actual,
+    TodayPage: (props: Parameters<typeof actual.TodayPage>[0]) => {
+      todayPageProps.current = props;
+      return <actual.TodayPage {...props} />;
+    },
+  };
+});
 
 afterEach(() => {
   cleanup();
   window.localStorage.clear();
   vi.restoreAllMocks();
+  todayPageProps.current = undefined;
 });
 
 function createDeferred<T>() {
@@ -61,6 +81,14 @@ function createProgressRepository(overrides: Partial<ProgressRepository> = {}): 
     getReviewItem: vi.fn().mockResolvedValue(null),
     saveStudyActivity: vi.fn().mockResolvedValue(undefined),
     listStudyActivities: vi.fn().mockResolvedValue([]),
+    saveMasteryProgress: vi.fn().mockResolvedValue(undefined),
+    getMasteryProgress: vi.fn().mockResolvedValue(null),
+    listMasteryProgress: vi.fn().mockResolvedValue([]),
+    saveMasteryReviewSession: vi.fn().mockResolvedValue(undefined),
+    getMasteryReviewSession: vi.fn().mockResolvedValue(null),
+    saveReinforcementPracticeSession: vi.fn().mockResolvedValue(undefined),
+    getReinforcementPracticeSession: vi.fn().mockResolvedValue(null),
+    listReinforcementPracticeSessions: vi.fn().mockResolvedValue([]),
     ...overrides,
   };
 }
@@ -72,6 +100,10 @@ describe('App shell', () => {
     render(<App />);
 
     expect(screen.getByRole('heading', { name: 'My Name' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Mastery review' })).toBeInTheDocument();
+    const continueButton = await screen.findByRole('button', { name: 'Continue' });
+    await waitFor(() => expect(continueButton).toBeEnabled());
+    await user.click(continueButton);
     expect(await screen.findByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Continue' })).toBeInTheDocument();
 
@@ -110,6 +142,51 @@ describe('App shell', () => {
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Basic English');
     expect(screen.queryByText(/MVP/)).not.toBeInTheDocument();
+  });
+
+  it('passes production scenario capabilities to TodayPage', () => {
+    render(<App />);
+
+    expect(todayPageProps.current).toEqual(expect.objectContaining({ scenarioCapabilities }));
+  });
+
+  it('renders a combined Review badge for one manual and one mastery item due today', async () => {
+    const now = '2026-05-26T00:00:00.000Z';
+    const repository = createProgressRepository({
+      listReviewItems: vi.fn().mockResolvedValue([
+        createWordReviewItem({ wordId: 'name', wordText: 'name', sourceDayId: 'day-001', now }),
+      ]),
+      listMasteryProgress: vi.fn().mockResolvedValue([
+        createPendingMasteryProgress({ contentType: 'word', contentId: 'name', sourceDayId: 'day-001', now }),
+      ]),
+    });
+    vi.spyOn(indexedDbProgressRepository, 'createIndexedDbProgressRepository').mockReturnValue(repository);
+
+    render(<App />);
+
+    expect(await screen.findByText('2', { selector: '.nav-badge' })).toBeInTheDocument();
+  });
+
+  it('counts only the remaining mastery capacity in the Review badge', async () => {
+    const now = '2026-05-26T00:00:00.000Z';
+    const masteryProgress = Array.from({ length: 10 }, (_, index) => ({
+      ...createPendingMasteryProgress({ contentType: 'word', contentId: `word-${index}`, sourceDayId: 'day-001', now }),
+      dueAt: '2000-01-01T00:00:00.000Z',
+    }));
+    const repository = createProgressRepository({
+      listMasteryProgress: vi.fn().mockResolvedValue(masteryProgress),
+      getMasteryReviewSession: vi.fn().mockResolvedValue({
+        id: 'mastery-session-2000-01-01',
+        localDate: '2000-01-01',
+        completedProgressIds: masteryProgress.slice(0, 7).map((progress) => progress.id),
+        updatedAt: now,
+      }),
+    });
+    vi.spyOn(indexedDbProgressRepository, 'createIndexedDbProgressRepository').mockReturnValue(repository);
+
+    render(<App />);
+
+    expect(await screen.findByText('1', { selector: '.nav-badge' })).toBeInTheDocument();
   });
 
   it('shows Chinese word help only after the learner enables it', async () => {
@@ -207,7 +284,7 @@ describe('Me capability progress', () => {
       listDayProgress: vi.fn().mockReturnValue(dayProgress.promise),
     });
 
-    render(<MePage repository={repository} scenarioCapabilities={scenarioCapabilities} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} scenarioCapabilities={scenarioCapabilities} />);
 
     expect(screen.queryByText('No capabilities unlocked yet.')).not.toBeInTheDocument();
     expect(screen.queryByText('Complete Day 1.')).not.toBeInTheDocument();
@@ -224,12 +301,12 @@ describe('Me capability progress', () => {
         createDayProgress({
           status: 'in_progress',
           currentStep: 'done',
-          completedStepIds: ['review', 'words', 'patterns', 'drills', 'translate', 'output'],
+          completedStepIds: ['mastery-review', 'review', 'words', 'patterns', 'drills', 'translate', 'output'],
         }),
       ]),
     });
 
-    render(<MePage repository={repository} scenarioCapabilities={scenarioCapabilities} />);
+    render(<MePage course={basicEnglishCourse} repository={repository} scenarioCapabilities={scenarioCapabilities} />);
 
     const unlockedHeading = await screen.findByRole('heading', { name: 'Unlocked' });
     const unlockedSection = unlockedHeading.closest('section');
