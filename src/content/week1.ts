@@ -288,7 +288,7 @@ export const week1Course: Course = {
                 scores: ['not complete', 'some complete sentences', 'complete sentences'],
               },
               { id: 'target-patterns', label: 'Form use', scores: ['not used', 'used with help', 'used with no help'] },
-              { id: 'word-use', label: 'Word use', scores: ['little new words', 'some new words', 'much new words'] },
+              { id: 'word-use', label: 'Word use', scores: ['not enough new words', 'some new words', 'enough new words'] },
               { id: 'independence', label: 'My words', scores: ['same as example', 'some change from example', 'all my words'] },
             ],
           },

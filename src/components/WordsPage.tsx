@@ -29,6 +29,7 @@ export function WordsPage({
   const [mode, setMode] = useState<WordsMode>('list');
   const [libraryQuery, setLibraryQuery] = useState('');
   const [libraryFilter, setLibraryFilter] = useState<LibraryFilter>('all');
+  const [libraryLimit, setLibraryLimit] = useState(LIBRARY_VISIBLE_LIMIT);
 
   const courseWordByText = useMemo(
     () => new Map(course.words.map((word) => [word.text.toLowerCase(), word])),
@@ -48,7 +49,7 @@ export function WordsPage({
       return normalizedLibraryQuery.length === 0 || word.includes(normalizedLibraryQuery);
     })
     .map((word) => ({ word, courseWord: courseWordByText.get(word) }));
-  const visibleLibraryEntries = libraryEntries.slice(0, LIBRARY_VISIBLE_LIMIT);
+  const visibleLibraryEntries = libraryEntries.slice(0, libraryLimit);
 
   const saveWordMark = async (word: Word, status: 'known' | 'review') => {
     const now = new Date().toISOString();
@@ -142,7 +143,10 @@ export function WordsPage({
                 type="search"
                 aria-label="Search Basic English 850 words"
                 value={libraryQuery}
-                onChange={(event) => setLibraryQuery(event.target.value)}
+                onChange={(event) => {
+                  setLibraryQuery(event.target.value);
+                  setLibraryLimit(LIBRARY_VISIBLE_LIMIT);
+                }}
                 placeholder="word"
               />
             </label>
@@ -151,7 +155,7 @@ export function WordsPage({
                 type="button"
                 className={`secondary-button${libraryFilter === 'all' ? ' selected-button' : ''}`}
                 aria-pressed={libraryFilter === 'all'}
-                onClick={() => setLibraryFilter('all')}
+                onClick={() => { setLibraryFilter('all'); setLibraryLimit(LIBRARY_VISIBLE_LIMIT); }}
               >
                 All
               </button>
@@ -159,7 +163,7 @@ export function WordsPage({
                 type="button"
                 className={`secondary-button${libraryFilter === 'course' ? ' selected-button' : ''}`}
                 aria-pressed={libraryFilter === 'course'}
-                onClick={() => setLibraryFilter('course')}
+                onClick={() => { setLibraryFilter('course'); setLibraryLimit(LIBRARY_VISIBLE_LIMIT); }}
               >
                 In Course
               </button>
@@ -167,14 +171,14 @@ export function WordsPage({
                 type="button"
                 className={`secondary-button${libraryFilter === 'future' ? ' selected-button' : ''}`}
                 aria-pressed={libraryFilter === 'future'}
-                onClick={() => setLibraryFilter('future')}
+                onClick={() => { setLibraryFilter('future'); setLibraryLimit(LIBRARY_VISIBLE_LIMIT); }}
               >
                 Future
               </button>
             </div>
           </div>
 
-          <p className="helper-text">
+          <p className="helper-text" role="status">
             Showing {visibleLibraryEntries.length} of {libraryEntries.length} matching words.
           </p>
 
@@ -194,6 +198,12 @@ export function WordsPage({
             </ul>
           ) : (
             <p className="muted">No words match this filter.</p>
+          )}
+          {visibleLibraryEntries.length < libraryEntries.length && (
+            <button type="button" className="secondary-button"
+              onClick={() => setLibraryLimit((limit) => limit + LIBRARY_VISIBLE_LIMIT)}>
+              Show more
+            </button>
           )}
         </div>
       ) : (

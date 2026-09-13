@@ -246,7 +246,7 @@ export const week5: Week = {
           { id: 'meaning', label: 'Meaning', scores: ['hard to understand', 'partly clear', 'clear'] },
           { id: 'going-out-order', label: 'Going out order', scores: ['no clear order', 'some order', 'clear going out and back order'] },
           { id: 'target-patterns', label: 'Form use', scores: ['not used', 'used with help', 'used with no help'] },
-          { id: 'word-use', label: 'Word use', scores: ['little outside words', 'some outside words', 'much outside words'] },
+              { id: 'word-use', label: 'Word use', scores: ['not enough outside words', 'some outside words', 'enough outside words'] },
           { id: 'independence', label: 'My words', scores: ['same as example', 'some change from example', 'all my words'] },
         ],
       },

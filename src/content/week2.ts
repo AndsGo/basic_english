@@ -254,7 +254,7 @@ export const week2: Week = {
             scores: ['not complete', 'some complete sentences', 'complete sentences'],
           },
           { id: 'target-patterns', label: 'Form use', scores: ['not used', 'used with help', 'used with no help'] },
-          { id: 'word-use', label: 'Word use', scores: ['little Week 2 words', 'some Week 2 words', 'much Week 2 words'] },
+              { id: 'word-use', label: 'Word use', scores: ['not enough Week 2 words', 'some Week 2 words', 'enough Week 2 words'] },
           { id: 'independence', label: 'My words', scores: ['same as example', 'some change from example', 'all my words'] },
         ],
       },

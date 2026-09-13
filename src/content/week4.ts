@@ -255,7 +255,7 @@ export const week4: Week = {
           { id: 'meaning', label: 'Meaning', scores: ['hard to understand', 'partly clear', 'clear'] },
           { id: 'shopping-meal', label: 'Shopping or meal detail', scores: ['no shopping or meal detail', 'some shopping or meal detail', 'clear shopping or meal scene'] },
           { id: 'target-patterns', label: 'Form use', scores: ['not used', 'used with help', 'used with no help'] },
-          { id: 'word-use', label: 'Word use', scores: ['little food or shopping words', 'some food or shopping words', 'much food or shopping words'] },
+              { id: 'word-use', label: 'Word use', scores: ['not enough food or shopping words', 'some food or shopping words', 'enough food or shopping words'] },
           { id: 'independence', label: 'My words', scores: ['same as example', 'some change from example', 'all my words'] },
         ],
       },
