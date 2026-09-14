@@ -3,7 +3,7 @@
 ## Delivered
 
 - Corrected the core inventory from 855 entries to 850 headwords. The extra entries `less`, `least`, `most`, `she`, and `un` remain accepted course exceptions; no lesson or progress IDs changed.
-- Before Week 13, scheduled course coverage was 174/850 (20.5%). After Weeks 13-31, coverage is 497/850 (58.5%), with 353 missing core headwords and 53 supplementary course words. All 550 course words occur in day word lists.
+- Before Week 13, scheduled course coverage was 174/850 (20.5%). After Weeks 13-34, coverage is 550/850 (64.7%), with 300 missing core headwords and 53 supplementary course words. All 603 course words occur in day word lists.
 - Replaced spelling-based placeholder phonetics for all 50 Week 8-12 words with British IPA. The typed pronunciation map makes missing entries a compile-time error.
 - Corrected countable-word language in all weekly assessment rubrics. Scores, criteria IDs, and pass thresholds are unchanged.
 - Corrected Day 80's `much days` model answer, cloze and Chinese prompt together: `A week has 7 days.`
