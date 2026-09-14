@@ -671,6 +671,30 @@ describe('basicEnglishCourse V1.12', () => {
 
     expect(duplicateWordIds).toEqual([]);
   });
+
+  it('does not map generated Week 29 through Week 34 flashcards to the account placeholder', () => {
+    const source = readFileSync(join(process.cwd(), 'src', 'content', 'wordFlashcardImages.ts'), 'utf8');
+    const lateCourseWords = basicEnglishCourse.words.filter(
+      (word) => word.weekIntroduced >= 29 && word.weekIntroduced <= 34,
+    );
+    const accountPlaceholderHash = createHash('sha256')
+      .update(readFileSync(join(process.cwd(), 'src', 'assets', 'word-flashcards', 'account.png')))
+      .digest('hex');
+    const accountMappedWordIds = lateCourseWords
+      .filter((word) => source.includes(`wordImageAsset('${word.id}', accountImage,`))
+      .map((word) => word.id);
+    const placeholderFileWordIds = lateCourseWords
+      .filter((word) => {
+        const bytes = readFileSync(
+          join(process.cwd(), 'src', 'assets', 'word-flashcards', `${word.id}-week${word.weekIntroduced}.png`),
+        );
+        return createHash('sha256').update(bytes).digest('hex') === accountPlaceholderHash;
+      })
+      .map((word) => word.id);
+
+    expect(accountMappedWordIds).toEqual([]);
+    expect(placeholderFileWordIds).toEqual([]);
+  });
 });
 
 describe('Basic English 850 validation', () => {

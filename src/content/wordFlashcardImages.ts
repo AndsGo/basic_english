@@ -475,6 +475,110 @@ import recordImage from '../assets/word-flashcards/record.png';
 import numberImage from '../assets/word-flashcards/number.png';
 import markImage from '../assets/word-flashcards/mark.png';
 import accountImage from '../assets/word-flashcards/account.png';
+import daughterWeek29Image from '../assets/word-flashcards/daughter-week29.png';
+import femaleWeek29Image from '../assets/word-flashcards/female-week29.png';
+import birthWeek29Image from '../assets/word-flashcards/birth-week29.png';
+import countryWeek29Image from '../assets/word-flashcards/country-week29.png';
+import groupWeek29Image from '../assets/word-flashcards/group-week29.png';
+import chiefWeek29Image from '../assets/word-flashcards/chief-week29.png';
+import behaviorWeek29Image from '../assets/word-flashcards/behavior-week29.png';
+import beautifulWeek29Image from '../assets/word-flashcards/beautiful-week29.png';
+import amusementWeek29Image from '../assets/word-flashcards/amusement-week29.png';
+import attractionWeek29Image from '../assets/word-flashcards/attraction-week29.png';
+import cruelWeek29Image from '../assets/word-flashcards/cruel-week29.png';
+import foolishWeek29Image from '../assets/word-flashcards/foolish-week29.png';
+import generalWeek29Image from '../assets/word-flashcards/general-week29.png';
+import greatWeek29Image from '../assets/word-flashcards/great-week29.png';
+import acidWeek29Image from '../assets/word-flashcards/acid-week29.png';
+import biteWeek29Image from '../assets/word-flashcards/bite-week29.png';
+import breathWeek29Image from '../assets/word-flashcards/breath-week29.png';
+import chestWeek30Image from '../assets/word-flashcards/chest-week30.png';
+import chinWeek30Image from '../assets/word-flashcards/chin-week30.png';
+import digestionWeek30Image from '../assets/word-flashcards/digestion-week30.png';
+import earWeek30Image from '../assets/word-flashcards/ear-week30.png';
+import earthWeek30Image from '../assets/word-flashcards/earth-week30.png';
+import fatWeek30Image from '../assets/word-flashcards/fat-week30.png';
+import feebleWeek30Image from '../assets/word-flashcards/feeble-week30.png';
+import brainWeek30Image from '../assets/word-flashcards/brain-week30.png';
+import clockWeek30Image from '../assets/word-flashcards/clock-week30.png';
+import commonWeek30Image from '../assets/word-flashcards/common-week30.png';
+import complexWeek30Image from '../assets/word-flashcards/complex-week30.png';
+import consciousWeek30Image from '../assets/word-flashcards/conscious-week30.png';
+import cutWeek30Image from '../assets/word-flashcards/cut-week30.png';
+import deadWeek30Image from '../assets/word-flashcards/dead-week30.png';
+import delicateWeek30Image from '../assets/word-flashcards/delicate-week30.png';
+import dirtyWeek30Image from '../assets/word-flashcards/dirty-week30.png';
+import dogWeek30Image from '../assets/word-flashcards/dog-week30.png';
+import dryWeek31Image from '../assets/word-flashcards/dry-week31.png';
+import dustWeek31Image from '../assets/word-flashcards/dust-week31.png';
+import fallWeek31Image from '../assets/word-flashcards/fall-week31.png';
+import farmWeek31Image from '../assets/word-flashcards/farm-week31.png';
+import fishWeek31Image from '../assets/word-flashcards/fish-week31.png';
+import flightWeek31Image from '../assets/word-flashcards/flight-week31.png';
+import flyWeek31Image from '../assets/word-flashcards/fly-week31.png';
+import formWeek31Image from '../assets/word-flashcards/form-week31.png';
+import forwardWeek31Image from '../assets/word-flashcards/forward-week31.png';
+import goldWeek31Image from '../assets/word-flashcards/gold-week31.png';
+import grassWeek31Image from '../assets/word-flashcards/grass-week31.png';
+import heartWeek31Image from '../assets/word-flashcards/heart-week31.png';
+import existenceWeek31Image from '../assets/word-flashcards/existence-week31.png';
+import hospitalWeek31Image from '../assets/word-flashcards/hospital-week31.png';
+import stomachWeek31Image from '../assets/word-flashcards/stomach-week31.png';
+import throatWeek31Image from '../assets/word-flashcards/throat-week31.png';
+import tongueWeek31Image from '../assets/word-flashcards/tongue-week31.png';
+import advertisementWeek32Image from '../assets/word-flashcards/advertisement-week32.png';
+import apparatusWeek32Image from '../assets/word-flashcards/apparatus-week32.png';
+import artWeek32Image from '../assets/word-flashcards/art-week32.png';
+import bandWeek32Image from '../assets/word-flashcards/band-week32.png';
+import baseWeek32Image from '../assets/word-flashcards/base-week32.png';
+import basinWeek32Image from '../assets/word-flashcards/basin-week32.png';
+import beeWeek32Image from '../assets/word-flashcards/bee-week32.png';
+import bellWeek32Image from '../assets/word-flashcards/bell-week32.png';
+import berryWeek32Image from '../assets/word-flashcards/berry-week32.png';
+import birdWeek32Image from '../assets/word-flashcards/bird-week32.png';
+import bloodWeek32Image from '../assets/word-flashcards/blood-week32.png';
+import bladeWeek32Image from '../assets/word-flashcards/blade-week32.png';
+import brakeWeek32Image from '../assets/word-flashcards/brake-week32.png';
+import brassWeek32Image from '../assets/word-flashcards/brass-week32.png';
+import bulbWeek32Image from '../assets/word-flashcards/bulb-week32.png';
+import canvasWeek32Image from '../assets/word-flashcards/canvas-week32.png';
+import carriageWeek32Image from '../assets/word-flashcards/carriage-week32.png';
+import cartWeek33Image from '../assets/word-flashcards/cart-week33.png';
+import competitionWeek33Image from '../assets/word-flashcards/competition-week33.png';
+import cowWeek33Image from '../assets/word-flashcards/cow-week33.png';
+import crushWeek33Image from '../assets/word-flashcards/crush-week33.png';
+import cryWeek33Image from '../assets/word-flashcards/cry-week33.png';
+import deathWeek33Image from '../assets/word-flashcards/death-week33.png';
+import degreeWeek33Image from '../assets/word-flashcards/degree-week33.png';
+import designWeek33Image from '../assets/word-flashcards/design-week33.png';
+import discoveryWeek33Image from '../assets/word-flashcards/discovery-week33.png';
+import distanceWeek33Image from '../assets/word-flashcards/distance-week33.png';
+import distributionWeek33Image from '../assets/word-flashcards/distribution-week33.png';
+import drainWeek33Image from '../assets/word-flashcards/drain-week33.png';
+import drivingWeek33Image from '../assets/word-flashcards/driving-week33.png';
+import elasticWeek33Image from '../assets/word-flashcards/elastic-week33.png';
+import electricWeek33Image from '../assets/word-flashcards/electric-week33.png';
+import engineWeek33Image from '../assets/word-flashcards/engine-week33.png';
+import expansionWeek33Image from '../assets/word-flashcards/expansion-week33.png';
+import experienceWeek34Image from '../assets/word-flashcards/experience-week34.png';
+import expertWeek34Image from '../assets/word-flashcards/expert-week34.png';
+import featherWeek34Image from '../assets/word-flashcards/feather-week34.png';
+import fieldWeek34Image from '../assets/word-flashcards/field-week34.png';
+import fightWeek34Image from '../assets/word-flashcards/fight-week34.png';
+import flagWeek34Image from '../assets/word-flashcards/flag-week34.png';
+import flameWeek34Image from '../assets/word-flashcards/flame-week34.png';
+import foldWeek34Image from '../assets/word-flashcards/fold-week34.png';
+import fowlWeek34Image from '../assets/word-flashcards/fowl-week34.png';
+import goatWeek34Image from '../assets/word-flashcards/goat-week34.png';
+import grainWeek34Image from '../assets/word-flashcards/grain-week34.png';
+import gripWeek34Image from '../assets/word-flashcards/grip-week34.png';
+import growthWeek34Image from '../assets/word-flashcards/growth-week34.png';
+import gunWeek34Image from '../assets/word-flashcards/gun-week34.png';
+import hammerWeek34Image from '../assets/word-flashcards/hammer-week34.png';
+import harborWeek34Image from '../assets/word-flashcards/harbor-week34.png';
+import hardWeek34Image from '../assets/word-flashcards/hard-week34.png';
+import harmonyWeek34Image from '../assets/word-flashcards/harmony-week34.png';
+import hateWeek34Image from '../assets/word-flashcards/hate-week34.png';
 import likeImage from '../assets/word-flashcards/like.png';
 import loveImage from '../assets/word-flashcards/love.png';
 import fearImage from '../assets/word-flashcards/fear.png';
@@ -1035,110 +1139,110 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('free', freeWeek25Image, 'object', 'concrete', 'none', 'A simple free flashcard image for Basic English learners.'),
   wordImageAsset('necessary', necessaryWeek25Image, 'object', 'concrete', 'none', 'A simple necessary flashcard image for Basic English learners.'),
   wordImageAsset('purpose', purposeWeek25Image, 'object', 'concrete', 'none', 'A simple purpose flashcard image for Basic English learners.'),
-  wordImageAsset('daughter', accountImage, 'object', 'concrete', 'none', 'A simple daughter flashcard image for Basic English learners.'),
-  wordImageAsset('female', accountImage, 'object', 'concrete', 'none', 'A simple female flashcard image for Basic English learners.'),
-  wordImageAsset('birth', accountImage, 'object', 'concrete', 'none', 'A simple birth flashcard image for Basic English learners.'),
-  wordImageAsset('country', accountImage, 'object', 'concrete', 'none', 'A simple country flashcard image for Basic English learners.'),
-  wordImageAsset('group', accountImage, 'object', 'concrete', 'none', 'A simple group flashcard image for Basic English learners.'),
-  wordImageAsset('chief', accountImage, 'object', 'concrete', 'none', 'A simple chief flashcard image for Basic English learners.'),
-  wordImageAsset('behavior', accountImage, 'object', 'concrete', 'none', 'A simple behavior flashcard image for Basic English learners.'),
-  wordImageAsset('beautiful', accountImage, 'object', 'concrete', 'none', 'A simple beautiful flashcard image for Basic English learners.'),
-  wordImageAsset('amusement', accountImage, 'object', 'concrete', 'none', 'A simple amusement flashcard image for Basic English learners.'),
-  wordImageAsset('attraction', accountImage, 'object', 'concrete', 'none', 'A simple attraction flashcard image for Basic English learners.'),
-  wordImageAsset('cruel', accountImage, 'object', 'concrete', 'none', 'A simple cruel flashcard image for Basic English learners.'),
-  wordImageAsset('foolish', accountImage, 'object', 'concrete', 'none', 'A simple foolish flashcard image for Basic English learners.'),
-  wordImageAsset('general', accountImage, 'object', 'concrete', 'none', 'A simple general flashcard image for Basic English learners.'),
-  wordImageAsset('great', accountImage, 'object', 'concrete', 'none', 'A simple great flashcard image for Basic English learners.'),
-  wordImageAsset('acid', accountImage, 'object', 'concrete', 'none', 'A simple acid flashcard image for Basic English learners.'),
-  wordImageAsset('bite', accountImage, 'object', 'concrete', 'none', 'A simple bite flashcard image for Basic English learners.'),
-  wordImageAsset('breath', accountImage, 'object', 'concrete', 'none', 'A simple breath flashcard image for Basic English learners.'),
-  wordImageAsset('chest', accountImage, 'object', 'concrete', 'none', 'A simple chest flashcard image for Basic English learners.'),
-  wordImageAsset('chin', accountImage, 'object', 'concrete', 'none', 'A simple chin flashcard image for Basic English learners.'),
-  wordImageAsset('digestion', accountImage, 'object', 'concrete', 'none', 'A simple digestion flashcard image for Basic English learners.'),
-  wordImageAsset('ear', accountImage, 'object', 'concrete', 'none', 'A simple ear flashcard image for Basic English learners.'),
-  wordImageAsset('earth', accountImage, 'object', 'concrete', 'none', 'A simple earth flashcard image for Basic English learners.'),
-  wordImageAsset('fat', accountImage, 'object', 'concrete', 'none', 'A simple fat flashcard image for Basic English learners.'),
-  wordImageAsset('feeble', accountImage, 'object', 'concrete', 'none', 'A simple feeble flashcard image for Basic English learners.'),
-  wordImageAsset('brain', accountImage, 'object', 'concrete', 'none', 'A simple brain flashcard image for Basic English learners.'),
-  wordImageAsset('clock', accountImage, 'object', 'concrete', 'none', 'A simple clock flashcard image for Basic English learners.'),
-  wordImageAsset('common', accountImage, 'object', 'concrete', 'none', 'A simple common flashcard image for Basic English learners.'),
-  wordImageAsset('complex', accountImage, 'object', 'concrete', 'none', 'A simple complex flashcard image for Basic English learners.'),
-  wordImageAsset('conscious', accountImage, 'object', 'concrete', 'none', 'A simple conscious flashcard image for Basic English learners.'),
-  wordImageAsset('cut', accountImage, 'object', 'concrete', 'none', 'A simple cut flashcard image for Basic English learners.'),
-  wordImageAsset('dead', accountImage, 'object', 'concrete', 'none', 'A simple dead flashcard image for Basic English learners.'),
-  wordImageAsset('delicate', accountImage, 'object', 'concrete', 'none', 'A simple delicate flashcard image for Basic English learners.'),
-  wordImageAsset('dirty', accountImage, 'object', 'concrete', 'none', 'A simple dirty flashcard image for Basic English learners.'),
-  wordImageAsset('dog', accountImage, 'object', 'concrete', 'none', 'A simple dog flashcard image for Basic English learners.'),
-  wordImageAsset('dry', accountImage, 'object', 'concrete', 'none', 'A simple dry flashcard image for Basic English learners.'),
-  wordImageAsset('dust', accountImage, 'object', 'concrete', 'none', 'A simple dust flashcard image for Basic English learners.'),
-  wordImageAsset('fall', accountImage, 'object', 'concrete', 'none', 'A simple fall flashcard image for Basic English learners.'),
-  wordImageAsset('farm', accountImage, 'object', 'concrete', 'none', 'A simple farm flashcard image for Basic English learners.'),
-  wordImageAsset('fish', accountImage, 'object', 'concrete', 'none', 'A simple fish flashcard image for Basic English learners.'),
-  wordImageAsset('flight', accountImage, 'object', 'concrete', 'none', 'A simple flight flashcard image for Basic English learners.'),
-  wordImageAsset('fly', accountImage, 'object', 'concrete', 'none', 'A simple fly flashcard image for Basic English learners.'),
-  wordImageAsset('form', accountImage, 'object', 'concrete', 'none', 'A simple form flashcard image for Basic English learners.'),
-  wordImageAsset('forward', accountImage, 'object', 'concrete', 'none', 'A simple forward flashcard image for Basic English learners.'),
-  wordImageAsset('gold', accountImage, 'object', 'concrete', 'none', 'A simple gold flashcard image for Basic English learners.'),
-  wordImageAsset('grass', accountImage, 'object', 'concrete', 'none', 'A simple grass flashcard image for Basic English learners.'),
-  wordImageAsset('heart', accountImage, 'object', 'concrete', 'none', 'A simple heart flashcard image for Basic English learners.'),
-  wordImageAsset('existence', accountImage, 'object', 'concrete', 'none', 'A simple existence flashcard image for Basic English learners.'),
-  wordImageAsset('hospital', accountImage, 'object', 'concrete', 'none', 'A simple hospital flashcard image for Basic English learners.'),
-  wordImageAsset('stomach', accountImage, 'object', 'concrete', 'none', 'A simple stomach flashcard image for Basic English learners.'),
-  wordImageAsset('throat', accountImage, 'object', 'concrete', 'none', 'A simple throat flashcard image for Basic English learners.'),
-  wordImageAsset('tongue', accountImage, 'object', 'concrete', 'none', 'A simple tongue flashcard image for Basic English learners.'),
-  wordImageAsset('advertisement', accountImage, 'object', 'concrete', 'none', 'A simple advertisement flashcard image for Basic English learners.'),
-  wordImageAsset('apparatus', accountImage, 'object', 'concrete', 'none', 'A simple apparatus flashcard image for Basic English learners.'),
-  wordImageAsset('art', accountImage, 'object', 'concrete', 'none', 'A simple art flashcard image for Basic English learners.'),
-  wordImageAsset('band', accountImage, 'object', 'concrete', 'none', 'A simple band flashcard image for Basic English learners.'),
-  wordImageAsset('base', accountImage, 'object', 'concrete', 'none', 'A simple base flashcard image for Basic English learners.'),
-  wordImageAsset('basin', accountImage, 'object', 'concrete', 'none', 'A simple basin flashcard image for Basic English learners.'),
-  wordImageAsset('bee', accountImage, 'object', 'concrete', 'none', 'A simple bee flashcard image for Basic English learners.'),
-  wordImageAsset('bell', accountImage, 'object', 'concrete', 'none', 'A simple bell flashcard image for Basic English learners.'),
-  wordImageAsset('berry', accountImage, 'object', 'concrete', 'none', 'A simple berry flashcard image for Basic English learners.'),
-  wordImageAsset('bird', accountImage, 'object', 'concrete', 'none', 'A simple bird flashcard image for Basic English learners.'),
-  wordImageAsset('blood', accountImage, 'object', 'concrete', 'none', 'A simple blood flashcard image for Basic English learners.'),
-  wordImageAsset('blade', accountImage, 'object', 'concrete', 'none', 'A simple blade flashcard image for Basic English learners.'),
-  wordImageAsset('brake', accountImage, 'object', 'concrete', 'none', 'A simple brake flashcard image for Basic English learners.'),
-  wordImageAsset('brass', accountImage, 'object', 'concrete', 'none', 'A simple brass flashcard image for Basic English learners.'),
-  wordImageAsset('bulb', accountImage, 'object', 'concrete', 'none', 'A simple bulb flashcard image for Basic English learners.'),
-  wordImageAsset('canvas', accountImage, 'object', 'concrete', 'none', 'A simple canvas flashcard image for Basic English learners.'),
-  wordImageAsset('carriage', accountImage, 'object', 'concrete', 'none', 'A simple carriage flashcard image for Basic English learners.'),
-  wordImageAsset('cart', accountImage, 'object', 'concrete', 'none', 'A simple cart flashcard image for Basic English learners.'),
-  wordImageAsset('competition', accountImage, 'object', 'concrete', 'none', 'A simple competition flashcard image for Basic English learners.'),
-  wordImageAsset('cow', accountImage, 'object', 'concrete', 'none', 'A simple cow flashcard image for Basic English learners.'),
-  wordImageAsset('crush', accountImage, 'object', 'concrete', 'none', 'A simple crush flashcard image for Basic English learners.'),
-  wordImageAsset('cry', accountImage, 'object', 'concrete', 'none', 'A simple cry flashcard image for Basic English learners.'),
-  wordImageAsset('death', accountImage, 'object', 'concrete', 'none', 'A simple death flashcard image for Basic English learners.'),
-  wordImageAsset('degree', accountImage, 'object', 'concrete', 'none', 'A simple degree flashcard image for Basic English learners.'),
-  wordImageAsset('design', accountImage, 'object', 'concrete', 'none', 'A simple design flashcard image for Basic English learners.'),
-  wordImageAsset('discovery', accountImage, 'object', 'concrete', 'none', 'A simple discovery flashcard image for Basic English learners.'),
-  wordImageAsset('distance', accountImage, 'object', 'concrete', 'none', 'A simple distance flashcard image for Basic English learners.'),
-  wordImageAsset('distribution', accountImage, 'object', 'concrete', 'none', 'A simple distribution flashcard image for Basic English learners.'),
-  wordImageAsset('drain', accountImage, 'object', 'concrete', 'none', 'A simple drain flashcard image for Basic English learners.'),
-  wordImageAsset('driving', accountImage, 'object', 'concrete', 'none', 'A simple driving flashcard image for Basic English learners.'),
-  wordImageAsset('elastic', accountImage, 'object', 'concrete', 'none', 'A simple elastic flashcard image for Basic English learners.'),
-  wordImageAsset('electric', accountImage, 'object', 'concrete', 'none', 'A simple electric flashcard image for Basic English learners.'),
-  wordImageAsset('engine', accountImage, 'object', 'concrete', 'none', 'A simple engine flashcard image for Basic English learners.'),
-  wordImageAsset('expansion', accountImage, 'object', 'concrete', 'none', 'A simple expansion flashcard image for Basic English learners.'),
-  wordImageAsset('experience', accountImage, 'object', 'concrete', 'none', 'A simple experience flashcard image for Basic English learners.'),
-  wordImageAsset('expert', accountImage, 'object', 'concrete', 'none', 'A simple expert flashcard image for Basic English learners.'),
-  wordImageAsset('feather', accountImage, 'object', 'concrete', 'none', 'A simple feather flashcard image for Basic English learners.'),
-  wordImageAsset('field', accountImage, 'object', 'concrete', 'none', 'A simple field flashcard image for Basic English learners.'),
-  wordImageAsset('fight', accountImage, 'object', 'concrete', 'none', 'A simple fight flashcard image for Basic English learners.'),
-  wordImageAsset('flag', accountImage, 'object', 'concrete', 'none', 'A simple flag flashcard image for Basic English learners.'),
-  wordImageAsset('flame', accountImage, 'object', 'concrete', 'none', 'A simple flame flashcard image for Basic English learners.'),
-  wordImageAsset('fold', accountImage, 'object', 'concrete', 'none', 'A simple fold flashcard image for Basic English learners.'),
-  wordImageAsset('fowl', accountImage, 'object', 'concrete', 'none', 'A simple fowl flashcard image for Basic English learners.'),
-  wordImageAsset('goat', accountImage, 'object', 'concrete', 'none', 'A simple goat flashcard image for Basic English learners.'),
-  wordImageAsset('grain', accountImage, 'object', 'concrete', 'none', 'A simple grain flashcard image for Basic English learners.'),
-  wordImageAsset('grip', accountImage, 'object', 'concrete', 'none', 'A simple grip flashcard image for Basic English learners.'),
-  wordImageAsset('growth', accountImage, 'object', 'concrete', 'none', 'A simple growth flashcard image for Basic English learners.'),
-  wordImageAsset('gun', accountImage, 'object', 'concrete', 'none', 'A simple gun flashcard image for Basic English learners.'),
-  wordImageAsset('hammer', accountImage, 'object', 'concrete', 'none', 'A simple hammer flashcard image for Basic English learners.'),
-  wordImageAsset('harbor', accountImage, 'object', 'concrete', 'none', 'A simple harbor flashcard image for Basic English learners.'),
-  wordImageAsset('hard', accountImage, 'object', 'concrete', 'none', 'A simple hard flashcard image for Basic English learners.'),
-  wordImageAsset('harmony', accountImage, 'object', 'concrete', 'none', 'A simple harmony flashcard image for Basic English learners.'),
-  wordImageAsset('hate', accountImage, 'object', 'concrete', 'none', 'A simple hate flashcard image for Basic English learners.'),
+  wordImageAsset('daughter', daughterWeek29Image, 'object', 'concrete', 'none', 'A simple daughter flashcard image for Basic English learners.'),
+  wordImageAsset('female', femaleWeek29Image, 'object', 'concrete', 'none', 'A simple female flashcard image for Basic English learners.'),
+  wordImageAsset('birth', birthWeek29Image, 'object', 'concrete', 'none', 'A simple birth flashcard image for Basic English learners.'),
+  wordImageAsset('country', countryWeek29Image, 'object', 'concrete', 'none', 'A simple country flashcard image for Basic English learners.'),
+  wordImageAsset('group', groupWeek29Image, 'object', 'concrete', 'none', 'A simple group flashcard image for Basic English learners.'),
+  wordImageAsset('chief', chiefWeek29Image, 'object', 'concrete', 'none', 'A simple chief flashcard image for Basic English learners.'),
+  wordImageAsset('behavior', behaviorWeek29Image, 'object', 'concrete', 'none', 'A simple behavior flashcard image for Basic English learners.'),
+  wordImageAsset('beautiful', beautifulWeek29Image, 'object', 'concrete', 'none', 'A simple beautiful flashcard image for Basic English learners.'),
+  wordImageAsset('amusement', amusementWeek29Image, 'object', 'concrete', 'none', 'A simple amusement flashcard image for Basic English learners.'),
+  wordImageAsset('attraction', attractionWeek29Image, 'object', 'concrete', 'none', 'A simple attraction flashcard image for Basic English learners.'),
+  wordImageAsset('cruel', cruelWeek29Image, 'object', 'concrete', 'none', 'A simple cruel flashcard image for Basic English learners.'),
+  wordImageAsset('foolish', foolishWeek29Image, 'object', 'concrete', 'none', 'A simple foolish flashcard image for Basic English learners.'),
+  wordImageAsset('general', generalWeek29Image, 'object', 'concrete', 'none', 'A simple general flashcard image for Basic English learners.'),
+  wordImageAsset('great', greatWeek29Image, 'object', 'concrete', 'none', 'A simple great flashcard image for Basic English learners.'),
+  wordImageAsset('acid', acidWeek29Image, 'object', 'concrete', 'none', 'A simple acid flashcard image for Basic English learners.'),
+  wordImageAsset('bite', biteWeek29Image, 'object', 'concrete', 'none', 'A simple bite flashcard image for Basic English learners.'),
+  wordImageAsset('breath', breathWeek29Image, 'object', 'concrete', 'none', 'A simple breath flashcard image for Basic English learners.'),
+  wordImageAsset('chest', chestWeek30Image, 'object', 'concrete', 'none', 'A simple chest flashcard image for Basic English learners.'),
+  wordImageAsset('chin', chinWeek30Image, 'object', 'concrete', 'none', 'A simple chin flashcard image for Basic English learners.'),
+  wordImageAsset('digestion', digestionWeek30Image, 'object', 'concrete', 'none', 'A simple digestion flashcard image for Basic English learners.'),
+  wordImageAsset('ear', earWeek30Image, 'object', 'concrete', 'none', 'A simple ear flashcard image for Basic English learners.'),
+  wordImageAsset('earth', earthWeek30Image, 'object', 'concrete', 'none', 'A simple earth flashcard image for Basic English learners.'),
+  wordImageAsset('fat', fatWeek30Image, 'object', 'concrete', 'none', 'A simple fat flashcard image for Basic English learners.'),
+  wordImageAsset('feeble', feebleWeek30Image, 'object', 'concrete', 'none', 'A simple feeble flashcard image for Basic English learners.'),
+  wordImageAsset('brain', brainWeek30Image, 'object', 'concrete', 'none', 'A simple brain flashcard image for Basic English learners.'),
+  wordImageAsset('clock', clockWeek30Image, 'object', 'concrete', 'none', 'A simple clock flashcard image for Basic English learners.'),
+  wordImageAsset('common', commonWeek30Image, 'object', 'concrete', 'none', 'A simple common flashcard image for Basic English learners.'),
+  wordImageAsset('complex', complexWeek30Image, 'object', 'concrete', 'none', 'A simple complex flashcard image for Basic English learners.'),
+  wordImageAsset('conscious', consciousWeek30Image, 'object', 'concrete', 'none', 'A simple conscious flashcard image for Basic English learners.'),
+  wordImageAsset('cut', cutWeek30Image, 'object', 'concrete', 'none', 'A simple cut flashcard image for Basic English learners.'),
+  wordImageAsset('dead', deadWeek30Image, 'object', 'concrete', 'none', 'A simple dead flashcard image for Basic English learners.'),
+  wordImageAsset('delicate', delicateWeek30Image, 'object', 'concrete', 'none', 'A simple delicate flashcard image for Basic English learners.'),
+  wordImageAsset('dirty', dirtyWeek30Image, 'object', 'concrete', 'none', 'A simple dirty flashcard image for Basic English learners.'),
+  wordImageAsset('dog', dogWeek30Image, 'object', 'concrete', 'none', 'A simple dog flashcard image for Basic English learners.'),
+  wordImageAsset('dry', dryWeek31Image, 'object', 'concrete', 'none', 'A simple dry flashcard image for Basic English learners.'),
+  wordImageAsset('dust', dustWeek31Image, 'object', 'concrete', 'none', 'A simple dust flashcard image for Basic English learners.'),
+  wordImageAsset('fall', fallWeek31Image, 'object', 'concrete', 'none', 'A simple fall flashcard image for Basic English learners.'),
+  wordImageAsset('farm', farmWeek31Image, 'object', 'concrete', 'none', 'A simple farm flashcard image for Basic English learners.'),
+  wordImageAsset('fish', fishWeek31Image, 'object', 'concrete', 'none', 'A simple fish flashcard image for Basic English learners.'),
+  wordImageAsset('flight', flightWeek31Image, 'object', 'concrete', 'none', 'A simple flight flashcard image for Basic English learners.'),
+  wordImageAsset('fly', flyWeek31Image, 'object', 'concrete', 'none', 'A simple fly flashcard image for Basic English learners.'),
+  wordImageAsset('form', formWeek31Image, 'object', 'concrete', 'none', 'A simple form flashcard image for Basic English learners.'),
+  wordImageAsset('forward', forwardWeek31Image, 'object', 'concrete', 'none', 'A simple forward flashcard image for Basic English learners.'),
+  wordImageAsset('gold', goldWeek31Image, 'object', 'concrete', 'none', 'A simple gold flashcard image for Basic English learners.'),
+  wordImageAsset('grass', grassWeek31Image, 'object', 'concrete', 'none', 'A simple grass flashcard image for Basic English learners.'),
+  wordImageAsset('heart', heartWeek31Image, 'object', 'concrete', 'none', 'A simple heart flashcard image for Basic English learners.'),
+  wordImageAsset('existence', existenceWeek31Image, 'object', 'concrete', 'none', 'A simple existence flashcard image for Basic English learners.'),
+  wordImageAsset('hospital', hospitalWeek31Image, 'object', 'concrete', 'none', 'A simple hospital flashcard image for Basic English learners.'),
+  wordImageAsset('stomach', stomachWeek31Image, 'object', 'concrete', 'none', 'A simple stomach flashcard image for Basic English learners.'),
+  wordImageAsset('throat', throatWeek31Image, 'object', 'concrete', 'none', 'A simple throat flashcard image for Basic English learners.'),
+  wordImageAsset('tongue', tongueWeek31Image, 'object', 'concrete', 'none', 'A simple tongue flashcard image for Basic English learners.'),
+  wordImageAsset('advertisement', advertisementWeek32Image, 'object', 'concrete', 'none', 'A simple advertisement flashcard image for Basic English learners.'),
+  wordImageAsset('apparatus', apparatusWeek32Image, 'object', 'concrete', 'none', 'A simple apparatus flashcard image for Basic English learners.'),
+  wordImageAsset('art', artWeek32Image, 'object', 'concrete', 'none', 'A simple art flashcard image for Basic English learners.'),
+  wordImageAsset('band', bandWeek32Image, 'object', 'concrete', 'none', 'A simple band flashcard image for Basic English learners.'),
+  wordImageAsset('base', baseWeek32Image, 'object', 'concrete', 'none', 'A simple base flashcard image for Basic English learners.'),
+  wordImageAsset('basin', basinWeek32Image, 'object', 'concrete', 'none', 'A simple basin flashcard image for Basic English learners.'),
+  wordImageAsset('bee', beeWeek32Image, 'object', 'concrete', 'none', 'A simple bee flashcard image for Basic English learners.'),
+  wordImageAsset('bell', bellWeek32Image, 'object', 'concrete', 'none', 'A simple bell flashcard image for Basic English learners.'),
+  wordImageAsset('berry', berryWeek32Image, 'object', 'concrete', 'none', 'A simple berry flashcard image for Basic English learners.'),
+  wordImageAsset('bird', birdWeek32Image, 'object', 'concrete', 'none', 'A simple bird flashcard image for Basic English learners.'),
+  wordImageAsset('blood', bloodWeek32Image, 'object', 'concrete', 'none', 'A simple blood flashcard image for Basic English learners.'),
+  wordImageAsset('blade', bladeWeek32Image, 'object', 'concrete', 'none', 'A simple blade flashcard image for Basic English learners.'),
+  wordImageAsset('brake', brakeWeek32Image, 'object', 'concrete', 'none', 'A simple brake flashcard image for Basic English learners.'),
+  wordImageAsset('brass', brassWeek32Image, 'object', 'concrete', 'none', 'A simple brass flashcard image for Basic English learners.'),
+  wordImageAsset('bulb', bulbWeek32Image, 'object', 'concrete', 'none', 'A simple bulb flashcard image for Basic English learners.'),
+  wordImageAsset('canvas', canvasWeek32Image, 'object', 'concrete', 'none', 'A simple canvas flashcard image for Basic English learners.'),
+  wordImageAsset('carriage', carriageWeek32Image, 'object', 'concrete', 'none', 'A simple carriage flashcard image for Basic English learners.'),
+  wordImageAsset('cart', cartWeek33Image, 'object', 'concrete', 'none', 'A simple cart flashcard image for Basic English learners.'),
+  wordImageAsset('competition', competitionWeek33Image, 'object', 'concrete', 'none', 'A simple competition flashcard image for Basic English learners.'),
+  wordImageAsset('cow', cowWeek33Image, 'object', 'concrete', 'none', 'A simple cow flashcard image for Basic English learners.'),
+  wordImageAsset('crush', crushWeek33Image, 'object', 'concrete', 'none', 'A simple crush flashcard image for Basic English learners.'),
+  wordImageAsset('cry', cryWeek33Image, 'object', 'concrete', 'none', 'A simple cry flashcard image for Basic English learners.'),
+  wordImageAsset('death', deathWeek33Image, 'object', 'concrete', 'none', 'A simple death flashcard image for Basic English learners.'),
+  wordImageAsset('degree', degreeWeek33Image, 'object', 'concrete', 'none', 'A simple degree flashcard image for Basic English learners.'),
+  wordImageAsset('design', designWeek33Image, 'object', 'concrete', 'none', 'A simple design flashcard image for Basic English learners.'),
+  wordImageAsset('discovery', discoveryWeek33Image, 'object', 'concrete', 'none', 'A simple discovery flashcard image for Basic English learners.'),
+  wordImageAsset('distance', distanceWeek33Image, 'object', 'concrete', 'none', 'A simple distance flashcard image for Basic English learners.'),
+  wordImageAsset('distribution', distributionWeek33Image, 'object', 'concrete', 'none', 'A simple distribution flashcard image for Basic English learners.'),
+  wordImageAsset('drain', drainWeek33Image, 'object', 'concrete', 'none', 'A simple drain flashcard image for Basic English learners.'),
+  wordImageAsset('driving', drivingWeek33Image, 'object', 'concrete', 'none', 'A simple driving flashcard image for Basic English learners.'),
+  wordImageAsset('elastic', elasticWeek33Image, 'object', 'concrete', 'none', 'A simple elastic flashcard image for Basic English learners.'),
+  wordImageAsset('electric', electricWeek33Image, 'object', 'concrete', 'none', 'A simple electric flashcard image for Basic English learners.'),
+  wordImageAsset('engine', engineWeek33Image, 'object', 'concrete', 'none', 'A simple engine flashcard image for Basic English learners.'),
+  wordImageAsset('expansion', expansionWeek33Image, 'object', 'concrete', 'none', 'A simple expansion flashcard image for Basic English learners.'),
+  wordImageAsset('experience', experienceWeek34Image, 'object', 'concrete', 'none', 'A simple experience flashcard image for Basic English learners.'),
+  wordImageAsset('expert', expertWeek34Image, 'object', 'concrete', 'none', 'A simple expert flashcard image for Basic English learners.'),
+  wordImageAsset('feather', featherWeek34Image, 'object', 'concrete', 'none', 'A simple feather flashcard image for Basic English learners.'),
+  wordImageAsset('field', fieldWeek34Image, 'object', 'concrete', 'none', 'A simple field flashcard image for Basic English learners.'),
+  wordImageAsset('fight', fightWeek34Image, 'object', 'concrete', 'none', 'A simple fight flashcard image for Basic English learners.'),
+  wordImageAsset('flag', flagWeek34Image, 'object', 'concrete', 'none', 'A simple flag flashcard image for Basic English learners.'),
+  wordImageAsset('flame', flameWeek34Image, 'object', 'concrete', 'none', 'A simple flame flashcard image for Basic English learners.'),
+  wordImageAsset('fold', foldWeek34Image, 'object', 'concrete', 'none', 'A simple fold flashcard image for Basic English learners.'),
+  wordImageAsset('fowl', fowlWeek34Image, 'object', 'concrete', 'none', 'A simple fowl flashcard image for Basic English learners.'),
+  wordImageAsset('goat', goatWeek34Image, 'object', 'concrete', 'none', 'A simple goat flashcard image for Basic English learners.'),
+  wordImageAsset('grain', grainWeek34Image, 'object', 'concrete', 'none', 'A simple grain flashcard image for Basic English learners.'),
+  wordImageAsset('grip', gripWeek34Image, 'object', 'concrete', 'none', 'A simple grip flashcard image for Basic English learners.'),
+  wordImageAsset('growth', growthWeek34Image, 'object', 'concrete', 'none', 'A simple growth flashcard image for Basic English learners.'),
+  wordImageAsset('gun', gunWeek34Image, 'object', 'concrete', 'none', 'A simple gun flashcard image for Basic English learners.'),
+  wordImageAsset('hammer', hammerWeek34Image, 'object', 'concrete', 'none', 'A simple hammer flashcard image for Basic English learners.'),
+  wordImageAsset('harbor', harborWeek34Image, 'object', 'concrete', 'none', 'A simple harbor flashcard image for Basic English learners.'),
+  wordImageAsset('hard', hardWeek34Image, 'object', 'concrete', 'none', 'A simple hard flashcard image for Basic English learners.'),
+  wordImageAsset('harmony', harmonyWeek34Image, 'object', 'concrete', 'none', 'A simple harmony flashcard image for Basic English learners.'),
+  wordImageAsset('hate', hateWeek34Image, 'object', 'concrete', 'none', 'A simple hate flashcard image for Basic English learners.'),
 ];
 
 export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(
