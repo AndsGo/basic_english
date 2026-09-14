@@ -146,10 +146,10 @@ describe('WordsPage', () => {
     await userEvent.click(screen.getByRole('button', { name: '850 Library' }));
 
     expect(screen.getByRole('heading', { name: 'Basic English 850 Library' })).toBeInTheDocument();
-    expect(screen.getByText('446 / 850')).toBeInTheDocument();
-    expect(screen.getByText('52.5% course coverage')).toBeInTheDocument();
+    expect(screen.getByText('497 / 850')).toBeInTheDocument();
+    expect(screen.getByText('58.5% course coverage')).toBeInTheDocument();
     expect(screen.getByRole('listitem', { name: /account in course/i })).toBeInTheDocument();
-    expect(screen.getByRole('listitem', { name: /acid future/i })).toBeInTheDocument();
+    expect(screen.getByRole('listitem', { name: /advertisement future/i })).toBeInTheDocument();
   });
 
   it('filters the Basic English 850 library by search and course status', async () => {
@@ -157,9 +157,9 @@ describe('WordsPage', () => {
 
     await userEvent.click(screen.getByRole('button', { name: '850 Library' }));
     await userEvent.click(screen.getByRole('button', { name: 'Future' }));
-    await userEvent.type(screen.getByLabelText('Search Basic English 850 words'), 'acid');
+    await userEvent.type(screen.getByLabelText('Search Basic English 850 words'), 'advertisement');
 
-    expect(screen.getByRole('listitem', { name: /acid future/i })).toBeInTheDocument();
+    expect(screen.getByRole('listitem', { name: /advertisement future/i })).toBeInTheDocument();
     expect(screen.queryByRole('listitem', { name: /account in course/i })).not.toBeInTheDocument();
   });
 

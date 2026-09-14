@@ -151,7 +151,7 @@ describe('CoursePage', () => {
       />,
     );
 
-    expect(screen.getAllByText('7 / 7 days completed')).toHaveLength(28);
+    expect(screen.getAllByText('7 / 7 days completed')).toHaveLength(31);
     expect(screen.queryByRole('button', { name: 'Open Today' })).not.toBeInTheDocument();
 
     const day196Card = screen.getByText('Day 196: Daily Story 7').closest('article');
