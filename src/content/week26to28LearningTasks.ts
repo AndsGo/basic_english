@@ -1,0 +1,10 @@
+import week26Image from '../assets/picture-describe/day-176-problems-decisions.png';
+import week27Image from '../assets/picture-describe/day-183-rules-control.png';
+import week28Image from '../assets/picture-describe/day-190-daily-life-check.png';
+import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
+import { week26to28 } from './week26to28';
+const images=[week26Image,week27Image,week28Image];
+const slug=(value:string)=>value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+export const week26to28PictureDescribeTasksByDayId:Record<string,PictureDescribeTask>=Object.fromEntries(week26to28.flatMap((week,index)=>week.days.map(day=>[day.id,{id:`picture-${day.id}-${slug(day.title)}`,dayId:day.id,title:day.title,goal:day.goal,image:images[index],targetWords:day.wordIds.slice(0,4),suggestedPatterns:day.outputTask.template.slice(0,3),requiredSentenceCount:day.outputTask.requiredSentenceCount,simpleVersion:day.outputTask.template.slice(0,day.outputTask.requiredSentenceCount)}])));
+export const week26to28SceneGoalsByDayId:Record<string,SceneGoal>=Object.fromEntries(week26to28.flatMap(week=>week.days.map(day=>[day.id,{id:slug(day.title),title:day.title,capability:`I can ${day.goal.toLowerCase()}`,templates:day.outputTask.template,guidedPrompts:day.outputTask.prompts,scenePrompt:day.outputTask.storyPrompt??'',dialoguePrompts:[`Ask and answer about ${day.title}.`]}])));
+export const week26to28SceneRemixTasksByDayId:Record<string,SceneRemixTask[]>=Object.fromEntries(week26to28.flatMap(week=>week.days.map(day=>[day.id,[{id:`${day.id}-remix-${slug(day.title)}`,type:'replace',prompt:`Change one sentence with ${day.wordIds[0]}.`,source:day.outputTask.template[0],referenceAnswers:day.outputTask.template.slice(1,3)}]])));

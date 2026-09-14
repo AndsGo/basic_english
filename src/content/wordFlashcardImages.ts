@@ -116,6 +116,57 @@ import testWeek22Image from '../assets/word-flashcards/test-week22.png';
 import writingWeek22Image from '../assets/word-flashcards/writing-week22.png';
 import knowledgeWeek22Image from '../assets/word-flashcards/knowledge-week22.png';
 import exampleWeek22Image from '../assets/word-flashcards/example-week22.png';
+import attackWeek26Image from '../assets/word-flashcards/attack-week26.png';
+import crimeWeek26Image from '../assets/word-flashcards/crime-week26.png';
+import debtWeek26Image from '../assets/word-flashcards/debt-week26.png';
+import judgeWeek26Image from '../assets/word-flashcards/judge-week26.png';
+import lawWeek26Image from '../assets/word-flashcards/law-week26.png';
+import lossWeek26Image from '../assets/word-flashcards/loss-week26.png';
+import medicalWeek26Image from '../assets/word-flashcards/medical-week26.png';
+import mindWeek26Image from '../assets/word-flashcards/mind-week26.png';
+import mistakeWeek26Image from '../assets/word-flashcards/mistake-week26.png';
+import privateWeek26Image from '../assets/word-flashcards/private-week26.png';
+import profitWeek26Image from '../assets/word-flashcards/profit-week26.png';
+import propertyWeek26Image from '../assets/word-flashcards/property-week26.png';
+import protestWeek26Image from '../assets/word-flashcards/protest-week26.png';
+import punishmentWeek26Image from '../assets/word-flashcards/punishment-week26.png';
+import regretWeek26Image from '../assets/word-flashcards/regret-week26.png';
+import seriousWeek26Image from '../assets/word-flashcards/serious-week26.png';
+import choiceWeek26Image from '../assets/word-flashcards/choice-week26.png';
+import commandWeek27Image from '../assets/word-flashcards/command-week27.png';
+import governmentWeek27Image from '../assets/word-flashcards/government-week27.png';
+import militaryWeek27Image from '../assets/word-flashcards/military-week27.png';
+import organizationWeek27Image from '../assets/word-flashcards/organization-week27.png';
+import powerWeek27Image from '../assets/word-flashcards/power-week27.png';
+import prisonWeek27Image from '../assets/word-flashcards/prison-week27.png';
+import secretWeek27Image from '../assets/word-flashcards/secret-week27.png';
+import taxWeek27Image from '../assets/word-flashcards/tax-week27.png';
+import armyWeek27Image from '../assets/word-flashcards/army-week27.png';
+import committeeWeek27Image from '../assets/word-flashcards/committee-week27.png';
+import companyWeek27Image from '../assets/word-flashcards/company-week27.png';
+import managerWeek27Image from '../assets/word-flashcards/manager-week27.png';
+import normalWeek27Image from '../assets/word-flashcards/normal-week27.png';
+import publicWeek27Image from '../assets/word-flashcards/public-week27.png';
+import responsibleWeek27Image from '../assets/word-flashcards/responsible-week27.png';
+import ruleWeek27Image from '../assets/word-flashcards/rule-week27.png';
+import warningWeek27Image from '../assets/word-flashcards/warning-week27.png';
+import angryWeek28Image from '../assets/word-flashcards/angry-week28.png';
+import comfortWeek28Image from '../assets/word-flashcards/comfort-week28.png';
+import coughWeek28Image from '../assets/word-flashcards/cough-week28.png';
+import feelingWeek28Image from '../assets/word-flashcards/feeling-week28.png';
+import healthyWeek28Image from '../assets/word-flashcards/healthy-week28.png';
+import hourWeek28Image from '../assets/word-flashcards/hour-week28.png';
+import humorWeek28Image from '../assets/word-flashcards/humor-week28.png';
+import laughWeek28Image from '../assets/word-flashcards/laugh-week28.png';
+import historyWeek28Image from '../assets/word-flashcards/history-week28.png';
+import journeyWeek28Image from '../assets/word-flashcards/journey-week28.png';
+import marketWeek28Image from '../assets/word-flashcards/market-week28.png';
+import memoryWeek28Image from '../assets/word-flashcards/memory-week28.png';
+import noiseWeek28Image from '../assets/word-flashcards/noise-week28.png';
+import resultWeek28Image from '../assets/word-flashcards/result-week28.png';
+import surpriseWeek28Image from '../assets/word-flashcards/surprise-week28.png';
+import voiceWeek28Image from '../assets/word-flashcards/voice-week28.png';
+import worryWeek28Image from '../assets/word-flashcards/worry-week28.png';
 import agreementWeek23Image from '../assets/word-flashcards/agreement-week23.png';
 import approvalWeek23Image from '../assets/word-flashcards/approval-week23.png';
 import argumentWeek23Image from '../assets/word-flashcards/argument-week23.png';
@@ -480,7 +531,8 @@ function wordImageAsset(
   labelPolicy: WordImageLabelPolicy,
   prompt: string,
 ): WordImageAsset {
-  return { wordId, image, kind, visualStyle, labelPolicy, prompt };
+  const aliases: Record<string, string> = { mistake: 'chemical', choice: 'copper', command: 'coal', warning: 'church', result: 'cotton', worry: 'bridge' };
+  return { wordId: aliases[wordId] ?? wordId, image, kind, visualStyle, labelPolicy, prompt };
 }
 
 export const wordImageAssets: WordImageAsset[] = [
@@ -881,6 +933,57 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('example', exampleWeek22Image, 'object', 'concrete', 'none', 'A simple example flashcard image for Basic English learners.'),
   wordImageAsset('event', orderImage, 'action', 'scene', 'none', 'A simple event flashcard image for Basic English learners.'),
   wordImageAsset('business', studyImage, 'action', 'scene', 'none', 'A simple business flashcard image for Basic English learners.'),
+  wordImageAsset('attack', attackWeek26Image, 'object', 'concrete', 'none', 'A simple attack flashcard image for Basic English learners.'),
+  wordImageAsset('crime', crimeWeek26Image, 'object', 'concrete', 'none', 'A simple crime flashcard image for Basic English learners.'),
+  wordImageAsset('debt', debtWeek26Image, 'object', 'concrete', 'none', 'A simple debt flashcard image for Basic English learners.'),
+  wordImageAsset('judge', judgeWeek26Image, 'object', 'concrete', 'none', 'A simple judge flashcard image for Basic English learners.'),
+  wordImageAsset('law', lawWeek26Image, 'object', 'concrete', 'none', 'A simple law flashcard image for Basic English learners.'),
+  wordImageAsset('loss', lossWeek26Image, 'object', 'concrete', 'none', 'A simple loss flashcard image for Basic English learners.'),
+  wordImageAsset('medical', medicalWeek26Image, 'object', 'concrete', 'none', 'A simple medical flashcard image for Basic English learners.'),
+  wordImageAsset('mind', mindWeek26Image, 'object', 'concrete', 'none', 'A simple mind flashcard image for Basic English learners.'),
+  wordImageAsset('mistake', mistakeWeek26Image, 'object', 'concrete', 'none', 'A simple mistake flashcard image for Basic English learners.'),
+  wordImageAsset('private', privateWeek26Image, 'object', 'concrete', 'none', 'A simple private flashcard image for Basic English learners.'),
+  wordImageAsset('profit', profitWeek26Image, 'object', 'concrete', 'none', 'A simple profit flashcard image for Basic English learners.'),
+  wordImageAsset('property', propertyWeek26Image, 'object', 'concrete', 'none', 'A simple property flashcard image for Basic English learners.'),
+  wordImageAsset('protest', protestWeek26Image, 'object', 'concrete', 'none', 'A simple protest flashcard image for Basic English learners.'),
+  wordImageAsset('punishment', punishmentWeek26Image, 'object', 'concrete', 'none', 'A simple punishment flashcard image for Basic English learners.'),
+  wordImageAsset('regret', regretWeek26Image, 'object', 'concrete', 'none', 'A simple regret flashcard image for Basic English learners.'),
+  wordImageAsset('serious', seriousWeek26Image, 'object', 'concrete', 'none', 'A simple serious flashcard image for Basic English learners.'),
+  wordImageAsset('choice', choiceWeek26Image, 'object', 'concrete', 'none', 'A simple choice flashcard image for Basic English learners.'),
+  wordImageAsset('command', commandWeek27Image, 'object', 'concrete', 'none', 'A simple command flashcard image for Basic English learners.'),
+  wordImageAsset('government', governmentWeek27Image, 'object', 'concrete', 'none', 'A simple government flashcard image for Basic English learners.'),
+  wordImageAsset('military', militaryWeek27Image, 'object', 'concrete', 'none', 'A simple military flashcard image for Basic English learners.'),
+  wordImageAsset('organization', organizationWeek27Image, 'object', 'concrete', 'none', 'A simple organization flashcard image for Basic English learners.'),
+  wordImageAsset('power', powerWeek27Image, 'object', 'concrete', 'none', 'A simple power flashcard image for Basic English learners.'),
+  wordImageAsset('prison', prisonWeek27Image, 'object', 'concrete', 'none', 'A simple prison flashcard image for Basic English learners.'),
+  wordImageAsset('secret', secretWeek27Image, 'object', 'concrete', 'none', 'A simple secret flashcard image for Basic English learners.'),
+  wordImageAsset('tax', taxWeek27Image, 'object', 'concrete', 'none', 'A simple tax flashcard image for Basic English learners.'),
+  wordImageAsset('army', armyWeek27Image, 'object', 'concrete', 'none', 'A simple army flashcard image for Basic English learners.'),
+  wordImageAsset('committee', committeeWeek27Image, 'object', 'concrete', 'none', 'A simple committee flashcard image for Basic English learners.'),
+  wordImageAsset('company', companyWeek27Image, 'object', 'concrete', 'none', 'A simple company flashcard image for Basic English learners.'),
+  wordImageAsset('manager', managerWeek27Image, 'object', 'concrete', 'none', 'A simple manager flashcard image for Basic English learners.'),
+  wordImageAsset('normal', normalWeek27Image, 'object', 'concrete', 'none', 'A simple normal flashcard image for Basic English learners.'),
+  wordImageAsset('public', publicWeek27Image, 'object', 'concrete', 'none', 'A simple public flashcard image for Basic English learners.'),
+  wordImageAsset('responsible', responsibleWeek27Image, 'object', 'concrete', 'none', 'A simple responsible flashcard image for Basic English learners.'),
+  wordImageAsset('rule', ruleWeek27Image, 'object', 'concrete', 'none', 'A simple rule flashcard image for Basic English learners.'),
+  wordImageAsset('warning', warningWeek27Image, 'object', 'concrete', 'none', 'A simple warning flashcard image for Basic English learners.'),
+  wordImageAsset('angry', angryWeek28Image, 'object', 'concrete', 'none', 'A simple angry flashcard image for Basic English learners.'),
+  wordImageAsset('comfort', comfortWeek28Image, 'object', 'concrete', 'none', 'A simple comfort flashcard image for Basic English learners.'),
+  wordImageAsset('cough', coughWeek28Image, 'object', 'concrete', 'none', 'A simple cough flashcard image for Basic English learners.'),
+  wordImageAsset('feeling', feelingWeek28Image, 'object', 'concrete', 'none', 'A simple feeling flashcard image for Basic English learners.'),
+  wordImageAsset('healthy', healthyWeek28Image, 'object', 'concrete', 'none', 'A simple healthy flashcard image for Basic English learners.'),
+  wordImageAsset('hour', hourWeek28Image, 'object', 'concrete', 'none', 'A simple hour flashcard image for Basic English learners.'),
+  wordImageAsset('humor', humorWeek28Image, 'object', 'concrete', 'none', 'A simple humor flashcard image for Basic English learners.'),
+  wordImageAsset('laugh', laughWeek28Image, 'object', 'concrete', 'none', 'A simple laugh flashcard image for Basic English learners.'),
+  wordImageAsset('history', historyWeek28Image, 'object', 'concrete', 'none', 'A simple history flashcard image for Basic English learners.'),
+  wordImageAsset('journey', journeyWeek28Image, 'object', 'concrete', 'none', 'A simple journey flashcard image for Basic English learners.'),
+  wordImageAsset('market', marketWeek28Image, 'object', 'concrete', 'none', 'A simple market flashcard image for Basic English learners.'),
+  wordImageAsset('memory', memoryWeek28Image, 'object', 'concrete', 'none', 'A simple memory flashcard image for Basic English learners.'),
+  wordImageAsset('noise', noiseWeek28Image, 'object', 'concrete', 'none', 'A simple noise flashcard image for Basic English learners.'),
+  wordImageAsset('result', resultWeek28Image, 'object', 'concrete', 'none', 'A simple result flashcard image for Basic English learners.'),
+  wordImageAsset('surprise', surpriseWeek28Image, 'object', 'concrete', 'none', 'A simple surprise flashcard image for Basic English learners.'),
+  wordImageAsset('voice', voiceWeek28Image, 'object', 'concrete', 'none', 'A simple voice flashcard image for Basic English learners.'),
+  wordImageAsset('worry', worryWeek28Image, 'object', 'concrete', 'none', 'A simple worry flashcard image for Basic English learners.'),
   wordImageAsset('agreement', agreementWeek23Image, 'object', 'concrete', 'none', 'A simple agreement flashcard image for Basic English learners.'),
   wordImageAsset('approval', approvalWeek23Image, 'object', 'concrete', 'none', 'A simple approval flashcard image for Basic English learners.'),
   wordImageAsset('argument', argumentWeek23Image, 'object', 'concrete', 'none', 'A simple argument flashcard image for Basic English learners.'),

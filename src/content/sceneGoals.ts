@@ -5,6 +5,7 @@ import { week14to16SceneGoalsByDayId } from './week14to16LearningTasks';
 import { week17to19SceneGoalsByDayId } from './week17to19LearningTasks';
 import { week20to22SceneGoalsByDayId } from './week20to22LearningTasks';
 import { week23to25SceneGoalsByDayId } from './week23to25LearningTasks';
+import { week26to28SceneGoalsByDayId } from './week26to28LearningTasks';
 
 type SceneGoalDayId =
   | 'day-001'
@@ -506,4 +507,5 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   ...week17to19SceneGoalsByDayId,
   ...week20to22SceneGoalsByDayId,
   ...week23to25SceneGoalsByDayId,
+  ...week26to28SceneGoalsByDayId,
 };
