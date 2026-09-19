@@ -127,7 +127,7 @@ export function WordsPage({
           <div className="basic-library-header">
             <div>
               <h3>Basic English 850 Library</h3>
-              <p className="muted">Core vocabulary coverage across the current 46-week course.</p>
+              <p className="muted">Core vocabulary coverage across the current 48-week course.</p>
             </div>
             <div className="basic-library-stats" aria-label="Basic English 850 coverage">
               <strong>{coveredCoreWords.size} / {basicEnglishWordList.length}</strong>

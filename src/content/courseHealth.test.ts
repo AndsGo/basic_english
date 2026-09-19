@@ -26,16 +26,16 @@ describe('courseHealth', () => {
   it('summarizes current course scope and weekly load', () => {
     const metrics = collectCurrentMetrics();
 
-    expect(metrics.courseWeeks).toBe(46);
-    expect(metrics.courseDays).toBe(322);
-    expect(metrics.courseWords).toBe(807);
-    expect(metrics.basicEnglishCourseWords).toBe(754);
+    expect(metrics.courseWeeks).toBe(48);
+    expect(metrics.courseDays).toBe(336);
+    expect(metrics.courseWords).toBe(841);
+    expect(metrics.basicEnglishCourseWords).toBe(788);
     expect(metrics.basicEnglishWordCount).toBe(850);
-    expect(metrics.basicEnglishCoveragePercent).toBe(88.7);
-    expect(metrics.pictureDescribe.covered).toBe(322);
-    expect(metrics.sceneGoals.covered).toBe(322);
-    expect(metrics.sceneRemix.covered).toBe(322);
-    expect(metrics.byWeek.map((week) => week.introducedWords)).toEqual([20, 33, 48, 39, 17, 10, 10, 10, 10, 10, 10, 10, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 19, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17]);
+    expect(metrics.basicEnglishCoveragePercent).toBe(92.7);
+    expect(metrics.pictureDescribe.covered).toBe(336);
+    expect(metrics.sceneGoals.covered).toBe(336);
+    expect(metrics.sceneRemix.covered).toBe(336);
+    expect(metrics.byWeek.map((week) => week.introducedWords)).toEqual([20, 33, 48, 39, 17, 10, 10, 10, 10, 10, 10, 10, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 19, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17]);
     expect(metrics.byWeek[1]).toMatchObject({
       averageActiveDayWordRefs: 11.7,
       averageSupportDayWordRefs: 0.1,

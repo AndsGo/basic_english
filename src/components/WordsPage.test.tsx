@@ -146,8 +146,8 @@ describe('WordsPage', () => {
     await userEvent.click(screen.getByRole('button', { name: '850 Library' }));
 
     expect(screen.getByRole('heading', { name: 'Basic English 850 Library' })).toBeInTheDocument();
-    expect(screen.getByText('754 / 850')).toBeInTheDocument();
-    expect(screen.getByText('88.7% course coverage')).toBeInTheDocument();
+    expect(screen.getByText('788 / 850')).toBeInTheDocument();
+    expect(screen.getByText('92.7% course coverage')).toBeInTheDocument();
     expect(screen.getByRole('listitem', { name: /account in course/i })).toBeInTheDocument();
     expect(screen.getByRole('listitem', { name: /against in course/i })).toBeInTheDocument();
   });

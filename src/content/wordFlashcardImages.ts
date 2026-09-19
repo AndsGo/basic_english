@@ -767,6 +767,40 @@ import sharpWeek46Image from '../assets/word-flashcards/sharp-week46.png';
 import smoothWeek46Image from '../assets/word-flashcards/smooth-week46.png';
 import spongeWeek46Image from '../assets/word-flashcards/sponge-week46.png';
 import structureWeek46Image from '../assets/word-flashcards/structure-week46.png';
+import anyWeek47Image from '../assets/word-flashcards/any-week47.png';
+import bitWeek47Image from '../assets/word-flashcards/bit-week47.png';
+import looseWeek47Image from '../assets/word-flashcards/loose-week47.png';
+import moonWeek47Image from '../assets/word-flashcards/moon-week47.png';
+import mouthWeek47Image from '../assets/word-flashcards/mouth-week47.png';
+import nutWeek47Image from '../assets/word-flashcards/nut-week47.png';
+import quiteWeek47Image from '../assets/word-flashcards/quite-week47.png';
+import sadWeek47Image from '../assets/word-flashcards/sad-week47.png';
+import skinWeek47Image from '../assets/word-flashcards/skin-week47.png';
+import slowWeek47Image from '../assets/word-flashcards/slow-week47.png';
+import tallWeek47Image from '../assets/word-flashcards/tall-week47.png';
+import thickWeek47Image from '../assets/word-flashcards/thick-week47.png';
+import tightWeek47Image from '../assets/word-flashcards/tight-week47.png';
+import wetWeek47Image from '../assets/word-flashcards/wet-week47.png';
+import wiseWeek47Image from '../assets/word-flashcards/wise-week47.png';
+import strangeWeek47Image from '../assets/word-flashcards/strange-week47.png';
+import slopeWeek47Image from '../assets/word-flashcards/slope-week47.png';
+import asWeek48Image from '../assets/word-flashcards/as-week48.png';
+import atWeek48Image from '../assets/word-flashcards/at-week48.png';
+import beWeek48Image from '../assets/word-flashcards/be-week48.png';
+import byWeek48Image from '../assets/word-flashcards/by-week48.png';
+import forWeek48Image from '../assets/word-flashcards/for-week48.png';
+import ifWeek48Image from '../assets/word-flashcards/if-week48.png';
+import letWeek48Image from '../assets/word-flashcards/let-week48.png';
+import noWeek48Image from '../assets/word-flashcards/no-week48.png';
+import notWeek48Image from '../assets/word-flashcards/not-week48.png';
+import ofWeek48Image from '../assets/word-flashcards/of-week48.png';
+import offWeek48Image from '../assets/word-flashcards/off-week48.png';
+import orWeek48Image from '../assets/word-flashcards/or-week48.png';
+import otherWeek48Image from '../assets/word-flashcards/other-week48.png';
+import outWeek48Image from '../assets/word-flashcards/out-week48.png';
+import overWeek48Image from '../assets/word-flashcards/over-week48.png';
+import pinWeek48Image from '../assets/word-flashcards/pin-week48.png';
+import ploughWeek48Image from '../assets/word-flashcards/plough-week48.png';
 import materialWeek40Image from '../assets/word-flashcards/material-week40.png';
 import matchWeek40Image from '../assets/word-flashcards/match-week40.png';
 import massWeek40Image from '../assets/word-flashcards/mass-week40.png';
@@ -1651,6 +1685,40 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('smooth', smoothWeek46Image, 'quality', 'concrete', 'none', 'A hand touches a smooth stone.'),
   wordImageAsset('sponge', spongeWeek46Image, 'object', 'scene', 'none', 'A sponge takes in water beside a cup.'),
   wordImageAsset('structure', structureWeek46Image, 'structure', 'scene', 'none', 'A bridge has a clear structure of blocks.'),
+  wordImageAsset('any', anyWeek47Image, 'structure', 'grammar', 'english-keyword', 'A choice card shows any one object from a group.'),
+  wordImageAsset('bit', bitWeek47Image, 'object', 'concrete', 'none', 'A small bit of biscuit rests beside the whole biscuit.'),
+  wordImageAsset('loose', looseWeek47Image, 'quality', 'concrete', 'none', 'A loose shoelace hangs open beside a tied lace.'),
+  wordImageAsset('moon', moonWeek47Image, 'place', 'scene', 'none', 'The moon shines above a quiet roof.'),
+  wordImageAsset('mouth', mouthWeek47Image, 'object', 'scene', 'none', 'A friendly face has a clear open mouth.'),
+  wordImageAsset('nut', nutWeek47Image, 'object', 'concrete', 'none', 'A few nuts are in a small bowl.'),
+  wordImageAsset('quite', quiteWeek47Image, 'quality', 'grammar', 'english-keyword', 'A degree card shows quite a full cup.'),
+  wordImageAsset('sad', sadWeek47Image, 'quality', 'scene', 'none', 'A person sits quietly with a sad face.'),
+  wordImageAsset('skin', skinWeek47Image, 'object', 'scene', 'none', 'A close view shows the skin on a friendly hand.'),
+  wordImageAsset('slow', slowWeek47Image, 'quality', 'scene', 'none', 'A snail moves slowly beside a toy car.'),
+  wordImageAsset('tall', tallWeek47Image, 'quality', 'concrete', 'none', 'Two trees show one clearly taller than the other.'),
+  wordImageAsset('thick', thickWeek47Image, 'quality', 'concrete', 'none', 'Two books show one thick and one thin.'),
+  wordImageAsset('tight', tightWeek47Image, 'quality', 'concrete', 'none', 'A tight jar lid is beside a loose lid.'),
+  wordImageAsset('wet', wetWeek47Image, 'quality', 'concrete', 'none', 'A wet towel has visible water drops.'),
+  wordImageAsset('wise', wiseWeek47Image, 'quality', 'scene', 'none', 'A thoughtful person chooses a good path.'),
+  wordImageAsset('strange', strangeWeek47Image, 'quality', 'concrete', 'none', 'An unusual fruit looks strange but friendly.'),
+  wordImageAsset('slope', slopeWeek47Image, 'place', 'scene', 'none', 'A grassy slope rises beside a path.'),
+  wordImageAsset('as', asWeek48Image, 'structure', 'grammar', 'english-keyword', 'Two people do the same action as each other.'),
+  wordImageAsset('at', atWeek48Image, 'structure', 'grammar', 'english-keyword', 'A person stands at a door.'),
+  wordImageAsset('be', beWeek48Image, 'structure', 'grammar', 'english-keyword', 'A simple state card shows be.'),
+  wordImageAsset('by', byWeek48Image, 'position', 'scene', 'none', 'A bicycle is by a small house.'),
+  wordImageAsset('for', forWeek48Image, 'structure', 'scene', 'none', 'A wrapped present is for a child.'),
+  wordImageAsset('if', ifWeek48Image, 'structure', 'grammar', 'english-keyword', 'A cloud and umbrella show an if condition.'),
+  wordImageAsset('let', letWeek48Image, 'action', 'scene', 'none', 'An adult lets a child pass through a gate.'),
+  wordImageAsset('no', noWeek48Image, 'structure', 'grammar', 'english-keyword', 'A stop card shows no.'),
+  wordImageAsset('not', notWeek48Image, 'structure', 'grammar', 'english-keyword', 'A negative sentence cue shows not.'),
+  wordImageAsset('of', ofWeek48Image, 'structure', 'grammar', 'english-keyword', 'A box contains a small part of a thing.'),
+  wordImageAsset('off', offWeek48Image, 'position', 'scene', 'none', 'A ball moves off a table.'),
+  wordImageAsset('or', orWeek48Image, 'structure', 'grammar', 'english-keyword', 'A choice card shows or.'),
+  wordImageAsset('other', otherWeek48Image, 'quality', 'concrete', 'none', 'Two different objects show one other object.'),
+  wordImageAsset('out', outWeek48Image, 'position', 'scene', 'none', 'A child walks out through an open door.'),
+  wordImageAsset('over', overWeek48Image, 'position', 'scene', 'none', 'A bridge is over a small stream.'),
+  wordImageAsset('pin', pinWeek48Image, 'object', 'concrete', 'none', 'A pin holds two sheets of paper together.'),
+  wordImageAsset('plough', ploughWeek48Image, 'object', 'scene', 'none', 'A farm plough turns earth in a field.'),
 ];
 
 export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(
