@@ -3,7 +3,7 @@
 ## Delivered
 
 - Corrected the core inventory from 855 entries to 850 headwords. The extra entries `less`, `least`, `most`, `she`, and `un` remain accepted course exceptions; no lesson or progress IDs changed.
-- Before Week 13, scheduled course coverage was 174/850 (20.5%). After Weeks 13-50, coverage is 821/850 (96.6%), with 29 missing core headwords and 53 supplementary course words. All 874 course words occur in day word lists.
+- Before Week 13, scheduled course coverage was 174/850 (20.5%). After Weeks 13-52, coverage is 850/850 (100%), with no missing core headwords and 53 supplementary course words. All 903 course words occur in day word lists.
 - Replaced spelling-based placeholder phonetics for all 50 Week 8-12 words with British IPA. The typed pronunciation map makes missing entries a compile-time error.
 - Corrected countable-word language in all weekly assessment rubrics. Scores, criteria IDs, and pass thresholds are unchanged.
 - Corrected Day 80's `much days` model answer, cloze and Chinese prompt together: `A week has 7 days.`
@@ -23,6 +23,7 @@
 - Added Weeks 45-46 (Days 309-322), with 34 new core words about past stories, future plans, and purpose, two picture-description scenes, word flashcards, and complete scene/remix assets.
 - Added Weeks 47-48 (Days 323-336), with 34 new core words about comparison, quality, argument, and reason, two picture-description scenes, word flashcards, and complete scene/remix assets.
 - Added Weeks 49-50 (Days 337-350), with 33 new core words about steps, processes, and picture description, two picture-description scenes, word flashcards, and complete scene/remix assets. The pronoun `I` reuses the Week 1 entry rather than creating a duplicate word ID.
+- Added Weeks 51-52 (Days 351-364), completing the remaining 29 core headwords with connection, place, comparison, and final-story practice, two picture-description scenes, word flashcards, and complete scene/remix assets.
 
 ## Audit Method
 
@@ -51,7 +52,7 @@ The JSON report derives scheduled coverage from actual day references, independe
 This closes the bounded content-correctness and library-access repair, not the entire future curriculum backlog.
 
 - Weeks 2-4 remain uneven: Week 2 introduces 33 words and averages 11.7 active references/day; Weeks 3 and 4 introduce 48 and 39 words. The warnings were not suppressed or thresholds relaxed. A future lesson-load revision must account for prerequisite patterns and existing progress.
-- The 50-week course is not full coverage of all 850 words, nor a guarantee of describing every possible life situation. The 29 missing headwords need authored teaching content and reviewed assets before they can be called delivered.
+- The 52-week course now schedules all 850 Basic English headwords. This completes the core vocabulary inventory, while continued review of learner performance and scene quality remains ongoing.
 - The pre-existing Weeks 13-52 proposal remains the long-term expansion plan. Its capacity is 679 slots, above the current remaining inventory; Weeks 14-16 are now shipped curriculum and the remaining weeks remain planned work.
 - This audit checks targeted grammar defects and pronunciation placeholders. It is not a complete linguistic certification of all prompts.
 - Initial bundle optimization remains open. No image was regenerated, redrawn, resized, or compressed in this repair.

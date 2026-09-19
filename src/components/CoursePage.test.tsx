@@ -140,7 +140,7 @@ describe('CoursePage', () => {
     expect(screen.getAllByRole('button', { name: 'Open Today' })).toHaveLength(1);
   });
 
-  it('shows all thirteen weeks complete after Day 91 is complete', () => {
+  it('shows all fifty-two weeks complete after the final day is complete', () => {
     render(
       <CoursePage
         course={basicEnglishCourse}
@@ -151,7 +151,7 @@ describe('CoursePage', () => {
       />,
     );
 
-    expect(screen.getAllByText('7 / 7 days completed')).toHaveLength(50);
+    expect(screen.getAllByText('7 / 7 days completed')).toHaveLength(52);
     expect(screen.queryByRole('button', { name: 'Open Today' })).not.toBeInTheDocument();
 
     const day238Card = screen.getByText('Day 238: Agreement and Respect 7').closest('article');

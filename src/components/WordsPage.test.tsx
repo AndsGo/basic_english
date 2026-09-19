@@ -146,8 +146,8 @@ describe('WordsPage', () => {
     await userEvent.click(screen.getByRole('button', { name: '850 Library' }));
 
     expect(screen.getByRole('heading', { name: 'Basic English 850 Library' })).toBeInTheDocument();
-    expect(screen.getByText('821 / 850')).toBeInTheDocument();
-    expect(screen.getByText('96.6% course coverage')).toBeInTheDocument();
+    expect(screen.getByText('850 / 850')).toBeInTheDocument();
+    expect(screen.getByText('100% course coverage')).toBeInTheDocument();
     expect(screen.getByRole('listitem', { name: /account in course/i })).toBeInTheDocument();
     expect(screen.getByRole('listitem', { name: /against in course/i })).toBeInTheDocument();
   });
@@ -159,7 +159,7 @@ describe('WordsPage', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Future' }));
     await userEvent.type(screen.getByLabelText('Search Basic English 850 words'), 'a');
 
-    expect(screen.getByRole('listitem', { name: /^a future$/i })).toBeInTheDocument();
+    expect(screen.getByText('No words match this filter.')).toBeInTheDocument();
     expect(screen.queryByRole('listitem', { name: /account in course/i })).not.toBeInTheDocument();
   });
 

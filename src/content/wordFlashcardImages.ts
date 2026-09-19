@@ -800,6 +800,35 @@ import starWeek50Image from '../assets/word-flashcards/star-week50.png';
 import stemWeek50Image from '../assets/word-flashcards/stem-week50.png';
 import stiffWeek50Image from '../assets/word-flashcards/stiff-week50.png';
 import wordWeek50Image from '../assets/word-flashcards/word-week50.png';
+import aWeek52Image from '../assets/word-flashcards/a-week52.png';
+import soWeek52Image from '../assets/word-flashcards/so-week52.png';
+import strongWeek51Image from '../assets/word-flashcards/strong-week51.png';
+import suchWeek52Image from '../assets/word-flashcards/such-week52.png';
+import sweetWeek51Image from '../assets/word-flashcards/sweet-week51.png';
+import systemWeek51Image from '../assets/word-flashcards/system-week51.png';
+import talkWeek51Image from '../assets/word-flashcards/talk-week51.png';
+import thanWeek52Image from '../assets/word-flashcards/than-week52.png';
+import thatWeek52Image from '../assets/word-flashcards/that-week52.png';
+import theWeek52Image from '../assets/word-flashcards/the-week52.png';
+import thereWeek52Image from '../assets/word-flashcards/there-week52.png';
+import thinWeek51Image from '../assets/word-flashcards/thin-week51.png';
+import thoughWeek52Image from '../assets/word-flashcards/though-week52.png';
+import throughWeek52Image from '../assets/word-flashcards/through-week52.png';
+import toWeek52Image from '../assets/word-flashcards/to-week52.png';
+import topWeek51Image from '../assets/word-flashcards/top-week51.png';
+import townWeek52Image from '../assets/word-flashcards/town-week52.png';
+import trickWeek52Image from '../assets/word-flashcards/trick-week52.png';
+import verseWeek52Image from '../assets/word-flashcards/verse-week52.png';
+import veryWeek52Image from '../assets/word-flashcards/very-week52.png';
+import violentWeek52Image from '../assets/word-flashcards/violent-week52.png';
+import warWeek52Image from '../assets/word-flashcards/war-week52.png';
+import wellWeek52Image from '../assets/word-flashcards/well-week52.png';
+import whereWeek52Image from '../assets/word-flashcards/where-week52.png';
+import whoWeek52Image from '../assets/word-flashcards/who-week52.png';
+import whyWeek52Image from '../assets/word-flashcards/why-week52.png';
+import wineWeek52Image from '../assets/word-flashcards/wine-week52.png';
+import yesWeek52Image from '../assets/word-flashcards/yes-week52.png';
+import youWeek52Image from '../assets/word-flashcards/you-week52.png';
 import anyWeek47Image from '../assets/word-flashcards/any-week47.png';
 import bitWeek47Image from '../assets/word-flashcards/bit-week47.png';
 import looseWeek47Image from '../assets/word-flashcards/loose-week47.png';
@@ -1785,6 +1814,35 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('stem', stemWeek50Image, 'object', 'concrete', 'none', 'A green flower has a clear stem.'),
   wordImageAsset('stiff', stiffWeek50Image, 'quality', 'concrete', 'none', 'A stiff board is beside flexible cloth.'),
   wordImageAsset('word', wordWeek50Image, 'abstract', 'grammar', 'english-keyword', 'A sound and book card shows word.'),
+  wordImageAsset('a', aWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the article a.'),
+  wordImageAsset('so', soWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the result word so.'),
+  wordImageAsset('strong', strongWeek51Image, 'quality', 'scene', 'none', 'A person lifts a heavy box, showing strong.'),
+  wordImageAsset('such', suchWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the word such.'),
+  wordImageAsset('sweet', sweetWeek51Image, 'quality', 'concrete', 'none', 'Honey and an apple show a sweet taste.'),
+  wordImageAsset('system', systemWeek51Image, 'abstract', 'scene', 'none', 'Connected pipes and a tap show a simple system.'),
+  wordImageAsset('talk', talkWeek51Image, 'action', 'scene', 'none', 'Two people talk face to face.'),
+  wordImageAsset('than', thanWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the comparison word than.'),
+  wordImageAsset('that', thatWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the pointing word that.'),
+  wordImageAsset('the', theWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the article the.'),
+  wordImageAsset('there', thereWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the place word there.'),
+  wordImageAsset('thin', thinWeek51Image, 'quality', 'relation', 'none', 'A thin pencil is beside a thick pencil.'),
+  wordImageAsset('though', thoughWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the contrast word though.'),
+  wordImageAsset('through', throughWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the path word through.'),
+  wordImageAsset('to', toWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the direction word to.'),
+  wordImageAsset('top', topWeek51Image, 'position', 'relation', 'none', 'A book rests on top of a stack.'),
+  wordImageAsset('town', townWeek52Image, 'place', 'scene', 'none', 'A small town has houses, shops, and streets.'),
+  wordImageAsset('trick', trickWeek52Image, 'action', 'scene', 'none', 'A child performs a harmless magic trick.'),
+  wordImageAsset('verse', verseWeek52Image, 'abstract', 'scene', 'none', 'A person recites beside an open poetry book.'),
+  wordImageAsset('very', veryWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the degree word very.'),
+  wordImageAsset('violent', violentWeek52Image, 'quality', 'scene', 'none', 'A strong storm breaks branches and shakes a fence.'),
+  wordImageAsset('war', warWeek52Image, 'abstract', 'scene', 'none', 'Two distant groups face each other in a historical war scene.'),
+  wordImageAsset('well', wellWeek52Image, 'quality', 'scene', 'none', 'A healthy person and a glass of water show well.'),
+  wordImageAsset('where', whereWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the place question where.'),
+  wordImageAsset('who', whoWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the person question who.'),
+  wordImageAsset('why', whyWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the reason question why.'),
+  wordImageAsset('wine', wineWeek52Image, 'object', 'concrete', 'none', 'A bottle and glass show wine.'),
+  wordImageAsset('yes', yesWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the answer word yes.'),
+  wordImageAsset('you', youWeek52Image, 'structure', 'grammar', 'english-keyword', 'A grammar card shows the second-person word you.'),
 ];
 
 export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(

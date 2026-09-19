@@ -65,6 +65,7 @@ import { week43to44PictureDescribeTasksByDayId } from './week43to44LearningTasks
 import { week45to46PictureDescribeTasksByDayId } from './week45to46LearningTasks';
 import { week47to48PictureDescribeTasksByDayId } from './week47to48LearningTasks';
 import { week49to50PictureDescribeTasksByDayId } from './week49to50LearningTasks';
+import { week51to52PictureDescribeTasksByDayId } from './week51to52LearningTasks';
 
 export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = {
   'day-001': {
@@ -637,4 +638,5 @@ export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = 
   ...week45to46PictureDescribeTasksByDayId,
   ...week47to48PictureDescribeTasksByDayId,
   ...week49to50PictureDescribeTasksByDayId,
+  ...week51to52PictureDescribeTasksByDayId,
 };
