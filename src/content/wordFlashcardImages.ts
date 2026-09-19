@@ -767,6 +767,39 @@ import sharpWeek46Image from '../assets/word-flashcards/sharp-week46.png';
 import smoothWeek46Image from '../assets/word-flashcards/smooth-week46.png';
 import spongeWeek46Image from '../assets/word-flashcards/sponge-week46.png';
 import structureWeek46Image from '../assets/word-flashcards/structure-week46.png';
+import hereWeek49Image from '../assets/word-flashcards/here-week49.png';
+import lookWeek49Image from '../assets/word-flashcards/look-week49.png';
+import netWeek49Image from '../assets/word-flashcards/net-week49.png';
+import shutWeek49Image from '../assets/word-flashcards/shut-week49.png';
+import smashWeek49Image from '../assets/word-flashcards/smash-week49.png';
+import sockWeek49Image from '../assets/word-flashcards/sock-week49.png';
+import stampWeek49Image from '../assets/word-flashcards/stamp-week49.png';
+import stationWeek49Image from '../assets/word-flashcards/station-week49.png';
+import stickyWeek49Image from '../assets/word-flashcards/sticky-week49.png';
+import stitchWeek49Image from '../assets/word-flashcards/stitch-week49.png';
+import stretchWeek49Image from '../assets/word-flashcards/stretch-week49.png';
+import threadWeek49Image from '../assets/word-flashcards/thread-week49.png';
+import ticketWeek49Image from '../assets/word-flashcards/ticket-week49.png';
+import touchWeek49Image from '../assets/word-flashcards/touch-week49.png';
+import umbrellaWeek49Image from '../assets/word-flashcards/umbrella-week49.png';
+import whipWeek49Image from '../assets/word-flashcards/whip-week49.png';
+import woundWeek49Image from '../assets/word-flashcards/wound-week49.png';
+import andWeek50Image from '../assets/word-flashcards/and-week50.png';
+import butWeek50Image from '../assets/word-flashcards/but-week50.png';
+import howWeek50Image from '../assets/word-flashcards/how-week50.png';
+import mayWeek50Image from '../assets/word-flashcards/may-week50.png';
+import mineWeek50Image from '../assets/word-flashcards/mine-week50.png';
+import seemWeek50Image from '../assets/word-flashcards/seem-week50.png';
+import selfWeek50Image from '../assets/word-flashcards/self-week50.png';
+import sexWeek50Image from '../assets/word-flashcards/sex-week50.png';
+import shameWeek50Image from '../assets/word-flashcards/shame-week50.png';
+import sideWeek50Image from '../assets/word-flashcards/side-week50.png';
+import sortWeek50Image from '../assets/word-flashcards/sort-week50.png';
+import specialWeek50Image from '../assets/word-flashcards/special-week50.png';
+import starWeek50Image from '../assets/word-flashcards/star-week50.png';
+import stemWeek50Image from '../assets/word-flashcards/stem-week50.png';
+import stiffWeek50Image from '../assets/word-flashcards/stiff-week50.png';
+import wordWeek50Image from '../assets/word-flashcards/word-week50.png';
 import anyWeek47Image from '../assets/word-flashcards/any-week47.png';
 import bitWeek47Image from '../assets/word-flashcards/bit-week47.png';
 import looseWeek47Image from '../assets/word-flashcards/loose-week47.png';
@@ -1719,6 +1752,39 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('over', overWeek48Image, 'position', 'scene', 'none', 'A bridge is over a small stream.'),
   wordImageAsset('pin', pinWeek48Image, 'object', 'concrete', 'none', 'A pin holds two sheets of paper together.'),
   wordImageAsset('plough', ploughWeek48Image, 'object', 'scene', 'none', 'A farm plough turns earth in a field.'),
+  wordImageAsset('here', hereWeek49Image, 'position', 'grammar', 'english-keyword', 'A clear place card shows here.'),
+  wordImageAsset('look', lookWeek49Image, 'action', 'scene', 'none', 'A child looks carefully at a flower.'),
+  wordImageAsset('net', netWeek49Image, 'object', 'concrete', 'none', 'A colorful net hangs beside a boat.'),
+  wordImageAsset('shut', shutWeek49Image, 'action', 'scene', 'none', 'A wooden door is shut.'),
+  wordImageAsset('smash', smashWeek49Image, 'action', 'scene', 'none', 'A clay cup is smashed into pieces.'),
+  wordImageAsset('sock', sockWeek49Image, 'object', 'concrete', 'none', 'A colorful sock rests beside a shoe.'),
+  wordImageAsset('stamp', stampWeek49Image, 'object', 'concrete', 'none', 'A postage stamp rests beside an envelope.'),
+  wordImageAsset('station', stationWeek49Image, 'place', 'scene', 'none', 'A train waits at a small station.'),
+  wordImageAsset('sticky', stickyWeek49Image, 'quality', 'concrete', 'none', 'A sticky drop holds paper to a table.'),
+  wordImageAsset('stitch', stitchWeek49Image, 'action', 'scene', 'none', 'A needle stitches two pieces of cloth.'),
+  wordImageAsset('stretch', stretchWeek49Image, 'action', 'scene', 'none', 'A person stretches a soft band.'),
+  wordImageAsset('thread', threadWeek49Image, 'object', 'concrete', 'none', 'A spool of thread rests beside cloth.'),
+  wordImageAsset('ticket', ticketWeek49Image, 'object', 'concrete', 'none', 'A travel ticket rests beside a train window.'),
+  wordImageAsset('touch', touchWeek49Image, 'action', 'scene', 'none', 'A hand touches a smooth ball.'),
+  wordImageAsset('umbrella', umbrellaWeek49Image, 'object', 'scene', 'none', 'A bright umbrella is open in rain.'),
+  wordImageAsset('whip', whipWeek49Image, 'object', 'scene', 'none', 'A farm worker holds a long whip beside a horse.'),
+  wordImageAsset('wound', woundWeek49Image, 'object', 'scene', 'none', 'A small wound is covered by a bandage.'),
+  wordImageAsset('and', andWeek50Image, 'structure', 'grammar', 'english-keyword', 'Two objects are joined by and.'),
+  wordImageAsset('but', butWeek50Image, 'structure', 'grammar', 'english-keyword', 'Two contrasting objects show but.'),
+  wordImageAsset('how', howWeek50Image, 'structure', 'grammar', 'english-keyword', 'A learner asks how a machine works.'),
+  wordImageAsset('may', mayWeek50Image, 'structure', 'grammar', 'english-keyword', 'A cloud and umbrella show may.'),
+  wordImageAsset('mine', mineWeek50Image, 'structure', 'grammar', 'english-keyword', 'A person has a book that is mine.'),
+  wordImageAsset('seem', seemWeek50Image, 'action', 'scene', 'none', 'A person looks thoughtful by a cloudy window.'),
+  wordImageAsset('self', selfWeek50Image, 'abstract', 'grammar', 'english-keyword', 'A person sees the self in a mirror.'),
+  wordImageAsset('sex', sexWeek50Image, 'abstract', 'grammar', 'english-keyword', 'A simple educational card shows sex.'),
+  wordImageAsset('shame', shameWeek50Image, 'quality', 'scene', 'none', 'A person looks down with shame.'),
+  wordImageAsset('side', sideWeek50Image, 'position', 'scene', 'none', 'A book is shown from its side.'),
+  wordImageAsset('sort', sortWeek50Image, 'action', 'scene', 'none', 'A person sorts blocks into bowls.'),
+  wordImageAsset('special', specialWeek50Image, 'quality', 'scene', 'none', 'One special flower stands out.'),
+  wordImageAsset('star', starWeek50Image, 'object', 'scene', 'none', 'A bright star shines at night.'),
+  wordImageAsset('stem', stemWeek50Image, 'object', 'concrete', 'none', 'A green flower has a clear stem.'),
+  wordImageAsset('stiff', stiffWeek50Image, 'quality', 'concrete', 'none', 'A stiff board is beside flexible cloth.'),
+  wordImageAsset('word', wordWeek50Image, 'abstract', 'grammar', 'english-keyword', 'A sound and book card shows word.'),
 ];
 
 export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(
