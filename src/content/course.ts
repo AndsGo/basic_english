@@ -15,11 +15,17 @@ import { week23, week23Words, week24, week24Words, week25, week25Words } from '.
 import { week26, week26Words, week27, week27Words, week28, week28Words } from './week26to28';
 import { week29, week29Words, week30, week30Words, week31, week31Words } from './week29to31';
 import { week32, week32Words, week33, week33Words, week34, week34Words } from './week32to34';
+import { week35, week35Words, week36, week36Words } from './week35to36';
+import { week37, week37Words, week38, week38Words } from './week37to38';
+import { week39, week39Words, week40, week40Words } from './week39to40';
+import { week41, week41Words, week42, week42Words } from './week41to42';
+import { week43, week43Words, week44, week44Words } from './week43to44';
+import { week45, week45Words, week46, week46Words } from './week45to46';
 
 export const basicEnglishCourse: Course = {
-  id: 'basic-english-34-weeks',
-  title: 'Basic English 34 Weeks',
-  contentVersion: '1.34.0',
+  id: 'basic-english-46-weeks',
+  title: 'Basic English 46 Weeks',
+  contentVersion: '1.46.0',
   schemaVersion: 1,
   words: [
     ...week1Words,
@@ -52,6 +58,18 @@ export const basicEnglishCourse: Course = {
     ...week32Words,
     ...week33Words,
     ...week34Words,
+    ...week35Words,
+    ...week36Words,
+    ...week37Words,
+    ...week38Words,
+    ...week39Words,
+    ...week40Words,
+    ...week41Words,
+    ...week42Words,
+    ...week43Words,
+    ...week44Words,
+    ...week45Words,
+    ...week46Words,
   ],
   patterns: [
     ...week1Patterns,
@@ -67,5 +85,5 @@ export const basicEnglishCourse: Course = {
     ...week17to19Patterns,
     ...week20to22Patterns,
   ],
-  weeks: [week1, week2, week3, week4, week5, week6, week7, ...week8to12, week13, week14, week15, week16, week17, week18, week19, week20, week21, week22, week23, week24, week25, week26, week27, week28, week29, week30, week31, week32, week33, week34],
+  weeks: [week1, week2, week3, week4, week5, week6, week7, ...week8to12, week13, week14, week15, week16, week17, week18, week19, week20, week21, week22, week23, week24, week25, week26, week27, week28, week29, week30, week31, week32, week33, week34, week35, week36, week37, week38, week39, week40, week41, week42, week43, week44, week45, week46],
 };

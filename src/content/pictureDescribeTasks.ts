@@ -57,6 +57,12 @@ import { week23to25PictureDescribeTasksByDayId } from './week23to25LearningTasks
 import { week26to28PictureDescribeTasksByDayId } from './week26to28LearningTasks';
 import { week29to31PictureDescribeTasksByDayId } from './week29to31LearningTasks';
 import { week32to34PictureDescribeTasksByDayId } from './week32to34LearningTasks';
+import { week35to36PictureDescribeTasksByDayId } from './week35to36LearningTasks';
+import { week37to38PictureDescribeTasksByDayId } from './week37to38LearningTasks';
+import { week39to40PictureDescribeTasksByDayId } from './week39to40LearningTasks';
+import { week41to42PictureDescribeTasksByDayId } from './week41to42LearningTasks';
+import { week43to44PictureDescribeTasksByDayId } from './week43to44LearningTasks';
+import { week45to46PictureDescribeTasksByDayId } from './week45to46LearningTasks';
 
 export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = {
   'day-001': {
@@ -621,4 +627,10 @@ export const pictureDescribeTasksByDayId: Record<string, PictureDescribeTask> = 
   ...week26to28PictureDescribeTasksByDayId,
   ...week29to31PictureDescribeTasksByDayId,
   ...week32to34PictureDescribeTasksByDayId,
+  ...week35to36PictureDescribeTasksByDayId,
+  ...week37to38PictureDescribeTasksByDayId,
+  ...week39to40PictureDescribeTasksByDayId,
+  ...week41to42PictureDescribeTasksByDayId,
+  ...week43to44PictureDescribeTasksByDayId,
+  ...week45to46PictureDescribeTasksByDayId,
 };

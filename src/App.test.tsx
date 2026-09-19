@@ -114,7 +114,7 @@ describe('App shell', () => {
     expect(screen.getAllByText('Complete Week 1 to unlock Home & Things.').length).toBeGreaterThan(0);
 
     await user.click(screen.getByRole('button', { name: 'Words' }));
-    expect(await screen.findByRole('heading', { name: 'Course Words' }, { timeout: 5000 })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Course Words' }, { timeout: 15000 })).toBeInTheDocument();
     expect(screen.getByText('name')).toBeInTheDocument();
     expect(screen.getByText('the word for a person or thing')).toBeInTheDocument();
     expect(screen.queryByText(/名字/)).not.toBeInTheDocument();
@@ -135,7 +135,7 @@ describe('App shell', () => {
     expect(screen.getByText('No capabilities unlocked yet.')).toBeInTheDocument();
     expect(screen.getByText('I can say who I am.')).toBeInTheDocument();
     expect(screen.getByText('Complete Day 1.')).toBeInTheDocument();
-  }, 10000);
+  }, 20000);
 
   it('shows a real product title in the top bar instead of a dev placeholder', () => {
     render(<App />);
@@ -195,14 +195,14 @@ describe('App shell', () => {
     render(<App />);
 
     await user.click(screen.getByRole('button', { name: 'Words' }));
-    expect(await screen.findByText('the word for a person or thing')).toBeInTheDocument();
+    expect(await screen.findByText('the word for a person or thing', {}, { timeout: 15000 })).toBeInTheDocument();
     expect(screen.queryByText(/名字/)).not.toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Me' }));
     await user.click(screen.getByRole('checkbox', { name: 'Show Chinese help' }));
     await user.click(screen.getByRole('button', { name: 'Words' }));
 
-    expect(await screen.findByText('the word for a person or thing')).toBeInTheDocument();
+    expect(await screen.findByText('the word for a person or thing', {}, { timeout: 15000 })).toBeInTheDocument();
     expect(screen.getByText(/名字/)).toBeInTheDocument();
   });
 

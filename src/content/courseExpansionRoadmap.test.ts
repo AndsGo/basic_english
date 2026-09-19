@@ -29,10 +29,10 @@ describe('courseExpansionRoadmap', () => {
       roadmap: courseExpansionRoadmap,
     });
 
-    expect(summary.currentCoreCoverage).toBe(550);
-    expect(summary.remainingCoreWords).toBe(300);
+    expect(summary.currentCoreCoverage).toBe(754);
+    expect(summary.remainingCoreWords).toBe(96);
     expect(summary.plannedFutureCoreWords).toBeGreaterThanOrEqual(summary.remainingCoreWords);
-    expect(summary.totalPlannedWeeks).toBe(74);
+    expect(summary.totalPlannedWeeks).toBe(86);
     expect(summary.averageFutureCoreWordsPerWeek).toBeCloseTo(17, 1);
   });
 });

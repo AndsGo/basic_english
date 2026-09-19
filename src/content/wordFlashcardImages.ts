@@ -579,6 +579,210 @@ import harborWeek34Image from '../assets/word-flashcards/harbor-week34.png';
 import hardWeek34Image from '../assets/word-flashcards/hard-week34.png';
 import harmonyWeek34Image from '../assets/word-flashcards/harmony-week34.png';
 import hateWeek34Image from '../assets/word-flashcards/hate-week34.png';
+import supportWeek35Image from '../assets/word-flashcards/support-week35.png';
+import rewardWeek35Image from '../assets/word-flashcards/reward-week35.png';
+import servantWeek35Image from '../assets/word-flashcards/servant-week35.png';
+import relationWeek36Image from '../assets/word-flashcards/relation-week36.png';
+import maleWeek36Image from '../assets/word-flashcards/male-week36.png';
+import marriedWeek36Image from '../assets/word-flashcards/married-week36.png';
+import opinionWeek36Image from '../assets/word-flashcards/opinion-week36.png';
+import personWeek36Image from '../assets/word-flashcards/person-week36.png';
+import representativeWeek36Image from '../assets/word-flashcards/representative-week36.png';
+import secretaryWeek36Image from '../assets/word-flashcards/secretary-week36.png';
+import ownerWeek36Image from '../assets/word-flashcards/owner-week36.png';
+import peaceWeek35Image from '../assets/word-flashcards/peace-week35.png';
+import cordWeek35Image from '../assets/word-flashcards/cord-week35.png';
+import fireWeek35Image from '../assets/word-flashcards/fire-week35.png';
+import horseWeek35Image from '../assets/word-flashcards/horse-week35.png';
+import instrumentWeek35Image from '../assets/word-flashcards/instrument-week35.png';
+import ironWeek35Image from '../assets/word-flashcards/iron-week35.png';
+import kettleWeek35Image from '../assets/word-flashcards/kettle-week35.png';
+import leafWeek35Image from '../assets/word-flashcards/leaf-week35.png';
+import machineWeek35Image from '../assets/word-flashcards/machine-week35.png';
+import nailWeek35Image from '../assets/word-flashcards/nail-week35.png';
+import needleWeek35Image from '../assets/word-flashcards/needle-week35.png';
+import pipeWeek35Image from '../assets/word-flashcards/pipe-week35.png';
+import plantWeek35Image from '../assets/word-flashcards/plant-week35.png';
+import sheepWeek35Image from '../assets/word-flashcards/sheep-week35.png';
+import shipWeek35Image from '../assets/word-flashcards/ship-week35.png';
+import societyWeek36Image from '../assets/word-flashcards/society-week36.png';
+import nationWeek36Image from '../assets/word-flashcards/nation-week36.png';
+import religionWeek36Image from '../assets/word-flashcards/religion-week36.png';
+import respectWeek36Image from '../assets/word-flashcards/respect-week36.png';
+import sonWeek36Image from '../assets/word-flashcards/son-week36.png';
+import storyWeek36Image from '../assets/word-flashcards/story-week36.png';
+import hearingWeek36Image from '../assets/word-flashcards/hearing-week36.png';
+import naturalWeek36Image from '../assets/word-flashcards/natural-week36.png';
+import bentWeek37Image from '../assets/word-flashcards/bent-week37.png';
+import blowWeek37Image from '../assets/word-flashcards/blow-week37.png';
+import boilingWeek37Image from '../assets/word-flashcards/boiling-week37.png';
+import burnWeek37Image from '../assets/word-flashcards/burn-week37.png';
+import burstWeek37Image from '../assets/word-flashcards/burst-week37.png';
+import fertileWeek37Image from '../assets/word-flashcards/fertile-week37.png';
+import iceWeek37Image from '../assets/word-flashcards/ice-week37.png';
+import islandWeek37Image from '../assets/word-flashcards/island-week37.png';
+import landWeek37Image from '../assets/word-flashcards/land-week37.png';
+import liquidWeek37Image from '../assets/word-flashcards/liquid-week37.png';
+import mistWeek37Image from '../assets/word-flashcards/mist-week37.png';
+import mountainWeek37Image from '../assets/word-flashcards/mountain-week37.png';
+import riverWeek37Image from '../assets/word-flashcards/river-week37.png';
+import rootWeek37Image from '../assets/word-flashcards/root-week37.png';
+import skyWeek37Image from '../assets/word-flashcards/sky-week37.png';
+import snowWeek37Image from '../assets/word-flashcards/snow-week37.png';
+import thunderWeek37Image from '../assets/word-flashcards/thunder-week37.png';
+import hornWeek38Image from '../assets/word-flashcards/horn-week38.png';
+import insectWeek38Image from '../assets/word-flashcards/insect-week38.png';
+import jellyWeek38Image from '../assets/word-flashcards/jelly-week38.png';
+import monkeyWeek38Image from '../assets/word-flashcards/monkey-week38.png';
+import pigWeek38Image from '../assets/word-flashcards/pig-week38.png';
+import ratWeek38Image from '../assets/word-flashcards/rat-week38.png';
+import seedWeek38Image from '../assets/word-flashcards/seed-week38.png';
+import snakeWeek38Image from '../assets/word-flashcards/snake-week38.png';
+import sneezeWeek38Image from '../assets/word-flashcards/sneeze-week38.png';
+import swimWeek38Image from '../assets/word-flashcards/swim-week38.png';
+import tailWeek38Image from '../assets/word-flashcards/tail-week38.png';
+import wingWeek38Image from '../assets/word-flashcards/wing-week38.png';
+import wormWeek38Image from '../assets/word-flashcards/worm-week38.png';
+import woolWeek38Image from '../assets/word-flashcards/wool-week38.png';
+import youngWeek38Image from '../assets/word-flashcards/young-week38.png';
+import springWeek38Image from '../assets/word-flashcards/spring-week38.png';
+import waveWeek38Image from '../assets/word-flashcards/wave-week38.png';
+import acrossWeek39Image from '../assets/word-flashcards/across-week39.png';
+import downWeek39Image from '../assets/word-flashcards/down-week39.png';
+import eastWeek39Image from '../assets/word-flashcards/east-week39.png';
+import dropWeek39Image from '../assets/word-flashcards/drop-week39.png';
+import joinWeek39Image from '../assets/word-flashcards/join-week39.png';
+import keepWeek39Image from '../assets/word-flashcards/keep-week39.png';
+import leadWeek39Image from '../assets/word-flashcards/lead-week39.png';
+import liftWeek39Image from '../assets/word-flashcards/lift-week39.png';
+import moveWeek39Image from '../assets/word-flashcards/move-week39.png';
+import railWeek39Image from '../assets/word-flashcards/rail-week39.png';
+import rangeWeek39Image from '../assets/word-flashcards/range-week39.png';
+import rollWeek39Image from '../assets/word-flashcards/roll-week39.png';
+import runWeek39Image from '../assets/word-flashcards/run-week39.png';
+import streetWeek39Image from '../assets/word-flashcards/street-week39.png';
+import trainWeek39Image from '../assets/word-flashcards/train-week39.png';
+import wheelWeek39Image from '../assets/word-flashcards/wheel-week39.png';
+import westWeek39Image from '../assets/word-flashcards/west-week39.png';
+import operationWeek40Image from '../assets/word-flashcards/operation-week40.png';
+import inkWeek41Image from '../assets/word-flashcards/ink-week41.png';
+import inventionWeek41Image from '../assets/word-flashcards/invention-week41.png';
+import knotWeek41Image from '../assets/word-flashcards/knot-week41.png';
+import pumpWeek41Image from '../assets/word-flashcards/pump-week41.png';
+import scissorsWeek41Image from '../assets/word-flashcards/scissors-week41.png';
+import screwWeek41Image from '../assets/word-flashcards/screw-week41.png';
+import spadeWeek41Image from '../assets/word-flashcards/spade-week41.png';
+import stickWeek41Image from '../assets/word-flashcards/stick-week41.png';
+import steamWeek41Image from '../assets/word-flashcards/steam-week41.png';
+import steelWeek41Image from '../assets/word-flashcards/steel-week41.png';
+import wireWeek41Image from '../assets/word-flashcards/wire-week41.png';
+import whistleWeek41Image from '../assets/word-flashcards/whistle-week41.png';
+import rodWeek41Image from '../assets/word-flashcards/rod-week41.png';
+import rubWeek41Image from '../assets/word-flashcards/rub-week41.png';
+import pullWeek41Image from '../assets/word-flashcards/pull-week41.png';
+import pushWeek41Image from '../assets/word-flashcards/push-week41.png';
+import kickWeek41Image from '../assets/word-flashcards/kick-week41.png';
+import industryWeek42Image from '../assets/word-flashcards/industry-week42.png';
+import leatherWeek42Image from '../assets/word-flashcards/leather-week42.png';
+import linenWeek42Image from '../assets/word-flashcards/linen-week42.png';
+import mixedWeek42Image from '../assets/word-flashcards/mixed-week42.png';
+import paintWeek42Image from '../assets/word-flashcards/paint-week42.png';
+import powderWeek42Image from '../assets/word-flashcards/powder-week42.png';
+import polishWeek42Image from '../assets/word-flashcards/polish-week42.png';
+import silkWeek42Image from '../assets/word-flashcards/silk-week42.png';
+import silverWeek42Image from '../assets/word-flashcards/silver-week42.png';
+import solidWeek42Image from '../assets/word-flashcards/solid-week42.png';
+import stoneWeek42Image from '../assets/word-flashcards/stone-week42.png';
+import waxWeek42Image from '../assets/word-flashcards/wax-week42.png';
+import wasteWeek42Image from '../assets/word-flashcards/waste-week42.png';
+import vesselWeek42Image from '../assets/word-flashcards/vessel-week42.png';
+import physicalWeek42Image from '../assets/word-flashcards/physical-week42.png';
+import scienceWeek42Image from '../assets/word-flashcards/science-week42.png';
+import hollowWeek42Image from '../assets/word-flashcards/hollow-week42.png';
+import impulseWeek43Image from '../assets/word-flashcards/impulse-week43.png';
+import observationWeek43Image from '../assets/word-flashcards/observation-week43.png';
+import theoryWeek43Image from '../assets/word-flashcards/theory-week43.png';
+import nerveWeek43Image from '../assets/word-flashcards/nerve-week43.png';
+import senseWeek43Image from '../assets/word-flashcards/sense-week43.png';
+import separateWeek43Image from '../assets/word-flashcards/separate-week43.png';
+import simpleWeek43Image from '../assets/word-flashcards/simple-week43.png';
+import levelWeek43Image from '../assets/word-flashcards/level-week43.png';
+import spaceWeek43Image from '../assets/word-flashcards/space-week43.png';
+import probableWeek43Image from '../assets/word-flashcards/probable-week43.png';
+import suddenWeek43Image from '../assets/word-flashcards/sudden-week43.png';
+import tendencyWeek43Image from '../assets/word-flashcards/tendency-week43.png';
+import signWeek43Image from '../assets/word-flashcards/sign-week43.png';
+import soundWeek43Image from '../assets/word-flashcards/sound-week43.png';
+import partWeek43Image from '../assets/word-flashcards/part-week43.png';
+import fictionWeek43Image from '../assets/word-flashcards/fiction-week43.png';
+import viewWeek43Image from '../assets/word-flashcards/view-week43.png';
+import placeWeek44Image from '../assets/word-flashcards/place-week44.png';
+import pictureWeek44Image from '../assets/word-flashcards/picture-week44.png';
+import planeWeek44Image from '../assets/word-flashcards/plane-week44.png';
+import playWeek44Image from '../assets/word-flashcards/play-week44.png';
+import pleasureWeek44Image from '../assets/word-flashcards/pleasure-week44.png';
+import porterWeek44Image from '../assets/word-flashcards/porter-week44.png';
+import presentWeek44Image from '../assets/word-flashcards/present-week44.png';
+import parcelWeek44Image from '../assets/word-flashcards/parcel-week44.png';
+import pencilWeek44Image from '../assets/word-flashcards/pencil-week44.png';
+import rayWeek44Image from '../assets/word-flashcards/ray-week44.png';
+import seaWeek44Image from '../assets/word-flashcards/sea-week44.png';
+import sailWeek44Image from '../assets/word-flashcards/sail-week44.png';
+import sayWeek44Image from '../assets/word-flashcards/say-week44.png';
+import sandWeek44Image from '../assets/word-flashcards/sand-week44.png';
+import roughWeek44Image from '../assets/word-flashcards/rough-week44.png';
+import politicalWeek44Image from '../assets/word-flashcards/political-week44.png';
+import poorWeek44Image from '../assets/word-flashcards/poor-week44.png';
+import aboutWeek45Image from '../assets/word-flashcards/about-week45.png';
+import comeWeek45Image from '../assets/word-flashcards/come-week45.png';
+import hangingWeek45Image from '../assets/word-flashcards/hanging-week45.png';
+import jumpWeek45Image from '../assets/word-flashcards/jump-week45.png';
+import motionWeek45Image from '../assets/word-flashcards/motion-week45.png';
+import newsWeek45Image from '../assets/word-flashcards/news-week45.png';
+import sendWeek45Image from '../assets/word-flashcards/send-week45.png';
+import shakeWeek45Image from '../assets/word-flashcards/shake-week45.png';
+import shockWeek45Image from '../assets/word-flashcards/shock-week45.png';
+import slipWeek45Image from '../assets/word-flashcards/slip-week45.png';
+import smellWeek45Image from '../assets/word-flashcards/smell-week45.png';
+import smokeWeek45Image from '../assets/word-flashcards/smoke-week45.png';
+import songWeek45Image from '../assets/word-flashcards/song-week45.png';
+import stageWeek45Image from '../assets/word-flashcards/stage-week45.png';
+import stepWeek45Image from '../assets/word-flashcards/step-week45.png';
+import troubleWeek45Image from '../assets/word-flashcards/trouble-week45.png';
+import twistWeek45Image from '../assets/word-flashcards/twist-week45.png';
+import againstWeek46Image from '../assets/word-flashcards/against-week46.png';
+import bitterWeek46Image from '../assets/word-flashcards/bitter-week46.png';
+import betweenWeek46Image from '../assets/word-flashcards/between-week46.png';
+import insuranceWeek46Image from '../assets/word-flashcards/insurance-week46.png';
+import jewelWeek46Image from '../assets/word-flashcards/jewel-week46.png';
+import kissWeek46Image from '../assets/word-flashcards/kiss-week46.png';
+import livingWeek46Image from '../assets/word-flashcards/living-week46.png';
+import muscleWeek46Image from '../assets/word-flashcards/muscle-week46.png';
+import musicWeek46Image from '../assets/word-flashcards/music-week46.png';
+import ornamentWeek46Image from '../assets/word-flashcards/ornament-week46.png';
+import poisonWeek46Image from '../assets/word-flashcards/poison-week46.png';
+import proseWeek46Image from '../assets/word-flashcards/prose-week46.png';
+import rhythmWeek46Image from '../assets/word-flashcards/rhythm-week46.png';
+import sharpWeek46Image from '../assets/word-flashcards/sharp-week46.png';
+import smoothWeek46Image from '../assets/word-flashcards/smooth-week46.png';
+import spongeWeek46Image from '../assets/word-flashcards/sponge-week46.png';
+import structureWeek46Image from '../assets/word-flashcards/structure-week46.png';
+import materialWeek40Image from '../assets/word-flashcards/material-week40.png';
+import matchWeek40Image from '../assets/word-flashcards/match-week40.png';
+import massWeek40Image from '../assets/word-flashcards/mass-week40.png';
+import metalWeek40Image from '../assets/word-flashcards/metal-week40.png';
+import paymentWeek40Image from '../assets/word-flashcards/payment-week40.png';
+import receiptWeek40Image from '../assets/word-flashcards/receipt-week40.png';
+import rateWeek40Image from '../assets/word-flashcards/rate-week40.png';
+import processWeek40Image from '../assets/word-flashcards/process-week40.png';
+import produceWeek40Image from '../assets/word-flashcards/produce-week40.png';
+import qualityWeek40Image from '../assets/word-flashcards/quality-week40.png';
+import quickWeek40Image from '../assets/word-flashcards/quick-week40.png';
+import quietWeek40Image from '../assets/word-flashcards/quiet-week40.png';
+import scaleWeek40Image from '../assets/word-flashcards/scale-week40.png';
+import substanceWeek40Image from '../assets/word-flashcards/substance-week40.png';
+import tradeWeek40Image from '../assets/word-flashcards/trade-week40.png';
+import unitWeek40Image from '../assets/word-flashcards/unit-week40.png';
 import likeImage from '../assets/word-flashcards/like.png';
 import loveImage from '../assets/word-flashcards/love.png';
 import fearImage from '../assets/word-flashcards/fear.png';
@@ -1243,6 +1447,210 @@ export const wordImageAssets: WordImageAsset[] = [
   wordImageAsset('hard', hardWeek34Image, 'object', 'concrete', 'none', 'A simple hard flashcard image for Basic English learners.'),
   wordImageAsset('harmony', harmonyWeek34Image, 'object', 'concrete', 'none', 'A simple harmony flashcard image for Basic English learners.'),
   wordImageAsset('hate', hateWeek34Image, 'object', 'concrete', 'none', 'A simple hate flashcard image for Basic English learners.'),
+  wordImageAsset('support', supportWeek35Image, 'action', 'scene', 'none', 'A person helps another person carry a box.'),
+  wordImageAsset('reward', rewardWeek35Image, 'object', 'scene', 'none', 'A person gives a small reward for good work.'),
+  wordImageAsset('servant', servantWeek35Image, 'person', 'scene', 'none', 'A household helper serves a meal.'),
+  wordImageAsset('peace', peaceWeek35Image, 'person', 'scene', 'none', 'Two people sit calmly together.'),
+  wordImageAsset('relation', relationWeek36Image, 'person', 'scene', 'none', 'Two family members stand together.'),
+  wordImageAsset('male', maleWeek36Image, 'person', 'scene', 'none', 'A clear adult man stands in an everyday home.'),
+  wordImageAsset('married', marriedWeek36Image, 'person', 'scene', 'none', 'A married couple stands together at home.'),
+  wordImageAsset('opinion', opinionWeek36Image, 'person', 'scene', 'none', 'A person shares an opinion with a friend.'),
+  wordImageAsset('person', personWeek36Image, 'person', 'scene', 'none', 'One clear adult person stands in a home.'),
+  wordImageAsset('representative', representativeWeek36Image, 'person', 'scene', 'none', 'A representative speaks with a visitor.'),
+  wordImageAsset('secretary', secretaryWeek36Image, 'person', 'scene', 'none', 'A secretary organizes papers at a desk.'),
+  wordImageAsset('owner', ownerWeek36Image, 'person', 'scene', 'none', 'A person cares for a thing that belongs to them.'),
+  wordImageAsset('cord', cordWeek35Image, 'object', 'concrete', 'none', 'A coiled cord lies on a table.'),
+  wordImageAsset('fire', fireWeek35Image, 'object', 'concrete', 'none', 'A small safe fire burns outdoors.'),
+  wordImageAsset('horse', horseWeek35Image, 'object', 'concrete', 'none', 'A horse stands in a field.'),
+  wordImageAsset('instrument', instrumentWeek35Image, 'object', 'concrete', 'none', 'A person plays a musical instrument.'),
+  wordImageAsset('iron', ironWeek35Image, 'object', 'concrete', 'none', 'An iron is beside a folded shirt.'),
+  wordImageAsset('kettle', kettleWeek35Image, 'object', 'concrete', 'none', 'A kettle sits on a kitchen table.'),
+  wordImageAsset('leaf', leafWeek35Image, 'object', 'concrete', 'none', 'A green leaf grows on a plant.'),
+  wordImageAsset('machine', machineWeek35Image, 'object', 'concrete', 'none', 'A household machine stands in a room.'),
+  wordImageAsset('nail', nailWeek35Image, 'object', 'concrete', 'none', 'A nail and hammer lie on a work table.'),
+  wordImageAsset('needle', needleWeek35Image, 'object', 'concrete', 'none', 'A needle with thread lies on cloth.'),
+  wordImageAsset('pipe', pipeWeek35Image, 'object', 'concrete', 'none', 'A pipe carries water under a sink.'),
+  wordImageAsset('plant', plantWeek35Image, 'object', 'concrete', 'none', 'A green plant grows in a pot.'),
+  wordImageAsset('sheep', sheepWeek35Image, 'object', 'concrete', 'none', 'A sheep stands in a field.'),
+  wordImageAsset('ship', shipWeek35Image, 'object', 'concrete', 'none', 'A ship moves on calm water.'),
+  wordImageAsset('society', societyWeek36Image, 'person', 'scene', 'none', 'A group of people stands together.'),
+  wordImageAsset('nation', nationWeek36Image, 'place', 'scene', 'none', 'People stand together in a landscape.'),
+  wordImageAsset('religion', religionWeek36Image, 'person', 'scene', 'none', 'A person sits quietly with hands together.'),
+  wordImageAsset('respect', respectWeek36Image, 'person', 'scene', 'none', 'Two people listen politely to each other.'),
+  wordImageAsset('son', sonWeek36Image, 'person', 'scene', 'none', 'A parent stands with a young boy.'),
+  wordImageAsset('story', storyWeek36Image, 'person', 'scene', 'none', 'An adult reads a picture book to a child.'),
+  wordImageAsset('hearing', hearingWeek36Image, 'person', 'scene', 'none', 'A person listens carefully.'),
+  wordImageAsset('natural', naturalWeek36Image, 'object', 'scene', 'none', 'A green plant grows outdoors in sunlight.'),
+  wordImageAsset('bent', bentWeek37Image, 'quality', 'concrete', 'none', 'A bent object is clearly not straight.'),
+  wordImageAsset('blow', blowWeek37Image, 'action', 'scene', 'none', 'A person blows air toward a small object.'),
+  wordImageAsset('boiling', boilingWeek37Image, 'quality', 'concrete', 'none', 'Hot water bubbles in a safe pot.'),
+  wordImageAsset('burn', burnWeek37Image, 'action', 'scene', 'none', 'A small flame burns a piece of wood outdoors.'),
+  wordImageAsset('burst', burstWeek37Image, 'action', 'scene', 'none', 'A colorful balloon bursts open.'),
+  wordImageAsset('fertile', fertileWeek37Image, 'quality', 'scene', 'none', 'A fertile garden has rich dark earth and healthy plants.'),
+  wordImageAsset('ice', iceWeek37Image, 'object', 'concrete', 'none', 'A clear piece of ice sits on a cool surface.'),
+  wordImageAsset('island', islandWeek37Image, 'place', 'scene', 'none', 'A small island has land and water around it.'),
+  wordImageAsset('land', landWeek37Image, 'place', 'scene', 'none', 'A clear piece of dry land lies beside water.'),
+  wordImageAsset('liquid', liquidWeek37Image, 'object', 'concrete', 'none', 'A clear liquid fills a glass.'),
+  wordImageAsset('mist', mistWeek37Image, 'object', 'scene', 'none', 'Light mist hangs above a quiet river.'),
+  wordImageAsset('mountain', mountainWeek37Image, 'place', 'scene', 'none', 'A high mountain rises behind green land.'),
+  wordImageAsset('river', riverWeek37Image, 'place', 'scene', 'none', 'A river moves between green banks.'),
+  wordImageAsset('root', rootWeek37Image, 'object', 'concrete', 'none', 'The root of a small plant is visible in earth.'),
+  wordImageAsset('sky', skyWeek37Image, 'place', 'scene', 'none', 'A wide blue sky is above the land.'),
+  wordImageAsset('snow', snowWeek37Image, 'object', 'scene', 'none', 'White snow covers the ground and a mountain peak.'),
+  wordImageAsset('thunder', thunderWeek37Image, 'object', 'scene', 'none', 'A dark cloud makes a loud thunder storm in the sky.'),
+  wordImageAsset('horn', hornWeek38Image, 'object', 'concrete', 'none', 'A clear animal horn is shown on a farm animal.'),
+  wordImageAsset('insect', insectWeek38Image, 'object', 'concrete', 'none', 'A small insect rests on a green leaf.'),
+  wordImageAsset('jelly', jellyWeek38Image, 'object', 'concrete', 'none', 'A small bowl holds soft red jelly.'),
+  wordImageAsset('monkey', monkeyWeek38Image, 'object', 'concrete', 'none', 'A monkey sits on a tree branch.'),
+  wordImageAsset('pig', pigWeek38Image, 'object', 'concrete', 'none', 'A pig stands in a clean farm yard.'),
+  wordImageAsset('rat', ratWeek38Image, 'object', 'concrete', 'none', 'A small rat stands near a wall.'),
+  wordImageAsset('seed', seedWeek38Image, 'object', 'concrete', 'none', 'A small seed lies beside rich earth.'),
+  wordImageAsset('snake', snakeWeek38Image, 'object', 'concrete', 'none', 'A long snake with no legs rests on the ground.'),
+  wordImageAsset('sneeze', sneezeWeek38Image, 'action', 'scene', 'none', 'A person sneezes into a tissue.'),
+  wordImageAsset('swim', swimWeek38Image, 'action', 'scene', 'none', 'A person swims across a small pool.'),
+  wordImageAsset('tail', tailWeek38Image, 'object', 'concrete', 'none', 'A clear animal tail is visible.'),
+  wordImageAsset('wing', wingWeek38Image, 'object', 'concrete', 'none', 'A bird spreads one clear wing.'),
+  wordImageAsset('worm', wormWeek38Image, 'object', 'concrete', 'none', 'A small worm moves through dark earth.'),
+  wordImageAsset('wool', woolWeek38Image, 'object', 'concrete', 'none', 'Soft wool is shown beside a sheep.'),
+  wordImageAsset('young', youngWeek38Image, 'quality', 'scene', 'none', 'A young animal stands beside an older animal.'),
+  wordImageAsset('spring', springWeek38Image, 'time', 'scene', 'none', 'Spring is shown with new green plants and flowers.'),
+  wordImageAsset('wave', waveWeek38Image, 'object', 'concrete', 'none', 'A clear wave moves across the water.'),
+  wordImageAsset('across', acrossWeek39Image, 'position', 'scene', 'none', 'A person walks across a small bridge.'),
+  wordImageAsset('down', downWeek39Image, 'position', 'scene', 'none', 'A person walks down a gentle street.'),
+  wordImageAsset('east', eastWeek39Image, 'place', 'scene', 'none', 'The sun rises in the east.'),
+  wordImageAsset('drop', dropWeek39Image, 'action', 'scene', 'none', 'A hand drops a small ball.'),
+  wordImageAsset('join', joinWeek39Image, 'action', 'scene', 'none', 'Two people join a small line.'),
+  wordImageAsset('keep', keepWeek39Image, 'action', 'scene', 'none', 'A person keeps a small bag close.'),
+  wordImageAsset('lead', leadWeek39Image, 'action', 'scene', 'none', 'A person leads a child along a path.'),
+  wordImageAsset('lift', liftWeek39Image, 'action', 'scene', 'none', 'A person lifts a light box.'),
+  wordImageAsset('move', moveWeek39Image, 'action', 'scene', 'none', 'A suitcase moves along a path.'),
+  wordImageAsset('rail', railWeek39Image, 'object', 'concrete', 'none', 'A clear rail lies beside a train track.'),
+  wordImageAsset('range', rangeWeek39Image, 'place', 'scene', 'none', 'A row of hills shows distance from near to far.'),
+  wordImageAsset('roll', rollWeek39Image, 'action', 'scene', 'none', 'A ball rolls along the ground.'),
+  wordImageAsset('run', runWeek39Image, 'action', 'scene', 'none', 'A person runs on a park path.'),
+  wordImageAsset('street', streetWeek39Image, 'place', 'scene', 'none', 'A clear town street has a few houses.'),
+  wordImageAsset('train', trainWeek39Image, 'object', 'scene', 'none', 'A passenger train waits on rails.'),
+  wordImageAsset('wheel', wheelWeek39Image, 'object', 'concrete', 'none', 'A round wheel is on a small cart.'),
+  wordImageAsset('west', westWeek39Image, 'place', 'scene', 'none', 'The sun goes down in the west.'),
+  wordImageAsset('operation', operationWeek40Image, 'action', 'scene', 'none', 'A shop worker performs a simple operation at a counter.'),
+  wordImageAsset('material', materialWeek40Image, 'object', 'scene', 'none', 'Wood, cloth, and metal are clear materials.'),
+  wordImageAsset('match', matchWeek40Image, 'quality', 'scene', 'none', 'Two objects match in size and color.'),
+  wordImageAsset('mass', massWeek40Image, 'object', 'scene', 'none', 'A balance scale holds a solid block.'),
+  wordImageAsset('metal', metalWeek40Image, 'object', 'concrete', 'none', 'A shiny metal bowl sits on a table.'),
+  wordImageAsset('payment', paymentWeek40Image, 'action', 'scene', 'none', 'A customer gives coins for a small item.'),
+  wordImageAsset('receipt', receiptWeek40Image, 'object', 'concrete', 'none', 'A receipt rests beside a paid item.'),
+  wordImageAsset('rate', rateWeek40Image, 'object', 'scene', 'none', 'A shop counter shows coins and amounts.'),
+  wordImageAsset('process', processWeek40Image, 'action', 'scene', 'none', 'Cloth changes into a shirt.'),
+  wordImageAsset('produce', produceWeek40Image, 'action', 'scene', 'none', 'A farmer gathers vegetables from a field.'),
+  wordImageAsset('quality', qualityWeek40Image, 'quality', 'scene', 'none', 'Two objects show different quality.'),
+  wordImageAsset('quick', quickWeek40Image, 'quality', 'scene', 'none', 'A person moves quickly to catch a bus.'),
+  wordImageAsset('quiet', quietWeek40Image, 'quality', 'scene', 'none', 'A calm room has very little sound.'),
+  wordImageAsset('scale', scaleWeek40Image, 'object', 'concrete', 'none', 'A kitchen scale weighs fruit.'),
+  wordImageAsset('substance', substanceWeek40Image, 'object', 'concrete', 'none', 'A glass jar holds a clear substance.'),
+  wordImageAsset('trade', tradeWeek40Image, 'action', 'scene', 'none', 'Two people exchange a basket and bread.'),
+  wordImageAsset('unit', unitWeek40Image, 'object', 'concrete', 'none', 'One clear block is a single unit.'),
+  wordImageAsset('ink', inkWeek41Image, 'object', 'concrete', 'none', 'A small bottle of dark ink is beside a pen.'),
+  wordImageAsset('invention', inventionWeek41Image, 'object', 'scene', 'none', 'A person shows a new useful machine.'),
+  wordImageAsset('knot', knotWeek41Image, 'object', 'concrete', 'none', 'A clear knot is tied in a rope.'),
+  wordImageAsset('pump', pumpWeek41Image, 'object', 'scene', 'none', 'A hand pump moves water from a bucket.'),
+  wordImageAsset('scissors', scissorsWeek41Image, 'object', 'concrete', 'none', 'Scissors cut a piece of cloth.'),
+  wordImageAsset('screw', screwWeek41Image, 'object', 'concrete', 'none', 'A metal screw is beside a screwdriver.'),
+  wordImageAsset('spade', spadeWeek41Image, 'object', 'concrete', 'none', 'A garden spade is in dark soil.'),
+  wordImageAsset('stick', stickWeek41Image, 'object', 'concrete', 'none', 'A thin wooden stick lies on a table.'),
+  wordImageAsset('steam', steamWeek41Image, 'object', 'scene', 'none', 'Soft steam rises from a safe kettle.'),
+  wordImageAsset('steel', steelWeek41Image, 'object', 'concrete', 'none', 'A strong steel tool lies on a table.'),
+  wordImageAsset('wire', wireWeek41Image, 'object', 'concrete', 'none', 'A coil of thin metal wire is shown.'),
+  wordImageAsset('whistle', whistleWeek41Image, 'object', 'scene', 'none', 'A person uses a small whistle.'),
+  wordImageAsset('rod', rodWeek41Image, 'object', 'concrete', 'none', 'A long straight metal rod is shown.'),
+  wordImageAsset('rub', rubWeek41Image, 'action', 'scene', 'none', 'A hand rubs a cloth on a table.'),
+  wordImageAsset('pull', pullWeek41Image, 'action', 'scene', 'none', 'A person pulls a small cart.'),
+  wordImageAsset('push', pushWeek41Image, 'action', 'scene', 'none', 'A person pushes a box.'),
+  wordImageAsset('kick', kickWeek41Image, 'action', 'scene', 'none', 'A person kicks a ball.'),
+  wordImageAsset('industry', industryWeek42Image, 'place', 'scene', 'none', 'A large factory makes useful things.'),
+  wordImageAsset('leather', leatherWeek42Image, 'object', 'concrete', 'none', 'A piece of leather lies beside a shoe.'),
+  wordImageAsset('linen', linenWeek42Image, 'object', 'concrete', 'none', 'A folded linen cloth lies on a table.'),
+  wordImageAsset('mixed', mixedWeek42Image, 'quality', 'scene', 'none', 'Two materials are mixed in a bowl.'),
+  wordImageAsset('paint', paintWeek42Image, 'object', 'concrete', 'none', 'A brush and colored paint are on a table.'),
+  wordImageAsset('powder', powderWeek42Image, 'object', 'concrete', 'none', 'A bowl holds fine powder.'),
+  wordImageAsset('polish', polishWeek42Image, 'action', 'scene', 'none', 'A person polishes a wooden table.'),
+  wordImageAsset('silk', silkWeek42Image, 'object', 'concrete', 'none', 'A smooth roll of silk cloth is shown.'),
+  wordImageAsset('silver', silverWeek42Image, 'object', 'concrete', 'none', 'A bright silver cup sits on a table.'),
+  wordImageAsset('solid', solidWeek42Image, 'quality', 'scene', 'none', 'A solid block is beside a glass of liquid.'),
+  wordImageAsset('stone', stoneWeek42Image, 'object', 'concrete', 'none', 'A pile of hard stones is at a work place.'),
+  wordImageAsset('wax', waxWeek42Image, 'object', 'concrete', 'none', 'A candle is made from soft wax.'),
+  wordImageAsset('waste', wasteWeek42Image, 'object', 'scene', 'none', 'A clean bin holds unwanted material.'),
+  wordImageAsset('vessel', vesselWeek42Image, 'object', 'concrete', 'none', 'A vessel holds clear liquid.'),
+  wordImageAsset('physical', physicalWeek42Image, 'quality', 'scene', 'none', 'A person lifts a solid box.'),
+  wordImageAsset('science', scienceWeek42Image, 'object', 'scene', 'none', 'A person observes a plant with an instrument.'),
+  wordImageAsset('hollow', hollowWeek42Image, 'quality', 'concrete', 'none', 'A hollow wooden tube has an empty inside.'),
+  wordImageAsset('impulse', impulseWeek43Image, 'object', 'scene', 'none', 'A person suddenly reaches for a small object.'),
+  wordImageAsset('observation', observationWeek43Image, 'object', 'scene', 'none', 'A person looks carefully at a plant.'),
+  wordImageAsset('theory', theoryWeek43Image, 'object', 'scene', 'none', 'A person thinks beside a simple model.'),
+  wordImageAsset('nerve', nerveWeek43Image, 'object', 'scene', 'none', 'A clear body part carries a message.'),
+  wordImageAsset('sense', senseWeek43Image, 'object', 'scene', 'none', 'A person uses the body to know a thing.'),
+  wordImageAsset('separate', separateWeek43Image, 'action', 'scene', 'none', 'Two objects move apart.'),
+  wordImageAsset('simple', simpleWeek43Image, 'quality', 'concrete', 'none', 'A simple machine has a few parts.'),
+  wordImageAsset('level', levelWeek43Image, 'object', 'concrete', 'none', 'A carpenter level rests on a table.'),
+  wordImageAsset('space', spaceWeek43Image, 'place', 'scene', 'none', 'Empty space is between two objects.'),
+  wordImageAsset('probable', probableWeek43Image, 'quality', 'scene', 'none', 'Dark clouds probably bring rain.'),
+  wordImageAsset('sudden', suddenWeek43Image, 'quality', 'scene', 'none', 'A balloon opens suddenly.'),
+  wordImageAsset('tendency', tendencyWeek43Image, 'object', 'scene', 'none', 'Balls move in the same direction.'),
+  wordImageAsset('sign', signWeek43Image, 'object', 'concrete', 'none', 'A clear sign gives information.'),
+  wordImageAsset('sound', soundWeek43Image, 'object', 'scene', 'none', 'A person listens to a bell.'),
+  wordImageAsset('part', partWeek43Image, 'object', 'concrete', 'none', 'A machine part rests beside the machine.'),
+  wordImageAsset('fiction', fictionWeek43Image, 'object', 'scene', 'none', 'A person reads a story book.'),
+  wordImageAsset('view', viewWeek43Image, 'place', 'scene', 'none', 'A clear view is seen from a window.'),
+  wordImageAsset('place', placeWeek44Image, 'place', 'scene', 'none', 'A clear place has a house and tree.'),
+  wordImageAsset('picture', pictureWeek44Image, 'object', 'concrete', 'none', 'A framed picture is on a wall.'),
+  wordImageAsset('plane', planeWeek44Image, 'object', 'scene', 'none', 'A passenger plane waits at an airport.'),
+  wordImageAsset('play', playWeek44Image, 'action', 'scene', 'none', 'Children play with a ball.'),
+  wordImageAsset('pleasure', pleasureWeek44Image, 'quality', 'scene', 'none', 'A person enjoys a cup of tea.'),
+  wordImageAsset('porter', porterWeek44Image, 'person', 'scene', 'none', 'A porter carries bags at a station.'),
+  wordImageAsset('present', presentWeek44Image, 'object', 'concrete', 'none', 'A wrapped present is beside a person.'),
+  wordImageAsset('parcel', parcelWeek44Image, 'object', 'concrete', 'none', 'A wrapped parcel is ready to carry.'),
+  wordImageAsset('pencil', pencilWeek44Image, 'object', 'concrete', 'none', 'A pencil draws a line on paper.'),
+  wordImageAsset('ray', rayWeek44Image, 'object', 'scene', 'none', 'A ray of sunlight enters a room.'),
+  wordImageAsset('sea', seaWeek44Image, 'place', 'scene', 'none', 'A calm sea is beside a small boat.'),
+  wordImageAsset('sail', sailWeek44Image, 'action', 'scene', 'none', 'A small boat sails on water.'),
+  wordImageAsset('say', sayWeek44Image, 'action', 'scene', 'none', 'A person speaks to a friend.'),
+  wordImageAsset('sand', sandWeek44Image, 'object', 'concrete', 'none', 'Sand is beside the water.'),
+  wordImageAsset('rough', roughWeek44Image, 'quality', 'concrete', 'none', 'A rough stone is beside a smooth stone.'),
+  wordImageAsset('political', politicalWeek44Image, 'quality', 'scene', 'none', 'A town meeting shows a political topic.'),
+  wordImageAsset('poor', poorWeek44Image, 'quality', 'scene', 'none', 'A small simple home has few things.'),
+  wordImageAsset('about', aboutWeek45Image, 'position', 'scene', 'none', 'A person talks about a picture with a friend.'),
+  wordImageAsset('come', comeWeek45Image, 'action', 'scene', 'none', 'A person comes toward a waiting friend.'),
+  wordImageAsset('hanging', hangingWeek45Image, 'quality', 'concrete', 'none', 'A coat is hanging from a wall hook.'),
+  wordImageAsset('jump', jumpWeek45Image, 'action', 'scene', 'none', 'A child jumps over a small puddle.'),
+  wordImageAsset('motion', motionWeek45Image, 'action', 'scene', 'none', 'A toy wheel is in motion on a table.'),
+  wordImageAsset('news', newsWeek45Image, 'object', 'scene', 'none', 'A person reads a plain newspaper.'),
+  wordImageAsset('send', sendWeek45Image, 'action', 'scene', 'none', 'A person sends a parcel from a mailbox.'),
+  wordImageAsset('shake', shakeWeek45Image, 'action', 'scene', 'none', 'A person shakes a small bottle.'),
+  wordImageAsset('shock', shockWeek45Image, 'quality', 'scene', 'none', 'A person looks shocked by a balloon pop.'),
+  wordImageAsset('slip', slipWeek45Image, 'action', 'scene', 'none', 'A person slips on a wet floor.'),
+  wordImageAsset('smell', smellWeek45Image, 'abstract', 'scene', 'none', 'A person smells a warm cup of tea.'),
+  wordImageAsset('smoke', smokeWeek45Image, 'object', 'scene', 'none', 'Smoke rises from a small campfire.'),
+  wordImageAsset('song', songWeek45Image, 'object', 'scene', 'none', 'A person sings with a simple instrument.'),
+  wordImageAsset('stage', stageWeek45Image, 'place', 'scene', 'none', 'A person performs on a small stage.'),
+  wordImageAsset('step', stepWeek45Image, 'action', 'scene', 'none', 'A foot steps onto a path.'),
+  wordImageAsset('trouble', troubleWeek45Image, 'quality', 'scene', 'none', 'A person asks for help with a bicycle.'),
+  wordImageAsset('twist', twistWeek45Image, 'action', 'scene', 'none', 'A person twists the lid of a jar.'),
+  wordImageAsset('against', againstWeek46Image, 'position', 'scene', 'none', 'A red ball rests against a blue box.'),
+  wordImageAsset('bitter', bitterWeek46Image, 'quality', 'scene', 'none', 'A person tastes a bitter lemon.'),
+  wordImageAsset('between', betweenWeek46Image, 'position', 'scene', 'none', 'A table is between two chairs.'),
+  wordImageAsset('insurance', insuranceWeek46Image, 'structure', 'scene', 'none', 'A person receives help after a bicycle problem.'),
+  wordImageAsset('jewel', jewelWeek46Image, 'object', 'concrete', 'none', 'A bright jewel is in a small open box.'),
+  wordImageAsset('kiss', kissWeek46Image, 'action', 'scene', 'none', 'Two friendly adults greet with a gentle kiss.'),
+  wordImageAsset('living', livingWeek46Image, 'quality', 'scene', 'none', 'A living green plant grows in a pot.'),
+  wordImageAsset('muscle', muscleWeek46Image, 'object', 'scene', 'none', 'A person lifts a light box with strong arms.'),
+  wordImageAsset('music', musicWeek46Image, 'object', 'scene', 'none', 'A person plays music on a guitar.'),
+  wordImageAsset('ornament', ornamentWeek46Image, 'object', 'scene', 'none', 'A colorful ornament hangs on a small tree.'),
+  wordImageAsset('poison', poisonWeek46Image, 'object', 'concrete', 'none', 'A sealed bottle holds poison.'),
+  wordImageAsset('prose', proseWeek46Image, 'object', 'scene', 'none', 'A person writes prose in a notebook.'),
+  wordImageAsset('rhythm', rhythmWeek46Image, 'structure', 'scene', 'none', 'A person taps a drum in a steady rhythm.'),
+  wordImageAsset('sharp', sharpWeek46Image, 'quality', 'concrete', 'none', 'A sharp knife rests safely on a board.'),
+  wordImageAsset('smooth', smoothWeek46Image, 'quality', 'concrete', 'none', 'A hand touches a smooth stone.'),
+  wordImageAsset('sponge', spongeWeek46Image, 'object', 'scene', 'none', 'A sponge takes in water beside a cup.'),
+  wordImageAsset('structure', structureWeek46Image, 'structure', 'scene', 'none', 'A bridge has a clear structure of blocks.'),
 ];
 
 export const wordImageVisualStyleByWordId: Partial<Record<string, WordImageVisualStyle>> = Object.fromEntries(

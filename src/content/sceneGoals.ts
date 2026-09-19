@@ -8,6 +8,12 @@ import { week23to25SceneGoalsByDayId } from './week23to25LearningTasks';
 import { week26to28SceneGoalsByDayId } from './week26to28LearningTasks';
 import { week29to31SceneGoalsByDayId } from './week29to31LearningTasks';
 import { week32to34SceneGoalsByDayId } from './week32to34LearningTasks';
+import { week35to36SceneGoalsByDayId } from './week35to36LearningTasks';
+import { week37to38SceneGoalsByDayId } from './week37to38LearningTasks';
+import { week39to40SceneGoalsByDayId } from './week39to40LearningTasks';
+import { week41to42SceneGoalsByDayId } from './week41to42LearningTasks';
+import { week43to44SceneGoalsByDayId } from './week43to44LearningTasks';
+import { week45to46SceneGoalsByDayId } from './week45to46LearningTasks';
 
 type SceneGoalDayId =
   | 'day-001'
@@ -512,4 +518,10 @@ export const sceneGoalsByDayId: Record<SceneGoalDayId, SceneGoal> = {
   ...week26to28SceneGoalsByDayId,
   ...week29to31SceneGoalsByDayId,
   ...week32to34SceneGoalsByDayId,
+  ...week35to36SceneGoalsByDayId,
+  ...week37to38SceneGoalsByDayId,
+  ...week39to40SceneGoalsByDayId,
+  ...week41to42SceneGoalsByDayId,
+  ...week43to44SceneGoalsByDayId,
+  ...week45to46SceneGoalsByDayId,
 };

@@ -8,6 +8,12 @@ import { week23to25SceneRemixTasksByDayId } from './week23to25LearningTasks';
 import { week26to28SceneRemixTasksByDayId } from './week26to28LearningTasks';
 import { week29to31SceneRemixTasksByDayId } from './week29to31LearningTasks';
 import { week32to34SceneRemixTasksByDayId } from './week32to34LearningTasks';
+import { week35to36SceneRemixTasksByDayId } from './week35to36LearningTasks';
+import { week37to38SceneRemixTasksByDayId } from './week37to38LearningTasks';
+import { week39to40SceneRemixTasksByDayId } from './week39to40LearningTasks';
+import { week41to42SceneRemixTasksByDayId } from './week41to42LearningTasks';
+import { week43to44SceneRemixTasksByDayId } from './week43to44LearningTasks';
+import { week45to46SceneRemixTasksByDayId } from './week45to46LearningTasks';
 
 export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> = {
   'day-001': [
@@ -493,4 +499,10 @@ export const sceneRemixTasksByDayId: Partial<Record<string, SceneRemixTask[]>> =
   ...week26to28SceneRemixTasksByDayId,
   ...week29to31SceneRemixTasksByDayId,
   ...week32to34SceneRemixTasksByDayId,
+  ...week35to36SceneRemixTasksByDayId,
+  ...week37to38SceneRemixTasksByDayId,
+  ...week39to40SceneRemixTasksByDayId,
+  ...week41to42SceneRemixTasksByDayId,
+  ...week43to44SceneRemixTasksByDayId,
+  ...week45to46SceneRemixTasksByDayId,
 };
