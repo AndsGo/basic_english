@@ -43,7 +43,7 @@ export function ExerciseRenderer({
   };
 
   return (
-    <div className="exercise-list">
+    <section className="exercise-list" aria-label="Drill exercises">
       {drills.map((exercise) => (
         <article className="exercise-card" key={exercise.id}>
           {exercise.type === 'choice' && (
@@ -145,6 +145,6 @@ export function ExerciseRenderer({
           )}
         </article>
       ))}
-    </div>
+    </section>
   );
 }

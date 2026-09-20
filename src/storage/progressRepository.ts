@@ -2,6 +2,7 @@ import type { DayProgress, StepId } from '../domain/progress';
 import type { MasteryContentType, MasteryProgress, MasteryReviewSession } from '../domain/mastery';
 import type { ReviewItem } from '../domain/review';
 import type { SceneOutput, SceneRemixSelfMark } from '../domain/types';
+import type { LocalRecording, SkillAttempt, SkillDayProgress } from '../domain/skillTraining';
 
 export interface StepProgress {
   id: string;
@@ -138,4 +139,11 @@ export interface ProgressRepository {
   saveReinforcementPracticeSession(session: ReinforcementPracticeSession): Promise<void>;
   getReinforcementPracticeSession(localDate: string, insightId: string): Promise<ReinforcementPracticeSession | null>;
   listReinforcementPracticeSessions(): Promise<ReinforcementPracticeSession[]>;
+  getSkillDayProgress?(dayId: string): Promise<SkillDayProgress | null>;
+  saveSkillDayProgress?(progress: SkillDayProgress): Promise<void>;
+  listSkillAttempts?(dayId: string): Promise<SkillAttempt[]>;
+  saveSkillAttempt?(attempt: SkillAttempt): Promise<void>;
+  saveLocalRecording?(recording: LocalRecording): Promise<void>;
+  getLocalRecording?(id: string): Promise<LocalRecording | null>;
+  deleteLocalRecording?(id: string): Promise<void>;
 }

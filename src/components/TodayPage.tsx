@@ -44,6 +44,8 @@ import { SceneRemixCard, type SceneRemixSubmitResult } from './SceneRemixCard';
 import { Stepper } from './Stepper';
 import { TranslationTask } from './TranslationTask';
 import { WordCards } from './WordCards';
+import { SkillPilotPanel } from './SkillPilotPanel';
+import { skillLessonsByDayId } from '../content/skillLessons';
 
 const emptyScenarioCapabilities: ScenarioCapability[] = [];
 
@@ -171,6 +173,8 @@ export function TodayPage({
   const sceneGoal = sceneGoalsByDayId[day.id];
   const remixTask = sceneRemixTasksByDayId[day.id]?.[0];
   const pictureTask = pictureDescribeTasksByDayId[day.id];
+  const skillLesson = skillLessonsByDayId[day.id];
+  const isSkillPilotAvailable = Boolean(repository.saveSkillAttempt && repository.saveLocalRecording && repository.saveSkillDayProgress);
   const allSceneGoals = useMemo(
     () => Object.values(sceneGoalsByDayId).filter((goal): goal is SceneGoal => Boolean(goal)),
     [sceneGoalsByDayId],
@@ -706,7 +710,9 @@ export function TodayPage({
         <Stepper currentStep={currentStep} />
       </div>
 
-      {allSceneGoals.length > 0 && sceneGoal && <SceneMap goals={allSceneGoals} completedSceneIds={completedSceneIds} currentSceneId={sceneGoal.id} />}
+      {currentStep === 'mastery-review' && allSceneGoals.length > 0 && sceneGoal && (
+        <SceneMap goals={allSceneGoals} completedSceneIds={completedSceneIds} currentSceneId={sceneGoal.id} />
+      )}
 
       <div className="panel today-step-panel">
         {isHydrating ? (
@@ -715,6 +721,7 @@ export function TodayPage({
           </section>
         ) : (
           <>
+            {currentStep === 'drills' && skillLesson && isSkillPilotAvailable && <SkillPilotPanel lesson={skillLesson} repository={repository} />}
             {currentStep === 'mastery-review' && (
               <MasteryReviewPanel
                 course={course}

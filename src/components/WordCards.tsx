@@ -37,7 +37,6 @@ export function WordCards({ words, showChineseHelp = false, marks = {}, onReview
               {word.example}
               <SpeechButton text={word.example} label={`Read example for ${word.text}`} />
             </p>
-            {marks[word.id] && <p className="selection-status">{marks[word.id] === 'known' ? 'Known' : 'Marked for review'}</p>}
             <div className="card-actions">
               <button
                 type="button"

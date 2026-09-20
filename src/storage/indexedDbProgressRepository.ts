@@ -15,8 +15,9 @@ import type {
   UserOutput,
   WordProgress,
 } from './progressRepository';
+import type { LocalRecording, SkillAttempt, SkillDayProgress } from '../domain/skillTraining';
 
-const DB_VERSION = 7;
+const DB_VERSION = 8;
 
 interface ProgressDb extends DBSchema {
   dayProgress: {
@@ -77,6 +78,9 @@ interface ProgressDb extends DBSchema {
     value: ReinforcementPracticeSession;
     indexes: { byLocalDate: string };
   };
+  skillDayProgress: { key: string; value: SkillDayProgress; };
+  skillAttempts: { key: string; value: SkillAttempt; indexes: { byDayId: string }; };
+  localRecordings: { key: string; value: LocalRecording; indexes: { byDayId: string; byTaskId: string }; };
 }
 
 async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
@@ -135,6 +139,18 @@ async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
       if (!db.objectStoreNames.contains('reinforcementPracticeSessions')) {
         const store = db.createObjectStore('reinforcementPracticeSessions', { keyPath: 'id' });
         store.createIndex('byLocalDate', 'localDate');
+      }
+      if (!db.objectStoreNames.contains('skillDayProgress')) {
+        db.createObjectStore('skillDayProgress', { keyPath: 'dayId' });
+      }
+      if (!db.objectStoreNames.contains('skillAttempts')) {
+        const store = db.createObjectStore('skillAttempts', { keyPath: 'id' });
+        store.createIndex('byDayId', 'dayId');
+      }
+      if (!db.objectStoreNames.contains('localRecordings')) {
+        const store = db.createObjectStore('localRecordings', { keyPath: 'id' });
+        store.createIndex('byDayId', 'dayId');
+        store.createIndex('byTaskId', 'taskId');
       }
     },
   });
@@ -357,6 +373,34 @@ export function createIndexedDbProgressRepository(dbName = 'basic-english-progre
       return (await db.getAll('reinforcementPracticeSessions')).sort(
         (left, right) => left.localDate.localeCompare(right.localDate) || left.id.localeCompare(right.id),
       );
+    },
+    async getSkillDayProgress(dayId) {
+      const db = await dbPromise;
+      return (await db.get('skillDayProgress', dayId)) ?? null;
+    },
+    async saveSkillDayProgress(progress) {
+      const db = await dbPromise;
+      await db.put('skillDayProgress', progress);
+    },
+    async listSkillAttempts(dayId) {
+      const db = await dbPromise;
+      return (await db.getAllFromIndex('skillAttempts', 'byDayId', dayId)).sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+    },
+    async saveSkillAttempt(attempt) {
+      const db = await dbPromise;
+      await db.put('skillAttempts', attempt);
+    },
+    async saveLocalRecording(recording) {
+      const db = await dbPromise;
+      await db.put('localRecordings', recording);
+    },
+    async getLocalRecording(id) {
+      const db = await dbPromise;
+      return (await db.get('localRecordings', id)) ?? null;
+    },
+    async deleteLocalRecording(id) {
+      const db = await dbPromise;
+      await db.delete('localRecordings', id);
     },
   };
 }

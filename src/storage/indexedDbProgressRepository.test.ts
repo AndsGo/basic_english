@@ -12,6 +12,7 @@ import type {
   UserOutput,
   WordProgress,
 } from './progressRepository';
+import type { LocalRecording, SkillAttempt } from '../domain/skillTraining';
 
 let dbCounter = 0;
 
@@ -154,6 +155,28 @@ interface OldV6ProgressDb extends DBSchema {
 }
 
 describe('indexedDbProgressRepository', () => {
+  it('persists local speaking evidence and its recording without changing legacy progress', async () => {
+    const repo = createIndexedDbProgressRepository(nextDbName());
+    const recording: LocalRecording = {
+      id: 'recording-1', dayId: 'day-001', taskId: 'd001-s1', attemptId: 'attempt-1',
+      blob: new Blob(['voice'], { type: 'audio/webm' }), mimeType: 'audio/webm', bytes: 5, durationMs: 1000,
+      createdAt: '2026-09-20T00:00:00.000Z',
+    };
+    const attempt: SkillAttempt = {
+      id: 'attempt-1', dayId: 'day-001', taskId: 'd001-s1', skill: 'speaking', revision: 1,
+      createdAt: recording.createdAt, recordingId: recording.id, playbackStartedAt: recording.createdAt, selfMark: 'clear',
+      hintEvents: [], replayCount: 0, usedSlowRate: false, afterFeedback: false,
+    };
+
+    await repo.saveLocalRecording!(recording);
+    await repo.saveSkillAttempt!(attempt);
+    await repo.saveSkillDayProgress!({ id: 'day-001', dayId: 'day-001', revision: 1, listeningComplete: true, speakingPending: false, updatedAt: recording.createdAt });
+
+    await expect(repo.getLocalRecording!('recording-1')).resolves.toMatchObject({ bytes: 5, taskId: 'd001-s1' });
+    await expect(repo.listSkillAttempts!('day-001')).resolves.toEqual([attempt]);
+    await expect(repo.getSkillDayProgress!('day-001')).resolves.toMatchObject({ listeningComplete: true });
+  });
+
   it('saves and loads day progress', async () => {
     const repo = createIndexedDbProgressRepository(nextDbName());
 
@@ -191,7 +214,7 @@ describe('indexedDbProgressRepository', () => {
       text: 'Second draft.',
     });
 
-    const db = await openDB(dbName, 7);
+    const db = await openDB(dbName, 8);
     await expect(db.getAll('userOutputs')).resolves.toEqual([
       userOutput({ id: 'second-output-id', text: 'Second draft.' }),
     ]);
@@ -219,7 +242,7 @@ describe('indexedDbProgressRepository', () => {
       dayId: 'day-001',
     });
 
-    const db = await openDB(dbName, 7);
+    const db = await openDB(dbName, 8);
     await expect(db.getAll('userOutputs')).resolves.toEqual([userOutput({ id: 'upgraded-output-id' })]);
     db.close();
   });
@@ -250,7 +273,7 @@ describe('indexedDbProgressRepository', () => {
 
     await repo.saveExerciseAttempt(attempt);
 
-    const db = await openDB(dbName, 7);
+    const db = await openDB(dbName, 8);
     await expect(db.get('exerciseAttempts', attempt.id)).resolves.toEqual(attempt);
     db.close();
   });
@@ -461,7 +484,7 @@ describe('indexedDbProgressRepository V1.1', () => {
     const repo = createIndexedDbProgressRepository(dbName);
     await repo.listUserOutputs();
 
-    const db = await openDB(dbName, 7);
+    const db = await openDB(dbName, 8);
     await db.put('userOutputs', {
       id: 'legacy-output-day-001',
       dayId: 'day-001',

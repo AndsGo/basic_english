@@ -271,12 +271,13 @@ async function completeDrills(user: ReturnType<typeof userEvent.setup>) {
   const replacementExercise = day.exercises.find((exercise) => exercise.type === 'replacement');
   if (!choiceExercise || !sentenceOrderExercise || !replacementExercise) throw new Error('Day 1 drill test content is incomplete.');
 
-  await user.click(screen.getByRole('button', { name: choiceExercise.correctOption }));
-  await user.type(screen.getByRole('textbox', { name: 'My ___ is Li.' }), 'name');
+  const drills = within(screen.getByRole('region', { name: 'Drill exercises' }));
+  await user.click(drills.getByRole('button', { name: choiceExercise.correctOption }));
+  await user.type(drills.getByRole('textbox', { name: 'My ___ is Li.' }), 'name');
   for (const token of sentenceOrderExercise.correctOrder) {
-    await user.click(screen.getByRole('button', { name: token }));
+    await user.click(drills.getByRole('button', { name: token }));
   }
-  await user.type(screen.getByRole('textbox', { name: 'Replacement answer' }), replacementExercise.referenceAnswer);
+  await user.type(drills.getByRole('textbox', { name: 'Replacement answer' }), replacementExercise.referenceAnswer);
   await user.click(await getEnabledContinueButton());
 }
 
@@ -797,7 +798,6 @@ describe('TodayPage', () => {
 
     expect(knowName).toHaveAttribute('aria-pressed', 'true');
     expect(knowName).toHaveClass('selected-button');
-    expect(screen.getByText('Known')).toBeInTheDocument();
 
     for (const button of screen.getAllByRole('button', { name: /^I know this/ })) {
       if (button !== knowName) await user.click(button);

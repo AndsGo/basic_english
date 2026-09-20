@@ -89,7 +89,9 @@ describe('WordFlashcards', () => {
 
     expect(screen.getByText('a part of a house')).toBeInTheDocument();
     expect(screen.getByText('My room is small.')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Read word room' })).toBeInTheDocument();
+    const wordSpeechButton = screen.getByRole('button', { name: 'Read word room' });
+    expect(wordSpeechButton).toBeInTheDocument();
+    expect(wordSpeechButton.parentElement).toHaveClass('flashcard-word-heading');
     expect(screen.queryByText('房间')).not.toBeInTheDocument();
   });
 
@@ -155,6 +157,20 @@ describe('WordFlashcards', () => {
 
     expect(screen.getByRole('heading', { name: 'room' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Previous' })).toBeDisabled();
+  });
+
+  it('reads the front word only when the learner moves through image flashcards', async () => {
+    renderWithSpeech(
+      <WordFlashcards words={words} imageByWordId={{ room: '/room.png' }} onKnow={vi.fn()} onReview={vi.fn()} />,
+    );
+
+    expect(speechService.speak).not.toHaveBeenCalled();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Next' }));
+    expect(speechService.speak).toHaveBeenLastCalledWith('name', 'normal', 'en-US');
+
+    await userEvent.click(screen.getByRole('button', { name: 'Previous' }));
+    expect(speechService.speak).toHaveBeenLastCalledWith('room', 'normal', 'en-US');
   });
 
   it('clamps the current card when the deck shrinks', async () => {

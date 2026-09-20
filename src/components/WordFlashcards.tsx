@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import type { Word } from '../domain/types';
 import { PhoneticText } from './PhoneticText';
 import { SpeechButton } from './SpeechButton';
+import { useSpeech } from '../speech/SpeechProvider';
 
 type FlashcardFeedback = 'review' | 'known' | 'error' | null;
 
@@ -18,6 +19,7 @@ export function WordFlashcards({
   onKnow: (word: Word) => void | Promise<void>;
   onReview: (word: Word) => void | Promise<void>;
 }) {
+  const { speak } = useSpeech();
   const queue = useMemo(
     () =>
       [...words].sort((a, b) => {
@@ -44,9 +46,14 @@ export function WordFlashcards({
   const image = imageByWordId[currentWord.id];
 
   const moveTo = (nextIndex: number) => {
+    const nextWord = queue[nextIndex];
+    if (!nextWord) return;
+
     setCurrentIndex(nextIndex);
     setIsBackVisible(false);
     setFeedback(null);
+    // Navigation is a direct user action, so browser speech is allowed to start reliably.
+    speak(nextWord.text, `flashcard-auto-${nextWord.id}`);
   };
 
   const save = async (action: 'known' | 'review') => {
@@ -89,7 +96,10 @@ export function WordFlashcards({
           </div>
         ) : (
           <div className="flashcard-back">
-            <h3>{currentWord.text}</h3>
+            <h3 className="flashcard-word-heading">
+              {currentWord.text}
+              <SpeechButton text={currentWord.text} label={`Read word ${currentWord.text}`} />
+            </h3>
             <PhoneticText value={currentWord.phonetic} />
             <p>
               {currentWord.definition}
@@ -104,7 +114,6 @@ export function WordFlashcards({
               {currentWord.example}
               <SpeechButton text={currentWord.example} label={`Read example for ${currentWord.text}`} />
             </p>
-            <SpeechButton text={currentWord.text} label={`Read word ${currentWord.text}`} />
             <div className="card-actions">
               <button type="button" className="secondary-button" onClick={() => void save('review')} disabled={isSaving}>
                 Add to review
