@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { Word } from '../domain/types';
 import { SpeechProvider } from '../speech/SpeechProvider';
 import { WordFlashcards } from './WordFlashcards';
+import { week3Words } from '../content/week3';
 
 const words: Word[] = [
   {
@@ -51,6 +52,51 @@ function renderWithSpeech(ui: ReactNode) {
 }
 
 describe('WordFlashcards', () => {
+  it('explains frequency with explicit records, preserving navigation speech and the example on Flip', async () => {
+    const frequencyWords = ['always', 'never'].map((id) => week3Words.find((word) => word.id === id)!);
+    renderWithSpeech(
+      <WordFlashcards words={frequencyWords} imageByWordId={{ always: '/always.png', never: '/never.png' }} onKnow={vi.fn()} onReview={vi.fn()} />,
+    );
+    expect(screen.getAllByRole('listitem')).toHaveLength(7);
+    expect(screen.getAllByRole('listitem').every((item) => item.getAttribute('aria-label')?.endsWith(': yes'))).toBe(true);
+    expect(screen.getByText('Every time.')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Next' }));
+    expect(speechService.speak).toHaveBeenCalled();
+    expect(screen.getByText('Sleep at school')).toBeInTheDocument();
+    expect(screen.getAllByRole('listitem').every((item) => item.getAttribute('aria-label')?.endsWith(': no'))).toBe(true);
+    await userEvent.click(screen.getByRole('button', { name: 'Flip' }));
+    expect(screen.getByText('I never sleep at school.')).toBeInTheDocument();
+    expect(screen.queryByRole('list', { name: 'Daily record' })).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Previous' }));
+    expect(screen.getByText('Every time.')).toBeInTheDocument();
+  });
+
+  it('shows a concrete first action with an accessible order sequence', () => {
+    const first = week3Words.find((word) => word.id === 'first')!;
+    renderWithSpeech(
+      <WordFlashcards words={[first]} imageByWordId={{ first: '/first.png' }} onKnow={vi.fn()} onReview={vi.fn()} />,
+    );
+
+    expect(screen.getByText('first: Put on clothes.')).toBeInTheDocument();
+    expect(screen.getByRole('group', { name: 'Going out: example order' })).toBeInTheDocument();
+    expect(screen.getByRole('list')).toHaveTextContent('Put on clothes.');
+    expect(screen.getByRole('list')).toHaveTextContent('Go to school.');
+  });
+
+  it('uses the same fact statement to distinguish true from false', async () => {
+    const truthWords: Word[] = [
+      { id: 'true', text: 'true', category: 'general_thing', definition: 'in agreement with fact', phonetic: '/truː/', chinese: '真实的', example: 'This is true.', weekIntroduced: 1, tags: [] },
+      { id: 'false', text: 'false', category: 'general_thing', definition: 'not in agreement with fact', phonetic: '/fɔːls/', chinese: '错误的', example: 'This is false.', weekIntroduced: 1, tags: [] },
+    ];
+    renderWithSpeech(
+      <WordFlashcards words={truthWords} imageByWordId={{ true: '/true.png', false: '/false.png' }} onKnow={vi.fn()} onReview={vi.fn()} />,
+    );
+
+    expect(screen.getByLabelText('Fact check')).toHaveTextContent('True. The cat is in the basket.');
+    await userEvent.click(screen.getByRole('button', { name: 'Next' }));
+    expect(screen.getByLabelText('Fact check')).toHaveTextContent('False. The cat is not in the basket.');
+  });
+
   it('shows image-backed words first on the front side', () => {
     renderWithSpeech(
       <WordFlashcards words={words} imageByWordId={{ room: '/room.png' }} onKnow={vi.fn()} onReview={vi.fn()} />,

@@ -716,6 +716,150 @@ textarea {
   font-weight: 800;
 }
 
+.frequency-visual {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 10px;
+  min-height: 0;
+  width: 100%;
+}
+
+.order-visual {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 10px;
+  min-height: 0;
+  width: 100%;
+}
+
+.order-record {
+  width: min(100%, 380px);
+  justify-self: center;
+}
+
+.order-meaning {
+  margin: 0 0 6px;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.order-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-steps li {
+  display: grid;
+  gap: 2px;
+  align-content: center;
+  min-height: 42px;
+  padding: 4px;
+  border: 1px solid var(--color-border-card);
+  border-radius: 4px;
+  background: var(--color-surface-muted);
+  font-size: 11px;
+  line-height: 1.15;
+}
+
+.order-steps span {
+  color: var(--color-text-muted);
+}
+
+.order-steps .order-step-current {
+  border-color: var(--color-accent-strong);
+  background: #e5f2ed;
+  color: #205640;
+}
+
+.truth-visual {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 10px;
+  min-height: 0;
+  width: 100%;
+}
+
+.truth-record {
+  width: min(100%, 380px);
+  justify-self: center;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border-card);
+  border-radius: 4px;
+  background: var(--color-surface-muted);
+}
+
+.truth-record p {
+  margin: 0;
+}
+
+.truth-statement {
+  font-size: 14px;
+}
+
+.truth-answer {
+  margin-top: 3px !important;
+  color: #205640;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.frequency-record {
+  width: min(100%, 380px);
+  justify-self: center;
+}
+
+.frequency-record p {
+  margin: 0;
+}
+
+.frequency-meaning {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.frequency-action {
+  font-size: 14px;
+  padding: 4px 0 8px;
+}
+
+.frequency-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.frequency-days li {
+  display: grid;
+  gap: 2px;
+  padding: 5px 0;
+  border-radius: 4px;
+  border: 1px solid var(--color-border-card);
+  font-size: 12px;
+}
+
+.frequency-yes {
+  background: #e5f2ed;
+  color: #205640;
+}
+
+.frequency-no {
+  background: #f0f1f3;
+  color: #505760;
+}
+
+.frequency-record .frequency-caption {
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
 .flashcard-navigation {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

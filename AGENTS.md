@@ -38,6 +38,57 @@ For grammar card images:
 - Do not include full example sentences unless the product spec explicitly requires them.
 - Keep the card style polished and consistent with the rest of the app.
 
+### Semantic Teaching Components
+
+These rules apply when a word's meaning needs context, comparison, or a relationship that a single illustration cannot explain. Frequency words such as `always` are adverbs, not prepositions.
+
+- Keep `visualStyle` as image metadata; it is not a part-of-speech or teaching-method classification. Model a teaching presentation separately when implementing it.
+- Existing keyword-only grammar images are legacy assets, not the quality standard for new or revised learning presentations. A keyword alone does not explain meaning.
+- Combine approved cartoon artwork with semantic HTML for records, comparisons, short English explanations, and example sentences. Do not bake this text or these diagrams into raster artwork.
+- Page-level records, timelines, labels, and relationship indicators are permitted when they explain the target meaning. This permission does not relax the image rules above or the Picture Describe Scene Rules below.
+- Keep English as the default. Chinese help must follow the existing user setting and must never be embedded in images.
+- Bind each presentation to the word's taught sense, definition, and example. Do not reuse an image merely because its subject is related; shared artwork is acceptable only when the complete presentation accurately distinguishes each target meaning.
+- Do not require a picture-only explanation for articles, auxiliaries, or logical relationships. Use short contextual sentences when needed, with vocabulary checked through the project's existing content validation policy.
+
+Choose the presentation by meaning:
+
+| Meaning | Examples | Presentation |
+| --- | --- | --- |
+| Concrete object | book, key | One recognizable cartoon object. |
+| Action or state | walk, happy | A clear action or state in a daily-life scene. |
+| Spatial relationship | under, between | Consistent concrete objects with the target placement made clear. |
+| Frequency | always, usually, often, sometimes, never | The same action across comparable occasions, with an English summary. |
+| Quantity or scope | all, some, every | A concrete group showing the relevant whole, subset, or each member. |
+| Degree or comparison | very, more, than | Comparable objects or situations with the relevant difference isolated. |
+| Cause, condition, or result | because, if, so | Related situations plus a short sentence clarifying the logical relationship. |
+| Reference or ownership | my, your, this, that | Explicit speaker, owner, or distance context. |
+| Article or auxiliary | a, the, be, will | Short contextual sentence examples with supporting artwork where useful. |
+
+#### Frequency Pilot Acceptance Examples
+
+Use one explicit context, such as having water with breakfast, across comparable breakfast occasions. A sample week illustrates a habit; it does not prove a person's lifetime behavior.
+
+| Word | Required meaning | Illustrative presentation |
+| --- | --- | --- |
+| always | Every time in the stated context. | The action occurs on every displayed occasion. |
+| usually | On most occasions, with exceptions. | Most occasions include the action; some do not. |
+| often | Many times; not a fixed proportion. | Repeated occurrences supported by a short contextual explanation. |
+| sometimes | On some occasions, not every time. | Some occurrences and some non-occurrences with a contextual explanation. |
+| never | Not on any occasion in the stated context. | Every occasion explicitly records that the action did not occur. |
+
+- Never teach fixed percentages or occurrence counts as definitions of `usually`, `often`, or `sometimes`. Their uses overlap; do not grade ambiguous records as having only one possible label.
+- A blank record means unknown unless explicitly defined otherwise. Distinguish occurrence, non-occurrence, and missing data using text or accessible symbols as well as color.
+- Pilot all five frequency words together before expanding to other semantic families. Retain the sample approval requirement for newly generated artwork.
+
+#### Verification Before Delivery
+
+- Check that the complete presentation communicates meaning beyond repeating the keyword, and that its artwork, records, explanation, and example agree.
+- Check related words side by side for misleading distinctions, ambiguous references, and accidental claims of exact frequency.
+- Keep word, phonetic text, and playback controls visible. Constrain the media region so it cannot push text out of the card.
+- Preserve stable front/back card dimensions and navigation placement on Flip and Previous/Next. Verify desktop and narrow mobile layouts, including long text and enabled Chinese help.
+- Provide accessible text for visual records; do not depend only on color, hover, animation, or sound. Respect reduced-motion preferences if animation is added.
+- Preserve existing playback, automatic navigation speech, review, and known-word behavior. For UI implementation changes, verify these flows and inspect rendered layouts; documentation-only edits require consistency and diff checks, not claims of completed UI testing.
+
 ### Picture Describe Scene Rules
 
 Picture describe images live under `src/assets/picture-describe/`.

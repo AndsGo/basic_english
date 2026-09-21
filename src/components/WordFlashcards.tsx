@@ -3,6 +3,12 @@ import type { Word } from '../domain/types';
 import { PhoneticText } from './PhoneticText';
 import { SpeechButton } from './SpeechButton';
 import { useSpeech } from '../speech/SpeechProvider';
+import { frequencyPresentations } from '../content/frequencyPresentations';
+import { orderPresentations } from '../content/orderPresentations';
+import { truthPresentations } from '../content/truthPresentations';
+import { FrequencyVisual } from './FrequencyVisual';
+import { OrderVisual } from './OrderVisual';
+import { TruthVisual } from './TruthVisual';
 
 type FlashcardFeedback = 'review' | 'known' | 'error' | null;
 
@@ -44,6 +50,9 @@ export function WordFlashcards({
   }
 
   const image = imageByWordId[currentWord.id];
+  const frequency = frequencyPresentations[currentWord.id];
+  const order = orderPresentations[currentWord.id];
+  const truth = truthPresentations[currentWord.id];
 
   const moveTo = (nextIndex: number) => {
     const nextWord = queue[nextIndex];
@@ -86,7 +95,13 @@ export function WordFlashcards({
       <article className="flashcard">
         {!isBackVisible ? (
           <div className="flashcard-front">
-            {image ? (
+            {frequency ? (
+              <FrequencyVisual presentation={frequency} image={image} />
+            ) : order ? (
+              <OrderVisual presentation={order} image={image} word={currentWord.text} />
+            ) : truth ? (
+              <TruthVisual presentation={truth} image={image} />
+            ) : image ? (
               <img src={image} alt={`${currentWord.text} flashcard illustration`} className="flashcard-image" />
             ) : (
               <div className="flashcard-image flashcard-image--fallback">No image yet</div>
