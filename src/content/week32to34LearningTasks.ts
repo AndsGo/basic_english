@@ -1,6 +1,6 @@
-import workImage from '../assets/picture-describe/day-218-people-at-work.png';
-import placesImage from '../assets/picture-describe/day-225-community-places.png';
-import respectImage from '../assets/picture-describe/day-232-agreement-respect.png';
+import workImage from '../assets/picture-describe/day-218-people-at-work.webp';
+import placesImage from '../assets/picture-describe/day-225-community-places.webp';
+import respectImage from '../assets/picture-describe/day-232-agreement-respect.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week32to34 } from './week32to34';
 

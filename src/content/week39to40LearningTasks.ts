@@ -1,5 +1,5 @@
-import week39Scene from '../assets/picture-describe/day-267-travel-and-movement.png';
-import week40Scene from '../assets/picture-describe/day-274-trade-and-money.png';
+import week39Scene from '../assets/picture-describe/day-267-travel-and-movement.webp';
+import week40Scene from '../assets/picture-describe/day-274-trade-and-money.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week39to40 } from './week39to40';
 

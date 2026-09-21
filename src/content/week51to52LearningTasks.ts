@@ -1,5 +1,5 @@
-import week51Scene from '../assets/picture-describe/day-351-connection-place.png';
-import week52Scene from '../assets/picture-describe/day-358-final-story-check.png';
+import week51Scene from '../assets/picture-describe/day-351-connection-place.webp';
+import week52Scene from '../assets/picture-describe/day-358-final-story-check.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week51to52 } from './week51to52';
 

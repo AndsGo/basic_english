@@ -1,5 +1,5 @@
-import week43Scene from '../assets/picture-describe/day-295-science-and-systems.png';
-import week44Scene from '../assets/picture-describe/day-302-world-story-check.png';
+import week43Scene from '../assets/picture-describe/day-295-science-and-systems.webp';
+import week44Scene from '../assets/picture-describe/day-302-world-story-check.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week43to44 } from './week43to44';
 const images = [week43Scene, week44Scene];

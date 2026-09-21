@@ -1,6 +1,6 @@
-import week23Image from '../assets/picture-describe/day-155-asking-answering.png';
-import week24Image from '../assets/picture-describe/day-162-cause-effect.png';
-import week25Image from '../assets/picture-describe/day-169-making-plans.png';
+import week23Image from '../assets/picture-describe/day-155-asking-answering.webp';
+import week24Image from '../assets/picture-describe/day-162-cause-effect.webp';
+import week25Image from '../assets/picture-describe/day-169-making-plans.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week23to25 } from './week23to25';
 const images=[week23Image,week24Image,week25Image];

@@ -1,6 +1,6 @@
-import week17Image from '../assets/picture-describe/day-113-light-color-look.png';
-import week18Image from '../assets/picture-describe/day-120-clothes-personal-things.png';
-import week19Image from '../assets/picture-describe/day-127-kitchen-food-detail.png';
+import week17Image from '../assets/picture-describe/day-113-light-color-look.webp';
+import week18Image from '../assets/picture-describe/day-120-clothes-personal-things.webp';
+import week19Image from '../assets/picture-describe/day-127-kitchen-food-detail.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week17to19 } from './week17to19';
 

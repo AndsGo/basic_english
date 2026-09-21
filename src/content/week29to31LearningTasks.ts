@@ -1,6 +1,6 @@
-import familyImage from '../assets/picture-describe/day-197-family-relations.png';
-import feelingsImage from '../assets/picture-describe/day-204-feelings-opinions.png';
-import healthImage from '../assets/picture-describe/day-211-health-body.png';
+import familyImage from '../assets/picture-describe/day-197-family-relations.webp';
+import feelingsImage from '../assets/picture-describe/day-204-feelings-opinions.webp';
+import healthImage from '../assets/picture-describe/day-211-health-body.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week29to31 } from './week29to31';
 

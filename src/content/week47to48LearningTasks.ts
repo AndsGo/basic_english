@@ -1,5 +1,5 @@
-import week47Scene from '../assets/picture-describe/day-323-comparison-quality.png';
-import week48Scene from '../assets/picture-describe/day-330-argument-reason.png';
+import week47Scene from '../assets/picture-describe/day-323-comparison-quality.webp';
+import week48Scene from '../assets/picture-describe/day-330-argument-reason.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week47to48 } from './week47to48';
 

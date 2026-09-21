@@ -662,7 +662,7 @@ describe('basicEnglishCourse V1.12', () => {
     const hashesByWordId = wordImageAssets
       .filter((asset) => newWordIds.has(asset.wordId))
       .map((asset) => {
-        const bytes = readFileSync(join(process.cwd(), 'src', 'assets', 'word-flashcards', `${asset.wordId}.png`));
+        const bytes = readFileSync(join(process.cwd(), 'src', 'assets', 'word-flashcards', `${asset.wordId}.webp`));
         return [asset.wordId, createHash('sha256').update(bytes).digest('hex')] as const;
       });
     const duplicateWordIds = hashesByWordId
@@ -678,7 +678,7 @@ describe('basicEnglishCourse V1.12', () => {
       (word) => word.weekIntroduced >= 29 && word.weekIntroduced <= 34,
     );
     const accountPlaceholderHash = createHash('sha256')
-      .update(readFileSync(join(process.cwd(), 'src', 'assets', 'word-flashcards', 'account.png')))
+      .update(readFileSync(join(process.cwd(), 'src', 'assets', 'word-flashcards', 'account.webp')))
       .digest('hex');
     const accountMappedWordIds = lateCourseWords
       .filter((word) => source.includes(`wordImageAsset('${word.id}', accountImage,`))
@@ -686,7 +686,7 @@ describe('basicEnglishCourse V1.12', () => {
     const placeholderFileWordIds = lateCourseWords
       .filter((word) => {
         const bytes = readFileSync(
-          join(process.cwd(), 'src', 'assets', 'word-flashcards', `${word.id}-week${word.weekIntroduced}.png`),
+          join(process.cwd(), 'src', 'assets', 'word-flashcards', `${word.id}-week${word.weekIntroduced}.webp`),
         );
         return createHash('sha256').update(bytes).digest('hex') === accountPlaceholderHash;
       })

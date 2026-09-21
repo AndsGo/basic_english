@@ -1,4 +1,4 @@
-import week13Image from '../assets/picture-describe/day-085-things-at-home.png';
+import week13Image from '../assets/picture-describe/day-085-things-at-home.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week13 } from './week13';
 

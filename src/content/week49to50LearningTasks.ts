@@ -1,5 +1,5 @@
-import week49Scene from '../assets/picture-describe/day-337-instructions-processes.png';
-import week50Scene from '../assets/picture-describe/day-344-description-practice.png';
+import week49Scene from '../assets/picture-describe/day-337-instructions-processes.webp';
+import week50Scene from '../assets/picture-describe/day-344-description-practice.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week49to50 } from './week49to50';
 

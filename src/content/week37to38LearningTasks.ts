@@ -1,5 +1,5 @@
-import week37Scene from '../assets/picture-describe/day-253-nature-and-weather.png';
-import week38Scene from '../assets/picture-describe/day-260-animals-and-living-things.png';
+import week37Scene from '../assets/picture-describe/day-253-nature-and-weather.webp';
+import week38Scene from '../assets/picture-describe/day-260-animals-and-living-things.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week37to38 } from './week37to38';
 

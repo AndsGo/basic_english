@@ -1,8 +1,8 @@
-import day050Image from '../assets/picture-describe/day-050-family-persons.png';
-import day057Image from '../assets/picture-describe/day-057-weather-garden.png';
-import day064Image from '../assets/picture-describe/day-064-office-records.png';
-import day071Image from '../assets/picture-describe/day-071-like-reason.png';
-import day078Image from '../assets/picture-describe/day-078-time-place.png';
+import day050Image from '../assets/picture-describe/day-050-family-persons.webp';
+import day057Image from '../assets/picture-describe/day-057-weather-garden.webp';
+import day064Image from '../assets/picture-describe/day-064-office-records.webp';
+import day071Image from '../assets/picture-describe/day-071-like-reason.webp';
+import day078Image from '../assets/picture-describe/day-078-time-place.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week8to12 } from './week8to12';
 

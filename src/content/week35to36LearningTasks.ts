@@ -1,5 +1,5 @@
-import week35Scene from '../assets/picture-describe/day-239-help-and-support.png';
-import week36Scene from '../assets/picture-describe/day-246-person-story.png';
+import week35Scene from '../assets/picture-describe/day-239-help-and-support.webp';
+import week36Scene from '../assets/picture-describe/day-246-person-story.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week35to36 } from './week35to36';
 

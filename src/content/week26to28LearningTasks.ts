@@ -1,6 +1,6 @@
-import week26Image from '../assets/picture-describe/day-176-problems-decisions.png';
-import week27Image from '../assets/picture-describe/day-183-rules-control.png';
-import week28Image from '../assets/picture-describe/day-190-daily-life-check.png';
+import week26Image from '../assets/picture-describe/day-176-problems-decisions.webp';
+import week27Image from '../assets/picture-describe/day-183-rules-control.webp';
+import week28Image from '../assets/picture-describe/day-190-daily-life-check.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week26to28 } from './week26to28';
 const images=[week26Image,week27Image,week28Image];

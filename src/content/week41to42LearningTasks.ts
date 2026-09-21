@@ -1,5 +1,5 @@
-import week41Scene from '../assets/picture-describe/day-281-tools-and-machines.png';
-import week42Scene from '../assets/picture-describe/day-288-materials-and-production.png';
+import week41Scene from '../assets/picture-describe/day-281-tools-and-machines.webp';
+import week42Scene from '../assets/picture-describe/day-288-materials-and-production.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week41to42 } from './week41to42';
 

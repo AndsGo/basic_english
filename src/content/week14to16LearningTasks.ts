@@ -1,6 +1,6 @@
-import week14Image from '../assets/picture-describe/day-092-things-materials.png';
-import week15Image from '../assets/picture-describe/day-099-shape-position.png';
-import week16Image from '../assets/picture-describe/day-106-amount-comparison.png';
+import week14Image from '../assets/picture-describe/day-092-things-materials.webp';
+import week15Image from '../assets/picture-describe/day-099-shape-position.webp';
+import week16Image from '../assets/picture-describe/day-106-amount-comparison.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week14to16 } from './week14to16';
 

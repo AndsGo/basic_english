@@ -1,6 +1,6 @@
-import week20Image from '../assets/picture-describe/day-134-home-story-check.png';
-import week21Image from '../assets/picture-describe/day-141-time-frequency-order.png';
-import week22Image from '../assets/picture-describe/day-148-work-study-actions.png';
+import week20Image from '../assets/picture-describe/day-134-home-story-check.webp';
+import week21Image from '../assets/picture-describe/day-141-time-frequency-order.webp';
+import week22Image from '../assets/picture-describe/day-148-work-study-actions.webp';
 import type { PictureDescribeTask, SceneGoal, SceneRemixTask } from '../domain/types';
 import { week20to22 } from './week20to22';
 
