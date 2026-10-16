@@ -36,7 +36,7 @@ async function clearAppStorage(page: Page) {
 async function seedCompletedDays(page: Page, dayIds: string[]) {
   await page.evaluate(
     async ({ contentVersion, dayIdsToSeed }) => {
-      const openRequest = indexedDB.open('basic-english-progress', 7);
+      const openRequest = indexedDB.open('basic-english-progress', 9);
 
       const db = await new Promise<IDBDatabase>((resolve, reject) => {
         openRequest.onerror = () => reject(openRequest.error);
@@ -89,6 +89,12 @@ async function seedCompletedDays(page: Page, dayIds: string[]) {
             const store = db.createObjectStore('reinforcementPracticeSessions', { keyPath: 'id' });
             store.createIndex('byLocalDate', 'localDate');
           }
+          if (!db.objectStoreNames.contains('capabilityCheckAttempts')) {
+            const store = db.createObjectStore('capabilityCheckAttempts', { keyPath: 'id' });
+            store.createIndex('byCapabilityId', 'capabilityId');
+            store.createIndex('byDayId', 'dayId');
+            store.createIndex('byDueAt', 'dueAt');
+          }
         };
         openRequest.onsuccess = () => resolve(openRequest.result);
       });
@@ -129,7 +135,7 @@ async function seedCompletedDays(page: Page, dayIds: string[]) {
 
 async function seedDailyLearningInsightData(page: Page, localDate: string) {
   await page.evaluate(async ({ date }) => {
-    const openRequest = indexedDB.open('basic-english-progress', 7);
+    const openRequest = indexedDB.open('basic-english-progress', 9);
     const db = await new Promise<IDBDatabase>((resolve, reject) => {
       openRequest.onsuccess = () => resolve(openRequest.result);
       openRequest.onerror = () => reject(openRequest.error);
@@ -182,7 +188,7 @@ async function seedDailyLearningInsightData(page: Page, localDate: string) {
 
 async function readLearningStores(page: Page) {
   return page.evaluate(async () => {
-    const openRequest = indexedDB.open('basic-english-progress', 7);
+    const openRequest = indexedDB.open('basic-english-progress', 9);
     const db = await new Promise<IDBDatabase>((resolve, reject) => {
       openRequest.onsuccess = () => resolve(openRequest.result);
       openRequest.onerror = () => reject(openRequest.error);
@@ -386,8 +392,21 @@ async function completeSceneOutput(page: Page, scene: 'self' | 'room') {
   await page.getByLabel('Scene dialogue').fill('A: Is this your room?\nB: Yes. This is my room.');
 }
 
+async function completeDayOneCapabilityCheck(page: Page) {
+  const check = page.getByLabel('Introduce yourself capability check');
+  await check.getByRole('button', { name: /Play mission audio|Read listening text/ }).click();
+  await check.getByLabel('She is a student.').check();
+  await check.getByLabel('Your answer').fill('My name is Li. I am from China. I am a student.');
+  await check.getByLabel('My answer includes all three ideas.').check();
+  await check.getByRole('radio', { name: 'Clear', exact: true }).check();
+  await check.getByRole('button', { name: 'Save capability check' }).click();
+  await expect(check.getByText('Independent')).toBeVisible();
+}
+
 async function completeCurrentDay(page: Page, dayId: string, finish = true) {
   const day = getCourseDay(dayId);
+
+  if (dayId === 'day-001') await completeDayOneCapabilityCheck(page);
 
   await continueTo(page, 'Quick Review', 3);
   await continueTo(page, basicEnglishCourse.words.find((word) => word.id === day.wordIds[0])?.text ?? 'Words');
@@ -508,6 +527,7 @@ test.describe('Basic English MVP e2e', () => {
     await expect(page.getByRole('heading', { name: 'My Name' })).toBeVisible();
     await expect(page.getByText('Week 1 / Day 1')).toBeVisible();
     await expect(page.getByText('No mastery review due today.')).toBeVisible();
+    await completeDayOneCapabilityCheck(page);
 
     await continueTo(page, 'Quick Review', 3);
     await expect(page.getByText('Day 1 has no review')).toBeVisible();
@@ -543,7 +563,7 @@ test.describe('Basic English MVP e2e', () => {
 
     await continueTo(page, 'Build Sentences');
     await expect(page.getByRole('heading', { name: 'Build Sentences' })).toBeVisible();
-    await expect(page.getByText('I can say who I am.')).toBeVisible();
+    await expect(page.getByText('I can say who I am.')).toHaveCount(0);
     await completeDayOneOutput(page);
 
     await continueTo(page, 'Day 1 complete');
@@ -589,13 +609,14 @@ test.describe('Basic English MVP e2e', () => {
     await page.getByRole('button', { name: 'Me', exact: true }).click();
     await expect(page.getByText('Completed days: 1')).toBeVisible();
     await expect(page.getByText('Review items: 2')).toBeVisible();
-    await expect(page.getByRole('listitem', { name: /Self Completed/ })).toBeVisible();
+    await expect(page.getByText('1 independent')).toBeVisible();
+    await expect(page.getByText('Introduce yourself').first()).toBeVisible();
     await expect(page.getByRole('heading', { name: 'My Descriptions' })).toBeVisible();
     await expect(page.getByText('Self Introduction')).toBeVisible();
 
     await page.reload();
     await page.getByRole('button', { name: 'Me', exact: true }).click();
-    await expect(page.getByRole('listitem', { name: /Self Completed/ })).toBeVisible();
+    await expect(page.getByText('1 independent')).toBeVisible();
   });
 
   test('navigates course and word bank views with configurable Chinese help', async ({ page }) => {
@@ -663,11 +684,11 @@ test.describe('Basic English MVP e2e', () => {
 
     await page.getByRole('button', { name: 'Me', exact: true }).click();
     await expect(page.getByText('I can describe my room.', { exact: true })).toBeVisible();
-    await expect(page.getByRole('listitem', { name: /Room Completed/ })).toBeVisible();
+    await expect(page.getByText('0 independent')).toBeVisible();
 
     await page.reload();
     await page.getByRole('button', { name: 'Me', exact: true }).click();
-    await expect(page.getByRole('listitem', { name: /Room Completed/ })).toBeVisible();
+    await expect(page.getByText('0 independent')).toBeVisible();
   });
 
   test('updates scenario mastery after completing a lesson and returning for mastery review', async ({ page }) => {

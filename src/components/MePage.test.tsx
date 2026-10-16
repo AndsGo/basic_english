@@ -7,6 +7,7 @@ import type { Course, ScenarioCapability, SceneGoal } from '../domain/types';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
 import type { ProgressRepository } from '../storage/progressRepository';
 import { MePage } from './MePage';
+import { createCapabilityCheckAttempt } from '../domain/capabilityCheck';
 
 const sceneGoalsByDayId: Record<string, SceneGoal> = {
   'day-001': {
@@ -95,6 +96,27 @@ const capability: ScenarioCapability = {
 };
 
 describe('MePage scene map', () => {
+  it('shows only independent capability checks in Scenes I Can Describe', async () => {
+    const repository = createIndexedDbProgressRepository('me-capability-outcomes');
+    await repository.saveCapabilityCheckAttempt!(createCapabilityCheckAttempt({
+      capabilityId: 'introduce-myself', taskId: 'check-self', dayId: 'day-001', listeningCorrect: true,
+      writtenText: 'My name is Li. I am from China. I am a student.', usedHints: [], meaningComplete: true, clarity: 'clear',
+      now: '2026-09-25T00:00:00.000Z',
+    }));
+    await repository.saveCapabilityCheckAttempt!(createCapabilityCheckAttempt({
+      capabilityId: 'buy-simple-things', taskId: 'check-shop', dayId: 'day-024', listeningCorrect: true,
+      writtenText: 'I want bread. Do you have bread? I will take it.', usedHints: ['patterns'], meaningComplete: true, clarity: 'clear',
+      now: '2026-09-25T01:00:00.000Z',
+    }));
+
+    render(<MePage course={basicEnglishCourse} repository={repository} />);
+
+    expect(await screen.findByText('1 independent')).toBeInTheDocument();
+    const independentList = screen.getByRole('heading', { name: 'Scenes I Can Describe' }).closest('.capability-outcomes');
+    expect(independentList).toHaveTextContent('Introduce yourself');
+    expect(screen.getByText('Buy simple things').parentElement).toHaveTextContent('With help');
+  });
+
   it('does not render the scene map while progress is loading', () => {
     const repository = createMockRepository({
       listDayProgress: vi.fn().mockReturnValue(new Promise(() => {})),
@@ -151,7 +173,13 @@ describe('MePage scene map', () => {
       updatedAt: '2026-05-27T00:00:00.000Z',
     });
 
-    render(<MePage course={basicEnglishCourse} repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
+    const {
+      saveCapabilityCheckAttempt: _saveCapabilityCheckAttempt,
+      listCapabilityCheckAttempts: _listCapabilityCheckAttempts,
+      ...legacyRepository
+    } = repository;
+
+    render(<MePage course={basicEnglishCourse} repository={legacyRepository} sceneGoalsByDayId={sceneGoalsByDayId} />);
 
     expect(await screen.findByRole('listitem', { name: /Self Completed/ })).toHaveClass('scene-map-item--completed');
     expect(screen.getByRole('listitem', { name: /Room Next/ })).toBeInTheDocument();

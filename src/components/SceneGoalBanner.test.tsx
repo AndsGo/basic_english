@@ -17,7 +17,7 @@ describe('SceneGoalBanner', () => {
   it('shows the current scene capability', () => {
     render(<SceneGoalBanner goal={goal} />);
 
-    expect(screen.getByText('Today')).toBeInTheDocument();
+    expect(screen.getByText("Today's mission")).toBeInTheDocument();
     expect(screen.getByText('I can describe myself.')).toBeInTheDocument();
     expect(screen.getByText('Self')).toBeInTheDocument();
   });

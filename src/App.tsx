@@ -150,6 +150,7 @@ export default function App() {
             pictureDescribeTasksByDayId={pictureDescribeTasksByDayId}
             scenarioCapabilities={scenarioCapabilities}
             showChineseHelp={showChineseHelp}
+            enableCapabilityChecks
             onProgressChange={() => void refreshProgressSummary()}
           />
         )}

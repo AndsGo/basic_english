@@ -15,9 +15,12 @@ require.extensions['.ts'] = (module, filename) => {
   module._compile(outputText, filename);
 };
 
-require.extensions['.png'] = (module, filename) => {
+const loadAssetPath = (module, filename) => {
   module.exports = filename;
 };
+
+require.extensions['.png'] = loadAssetPath;
+require.extensions['.webp'] = loadAssetPath;
 
 const { basicEnglishAllowedWords } = require('../src/content/basicEnglish850.ts');
 const { basicEnglishCourse } = require('../src/content/course.ts');

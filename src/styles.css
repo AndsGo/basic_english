@@ -235,6 +235,218 @@ textarea {
   margin: 0;
 }
 
+.mastery-stack,
+.capability-check,
+.capability-check-section,
+.capability-review,
+.capability-review-list,
+.capability-outcomes,
+.capability-check-summary {
+  display: grid;
+  gap: 14px;
+}
+
+.mastery-stack > .capability-check,
+.capability-review {
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+
+.capability-check-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.capability-check-heading h2,
+.capability-check-heading p,
+.capability-check-section h3,
+.capability-check-section p,
+.capability-outcomes h3,
+.capability-outcomes h4,
+.capability-outcomes p {
+  margin: 0;
+}
+
+.capability-check-progress {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.capability-audio-button {
+  min-width: 176px;
+}
+
+.capability-listening-feedback {
+  min-height: 1.5rem;
+}
+
+.capability-listening-feedback p {
+  margin: 0;
+}
+
+.capability-check-section {
+  padding: 14px 0 14px 16px;
+  border-left: 3px solid var(--color-border-accent);
+}
+
+.capability-options,
+.capability-clarity {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.capability-options legend,
+.capability-clarity legend {
+  margin-bottom: 8px;
+  font-weight: 750;
+}
+
+.capability-options label,
+.capability-clarity label,
+.check-row {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-raised);
+}
+
+.capability-options label.selected {
+  border-color: var(--color-primary);
+  background: var(--color-accent-soft);
+}
+
+.capability-options input,
+.capability-clarity input,
+.check-row input {
+  flex: 0 0 auto;
+  margin-top: 3px;
+}
+
+.capability-hint-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.capability-answer {
+  display: grid;
+  gap: 7px;
+  font-weight: 700;
+}
+
+.capability-answer textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 132px;
+  resize: vertical;
+  padding: 12px;
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  background: var(--color-surface-raised);
+  line-height: 1.55;
+}
+
+.capability-answer textarea:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.capability-count {
+  justify-self: end;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.capability-required-ideas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.capability-required-ideas li {
+  padding: 9px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-sunken);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.capability-help-note,
+.listening-fallback {
+  padding: 10px 12px;
+  border-left: 3px solid var(--color-warning-border);
+  background: var(--color-warning-bg);
+}
+
+.capability-result {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 30px;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-soft);
+  background: var(--color-surface-sunken);
+  font-size: 0.9rem;
+}
+
+.capability-result--independent {
+  color: var(--color-on-primary);
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+}
+
+.capability-result--with-help {
+  color: var(--color-accent-text);
+  border-color: var(--color-border-accent);
+  background: var(--color-accent-softer);
+}
+
+.capability-result--practice-again {
+  color: var(--color-danger);
+  border-color: currentColor;
+  background: var(--color-surface-raised);
+}
+
+.independent-scene-list {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.independent-scene-list li,
+.capability-check-summary article {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border-card);
+}
+
+.independent-scene-list span {
+  color: var(--color-accent-text);
+  font-weight: 750;
+}
+
 .hint-actions,
 .recording-actions,
 .self-check {
@@ -1419,6 +1631,30 @@ textarea {
 
 .daily-learning-report-list li {
   padding-left: 0.125rem;
+}
+
+@media (max-width: 560px) {
+  .capability-required-ideas {
+    grid-template-columns: 1fr;
+  }
+
+  .capability-check-heading,
+  .capability-check-section .section-header {
+    align-items: stretch;
+  }
+
+  .capability-check-section {
+    padding-left: 12px;
+  }
+
+  .capability-check-section .secondary-button,
+  .capability-check > .primary-button {
+    width: 100%;
+  }
+
+  .capability-audio-button {
+    min-width: 0;
+  }
 }
 
 @media (max-width: 480px) {

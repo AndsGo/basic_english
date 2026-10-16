@@ -6,12 +6,39 @@ import { createPendingMasteryProgress } from '../domain/mastery';
 import { createPictureDescriptionReviewItem, createSceneRemixReviewItem, createWordReviewItem } from '../domain/review';
 import { createIndexedDbProgressRepository } from '../storage/indexedDbProgressRepository';
 import { ReviewPage } from './ReviewPage';
+import { createCapabilityCheckAttempt } from '../domain/capabilityCheck';
+import { SpeechProvider } from '../speech/SpeechProvider';
+import type { SpeechService } from '../speech/speechService';
 
 afterEach(() => {
   cleanup();
 });
 
 describe('ReviewPage', () => {
+  it('shows the latest due capability check as a complete practice flow', async () => {
+    const repo = createIndexedDbProgressRepository('review-page-capability-check');
+    await repo.saveCapabilityCheckAttempt!(createCapabilityCheckAttempt({
+      capabilityId: 'introduce-myself', taskId: 'capability-check-introduce-myself', dayId: 'day-001', listeningCorrect: true,
+      writtenText: 'My name is Li.', usedHints: [], meaningComplete: false, clarity: 'unclear',
+      now: '2026-05-26T00:00:00.000Z',
+    }));
+    const service: SpeechService = {
+      isSupported: () => true,
+      speak: vi.fn(() => ({ text: '', rate: 1, lang: 'en-US' })),
+      stop: vi.fn(),
+    };
+
+    render(
+      <SpeechProvider enabled rate="normal" service={service}>
+        <ReviewPage course={basicEnglishCourse} repository={repo} />
+      </SpeechProvider>,
+    );
+
+    expect(await screen.findByRole('heading', { name: 'Capability checks' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Introduce yourself' })).toBeInTheDocument();
+    expect(screen.getByText('1 due')).toBeInTheDocument();
+  });
+
   it('resolves known review items and shows the empty state', async () => {
     const user = userEvent.setup();
     const repo = createIndexedDbProgressRepository('review-page-resolve-known-item');

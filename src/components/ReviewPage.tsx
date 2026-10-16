@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   REVIEW_INTERVAL_DAYS,
   rescheduleReviewItem,
@@ -11,6 +11,9 @@ import type { ProgressRepository } from '../storage/progressRepository';
 import { MasteryReviewPanel } from './MasteryReviewPanel';
 import { PictureDescriptionReviewCard } from './PictureDescriptionReviewCard';
 import { SceneRemixCard, type SceneRemixSubmitResult } from './SceneRemixCard';
+import { selectDueCapabilityAttempts, type CapabilityCheckAttempt } from '../domain/capabilityCheck';
+import { capabilityChecksByDayId } from '../content/capabilityChecks';
+import { CapabilityCheckPanel } from './CapabilityCheckPanel';
 
 function makeSceneRemixTaskFromReviewItem(item: ReviewItem): SceneRemixTask {
   return {
@@ -40,25 +43,36 @@ export function ReviewPage({
   const [items, setItems] = useState<ReviewItem[]>([]);
   const [loadError, setLoadError] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
+  const [capabilityAttempts, setCapabilityAttempts] = useState<CapabilityCheckAttempt[]>([]);
 
-  const loadItems = async () => {
+  const loadItems = useCallback(async () => {
     try {
-      setItems(await repository.listReviewItems('active'));
+      const [reviewItems, attempts] = await Promise.all([
+        repository.listReviewItems('active'),
+        repository.listCapabilityCheckAttempts?.() ?? Promise.resolve([]),
+      ]);
+      setItems(reviewItems);
+      setCapabilityAttempts(attempts);
       setLoadError(false);
     } catch {
       setItems([]);
+      setCapabilityAttempts([]);
       setLoadError(true);
     }
-  };
+  }, [repository]);
 
   useEffect(() => {
     let isMounted = true;
 
     async function loadActiveItems() {
       try {
-        const activeItems = await repository.listReviewItems('active');
+        const [activeItems, attempts] = await Promise.all([
+          repository.listReviewItems('active'),
+          repository.listCapabilityCheckAttempts?.() ?? Promise.resolve([]),
+        ]);
         if (!isMounted) return;
         setItems(activeItems);
+        setCapabilityAttempts(attempts);
         setLoadError(false);
       } catch {
         if (!isMounted) return;
@@ -116,6 +130,16 @@ export function ReviewPage({
   };
 
   const dueItems = selectDueReviewItems(items, new Date().toISOString());
+  const dueCapabilityAttempts = selectDueCapabilityAttempts(capabilityAttempts, new Date().toISOString());
+  const dueCapabilityTasks = dueCapabilityAttempts
+    .map((attempt) => capabilityChecksByDayId[attempt.dayId])
+    .filter((task) => Boolean(task));
+
+  const handleCapabilityChange = useCallback((isComplete: boolean) => {
+    if (!isComplete) return;
+    void loadItems();
+    onReviewChange?.();
+  }, [loadItems, onReviewChange]);
 
   return (
     <section className="panel">
@@ -123,6 +147,29 @@ export function ReviewPage({
       <section aria-label="Mastery review">
         <MasteryReviewPanel course={course} repository={repository} onChange={onReviewChange} />
       </section>
+      {repository.listCapabilityCheckAttempts && repository.saveCapabilityCheckAttempt && (
+        <section className="capability-review" aria-label="Capability checks">
+          <div className="section-header">
+            <h2>Capability checks</h2>
+            <span className="muted">{dueCapabilityTasks.length} due</span>
+          </div>
+          {dueCapabilityTasks.length === 0 ? (
+            <p>No capability checks due today.</p>
+          ) : (
+            <div className="capability-review-list">
+              {dueCapabilityTasks.map((task) => (
+                <CapabilityCheckPanel
+                  key={task.id}
+                  task={task}
+                  repository={repository}
+                  practiceMode
+                  onCompletionChange={handleCapabilityChange}
+                />
+              ))}
+            </div>
+          )}
+        </section>
+      )}
       <section aria-label="Practice again">
         <h2>Practice again</h2>
         {loadError && <p role="alert">Review items could not be loaded.</p>}

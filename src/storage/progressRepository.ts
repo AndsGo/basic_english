@@ -3,6 +3,7 @@ import type { MasteryContentType, MasteryProgress, MasteryReviewSession } from '
 import type { ReviewItem } from '../domain/review';
 import type { SceneOutput, SceneRemixSelfMark } from '../domain/types';
 import type { LocalRecording, SkillAttempt, SkillDayProgress } from '../domain/skillTraining';
+import type { CapabilityCheckAttempt } from '../domain/capabilityCheck';
 
 export interface StepProgress {
   id: string;
@@ -146,4 +147,6 @@ export interface ProgressRepository {
   saveLocalRecording?(recording: LocalRecording): Promise<void>;
   getLocalRecording?(id: string): Promise<LocalRecording | null>;
   deleteLocalRecording?(id: string): Promise<void>;
+  saveCapabilityCheckAttempt?(attempt: CapabilityCheckAttempt): Promise<void>;
+  listCapabilityCheckAttempts?(capabilityId?: string): Promise<CapabilityCheckAttempt[]>;
 }

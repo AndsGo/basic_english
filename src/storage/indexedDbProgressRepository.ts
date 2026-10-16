@@ -16,8 +16,9 @@ import type {
   WordProgress,
 } from './progressRepository';
 import type { LocalRecording, SkillAttempt, SkillDayProgress } from '../domain/skillTraining';
+import type { CapabilityCheckAttempt } from '../domain/capabilityCheck';
 
-const DB_VERSION = 8;
+const DB_VERSION = 9;
 
 interface ProgressDb extends DBSchema {
   dayProgress: {
@@ -81,6 +82,11 @@ interface ProgressDb extends DBSchema {
   skillDayProgress: { key: string; value: SkillDayProgress; };
   skillAttempts: { key: string; value: SkillAttempt; indexes: { byDayId: string }; };
   localRecordings: { key: string; value: LocalRecording; indexes: { byDayId: string; byTaskId: string }; };
+  capabilityCheckAttempts: {
+    key: string;
+    value: CapabilityCheckAttempt;
+    indexes: { byCapabilityId: string; byDayId: string; byDueAt: string };
+  };
 }
 
 async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
@@ -151,6 +157,12 @@ async function openProgressDb(name: string): Promise<IDBPDatabase<ProgressDb>> {
         const store = db.createObjectStore('localRecordings', { keyPath: 'id' });
         store.createIndex('byDayId', 'dayId');
         store.createIndex('byTaskId', 'taskId');
+      }
+      if (!db.objectStoreNames.contains('capabilityCheckAttempts')) {
+        const store = db.createObjectStore('capabilityCheckAttempts', { keyPath: 'id' });
+        store.createIndex('byCapabilityId', 'capabilityId');
+        store.createIndex('byDayId', 'dayId');
+        store.createIndex('byDueAt', 'dueAt');
       }
     },
   });
@@ -401,6 +413,17 @@ export function createIndexedDbProgressRepository(dbName = 'basic-english-progre
     async deleteLocalRecording(id) {
       const db = await dbPromise;
       await db.delete('localRecordings', id);
+    },
+    async saveCapabilityCheckAttempt(attempt) {
+      const db = await dbPromise;
+      await db.put('capabilityCheckAttempts', attempt);
+    },
+    async listCapabilityCheckAttempts(capabilityId) {
+      const db = await dbPromise;
+      const attempts = capabilityId
+        ? await db.getAllFromIndex('capabilityCheckAttempts', 'byCapabilityId', capabilityId)
+        : await db.getAll('capabilityCheckAttempts');
+      return attempts.sort((left, right) => left.createdAt.localeCompare(right.createdAt));
     },
   };
 }

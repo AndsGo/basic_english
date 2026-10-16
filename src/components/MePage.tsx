@@ -10,6 +10,8 @@ import type { SpeechLanguage, SpeechRate } from '../speech/speechService';
 import type { ThemePreference } from '../theme';
 import type { PictureDescription, ProgressRepository, ReinforcementPracticeSession, StudyActivity, UserOutput } from '../storage/progressRepository';
 import { SceneMap } from './SceneMap';
+import { getLatestCapabilityAttempts, type CapabilityCheckAttempt } from '../domain/capabilityCheck';
+import { capabilityChecksByDayId } from '../content/capabilityChecks';
 
 const DEFAULT_TOTAL_DAY_COUNT = 7;
 
@@ -105,6 +107,7 @@ export function MePage({
   const [masteryProgress, setMasteryProgress] = useState<MasteryProgress[]>([]);
   const [dailyLearningInsight, setDailyLearningInsight] = useState<DailyLearningInsight | undefined>();
   const [reinforcementSessions, setReinforcementSessions] = useState<ReinforcementPracticeSession[]>([]);
+  const [capabilityAttempts, setCapabilityAttempts] = useState<CapabilityCheckAttempt[]>([]);
   const [loadError, setLoadError] = useState(false);
   const [hasLoadedProgress, setHasLoadedProgress] = useState(false);
 
@@ -114,13 +117,14 @@ export function MePage({
 
     async function loadProgress() {
       try {
-        const [savedDays, savedOutputs, savedPictureDescriptions, activeReviewItems, savedActivities, savedMasteryProgress] = await Promise.all([
+        const [savedDays, savedOutputs, savedPictureDescriptions, activeReviewItems, savedActivities, savedMasteryProgress, savedCapabilityAttempts] = await Promise.all([
           repository.listDayProgress(),
           repository.listUserOutputs(),
           repository.listPictureDescriptions(),
           repository.listReviewItems('active'),
           repository.listStudyActivities(),
           repository.listMasteryProgress(),
+          repository.listCapabilityCheckAttempts?.() ?? Promise.resolve([]),
         ]);
 
         if (!isMounted) return;
@@ -130,6 +134,7 @@ export function MePage({
         setReviewItems(activeReviewItems);
         setActivities(savedActivities);
         setMasteryProgress(savedMasteryProgress);
+        setCapabilityAttempts(savedCapabilityAttempts);
         setLoadError(false);
         setHasLoadedProgress(true);
 
@@ -166,6 +171,7 @@ export function MePage({
         setMasteryProgress([]);
         setDailyLearningInsight(undefined);
         setReinforcementSessions([]);
+        setCapabilityAttempts([]);
         setLoadError(true);
         setHasLoadedProgress(true);
       }
@@ -208,6 +214,13 @@ export function MePage({
     : latestReinforcementSession?.status === 'skipped'
       ? 'Practice skipped'
       : 'Practice available';
+  const latestCapabilityAttempts = getLatestCapabilityAttempts(capabilityAttempts);
+  const independentAttempts = latestCapabilityAttempts.filter((attempt) => attempt.result === 'independent');
+  const capabilityResultLabel = {
+    independent: 'Independent',
+    'with-help': 'With help',
+    'practice-again': 'Practice again',
+  } as const;
 
   return (
     <section className="panel">
@@ -241,6 +254,41 @@ export function MePage({
             </ul>
           )}
           {dailyLearningInsight.items.length > 0 && <p>{practiceState}</p>}
+        </section>
+      )}
+      {repository.listCapabilityCheckAttempts && (
+        <section className="capability-outcomes">
+          <div className="section-header">
+            <h3>Scenes I Can Describe</h3>
+            <span className="muted">{independentAttempts.length} independent</span>
+          </div>
+          {independentAttempts.length === 0 ? (
+            <p>Complete a capability check without help to add a scene here.</p>
+          ) : (
+            <ul className="independent-scene-list">
+              {independentAttempts.map((attempt) => (
+                <li key={attempt.capabilityId}>
+                  <strong>{capabilityChecksByDayId[attempt.dayId]?.title ?? attempt.capabilityId}</strong>
+                  <span>Independent</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          <h4>Latest capability checks</h4>
+          {latestCapabilityAttempts.length === 0 ? (
+            <p>No capability checks completed yet.</p>
+          ) : (
+            <div className="capability-check-summary">
+              {latestCapabilityAttempts.map((attempt) => (
+                <article key={attempt.capabilityId}>
+                  <strong>{capabilityChecksByDayId[attempt.dayId]?.title ?? attempt.capabilityId}</strong>
+                  <span className={`capability-result capability-result--${attempt.result}`}>
+                    {capabilityResultLabel[attempt.result]}
+                  </span>
+                </article>
+              ))}
+            </div>
+          )}
         </section>
       )}
       {scenarioCapabilities && !hasLoadedProgress && (
@@ -423,7 +471,7 @@ export function MePage({
           )}
         </section>
       )}
-      {hasLoadedProgress && !loadError && sceneGoals.length > 0 && (
+      {hasLoadedProgress && !loadError && !repository.listCapabilityCheckAttempts && sceneGoals.length > 0 && (
         <SceneMap goals={sceneGoals} completedSceneIds={completedSceneIds} />
       )}
       <section>

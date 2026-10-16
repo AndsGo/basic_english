@@ -46,6 +46,8 @@ import { TranslationTask } from './TranslationTask';
 import { WordCards } from './WordCards';
 import { SkillPilotPanel } from './SkillPilotPanel';
 import { skillLessonsByDayId } from '../content/skillLessons';
+import { capabilityChecksByDayId } from '../content/capabilityChecks';
+import { CapabilityCheckPanel } from './CapabilityCheckPanel';
 
 const emptyScenarioCapabilities: ScenarioCapability[] = [];
 
@@ -155,6 +157,7 @@ export function TodayPage({
   pictureDescribeTasksByDayId = {},
   scenarioCapabilities = emptyScenarioCapabilities,
   showChineseHelp = false,
+  enableCapabilityChecks = false,
   onProgressChange,
 }: {
   course: Course;
@@ -164,6 +167,7 @@ export function TodayPage({
   pictureDescribeTasksByDayId?: Partial<Record<string, PictureDescribeTask>>;
   scenarioCapabilities?: ScenarioCapability[];
   showChineseHelp?: boolean;
+  enableCapabilityChecks?: boolean;
   onProgressChange?: () => void;
 }) {
   const allDays = useMemo(() => course.weeks.flatMap((week) => week.days), [course.weeks]);
@@ -174,6 +178,9 @@ export function TodayPage({
   const remixTask = sceneRemixTasksByDayId[day.id]?.[0];
   const pictureTask = pictureDescribeTasksByDayId[day.id];
   const skillLesson = skillLessonsByDayId[day.id];
+  const capabilityCheckTask = enableCapabilityChecks && repository.saveCapabilityCheckAttempt && repository.listCapabilityCheckAttempts
+    ? capabilityChecksByDayId[day.id]
+    : undefined;
   const isSkillPilotAvailable = Boolean(repository.saveSkillAttempt && repository.saveLocalRecording && repository.saveSkillDayProgress);
   const allSceneGoals = useMemo(
     () => Object.values(sceneGoalsByDayId).filter((goal): goal is SceneGoal => Boolean(goal)),
@@ -195,6 +202,7 @@ export function TodayPage({
   const [translationDrafts, setTranslationDrafts] = useState<Record<string, TranslationDraft | undefined>>({});
   const [isSceneRemixSubmitted, setIsSceneRemixSubmitted] = useState(false);
   const [isMasteryReviewComplete, setIsMasteryReviewComplete] = useState(false);
+  const [isCapabilityCheckComplete, setIsCapabilityCheckComplete] = useState(false);
   const [hasMasterySeedingError, setHasMasterySeedingError] = useState(false);
   const [activeReviewItems, setActiveReviewItems] = useState<ReviewItem[]>([]);
   const [dailyLearningReport, setDailyLearningReport] = useState<DailyLearningInsight | null>(null);
@@ -300,6 +308,15 @@ export function TodayPage({
   }, [currentStep, refreshMasteryReviewCompletion]);
 
   useEffect(() => {
+    setIsCapabilityCheckComplete(!capabilityCheckTask);
+  }, [capabilityCheckTask]);
+
+  const handleCapabilityCheckCompletion = useCallback((isComplete: boolean) => {
+    setIsCapabilityCheckComplete(isComplete);
+    if (isComplete) onProgressChange?.();
+  }, [onProgressChange]);
+
+  useEffect(() => {
     if (currentStep !== 'done') return;
     void refreshDailyLearningReport();
   }, [currentStep, refreshDailyLearningReport]);
@@ -382,9 +399,15 @@ export function TodayPage({
 
   const currentGate = useMemo(() => {
     if (currentStep === 'mastery-review') {
-      return isMasteryReviewComplete
+      return isMasteryReviewComplete && isCapabilityCheckComplete
         ? { isComplete: true, missingRequirements: [] }
-        : { isComplete: false, missingRequirements: ['Complete today\'s mastery review.'] };
+        : {
+            isComplete: false,
+            missingRequirements: [
+              ...(!isMasteryReviewComplete ? ['Complete today\'s mastery review.'] : []),
+              ...(!isCapabilityCheckComplete ? ['Complete today\'s capability check.'] : []),
+            ],
+          };
     }
     if (currentStep === 'words') return getWordsCompletion(day.wordIds, wordMarks);
     if (currentStep === 'patterns') return getPatternsCompletion(day.patternIds, practicedPatternIds);
@@ -423,6 +446,7 @@ export function TodayPage({
     pictureTask,
     pictureDescriptionDraft.checkedAt,
     isMasteryReviewComplete,
+    isCapabilityCheckComplete,
   ]);
 
   const nextDay = useMemo(() => allDays[allDays.findIndex((courseDay) => courseDay.id === day.id) + 1], [allDays, day.id]);
@@ -706,7 +730,7 @@ export function TodayPage({
         <h2>{day.title}</h2>
         <p>{day.goal}</p>
         <p className="time-label">{day.estimatedMinutes} minutes</p>
-        {sceneGoal && <SceneGoalBanner goal={sceneGoal} />}
+        {sceneGoal && <SceneGoalBanner goal={sceneGoal} mission={capabilityCheckTask?.mission} />}
         <Stepper currentStep={currentStep} />
       </div>
 
@@ -723,14 +747,23 @@ export function TodayPage({
           <>
             {currentStep === 'drills' && skillLesson && isSkillPilotAvailable && <SkillPilotPanel lesson={skillLesson} repository={repository} />}
             {currentStep === 'mastery-review' && (
-              <MasteryReviewPanel
-                course={course}
-                repository={repository}
-                onChange={() => {
-                  void refreshMasteryReviewCompletion();
-                  onProgressChange?.();
-                }}
-              />
+              <div className="mastery-stack">
+                <MasteryReviewPanel
+                  course={course}
+                  repository={repository}
+                  onChange={() => {
+                    void refreshMasteryReviewCompletion();
+                    onProgressChange?.();
+                  }}
+                />
+                {capabilityCheckTask && (
+                  <CapabilityCheckPanel
+                    task={capabilityCheckTask}
+                    repository={repository}
+                    onCompletionChange={handleCapabilityCheckCompletion}
+                  />
+                )}
+              </div>
             )}
             {currentStep === 'review' && (
               <section>

@@ -96,12 +96,31 @@ function createProgressRepository(overrides: Partial<ProgressRepository> = {}): 
 describe('App shell', () => {
   it('opens on Today and switches between mobile navigation tabs', async () => {
     const user = userEvent.setup();
+    const capabilityAttempts: NonNullable<Awaited<ReturnType<NonNullable<ProgressRepository['listCapabilityCheckAttempts']>>>> = [];
+    const repository = createProgressRepository({
+      saveCapabilityCheckAttempt: vi.fn(async (attempt) => {
+        capabilityAttempts.push(attempt);
+      }),
+      listCapabilityCheckAttempts: vi.fn(async () => capabilityAttempts),
+    });
+    vi.spyOn(indexedDbProgressRepository, 'createIndexedDbProgressRepository').mockReturnValue(repository);
 
     render(<App />);
 
     expect(screen.getByRole('heading', { name: 'My Name' })).toBeInTheDocument();
     expect(await screen.findByRole('heading', { name: 'Mastery review' })).toBeInTheDocument();
     const continueButton = await screen.findByRole('button', { name: 'Continue' });
+    expect(continueButton).toBeDisabled();
+    await user.click(screen.getByRole('button', { name: /Play mission audio|Read listening text/ }));
+    await user.click(screen.getByLabelText('She is a student.'));
+    await user.type(
+      screen.getByLabelText('Your answer'),
+      'My name is Li. I am from China. I am a student.',
+    );
+    await user.click(screen.getByRole('checkbox', { name: 'My answer includes all three ideas.' }));
+    await user.click(screen.getByRole('radio', { name: 'Clear' }));
+    await user.click(screen.getByRole('button', { name: 'Save capability check' }));
+    expect(await screen.findByText('Independent')).toBeInTheDocument();
     await waitFor(() => expect(continueButton).toBeEnabled());
     await user.click(continueButton);
     expect(await screen.findByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();
@@ -144,10 +163,13 @@ describe('App shell', () => {
     expect(screen.queryByText(/MVP/)).not.toBeInTheDocument();
   });
 
-  it('passes production scenario capabilities to TodayPage', () => {
+  it('passes production scenario capabilities and capability checks to TodayPage', () => {
     render(<App />);
 
-    expect(todayPageProps.current).toEqual(expect.objectContaining({ scenarioCapabilities }));
+    expect(todayPageProps.current).toEqual(expect.objectContaining({
+      scenarioCapabilities,
+      enableCapabilityChecks: true,
+    }));
   });
 
   it('renders a combined Review badge for one manual and one mastery item due today', async () => {
@@ -204,7 +226,7 @@ describe('App shell', () => {
 
     expect(await screen.findByText('the word for a person or thing', {}, { timeout: 15000 })).toBeInTheDocument();
     expect(screen.getByText(/名字/)).toBeInTheDocument();
-  });
+  }, 20000);
 
   it('applies the chosen theme preference to the document root', async () => {
     const user = userEvent.setup();
