@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-09-rain",
+  "id": "story-09-rain",
+  "wordId": "rain",
+  "narrator": "The girl in red is speaking.",
+  "pages": [
+    {
+      "file": "rain-1.webp",
+      "alt": "I look at clouds over a garden from my window.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-1dcf16b2-d575-4ea9-af3f-03cf5722f080.png",
+      "prompt": "Create page 1 of WATER FROM THE SKY, teaching RAIN. The same girl with short curly black hair, coral-red sweater and dark blue trousers from UNDER stands INSIDE her warm cream room by a large closed window, looking out at clouds over a small garden with a tree and several flowers. It is NOT raining yet: clouds are visible, window and flowers have no rain drops. Frame girl, window and outdoor garden clearly in one scene, soft overcast outdoor light and warm indoor tone. Style: match the reference's warm polished volumetric cartoon educational illustration, concrete shapes, natural soft light, gentle shadows, visible volume, lightly textured neutral surroundings. One complete 512x512 square daily-life scene, generous padding, natural perspective, minimal clutter. No visible text, letters, labels, numbers, watermarks, speech bubbles, symbols, arrows, panels, diagrams, flat icons or collage."
+    },
+    {
+      "file": "rain-2.webp",
+      "alt": "I watch rain through the window.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-2c99aa53-ea08-4611-aa3b-66da7c38d6b1.png",
+      "prompt": "Edit reference into page 2 of the same RAIN educational picture book. Preserve the same coral-red-sweater girl with short curly black hair, room, large CLOSED window, garden, tree and flowers. It is NOW RAINING outside. Show gentle visible raindrops falling naturally outside, droplets on window glass and damp garden, with soft grey overcast outdoor light. Girl remains dry indoors watching with interest. No sunbeams contradicting the rain, no arrows. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    },
+    {
+      "file": "rain-3.webp",
+      "alt": "Rain falls on the flowers in the garden.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-6592c2f6-3967-4472-ba17-252030a1c343.png",
+      "prompt": "Edit reference into page 3 of the same RAIN educational picture book. Same garden, tree, flowers and gentle rain. Move camera closer to the flowers OUTSIDE the same window, so rainwater visibly lands on flower petals and earth in one complete garden scene. The cream window frame and the same red-sweater girl indoors can appear softly in the background. Clearly show water falling from above onto real flowers, not watering from a can, not a diagram. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    },
+    {
+      "file": "rain-4.webp",
+      "alt": "I am at home and watch the rain outside.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-1bebeab9-03e6-44b7-b3b1-20f279fe7dff.png",
+      "prompt": "Edit reference into page 4 of the same RAIN educational picture book. Same girl in coral-red sweater with short curly hair remains INSIDE by the same closed window. She watches continuing gentle rain over the same garden, calmly with one hand near the window frame. Show her face, rain drops, tree and flowers together, warm interior and soft grey outdoor light. No umbrellas indoors, no readable text. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    }
+  ]
+}

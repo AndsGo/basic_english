@@ -1,0 +1,39 @@
+{
+  "sourceId": "story-36-opinion",
+  "id": "story-36-opinion",
+  "wordId": "opinion",
+  "narrator": "The person in green is speaking.",
+  "pages": [
+    {
+      "file": "opinion-1.webp",
+      "alt": "My friend and I look at 2 cups.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b3d34bd9-fde2-4d92-8433-7224c56c260a.png",
+      "prompt": "Page 1 of DIFFERENT OPINIONS. SAME short wavy-haired sage-blouse woman from reference sits on LEFT as narrator. Add her adult female friend on RIGHT, black bob hair, CREAM cardigan and blue trousers. Both look thoughtfully at SAME TWO teal cups on wooden table between them, small cup on viewer-left near narrator and large cup on viewer-right near friend. Same cup design and color except size; exactly TWO cups. Neither holds a cup yet, empty hands away. Same warm kitchen with cream teapot behind, both faces friendly, no argument, no right/wrong symbols. Use case: illustration-story. Create one complete 512x512 square daily-life picture-book scene. Match STYLE REFERENCE's warm polished volumetric cartoon, friendly concrete characters, natural perspective, soft light, gentle shadows and lightly textured clean neutral setting. Reference for style and specified continuity only. Clear learning focus and minimal clutter. No visible text, Chinese, letters, numbers, labels, captions, watermark, arrows, signs, diagrams, panels, collage, speech bubbles, flat icons or symbols."
+    },
+    {
+      "file": "opinion-2.webp",
+      "alt": "I choose the small cup. My friend looks at the big cup.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-a570f4e2-3ba2-48e7-aa3c-f6c7f205cd38.png",
+      "prompt": "Page 2: SAME two women and table: sage-blouse short-wavy-haired NARRATOR on LEFT lifts and holds SMALL teal cup, happy with her choice. Cream-cardigan black-bob FRIEND on RIGHT looks thoughtfully at BIG teal cup still resting near her on right side of table. EXACTLY TWO matching-design cups with clear size difference, cream teapot behind. No one is right or wrong, no judgment marks. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b3d34bd9-fde2-4d92-8433-7224c56c260a.png"
+    },
+    {
+      "file": "opinion-3.webp",
+      "alt": "My friend chooses the big cup. I have the small cup.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-9880394e-699f-469c-93e6-bedffe144174.png",
+      "prompt": "Page 3: SAME women in SAME seats. Cream-cardigan black-bob FRIEND RIGHT now holds BIG teal cup with both hands and smiles, her own preference. Sage-blouse narrator LEFT still holds SMALL teal cup, listens warmly. EXACTLY TWO cups, neither on table in duplicate, same cup size/design/colors, same kitchen and teapot, no dispute or symbols. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b3d34bd9-fde2-4d92-8433-7224c56c260a.png"
+    },
+    {
+      "file": "opinion-4.webp",
+      "alt": "My friend and I use different cups for tea.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-ce5934ab-ce33-446a-8dca-081346b69aec.png",
+      "prompt": "Page 4: SAME women calmly enjoy tea together, sage-blouse narrator LEFT uses SMALL teal cup, cream-cardigan friend RIGHT uses BIG teal cup. Both content with DIFFERENT choices, two cups total and no extras. Preserve identities, sizes, room and teapot. Natural friendly complete scene, no winner/loser, check marks or text. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b3d34bd9-fde2-4d92-8433-7224c56c260a.png"
+    }
+  ]
+}

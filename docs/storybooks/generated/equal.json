@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-16-equal",
+  "id": "story-16-equal",
+  "wordId": "equal",
+  "narrator": "The person in yellow is speaking.",
+  "pages": [
+    {
+      "file": "equal-1.webp",
+      "alt": "The left table has 2 cups. The right table has one cup.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-e4233369-36e8-41c5-b9c5-33f1a27dbee6.png",
+      "prompt": "Page 1 of a four-page story about EQUAL NUMBERS. In a warm community room, a young adult woman with short dark hair and mustard-yellow cardigan stands behind TWO separate equally sized small rectangular wooden tables side by side, clearly separated by a gap. LEFT table has EXACTLY TWO matching plain teal cups side by side. RIGHT table has EXACTLY ONE identical teal cup. Exactly THREE cups total, each entire cup visible, no extras anywhere. Both tables fully visible, equal visual importance. Woman's empty hands rest away from cups. No numbers or comparison signs. Use case: illustration-story. Create a 512x512 square picture-book page, one complete concrete daily-life scene. Match the supplied STYLE REFERENCE's warm polished volumetric cartoon, friendly characters, natural perspective, soft daylight, gentle shadows, warm cream surroundings and lightly textured materials. Keep a simple clear focus. No readable text, Chinese, numbers, labels, arrows, diagram, panels, collage, speech bubbles, watermarks, flat icons or symbols. The reference is for style only, not an edit target."
+    },
+    {
+      "file": "equal-2.webp",
+      "alt": "The left table has 2 cups. The right table has one cup.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-f8732750-6bea-4875-a073-41e78bd70583.png",
+      "prompt": "Page 2: SAME woman, room, camera and TWO separate identical tables with gap. LEFT table EXACTLY TWO matching plain teal cups. RIGHT table EXACTLY ONE identical teal cup. Exactly THREE cups total, each entire cup visible. Woman compares tables with empty open hands away from cups. This is unequal number, not unequal size. No text or mathematical symbols. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "equal-3.webp",
+      "alt": "I put another cup on the right table. Now the tables have 2 cups and 2 cups.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-43db5360-2132-4819-92f2-32e890ef5c63.png",
+      "prompt": "Page 3: SAME TWO separate tables with gap. Keep EXACTLY TWO teal cups on LEFT table. On RIGHT table keep its original ONE teal cup, and the same woman places ONE ADDITIONAL identical teal cup next to it, her hand on the new cup handle while its base touches tabletop. Four cups total, 2 left and 2 right, all visible, no spare cups or duplicates. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "equal-4.webp",
+      "alt": "The left table has 2 cups. The right table has 2 cups.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-8eb31541-4735-48ff-bbc2-85beb00c4d21.png",
+      "prompt": "Page 4: SAME TWO tables and fixed camera. Now EXACTLY TWO matching teal cups sit on LEFT table and EXACTLY TWO matching teal cups sit on RIGHT table, FOUR cups total. Same sizes and arrangement on both tables, clear gap separates tables. Woman stands behind smiling with both hands EMPTY and away from cups. No other cup anywhere, no signs or numbers. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    }
+  ]
+}

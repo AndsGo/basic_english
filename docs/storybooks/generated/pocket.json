@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-18-pocket",
+  "id": "story-18-pocket",
+  "wordId": "pocket",
+  "narrator": "The person with the key is speaking.",
+  "pages": [
+    {
+      "file": "pocket-1.webp",
+      "alt": "I have a key in my hand near the door.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-4461ca03-0f79-44bd-a5a2-5af4195491a5.png",
+      "prompt": "Page 1 of a four-page story about a POCKET. A young adult woman with dark hair in a low ponytail wears an unbuttoned ochre-brown coat with large sewn-on rectangular patch pockets over a cream shirt, blue jeans. She stands by a wooden home door, holding ONE silver house key openly in her RIGHT hand at waist height, away from the coat. Clearly show the key and the coat's right patch pocket below her right hand (viewer-left). Only one key, no handbag. Use case: illustration-story. Create a 512x512 square picture-book page, one complete concrete daily-life scene. Match the supplied STYLE REFERENCE's warm polished volumetric cartoon, friendly characters, natural perspective, soft daylight, gentle shadows, warm cream surroundings and lightly textured materials. Keep a simple clear focus. No readable text, Chinese, numbers, labels, arrows, diagram, panels, collage, speech bubbles, watermarks, flat icons or symbols. The reference is for style only, not an edit target."
+    },
+    {
+      "file": "pocket-2.webp",
+      "alt": "My coat has a pocket. I have a key.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-9d417f14-0025-439e-be3f-228ec3947ef4.png",
+      "prompt": "Page 2: SAME ochre-coat woman at wooden door. Slightly closer torso framing clearly shows sewn-on RIGHT coat patch pocket opening on VIEWER-LEFT. She gently pulls open its fabric rim with her LEFT hand while RIGHT hand holds the SINGLE silver key just above and outside the opening. Pocket is real sewn fabric attached to coat, no bag, not yet putting key in. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "pocket-3.webp",
+      "alt": "I put the key in my pocket.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b6a8efad-d595-4101-b31c-dc052a87ec78.png",
+      "prompt": "Page 3: SAME ochre-coat woman and torso angle. Her RIGHT hand visibly places the SINGLE silver key INTO her RIGHT coat patch pocket (viewer-left); key lower shaft is inside pocket, round bow still partly visible between fingers ABOVE opening. Left hand relaxed away. Preserve coat shape, patch pocket and key shape, only one key, no transparent fabric or cutaway. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "pocket-4.webp",
+      "alt": "I take the key out of my pocket at the door.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-bdffe2e2-27ec-41ce-9bb6-c7f40c0a4b74.png",
+      "prompt": "Page 4: SAME ochre-coat woman by the SAME wooden door with lock visible. She has just taken the SINGLE silver key OUT of the SAME RIGHT patch pocket (viewer-left): key now fully outside fabric, right hand holding it a short distance ABOVE pocket opening, preparing to use door. Left hand away. Same key, clothing and pocket, no extra keys. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    }
+  ]
+}

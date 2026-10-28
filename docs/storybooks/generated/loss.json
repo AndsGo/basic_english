@@ -1,0 +1,37 @@
+{
+  "sourceId": "story-26-loss",
+  "id": "story-26-loss",
+  "wordId": "loss",
+  "narrator": "The person in the coat is speaking.",
+  "pages": [
+    {
+      "file": "pocket-1.webp",
+      "alt": "In the morning, I have my key.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-4461ca03-0f79-44bd-a5a2-5af4195491a5.png",
+      "prompt": "Page 1 of a four-page story about a POCKET. A young adult woman with dark hair in a low ponytail wears an unbuttoned ochre-brown coat with large sewn-on rectangular patch pockets over a cream shirt, blue jeans. She stands by a wooden home door, holding ONE silver house key openly in her RIGHT hand at waist height, away from the coat. Clearly show the key and the coat's right patch pocket below her right hand (viewer-left). Only one key, no handbag. Use case: illustration-story. Create a 512x512 square picture-book page, one complete concrete daily-life scene. Match the supplied STYLE REFERENCE's warm polished volumetric cartoon, friendly characters, natural perspective, soft daylight, gentle shadows, warm cream surroundings and lightly textured materials. Keep a simple clear focus. No readable text, Chinese, numbers, labels, arrows, diagram, panels, collage, speech bubbles, watermarks, flat icons or symbols. The reference is for style only, not an edit target.",
+      "reusedFrom": "story-18-pocket/page-1"
+    },
+    {
+      "file": "loss-2.webp",
+      "alt": "My pocket is empty. I have no key.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-77ca8d4f-d783-4f12-ad58-776ff896f23f.png",
+      "prompt": "Page 2: SAME woman from POCKET reference in ochre-brown coat, cream top and blue jeans, same ponytail. She checks her RIGHT coat patch pocket on viewer-left and pulls its cloth lining partly inside-out to show it is EMPTY. Worried puzzled expression, hands empty; NO KEY visible anywhere in image. Same warm entrance room with wooden door, not symbolic question marks. Use case: illustration-story. One complete 512x512 square daily-life scene. Use provided reference for exact character identity, clothing, objects, location continuity and warm polished cartoon volume, natural perspective, soft daylight and gentle shadows. Change only the events described for this page. No visible text, Chinese, readable letters or numbers, labels, arrows, watermark, diagram, panels, collage, speech bubbles, icons or abstract symbols."
+    },
+    {
+      "file": "loss-3.webp",
+      "alt": "I look for the key in my bag.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-05636e1f-cfb9-4062-9929-15623ceda777.png",
+      "prompt": "Page 3: SAME ochre-coat woman searches carefully at a small wooden table in SAME entrance room. A plain brown bag on table is held OPEN with visibly EMPTY interior; she looks inside it, tabletop also empty. Original door visible behind her. No key anywhere, not on floor or hidden in background. Single room scene, no split panels, no extra bags. Use case: illustration-story. One complete 512x512 square daily-life scene. Use provided reference for exact character identity, clothing, objects, location continuity and warm polished cartoon volume, natural perspective, soft daylight and gentle shadows. Change only the events described for this page. No visible text, Chinese, readable letters or numbers, labels, arrows, watermark, diagram, panels, collage, speech bubbles, icons or abstract symbols."
+    },
+    {
+      "file": "loss-4.webp",
+      "alt": "My friend and I talk at the door. I have no key.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-2ace951e-d8d0-4103-aabb-5f6654a3b0f7.png",
+      "prompt": "Page 4: SAME ochre-coat woman near SAME CLOSED wooden home door, hands EMPTY, looking concerned and talking calmly with an adult friend in a plain NAVY sweater. Friend listens with a natural reassuring open-hand gesture. Key still missing: NO KEY visible anywhere. The woman in ochre coat remains narrator, friend has no coat or key. No thief, crime, symbols or speech bubbles. Use case: illustration-story. One complete 512x512 square daily-life scene. Use provided reference for exact character identity, clothing, objects, location continuity and warm polished cartoon volume, natural perspective, soft daylight and gentle shadows. Change only the events described for this page. No visible text, Chinese, readable letters or numbers, labels, arrows, watermark, diagram, panels, collage, speech bubbles, icons or abstract symbols."
+    }
+  ]
+}

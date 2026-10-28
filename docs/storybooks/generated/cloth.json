@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-14-cloth",
+  "id": "story-14-cloth",
+  "wordId": "cloth",
+  "narrator": "The person in red is speaking.",
+  "pages": [
+    {
+      "file": "cloth-1.webp",
+      "alt": "There is water on the table near a cup.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-55a1b404-3d67-4c04-9b8b-b920aa8ab758.png",
+      "prompt": "Page 1 of a four-page story about a CLOTH. A young adult woman with tied-back dark hair in a terracotta-red blouse and beige trousers notices a small shallow puddle of spilled water beside one upright clear drinking glass on an otherwise empty wooden kitchen table. Her empty hands are away from the spill. A blue cotton cleaning cloth lies folded on a side counter, not cleaning yet. Establish visible woven cloth, plain metal wash basin on counter, warm home kitchen. Use case: illustration-story. Create a 512x512 square picture-book page, one complete concrete daily-life scene. Match the supplied STYLE REFERENCE's warm polished volumetric cartoon, friendly characters, natural perspective, soft daylight, gentle shadows, warm cream surroundings and lightly textured materials. Keep a simple clear focus. No readable text, Chinese, numbers, labels, arrows, diagram, panels, collage, speech bubbles, watermarks, flat icons or symbols. The reference is for style only, not an edit target."
+    },
+    {
+      "file": "cloth-2.webp",
+      "alt": "I have a blue cloth.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-8ae9d05e-7a8a-4860-bbd2-0b02f1903673.png",
+      "prompt": "Page 2: The SAME terracotta-blouse woman in the same kitchen holds up the ONE blue woven cotton cleaning cloth in both hands, showing soft folds, stitched edge, thickness and textile texture. Keep ONE upright clear glass and small water spill on wooden table visible below. Cloth not a tissue, not clothing. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "cloth-3.webp",
+      "alt": "I use the cloth to clean the table.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-ab076c5d-8042-40f5-8902-7f4df874d7e0.png",
+      "prompt": "Page 3: The SAME terracotta-blouse woman presses the SAME blue cotton cloth flat against the water spill on the same wooden table and wipes it up with one hand. Visibly partially dry tabletop behind cloth, small wet area in front. ONE upright clear glass remains unchanged and safely away from wiping. No extra cloth. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "cloth-4.webp",
+      "alt": "I wash the cloth in water. The table is clean.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-6e295a4a-89e0-4f9c-b488-469e4c40e88d.png",
+      "prompt": "Page 4: The SAME woman washes the SAME blue woven cloth with both hands IN the metal wash basin on the kitchen counter. A little water clearly in basin, hands and cloth anatomically clear. Clean dry wooden table and the ONE glass remain visible in foreground. One complete kitchen scene, not a split view. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    }
+  ]
+}

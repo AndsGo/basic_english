@@ -1,0 +1,39 @@
+{
+  "sourceId": "story-30-dirty",
+  "id": "story-30-dirty",
+  "wordId": "dirty",
+  "narrator": "The person in blue is speaking.",
+  "pages": [
+    {
+      "file": "dirty-1.webp",
+      "alt": "I work in the garden with my hands.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-33a05bcd-de99-41ed-9121-56ff6d46b1c3.png",
+      "prompt": "Page 1 of DIRTY HANDS. A young adult woman with MEDIUM BROWN SKIN, dark curly hair tied back, plain TEAL shirt and beige trousers works with a small green plant in loose BROWN SOIL in a home garden bed. Bare hands touch soil, a little loose earth sticks to fingers, natural healthy consistent skin tone, not darkening skin. Her face and both hands visible. Simple garden and pale outdoor wash basin nearby for later pages. No gloves, no symbols. Soil and plant concrete. Use case: illustration-story. Create one complete 512x512 square daily-life picture-book scene. Match STYLE REFERENCE's warm polished volumetric cartoon, friendly concrete characters, natural perspective, soft light, gentle shadows and lightly textured clean neutral setting. Reference for style and specified continuity only. Clear learning focus and minimal clutter. No visible text, Chinese, letters, numbers, labels, captions, watermark, arrows, signs, diagrams, panels, collage, speech bubbles, flat icons or symbols."
+    },
+    {
+      "file": "dirty-2.webp",
+      "alt": "There is earth on my hands. My hands are dirty.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-1065babc-80c4-4abe-9bbb-dcdcfd5c165a.png",
+      "prompt": "Page 2: SAME medium-brown-skinned woman in TEAL shirt, curly hair tied back, SAME garden and sunlight. Closer view of her face and BOTH HANDS held up in front of her; recognizable CRUMBLY BROWN SOIL clings in irregular clumps to fingers and palms, clearly an added material, NOT a different skin color. Clean skin areas between dirt patches visibly retain exact original medium brown tone. Garden plant and outdoor basin in background. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-33a05bcd-de99-41ed-9121-56ff6d46b1c3.png"
+    },
+    {
+      "file": "dirty-3.webp",
+      "alt": "I wash my hands with water and soap.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-5977c272-43fe-4951-a8f8-f4897b818c20.png",
+      "prompt": "Page 3: SAME woman at SAME pale outdoor wash basin from reference. Wash BOTH dirt-covered hands under flowing clear tap water with visible WHITE SOAP foam and plain unlabelled soap bar beside basin. Some brown soil washes into basin, original medium-brown skin tone unchanged. Clear natural hands and water stream, teal shirt and tied curly hair same, no bottle labels. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-33a05bcd-de99-41ed-9121-56ff6d46b1c3.png"
+    },
+    {
+      "file": "dirty-4.webp",
+      "alt": "My hands are clean.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-00ea11a5-47f1-4208-b985-44d006b30eb4.png",
+      "prompt": "Page 4: SAME woman shows BOTH CLEAN HANDS in SAME garden light, palms open and fingers natural, no soil or foam remaining. Preserve EXACT original medium-brown skin color from reference, no skin lightening. Teal shirt and curly tied-back hair unchanged, same garden and outdoor wash basin behind. Healthy ordinary hands, no sparkle symbols or split comparison. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-33a05bcd-de99-41ed-9121-56ff6d46b1c3.png"
+    }
+  ]
+}

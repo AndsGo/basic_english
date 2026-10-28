@@ -1,0 +1,40 @@
+{
+  "sourceId": "story-39-across",
+  "id": "story-39-across",
+  "wordId": "across",
+  "narrator": "The person in red is speaking.",
+  "pages": [
+    {
+      "file": "across-1.webp",
+      "alt": "My friend is on the other side of the river.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-adb9aed4-d739-4f40-942d-9d1f706469e0.png",
+      "prompt": "Page 1 of TO THE OTHER SIDE. Use supplied RIVER SCENE as exact landscape/character reference. Preserve elevated camera, river's near-right and far-left banks, SAME STONE ARCHED FOOTBRIDGE and its railings/endpoints, trees and paths. CHANGE ONLY characters' positions: RUST-RED sweater narrator man stays on NEAR-RIGHT bank path in foreground, looking toward his friend. BLUE-cardigan woman friend now stands on FAR-LEFT bank path on OTHER SIDE of river near the FAR end of bridge, naturally waving back. Exactly TWO people, one on each bank, no one on bridge yet. Show BOTH people and ENTIRE bridge with both ends visibly connected to banks so a safe crossing route is clear. No duplicate friends, no impossible bridge, no arrows, map, text or panels. Use case: illustration-story. Output one complete 512x512 square daily-life picture-book scene. Match supplied reference's warm polished volumetric cartoon, concrete friendly people and objects, natural perspective, soft light, gentle shadows, clean lightly textured surroundings. Clear learning focus with minimal clutter. Reference for style and specified continuity only. No visible text, Chinese, readable letters/numbers, captions, labels, watermarks, arrows, diagrams, panels, collage, speech bubbles, flat icons or abstract symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-17add50f-4740-4e27-bc31-0eb8105deaea.png"
+    },
+    {
+      "file": "across-2.webp",
+      "alt": "I go to the bridge. My friend is on the other side.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b69c7a29-0f2b-4578-ac26-49425a400bc9.png",
+      "prompt": "Page 2: SAME fixed elevated camera, river banks, stone footbridge and railings. Rust-red narrator man has moved FROM near-right foreground path TO the NEAR-RIGHT END OF BRIDGE, still on that bank, preparing to cross. Blue-cardigan friend remains on FAR-LEFT bank near far end of bridge. Exactly two people, same relative scale with landscape, no one standing in water. Both bridge ends connected to correct banks, no arrows. Use case: illustration-story. One complete 512x512 square daily-life scene. Use supplied reference for exact character identity, clothing, objects, setting and warm polished cartoon volume, natural perspective, soft light, gentle shadows. Follow only this page's described change. No visible text, Chinese, readable letters/numbers, captions, labels, arrows, watermark, panels, collage, diagrams, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-adb9aed4-d739-4f40-942d-9d1f706469e0.png"
+    },
+    {
+      "file": "across-3.webp",
+      "alt": "I walk across the bridge to my friend.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-c0c774ed-1995-431f-96c0-937055d82c84.png",
+      "prompt": "Page 3: SAME fixed elevated camera, SAME stone arch bridge and river. Rust-red narrator man is now ON THE MIDDLE OF THE BRIDGE DECK, walking toward FAR-LEFT BANK where blue-cardigan friend waits. Show full body and feet on actual deck BETWEEN bridge railings, not under arch or on river. Man scaled naturally to bridge, not gigantic. BOTH BRIDGE ENDS remain clearly connected to banks. One man in middle, one friend at far-left, no duplicates. Use case: illustration-story. One complete 512x512 square daily-life scene. Use supplied reference for exact character identity, clothing, objects, setting and warm polished cartoon volume, natural perspective, soft light, gentle shadows. Follow only this page's described change. No visible text, Chinese, readable letters/numbers, captions, labels, arrows, watermark, panels, collage, diagrams, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-adb9aed4-d739-4f40-942d-9d1f706469e0.png"
+    },
+    {
+      "file": "across-4.webp",
+      "alt": "My friend and I are together on the other side.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-15ccde27-a887-4a81-aa57-344c173a3a49.png",
+      "prompt": "Page 4: SAME camera and landscape. Rust-red narrator man has now crossed COMPLETELY and stands TOGETHER WITH blue-cardigan woman on the FAR-LEFT BANK PATH just past FAR-LEFT bridge end. Both full figures together there, same clothes, friendly greeting. NEAR-RIGHT foreground path is EMPTY of people now. Entire bridge and river remain visible, proving completed crossing. Exactly two people, no duplicate on original bank. Use case: illustration-story. One complete 512x512 square daily-life scene. Use supplied reference for exact character identity, clothing, objects, setting and warm polished cartoon volume, natural perspective, soft light, gentle shadows. Follow only this page's described change. No visible text, Chinese, readable letters/numbers, captions, labels, arrows, watermark, panels, collage, diagrams, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-adb9aed4-d739-4f40-942d-9d1f706469e0.png"
+    }
+  ]
+}

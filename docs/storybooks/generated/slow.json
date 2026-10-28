@@ -1,0 +1,40 @@
+{
+  "sourceId": "story-47-slow",
+  "id": "story-47-slow",
+  "wordId": "slow",
+  "narrator": "The person with the cup is speaking.",
+  "pages": [
+    {
+      "file": "slow-1.webp",
+      "alt": "The cup in my hands is full of water.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-a5b8de66-5531-411b-9ec0-5187743c8d4f.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. An adult woman with dark hair in a ponytail, plain muted coral sweater and dark blue trousers stands carefully holding a clear handled glass cup FULL of water with both hands. Water surface close to rim and level. Full body visible in a warm home; a simple wooden table is several steps away on her right. Plain floor, safe clear path. Show the water clearly, hands natural. She is preparing to carry it to the table.",
+      "referenceSource": "D:/work/demo/basic_english/src/assets/word-stories/give-1.webp"
+    },
+    {
+      "file": "slow-2.webp",
+      "alt": "I carry the cup with care.",
+      "reviewed": true,
+      "source": "D:/AppData/Orca/codex-accounts/ccd4a5eb-7610-48bd-a20f-60ef7776c282/home/generated_images/01a1783c-1e79-7392-bfab-8e45b7dde5f1/exec-aa557900-4ac4-4200-9c4c-38ebcd161aad.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Same coral-sweater ponytailed adult woman and room, same transparent handled glass cup full of water. Page2 she takes a careful SMALL step toward same wooden table at right; both hands steadily hold level cup, water just below rim. Full body, natural walking posture, no speed lines or arrows. Table slightly closer now. Static art supports careful carrying; webpage conveys taking more time.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-a5b8de66-5531-411b-9ec0-5187743c8d4f.png"
+    },
+    {
+      "file": "slow-3.webp",
+      "alt": "I take time to carry the full cup to the table.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-cca0f8c3-d3d0-43a0-8210-d25bbcb4ac90.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page3 same ponytailed woman coral sweater dark jeans and home, now close to same table at right but still carrying same FULL transparent handled cup with both hands. Eyes attend to level water near rim, balanced careful posture and short final distance to table. Same cup and clothing, no spill, full body or most body visible.",
+      "referenceSource": "D:/AppData/Orca/codex-accounts/ccd4a5eb-7610-48bd-a20f-60ef7776c282/home/generated_images/01a1783c-1e79-7392-bfab-8e45b7dde5f1/exec-aa557900-4ac4-4200-9c4c-38ebcd161aad.png"
+    },
+    {
+      "file": "slow-4.webp",
+      "alt": "I put the full cup on the table with care.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-02364897-9b4c-4717-a10b-bfdf1a3bb3e6.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page4 woman at same table, carefully sets same FULL clear handled glass cup down: base visibly rests on wood while both hands gently release it. Water just below rim, no spills. Same coral sweater ponytail, room and furniture; calm satisfied expression.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-cca0f8c3-d3d0-43a0-8210-d25bbcb4ac90.png"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-04-enough",
+  "id": "story-04-enough",
+  "wordId": "enough",
+  "narrator": "The person in green is speaking.",
+  "pages": [
+    {
+      "file": "enough-1.webp",
+      "alt": "My friend and I are at a table. There is no bread.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-513c6bfe-ab60-4432-b165-b9fa0588dfad.png",
+      "prompt": "Create one 512x512 square page for a Basic English picture book teaching ENOUGH. Attached image is only a STYLE reference: warm polished volumetric cartoon, concrete shapes, soft natural window light, gentle shadows and lightly textured cream home interior. Two young adult friends sit at a small wooden dining table, a short curly-haired woman in a sage-green top on the left (the narrator) and a short-haired man in a muted rust top on the right. They are getting ready for a small bread meal. Show TWO clearly separated matching empty plates, one directly in front of each person. The narrator looks towards the two empty places with a friendly thoughtful expression. Minimal clean table, no bread yet, no extra plates or food, no readable text or decoration. Medium-wide framing including both people, both hands and both plates, natural perspective, generous padding. This is page 1, setting up their need for bread, not yet the final enough state. No text, labels, numbers, symbols, arrows, speech bubbles, watermark, panels, collage, diagrams, flat icons or stick figures."
+    },
+    {
+      "file": "enough-2.webp",
+      "alt": "I have bread. My friend has no bread.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-00357350-cb26-44cb-bb59-7e2f25bea5a2.png",
+      "prompt": "Edit reference into page 2 of the same ENOUGH story. Preserve EXACT same curly-haired woman in sage-green top on LEFT, man in rust top on RIGHT, faces, table, two matching plates, room, camera, warm polished volumetric cartoon style and soft sunlight. The woman narrator on the LEFT has ONE simple bread roll on her left-side plate. The man friend on the RIGHT has an EMPTY plate and empty hands. The woman looks from her own bread to her friend's empty plate with concern, recognizing there is no bread for him. Only one bread roll in the entire scene, no bread anywhere else. Each plate remains in front of its original person. One complete 512x512 square scene, generous padding. No text, labels, numbers, symbols, arrows, speech bubbles, watermarks, panels, collage or icons."
+    },
+    {
+      "file": "enough-3.webp",
+      "alt": "I put bread in front of my friend. I have bread for me.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-d711bd5e-782b-4851-8725-9d831503f7d0.png",
+      "prompt": "Edit reference into page 3 of the same ENOUGH story. Preserve EXACT same curly-haired woman in sage-green top on LEFT, man in rust top on RIGHT, faces, table, two matching plates, room, camera, warm polished volumetric cartoon style and soft sunlight. The woman narrator on the LEFT now puts ONE additional matching bread roll onto her friend's previously empty plate on the RIGHT. The first bread roll stays on her OWN left-side plate. Show exactly TWO bread rolls total, one for each meal place. Her hand is finishing setting the second roll on his plate, not taking away her own roll. Each plate remains in front of its original person. One complete 512x512 square scene, generous padding. No text, labels, numbers, symbols, arrows, speech bubbles, watermarks, panels, collage or icons."
+    },
+    {
+      "file": "enough-4.webp",
+      "alt": "There is bread for my friend and bread for me.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b5cba96a-0f27-419a-be7a-7fe817972c8a.png",
+      "prompt": "Edit this reference into the final page of the SAME ENOUGH story. Preserve the woman in sage-green top on the LEFT, man in rust top on the RIGHT, faces, room, table, two white plates, warm volumetric cartoon style and camera. CRITICAL COUNT: exactly TWO bread rolls total in the ENTIRE image: exactly ONE whole bread roll resting on the woman's LEFT plate and exactly ONE whole bread roll resting on the man's RIGHT plate. Do NOT add bread anywhere else. Both friends have completely EMPTY HANDS resting flat on the wooden table beside their own plates, not touching, holding, tearing or eating any bread. They smile calmly because both have bread for their meal. No eating action. Preserve the exact two rolls already present in the reference. One complete 512x512 square scene. No text, labels, numbers, speech bubbles, symbols, arrows, watermark, collage or panels."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "sourceId": "story-33-distance",
+  "id": "story-33-distance",
+  "wordId": "distance",
+  "narrator": "The person with the bag is speaking.",
+  "pages": [
+    {
+      "file": "distance-1.webp",
+      "alt": "The shop is near my home.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-d23e3b33-5f7a-4cc0-bdb8-ee48b4fe0f54.png",
+      "prompt": "Page 1 of DISTANCE FROM HOME. A young adult woman with dark ponytail, NAVY jacket, cream trousers and brown shoulder bag stands at her HOME's MINT-GREEN front door on viewer-left. On same short pedestrian street, a small FOOD SHOP with GREEN canvas awning and unlabelled produce crates is CLOSE BY on viewer-right. Both home door and shop entirely visible, a short continuous walkway connects them naturally, no road crossing. Home warm cream with terracotta roof. No written shop sign, map, arrows or distance marks. Use case: illustration-story. Create one complete 512x512 square daily-life picture-book scene. Match STYLE REFERENCE's warm polished volumetric cartoon, friendly concrete characters, natural perspective, soft light, gentle shadows and lightly textured clean neutral setting. Reference for style and specified continuity only. Clear learning focus and minimal clutter. No visible text, Chinese, letters, numbers, labels, captions, watermark, arrows, signs, diagrams, panels, collage, speech bubbles, flat icons or symbols."
+    },
+    {
+      "file": "distance-2.webp",
+      "alt": "I walk from home to the shop. The distance is short.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-da6b843f-f340-48c1-b665-8681e04a9c85.png",
+      "prompt": "Page 2: SAME navy-jacket ponytail woman with cream trousers and brown shoulder bag walks the SHORT pedestrian path from SAME MINT-GREEN HOME DOOR on LEFT toward nearby SAME GREEN-AWNING FOOD SHOP on RIGHT. Both exact endpoints fully visible in this complete neighborhood street scene, no map, no arrows, no written distance. Preserve home architecture, shop crates, daylight, camera and clothing. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-d23e3b33-5f7a-4cc0-bdb8-ee48b4fe0f54.png"
+    },
+    {
+      "file": "distance-3.webp",
+      "alt": "The school is far from the same home.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-3ea84598-f1b3-4ccb-8a8f-63333f1eca9b.png",
+      "prompt": "Page 3: SAME home and neighborhood, SAME navy-jacket woman starts ANOTHER walk from SAME MINT-GREEN HOME DOOR in near foreground LEFT. SAME green-awning shop stays CLOSE BY on right. At FAR END of a much LONGER CONTINUOUS pedestrian street beyond shop is a recognizable BRICK SCHOOL with plain blue gate, red roof and tall classroom windows, tiny in distance. Show home origin and far school in one natural street view, not inset, collage or map. No labels or signs. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-d23e3b33-5f7a-4cc0-bdb8-ee48b4fe0f54.png"
+    },
+    {
+      "file": "distance-4-v2.webp",
+      "alt": "I am at the school at the end of my journey.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-4efff64b-2219-4ad5-afd4-248110d961f3.png",
+      "prompt": "Revise page 4, the SCHOOL ARRIVAL scene, to correct location continuity. IMAGE 1 is edit target, IMAGE 2 shows the SAME school at the far end of the long street. Keep the exact navy-jacket ponytail woman, cream trousers and brown shoulder bag, on safe pavement at the plain BLUE SCHOOL GATE. Show the school from IMAGE 2 up close: a taller TERRACOTTA/RED-BRICK facade, RED tiled triangular roof, tall arched classroom windows, cream architectural trim, blue gate with cream pillars. Most importantly REMOVE the nearby GREEN-AWNING FOOD SHOP, produce crates and any home door from IMAGE 1; NO SHOP OR GREEN AWNING can appear at all in this school-arrival scene. School is FAR from her home and its nearby shop, she has completed the long walk. Retain warm polished volumetric cartoon style, natural perspective, soft daylight and gentle shadows. One complete 512x512 square scene, not map/collage. No visible writing, Chinese, labels, street signs, numbers, arrows, watermark, panels or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-3ea84598-f1b3-4ccb-8a8f-63333f1eca9b.png",
+      "initialPrompt": "Page 4: SAME navy-jacket woman with cream trousers and brown shoulder bag has arrived ON FOOT at SAME BRICK SCHOOL with plain blue gate, red roof and classroom windows. Show school entrance clearly as destination, wooden classroom tables and books visible through window, no school sign or text. Home no longer visible from here, location matches far school in prior page. One complete warm neighborhood arrival scene. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "editTargetSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b041ba31-f363-4a49-85fc-04ce98b67d64.png"
+    }
+  ]
+}

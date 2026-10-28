@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-19-soup",
+  "id": "story-19-soup",
+  "wordId": "soup",
+  "narrator": "The person with the pot is speaking.",
+  "pages": [
+    {
+      "file": "soup-1.webp",
+      "alt": "There is soup in the pot.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-c2948638-c1eb-4a4a-bd7c-8200a7a9447a.png",
+      "prompt": "Page 1 of a four-page story about SOUP. A middle-aged adult woman with short wavy dark hair wears a sage-green blouse and cream apron in a warm home kitchen. On a heatproof kitchen counter stands a small handled pot clearly containing golden liquid soup with a FEW visible small orange carrot and green vegetable pieces. Its lid rests safely beside it. A plain cream bowl and metal ladle are nearby. Woman looks at the pot, hands safely away, no dramatic steam. Liquid soup surface clearly visible, not dry food or plain water. Use case: illustration-story. Create a 512x512 square picture-book page, one complete concrete daily-life scene. Match the supplied STYLE REFERENCE's warm polished volumetric cartoon, friendly characters, natural perspective, soft daylight, gentle shadows, warm cream surroundings and lightly textured materials. Keep a simple clear focus. No readable text, Chinese, numbers, labels, arrows, diagram, panels, collage, speech bubbles, watermarks, flat icons or symbols. The reference is for style only, not an edit target."
+    },
+    {
+      "file": "soup-2.webp",
+      "alt": "I take soup from the pot for my meal.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-9c9c48a0-ad93-49ad-ad40-c13efa1112a4.png",
+      "prompt": "Page 2: SAME adult woman in sage blouse and cream apron, SAME green handled soup pot on heatproof counter, same warm kitchen. She uses the metal ladle to serve golden LIQUID vegetable soup INTO the same cream bowl on counter; only faint gentle steam, not boiling. Clear liquid stream into bowl, a few carrot and green pieces, hands safely on ladle handle and away from heat. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "soup-3.webp",
+      "alt": "I have a spoon for my soup.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-d789a56f-8e07-4c5a-be12-2b699817990c.png",
+      "prompt": "Page 3: SAME woman now sits at wooden kitchen table with the SAME cream bowl clearly containing golden liquid vegetable soup. She holds ONE ordinary metal eating spoon above bowl, ready to eat, spoon clearly smaller than a ladle. Same green pot remains safely on counter in background. One bowl only, no dramatic steam or pouring. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "soup-4.webp",
+      "alt": "I have soup and bread for my meal.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-86ceb7e2-33d8-493b-8a11-99e6c33cc361.png",
+      "prompt": "Page 4: SAME woman calmly eats warm golden vegetable soup from the SAME cream bowl with the ONE eating spoon at wooden table. A small separate plain plate holds ONE bread roll as another part of meal. Soup remains clearly LIQUID with a few vegetables. Same clothing and kitchen, same green pot on background counter, natural safe eating posture. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    }
+  ]
+}

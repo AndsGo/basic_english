@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-01-friend",
+  "id": "story-01-friend",
+  "wordId": "friend",
+  "narrator": "Li is speaking.",
+  "pages": [
+    {
+      "file": "friend-1.webp",
+      "alt": "Li and Anna are in the same room.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-7e8729eb-3055-47f6-9633-ab0d86006ff0.png",
+      "prompt": "Create a new 512x512 square illustration-story page for an English educational picture book MY NEW FRIEND. Attached picture is a STYLE reference only: polished warm volumetric cartoon, expressive friendly faces, natural soft window light, gentle shadows and lightly textured neutral room. Two late-teen students: Li, short dark hair, plain blue overshirt and beige trousers; Anna, long dark-brown hair, cream knit top and dark jeans. Page 1: Li is at the open entrance to a cozy learning room, greeting Anna with a natural small hand gesture. Anna is near a wooden study table with two chairs and smiles back warmly. Both faces visible. Show one complete daily-life scene with clear volume, natural perspective, generous padding, minimal clutter. This scene will introduce Li as narrator; DO NOT print his name or any text. No visible text, letters, numbers, labels, speech bubbles, arrows, watermark, collage, panels, diagrams, flat icons or stick figures. Keep school materials closed or blank without readable writing."
+    },
+    {
+      "file": "friend-2.webp",
+      "alt": "Anna makes a place for Li at the table.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-8ab11ba3-e223-44f8-8f6c-83deb2fe2511.png",
+      "prompt": "Edit reference into page 2 of MY NEW FRIEND. Preserve EXACT same late-teen Li with short dark hair, blue overshirt, white tee and beige trousers; Anna with long brown hair, cream knit top and dark jeans; warm learning room, window, wooden table and chairs; polished volumetric cartoon style, natural perspective, soft sunlight and shadows. Anna kindly pulls out the empty chair next to her with one hand, inviting Li to sit down, and moves a closed book and blank drawing paper to the middle of their table. Li stands beside the offered chair with a grateful smile. The action is considerate and concrete, showing kindness. One complete 512x512 square daily-life scene with generous padding. No text, letters, numbers, labels, speech bubbles, arrows, watermarks, icons, collage, panels or diagrams."
+    },
+    {
+      "file": "friend-3.webp",
+      "alt": "Li shows a picture to Anna, and Anna shows a picture to Li.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-9638262a-0a34-4680-a3b3-0b3141378172.png",
+      "prompt": "Edit reference into page 3 of MY NEW FRIEND. Preserve EXACT same late-teen Li with short dark hair, blue overshirt, white tee and beige trousers; Anna with long brown hair, cream knit top and dark jeans; warm learning room, window, wooden table and chairs; polished volumetric cartoon style, natural perspective, soft sunlight and shadows. Li and Anna are now seated together at the same table. Each shows the other one small drawing of a tree or flower, smiling and making friendly eye contact. Both participate equally, not just standing side by side. Drawings have NO text, letters or signatures. Show the two distinct drawings and both faces clearly. One complete 512x512 square daily-life scene with generous padding. No text, letters, numbers, labels, speech bubbles, arrows, watermarks, icons, collage, panels or diagrams."
+    },
+    {
+      "file": "friend-4.webp",
+      "alt": "Li and Anna read the same book together.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-086f65cc-daa8-431a-8e3a-38abc7efacb7.png",
+      "prompt": "Edit reference into page 4 of MY NEW FRIEND. Preserve EXACT same late-teen Li with short dark hair, blue overshirt, white tee and beige trousers; Anna with long brown hair, cream knit top and dark jeans; warm learning room, window, wooden table and chairs; polished volumetric cartoon style, natural perspective, soft sunlight and shadows. Li and Anna are seated at the same table studying together. One open picture book is between them with simple colorful everyday pictures and NO words or letters. Li points to a picture while Anna looks and listens with interest; both are actively engaged as friends. Keep the book shared between them, not handed away. One complete 512x512 square daily-life scene with generous padding. No text, letters, numbers, labels, speech bubbles, arrows, watermarks, icons, collage, panels or diagrams."
+    }
+  ]
+}

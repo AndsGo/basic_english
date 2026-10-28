@@ -1,0 +1,40 @@
+{
+  "sourceId": "story-49-thread",
+  "id": "story-49-thread",
+  "wordId": "thread",
+  "narrator": "The person with the coat is speaking.",
+  "pages": [
+    {
+      "file": "thread-1.webp",
+      "alt": "I look at the loose button on my coat.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-3663bc1b-2b34-4f06-8c46-001dd87d8ff3.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. An adult middle-aged woman with dark hair in a bun, plain muted plum cardigan and cream blouse sits at a wooden sewing table, inspecting a LOOSE tan round four-hole button on the cuff of her dark blue coat lying flat. The button hangs by a few pale threads, it has not fallen off. A small wooden needle box and a small spool of contrasting cream sewing thread lie on table. Clearly adult hands and proportions. Focus on coat cuff/button while her face remains visible; natural scene, no instructional overlays.",
+      "referenceSource": "D:/work/demo/basic_english/src/assets/word-stories/give-1.webp"
+    },
+    {
+      "file": "thread-2.webp",
+      "alt": "I put thread through the needle.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-7ea6d118-2f28-4168-b804-ddc46644c492.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page2 same ADULT woman plum cardigan cream blouse at sewing table, face and hands visible. She threads thin CREAM thread through visible elongated eye of ONE short metallic needle held carefully in hand. Thread emerges from BOTH sides of eye as one continuous curved strand connected to same spool on table. Dark blue coat with loose tan four-hole button below. Natural hand proportions, no diagram, no oversized needle. Needle eye and connected thread focal and clearly visible.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-3663bc1b-2b34-4f06-8c46-001dd87d8ff3.png"
+    },
+    {
+      "file": "thread-3.webp",
+      "alt": "The thread joins the button to the cloth.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-2e6db996-f28f-4b8c-9635-eff7c2553df3.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page3 same ADULT plum cardigan woman and table. Natural close scene sewing SAME tan four-hole button onto SAME dark blue coat cuff: a single needle has passed through cloth and button hole; continuous thin CREAM thread runs through holes to cloth with small natural stitch loop joining them. Same spool on table, hands hold cloth and needle naturally. Show real attachment, not thread floating past button.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-7ea6d118-2f28-4168-b804-ddc46644c492.png"
+    },
+    {
+      "file": "thread-4.webp",
+      "alt": "The button is fixed. I put the needle in its box.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b225a3d2-6f29-4e03-825d-74b9f0a15d28.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page4 same adult woman checks tan four-hole button now SECURELY stitched to dark blue coat cuff with neat cream stitches. Left hand gently checks button, right places the ONE needle in open small wooden storage box on table. Same cream thread spool near box, trimmed working thread, no needle left sticking in coat. Same plum cardigan, face, lighting, scale.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-2e6db996-f28f-4b8c-9635-eff7c2553df3.png"
+    }
+  ]
+}

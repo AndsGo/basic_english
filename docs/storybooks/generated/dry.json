@@ -1,0 +1,39 @@
+{
+  "sourceId": "story-31-dry",
+  "id": "story-31-dry",
+  "wordId": "dry",
+  "narrator": "The person in red is speaking.",
+  "pages": [
+    {
+      "file": "dry-1.webp",
+      "alt": "I wash the cloth. It has water in it.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-8e4d8d20-b853-4357-a1a4-71c1e2eb018b.png",
+      "prompt": "Page 1 of THE CLOTH IS DRY. SAME terracotta-blouse woman with tied-back dark hair and beige trousers from reference, SAME blue woven cotton cloth and metal wash basin in SAME warm kitchen. She lifts the freshly washed SOAKING WET BLUE CLOTH above basin; several clear WATER DROPS fall from its bottom edge INTO basin. Damp fabric hangs heavy. Show basin water and droplets clearly, no cloth on table, no dry version or panels. One complete washing scene. Use case: illustration-story. Create one complete 512x512 square daily-life picture-book scene. Match STYLE REFERENCE's warm polished volumetric cartoon, friendly concrete characters, natural perspective, soft light, gentle shadows and lightly textured clean neutral setting. Reference for style and specified continuity only. Clear learning focus and minimal clutter. No visible text, Chinese, letters, numbers, labels, captions, watermark, arrows, signs, diagrams, panels, collage, speech bubbles, flat icons or symbols."
+    },
+    {
+      "file": "dry-2.webp",
+      "alt": "I put the wet cloth in the sun.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-9e6044f3-5fbc-405f-8c86-6f51851c00b9.png",
+      "prompt": "Page 2: SAME terracotta-blouse woman, beige trousers and SAME blue woven cotton cloth. In sunny small home garden adjoining kitchen, she hangs the still WET cloth over a simple wooden drying rack on stable ground. A FEW water drops fall from cloth edge, fabric visibly damp/heavier; metal wash basin below catches drips. Natural sunlight reaches cloth, no numbers, clock, arrows or instant drying magic. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-8e4d8d20-b853-4357-a1a4-71c1e2eb018b.png"
+    },
+    {
+      "file": "dry-3.webp",
+      "alt": "After some time, the cloth is dry.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-7286f39c-a0e0-4660-8342-5fe4c07d9621.png",
+      "prompt": "Page 3: SAME woman and SAME wooden drying rack in SAME sunny small garden after some time. SAME blue cloth hangs at EXACT same place but now DRY, lighter soft natural folds, NO WATER DROPS or wet shine. She checks cloth gently with fingertips. Same metal basin below, sunlight and surroundings consistent, no time symbols or baked-in text. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-8e4d8d20-b853-4357-a1a4-71c1e2eb018b.png"
+    },
+    {
+      "file": "dry-4.webp",
+      "alt": "I use the dry cloth to clean a cup.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-994bf488-6946-4cff-bc21-25cfeb967727.png",
+      "prompt": "Page 4: SAME woman now inside SAME warm kitchen from original reference, using SAME DRY BLUE COTTON CLOTH to gently wipe outside of ONE clean clear drinking glass. Cloth folded in her hands, no water drops, no sink washing action. Same terracotta blouse, beige trousers, woven cloth pattern, wooden table and kitchen, no extra cloth. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-8e4d8d20-b853-4357-a1a4-71c1e2eb018b.png"
+    }
+  ]
+}

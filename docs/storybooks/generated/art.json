@@ -1,0 +1,41 @@
+{
+  "sourceId": "story-32-art",
+  "id": "story-32-art",
+  "wordId": "art",
+  "narrator": "The man is speaking.",
+  "pages": [
+    {
+      "file": "art-1.webp",
+      "alt": "I look at flowers in the garden.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-28ace95d-1096-44f9-8cb5-d80219bb6f59.png",
+      "prompt": "Page 1 of ART FROM THE GARDEN. A young adult man with warm brown skin, short dark curly hair, a muted PURPLE overshirt over cream T-shirt and sage trousers looks attentively at a small garden of red and yellow flowers. He holds a plain drawing board with BLANK white paper and a small paintbox, not painting yet. Concrete flowers are main inspiration, warm friendly garden scene, no easel labels, no signatures, no symbolic imagination bubbles. Use case: illustration-story. Create one complete 512x512 square daily-life picture-book scene. Match STYLE REFERENCE's warm polished volumetric cartoon, friendly concrete characters, natural perspective, soft light, gentle shadows and lightly textured clean neutral setting. Reference for style and specified continuity only. Clear learning focus and minimal clutter. No visible text, Chinese, letters, numbers, labels, captions, watermark, arrows, signs, diagrams, panels, collage, speech bubbles, flat icons or symbols."
+    },
+    {
+      "file": "art-2.webp",
+      "alt": "I make a picture of flowers with colors.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b1a6d0ad-7c2a-4045-939b-71865ee54ae4.png",
+      "prompt": "Page 2: SAME purple-overshirt young man, curly hair, cream shirt and sage trousers, SAME red/yellow flower garden. He now PAINTS on white paper held on SAME drawing board resting on lap, using one small brush and SAME plain paintbox. Painting shows a developing recognizable red/yellow flower garden in green surroundings, not words or abstract diagram. Natural seated/kneeling pose, no signature. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-28ace95d-1096-44f9-8cb5-d80219bb6f59.png"
+    },
+    {
+      "file": "art-3.webp",
+      "alt": "I show my art about the garden.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-aae708bd-67b1-4157-9ae1-f3aa71db4c6c.png",
+      "prompt": "Page 3: SAME man in SAME garden holds up his COMPLETED drawing-board painting to show it, points gently at part he likes. Painting clearly depicts the same RED AND YELLOW FLOWERS with green leaves, warm expressive simple garden shapes, no readable text, initials or signature. Keep his face, clothes, exact painting colors and board consistent, real flowers nearby. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-28ace95d-1096-44f9-8cb5-d80219bb6f59.png"
+    },
+    {
+      "file": "art-4.webp",
+      "alt": "My friend and I look at my art on the wall.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-e5b707bc-4fcf-4155-b4bf-3be1c3266ddf.png",
+      "prompt": "Edit ONLY the artwork hanging on the wall in IMAGE 1 (the indoor scene). IMAGE 2 supplies the EXACT completed PAINTING to hang: a small PORTRAIT white watercolor sheet with 3 prominent red flowers, 2 prominent yellow flowers, green leaves and soft blue/green watercolor background, white paper margins. Preserve that specific painting's composition and watercolor brushwork from IMAGE 2. Replace the large realistic garden canvas in IMAGE 1 with that SAME portrait white PAPER PAINTING, its physical size roughly A4/a little taller than the man's head, placed clearly between the two friends on the wall. Do not turn it into a photograph or a new painting. Keep the man in purple overshirt, cream-top friend, their faces, poses, room, lighting, framing and warm volumetric cartoon rendering in IMAGE 1 unchanged. One complete square scene, no text, signature, labels, watermark, arrows, symbols, panels or collage. The watercolor paper is an object on the wall, not an overlay.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-aae708bd-67b1-4157-9ae1-f3aa71db4c6c.png",
+      "initialPrompt": "Page 4: SAME man indoors at a warm cream wall where his SAME finished red/yellow flower garden PAINTING now hangs plainly, no frame text or signature. His adult friend in a plain cream top looks at the painting appreciatively, while man gestures to it with natural empty hand. Painting's distinctive red/yellow flowers and green leaves match prior pages. One full room scene, no caption or right/wrong marks. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "editTargetSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-1a048294-bbb2-4cc5-9f8d-eea57a2b9318.png"
+    }
+  ]
+}

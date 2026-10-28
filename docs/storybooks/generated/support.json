@@ -1,0 +1,39 @@
+{
+  "sourceId": "story-35-support",
+  "id": "story-35-support",
+  "wordId": "support",
+  "narrator": "The person in red is speaking.",
+  "pages": [
+    {
+      "file": "support-1.webp",
+      "alt": "My friend has a bag full of food.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-f0c4026d-3fff-4466-bfa3-0c4195b247aa.png",
+      "prompt": "Page 1 of SUPPORT MY FRIEND. Two adult friends on a quiet homebound pedestrian path. Friend on RIGHT is woman with dark ponytail, cream cardigan and blue trousers holding ONE tan cloth bag FULL of ordinary food: a bread roll, red apples and leafy greens. She has stopped to adjust her grip, bag resting safely close to ground, looks mildly tired but not injured. Narrator on LEFT is man with short dark hair and RUST-RED shirt, dark trousers, carrying a SECOND plain folded EMPTY tan cloth bag under arm, looking toward her attentively. No helping action yet. Simple warm neighborhood, two people only. Use case: illustration-story. Create one complete 512x512 square daily-life picture-book scene. Match STYLE REFERENCE's warm polished volumetric cartoon, friendly concrete characters, natural perspective, soft light, gentle shadows and lightly textured clean neutral setting. Reference for style and specified continuity only. Clear learning focus and minimal clutter. No visible text, Chinese, letters, numbers, labels, captions, watermark, arrows, signs, diagrams, panels, collage, speech bubbles, flat icons or symbols."
+    },
+    {
+      "file": "support-2.webp",
+      "alt": "My friend asks for help with the bag.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-1549010a-b272-4eef-bad7-f3e31f0ef327.png",
+      "prompt": "Page 2: SAME two friends, clothing and path. Cream-cardigan ponytail woman RIGHT asks for help with SAME full tan food bag resting safely near ground, looks toward rust-red-shirt man LEFT. He turns to her attentively, still holding SECOND folded EMPTY tan cloth bag, has not taken food yet. Only same bread, apples and greens in her bag, exactly two people, no injury or exaggerated weight. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-f0c4026d-3fff-4466-bfa3-0c4195b247aa.png"
+    },
+    {
+      "file": "support-3.webp",
+      "alt": "I carry some of the food for my friend.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-41f4a2e5-4994-4477-b512-e126ec01a310.png",
+      "prompt": "Page 3: SAME friends on SAME path, stopped safely. Narrator rust-red-shirt man LEFT opens his SECOND tan bag and takes SOME food from cream-cardigan woman's original bag into his: one red apple in his hand going into his bag, some greens already in his bag. Woman RIGHT still has original bag with bread and remaining food. Show actual sharing of load, TWO bags total, not all food transferred. Clothing/identities unchanged. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-f0c4026d-3fff-4466-bfa3-0c4195b247aa.png"
+    },
+    {
+      "file": "support-4.webp",
+      "alt": "My friend and I carry food home in 2 bags.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-567b0e73-3e5a-43d8-9c71-f7cb37fcd5cd.png",
+      "prompt": "Page 4: SAME rust-red-shirt man LEFT and cream-cardigan woman RIGHT arrive together at a home entrance. EACH carries ONE of the TWO tan bags with SOME food, visibly a smaller manageable load each. Narrator's bag contains apples/some greens, woman's contains bread/remaining food. Relaxed comfortable upright walking, friendly, no empty second bag and no third bag. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-f0c4026d-3fff-4466-bfa3-0c4195b247aa.png"
+    }
+  ]
+}

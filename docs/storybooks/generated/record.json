@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-10-record",
+  "id": "story-10-record",
+  "wordId": "record",
+  "narrator": "The man is speaking.",
+  "pages": [
+    {
+      "file": "record-1.webp",
+      "alt": "I put books on the table and clean it.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-9300c621-f781-42bd-bafb-26f6ad9f0957.png",
+      "prompt": "Create page 1 of A PAGE FOR MY WORK, teaching the noun RECORD. A young adult man with round glasses, short black hair and a muted teal sweater is finishing two small home-office tasks: he has placed a few closed books neatly on one side of a wooden table and is wiping the remaining tabletop clean with a cloth. A clean blank sheet of paper and pen rest nearby for making a written work record later. Warm tidy cream-walled work room and window, natural perspective, concrete hands and objects. Paper and book covers have NO writing. Style: match the reference's warm polished volumetric cartoon educational illustration, concrete shapes, natural soft light, gentle shadows, visible volume, lightly textured neutral surroundings. One complete 512x512 square daily-life scene, generous padding, natural perspective, minimal clutter. No visible text, letters, labels, numbers, watermarks, speech bubbles, symbols, arrows, panels, diagrams, flat icons or collage."
+    },
+    {
+      "file": "record-2.webp",
+      "alt": "I write a record of my work on paper.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-2c862ddb-c961-4ff9-a717-62cdcf071ea4.png",
+      "prompt": "Edit reference into page 2 of the same RECORD educational picture book. Preserve same man with round glasses, short black hair and teal sweater, home-office table and neatly stacked books. He is making a work record: seated at the clean table, pen just touching a sheet of paper as he starts writing. Camera angle must show NO readable writing, letters, symbols or labels on the paper; the written record will be rendered separately by the app. Cloth rests aside. Concrete natural writing posture. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    },
+    {
+      "file": "record-3.webp",
+      "alt": "I read the record of my work.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-851a68b5-1cdd-436f-8d15-5a3ffbdb8a19.png",
+      "prompt": "Edit reference into page 3 of the same RECORD educational picture book. Same man with glasses and teal sweater is looking at the same work-record sheet in his hands beside the tidy table and stacked books. He looks at the FRONT face of the paper while camera sees only its blank BACK, so absolutely no writing is visible in the illustration. The app will show the readable work record separately. No floating labels or speech bubbles. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    },
+    {
+      "file": "record-4.webp",
+      "alt": "I keep the record in a box.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-a6a3def6-1af5-454b-8204-654a2ab9e131.png",
+      "prompt": "Edit reference into page 4 of the same RECORD educational picture book. Same man with glasses and teal sweater carefully puts the same work-record sheet into a plain brown folder or storage box for keeping it. Paper's writing face is hidden from camera, no visible text. Keep tidy table, same stacked books and natural warm home-office scene. A concrete action of keeping a paper record for another day, no diagram. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    }
+  ]
+}

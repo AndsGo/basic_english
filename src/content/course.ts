@@ -1,4 +1,5 @@
 import type { Course } from '../domain/types';
+import { applyStoryWordCorrection } from './applyStoryWordCorrection';
 import { week1, week1Patterns, week1Words } from './week1';
 import { week2, week2Patterns, week2Words } from './week2';
 import { week3, week3Patterns, week3Words } from './week3';
@@ -79,7 +80,7 @@ export const basicEnglishCourse: Course = {
     ...week50Words,
     ...week51Words,
     ...week52Words,
-  ],
+  ].map(applyStoryWordCorrection),
   patterns: [
     ...week1Patterns,
     ...week2Patterns,

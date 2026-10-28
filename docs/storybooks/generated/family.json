@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-08-family",
+  "id": "story-08-family",
+  "wordId": "family",
+  "narrator": "Li is speaking.",
+  "pages": [
+    {
+      "file": "family-1.webp",
+      "alt": "Li and his mother put things on the table.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-1a077890-7740-4a24-96fa-77eb5f1a7484.png",
+      "prompt": "Create page 1 of AT HOME TOGETHER, teaching FAMILY. Li, the same short-haired young man in a blue overshirt and beige trousers from the FRIEND reference, is helping his mother, an adult woman with shoulder-length dark hair and muted rose blouse, prepare a dining table at home. Only Li and his mother in this first scene. Two extra empty chairs suggest other family members will join. Friendly natural family interaction, simple cream-walled dining room, wooden table, plain plates, no decorative writing. Li is the narrator. Style: match the reference's warm polished volumetric cartoon educational illustration, concrete shapes, natural soft light, gentle shadows, visible volume, lightly textured neutral surroundings. One complete 512x512 square daily-life scene, generous padding, natural perspective, minimal clutter. No visible text, letters, labels, numbers, watermarks, speech bubbles, symbols, arrows, panels, diagrams, flat icons or collage."
+    },
+    {
+      "file": "family-2.webp",
+      "alt": "My father and sister are here with my mother and me.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-7f936d47-19da-4132-92dd-e9a075e7fdcf.png",
+      "prompt": "Edit reference into page 2 of the same FAMILY educational picture book. Preserve Li in blue overshirt and beige trousers, his mother in muted rose blouse, same dining room and table. Li's father, a mature adult man with short dark hair and some grey at the temples, brown shirt and grey trousers, joins with Li's younger sister, a teen girl with straight black hair and mint-green top. EXACTLY these FOUR family members total; no other people. Show father and sister arriving to help, mother and Li still present. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    },
+    {
+      "file": "family-3.webp",
+      "alt": "My family makes a meal together.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-610dc162-e431-4dbb-98f2-81239535d48b.png",
+      "prompt": "Edit reference into page 3 of the same FAMILY educational picture book. Same home and table. EXACTLY FOUR family members prepare the meal together: Li in blue overshirt and beige trousers, mother in rose blouse, father with grey temples in brown shirt and grey trousers, teen sister with straight black hair in mint-green top. Each does a small concrete helpful action at the dining table, sharing plates and simple food. Keep their identities and clothing distinct and consistent, no duplicated people. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    },
+    {
+      "file": "family-4.webp",
+      "alt": "My family has a meal together.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-e2150a18-b21e-4276-809d-041ec12accbe.png",
+      "prompt": "Edit reference into page 4 of the same FAMILY educational picture book. Same EXACT FOUR family members now sit around the same dining table having a simple meal together: Li in blue overshirt, mother in rose blouse, father with grey temples in brown shirt, sister with straight black hair in mint-green top. Four people, four meal places, natural family interaction, no one missing or duplicated. Food simple and no readable packaging. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    }
+  ]
+}

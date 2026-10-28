@@ -1,0 +1,40 @@
+{
+  "sourceId": "story-50-but",
+  "id": "story-50-but",
+  "wordId": "but",
+  "narrator": "The person with the bag is speaking.",
+  "pages": [
+    {
+      "file": "but-1.webp",
+      "alt": "I have a small bag and a book.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-914cce71-b85c-40a4-9f3d-0f3ecfe45edd.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. A friendly adult woman with short dark curly hair, plain light-green blouse and dark trousers stands at a wooden table considering one SMALL sturdy plain ochre canvas tote bag and one modest green hardcover book lying alongside it. Bag open, natural boxy shape and visible stitched handles. Book is slightly narrower and shorter than bag capacity, so it will fit normally with no magic expansion. Clearly show both entire bag and book. Warm home, soft window light.",
+      "referenceSource": "D:/work/demo/basic_english/src/assets/word-stories/give-1.webp"
+    },
+    {
+      "file": "but-2.webp",
+      "alt": "The book is over the open bag.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b0535534-1cfc-44a7-8775-1fa8b7ed7a39.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page2 same light-green-blouse curly-haired woman, same SMALL ochre canvas tote and SAME green hardcover book, same table. Hold green book just above open bag mouth comparing fit before insertion. Book clearly slightly narrower and shorter than bag, fits normally. Keep same modest bag capacity and proportions, one book only.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-914cce71-b85c-40a4-9f3d-0f3ecfe45edd.png"
+    },
+    {
+      "file": "but-3.webp",
+      "alt": "I put the book in the small bag.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-4807ea5f-2355-4ad3-87c3-24528111e10d.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page3 woman inserts SAME green book halfway down SAME small ochre canvas tote. Book partly visible at open mouth, sturdy stitched handles/seams remain intact supporting normal weight. Fixed bag dimensions no expansion, same curly-haired green blouse woman and home table.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b0535534-1cfc-44a7-8775-1fa8b7ed7a39.png"
+    },
+    {
+      "file": "but-4.webp",
+      "alt": "The small bag can carry my book.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-ffcd87cb-e0bf-4145-8c16-742936c767a6.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page4 woman lifts SAME SMALL ochre tote normally by its two handles beside her. SAME single green book in bag with its top just visible at opening. Canvas holds normal weight, no enlargement or tearing. Same green blouse, curly hair and room, satisfied expression.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-4807ea5f-2355-4ad3-87c3-24528111e10d.png"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "sourceId": "story-51-so",
+  "id": "story-51-so",
+  "wordId": "so",
+  "narrator": "The person in blue is speaking.",
+  "pages": [
+    {
+      "file": "so-1.webp",
+      "alt": "My friend and I want to go to the garden.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-11e60fbe-a444-4b7c-b1ca-6ea120dcd9d8.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Two adult friends at the inside entrance of a warm home preparing to go to a garden. Short dark-haired man in plain blue overshirt beige trousers is narrator; woman friend long brown hair cream knit top dark jeans. Man holds a plain brown shoulder bag, woman is ready beside him. Open doorway looks onto a DRY garden path under increasingly gray cloudy sky; no rain yet. A nearby window also visible; table with one closed green book behind them. Friendly quiet natural scene.",
+      "referenceSource": "D:/work/demo/basic_english/src/assets/word-stories/give-1.webp"
+    },
+    {
+      "file": "so-2.webp",
+      "alt": "There is rain. I put my bag back. My friend and I are at home.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b6605f39-5f13-47a5-ba7b-0497fbfbb8d7.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page2 same blue overshirt man and cream knit friend at same home entrance. NOW rain visibly falls outside doorway, garden path wet. Man hangs SAME brown shoulder bag BACK on wall hook, woman begins closing entrance door rather than leaving. Closed green book on same inside table. Their choice to remain home visible, no outing, no text.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-11e60fbe-a444-4b7c-b1ca-6ea120dcd9d8.png"
+    },
+    {
+      "file": "so-3.webp",
+      "alt": "My friend and I open a book at home.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-308107ba-ac03-4d27-ba1e-6a89c05fcf52.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page3 same blue man and cream friend sit together inside at wooden table OPENING same green book to read. Page pictures unlettered, no readable writing. Brown bag remains unused wall hook. Same rain clearly outside window, same furniture and clothes.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b6605f39-5f13-47a5-ba7b-0497fbfbb8d7.png"
+    },
+    {
+      "file": "so-4.webp",
+      "alt": "My friend and I read at home. There is rain.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-25d9b453-414f-41e2-9170-ad6f981871b1.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page4 same blue man and cream friend comfortably reading SAME open green book at same home table, one points to simple picture without writing. Brown bag remains unused on wall hook, rain continues outside window. Natural warm conversation and actual reading result; no garden outing.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-308107ba-ac03-4d27-ba1e-6a89c05fcf52.png"
+    }
+  ]
+}
