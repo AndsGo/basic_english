@@ -1,0 +1,40 @@
+{
+  "sourceId": "story-48-if",
+  "id": "story-48-if",
+  "wordId": "if",
+  "narrator": "The person in blue is speaking.",
+  "pages": [
+    {
+      "file": "if-1.webp",
+      "alt": "My friend and I talk about tomorrow at home.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-591a352a-242b-4e71-a8f3-5ff141c7a7ac.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Two adult friends in a warm home discuss plans beside a window. Narrator is a short dark-haired man in a plain blue overshirt and beige trousers; friend is a long brown-haired woman in a cream knit top and dark jeans. Blue man calmly gestures as he discusses tomorrow with friend. Outside window dry and overcast, not raining; both still at home TODAY, no imagined future scenes. There is a small green closed book on a table and a plain brown bag on a wall hook, consistent props for later. Single complete room scene.",
+      "referenceSource": "D:/work/demo/basic_english/src/assets/word-stories/give-1.webp"
+    },
+    {
+      "file": "if-2.webp",
+      "alt": "I talk about being at home if there is rain tomorrow.",
+      "reviewed": true,
+      "source": "D:/AppData/Orca/codex-accounts/ccd4a5eb-7610-48bd-a20f-60ef7776c282/home/generated_images/01a1783c-1e79-7392-bfab-8e45b7dde5f1/exec-1100053d-d32f-46af-8b02-6f698c837457.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Continue SAME TODAY discussion, blue-overshirt man and cream-top friend remain seated at same table with closed green book and plain cup, brown bag on wall hook. Narrator gestures toward window while describing a POSSIBLE rainy tomorrow; outside still same dry overcast weather today, NO rain yet. They have not acted on future plans. No thought bubble or imagined scene. Sentence and future label outside image.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-591a352a-242b-4e71-a8f3-5ff141c7a7ac.png"
+    },
+    {
+      "file": "if-3.webp",
+      "alt": "I have a bag at home. I may go to the garden tomorrow.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-d5e3e02d-c2f8-4b4f-987c-ca78cd6cbcdf.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page3 SAME TODAY room and friends, blue man now stands near wall hook holding same brown bag preparing possible outing items, cream-top friend nearby listening. Same closed green book on table. Same DRY overcast weather through window, NO rain yet. They remain indoors discussing alternative tomorrow plan, no imagined scene, no garden trip yet.",
+      "referenceSource": "D:/AppData/Orca/codex-accounts/ccd4a5eb-7610-48bd-a20f-60ef7776c282/home/generated_images/01a1783c-1e79-7392-bfab-8e45b7dde5f1/exec-1100053d-d32f-46af-8b02-6f698c837457.png"
+    },
+    {
+      "file": "if-4.webp",
+      "alt": "The next day there is rain. My friend and I read at home.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-24329307-34a7-4320-b4ca-e61e16d015cc.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page4 NOW NEXT DAY: same blue man and cream friend seated at same table reading same green book OPEN, book pages without writing. Brown bag unused on wall hook. Through same window clearly show rain and wet outside garden. Both at home executing only one plan, no outing. Same faces, clothes, furniture.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-d5e3e02d-c2f8-4b4f-987c-ca78cd6cbcdf.png"
+    }
+  ]
+}

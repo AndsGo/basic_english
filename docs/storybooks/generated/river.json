@@ -1,0 +1,39 @@
+{
+  "sourceId": "story-37-river",
+  "id": "story-37-river",
+  "wordId": "river",
+  "narrator": "The person in red is speaking.",
+  "pages": [
+    {
+      "file": "river-1.webp",
+      "alt": "My friend and I walk near a river.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-17add50f-4740-4e27-bc31-0eb8105deaea.png",
+      "prompt": "Page 1 of A WALK BY THE RIVER. Two adult friends walk TOGETHER on a wide safe paved path on the NEAR-RIGHT bank of a long naturally curving RIVER. Narrator man wears RUST-RED sweater and dark trousers, woman friend wears BLUE cardigan and cream trousers. Elevated natural three-quarter landscape view shows BOTH river banks, blue-green water with natural flowing ripples extending into distance, riverside trees and ONE small arched STONE FOOTBRIDGE with railings connecting near-right bank to far-left bank in the middle background. Foreground path has a low protective railing. Not a lake or pond, no arrows, no text, no swimming. Whole scene with both friends and bridge endpoints visible. Use case: illustration-story. Output one complete 512x512 square daily-life picture-book scene. Match supplied reference's warm polished volumetric cartoon, concrete friendly people and objects, natural perspective, soft light, gentle shadows, clean lightly textured surroundings. Clear learning focus with minimal clutter. Reference for style and specified continuity only. No visible text, Chinese, readable letters/numbers, captions, labels, watermarks, arrows, diagrams, panels, collage, speech bubbles, flat icons or abstract symbols."
+    },
+    {
+      "file": "river-2.webp",
+      "alt": "The water moves in the river.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-c247c40f-4849-4de0-a5e9-973cebe46021.png",
+      "prompt": "Page 2: SAME flowing river, BOTH banks and SAME stone footbridge, same warm natural daylight. Slightly closer elevated view emphasizes LONG CURVING WATERCOURSE with natural current ripples and a few small white foam streaks, water continues beneath bridge and into distance, no drawn direction marks. Same rust-red man and blue-cardigan woman remain TOGETHER on SAFE near-right bank path behind railing, smaller at right edge. Not a still pond. Use case: illustration-story. One complete 512x512 square daily-life scene. Use supplied reference for exact character identity, clothing, objects, setting and warm polished cartoon volume, natural perspective, soft light, gentle shadows. Follow only this page's described change. No visible text, Chinese, readable letters/numbers, captions, labels, arrows, watermark, panels, collage, diagrams, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-17add50f-4740-4e27-bc31-0eb8105deaea.png"
+    },
+    {
+      "file": "river-3.webp",
+      "alt": "The water goes under the bridge.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-60ba7735-33b4-4bde-9e83-7bdbc9f1829c.png",
+      "prompt": "Page 3: SAME stone arched footbridge and SAME river, closer natural view clearly shows continuous flowing water entering and leaving the OPEN SPACE UNDER bridge arch. Both banks and natural ripples visible, bridge has same stone blocks and railings. Same two friends TOGETHER on near-right bank path behind protective rail, watching water, NOT on separate banks. One complete riverside scene, no cutaway or diagram. Use case: illustration-story. One complete 512x512 square daily-life scene. Use supplied reference for exact character identity, clothing, objects, setting and warm polished cartoon volume, natural perspective, soft light, gentle shadows. Follow only this page's described change. No visible text, Chinese, readable letters/numbers, captions, labels, arrows, watermark, panels, collage, diagrams, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-17add50f-4740-4e27-bc31-0eb8105deaea.png"
+    },
+    {
+      "file": "river-4.webp",
+      "alt": "My friend and I watch the river from a safe place.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-7fc322d5-bf97-4d4e-a857-8e9beff91334.png",
+      "prompt": "Page 4: SAME rust-red narrator man and blue-cardigan woman now pause TOGETHER behind SAME sturdy path railing on near-right riverbank and WATCH the river. Both feet on wide paved safe path, hands natural, no leaning over rail. SAME river, both banks and stone bridge visible beyond. Warm polished volume and natural daylight, no swimming, arrows or labels. Use case: illustration-story. One complete 512x512 square daily-life scene. Use supplied reference for exact character identity, clothing, objects, setting and warm polished cartoon volume, natural perspective, soft light, gentle shadows. Follow only this page's described change. No visible text, Chinese, readable letters/numbers, captions, labels, arrows, watermark, panels, collage, diagrams, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-17add50f-4740-4e27-bc31-0eb8105deaea.png"
+    }
+  ]
+}

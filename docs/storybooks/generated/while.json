@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-21-while",
+  "id": "story-21-while",
+  "wordId": "while",
+  "narrator": "Li is speaking.",
+  "pages": [
+    {
+      "file": "while-1.webp",
+      "alt": "Li and Anna are at the table.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-3999d3fa-9f6f-42ab-b932-50c9549cc1b4.png",
+      "prompt": "Page 1 of AT THE SAME TIME. SAME Li on LEFT with short dark hair, blue overshirt and beige trousers; SAME Anna on RIGHT with long brown hair and cream knit top. Same warm study room and wooden table. Each has a closed plain green book and a plain white sheet with a pen in front of them, hands resting ready, neither reading nor writing yet. A simple brown bag hangs beside Li's chair. Exactly two learners, no readable writing. Both bodies and both sets of materials visible so later simultaneous activities are clear. Use case: illustration-story. Output one 512x512 square picture-book illustration, one complete daily-life scene. Match the supplied STYLE REFERENCE's warm polished volumetric cartoon, concrete friendly people and objects, natural perspective, soft daylight, gentle shadows, lightly textured neutral surroundings. Minimal clutter, clear learning focus. Reference is for style/character continuity, not an edit target. No visible text, Chinese, readable letters, numbers, captions, labels, arrows, watermarks, speech bubbles, signs, diagrams, panels, collage, flat icons or symbols."
+    },
+    {
+      "file": "while-2.webp",
+      "alt": "I read while my friend writes.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-8bde8bbc-a707-4fb1-b6ba-d728859070b6.png",
+      "prompt": "Page 2: Preserve SAME Li LEFT in blue overshirt and Anna RIGHT in cream knit top, same table and room. SIMULTANEOUS ACTIONS: Li looks down at his OWN OPEN green book, reading; Anna looks down at her own plain white paper, clearly holding a pen with its tip on paper, writing. Anna's own green book CLOSED to her right. Li's paper and unused pen lie flat near him. Both activities clearly visible together, one shared moment. No readable marks. Use case: illustration-story. One complete 512x512 square daily-life scene. Use provided reference for exact character identity, clothing, objects, location continuity and warm polished cartoon volume, natural perspective, soft daylight and gentle shadows. Change only the events described for this page. No visible text, Chinese, readable letters or numbers, labels, arrows, watermark, diagram, panels, collage, speech bubbles, icons or abstract symbols."
+    },
+    {
+      "file": "while-3.webp",
+      "alt": "My friend reads while I write.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-7f42ec0a-3cd0-4e45-815f-180fa346ff0a.png",
+      "prompt": "Page 3: Preserve SAME people in SAME LEFT/RIGHT seats. NOW REVERSE ACTIVITIES: Li on LEFT looks down at plain white paper, his hand holding pen tip to paper, WRITING. Li's own green book CLOSED beside him. Anna on RIGHT looks down into her OWN OPEN green book, READING, her unused pen rests by her paper. Both simultaneous activities visible in the SAME full scene, do not swap character clothes or seats. Use case: illustration-story. One complete 512x512 square daily-life scene. Use provided reference for exact character identity, clothing, objects, location continuity and warm polished cartoon volume, natural perspective, soft daylight and gentle shadows. Change only the events described for this page. No visible text, Chinese, readable letters or numbers, labels, arrows, watermark, diagram, panels, collage, speech bubbles, icons or abstract symbols."
+    },
+    {
+      "file": "while-4.webp",
+      "alt": "I put my book and pen in my bag.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-3cabec0a-ed9e-46b3-bb7a-783b0d1321be.png",
+      "prompt": "Page 4: SAME scene and seats, both have STOPPED reading and writing. Li on LEFT puts HIS closed green book and pen into HIS plain brown bag beside his chair; show hand, book and open bag clearly. Anna on RIGHT sits relaxed with her OWN CLOSED green book and paper neatly on table, hands empty, not reading or writing. Exactly two people, no duplicate green book in Li's place. Use case: illustration-story. One complete 512x512 square daily-life scene. Use provided reference for exact character identity, clothing, objects, location continuity and warm polished cartoon volume, natural perspective, soft daylight and gentle shadows. Change only the events described for this page. No visible text, Chinese, readable letters or numbers, labels, arrows, watermark, diagram, panels, collage, speech bubbles, icons or abstract symbols."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-17-shade",
+  "id": "story-17-shade",
+  "wordId": "shade",
+  "narrator": "The person in red is speaking.",
+  "pages": [
+    {
+      "file": "shade-1.webp",
+      "alt": "I walk in the bright sun near a tree.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-13ee2236-f91a-4297-a169-665a4e9964a3.png",
+      "prompt": "Page 1 of a four-page story about SHADE. A middle-aged woman with short dark wavy hair, coral blouse and light blue trousers walks on a brightly SUNLIT garden path, not yet in shade. A single large leafy tree stands to the right, its canopy casting a coherent soft-edged leafy shaded area on the earth below it, next to the path. Sunlight comes from upper left; show bright open ground and the darker tree shade together in the same daytime garden. No night effect, no artificial black patch or symbolic sun icon. Use case: illustration-story. Create a 512x512 square picture-book page, one complete concrete daily-life scene. Match the supplied STYLE REFERENCE's warm polished volumetric cartoon, friendly characters, natural perspective, soft daylight, gentle shadows, warm cream surroundings and lightly textured materials. Keep a simple clear focus. No readable text, Chinese, numbers, labels, arrows, diagram, panels, collage, speech bubbles, watermarks, flat icons or symbols. The reference is for style only, not an edit target."
+    },
+    {
+      "file": "shade-2.webp",
+      "alt": "The tree makes shade on the earth.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-860982dd-067b-4345-bd41-5b7ca1274a32.png",
+      "prompt": "Page 2: SAME coral-blouse woman, large tree and daytime garden. Slightly wider view emphasizing the tree canopy and corresponding SHADE on earth directly below and to lower right. Strong light from upper LEFT stays consistent. Woman still stands in SUNLIGHT to the left and looks toward shaded ground. Show shaded ground and sunlit ground together; natural softly textured shadows, no black solid patch. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "shade-3.webp",
+      "alt": "I go to the shade under the tree.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-2ad6d8d8-8655-4bce-8ade-233900637fe0.png",
+      "prompt": "Page 3: SAME coral-blouse woman with light blue trousers steps FROM the bright garden path INTO the shaded area immediately under the SAME tree canopy. Her forward foot and body enter dappled shade. Fixed sun from upper left, tree trunk right. Background open garden remains sunny, shade corresponds to canopy, daytime. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "shade-4.webp",
+      "alt": "I rest in the shade under the tree.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-12f8bf63-9fba-4fcf-ba57-6dae03dfb5ed.png",
+      "prompt": "Page 4: SAME woman is now seated resting on the earth under the SAME leafy tree, comfortably leaning near trunk, empty hands relaxed in lap. Her body and the earth around her are in natural cool dappled SHADE, while the path and garden beyond remain clearly SUNLIT. Preserve daytime, tree, clothing and sun direction, no night scene. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    }
+  ]
+}

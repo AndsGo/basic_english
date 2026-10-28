@@ -1,0 +1,40 @@
+{
+  "sourceId": "story-45-news",
+  "id": "story-45-news",
+  "wordId": "news",
+  "narrator": "The person with the letter is speaking.",
+  "pages": [
+    {
+      "file": "news-1.webp",
+      "alt": "I open a letter from my friend.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-6a22c30f-54f8-4496-8aaf-e3f2f499972f.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. An adult woman with shoulder-length dark hair, plain lavender cardigan and cream shirt sits at a honey-colored wooden table in a warm home. She is carefully opening a plain white envelope containing a white letter. No readable writing on envelope or letter. Single main action, both hands natural. Behind her a cream sofa and window; leave space to show family later.",
+      "referenceSource": "D:/work/demo/basic_english/src/assets/word-stories/give-1.webp"
+    },
+    {
+      "file": "news-2.webp",
+      "alt": "I read the letter from my friend.",
+      "reviewed": true,
+      "source": "D:/AppData/Orca/codex-accounts/ccd4a5eb-7610-48bd-a20f-60ef7776c282/home/generated_images/01a1783c-1e79-7392-bfab-8e45b7dde5f1/exec-1109b785-d722-447e-b42d-eefb1bdfe550.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Continue same lavender-cardigan adult woman, same home and table. Page2 she now reads the extracted white letter held in both hands, pleased by good news. Open empty envelope lies on table. Show blank BACK of letter to viewer, no writing anywhere. Same lavender cardigan and cream shirt, no new people yet. Friend's message will be rendered separately as HTML, do not show it as image.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-6a22c30f-54f8-4496-8aaf-e3f2f499972f.png"
+    },
+    {
+      "file": "news-3.webp",
+      "alt": "I tell my family the news in the letter.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-f26630e0-5b55-4dde-8637-9bbc19cd3b99.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page3 same lavender cardigan narrator in same home tells FAMILY good news: she sits to LEFT of same cream sofa holding white letter, natural speaking gesture. Add adult short dark-haired man plain rust sweater and older gray-bob woman plain sage blouse seated together on sofa listening. White envelope on table, letter writer absent.",
+      "referenceSource": "D:/AppData/Orca/codex-accounts/ccd4a5eb-7610-48bd-a20f-60ef7776c282/home/generated_images/01a1783c-1e79-7392-bfab-8e45b7dde5f1/exec-1109b785-d722-447e-b42d-eefb1bdfe550.png"
+    },
+    {
+      "file": "news-4.webp",
+      "alt": "My family is happy about the news.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-d18771fc-17c0-4619-80dc-c890358237ff.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page4 same three family members, lavender woman at left with letter, rust sweater man and gray-bob sage woman on cream sofa. All happy about same good news, natural conversation and smiles, no new people, no other event.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-f26630e0-5b55-4dde-8637-9bbc19cd3b99.png"
+    }
+  ]
+}

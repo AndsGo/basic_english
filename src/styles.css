@@ -78,6 +78,41 @@ body {
   margin: 0;
 }
 
+.word-story { max-width: 1040px; margin: 0 auto; }
+.words-view-modes { flex-wrap: wrap; }
+.story-picker { display: grid; gap: 8px; margin: 16px 0 20px; }
+.story-picker select { width: 100%; min-width: 0; min-height: 44px; box-sizing: border-box; padding: 8px; border: 1px solid var(--color-border-input); border-radius: var(--radius-md); background: var(--color-surface-raised); color: var(--color-text); font: inherit; }
+.story-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.story-heading h3 { margin: 0; font-size: 1.5rem; }
+.story-review { padding: 12px 0 20px; }
+.story-review summary { cursor: pointer; }
+.story-spread { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border: 1px solid var(--color-border); border-radius: 16px; overflow: hidden; background: var(--color-surface-raised); }
+.story-image { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; align-self: center; }
+.story-copy { padding: clamp(16px, 3vw, 32px); min-width: 0; }
+.story-sentence { font-size: clamp(1.3rem, 2.4vw, 1.9rem); line-height: 1.65; min-height: 6.6em; }
+.story-sentence mark { background: var(--color-accent-softer); color: var(--color-accent-text); padding: 0 4px; border-radius: 4px; }
+.story-chinese { line-height: 1.6; min-height: 3.2em; }
+.story-navigation { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 16px; }
+.story-navigation button { min-width: 125px; }
+.story-answers { display: grid; gap: 10px; }
+.story-check { grid-template-columns: minmax(0, 1fr); }
+.story-context { margin: 12px 0; }
+.story-context summary { cursor: pointer; }
+.story-record { margin-top: 16px; padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-muted); }
+.story-record-region { display: flow-root; }
+.story-record ul { margin-bottom: 0; padding-left: 20px; }
+.story-practice { display: grid; gap: 12px; margin: 20px 0; }
+.story-practice textarea { width: 100%; box-sizing: border-box; padding: 12px; color: var(--color-text); background: var(--color-surface-raised); border: 1px solid var(--color-border-input); border-radius: var(--radius-md); font: inherit; resize: vertical; }
+.story-practice-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+@media (max-width: 640px) {
+  .story-spread { grid-template-columns: minmax(0, 1fr); }
+  .story-image { max-height: 300px; }
+  .story-copy { padding: 16px; }
+  .story-sentence { margin: 12px 0; }
+  .story-navigation button { min-width: 0; padding: 10px; }
+  .story-navigation span { white-space: nowrap; }
+}
+
 button,
 input,
 textarea {

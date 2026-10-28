@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-27-rule",
+  "id": "story-27-rule",
+  "wordId": "rule",
+  "narrator": "The person in brown is speaking.",
+  "pages": [
+    {
+      "file": "rule-1.webp",
+      "alt": "Persons read books in the library.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-690fc029-7ef5-44cd-b29a-9b63d5543be9.png",
+      "prompt": "Page 1 of IN THE LIBRARY. A warm quiet public library with wooden bookshelves and a reading table. Exactly FOUR ADULTS: narrator, a young man in brown cardigan on viewer-left, his friend a young woman in mint blouse on viewer-right, both sitting with open books; a grey-haired older woman wearing glasses and a navy cardigan (librarian) near shelves behind them; another adult reader in plain cream shirt at background table. All are quietly reading or looking at books. Covers and pages have no readable text, no labels or signs. No shushing symbols. Use case: illustration-story. Output one 512x512 square picture-book illustration, one complete daily-life scene. Match the supplied STYLE REFERENCE's warm polished volumetric cartoon, concrete friendly people and objects, natural perspective, soft daylight, gentle shadows, lightly textured neutral surroundings. Minimal clutter, clear learning focus. Reference is for style/character continuity, not an edit target. No visible text, Chinese, readable letters, numbers, captions, labels, arrows, watermarks, speech bubbles, signs, diagrams, panels, collage, flat icons or symbols."
+    },
+    {
+      "file": "rule-2.webp",
+      "alt": "A person tells my friend and me the rule in the library.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-f2f11c71-76d4-4498-a3cc-d100dc293c25.png",
+      "prompt": "Page 2: SAME four library adults and room. Narrator brown-cardigan man at front left has turned slightly to speak to mint-blouse friend at front right, books resting open on table. SAME grey-haired glasses librarian in navy cardigan stands beside them and gently reminds them with a natural calm open-hand gesture, no shushing sign or angry gesture. Cream-shirt background reader stays reading. Exactly four adults, no signs or written rules in image. Use case: illustration-story. One complete 512x512 square daily-life scene. Use provided reference for exact character identity, clothing, objects, location continuity and warm polished cartoon volume, natural perspective, soft daylight and gentle shadows. Change only the events described for this page. No visible text, Chinese, readable letters or numbers, labels, arrows, watermark, diagram, panels, collage, speech bubbles, icons or abstract symbols."
+    },
+    {
+      "file": "rule-3.webp",
+      "alt": "My friend and I talk quietly near the books.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-4a24aa0c-d6a7-4ca1-a3b1-9e0fd333cb18.png",
+      "prompt": "Page 3: SAME brown-cardigan man LEFT and mint-blouse woman RIGHT lean slightly toward each other over open books and talk QUIETLY, relaxed small mouth movements, considerate behavior. SAME librarian in navy behind them is back with books near shelf, cream-shirt background reader continues reading undisturbed. Exactly same four people, natural library scene, no symbolic sound waves. Use case: illustration-story. One complete 512x512 square daily-life scene. Use provided reference for exact character identity, clothing, objects, location continuity and warm polished cartoon volume, natural perspective, soft daylight and gentle shadows. Change only the events described for this page. No visible text, Chinese, readable letters or numbers, labels, arrows, watermark, diagram, panels, collage, speech bubbles, icons or abstract symbols."
+    },
+    {
+      "file": "rule-4.webp",
+      "alt": "Persons read quietly in the library.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-dca207cc-fced-4361-9a0c-8a0f936109d8.png",
+      "prompt": "Page 4: SAME library and SAME FOUR adults. Brown-cardigan narrator man and mint-blouse friend now both READ their own open books at foreground table, librarian in navy calmly tends bookshelf, cream-shirt background reader continues reading. Peaceful shared reading is result of keeping rule. No readable book text, signs or silence symbols. Use case: illustration-story. One complete 512x512 square daily-life scene. Use provided reference for exact character identity, clothing, objects, location continuity and warm polished cartoon volume, natural perspective, soft daylight and gentle shadows. Change only the events described for this page. No visible text, Chinese, readable letters or numbers, labels, arrows, watermark, diagram, panels, collage, speech bubbles, icons or abstract symbols."
+    }
+  ]
+}

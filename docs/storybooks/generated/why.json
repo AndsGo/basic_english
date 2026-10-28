@@ -1,0 +1,47 @@
+{
+  "sourceId": "story-52-why",
+  "id": "story-52-why",
+  "wordId": "why",
+  "narrator": "Li is speaking.",
+  "pages": [
+    {
+      "file": "why-1.webp",
+      "alt": "My friend asks me why I take a bag.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-9c738659-3101-4621-a8ac-d97a59d112fb.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Two friendly young adult students at entrance of cozy learning room/home getting ready to leave: Li has short dark hair, plain blue overshirt and beige trousers, and holds one empty plain brown canvas shoulder bag in one hand. Anna has long dark-brown hair, cream knit top and dark jeans. Anna asks him a question with a natural small open-hand gesture, Li attends to her. One closed green book lies clearly on nearby table ready to pack. Faces visible, warm volume and soft window light, no question marks or text.",
+      "referenceSource": "D:/work/demo/basic_english/src/assets/word-stories/give-1.webp"
+    },
+    {
+      "file": "why-2.webp",
+      "alt": "I put my book in the bag.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-ee5ae08b-1ddc-4bb5-b641-a86ab8179dd3.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page2 same Li blue overshirt beige trousers and Anna cream knit dark jeans at room entrance. Li puts SAME green hardcover book into SAME plain brown canvas shoulder bag while answering Anna; book partly inserted and visible. Anna listens with relaxed hands, same table and room, no bubbles or text.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-9c738659-3101-4621-a8ac-d97a59d112fb.png"
+    },
+    {
+      "file": "why-3.webp",
+      "alt": "My friend asks me a question at the door of a learning room.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-98ced537-7698-490d-a7db-4cafa6686537.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page3 same Li with same brown shoulder bag containing green book and same Anna. They now stand at open doorway to friendly learning room, wooden group study table visible beyond. Anna naturally gestures a question to Li, he listens holding bag. Same clothes/faces, no sign or text at doorway.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-ee5ae08b-1ddc-4bb5-b641-a86ab8179dd3.png"
+    },
+    {
+      "file": "why-4.webp",
+      "alt": "I talk with more persons in the learning room.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-e8d133a0-de00-4584-800f-889db9034125.png",
+      "prompt": "Edit this picture-book illustration. Change ONLY the brown shoulder bag hanging on the left chair: remove the second green book sticking out of that bag and make the bag visibly EMPTY at its opening. Keep the ONE green open book already on the table exactly unchanged; that is the same book taken out to study together. Preserve all four people, faces, clothes, hands, gestures, table, room, lighting, illustration style and composition. No text, labels, symbols or watermarks. Square output, suitable for 512x512.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-fee301fc-18e0-495f-93c6-d5f7b2605dd4.png",
+      "previousCandidate": {
+        "word": "why",
+        "n": 4,
+        "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-fee301fc-18e0-495f-93c6-d5f7b2605dd4.png",
+        "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page4 same Li and Anna in learning room at study table with two additional ADULT learners: darker-skinned woman in mustard top and gray-haired man muted teal shirt. Li speaks warmly, friendly shared eye contact and gestures, Anna participates. Same brown bag hangs on Li's chair, same green book open on table with unlettered picture pages. Show conversation, no writing on walls or boards.",
+        "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-98ced537-7698-490d-a7db-4cafa6686537.png"
+      }
+    }
+  ]
+}

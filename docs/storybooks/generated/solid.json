@@ -1,0 +1,39 @@
+{
+  "sourceId": "story-42-solid",
+  "id": "story-42-solid",
+  "wordId": "solid",
+  "narrator": "The person in red is speaking.",
+  "pages": [
+    {
+      "file": "solid-1.webp",
+      "alt": "I have a stone and some water in a cup.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-95fed2e5-7159-42ff-97f4-1ce5281d0d1b.png",
+      "prompt": "Page 1 of A STONE AND SOME WATER. An adult woman with tied-back dark hair, plain CORAL blouse and beige trousers sits at wooden home table. Exactly ONE small GREY OVAL STONE with a slightly flat left edge and a small white speck on top lies on table. Exactly TWO clear glass containers: a TALL STRAIGHT cylindrical drinking glass two-thirds full of clear WATER on LEFT, and a SHORT WIDE ROUND glass cup with a handle, EMPTY, on RIGHT. Both different container shapes and the stone fully visible. Woman hands empty and away, no pouring yet. Warm room, not a diagram or side-by-side panels. Use case: illustration-story. Output one complete 512x512 square daily-life picture-book scene. Match supplied reference's warm polished volumetric cartoon, concrete friendly people and objects, natural perspective, soft light, gentle shadows, clean lightly textured surroundings. Clear learning focus with minimal clutter. Reference for style and specified continuity only. No visible text, Chinese, readable letters/numbers, captions, labels, watermarks, arrows, diagrams, panels, collage, speech bubbles, flat icons or abstract symbols."
+    },
+    {
+      "file": "solid-2.webp",
+      "alt": "I put water from one cup in another cup.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-f631663a-d249-41f8-b118-1c997fe56bf9.png",
+      "prompt": "Page 2: SAME coral-blouse woman, SAME oval GREY STONE with small WHITE SPECK remains unchanged on table. She pours CLEAR WATER from SAME TALL STRAIGHT GLASS on LEFT into SAME SHORT WIDE ROUND HANDLED GLASS CUP on RIGHT. Natural transparent water stream and visible water spreading to wide curved cup interior, tall glass tilted by hand, no spill. EXACTLY TWO glass containers and ONE stone, no third container, no labels. Use case: illustration-story. One complete 512x512 square daily-life scene. Use supplied reference for exact character identity, clothing, objects, setting and warm polished cartoon volume, natural perspective, soft light, gentle shadows. Follow only this page's described change. No visible text, Chinese, readable letters/numbers, captions, labels, arrows, watermark, panels, collage, diagrams, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-95fed2e5-7159-42ff-97f4-1ce5281d0d1b.png"
+    },
+    {
+      "file": "solid-3.webp",
+      "alt": "The stone keeps its form. The water is in the wide cup.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-f91e1ceb-5631-454f-8516-6dab0efb0cdf.png",
+      "prompt": "Page 3: SAME woman and table, water transfer finished: TALL GLASS on LEFT is EMPTY, WIDE HANDLED GLASS CUP on RIGHT contains water. She holds SAME oval GREY STONE with flat left edge and WHITE SPECK just above table beside wide cup, showing stone shape unchanged, not inside water. ONE stone only, unchanged size, no deformation. Exactly two containers, natural life scene, no diagram. Use case: illustration-story. One complete 512x512 square daily-life scene. Use supplied reference for exact character identity, clothing, objects, setting and warm polished cartoon volume, natural perspective, soft light, gentle shadows. Follow only this page's described change. No visible text, Chinese, readable letters/numbers, captions, labels, arrows, watermark, panels, collage, diagrams, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-95fed2e5-7159-42ff-97f4-1ce5281d0d1b.png"
+    },
+    {
+      "file": "solid-4.webp",
+      "alt": "The stone is solid. The water is liquid.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-929bee3d-630f-4abf-9a00-19394641de77.png",
+      "prompt": "Page 4: SAME woman calmly compares SAME stone and water on table. SAME grey oval WHITE-SPECK stone rests unchanged beside SAME wide handled glass CUP FULL OF WATER; TALL straight glass empty on left. Her hands away from stone and cups, relaxed observing pose. ONE solid stone and liquid water visible together in one complete room scene, no printed comparisons or symbols. Use case: illustration-story. One complete 512x512 square daily-life scene. Use supplied reference for exact character identity, clothing, objects, setting and warm polished cartoon volume, natural perspective, soft light, gentle shadows. Follow only this page's described change. No visible text, Chinese, readable letters/numbers, captions, labels, arrows, watermark, panels, collage, diagrams, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-95fed2e5-7159-42ff-97f4-1ce5281d0d1b.png"
+    }
+  ]
+}

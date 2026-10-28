@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-22-example",
+  "id": "story-22-example",
+  "wordId": "example",
+  "narrator": "The person in red is speaking.",
+  "pages": [
+    {
+      "file": "example-1.webp",
+      "alt": "My friend and I look at fruit.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-31324612-abb4-4f17-a048-b3d3293cc220.png",
+      "prompt": "Page 1 of EXAMPLES OF FRUIT. Two young adult friends at a small outdoor fruit stall. Narrator on LEFT, woman with a dark bob, rust-red cardigan and beige trousers, listens to her friend on RIGHT, man with short brown hair and cream shirt. He gestures naturally toward a small arrangement of recognizable RED APPLES and ORANGES in shallow wooden crates, asking about fruit. Narrator's hands empty. Both fruit types visible, no other distracting produce, no stall labels or price signs. Use case: illustration-story. Output one 512x512 square picture-book illustration, one complete daily-life scene. Match the supplied STYLE REFERENCE's warm polished volumetric cartoon, concrete friendly people and objects, natural perspective, soft daylight, gentle shadows, lightly textured neutral surroundings. Minimal clutter, clear learning focus. Reference is for style/character continuity, not an edit target. No visible text, Chinese, readable letters, numbers, captions, labels, arrows, watermarks, speech bubbles, signs, diagrams, panels, collage, flat icons or symbols."
+    },
+    {
+      "file": "example-2.webp",
+      "alt": "I show my friend an apple.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-f706fd0d-1533-4579-a5e3-e0aafdfb65c5.png",
+      "prompt": "Page 2: SAME rust-cardigan woman LEFT is narrator. She holds up ONE RED APPLE in her hand to SHOW it to same cream-shirt male friend RIGHT at same fruit stall. Friend watches the apple attentively. Apples and oranges remain recognizable in their wooden crates. Only one fruit being held, woman's free hand natural. No labels, no category symbols. Use case: illustration-story. One complete 512x512 square daily-life scene. Use provided reference for exact character identity, clothing, objects, location continuity and warm polished cartoon volume, natural perspective, soft daylight and gentle shadows. Change only the events described for this page. No visible text, Chinese, readable letters or numbers, labels, arrows, watermark, diagram, panels, collage, speech bubbles, icons or abstract symbols."
+    },
+    {
+      "file": "example-3.webp",
+      "alt": "I show my friend an orange.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-fee2b8fc-a43b-406b-bba1-478221647cb9.png",
+      "prompt": "Page 3: SAME rust-cardigan woman LEFT now holds ONE ORANGE to show the SAME cream-shirt male friend RIGHT, who watches it. Her former red apple has been put BACK in apple crate, no apple in either hand. Keep BOTH crates, apple and orange distinct in shape and skin texture, same stall, clothing and view. Use case: illustration-story. One complete 512x512 square daily-life scene. Use provided reference for exact character identity, clothing, objects, location continuity and warm polished cartoon volume, natural perspective, soft daylight and gentle shadows. Change only the events described for this page. No visible text, Chinese, readable letters or numbers, labels, arrows, watermark, diagram, panels, collage, speech bubbles, icons or abstract symbols."
+    },
+    {
+      "file": "example-4.webp",
+      "alt": "An apple and an orange are examples of fruit.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-b91eef68-2f4f-455b-be94-ee99a328f625.png",
+      "prompt": "Page 4: SAME two friends at SAME stall. A red apple and an orange sit clearly SIDE BY SIDE on the wooden counter in foreground, both recognizable whole fruit; woman presents both with EMPTY open hands and friend looks at them. Other apples and oranges remain in crates behind. One complete stall scene, not comparison panels or icons. Use case: illustration-story. One complete 512x512 square daily-life scene. Use provided reference for exact character identity, clothing, objects, location continuity and warm polished cartoon volume, natural perspective, soft daylight and gentle shadows. Change only the events described for this page. No visible text, Chinese, readable letters or numbers, labels, arrows, watermark, diagram, panels, collage, speech bubbles, icons or abstract symbols."
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "sourceId": "story-46-between",
+  "id": "story-46-between",
+  "wordId": "between",
+  "narrator": "The person with the plant is speaking.",
+  "pages": [
+    {
+      "file": "between-1.webp",
+      "alt": "I have a plant in my hands. There is a chair and a window.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-e5e825c9-0cd8-485d-b6aa-9e7f4597ae49.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. A friendly adult man with short black hair, plain sage-green sweater and tan trousers stands in a warm living room holding a small terracotta pot with one leafy green plant. Composition supports an exact spatial lesson: a complete blue upholstered chair at left, a single full tall window at far right of back wall. There is a clear empty strip of wooden floor between the chair and the window, and also a visible separate empty floor area to the LEFT of the chair, away from the window. Both chair and window fully visible and spatially separate. Man at foreground center holding pot, not placed yet. No other chairs, no other windows or plants.",
+      "referenceSource": "D:/work/demo/basic_english/src/assets/word-stories/give-1.webp"
+    },
+    {
+      "file": "between-2.webp",
+      "alt": "I put the plant near the chair. The chair is between the plant and the window.",
+      "reviewed": true,
+      "source": "D:/AppData/Orca/codex-accounts/ccd4a5eb-7610-48bd-a20f-60ef7776c282/home/generated_images/01a1783c-1e79-7392-bfab-8e45b7dde5f1/exec-ad46bcb5-3f3f-4a59-b9e3-4b65670c07e4.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Continue EXACT room geometry same view: blue chair left, tall window far right, empty floor strip between. Move the SAME potted plant onto floor immediately to LEFT of chair, the side AWAY from window. Sage-sweater man crouches with his hands just releasing pot there. Spatial order from left to right: potted plant, blue chair, empty space, window. Chair must separate plant from window, clearly not between them. Full chair and complete pot visible. Only one pot and one window.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-e5e825c9-0cd8-485d-b6aa-9e7f4597ae49.png"
+    },
+    {
+      "file": "between-3.webp",
+      "alt": "I put the plant between the chair and the window.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-bc7cb964-45e3-46ed-b8ae-4ed3b73cf537.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page3 same room, same blue chair left and tall window right. Same terracotta potted plant now on floor in visible gap BETWEEN chair and window. Left-to-right order chair, plant, window. Sage sweater man crouches next to pot, hands releasing it; don't obscure references. Keep both chair and window identifiable, no additional plants.",
+      "referenceSource": "D:/AppData/Orca/codex-accounts/ccd4a5eb-7610-48bd-a20f-60ef7776c282/home/generated_images/01a1783c-1e79-7392-bfab-8e45b7dde5f1/exec-ad46bcb5-3f3f-4a59-b9e3-4b65670c07e4.png"
+    },
+    {
+      "file": "between-4.webp",
+      "alt": "My friend finds the plant between the chair and the window.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-6db1e023-5758-4d88-94a7-66213495bda7.png",
+      "prompt": "Create one 512x512 square English educational picture-book page. Use attached image only as reference for polished warm cartoon illustration: concrete rounded volume, friendly expressive people, soft natural light and shadows, lightly textured warm neutral colors, natural perspective. One complete daily-life scene, restrained clutter, generous padding. No readable text, letters, numbers, Chinese, labels, captions, speech bubbles, arrows, symbols, watermarks, panels, collage, flat vector icons or diagrams. Page4 keep EXACT final placement of page3: blue chair left, pot in open floor gap, window right. Same sage-sweater narrator stands near left chair while adult woman friend plain dusty blue cardigan notices pot and gestures toward it. Do not block chair-pot-window relationship, no extra plants.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\d217d07d-f40d-4350-ad69-b38a883c603a\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-bc7cb964-45e3-46ed-b8ae-4ed3b73cf537.png"
+    }
+  ]
+}

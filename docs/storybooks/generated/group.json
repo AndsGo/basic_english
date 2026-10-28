@@ -1,0 +1,39 @@
+{
+  "sourceId": "story-29-group",
+  "id": "story-29-group",
+  "wordId": "group",
+  "narrator": "This is a story about a group.",
+  "pages": [
+    {
+      "file": "group-1.webp",
+      "alt": "3 persons work in the garden.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-2a98bd42-2842-464a-a571-0223915413e7.png",
+      "prompt": "Page 1 of WORKING AS A GROUP. Exactly THREE ADULTS meet in a small community garden with a slightly untidy flower bed and a few fallen leaves. A young man in NAVY shirt with a green watering can, a woman with curly dark bob in MUSTARD cardigan with a small broom, and an older grey-haired man in MINT shirt with a simple plain basket. They greet each other and prepare to work together, all three fully visible, no other people anywhere. Natural garden tools, no sharp tools, no written team labels. Use case: illustration-story. Create one complete 512x512 square daily-life picture-book scene. Match STYLE REFERENCE's warm polished volumetric cartoon, friendly concrete characters, natural perspective, soft light, gentle shadows and lightly textured clean neutral setting. Reference for style and specified continuity only. Clear learning focus and minimal clutter. No visible text, Chinese, letters, numbers, labels, captions, watermark, arrows, signs, diagrams, panels, collage, speech bubbles, flat icons or symbols."
+    },
+    {
+      "file": "group-2.webp",
+      "alt": "The group talks about the work in the garden.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-a35b276f-cb9d-4bbc-ba35-811664c62064.png",
+      "prompt": "Page 2: SAME EXACT THREE ADULTS in SAME community garden: navy-shirt young man with green watering can LEFT, mustard-cardigan curly-bob woman CENTER, older grey-haired mint-shirt man with wicker basket RIGHT. They briefly pause tools and talk together, looking at the untidy bed and deciding work, clearly one interacting group. Tools held safely, no fourth person or onlookers, no written plan. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-2a98bd42-2842-464a-a571-0223915413e7.png"
+    },
+    {
+      "file": "group-3.webp",
+      "alt": "One person gives water to the plants. The others clean.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-525fb814-3fbd-47a9-9d4b-44eaecb8845d.png",
+      "prompt": "Page 3: SAME THREE group members simultaneously work in SAME garden. Navy-shirt man LEFT brings/pours water from SAME green watering can onto plants. Mustard-cardigan woman CENTER sweeps fallen leaves from path with SAME small broom. Grey-haired mint-shirt man RIGHT gathers leaves into SAME wicker basket. Three distinct concrete jobs in one natural scene, exactly three people. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-2a98bd42-2842-464a-a571-0223915413e7.png"
+    },
+    {
+      "file": "group-4.webp",
+      "alt": "The group finishes the work together.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-5f45260a-b9c8-4e1f-a743-c4880ffe3f50.png",
+      "prompt": "Page 4: SAME THREE adults now rest TOGETHER beside the same flower bed and path, which is visibly TIDY with fallen leaves removed. Navy-shirt man sets green watering can down, mustard woman rests broom safely against fence, mint-shirt older man sets leaf basket down. Friendly shared satisfaction, exactly same three members and clothes, no extra people or symbols. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-2a98bd42-2842-464a-a571-0223915413e7.png"
+    }
+  ]
+}

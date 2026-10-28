@@ -1,0 +1,39 @@
+{
+  "sourceId": "story-34-growth",
+  "id": "story-34-growth",
+  "wordId": "growth",
+  "narrator": "The person in red is speaking.",
+  "pages": [
+    {
+      "file": "growth-1.webp",
+      "alt": "There is a small tree in the garden.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-a341fc41-647c-41ea-a3d5-a5fbeb9a68c1.png",
+      "prompt": "Page 1 of THE GROWTH OF A TREE. A young adult woman with black bob, plain soft RED shirt and denim-blue trousers tends ONE small newly planted TREE SAPLING in garden earth. Sapling has one thin woody trunk and a modest leafy crown, top about her KNEE height. She stands next to it holding a plain blue watering can angled gently toward earth. Fixed wooden garden fence behind is about her WAIST high; a large round pale stone to right of tree base is stable landmark. Wide level camera shows whole woman, whole sapling, fence and ground. No flower instead of tree, no height marks or labels. Use case: illustration-story. Create one complete 512x512 square daily-life picture-book scene. Match STYLE REFERENCE's warm polished volumetric cartoon, friendly concrete characters, natural perspective, soft light, gentle shadows and lightly textured clean neutral setting. Reference for style and specified continuity only. Clear learning focus and minimal clutter. No visible text, Chinese, letters, numbers, labels, captions, watermark, arrows, signs, diagrams, panels, collage, speech bubbles, flat icons or symbols."
+    },
+    {
+      "file": "growth-2.webp",
+      "alt": "The small tree has water and light.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-122181d3-4ea8-4f0c-bf8f-c355d3b9ad3b.png",
+      "prompt": "Page 2: SAME red-shirt bob-haired woman, SAME single small tree, blue watering can, waist-high wooden fence and round pale stone RIGHT of trunk base. Keep tree EXACT SAME SMALL SIZE as reference, same location and trunk/leaves, no growth yet. Woman gently checks moist earth near base under normal warm sunshine. Stable level camera and fence/stone scale; water and light are care conditions, no arrows or magic. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-a341fc41-647c-41ea-a3d5-a5fbeb9a68c1.png"
+    },
+    {
+      "file": "growth-3.webp",
+      "alt": "After a year, the same tree is big.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-27f66a51-da17-4b3d-878d-35dd741067b6.png",
+      "prompt": "Page 3: AFTER A YEAR, SAME SINGLE TREE has grown noticeably TALLER AND BROADER at SAME ground point. Preserve EXACT camera, fence height/position, round pale stone RIGHT of base, woman's red shirt/blue trousers and body scale. Tree now about 1.6 TIMES reference tree height, crown about twice as broad, top rises ABOVE the same woman's BENT HEAD and above fence. Same thin woody trunk now thicker, no gigantic mature tree. Woman has SAME bent posture beside it looking pleased, blue watering can on ground. No date text or growth symbols. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-a341fc41-647c-41ea-a3d5-a5fbeb9a68c1.png"
+    },
+    {
+      "file": "growth-4.webp",
+      "alt": "I look at the growth of the tree.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-35774d5e-59ce-46f6-8c9d-21b88ef1081e.png",
+      "prompt": "Page 4: Use supplied reference as the completed AFTER-A-YEAR tree state. Preserve EXACT BIGGER TREE height, crown shape, trunk position, camera, fence, pale stone, woman and all scale relationships. Same woman in red shirt now looks at the tree and gently touches a low leaf with one empty hand; blue watering can stays on ground. NO additional growth from supplied reference. Clear same tree after a year, not a new species or closer camera. No text or growth arrows. Use case: illustration-story. One complete 512x512 square daily-life scene. Reference establishes exact people, clothing, props, setting and warm polished volumetric cartoon style, natural perspective, soft light and gentle shadows. Follow only this page's specified change. No visible text, Chinese, readable letters or numbers, captions, labels, arrows, watermark, diagrams, panels, collage, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-27f66a51-da17-4b3d-878d-35dd741067b6.png"
+    }
+  ]
+}

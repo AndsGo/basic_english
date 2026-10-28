@@ -7,8 +7,10 @@ import type { ProgressRepository } from '../storage/progressRepository';
 import { PhoneticText } from './PhoneticText';
 import { SpeechButton } from './SpeechButton';
 import { WordFlashcards } from './WordFlashcards';
+import { WordStory } from './WordStory';
+import { giveStory, wordStories } from '../content/wordStories';
 
-type WordsMode = 'list' | 'flashcards' | 'library';
+type WordsMode = 'list' | 'flashcards' | 'library' | 'stories';
 type LibraryFilter = 'all' | 'course' | 'future';
 
 const LIBRARY_VISIBLE_LIMIT = 120;
@@ -27,9 +29,13 @@ export function WordsPage({
   onProgressChange?: () => void;
 }) {
   const [mode, setMode] = useState<WordsMode>('list');
+  const [selectedStoryId, setSelectedStoryId] = useState(giveStory.id);
   const [libraryQuery, setLibraryQuery] = useState('');
   const [libraryFilter, setLibraryFilter] = useState<LibraryFilter>('all');
   const [libraryLimit, setLibraryLimit] = useState(LIBRARY_VISIBLE_LIMIT);
+  const availableStories = wordStories.filter((story) => course.words.some((word) => word.id === story.wordId))
+    .sort((left, right) => left.week - right.week || left.courseWeek - right.courseWeek);
+  const selectedStory = availableStories.find((story) => story.id === selectedStoryId) ?? availableStories[0];
 
   const courseWordByText = useMemo(
     () => new Map(course.words.map((word) => [word.text.toLowerCase(), word])),
@@ -87,7 +93,7 @@ export function WordsPage({
     <section className="panel">
       <div className="section-header">
         <h2>Course Words</h2>
-        <div className="segmented-control" aria-label="Words view mode">
+        <div className="segmented-control words-view-modes" aria-label="Words view mode">
           <button
             type="button"
             className={`secondary-button${mode === 'list' ? ' selected-button' : ''}`}
@@ -112,9 +118,24 @@ export function WordsPage({
           >
             850 Library
           </button>
+          <button type="button" className={`secondary-button${mode === 'stories' ? ' selected-button' : ''}`}
+            aria-pressed={mode === 'stories'} onClick={() => setMode('stories')}>
+            Stories
+          </button>
         </div>
       </div>
-      {mode === 'flashcards' ? (
+      {mode === 'stories' ? (
+        selectedStory ? <>
+          <label className="story-picker">
+            Choose a story
+            <select value={selectedStory.id} onChange={(event) => setSelectedStoryId(event.target.value)}>
+              {availableStories.map((story) => <option key={story.id} value={story.id}>Week {story.week} · {story.wordId} · {story.title}</option>)}
+            </select>
+          </label>
+          <WordStory key={selectedStory.id} story={selectedStory} words={course.words} showChineseHelp={showChineseHelp}
+            onReview={(word) => saveWordMark(word, 'review')} />
+        </> : <p>No stories for these words yet.</p>
+      ) : mode === 'flashcards' ? (
         <WordFlashcards
           words={course.words}
           imageByWordId={imageByWordId}
@@ -224,6 +245,10 @@ export function WordsPage({
                 {word.example}
                 <SpeechButton text={word.example} label={`Read example for ${word.text}`} />
               </small>
+              {availableStories.filter((story) => story.wordId === word.id).map((story) => <button key={story.id} type="button" className="secondary-button" onClick={() => {
+                setSelectedStoryId(story.id);
+                setMode('stories');
+              }}>Read a story with {word.text}</button>)}
             </article>
           ))}
         </div>

@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-07-rest",
+  "id": "story-07-rest",
+  "wordId": "rest",
+  "narrator": "The person in red is speaking.",
+  "pages": [
+    {
+      "file": "rest-1.webp",
+      "alt": "I clean a table and put books together.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-fb426bf7-0d66-4b13-8085-a390bb32bb2b.png",
+      "prompt": "Create page 1 of A QUIET TIME, teaching REST. A young adult man with short black hair, a muted burgundy shirt and dark trousers is doing ordinary home work: arranging a small stack of books and wiping a wooden table with a cloth. A comfortable wooden chair is nearby for later rest, with a cup of water on a small side table. Warm cream living room, natural daylight. Show a concrete activity with his face, hands, books, table and nearby chair clearly, no exaggeration of pain or illness. Style: match the reference's warm polished volumetric cartoon educational illustration, concrete shapes, natural soft light, gentle shadows, visible volume, lightly textured neutral surroundings. One complete 512x512 square daily-life scene, generous padding, natural perspective, minimal clutter. No visible text, letters, labels, numbers, watermarks, speech bubbles, symbols, arrows, panels, diagrams, flat icons or collage."
+    },
+    {
+      "file": "rest-2.webp",
+      "alt": "I stop my work. I am tired.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-607c4ec3-7a06-4a46-8294-080486829121.png",
+      "prompt": "Edit reference into page 2 of the same REST educational picture book. Preserve same young adult man in burgundy shirt and dark trousers, home, books, cloth and comfortable chair. He has STOPPED the cleaning work, set the cloth down on the table and stands near the chair with a naturally tired expression and relaxed lowered shoulders. He recognizes he needs a rest; no dramatic pain, illness or injury. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    },
+    {
+      "file": "rest-3.webp",
+      "alt": "I have a quiet rest in the chair.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-9015b3b4-4d68-48c2-b2d6-8cec41213f32.png",
+      "prompt": "Edit reference into page 3 of the same REST educational picture book. Same man is now sitting comfortably in the same chair beside the table, with BOTH hands empty resting loosely on his legs, eyes calmly relaxed, not reading, cleaning or working. The cleaning cloth and stacked books remain on the table. Cup of water on the side table. Clearly show quiet rest after work, not sleep in bed. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    },
+    {
+      "file": "rest-4.webp",
+      "alt": "I get up from the chair and am ready for work.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-ac5988c2-84ba-4cb0-a580-ec403d7dfebd.png",
+      "prompt": "Edit reference into page 4 of the same REST educational picture book. Same man has had some quiet rest and is calmly getting up from the chair, looking ready to continue ordinary work. His expression is comfortable and alert, not an exaggerated magical transformation. Same table, cloth and books remain available. Hands natural and empty as he gets up. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    }
+  ]
+}

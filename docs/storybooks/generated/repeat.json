@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-06-repeat",
+  "id": "story-06-repeat",
+  "wordId": "repeat",
+  "narrator": "The person with the bag is speaking.",
+  "pages": [
+    {
+      "file": "repeat-1.webp",
+      "alt": "I ask my friend for the way to the shop.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-4681760e-04ec-408a-9f88-7969f12590c3.png",
+      "prompt": "Create page 1 of PLEASE SAY IT AGAIN, a story about asking a friend to repeat directions. On a quiet car-free pedestrian T-junction, the same ponytailed young woman narrator in teal jacket, beige trousers and brown shoulder bag from LEFT is asking a friendly adult woman guide in a mustard cardigan for the way to the fruit shop. The fruit shop with striped cream-and-muted-red awning and fruit crates stays on the LEFT branch. The narrator has empty hands and a polite curious expression; the guide listens. Keep the junction readable, no gestures or signs containing text. Style: match the reference's warm polished volumetric cartoon educational illustration, concrete shapes, natural soft light, gentle shadows, visible volume, lightly textured neutral surroundings. One complete 512x512 square daily-life scene, generous padding, natural perspective, minimal clutter. No visible text, letters, labels, numbers, watermarks, speech bubbles, symbols, arrows, panels, diagrams, flat icons or collage."
+    },
+    {
+      "file": "repeat-2.webp",
+      "alt": "My friend shows the way to the shop. I do not understand.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-6c4beab1-c787-49ff-98b1-89a95b5c01d2.png",
+      "prompt": "Edit reference into page 2 of the same REPEAT educational picture book. Preserve the ponytailed narrator in teal jacket with beige trousers and brown bag, and the same mustard-cardigan guide, junction and fruit shop. Both women now face roughly AWAY from the camera along the original path so the fruit shop on viewer LEFT is also the narrator's LEFT. The guide stands beside her and points LEFT towards the fruit shop with a clear natural arm gesture. The narrator looks uncertain and listens, with her body still oriented along the path. No printed dialogue. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    },
+    {
+      "file": "repeat-3.webp",
+      "alt": "I ask my friend to repeat.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-d4b67a5d-9969-4b83-9249-4323fea4e728.png",
+      "prompt": "Edit reference into page 3 of the same REPEAT educational picture book. Same two women and scene. The narrator in teal politely asks the guide to say the direction again, one open hand near her own chest and a curious, slightly puzzled expression. The guide pauses and listens kindly. Keep their body positions, fruit shop on the LEFT and right garden path consistent. No puzzled symbols or speech bubbles. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    },
+    {
+      "file": "repeat-4.webp",
+      "alt": "My friend shows the same way again. Now I understand.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-ab2188f2-c7e5-4ac2-b6a9-0a9bb6dafb08.png",
+      "prompt": "Edit reference into page 4 of the same REPEAT educational picture book. Same two women and junction. The mustard-cardigan guide REPEATS the same LEFT-pointing gesture towards the fruit shop on the LEFT. The teal narrator now nods with understanding and starts orienting her feet towards the LEFT branch. Keep the direction identical to the earlier guidance, no mirroring. Narrator's body was facing away along the path, so the shop is truly her left. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    }
+  ]
+}

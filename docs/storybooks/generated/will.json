@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-12-will",
+  "id": "story-12-will",
+  "wordId": "will",
+  "narrator": "The person in green is speaking.",
+  "pages": [
+    {
+      "file": "will-1.webp",
+      "alt": "My friend and I are at home. I have a bag and water.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-60608b1a-7191-417b-8f28-992e07ef0796.png",
+      "prompt": "Create page 1 of TOMORROW IN THE GARDEN, teaching future WILL. Two young adult friends at HOME TODAY: the same curly-haired woman in sage-green top and man in muted rust top from ENOUGH, now near a wooden table beside a window. They are calmly discussing a garden visit planned for tomorrow, not already traveling. A small brown day bag and a CLOSED clear water bottle are on the table, ready to prepare. A simple green garden is visible outside the window, but both people remain inside. No calendar, clock numerals, thought bubbles, split scene or future visualization. Style: match the reference's warm polished volumetric cartoon educational illustration, concrete shapes, natural soft light, gentle shadows, visible volume, lightly textured neutral surroundings. One complete 512x512 square daily-life scene, generous padding, natural perspective, minimal clutter. No visible text, letters, labels, numbers, watermarks, speech bubbles, symbols, arrows, panels, diagrams, flat icons or collage."
+    },
+    {
+      "file": "will-2.webp",
+      "alt": "My friend and I talk about tomorrow at home.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-6d034675-6b82-4306-8727-5cf54295416e.png",
+      "prompt": "Edit reference into page 2 of the same WILL educational picture book. Preserve same curly-haired woman in sage-green top and male friend in rust top, same HOME interior, table, brown day bag and closed water bottle. They are still at home TODAY preparing a garden trip planned for TOMORROW. Woman narrator checks the closed bag and water bottle on the table, calmly discussing what she will do. Do not depict her already in the garden, no imagined future bubble, no calendar or text. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    },
+    {
+      "file": "will-3.webp",
+      "alt": "My friend puts water in the bag for tomorrow.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-ffc92829-9dd1-4f2f-8bfb-cf3fb0616179.png",
+      "prompt": "Edit reference into page 3 of the same WILL educational picture book. Same two friends remain at home TODAY. The male friend in rust top now helps prepare for joining tomorrow's garden trip, placing the CLOSED water bottle into the open brown day bag while the woman in sage-green watches and helps hold the bag. Both are preparing together, not departing yet. Same room and table, no text, calendar or split scene. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    },
+    {
+      "file": "will-4.webp",
+      "alt": "The next day, my friend and I walk in the garden.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-9cb1ce4d-7e9d-4490-aa83-9c85695d1e3f.png",
+      "prompt": "Edit reference into page 4 of the same WILL educational picture book. It is now the NEXT DAY and the same two friends are walking together in the real garden outside: curly-haired woman in sage-green top carries the small brown day bag, man in rust top walks beside her. Friendly garden with concrete flowers, trees and a clear path, soft natural morning light. One actual outdoor scene, not an imagined bubble or collage. Keep exact character designs and clothing from the reference, no text or date. Preserve the reference's polished warm volumetric cartoon style, soft natural lighting, gentle shadows and clear concrete objects. Single complete 512x512 square daily-life scene, natural perspective, generous padding. No visible text, letters, numbers, labels, watermarks, speech bubbles, symbols, arrows, diagrams, panels, collage or flat icons."
+    }
+  ]
+}

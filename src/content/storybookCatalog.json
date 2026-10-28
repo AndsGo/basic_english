@@ -1,0 +1,3738 @@
+[
+  {
+    "id": "story-01-friend",
+    "sourceId": "story-01-friend",
+    "title": "My new friend",
+    "wordId": "friend",
+    "courseWeek": 1,
+    "week": 1,
+    "definition": "a person you like",
+    "definitionChinese": "朋友，彼此愿意相处的人",
+    "reviewWordIds": [
+      "name",
+      "she",
+      "kind",
+      "study"
+    ],
+    "narrator": "Li is speaking.",
+    "narratorChinese": "Li",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "My name is Li.",
+        "chinese": "我的名字叫 Li。",
+        "file": "friend-1.webp",
+        "alt": "Li and Anna are in the same room.",
+        "semanticText": null
+      },
+      {
+        "text": "This is Anna. She is kind.",
+        "chinese": "这是 Anna。她很友好。",
+        "file": "friend-2.webp",
+        "alt": "Anna makes a place for Li at the table.",
+        "semanticText": null
+      },
+      {
+        "text": "Anna is my friend.",
+        "chinese": "Anna 是我的朋友。",
+        "file": "friend-3.webp",
+        "alt": "Li shows a picture to Anna, and Anna shows a picture to Li.",
+        "semanticText": null
+      },
+      {
+        "text": "I study English with my friend.",
+        "chinese": "我和朋友一起学英语。",
+        "file": "friend-4.webp",
+        "alt": "Li and Anna read the same book together.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Li and Anna study together. Anna is Li's friend. Who is Li's friend?",
+      "options": [
+        "Anna.",
+        "The table."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. Anna is a person. Li and Anna study together.",
+      "retry": "Look again at the question.",
+      "chinese": "Li 和 Anna 一起学习。Anna 是 Li 的朋友。谁是 Li 的朋友？"
+    },
+    "practice": "This is my friend, ___.",
+    "practiceExamples": [
+      "This is my friend, Anna."
+    ],
+    "ready": true
+  },
+  {
+    "id": "under-the-chair",
+    "sourceId": "story-02-under",
+    "title": "Where is my bag?",
+    "wordId": "under",
+    "courseWeek": 2,
+    "week": 3,
+    "definition": "below something",
+    "definitionChinese": "在某个物体下方",
+    "reviewWordIds": [
+      "bag",
+      "chair",
+      "book",
+      "table"
+    ],
+    "narrator": "The girl in red is speaking.",
+    "narratorChinese": "红衣卷发女孩",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "Where is my bag?",
+        "chinese": "我的书包在哪里？",
+        "file": "under-1.webp",
+        "alt": "A girl is looking for her bag. The bag is below the chair. A book is below the table.",
+        "semanticText": null
+      },
+      {
+        "text": "My bag is not on the chair.",
+        "chinese": "我的书包不在椅子上。",
+        "file": "under-2.webp",
+        "alt": "The girl looks at the empty chair seat. Her bag is below the seat.",
+        "semanticText": null
+      },
+      {
+        "text": "The bag is under the chair.",
+        "chinese": "书包在椅子下面。",
+        "file": "under-3.webp",
+        "alt": "The girl points to her bag below the chair seat, between the chair legs.",
+        "semanticText": null
+      },
+      {
+        "text": "My book is under the table.",
+        "chinese": "我的书在桌子下面。",
+        "file": "under-4.webp",
+        "alt": "The girl points to the book below the table. The bag is still below the chair.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "The cup is under the table. Is the cup on the table?",
+      "options": [
+        "Yes, it is on the table.",
+        "No, it is under the table."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. Under means below. The cup is not on top of the table.",
+      "retry": "Look again at the question.",
+      "chinese": "杯子在桌子下面。它是在桌子上面吗？"
+    },
+    "practice": "The ___ is under the table.",
+    "practiceExamples": [
+      "The bag is under the table."
+    ],
+    "ready": true
+  },
+  {
+    "id": "give-a-book",
+    "sourceId": "story-03-give",
+    "title": "A book for my friend",
+    "wordId": "give",
+    "courseWeek": 3,
+    "week": 3,
+    "definition": "to let another person have something",
+    "definitionChinese": "把某物交给另一个人，使对方持有",
+    "reviewWordIds": [
+      "book",
+      "friend",
+      "have",
+      "happy"
+    ],
+    "narrator": "The boy in blue is speaking.",
+    "narratorChinese": "蓝衣男孩",
+    "contextSupport": [
+      {
+        "text": "now",
+        "definition": "at this time",
+        "chinese": "现在，此刻"
+      },
+      {
+        "text": "no",
+        "definition": "not any",
+        "chinese": "没有；例如 no book 是没有书"
+      }
+    ],
+    "pages": [
+      {
+        "text": "I have a book. My friend is here.",
+        "chinese": "我有一本书。我的朋友在这里。",
+        "file": "give-1.webp",
+        "alt": "A boy in blue has a green book. His friend is near the table.",
+        "semanticText": null
+      },
+      {
+        "text": "My friend has no book.",
+        "chinese": "我的朋友没有书。",
+        "file": "give-2.webp",
+        "alt": "The girl has no book. The boy has a green book.",
+        "semanticText": null
+      },
+      {
+        "text": "I give a book to my friend.",
+        "chinese": "我把一本书给我的朋友。",
+        "file": "give-3.webp",
+        "alt": "The boy is giving the green book to the girl.",
+        "semanticText": null
+      },
+      {
+        "text": "Now my friend has the book. She is happy.",
+        "chinese": "现在我的朋友有了这本书。她很高兴。",
+        "file": "give-4.webp",
+        "alt": "The girl now has the green book. The boy has no book. They are happy.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I give a pen to my friend. Who has the pen now?",
+      "options": [
+        "My friend has the pen.",
+        "I have the pen."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. My friend has the pen after I give it to her.",
+      "retry": "Look again at the question.",
+      "chinese": "我把笔给朋友。现在谁有笔？"
+    },
+    "practice": "I give a ___ to my friend.",
+    "practiceExamples": [
+      "I give a cup to my friend."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-04-enough",
+    "sourceId": "story-04-enough",
+    "title": "Food for a friend and me",
+    "wordId": "enough",
+    "courseWeek": 4,
+    "week": 4,
+    "definition": "as much as needed",
+    "definitionChinese": "足以满足明确的需要",
+    "reviewWordIds": [
+      "food",
+      "bread",
+      "friend",
+      "have"
+    ],
+    "narrator": "The person in green is speaking.",
+    "narratorChinese": "左侧就餐者",
+    "contextSupport": [
+      {
+        "text": "now",
+        "definition": "at this time",
+        "chinese": "现在，此刻"
+      }
+    ],
+    "pages": [
+      {
+        "text": "My friend and I need some bread.",
+        "chinese": "朋友和我需要一些面包。",
+        "file": "enough-1.webp",
+        "alt": "My friend and I are at a table. There is no bread.",
+        "semanticText": null
+      },
+      {
+        "text": "I have bread for me, but not for my friend.",
+        "chinese": "我有自己吃的面包，却没有给朋友的。",
+        "file": "enough-2.webp",
+        "alt": "I have bread. My friend has no bread.",
+        "semanticText": null
+      },
+      {
+        "text": "Now I have bread for my friend.",
+        "chinese": "现在我也有给朋友的面包了。",
+        "file": "enough-3.webp",
+        "alt": "I put bread in front of my friend. I have bread for me.",
+        "semanticText": null
+      },
+      {
+        "text": "My friend and I have enough bread for this meal.",
+        "chinese": "这顿饭我们有足够的面包。",
+        "file": "enough-4.webp",
+        "alt": "There is bread for my friend and bread for me.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I need a cup for me and a cup for my friend. I have one cup. Do I have enough?",
+      "options": [
+        "Yes.",
+        "No."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. My friend needs a cup, and I need a cup. My friend has no cup.",
+      "retry": "Look again at the question.",
+      "chinese": "我和朋友各需要一个杯子，但现在只有一个，够吗？"
+    },
+    "practice": "I have enough ___ for ___.",
+    "practiceExamples": [
+      "I have enough food for this meal."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-05-left",
+    "sourceId": "story-05-left",
+    "title": "The way to the shop",
+    "wordId": "left",
+    "courseWeek": 5,
+    "week": 5,
+    "definition": "the side opposite right",
+    "definitionChinese": "以指定行走者的朝向为准的左侧",
+    "reviewWordIds": [
+      "way",
+      "shop",
+      "turn",
+      "go"
+    ],
+    "narrator": "The person with the bag is speaking.",
+    "narratorChinese": "背朝镜头的行走者",
+    "contextSupport": [
+      {
+        "text": "now",
+        "definition": "at this time",
+        "chinese": "现在，此刻"
+      }
+    ],
+    "pages": [
+      {
+        "text": "I want to go to the shop.",
+        "chinese": "我想去商店。",
+        "file": "left-1.webp",
+        "alt": "I go to a shop. The shop is on my left.",
+        "semanticText": null
+      },
+      {
+        "text": "The shop is on my left.",
+        "chinese": "商店在我的左边。",
+        "file": "left-2.webp",
+        "alt": "The shop is on my left. I show the way with my left hand.",
+        "semanticText": null
+      },
+      {
+        "text": "I turn left.",
+        "chinese": "我向左转。",
+        "file": "left-3.webp",
+        "alt": "I turn left to go to the shop.",
+        "semanticText": null
+      },
+      {
+        "text": "Now I am at the shop.",
+        "chinese": "现在我到了商店。",
+        "file": "left-4.webp",
+        "alt": "I am at the shop. I see fruit.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "The shop is on my left. Which way do I turn?",
+      "options": [
+        "Left.",
+        "Right."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. I turn to my left to go to the shop.",
+      "retry": "Look again at the question.",
+      "chinese": "商店在我的左边，我要向哪边转？"
+    },
+    "practice": "The ___ is on my left.",
+    "practiceExamples": [
+      "The door is on my left."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-06-repeat",
+    "sourceId": "story-06-repeat",
+    "title": "Please say it again",
+    "wordId": "repeat",
+    "courseWeek": 6,
+    "week": 6,
+    "definition": "to say or do again",
+    "definitionChinese": "把同样的信息再说一次",
+    "reviewWordIds": [
+      "ask",
+      "understand",
+      "way",
+      "shop"
+    ],
+    "narrator": "The person with the bag is speaking.",
+    "narratorChinese": "问路者",
+    "contextSupport": [
+      {
+        "text": "now",
+        "definition": "at this time",
+        "chinese": "现在，此刻"
+      }
+    ],
+    "pages": [
+      {
+        "text": "I ask for the way to the shop.",
+        "chinese": "我询问去商店的路。",
+        "file": "repeat-1.webp",
+        "alt": "I ask my friend for the way to the shop.",
+        "semanticText": null
+      },
+      {
+        "text": "My friend says, \"Turn left.\" I do not understand.",
+        "chinese": "朋友说“向左转”。我没有听懂。",
+        "file": "repeat-2.webp",
+        "alt": "My friend shows the way to the shop. I do not understand.",
+        "semanticText": null
+      },
+      {
+        "text": "\"Please repeat,\" I say.",
+        "chinese": "我说：“请再说一遍。”",
+        "file": "repeat-3.webp",
+        "alt": "I ask my friend to repeat.",
+        "semanticText": null
+      },
+      {
+        "text": "My friend says, \"Turn left.\" Now I understand.",
+        "chinese": "朋友再次说“向左转”。现在我听懂了。",
+        "file": "repeat-4.webp",
+        "alt": "My friend shows the same way again. Now I understand.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I say, \"Open the book.\" You ask me to repeat. What do I say?",
+      "options": [
+        "Close the book.",
+        "Open the book."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. To repeat is to say the same thing again.",
+      "retry": "Look again at the question.",
+      "chinese": "我说“打开书”，你请我重复，我应该再说哪一句？"
+    },
+    "practice": "Please repeat ___.",
+    "practiceExamples": [
+      "Please repeat the question."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-07-rest",
+    "sourceId": "story-07-rest",
+    "title": "A quiet time",
+    "wordId": "rest",
+    "courseWeek": 7,
+    "week": 7,
+    "definition": "quiet time after work",
+    "definitionChinese": "停止工作或活动，让身体休息",
+    "reviewWordIds": [
+      "work",
+      "tired",
+      "chair",
+      "water"
+    ],
+    "narrator": "The person in red is speaking.",
+    "narratorChinese": "工作后休息的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I do my work.",
+        "chinese": "我做自己的工作。",
+        "file": "rest-1.webp",
+        "alt": "I clean a table and put books together.",
+        "semanticText": null
+      },
+      {
+        "text": "I am tired. I need rest.",
+        "chinese": "我累了。我需要休息。",
+        "file": "rest-2.webp",
+        "alt": "I stop my work. I am tired.",
+        "semanticText": null
+      },
+      {
+        "text": "I have a quiet rest in a chair.",
+        "chinese": "我坐在椅子上休息。",
+        "file": "rest-3.webp",
+        "alt": "I have a quiet rest in the chair.",
+        "semanticText": null
+      },
+      {
+        "text": "After some rest, I feel ready to work again.",
+        "chinese": "休息了一会儿，我觉得可以再次工作了。",
+        "file": "rest-4.webp",
+        "alt": "I get up from the chair and am ready for work.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I am tired after work. Which action is rest?",
+      "options": [
+        "A quiet time in a chair.",
+        "More work with no stop."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. Rest is a quiet time when I stop working.",
+      "retry": "Look again at the question.",
+      "chinese": "工作后累了，哪一种行为是休息？"
+    },
+    "practice": "After ___, I need rest.",
+    "practiceExamples": [
+      "After work, I need rest."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-08-family",
+    "sourceId": "story-08-family",
+    "title": "At home together",
+    "wordId": "family",
+    "courseWeek": 8,
+    "week": 8,
+    "definition": "a group with relations such as mother and son",
+    "definitionChinese": "具有家庭成员关系的一组人，不以所有成员住在一起为必要条件",
+    "reviewWordIds": [
+      "mother",
+      "father",
+      "sister",
+      "home"
+    ],
+    "narrator": "Li is speaking.",
+    "narratorChinese": "介绍家人的青年",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "This is my mother.",
+        "chinese": "这是我的母亲。",
+        "file": "family-1.webp",
+        "alt": "Li and his mother put things on the table.",
+        "semanticText": null
+      },
+      {
+        "text": "This is my father. This is my sister.",
+        "chinese": "这是我的父亲。这是我的姐妹。",
+        "file": "family-2.webp",
+        "alt": "My father and sister are here with my mother and me.",
+        "semanticText": null
+      },
+      {
+        "text": "This is my family.",
+        "chinese": "这是我的家人。",
+        "file": "family-3.webp",
+        "alt": "My family makes a meal together.",
+        "semanticText": null
+      },
+      {
+        "text": "My family has a meal together.",
+        "chinese": "我的家人一起吃饭。",
+        "file": "family-4.webp",
+        "alt": "My family has a meal together.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "My mother is a person in my ___.",
+      "options": [
+        "bag",
+        "family"
+      ],
+      "correctIndex": 1,
+      "success": "Correct. My mother is a person in my family.",
+      "retry": "Look again at the question.",
+      "chinese": "母亲是我的什么中的一员？"
+    },
+    "practice": "This is my ___.",
+    "practiceExamples": [
+      "This is my sister."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-09-rain",
+    "sourceId": "story-09-rain",
+    "title": "Water from the sky",
+    "wordId": "rain",
+    "courseWeek": 9,
+    "week": 9,
+    "definition": "water falling from clouds",
+    "definitionChinese": "从云中落下的雨水",
+    "reviewWordIds": [
+      "cloud",
+      "water",
+      "window",
+      "garden"
+    ],
+    "narrator": "The girl in red is speaking.",
+    "narratorChinese": "窗边观察的人",
+    "contextSupport": [
+      {
+        "text": "now",
+        "definition": "at this time",
+        "chinese": "现在，此刻"
+      }
+    ],
+    "pages": [
+      {
+        "text": "There are clouds over the garden.",
+        "chinese": "花园上空有云。",
+        "file": "rain-1.webp",
+        "alt": "I look at clouds over a garden from my window.",
+        "semanticText": null
+      },
+      {
+        "text": "Now there is rain.",
+        "chinese": "现在下雨了。",
+        "file": "rain-2.webp",
+        "alt": "I watch rain through the window.",
+        "semanticText": null
+      },
+      {
+        "text": "The rain gives water to the flowers.",
+        "chinese": "雨给花朵带来水。",
+        "file": "rain-3.webp",
+        "alt": "Rain falls on the flowers in the garden.",
+        "semanticText": null
+      },
+      {
+        "text": "I look at the rain from my window.",
+        "chinese": "我从窗边看雨。",
+        "file": "rain-4.webp",
+        "alt": "I am at home and watch the rain outside.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Water falls from clouds. Is this rain?",
+      "options": [
+        "Yes.",
+        "No, it is a cup."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. Rain is water falling from clouds.",
+      "retry": "Look again at the question.",
+      "chinese": "水从云中落下来，这是雨吗？"
+    },
+    "practice": "There is rain in ___.",
+    "practiceExamples": [
+      "There is rain in the garden."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-10-record",
+    "sourceId": "story-10-record",
+    "title": "A page for my work",
+    "wordId": "record",
+    "courseWeek": 10,
+    "week": 10,
+    "definition": "an account on paper",
+    "definitionChinese": "把做过或看到的事情记在纸上",
+    "reviewWordIds": [
+      "work",
+      "page",
+      "write",
+      "day"
+    ],
+    "narrator": "The man is speaking.",
+    "narratorChinese": "记录工作的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "Today I do some work.",
+        "chinese": "今天我做了一些工作。",
+        "file": "record-1.webp",
+        "alt": "I put books on the table and clean it.",
+        "semanticText": null
+      },
+      {
+        "text": "I write a record of my work.",
+        "chinese": "我写下自己的工作记录。",
+        "file": "record-2.webp",
+        "alt": "I write a record of my work on paper.",
+        "semanticText": {
+          "kind": "record",
+          "label": "Today",
+          "lines": [
+            "I put the books on the table.",
+            "I clean the table."
+          ],
+          "accessibleSummary": "This is a record of my work today."
+        }
+      },
+      {
+        "text": "The record shows what I do today.",
+        "chinese": "记录显示我今天做了什么。",
+        "file": "record-3.webp",
+        "alt": "I read the record of my work.",
+        "semanticText": {
+          "kind": "record",
+          "label": "Today",
+          "lines": [
+            "I put the books on the table.",
+            "I clean the table."
+          ],
+          "accessibleSummary": "This is a record of my work today."
+        }
+      },
+      {
+        "text": "I keep the record for another day.",
+        "chinese": "我把记录留到以后的日子查看。",
+        "file": "record-4.webp",
+        "alt": "I keep the record in a box.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Which is a record of my work?",
+      "options": [
+        "A cup of water.",
+        "A page with what I do."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. A record keeps an account of what I do.",
+      "retry": "Look again at the question.",
+      "chinese": "哪一种可以是我的工作记录？"
+    },
+    "practice": "Today I ___.",
+    "practiceExamples": [
+      "Today I open my book and study English."
+    ],
+    "ready": true
+  },
+  {
+    "id": "because-my-friend-is-happy",
+    "sourceId": "story-11-because",
+    "title": "Why is my friend happy?",
+    "wordId": "because",
+    "courseWeek": 11,
+    "week": 11,
+    "definition": "for the reason that",
+    "definitionChinese": "连接一件事和说明它的原因的句子",
+    "reviewWordIds": [
+      "friend",
+      "book",
+      "give",
+      "happy"
+    ],
+    "narrator": "The boy in blue is speaking.",
+    "narratorChinese": "蓝衣男孩",
+    "contextSupport": [
+      {
+        "text": "now",
+        "definition": "at this time",
+        "chinese": "现在，此刻"
+      }
+    ],
+    "pages": [
+      {
+        "text": "My friend has no book.",
+        "chinese": "我的朋友没有书。",
+        "file": "give-2.webp",
+        "alt": "The girl has no book. The boy has a green book.",
+        "semanticText": null
+      },
+      {
+        "text": "I have a book for my friend.",
+        "chinese": "我有一本书要给我的朋友。",
+        "file": "give-1.webp",
+        "alt": "The boy has a book to give to his friend.",
+        "semanticText": null
+      },
+      {
+        "text": "I give my friend the book because she has no book.",
+        "chinese": "我把书给朋友，因为她没有书。",
+        "file": "give-3.webp",
+        "alt": "The boy gives his book to the girl. She has no book.",
+        "semanticText": null
+      },
+      {
+        "text": "My friend is happy because she has a book now.",
+        "chinese": "我的朋友很高兴，因为她现在有书了。",
+        "file": "give-4.webp",
+        "alt": "The girl is happy. She now has the book.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I open the door because my friend is here. Why do I open the door?",
+      "options": [
+        "My friend is here.",
+        "My friend has a book."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. My friend is here. That is the reason I open the door.",
+      "retry": "Look again at the question.",
+      "chinese": "我开门，因为朋友来了。开门的原因是什么？"
+    },
+    "practice": "I am happy because ___.",
+    "practiceExamples": [
+      "I am happy because my friend is here."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-12-will",
+    "sourceId": "story-12-will",
+    "title": "Tomorrow in the garden",
+    "wordId": "will",
+    "courseWeek": 12,
+    "week": 12,
+    "definition": "a word for future action",
+    "definitionChinese": "谈论将来的计划或行动",
+    "reviewWordIds": [
+      "tomorrow",
+      "garden",
+      "friend",
+      "go"
+    ],
+    "narrator": "The person in green is speaking.",
+    "narratorChinese": "准备次日活动的人",
+    "contextSupport": [
+      {
+        "text": "now",
+        "definition": "at this time",
+        "chinese": "现在，此刻"
+      }
+    ],
+    "pages": [
+      {
+        "text": "Today I am at home.",
+        "chinese": "今天我在家。",
+        "file": "will-1.webp",
+        "alt": "My friend and I are at home. I have a bag and water.",
+        "semanticText": {
+          "kind": "timeContext",
+          "label": "Today",
+          "lines": [],
+          "accessibleSummary": "The persons are at home today. They talk about tomorrow."
+        }
+      },
+      {
+        "text": "Tomorrow I will go to the garden.",
+        "chinese": "明天我会去花园。",
+        "file": "will-2.webp",
+        "alt": "My friend and I talk about tomorrow at home.",
+        "semanticText": {
+          "kind": "timeContext",
+          "label": "Today",
+          "lines": [],
+          "accessibleSummary": "The persons are at home today. They talk about tomorrow."
+        }
+      },
+      {
+        "text": "My friend will go with me.",
+        "chinese": "我的朋友会和我一起去。",
+        "file": "will-3.webp",
+        "alt": "My friend puts water in the bag for tomorrow.",
+        "semanticText": {
+          "kind": "timeContext",
+          "label": "Today",
+          "lines": [],
+          "accessibleSummary": "The persons are at home today. They talk about tomorrow."
+        }
+      },
+      {
+        "text": "Now it is the next day. My friend and I go to the garden.",
+        "chinese": "现在到了第二天。我们去花园。",
+        "file": "will-4.webp",
+        "alt": "The next day, my friend and I walk in the garden.",
+        "semanticText": {
+          "kind": "timeContext",
+          "label": "The next day",
+          "lines": [],
+          "accessibleSummary": "The next day is here. The persons go to the garden."
+        }
+      }
+    ],
+    "check": {
+      "prompt": "Today I am at home. Tomorrow I will go to the shop. When will I go to the shop?",
+      "options": [
+        "Today.",
+        "Tomorrow."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. Will is used for the future action.",
+      "retry": "Look again at the question.",
+      "chinese": "今天在家，明天将去商店。去商店是什么时候？"
+    },
+    "practice": "Tomorrow I will ___.",
+    "practiceExamples": [
+      "Tomorrow I will study English."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-13-cat",
+    "sourceId": "story-13-cat",
+    "title": "A small friend at home",
+    "wordId": "cat",
+    "courseWeek": 13,
+    "week": 13,
+    "definition": "a small animal often living at home",
+    "definitionChinese": "猫，一种具体的动物",
+    "reviewWordIds": [
+      "door",
+      "chair",
+      "under",
+      "hand"
+    ],
+    "narrator": "The person in green is speaking.",
+    "narratorChinese": "照看猫的人",
+    "contextSupport": [
+      {
+        "text": "now",
+        "definition": "at this time",
+        "chinese": "现在，此刻"
+      }
+    ],
+    "pages": [
+      {
+        "text": "There is a cat near the door.",
+        "chinese": "门边有一只猫。",
+        "file": "cat-1.webp",
+        "alt": "A cat is near the door.",
+        "semanticText": null
+      },
+      {
+        "text": "The cat is under the chair.",
+        "chinese": "猫在椅子下面。",
+        "file": "cat-2.webp",
+        "alt": "The cat is under the chair.",
+        "semanticText": null
+      },
+      {
+        "text": "The cat is near my hand.",
+        "chinese": "猫在我的手旁边。",
+        "file": "cat-3.webp",
+        "alt": "The cat is near my hand.",
+        "semanticText": null
+      },
+      {
+        "text": "Now the cat is sleeping.",
+        "chinese": "现在猫睡着了。",
+        "file": "cat-4.webp",
+        "alt": "The cat is sleeping on a soft place.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Which animal is in the story?",
+      "options": [
+        "A cat.",
+        "A tree."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. The small animal in the story is a cat.",
+      "retry": "Look again at the question.",
+      "chinese": "故事里的动物是什么？"
+    },
+    "practice": "The cat is ___.",
+    "practiceExamples": [
+      "The cat is near the door."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-14-cloth",
+    "sourceId": "story-14-cloth",
+    "title": "A clean table",
+    "wordId": "cloth",
+    "courseWeek": 14,
+    "week": 14,
+    "definition": "soft material used for cleaning",
+    "definitionChinese": "用来擦拭的布，区别于衣服 clothes",
+    "reviewWordIds": [
+      "table",
+      "water",
+      "clean",
+      "use"
+    ],
+    "narrator": "The person in red is speaking.",
+    "narratorChinese": "擦桌子的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "There is water on the table.",
+        "chinese": "桌子上有水。",
+        "file": "cloth-1.webp",
+        "alt": "There is water on the table near a cup.",
+        "semanticText": null
+      },
+      {
+        "text": "I have a soft cloth.",
+        "chinese": "我有一块柔软的布。",
+        "file": "cloth-2.webp",
+        "alt": "I have a blue cloth.",
+        "semanticText": null
+      },
+      {
+        "text": "I use the cloth to clean the table.",
+        "chinese": "我用布擦桌子。",
+        "file": "cloth-3.webp",
+        "alt": "I use the cloth to clean the table.",
+        "semanticText": null
+      },
+      {
+        "text": "The table is clean. I wash the cloth.",
+        "chinese": "桌子干净了。我把布洗一洗。",
+        "file": "cloth-4.webp",
+        "alt": "I wash the cloth in water. The table is clean.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Which thing can I use to clean this table?",
+      "options": [
+        "A key.",
+        "A cloth."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. The cloth can take up the water as I clean.",
+      "retry": "Look again at the question.",
+      "chinese": "这里可以用哪件东西擦桌子？"
+    },
+    "practice": "I use a cloth to clean ___.",
+    "practiceExamples": [
+      "I use a cloth to clean the table."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-15-middle",
+    "sourceId": "story-15-middle",
+    "title": "A place for the cup",
+    "wordId": "middle",
+    "courseWeek": 15,
+    "week": 15,
+    "definition": "the part between the sides",
+    "definitionChinese": "一个范围两侧之间的中间部分",
+    "reviewWordIds": [
+      "cup",
+      "table",
+      "left",
+      "put"
+    ],
+    "narrator": "The man is speaking.",
+    "narratorChinese": "摆放杯子的人",
+    "contextSupport": [
+      {
+        "text": "now",
+        "definition": "at this time",
+        "chinese": "现在，此刻"
+      }
+    ],
+    "pages": [
+      {
+        "text": "Here is a cup on the table.",
+        "chinese": "桌子上有一个杯子。",
+        "file": "middle-1.webp",
+        "alt": "The cup is near the left side of the table.",
+        "semanticText": null
+      },
+      {
+        "text": "The cup is near the left side.",
+        "chinese": "杯子靠近左侧。",
+        "file": "middle-2.webp",
+        "alt": "The cup is near the left side of the table.",
+        "semanticText": null
+      },
+      {
+        "text": "I put the cup in the middle of the table.",
+        "chinese": "我把杯子放到桌子中间。",
+        "file": "middle-3.webp",
+        "alt": "I put the cup in the middle of the table.",
+        "semanticText": null
+      },
+      {
+        "text": "Now the cup is in the middle.",
+        "chinese": "现在杯子在中间了。",
+        "file": "middle-4.webp",
+        "alt": "The cup is in the middle of the table.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "The cup is in the middle of the table. Is it near the left edge?",
+      "options": [
+        "No.",
+        "Yes."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. In this scene the cup is between the sides, not near the edge.",
+      "retry": "Look again at the question.",
+      "chinese": "杯子在这张桌面的中间，它靠近左边缘吗？"
+    },
+    "practice": "The ___ is in the middle of ___.",
+    "practiceExamples": [
+      "The book is in the middle of the table."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-16-equal",
+    "sourceId": "story-16-equal",
+    "title": "The same number",
+    "wordId": "equal",
+    "courseWeek": 16,
+    "week": 16,
+    "definition": "the same in number",
+    "definitionChinese": "数量相等，本篇只教数量这一义",
+    "reviewWordIds": [
+      "cup",
+      "table",
+      "same",
+      "number"
+    ],
+    "narrator": "The person in yellow is speaking.",
+    "narratorChinese": "补充杯子的人",
+    "contextSupport": [
+      {
+        "text": "now",
+        "definition": "at this time",
+        "chinese": "现在，此刻"
+      }
+    ],
+    "pages": [
+      {
+        "text": "This table has 2 cups.",
+        "chinese": "这张桌子有两个杯子。",
+        "file": "equal-1.webp",
+        "alt": "The left table has 2 cups. The right table has one cup.",
+        "semanticText": {
+          "kind": "comparison",
+          "label": "Cups on the tables",
+          "lines": [
+            "Left table: 2 cups.",
+            "Right table: one cup."
+          ],
+          "accessibleSummary": "The left table has 2 cups. The right table has one cup. The numbers are not equal."
+        }
+      },
+      {
+        "text": "That table has one cup. The numbers are not equal.",
+        "chinese": "那张桌子有一个杯子。数量不相等。",
+        "file": "equal-2.webp",
+        "alt": "The left table has 2 cups. The right table has one cup.",
+        "semanticText": {
+          "kind": "comparison",
+          "label": "Cups on the tables",
+          "lines": [
+            "Left table: 2 cups.",
+            "Right table: one cup."
+          ],
+          "accessibleSummary": "The left table has 2 cups. The right table has one cup. The numbers are not equal."
+        }
+      },
+      {
+        "text": "I put another cup on that table.",
+        "chinese": "我在那张桌子上再放一个杯子。",
+        "file": "equal-3.webp",
+        "alt": "I put another cup on the right table. Now the tables have 2 cups and 2 cups.",
+        "semanticText": {
+          "kind": "comparison",
+          "label": "Cups on the tables",
+          "lines": [
+            "Left table: 2 cups.",
+            "Right table: 2 cups."
+          ],
+          "accessibleSummary": "The left table has 2 cups. The right table has 2 cups. The numbers are equal."
+        }
+      },
+      {
+        "text": "Now the numbers of cups are equal.",
+        "chinese": "现在杯子的数量相等了。",
+        "file": "equal-4.webp",
+        "alt": "The left table has 2 cups. The right table has 2 cups.",
+        "semanticText": {
+          "kind": "comparison",
+          "label": "Cups on the tables",
+          "lines": [
+            "Left table: 2 cups.",
+            "Right table: 2 cups."
+          ],
+          "accessibleSummary": "The left table has 2 cups. The right table has 2 cups. The numbers are equal."
+        }
+      }
+    ],
+    "check": {
+      "prompt": "2 books here and 2 books there. Are the numbers equal?",
+      "options": [
+        "No.",
+        "Yes."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. The groups have the same number of books. The numbers are equal.",
+      "retry": "Look again at the question.",
+      "chinese": "这里两本书，那里也两本，数量相等吗？"
+    },
+    "practice": "The numbers of ___ are equal.",
+    "practiceExamples": [
+      "The numbers of cups are equal."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-17-shade",
+    "sourceId": "story-17-shade",
+    "title": "Under the tree",
+    "wordId": "shade",
+    "courseWeek": 17,
+    "week": 17,
+    "definition": "a place where a tree or other thing keeps the light of the sun off it",
+    "definitionChinese": "被树等遮住直射阳光的阴凉处",
+    "reviewWordIds": [
+      "sun",
+      "tree",
+      "garden",
+      "rest"
+    ],
+    "narrator": "The person in red is speaking.",
+    "narratorChinese": "进入树荫的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "The sun is bright in the garden.",
+        "chinese": "花园里的阳光很明亮。",
+        "file": "shade-1.webp",
+        "alt": "I walk in the bright sun near a tree.",
+        "semanticText": null
+      },
+      {
+        "text": "The tree makes shade on the earth.",
+        "chinese": "树在地面上遮出一片阴凉。",
+        "file": "shade-2.webp",
+        "alt": "The tree makes shade on the earth.",
+        "semanticText": null
+      },
+      {
+        "text": "I go to the shade under the tree.",
+        "chinese": "我走到树下的阴凉处。",
+        "file": "shade-3.webp",
+        "alt": "I go to the shade under the tree.",
+        "semanticText": null
+      },
+      {
+        "text": "I rest in the shade.",
+        "chinese": "我在阴凉处休息。",
+        "file": "shade-4.webp",
+        "alt": "I rest in the shade under the tree.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Where is the shade in this story?",
+      "options": [
+        "Under the tree, out of the sun.",
+        "In the bright sun."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. The tree keeps the light of the sun off the place below it.",
+      "retry": "Look again at the question.",
+      "chinese": "故事中的阴凉处在哪里？"
+    },
+    "practice": "There is shade under ___.",
+    "practiceExamples": [
+      "There is shade under the tree."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-18-pocket",
+    "sourceId": "story-18-pocket",
+    "title": "A key in my coat",
+    "wordId": "pocket",
+    "courseWeek": 18,
+    "week": 18,
+    "definition": "a small part of clothes for keeping things",
+    "definitionChinese": "衣服上可以装小东西的口袋",
+    "reviewWordIds": [
+      "key",
+      "coat",
+      "in",
+      "hand"
+    ],
+    "narrator": "The person with the key is speaking.",
+    "narratorChinese": "穿外套的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I have a key in my hand.",
+        "chinese": "我手里有一把钥匙。",
+        "file": "pocket-1.webp",
+        "alt": "I have a key in my hand near the door.",
+        "semanticText": null
+      },
+      {
+        "text": "My coat has a pocket.",
+        "chinese": "我的外套有一个口袋。",
+        "file": "pocket-2.webp",
+        "alt": "My coat has a pocket. I have a key.",
+        "semanticText": null
+      },
+      {
+        "text": "I put the key in my pocket.",
+        "chinese": "我把钥匙放进口袋。",
+        "file": "pocket-3.webp",
+        "alt": "I put the key in my pocket.",
+        "semanticText": null
+      },
+      {
+        "text": "At the door, I take the key out of my pocket.",
+        "chinese": "到了门边，我从口袋里取出钥匙。",
+        "file": "pocket-4.webp",
+        "alt": "I take the key out of my pocket at the door.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "A small part of my coat keeps my key. What is it?",
+      "options": [
+        "A table.",
+        "A pocket."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. The pocket is part of the coat and can keep a small thing.",
+      "retry": "Look again at the question.",
+      "chinese": "外套上装钥匙的小部分叫什么？"
+    },
+    "practice": "I keep ___ in my pocket.",
+    "practiceExamples": [
+      "I keep my key in my pocket."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-19-soup",
+    "sourceId": "story-19-soup",
+    "title": "A warm meal",
+    "wordId": "soup",
+    "courseWeek": 19,
+    "week": 19,
+    "definition": "warm liquid food",
+    "definitionChinese": "以液体为主、可以作为食物的汤",
+    "reviewWordIds": [
+      "pot",
+      "spoon",
+      "warm",
+      "meal"
+    ],
+    "narrator": "The person with the pot is speaking.",
+    "narratorChinese": "喝汤的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "There is soup in the pot.",
+        "chinese": "锅里有汤。",
+        "file": "soup-1.webp",
+        "alt": "There is soup in the pot.",
+        "semanticText": null
+      },
+      {
+        "text": "The soup is warm.",
+        "chinese": "汤是温热的。",
+        "file": "soup-2.webp",
+        "alt": "I take soup from the pot for my meal.",
+        "semanticText": null
+      },
+      {
+        "text": "I have a spoon for my soup.",
+        "chinese": "我有一把喝汤的勺子。",
+        "file": "soup-3.webp",
+        "alt": "I have a spoon for my soup.",
+        "semanticText": null
+      },
+      {
+        "text": "The soup is part of my meal.",
+        "chinese": "汤是我这一餐的一部分。",
+        "file": "soup-4.webp",
+        "alt": "I have soup and bread for my meal.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Which food can I eat with a spoon in this story?",
+      "options": [
+        "Soup.",
+        "A key."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. Soup is liquid food. I can take some soup with a spoon.",
+      "retry": "Look again at the question.",
+      "chinese": "这个故事里用勺子吃的食物是什么？"
+    },
+    "practice": "The soup is ___.",
+    "practiceExamples": [
+      "The soup is warm."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-20-drawer",
+    "sourceId": "story-20-drawer",
+    "title": "A place for my pens",
+    "wordId": "drawer",
+    "courseWeek": 20,
+    "week": 20,
+    "definition": "a part of a table like a box that moves in and out",
+    "definitionChinese": "家具中可以拉出、推进的抽屉",
+    "reviewWordIds": [
+      "table",
+      "pen",
+      "open",
+      "in"
+    ],
+    "narrator": "The man is speaking.",
+    "narratorChinese": "整理笔的人",
+    "contextSupport": [
+      {
+        "text": "now",
+        "definition": "at this time",
+        "chinese": "现在，此刻"
+      }
+    ],
+    "pages": [
+      {
+        "text": "My pens are on the table.",
+        "chinese": "我的笔放在桌上。",
+        "file": "drawer-1.webp",
+        "alt": "My pens are on the table. The drawer is closed.",
+        "semanticText": null
+      },
+      {
+        "text": "I open the drawer in the table.",
+        "chinese": "我打开桌子的抽屉。",
+        "file": "drawer-2.webp",
+        "alt": "I open the drawer. My pens are on the table.",
+        "semanticText": null
+      },
+      {
+        "text": "I put the pens in the drawer.",
+        "chinese": "我把笔放进抽屉。",
+        "file": "drawer-3.webp",
+        "alt": "I put the pens in the drawer.",
+        "semanticText": null
+      },
+      {
+        "text": "Now my pens have a place in the drawer.",
+        "chinese": "现在我的笔有了放在抽屉里的固定位置。",
+        "file": "drawer-4.webp",
+        "alt": "My pens are in the drawer. The table is clean.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Which part of the table moves out and keeps my pens?",
+      "options": [
+        "The window.",
+        "The drawer."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. A drawer is part of the table and moves in and out.",
+      "retry": "Look again at the question.",
+      "chinese": "桌子上可以滑出、存放笔的是哪个部分？"
+    },
+    "practice": "I keep ___ in the drawer.",
+    "practiceExamples": [
+      "I keep my pens in the drawer."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-21-while",
+    "sourceId": "story-21-while",
+    "title": "At the same time",
+    "wordId": "while",
+    "courseWeek": 21,
+    "week": 21,
+    "definition": "at the same time as",
+    "definitionChinese": "两个动作在时间上同时发生，本篇不教对比义",
+    "reviewWordIds": [
+      "read",
+      "write",
+      "friend",
+      "table"
+    ],
+    "narrator": "Li is speaking.",
+    "narratorChinese": "最初读书、随后写字的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "My friend and I are at the table.",
+        "chinese": "朋友和我在桌旁。",
+        "file": "while-1.webp",
+        "alt": "Li and Anna are at the table.",
+        "semanticText": null
+      },
+      {
+        "text": "I read while my friend writes.",
+        "chinese": "我读书的时候，朋友在写字。",
+        "file": "while-2.webp",
+        "alt": "I read while my friend writes.",
+        "semanticText": null
+      },
+      {
+        "text": "My friend reads while I write.",
+        "chinese": "朋友读书的时候，我在写字。",
+        "file": "while-3.webp",
+        "alt": "My friend reads while I write.",
+        "semanticText": null
+      },
+      {
+        "text": "After the work, I put my book and pen in my bag.",
+        "chinese": "做完后，我把书和笔放进袋子里。",
+        "file": "while-4.webp",
+        "alt": "I put my book and pen in my bag.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I read while my friend writes. Do my friend and I do this at the same time?",
+      "options": [
+        "Yes.",
+        "No, I read after my friend stops."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. While tells of 2 actions at the same time.",
+      "retry": "Look again at the question.",
+      "chinese": "我读书时朋友写字，这两个动作是在同一时间吗？"
+    },
+    "practice": "I ___ while my friend ___.",
+    "practiceExamples": [
+      "I read while my friend writes."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-22-example",
+    "sourceId": "story-22-example",
+    "title": "Show me one",
+    "wordId": "example",
+    "courseWeek": 22,
+    "week": 22,
+    "definition": "one thing that shows what a kind of thing is like",
+    "definitionChinese": "用来说明一类事物的一个具体例子",
+    "reviewWordIds": [
+      "fruit",
+      "apple",
+      "orange",
+      "show"
+    ],
+    "narrator": "The person in red is speaking.",
+    "narratorChinese": "拿出水果举例的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "My friend asks for an example of fruit.",
+        "chinese": "朋友想看一个水果的例子。",
+        "file": "example-1.webp",
+        "alt": "My friend and I look at fruit.",
+        "semanticText": null
+      },
+      {
+        "text": "I show an apple. An apple is an example of fruit.",
+        "chinese": "我拿出苹果。苹果是水果的一个例子。",
+        "file": "example-2.webp",
+        "alt": "I show my friend an apple.",
+        "semanticText": null
+      },
+      {
+        "text": "An orange is another example.",
+        "chinese": "橙子是另一个例子。",
+        "file": "example-3.webp",
+        "alt": "I show my friend an orange.",
+        "semanticText": null
+      },
+      {
+        "text": "There are different examples of fruit.",
+        "chinese": "水果有不同的例子。",
+        "file": "example-4.webp",
+        "alt": "An apple and an orange are examples of fruit.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Which is an example of clothes?",
+      "options": [
+        "A cup.",
+        "A coat."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. A coat is one kind of clothes.",
+      "retry": "Look again at the question.",
+      "chinese": "哪一种是衣服的一个例子？"
+    },
+    "practice": "___ is an example of ___.",
+    "practiceExamples": [
+      "An apple is an example of fruit."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-23-selection",
+    "sourceId": "story-23-selection",
+    "title": "A cup for tea",
+    "wordId": "selection",
+    "courseWeek": 23,
+    "week": 23,
+    "definition": "a thing you choose from a group",
+    "definitionChinese": "从多个选项中选出的东西，本篇教选择结果",
+    "reviewWordIds": [
+      "cup",
+      "small",
+      "big",
+      "tea"
+    ],
+    "narrator": "The person in green is speaking.",
+    "narratorChinese": "选小杯子的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I want a cup for my tea.",
+        "chinese": "我想要一个喝茶的杯子。",
+        "file": "selection-1.webp",
+        "alt": "I look at a small cup and a big cup.",
+        "semanticText": null
+      },
+      {
+        "text": "Here is a small cup and a big cup.",
+        "chinese": "这里有一个小杯子和一个大杯子。",
+        "file": "selection-2.webp",
+        "alt": "There is a small cup and a big cup.",
+        "semanticText": null
+      },
+      {
+        "text": "I choose the small cup. It is my selection.",
+        "chinese": "我选小杯子。它是我选中的那个。",
+        "file": "selection-3.webp",
+        "alt": "I choose the small cup.",
+        "semanticText": null
+      },
+      {
+        "text": "I use my selection for my tea.",
+        "chinese": "我用选中的杯子喝茶。",
+        "file": "selection-4.webp",
+        "alt": "I have tea in the small cup. The big cup is on the table.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I choose the blue cup, not the red cup. What is my selection?",
+      "options": [
+        "The blue cup.",
+        "The red cup."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. My selection is the cup I choose.",
+      "retry": "Look again at the question.",
+      "chinese": "我选蓝杯子而不是红杯子，我选中的是哪一个？"
+    },
+    "practice": "My selection is ___.",
+    "practiceExamples": [
+      "My selection is the small cup."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-24-cause",
+    "sourceId": "story-24-cause",
+    "title": "Why does the paper move?",
+    "wordId": "cause",
+    "courseWeek": 24,
+    "week": 24,
+    "definition": "something that makes an event take place",
+    "definitionChinese": "使某件事发生的原因，本篇教名词",
+    "reviewWordIds": [
+      "paper",
+      "window",
+      "wind",
+      "open"
+    ],
+    "narrator": "The man is speaking.",
+    "narratorChinese": "在窗旁观察的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "The window is open. Wind comes in.",
+        "chinese": "窗开着。风吹进房间。",
+        "file": "cause-1.webp",
+        "alt": "The window is open. There is paper on the table.",
+        "semanticText": null
+      },
+      {
+        "text": "The wind moves the paper.",
+        "chinese": "风吹动了纸。",
+        "file": "cause-2.webp",
+        "alt": "The wind moves the paper on the table.",
+        "semanticText": null
+      },
+      {
+        "text": "The wind is the cause of this change.",
+        "chinese": "风是这次移动的原因。",
+        "file": "cause-3.webp",
+        "alt": "The wind moves the paper.",
+        "semanticText": null
+      },
+      {
+        "text": "I close the window. The paper is on the table.",
+        "chinese": "我关上窗。纸留在桌上。",
+        "file": "cause-4.webp",
+        "alt": "I close the window. The paper is on the table.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Rain gives water to a plant. What is the cause of the water on the plant?",
+      "options": [
+        "The color of the plant.",
+        "The rain."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. Rain brings water to the plant in this scene.",
+      "retry": "Look again at the question.",
+      "chinese": "雨水落到植物上，植物上出现这些水的原因是什么？"
+    },
+    "practice": "___ is the cause of ___.",
+    "practiceExamples": [
+      "The wind is the cause of the motion."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-25-purpose",
+    "sourceId": "story-25-purpose",
+    "title": "Why take a bag?",
+    "wordId": "purpose",
+    "courseWeek": 25,
+    "week": 25,
+    "definition": "the reason for doing something",
+    "definitionChinese": "做一件事想达到的目的",
+    "reviewWordIds": [
+      "bag",
+      "shop",
+      "carry",
+      "food"
+    ],
+    "narrator": "The person in blue is speaking.",
+    "narratorChinese": "拿袋子购物的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I take an empty bag to the shop.",
+        "chinese": "我带着一个空袋子去商店。",
+        "file": "purpose-1.webp",
+        "alt": "I take an empty bag from my home.",
+        "semanticText": null
+      },
+      {
+        "text": "I have a purpose for the bag.",
+        "chinese": "我带这个袋子有一个目的。",
+        "file": "purpose-2.webp",
+        "alt": "I have an empty bag at the shop.",
+        "semanticText": null
+      },
+      {
+        "text": "My purpose is to carry the food home.",
+        "chinese": "我的目的是把食物带回家。",
+        "file": "purpose-3.webp",
+        "alt": "I put food in the bag.",
+        "semanticText": null
+      },
+      {
+        "text": "The bag helps me carry the food.",
+        "chinese": "袋子帮助我提着食物。",
+        "file": "purpose-4.webp",
+        "alt": "I carry the food home in the bag.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I take a cup because I want to drink water. What is my purpose?",
+      "options": [
+        "To drink water.",
+        "To write a letter."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. The purpose is what I want to do with the cup.",
+      "retry": "Look again at the question.",
+      "chinese": "我为了喝水而拿杯子，我的目的是什么？"
+    },
+    "practice": "My purpose is to ___.",
+    "practiceExamples": [
+      "My purpose is to carry the food home."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-26-loss",
+    "sourceId": "story-26-loss",
+    "title": "Where is my key now?",
+    "wordId": "loss",
+    "courseWeek": 26,
+    "week": 26,
+    "definition": "not having something that was your property",
+    "definitionChinese": "原先拥有的东西不在了造成的失去",
+    "reviewWordIds": [
+      "key",
+      "pocket",
+      "morning",
+      "problem"
+    ],
+    "narrator": "The person in the coat is speaking.",
+    "narratorChinese": "钥匙的主人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "In the morning, I have my key.",
+        "chinese": "早上我还拿着钥匙。",
+        "file": "pocket-1.webp",
+        "alt": "In the morning, I have my key.",
+        "semanticText": null
+      },
+      {
+        "text": "Now the key is not in my pocket.",
+        "chinese": "现在钥匙不在口袋里。",
+        "file": "loss-2.webp",
+        "alt": "My pocket is empty. I have no key.",
+        "semanticText": null
+      },
+      {
+        "text": "I look for it. The key is not here.",
+        "chinese": "我寻找它，却找不到。",
+        "file": "loss-3.webp",
+        "alt": "I look for the key in my bag.",
+        "semanticText": null
+      },
+      {
+        "text": "The loss of my key is a problem.",
+        "chinese": "钥匙丢失给我带来了问题。",
+        "file": "loss-4.webp",
+        "alt": "My friend and I talk at the door. I have no key.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I have a pen in the morning. Now I can find no pen. What is the loss?",
+      "options": [
+        "A new cup on the table.",
+        "The loss of my pen."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. The pen was my property. Now I do not have it.",
+      "retry": "Look again at the question.",
+      "chinese": "原先有笔，寻找后仍找不到，丢失的是什么？"
+    },
+    "practice": "The loss of ___ is a problem.",
+    "practiceExamples": [
+      "The loss of my key is a problem."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-27-rule",
+    "sourceId": "story-27-rule",
+    "title": "In the library",
+    "wordId": "rule",
+    "courseWeek": 27,
+    "week": 27,
+    "definition": "a statement about what persons may or may not do",
+    "definitionChinese": "共同场景中约定应当遵守的要求",
+    "reviewWordIds": [
+      "library",
+      "read",
+      "low",
+      "book"
+    ],
+    "narrator": "The person in brown is speaking.",
+    "narratorChinese": "图书馆读者",
+    "contextSupport": [
+      {
+        "text": "voice",
+        "definition": "sound from a person",
+        "chinese": "人的说话声；keep your voice low 是轻声说话"
+      }
+    ],
+    "pages": [
+      {
+        "text": "Persons are reading in the library.",
+        "chinese": "人们正在图书馆里阅读。",
+        "file": "rule-1.webp",
+        "alt": "Persons read books in the library.",
+        "semanticText": null
+      },
+      {
+        "text": "There is a rule: keep your voice low.",
+        "chinese": "这里有一条规则：轻声说话。",
+        "file": "rule-2.webp",
+        "alt": "A person tells my friend and me the rule in the library.",
+        "semanticText": null
+      },
+      {
+        "text": "My friend and I keep the rule.",
+        "chinese": "朋友和我遵守规则。",
+        "file": "rule-3.webp",
+        "alt": "My friend and I talk quietly near the books.",
+        "semanticText": null
+      },
+      {
+        "text": "The rule helps persons read quietly.",
+        "chinese": "这条规则帮助大家安静阅读。",
+        "file": "rule-4.webp",
+        "alt": "Persons read quietly in the library.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "The rule is to keep your voice low. Which action keeps this rule?",
+      "options": [
+        "Quiet talk.",
+        "A loud voice across the room."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. Quiet talk keeps the rule in this library.",
+      "retry": "Look again at the question.",
+      "chinese": "规则要求轻声说话，哪种行为遵守规则？"
+    },
+    "practice": "One rule here is ___.",
+    "practiceExamples": [
+      "One rule here is to keep your voice low."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-28-journey",
+    "sourceId": "story-28-journey",
+    "title": "From home to the market",
+    "wordId": "journey",
+    "courseWeek": 28,
+    "week": 28,
+    "definition": "the act of going from one place to another",
+    "definitionChinese": "从一处到另一处的一段行程",
+    "reviewWordIds": [
+      "home",
+      "bus",
+      "road",
+      "market"
+    ],
+    "narrator": "The person with the bag is speaking.",
+    "narratorChinese": "乘公交的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "My journey starts at home.",
+        "chinese": "我的行程从家里开始。",
+        "file": "journey-1.webp",
+        "alt": "My journey starts at home.",
+        "semanticText": null
+      },
+      {
+        "text": "I take a bus to the market.",
+        "chinese": "我乘公交去集市。",
+        "file": "journey-2.webp",
+        "alt": "I take a bus. My bag is with me.",
+        "semanticText": null
+      },
+      {
+        "text": "The bus goes on the road.",
+        "chinese": "公交车沿着道路行驶。",
+        "file": "journey-3.webp",
+        "alt": "The bus goes on the road.",
+        "semanticText": null
+      },
+      {
+        "text": "My journey ends at the market.",
+        "chinese": "我的行程在集市结束。",
+        "file": "journey-4.webp",
+        "alt": "I am at the market with my bag. The bus is here.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "A journey starts at home and ends at school. Where does it end?",
+      "options": [
+        "At home.",
+        "At school."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. The end of this journey is school.",
+      "retry": "Look again at the question.",
+      "chinese": "从家去学校的行程终点在哪里？"
+    },
+    "practice": "My journey starts at ___ and ends at ___.",
+    "practiceExamples": [
+      "My journey starts at home and ends at the market."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-29-group",
+    "sourceId": "story-29-group",
+    "title": "Persons working together",
+    "wordId": "group",
+    "courseWeek": 29,
+    "week": 29,
+    "definition": "persons or things together",
+    "definitionChinese": "被放在一起考虑的一组人，本篇只教人群义",
+    "reviewWordIds": [
+      "friend",
+      "garden",
+      "work",
+      "together"
+    ],
+    "narrator": "This is a story about a group.",
+    "narratorChinese": "描述三人小组的旁观者",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "3 persons come to work in the garden.",
+        "chinese": "三个人来花园做事。",
+        "file": "group-1.webp",
+        "alt": "3 persons work in the garden.",
+        "semanticText": null
+      },
+      {
+        "text": "They are a group.",
+        "chinese": "他们组成一个小组。",
+        "file": "group-2.webp",
+        "alt": "The group talks about the work in the garden.",
+        "semanticText": null
+      },
+      {
+        "text": "One person brings water. The others clean.",
+        "chinese": "一个人送水，其他人清理。",
+        "file": "group-3.webp",
+        "alt": "One person gives water to the plants. The others clean.",
+        "semanticText": null
+      },
+      {
+        "text": "The group finishes the work together.",
+        "chinese": "这个小组一起完成了工作。",
+        "file": "group-4.webp",
+        "alt": "The group finishes the work together.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "3 friends work together. Are they a group?",
+      "options": [
+        "Yes.",
+        "No."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. The 3 friends work together in a group.",
+      "retry": "Look again at the question.",
+      "chinese": "三个朋友一起组成小队做事，他们是一个小组吗？"
+    },
+    "practice": "My group has ___ persons.",
+    "practiceExamples": [
+      "My group has 3 persons."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-30-dirty",
+    "sourceId": "story-30-dirty",
+    "title": "After the garden work",
+    "wordId": "dirty",
+    "courseWeek": 30,
+    "week": 30,
+    "definition": "not clean",
+    "definitionChinese": "表面有泥土或污物的，不干净",
+    "reviewWordIds": [
+      "hand",
+      "garden",
+      "wash",
+      "clean"
+    ],
+    "narrator": "The person in blue is speaking.",
+    "narratorChinese": "做园艺的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I work in the garden.",
+        "chinese": "我在花园里做事。",
+        "file": "dirty-1.webp",
+        "alt": "I work in the garden with my hands.",
+        "semanticText": null
+      },
+      {
+        "text": "Now my hands are dirty.",
+        "chinese": "现在我的手脏了。",
+        "file": "dirty-2.webp",
+        "alt": "There is earth on my hands. My hands are dirty.",
+        "semanticText": null
+      },
+      {
+        "text": "I wash my dirty hands with water and soap.",
+        "chinese": "我用水和肥皂洗脏了的手。",
+        "file": "dirty-3.webp",
+        "alt": "I wash my hands with water and soap.",
+        "semanticText": null
+      },
+      {
+        "text": "Now my hands are clean.",
+        "chinese": "现在我的手干净了。",
+        "file": "dirty-4.webp",
+        "alt": "My hands are clean.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "There is earth on my shoes after garden work. Are they dirty?",
+      "options": [
+        "No, the earth makes the shoes clean.",
+        "Yes."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. The earth on the shoes makes the shoes dirty in this scene.",
+      "retry": "Look again at the question.",
+      "chinese": "园艺后鞋上有泥，鞋子脏了吗？"
+    },
+    "practice": "My ___ is dirty. I will clean it.",
+    "practiceExamples": [
+      "My coat is dirty. I will clean it."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-31-dry",
+    "sourceId": "story-31-dry",
+    "title": "A cloth in the sun",
+    "wordId": "dry",
+    "courseWeek": 31,
+    "week": 31,
+    "definition": "with no water on or in it",
+    "definitionChinese": "没有水分或已不潮湿的，本篇教状态",
+    "reviewWordIds": [
+      "cloth",
+      "water",
+      "sun",
+      "wash"
+    ],
+    "narrator": "The person in red is speaking.",
+    "narratorChinese": "洗布的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I wash the cloth. There is water in it.",
+        "chinese": "我洗布，布里含着水。",
+        "file": "dry-1.webp",
+        "alt": "I wash the cloth. It has water in it.",
+        "semanticText": null
+      },
+      {
+        "text": "I put the cloth in the sun.",
+        "chinese": "我把布放到阳光下晾。",
+        "file": "dry-2.webp",
+        "alt": "I put the wet cloth in the sun.",
+        "semanticText": null
+      },
+      {
+        "text": "After some time, the cloth is dry.",
+        "chinese": "过了一段时间，布干了。",
+        "file": "dry-3.webp",
+        "alt": "After some time, the cloth is dry.",
+        "semanticText": null
+      },
+      {
+        "text": "I use the dry cloth again.",
+        "chinese": "我再次使用这块干布。",
+        "file": "dry-4.webp",
+        "alt": "I use the dry cloth to clean a cup.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "A cloth has no water in it now. Is it dry?",
+      "options": [
+        "Yes.",
+        "No."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. Dry means it does not have water on or in it.",
+      "retry": "Look again at the question.",
+      "chinese": "一块布现在没有水分了，它是干的吗？"
+    },
+    "practice": "The ___ is dry now.",
+    "practiceExamples": [
+      "The cloth is dry now."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-32-art",
+    "sourceId": "story-32-art",
+    "title": "A picture for the wall",
+    "wordId": "art",
+    "courseWeek": 32,
+    "week": 32,
+    "definition": "pictures and other things that express ideas or feelings",
+    "definitionChinese": "通过图画等作品表达想法或感受",
+    "reviewWordIds": [
+      "flower",
+      "color",
+      "wall",
+      "make"
+    ],
+    "narrator": "The man is speaking.",
+    "narratorChinese": "画画的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I look at the flowers in the garden.",
+        "chinese": "我看花园里的花。",
+        "file": "art-1.webp",
+        "alt": "I look at flowers in the garden.",
+        "semanticText": null
+      },
+      {
+        "text": "I make a picture with colors.",
+        "chinese": "我用颜色画一幅画。",
+        "file": "art-2.webp",
+        "alt": "I make a picture of flowers with colors.",
+        "semanticText": null
+      },
+      {
+        "text": "My art shows how I feel about the garden.",
+        "chinese": "我的艺术作品表达我对花园的感受。",
+        "file": "art-3.webp",
+        "alt": "I show my art about the garden.",
+        "semanticText": null
+      },
+      {
+        "text": "I put my art on the wall for my friend to see.",
+        "chinese": "我把作品放到墙上给朋友看。",
+        "file": "art-4.webp",
+        "alt": "My friend and I look at my art on the wall.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I make a picture to show an idea. Can it be art?",
+      "options": [
+        "No, art is only for experts.",
+        "Yes."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. A picture can express an idea. It can be art.",
+      "retry": "Look again at the question.",
+      "chinese": "我画一幅画表达想法，它可以是艺术作品吗？"
+    },
+    "practice": "My art shows ___.",
+    "practiceExamples": [
+      "My art shows my garden."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-33-distance",
+    "sourceId": "story-33-distance",
+    "title": "Near or far from home?",
+    "wordId": "distance",
+    "courseWeek": 33,
+    "week": 33,
+    "definition": "the space between 2 places",
+    "definitionChinese": "两个地点之间的距离",
+    "reviewWordIds": [
+      "home",
+      "shop",
+      "school",
+      "far"
+    ],
+    "narrator": "The person with the bag is speaking.",
+    "narratorChinese": "从同一家出发的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "The shop is near my home.",
+        "chinese": "商店离我家近。",
+        "file": "distance-1.webp",
+        "alt": "The shop is near my home.",
+        "semanticText": null
+      },
+      {
+        "text": "The distance from home to the shop is short.",
+        "chinese": "从家到商店的距离短。",
+        "file": "distance-2.webp",
+        "alt": "I walk from home to the shop. The distance is short.",
+        "semanticText": null
+      },
+      {
+        "text": "The school is far from my home.",
+        "chinese": "学校离我家远。",
+        "file": "distance-3.webp",
+        "alt": "The school is far from the same home.",
+        "semanticText": null
+      },
+      {
+        "text": "The distance to the school is great.",
+        "chinese": "到学校的距离很大。",
+        "file": "distance-4-v2.webp",
+        "alt": "I am at the school at the end of my journey.",
+        "semanticText": {
+          "kind": "comparison",
+          "label": "The same home",
+          "lines": [
+            "Home to the shop: a short distance.",
+            "Home to the school: a great distance."
+          ],
+          "accessibleSummary": "The journeys start at the same home. The shop is near and the school is far."
+        }
+      }
+    ],
+    "check": {
+      "prompt": "The shop is near home. The school is far from home. Which journey covers more distance?",
+      "options": [
+        "Home to the school.",
+        "Home to the shop."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. The journeys start at the same home. The shop is near, and the school is far.",
+      "retry": "Look again at the question.",
+      "chinese": "同样从家出发，到商店近、到学校远，哪个距离更长？"
+    },
+    "practice": "The distance from ___ to ___ is ___.",
+    "practiceExamples": [
+      "The distance from home to the shop is short."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-34-growth",
+    "sourceId": "story-34-growth",
+    "title": "The tree gets big",
+    "wordId": "growth",
+    "courseWeek": 34,
+    "week": 34,
+    "definition": "an increase in size",
+    "definitionChinese": "生物随时间长大，本篇教植物生长",
+    "reviewWordIds": [
+      "tree",
+      "garden",
+      "year",
+      "water"
+    ],
+    "narrator": "The person in red is speaking.",
+    "narratorChinese": "照看小树的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "There is a small tree in the garden.",
+        "chinese": "花园里有一棵小树。",
+        "file": "growth-1.webp",
+        "alt": "There is a small tree in the garden.",
+        "semanticText": {
+          "kind": "time",
+          "label": "At first",
+          "lines": [],
+          "accessibleSummary": "The tree is small at first."
+        }
+      },
+      {
+        "text": "The tree has water and light.",
+        "chinese": "树得到水和光。",
+        "file": "growth-2.webp",
+        "alt": "The small tree has water and light.",
+        "semanticText": {
+          "kind": "time",
+          "label": "At first",
+          "lines": [],
+          "accessibleSummary": "The tree is small at first."
+        }
+      },
+      {
+        "text": "After a year, the tree is big.",
+        "chinese": "过了一年，这棵树长大了。",
+        "file": "growth-3.webp",
+        "alt": "After a year, the same tree is big.",
+        "semanticText": {
+          "kind": "time",
+          "label": "After a year",
+          "lines": [],
+          "accessibleSummary": "After a year, the same tree is big."
+        }
+      },
+      {
+        "text": "This change is the growth of the tree.",
+        "chinese": "这种变化就是树的生长。",
+        "file": "growth-4.webp",
+        "alt": "I look at the growth of the tree.",
+        "semanticText": {
+          "kind": "time",
+          "label": "After a year",
+          "lines": [],
+          "accessibleSummary": "After a year, the same tree is big."
+        }
+      }
+    ],
+    "check": {
+      "prompt": "A small plant gets big over time. What is this?",
+      "options": [
+        "A change of its name.",
+        "Growth."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. Growth is an increase in size over time.",
+      "retry": "Look again at the question.",
+      "chinese": "植物随时间长大了，这是什么变化？"
+    },
+    "practice": "I can see the growth of ___.",
+    "practiceExamples": [
+      "I can see the growth of the tree."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-35-support",
+    "sourceId": "story-35-support",
+    "title": "Help with a bag",
+    "wordId": "support",
+    "courseWeek": 35,
+    "week": 35,
+    "definition": "to help a person or thing",
+    "definitionChinese": "通过实际帮助支持某人，本篇教帮助义",
+    "reviewWordIds": [
+      "friend",
+      "bag",
+      "weight",
+      "help"
+    ],
+    "narrator": "The person in red is speaking.",
+    "narratorChinese": "帮助朋友提食物的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "My friend has a bag full of food.",
+        "chinese": "朋友提着一个装满食物的袋子。",
+        "file": "support-1.webp",
+        "alt": "My friend has a bag full of food.",
+        "semanticText": null
+      },
+      {
+        "text": "The bag is not light. She needs help.",
+        "chinese": "袋子不轻。她需要帮忙。",
+        "file": "support-2.webp",
+        "alt": "My friend asks for help with the bag.",
+        "semanticText": null
+      },
+      {
+        "text": "I support my friend by carrying some of the food.",
+        "chinese": "我帮忙提一部分食物，支持朋友。",
+        "file": "support-3.webp",
+        "alt": "I carry some of the food for my friend.",
+        "semanticText": null
+      },
+      {
+        "text": "I carry food, and she carries food. I support her with this work.",
+        "chinese": "我提食物，她也提食物。我在这件事上支持她。",
+        "file": "support-4.webp",
+        "alt": "My friend and I carry food home in 2 bags.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "My friend needs help with her work. Which action can support her?",
+      "options": [
+        "Helping her with part of the work.",
+        "Doing no work to help."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. To support her here is to give useful help.",
+      "retry": "Look again at the question.",
+      "chinese": "朋友需要帮忙做事，哪种行为是在支持她？"
+    },
+    "practice": "I support ___ by ___.",
+    "practiceExamples": [
+      "I support my friend by helping with the work."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-36-opinion",
+    "sourceId": "story-36-opinion",
+    "title": "Different cups for different persons",
+    "wordId": "opinion",
+    "courseWeek": 36,
+    "week": 36,
+    "definition": "what a person has in mind about something",
+    "definitionChinese": "一个人对事物的看法，可以与别人不同",
+    "reviewWordIds": [
+      "cup",
+      "small",
+      "big",
+      "like"
+    ],
+    "narrator": "The person in green is speaking.",
+    "narratorChinese": "喜欢小杯子的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "My friend and I look at 2 cups.",
+        "chinese": "朋友和我看着两个杯子。",
+        "file": "opinion-1.webp",
+        "alt": "My friend and I look at 2 cups.",
+        "semanticText": null
+      },
+      {
+        "text": "In my opinion, the small cup is best for me.",
+        "chinese": "在我看来，小杯子最适合我。",
+        "file": "opinion-2.webp",
+        "alt": "I choose the small cup. My friend looks at the big cup.",
+        "semanticText": null
+      },
+      {
+        "text": "My friend likes the big cup. That is her opinion.",
+        "chinese": "朋友喜欢大杯子。这是她的看法。",
+        "file": "opinion-3.webp",
+        "alt": "My friend chooses the big cup. I have the small cup.",
+        "semanticText": null
+      },
+      {
+        "text": "My opinion is different from hers. I like my cup, and she likes her cup.",
+        "chinese": "我的看法和她不同。我喜欢我的杯子，她喜欢她的杯子。",
+        "file": "opinion-4.webp",
+        "alt": "My friend and I use different cups for tea.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I say, \"I like the small cup best.\" Is this my opinion?",
+      "options": [
+        "No, all persons have to like it best.",
+        "Yes."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. The sentence tells what I like. It is my opinion.",
+      "retry": "Look again at the question.",
+      "chinese": "我说“我最喜欢小杯子”，这是我的看法吗？"
+    },
+    "practice": "In my opinion, ___ is good for me because ___.",
+    "practiceExamples": [
+      "In my opinion, the small cup is good for me because it is light."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-37-river",
+    "sourceId": "story-37-river",
+    "title": "A walk by moving water",
+    "wordId": "river",
+    "courseWeek": 37,
+    "week": 37,
+    "definition": "a long, natural body of moving water on land",
+    "definitionChinese": "在陆地上沿一定河道流动的水",
+    "reviewWordIds": [
+      "water",
+      "land",
+      "bridge",
+      "walk"
+    ],
+    "narrator": "The person in red is speaking.",
+    "narratorChinese": "在河边步行的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "My friend and I walk near a river.",
+        "chinese": "我们在河边走。",
+        "file": "river-1.webp",
+        "alt": "My friend and I walk near a river.",
+        "semanticText": null
+      },
+      {
+        "text": "The water moves in the river.",
+        "chinese": "水在河里流动。",
+        "file": "river-2.webp",
+        "alt": "The water moves in the river.",
+        "semanticText": null
+      },
+      {
+        "text": "The water goes under a bridge.",
+        "chinese": "水从桥下流过。",
+        "file": "river-3.webp",
+        "alt": "The water goes under the bridge.",
+        "semanticText": null
+      },
+      {
+        "text": "My friend and I watch the river from a safe place.",
+        "chinese": "我们在安全的地方看河。",
+        "file": "river-4.webp",
+        "alt": "My friend and I watch the river from a safe place.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Which is a river?",
+      "options": [
+        "A long, natural body of moving water on land.",
+        "Water in a cup."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. A river is a long, natural body of moving water on land.",
+      "retry": "Look again at the question.",
+      "chinese": "哪一种是河流？"
+    },
+    "practice": "The river goes ___.",
+    "practiceExamples": [
+      "The river goes under the bridge."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-38-seed",
+    "sourceId": "story-38-seed",
+    "title": "From a small seed",
+    "wordId": "seed",
+    "courseWeek": 38,
+    "week": 38,
+    "definition": "a small part of a plant from which a new plant can come",
+    "definitionChinese": "能在适当条件下长成新植物的种子",
+    "reviewWordIds": [
+      "plant",
+      "pot",
+      "water",
+      "growth"
+    ],
+    "narrator": "The person with the seed is speaking.",
+    "narratorChinese": "播种的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I have a small seed.",
+        "chinese": "我有一粒小种子。",
+        "file": "seed-1.webp",
+        "alt": "I have a small seed near a pot of earth.",
+        "semanticText": null
+      },
+      {
+        "text": "I put the seed in the earth in a pot.",
+        "chinese": "我把种子放进花盆的土里。",
+        "file": "seed-2.webp",
+        "alt": "I put the seed in the earth in a pot.",
+        "semanticText": null
+      },
+      {
+        "text": "I give it water and time.",
+        "chinese": "我给它水，也给它时间。",
+        "file": "seed-3.webp",
+        "alt": "I give water to the seed over some days.",
+        "semanticText": {
+          "kind": "time",
+          "label": "Over some days",
+          "lines": [],
+          "accessibleSummary": "I give the seed water over some days."
+        }
+      },
+      {
+        "text": "A young plant comes from the seed.",
+        "chinese": "一株幼小的植物从种子长出来。",
+        "file": "seed-4.webp",
+        "alt": "A young plant comes from the seed.",
+        "semanticText": {
+          "kind": "time",
+          "label": "After some days",
+          "lines": [],
+          "accessibleSummary": "After some days, a young plant comes from the seed."
+        }
+      }
+    ],
+    "check": {
+      "prompt": "What can a new plant come from?",
+      "options": [
+        "A metal key.",
+        "A seed."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. A new plant can come from a seed when conditions are right.",
+      "retry": "Look again at the question.",
+      "chinese": "在合适条件下，新植物能从什么长出来？"
+    },
+    "practice": "A ___ can come from a seed.",
+    "practiceExamples": [
+      "A tree can come from a seed."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-39-across",
+    "sourceId": "story-39-across",
+    "title": "To the other side",
+    "wordId": "across",
+    "courseWeek": 39,
+    "week": 39,
+    "definition": "from one side to the other",
+    "definitionChinese": "从一侧移动到另一侧",
+    "reviewWordIds": [
+      "bridge",
+      "river",
+      "way",
+      "walk"
+    ],
+    "narrator": "The person in red is speaking.",
+    "narratorChinese": "去对岸找朋友的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "My friend is on the other side of the river.",
+        "chinese": "朋友在河的另一边。",
+        "file": "across-1.webp",
+        "alt": "My friend is on the other side of the river.",
+        "semanticText": null
+      },
+      {
+        "text": "I go to the bridge.",
+        "chinese": "我走到桥边。",
+        "file": "across-2.webp",
+        "alt": "I go to the bridge. My friend is on the other side.",
+        "semanticText": null
+      },
+      {
+        "text": "I walk across the bridge.",
+        "chinese": "我走过这座桥。",
+        "file": "across-3.webp",
+        "alt": "I walk across the bridge to my friend.",
+        "semanticText": null
+      },
+      {
+        "text": "Now I am on the other side with my friend.",
+        "chinese": "现在我和朋友在另一边了。",
+        "file": "across-4.webp",
+        "alt": "My friend and I are together on the other side.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I walk across a room. Where do I go?",
+      "options": [
+        "From one side to the other.",
+        "I am in the same place with no motion."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. Across describes motion from one side to the other.",
+      "retry": "Look again at the question.",
+      "chinese": "我穿过房间，是怎样移动的？"
+    },
+    "practice": "I go across ___.",
+    "practiceExamples": [
+      "I go across the bridge."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-40-receipt",
+    "sourceId": "story-40-receipt",
+    "title": "A paper after payment",
+    "wordId": "receipt",
+    "courseWeek": 40,
+    "week": 40,
+    "definition": "a paper that shows a payment",
+    "definitionChinese": "证明已付款并记录交易的收据",
+    "reviewWordIds": [
+      "pay",
+      "shop",
+      "buy",
+      "cup"
+    ],
+    "narrator": "The person in the coat is speaking.",
+    "narratorChinese": "买杯子的顾客",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I buy a cup at the shop.",
+        "chinese": "我在商店买一个杯子。",
+        "file": "receipt-1.webp",
+        "alt": "I buy a cup at the shop.",
+        "semanticText": null
+      },
+      {
+        "text": "I pay for the cup.",
+        "chinese": "我付杯子的钱。",
+        "file": "receipt-2.webp",
+        "alt": "I pay for the cup.",
+        "semanticText": null
+      },
+      {
+        "text": "The shop gives me a receipt.",
+        "chinese": "商店给我一张收据。",
+        "file": "receipt-3.webp",
+        "alt": "The shop gives me a receipt for the cup.",
+        "semanticText": {
+          "kind": "receipt",
+          "label": "Payment record",
+          "lines": [
+            "Payment for: a cup.",
+            "Payment: complete."
+          ],
+          "accessibleSummary": "This receipt shows a complete payment for one cup."
+        }
+      },
+      {
+        "text": "The receipt shows my payment.",
+        "chinese": "收据显示我的付款。",
+        "file": "receipt-4.webp",
+        "alt": "At home, I read the receipt for the cup.",
+        "semanticText": {
+          "kind": "receipt",
+          "label": "Payment record",
+          "lines": [
+            "Payment for: a cup.",
+            "Payment: complete."
+          ],
+          "accessibleSummary": "This receipt shows a complete payment for one cup."
+        }
+      }
+    ],
+    "check": {
+      "prompt": "Which paper shows my payment for the cup?",
+      "options": [
+        "A page for a letter.",
+        "The receipt."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. The receipt records the payment for the cup.",
+      "retry": "Look again at the question.",
+      "chinese": "哪张纸能显示我已经付了杯子的钱？"
+    },
+    "practice": "The receipt shows payment for ___.",
+    "practiceExamples": [
+      "The receipt shows payment for a cup."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-41-pull",
+    "sourceId": "story-41-pull",
+    "title": "Open the drawer",
+    "wordId": "pull",
+    "courseWeek": 41,
+    "week": 41,
+    "definition": "to move a thing to you",
+    "definitionChinese": "把东西朝自己的方向拉",
+    "reviewWordIds": [
+      "drawer",
+      "hand",
+      "open",
+      "move"
+    ],
+    "narrator": "The man is speaking.",
+    "narratorChinese": "拉抽屉的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "My pen is in the drawer.",
+        "chinese": "我的笔在抽屉里。",
+        "file": "pull-1.webp",
+        "alt": "My pen is in the drawer. The drawer is closed.",
+        "semanticText": null
+      },
+      {
+        "text": "I put my hand on the drawer.",
+        "chinese": "我把手放到抽屉把手上。",
+        "file": "pull-2.webp",
+        "alt": "I put my hand on the drawer.",
+        "semanticText": null
+      },
+      {
+        "text": "I pull the drawer to me.",
+        "chinese": "我把抽屉朝自己拉。",
+        "file": "pull-3.webp",
+        "alt": "I pull the drawer to me. My pen is in it.",
+        "semanticText": null
+      },
+      {
+        "text": "The drawer is open. I can take my pen.",
+        "chinese": "抽屉打开了。我可以拿笔了。",
+        "file": "pull-4.webp",
+        "alt": "The drawer is open. I take my pen.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "To pull a box, which way do I move it?",
+      "options": [
+        "To me.",
+        "From me to my friend."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. Pull means moving a thing to the person doing the action.",
+      "retry": "Look again at the question.",
+      "chinese": "拉一个盒子，是把它朝哪个方向移动？"
+    },
+    "practice": "I pull ___ to me.",
+    "practiceExamples": [
+      "I pull the drawer to me."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-42-solid",
+    "sourceId": "story-42-solid",
+    "title": "A stone and some water",
+    "wordId": "solid",
+    "courseWeek": 42,
+    "week": 42,
+    "definition": "not liquid or air",
+    "definitionChinese": "固体，本篇用固定形状与液体对照",
+    "reviewWordIds": [
+      "stone",
+      "water",
+      "form",
+      "cup"
+    ],
+    "narrator": "The person in red is speaking.",
+    "narratorChinese": "比较石头和水的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I have a stone and some water.",
+        "chinese": "我有一块石头和一些水。",
+        "file": "solid-1.webp",
+        "alt": "I have a stone and some water in a cup.",
+        "semanticText": null
+      },
+      {
+        "text": "The water takes the form of its cup.",
+        "chinese": "水呈现装它的杯子的形状。",
+        "file": "solid-2.webp",
+        "alt": "I put water from one cup in another cup.",
+        "semanticText": null
+      },
+      {
+        "text": "The stone keeps its form. It is solid.",
+        "chinese": "石头保持形状。它是固体。",
+        "file": "solid-3.webp",
+        "alt": "The stone keeps its form. The water is in the wide cup.",
+        "semanticText": null
+      },
+      {
+        "text": "This solid stone is different from the liquid water.",
+        "chinese": "这块固体石头与液态水不同。",
+        "file": "solid-4.webp",
+        "alt": "The stone is solid. The water is liquid.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Which is solid in this story?",
+      "options": [
+        "The water.",
+        "The stone."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. The stone is solid; the water is liquid.",
+      "retry": "Look again at the question.",
+      "chinese": "这个故事里哪一个是固体？"
+    },
+    "practice": "The ___ is solid.",
+    "practiceExamples": [
+      "The stone is solid."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-43-observation",
+    "sourceId": "story-43-observation",
+    "title": "Look at the plant",
+    "wordId": "observation",
+    "courseWeek": 43,
+    "week": 43,
+    "definition": "a fact learned by looking with care",
+    "definitionChinese": "通过仔细看直接注意到的事实",
+    "reviewWordIds": [
+      "plant",
+      "leaf",
+      "see",
+      "water"
+    ],
+    "narrator": "The person with glasses is speaking.",
+    "narratorChinese": "观察植物的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I look at the plant with care.",
+        "chinese": "我仔细观察这株植物。",
+        "file": "observation-1.webp",
+        "alt": "I look at a plant. One leaf is brown.",
+        "semanticText": null
+      },
+      {
+        "text": "One leaf is brown. That is my observation.",
+        "chinese": "一片叶子是棕色的。这是我的观察。",
+        "file": "observation-2.webp",
+        "alt": "One leaf of the plant is brown.",
+        "semanticText": {
+          "kind": "observation",
+          "label": "What I see",
+          "lines": [
+            "One leaf is brown."
+          ],
+          "accessibleSummary": "One brown leaf is a fact I can see."
+        }
+      },
+      {
+        "text": "The earth is dry. That is another observation.",
+        "chinese": "土是干的。这是另一个观察。",
+        "file": "observation-3.webp",
+        "alt": "I look at the dry earth in the pot.",
+        "semanticText": {
+          "kind": "observation",
+          "label": "What I see",
+          "lines": [
+            "The earth is dry."
+          ],
+          "accessibleSummary": "The dry earth is another observation."
+        }
+      },
+      {
+        "text": "It is possible that the plant needs water. I need more facts to be certain.",
+        "chinese": "我有个想法：植物可能需要水。我需要更多事实才能确定。",
+        "file": "observation-4.webp",
+        "alt": "I look at the plant with care. I need more facts.",
+        "semanticText": {
+          "kind": "inference",
+          "label": "One possible reason",
+          "lines": [
+            "The plant may need water."
+          ],
+          "accessibleSummary": "This is a possible reason, not a certain fact."
+        }
+      }
+    ],
+    "check": {
+      "prompt": "Which sentence is an observation?",
+      "options": [
+        "One leaf is brown.",
+        "It is possible that the plant is ill."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. I can see the brown leaf. The other sentence gives a possible reason.",
+      "retry": "Look again at the question.",
+      "chinese": "哪一句是在说直接观察到的现象？"
+    },
+    "practice": "I can see ___. My observation is ___.",
+    "practiceExamples": [
+      "I can see a brown leaf. My observation is that one leaf is brown."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-44-parcel",
+    "sourceId": "story-44-parcel",
+    "title": "A book in a parcel",
+    "wordId": "parcel",
+    "courseWeek": 44,
+    "week": 44,
+    "definition": "a thing covered in paper for carrying or sending",
+    "definitionChinese": "包好用于运送的一件或一组物品",
+    "reviewWordIds": [
+      "book",
+      "paper",
+      "box",
+      "friend"
+    ],
+    "narrator": "Li is speaking.",
+    "narratorChinese": "包装书的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I have a book for my friend.",
+        "chinese": "我有一本书要给朋友。",
+        "file": "parcel-1.webp",
+        "alt": "I have a book, a box and some paper.",
+        "semanticText": null
+      },
+      {
+        "text": "I put the book in a box and cover it with paper.",
+        "chinese": "我把书装进盒子，再用纸包好。",
+        "file": "parcel-2.webp",
+        "alt": "I put the book in the box and cover it with paper.",
+        "semanticText": null
+      },
+      {
+        "text": "Now it is a parcel.",
+        "chinese": "现在它是一个包裹。",
+        "file": "parcel-3.webp",
+        "alt": "The book is in a parcel.",
+        "semanticText": null
+      },
+      {
+        "text": "The parcel is ready to go to my friend.",
+        "chinese": "包裹准备送到朋友那里。",
+        "file": "parcel-4.webp",
+        "alt": "I give the parcel to a person for sending.",
+        "semanticText": {
+          "kind": "address",
+          "label": "For my friend",
+          "lines": [
+            "To: Anna.",
+            "At: 2 Green Road."
+          ],
+          "accessibleSummary": "This parcel is for Anna at 2 Green Road."
+        }
+      }
+    ],
+    "check": {
+      "prompt": "A book is covered in paper for sending. What is it now?",
+      "options": [
+        "A river.",
+        "A parcel."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. A parcel is a thing covered in paper for carrying or sending.",
+      "retry": "Look again at the question.",
+      "chinese": "一本书已包好准备寄出，包好的这一件是什么？"
+    },
+    "practice": "The parcel has ___ in it.",
+    "practiceExamples": [
+      "The parcel has a book in it."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-45-news",
+    "sourceId": "story-45-news",
+    "title": "A letter from my friend",
+    "wordId": "news",
+    "courseWeek": 45,
+    "week": 45,
+    "definition": "new knowledge about an event",
+    "definitionChinese": "关于已发生事情的新消息",
+    "reviewWordIds": [
+      "letter",
+      "friend",
+      "work",
+      "tell"
+    ],
+    "narrator": "The person with the letter is speaking.",
+    "narratorChinese": "收到朋友来信的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "Yesterday, I opened a letter from my friend.",
+        "chinese": "昨天，我打开朋友的一封信。",
+        "file": "news-1.webp",
+        "alt": "I open a letter from my friend.",
+        "semanticText": {
+          "kind": "time",
+          "label": "Yesterday",
+          "lines": [],
+          "accessibleSummary": "This is a story about yesterday."
+        }
+      },
+      {
+        "text": "My friend finished her work. This is the news in the letter.",
+        "chinese": "朋友完成了工作。这是信中的消息。",
+        "file": "news-2.webp",
+        "alt": "I read the letter from my friend.",
+        "semanticText": {
+          "kind": "letter",
+          "label": "Yesterday: from my friend",
+          "lines": [
+            "I finished my work."
+          ],
+          "accessibleSummary": "The letter says that my friend finished her work."
+        }
+      },
+      {
+        "text": "I talked with my family about the news.",
+        "chinese": "我把这个消息告诉家人。",
+        "file": "news-3.webp",
+        "alt": "I tell my family the news in the letter.",
+        "semanticText": {
+          "kind": "time",
+          "label": "Yesterday",
+          "lines": [],
+          "accessibleSummary": "This is a story about yesterday."
+        }
+      },
+      {
+        "text": "My family was happy about the good news.",
+        "chinese": "家人听到这个好消息很高兴。",
+        "file": "news-4.webp",
+        "alt": "My family is happy about the news.",
+        "semanticText": {
+          "kind": "time",
+          "label": "Yesterday",
+          "lines": [],
+          "accessibleSummary": "This is a story about yesterday."
+        }
+      }
+    ],
+    "check": {
+      "prompt": "My friend tells me that she finished her work. What is the news?",
+      "options": [
+        "She finished her work.",
+        "The paper is white."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. The news is the fact that the work is finished.",
+      "retry": "Look again at the question.",
+      "chinese": "朋友告诉我她完成了工作，新消息是什么？"
+    },
+    "practice": "The news is that ___.",
+    "practiceExamples": [
+      "The news is that my friend finished her work."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-46-between",
+    "sourceId": "story-46-between",
+    "title": "A place for the plant",
+    "wordId": "between",
+    "courseWeek": 46,
+    "week": 46,
+    "definition": "in the space separating 2 things",
+    "definitionChinese": "在两个明确参照物之间",
+    "reviewWordIds": [
+      "plant",
+      "chair",
+      "window",
+      "place"
+    ],
+    "narrator": "The person with the plant is speaking.",
+    "narratorChinese": "摆放盆栽的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I need a place for the plant.",
+        "chinese": "我需要给盆栽找个位置。",
+        "file": "between-1.webp",
+        "alt": "I have a plant in my hands. There is a chair and a window.",
+        "semanticText": null
+      },
+      {
+        "text": "First, I put it near the chair.",
+        "chinese": "首先，我把它放在椅子旁。",
+        "file": "between-2.webp",
+        "alt": "I put the plant near the chair. The chair is between the plant and the window.",
+        "semanticText": null
+      },
+      {
+        "text": "Then I put it between the chair and the window.",
+        "chinese": "然后我把它放在椅子和窗之间。",
+        "file": "between-3.webp",
+        "alt": "I put the plant between the chair and the window.",
+        "semanticText": null
+      },
+      {
+        "text": "My friend finds it between the 2 things.",
+        "chinese": "朋友在这两样东西之间找到了它。",
+        "file": "between-4.webp",
+        "alt": "My friend finds the plant between the chair and the window.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "A cup is between a book and a box. Which 2 things are on its sides?",
+      "options": [
+        "2 windows.",
+        "The book and the box."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. Between needs the 2 named things in this scene.",
+      "retry": "Look again at the question.",
+      "chinese": "杯子在书和盒子之间，它两侧的参照物是哪两个？"
+    },
+    "practice": "The ___ is between ___ and ___.",
+    "practiceExamples": [
+      "The cup is between the book and the box."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-47-slow",
+    "sourceId": "story-47-slow",
+    "title": "Take time with the cup",
+    "wordId": "slow",
+    "courseWeek": 47,
+    "week": 47,
+    "definition": "not quick",
+    "definitionChinese": "动作或移动速度较慢，本篇不评价智力或能力",
+    "reviewWordIds": [
+      "cup",
+      "water",
+      "carry",
+      "safe"
+    ],
+    "narrator": "The person with the cup is speaking.",
+    "narratorChinese": "端满水杯的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "The cup is full of water.",
+        "chinese": "杯子里装满了水。",
+        "file": "slow-1.webp",
+        "alt": "The cup in my hands is full of water.",
+        "semanticText": null
+      },
+      {
+        "text": "I carry it with slow steps.",
+        "chinese": "我慢慢迈步端着它。",
+        "file": "slow-2.webp",
+        "alt": "I carry the cup with care.",
+        "semanticText": null
+      },
+      {
+        "text": "I am slow because I do not want to drop the cup.",
+        "chinese": "我放慢速度，因为我不想把杯子掉在地上。",
+        "file": "slow-3.webp",
+        "alt": "I take time to carry the full cup to the table.",
+        "semanticText": null
+      },
+      {
+        "text": "I put the cup on the table with care.",
+        "chinese": "我小心地把杯子放在桌上。",
+        "file": "slow-4.webp",
+        "alt": "I put the full cup on the table with care.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "2 persons walk the same way. One takes more time. In this comparison, is that person slow or quick?",
+      "options": [
+        "Slow.",
+        "Quick."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. For the same way, taking more time means moving more slowly.",
+      "retry": "Look again at the question.",
+      "chinese": "两个人走同一条路，一个人用时更长。在这次比较中，这个人是慢还是快？"
+    },
+    "practice": "I am slow when I ___.",
+    "practiceExamples": [
+      "I am slow when I carry a full cup."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-48-if",
+    "sourceId": "story-48-if",
+    "title": "What will I do tomorrow?",
+    "wordId": "if",
+    "courseWeek": 48,
+    "week": 48,
+    "definition": "on the condition that something happens",
+    "definitionChinese": "某个条件成立时采用相应安排",
+    "reviewWordIds": [
+      "rain",
+      "garden",
+      "home",
+      "condition"
+    ],
+    "narrator": "The person in blue is speaking.",
+    "narratorChinese": "准备次日活动的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I will do one of 2 things tomorrow.",
+        "chinese": "明天，我会在两种安排中采用一种。",
+        "file": "if-1.webp",
+        "alt": "My friend and I talk about tomorrow at home.",
+        "semanticText": null
+      },
+      {
+        "text": "If there is rain, I will be at home.",
+        "chinese": "如果下雨，我就在家。",
+        "file": "if-2.webp",
+        "alt": "I talk about being at home if there is rain tomorrow.",
+        "semanticText": {
+          "kind": "condition",
+          "label": "A possible future",
+          "lines": [
+            "If there is rain, I will be at home."
+          ],
+          "accessibleSummary": "This is a possible action for tomorrow, not a fact about today."
+        }
+      },
+      {
+        "text": "If there is no rain, I will go to the garden.",
+        "chinese": "如果不下雨，我就去花园。",
+        "file": "if-3.webp",
+        "alt": "I have a bag at home. I may go to the garden tomorrow.",
+        "semanticText": {
+          "kind": "condition",
+          "label": "Another possible future",
+          "lines": [
+            "If there is no rain, I will go to the garden."
+          ],
+          "accessibleSummary": "This is another possible action for tomorrow, not a fact about today."
+        }
+      },
+      {
+        "text": "The next day, there is rain. I am at home.",
+        "chinese": "到了第二天，下雨了。我在家里。",
+        "file": "if-4.webp",
+        "alt": "The next day there is rain. My friend and I read at home.",
+        "semanticText": {
+          "kind": "timeContext",
+          "label": "The next day",
+          "lines": [
+            "There is rain. I am at home."
+          ],
+          "accessibleSummary": "There is rain now. I am at home."
+        }
+      }
+    ],
+    "check": {
+      "prompt": "If there is rain, I will be at home. There is rain now. Where will I be?",
+      "options": [
+        "In the garden.",
+        "At home."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. There is rain. The condition for being at home is true.",
+      "retry": "Look again at the question.",
+      "chinese": "计划说下雨就留家，现在下雨了，按计划该怎么做？"
+    },
+    "practice": "If ___, I will ___.",
+    "practiceExamples": [
+      "If there is rain, I will be at home."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-49-thread",
+    "sourceId": "story-49-thread",
+    "title": "A button for my coat",
+    "wordId": "thread",
+    "courseWeek": 49,
+    "week": 49,
+    "definition": "a thin line used for joining cloth",
+    "definitionChinese": "缝合布料时用的细线",
+    "reviewWordIds": [
+      "button",
+      "coat",
+      "needle",
+      "cloth"
+    ],
+    "narrator": "The person with the coat is speaking.",
+    "narratorChinese": "缝纽扣的成年人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "The button on my coat is loose.",
+        "chinese": "外套上的纽扣松了。",
+        "file": "thread-1.webp",
+        "alt": "I look at the loose button on my coat.",
+        "semanticText": null
+      },
+      {
+        "text": "I put thread through the needle.",
+        "chinese": "我把线穿过针孔。",
+        "file": "thread-2.webp",
+        "alt": "I put thread through the needle.",
+        "semanticText": null
+      },
+      {
+        "text": "The thread joins the button to the cloth.",
+        "chinese": "线把纽扣和布连在一起。",
+        "file": "thread-3.webp",
+        "alt": "The thread joins the button to the cloth.",
+        "semanticText": null
+      },
+      {
+        "text": "Now the button is fixed. I put the needle in its box.",
+        "chinese": "现在纽扣固定好了。我把针收好。",
+        "file": "thread-4.webp",
+        "alt": "The button is fixed. I put the needle in its box.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Which thing joins cloth in this story?",
+      "options": [
+        "Thread.",
+        "A glass of water."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. The thin thread goes through the cloth and keeps the button in place.",
+      "retry": "Look again at the question.",
+      "chinese": "故事里是哪种材料把纽扣与布连起来？"
+    },
+    "practice": "Thread is used to ___.",
+    "practiceExamples": [
+      "Thread is used to join cloth."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-50-but",
+    "sourceId": "story-50-but",
+    "title": "A small bag can help",
+    "wordId": "but",
+    "courseWeek": 50,
+    "week": 50,
+    "definition": "used to put different ideas together",
+    "definitionChinese": "连接有对比或转折关系的两句话",
+    "reviewWordIds": [
+      "bag",
+      "small",
+      "useful",
+      "carry"
+    ],
+    "narrator": "The person with the bag is speaking.",
+    "narratorChinese": "用小袋子装书的人",
+    "contextSupport": [
+      {
+        "text": "strong",
+        "definition": "able to carry much weight",
+        "chinese": "这里说袋子结实，能承受重量"
+      }
+    ],
+    "pages": [
+      {
+        "text": "This bag is small.",
+        "chinese": "这个袋子很小。",
+        "file": "but-1.webp",
+        "alt": "I have a small bag and a book.",
+        "semanticText": null
+      },
+      {
+        "text": "I have a book to carry.",
+        "chinese": "我有一本书要带走。",
+        "file": "but-2.webp",
+        "alt": "The book is over the open bag.",
+        "semanticText": null
+      },
+      {
+        "text": "The bag is small, but it is strong.",
+        "chinese": "袋子虽然小，但很结实。",
+        "file": "but-3.webp",
+        "alt": "I put the book in the small bag.",
+        "semanticText": null
+      },
+      {
+        "text": "It is small, but it can carry what I need.",
+        "chinese": "它虽小，但装得下我需要的东西。",
+        "file": "but-4.webp",
+        "alt": "The small bag can carry my book.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "The bag is old, but it is useful. Can I still use it?",
+      "options": [
+        "No, old things have no use.",
+        "Yes, it is useful."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. The sentence says the old bag is still useful.",
+      "retry": "Look again at the question.",
+      "chinese": "袋子虽然旧，但仍有用。我还能用它吗？"
+    },
+    "practice": "___, but ___.",
+    "practiceExamples": [
+      "My bag is old, but it is useful."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-51-so",
+    "sourceId": "story-51-so",
+    "title": "Rain changes my day",
+    "wordId": "so",
+    "courseWeek": 51,
+    "week": 51,
+    "definition": "used to show what comes after a reason",
+    "definitionChinese": "在原因之后引出相应结果",
+    "reviewWordIds": [
+      "rain",
+      "home",
+      "garden",
+      "read"
+    ],
+    "narrator": "The person in blue is speaking.",
+    "narratorChinese": "下雨时留在家里的人",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "I want to go to the garden.",
+        "chinese": "我想去花园。",
+        "file": "so-1.webp",
+        "alt": "My friend and I want to go to the garden.",
+        "semanticText": null
+      },
+      {
+        "text": "There is rain, so I am at home.",
+        "chinese": "下雨了，所以我在家里。",
+        "file": "so-2.webp",
+        "alt": "There is rain. I put my bag back. My friend and I are at home.",
+        "semanticText": {
+          "kind": "causeAndEffect",
+          "label": "The same reason and effect",
+          "lines": [
+            "There is rain, so I am at home.",
+            "I am at home because there is rain."
+          ],
+          "accessibleSummary": "Rain is the reason. Being at home is the effect."
+        }
+      },
+      {
+        "text": "I am at home, so I can read with my friend.",
+        "chinese": "我在家里，所以可以和朋友一起读书。",
+        "file": "so-3.webp",
+        "alt": "My friend and I open a book at home.",
+        "semanticText": null
+      },
+      {
+        "text": "I do not go to the garden. I read at home.",
+        "chinese": "我不去花园了。我在家读书。",
+        "file": "so-4.webp",
+        "alt": "My friend and I read at home. There is rain.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "The cup is empty, so I put water in it. What is the effect?",
+      "options": [
+        "I put water in the cup.",
+        "The cup was empty."
+      ],
+      "correctIndex": 0,
+      "success": "Correct. The empty cup is the reason. Putting water in it is the effect.",
+      "retry": "Look again at the question.",
+      "chinese": "杯子空了，所以我往里面倒水，结果是哪件事？"
+    },
+    "practice": "___, so ___.",
+    "practiceExamples": [
+      "There is rain, so I am at home."
+    ],
+    "ready": true
+  },
+  {
+    "id": "story-52-why",
+    "sourceId": "story-52-why",
+    "title": "Tell me the reason",
+    "wordId": "why",
+    "courseWeek": 52,
+    "week": 52,
+    "definition": "used to ask for a reason",
+    "definitionChinese": "询问一件事的原因，而不是时间或地点",
+    "reviewWordIds": [
+      "because",
+      "book",
+      "carry",
+      "reason"
+    ],
+    "narrator": "Li is speaking.",
+    "narratorChinese": "回答朋友提问的学习者",
+    "contextSupport": [],
+    "pages": [
+      {
+        "text": "My friend asks, \"Why do you take a bag?\"",
+        "chinese": "朋友问：“你为什么带袋子？”",
+        "file": "why-1.webp",
+        "alt": "My friend asks me why I take a bag.",
+        "semanticText": null
+      },
+      {
+        "text": "I take it because I want to carry my book.",
+        "chinese": "我带它，因为我想装书。",
+        "file": "why-2.webp",
+        "alt": "I put my book in the bag.",
+        "semanticText": null
+      },
+      {
+        "text": "\"Why do you study English?\" my friend asks.",
+        "chinese": "朋友问：“你为什么学英语？”",
+        "file": "why-3.webp",
+        "alt": "My friend asks me a question at the door of a learning room.",
+        "semanticText": null
+      },
+      {
+        "text": "I study because I want to talk with more persons. What is your reason?",
+        "chinese": "我学习，因为我想和更多人交流。你的原因是什么？",
+        "file": "why-4.webp",
+        "alt": "I talk with more persons in the learning room.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "Why do I carry a cup? I want to drink water. Which answer gives the reason?",
+      "options": [
+        "At the table.",
+        "Because I want to drink water."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. Why asks for a reason, not a place.",
+      "retry": "Look again at the question.",
+      "chinese": "问“为什么带杯子”，哪种回答提供了原因？"
+    },
+    "practice": "Why do you ___? Because ___.",
+    "practiceExamples": [
+      "Why do you study English? Because I want to talk with more persons."
+    ],
+    "ready": true
+  },
+  {
+    "id": "open-the-box",
+    "sourceId": "companion-open",
+    "title": "A book in a box",
+    "wordId": "open",
+    "courseWeek": 3,
+    "week": 3,
+    "definition": "to move something so it is not closed",
+    "definitionChinese": "打开物体的动作",
+    "reviewWordIds": [
+      "book",
+      "box",
+      "have",
+      "in"
+    ],
+    "narrator": "The girl in yellow is speaking.",
+    "narratorChinese": "黄衣女孩",
+    "contextSupport": [
+      {
+        "text": "now",
+        "definition": "at this time",
+        "chinese": "现在，此刻"
+      }
+    ],
+    "pages": [
+      {
+        "text": "My book is in the box.",
+        "chinese": "我的书在盒子里。",
+        "file": "open-1.webp",
+        "alt": "A girl is at a table with a closed box. Her book is in the box.",
+        "semanticText": null
+      },
+      {
+        "text": "I open the box.",
+        "chinese": "我打开盒子。",
+        "file": "open-2.webp",
+        "alt": "The girl lifts the box top. A closed green book is in the box.",
+        "semanticText": null
+      },
+      {
+        "text": "I open the book.",
+        "chinese": "我打开书。",
+        "file": "open-3.webp",
+        "alt": "The girl opens the green book on the table. The empty box is near it.",
+        "semanticText": null
+      },
+      {
+        "text": "Now I can read my book.",
+        "chinese": "现在我能读书了。",
+        "file": "open-4.webp",
+        "alt": "The girl looks at pictures in her open book. The empty box is near her.",
+        "semanticText": null
+      }
+    ],
+    "check": {
+      "prompt": "I open a box. Is the box closed now?",
+      "options": [
+        "Yes.",
+        "No."
+      ],
+      "correctIndex": 1,
+      "success": "Correct. The box is open after I open it.",
+      "retry": "Look again at the question.",
+      "chinese": "打开盒子之后，盒子现在关着吗？"
+    },
+    "practice": "I open the ___.",
+    "practiceExamples": [
+      "I open the book."
+    ],
+    "ready": true
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-05-left",
+  "id": "story-05-left",
+  "wordId": "left",
+  "narrator": "The person with the bag is speaking.",
+  "pages": [
+    {
+      "file": "left-1.webp",
+      "alt": "I go to a shop. The shop is on my left.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-cb2161c4-ca75-4ced-815a-3f52040561a5.png",
+      "prompt": "Create one 512x512 square page for a Basic English picture book LEFT. Match the attached image's warm polished volumetric cartoon educational style, soft natural sunlight and gentle shadows, but use a NEW outdoor scene. A young woman narrator with a dark ponytail, muted teal jacket, beige trousers and a small brown shoulder bag walks AWAY FROM THE CAMERA on a quiet car-free pedestrian path towards a T-junction. Use a stable rear-following viewpoint so HER LEFT is also clearly the viewer's LEFT. At the junction, a small fruit shop is unmistakably on the LEFT branch, with a striped cream-and-muted-red awning and wooden fruit crates; no readable shop sign. The right branch is an empty garden path. Show her full body from behind, both branches of the path, and fruit shop location all clearly in one natural-perspective daily-life scene. Do not reverse or mirror direction. Generous padding, minimal clutter, warm clean setting, no traffic. No text, letters, arrows, maps, symbols, labels, numbers, watermark, speech bubbles, panels or collage. This is page 1, before she reaches or turns at the junction."
+    },
+    {
+      "file": "left-2.webp",
+      "alt": "The shop is on my left. I show the way with my left hand.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-aaaa7248-3b83-4873-8cc3-8a4aa13c421c.png",
+      "prompt": "Edit reference into page 2 of the LEFT educational story. Preserve same woman narrator, ponytail, teal jacket, beige trousers, brown shoulder bag, pedestrian T-junction and fruit shop, warm polished volumetric cartoon style, soft natural sunlight and shadows. The same woman has reached the junction and is standing with her BACK to the camera, facing along the main path. She looks and gestures naturally with HER LEFT HAND toward the SAME fruit shop on HER LEFT (viewer LEFT). The right-hand garden path is still on viewer RIGHT. Keep her body facing away so the teaching reference frame is unambiguous. One complete 512x512 square daily-life scene, natural perspective, generous padding. No readable text, letters, arrows, maps, labels, speech bubbles, watermark, panels, collage, icons or symbols. No road traffic."
+    },
+    {
+      "file": "left-3.webp",
+      "alt": "I turn left to go to the shop.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-7d582565-939c-4b04-bc7a-60eb914a2f4c.png",
+      "prompt": "Edit reference into page 3 of the LEFT educational story. Preserve same woman narrator, ponytail, teal jacket, beige trousers, brown shoulder bag, pedestrian T-junction and fruit shop, warm polished volumetric cartoon style, soft natural sunlight and shadows. Show the same woman actually turning LEFT at the junction, feet and body stepping along the LEFT branch toward the SAME fruit shop. View remains behind her original direction, NOT mirrored. The fruit shop stays on the viewer LEFT, and the empty garden path stays on the viewer RIGHT. Her leftward step and changed direction are clearly visible, not just a head turn. One complete 512x512 square daily-life scene, natural perspective, generous padding. No readable text, letters, arrows, maps, labels, speech bubbles, watermark, panels, collage, icons or symbols. No road traffic."
+    },
+    {
+      "file": "left-4.webp",
+      "alt": "I am at the shop. I see fruit.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-7f50a837-9630-4a6b-8db9-36f9ce662ac0.png",
+      "prompt": "Edit reference into page 4 of the LEFT educational story. Preserve same woman narrator, ponytail, teal jacket, beige trousers, brown shoulder bag, pedestrian T-junction and fruit shop, warm polished volumetric cartoon style, soft natural sunlight and shadows. The woman has completed the left turn and is now standing at the SAME fruit shop's crates on the LEFT branch, looking at the fruit. Preserve ponytail, teal jacket, beige trousers, small brown bag, striped cream-and-muted-red awning, shop doorway and fruit crates. A friendly shopkeeper can stand just inside the doorway. She has reached the shop, not another garden location. Keep the scene oriented consistently, no mirrored buildings. One complete 512x512 square daily-life scene, natural perspective, generous padding. No readable text, letters, arrows, maps, labels, speech bubbles, watermark, panels, collage, icons or symbols. No road traffic."
+    }
+  ]
+}

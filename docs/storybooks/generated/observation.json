@@ -1,0 +1,39 @@
+{
+  "sourceId": "story-43-observation",
+  "id": "story-43-observation",
+  "wordId": "observation",
+  "narrator": "The person with glasses is speaking.",
+  "pages": [
+    {
+      "file": "observation-1.webp",
+      "alt": "I look at a plant. One leaf is brown.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-46f0999d-f378-4bb4-b96c-24f55eeadd8e.png",
+      "prompt": "Page 1 of LOOK AT THE PLANT. An adult man with short dark hair, black round glasses and BROWN shirt carefully looks at ONE small green plant in a plain TERRACOTTA pot on wooden home table. Plant has several green leaves and EXACTLY ONE clearly BROWN LEAF attached on its viewer-left side; pot's visible topsoil is dry, crumbly and lightly cracked. He leans close to observe without touching or watering. A plain blue watering can stands far aside, not in his hands, no claim of cause. Warm natural room light, no magnifier icon, thought bubbles or symbols. Show plant, brown leaf and soil clearly. Use case: illustration-story. Output one complete 512x512 square daily-life picture-book scene. Match supplied reference's warm polished volumetric cartoon, concrete friendly people and objects, natural perspective, soft light, gentle shadows, clean lightly textured surroundings. Clear learning focus with minimal clutter. Reference for style and specified continuity only. No visible text, Chinese, readable letters/numbers, captions, labels, watermarks, arrows, diagrams, panels, collage, speech bubbles, flat icons or abstract symbols."
+    },
+    {
+      "file": "observation-2.webp",
+      "alt": "One leaf of the plant is brown.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-cbcd7c99-eedb-4009-88bf-6f153fc9120f.png",
+      "prompt": "Page 2: SAME brown-shirt man with black glasses, same room/pot/plant. Closer view emphasizes EXACTLY ONE BROWN LEAF attached on viewer-left among otherwise GREEN leaves. He gently points NEAR brown leaf without plucking or changing it. Same dry crumbly topsoil visible. No extra dead leaves, no water pouring, no magnifier or labels, leaf color natural. Use case: illustration-story. One complete 512x512 square daily-life scene. Use supplied reference for exact character identity, clothing, objects, setting and warm polished cartoon volume, natural perspective, soft light, gentle shadows. Follow only this page's described change. No visible text, Chinese, readable letters/numbers, captions, labels, arrows, watermark, panels, collage, diagrams, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-46f0999d-f378-4bb4-b96c-24f55eeadd8e.png"
+    },
+    {
+      "file": "observation-3.webp",
+      "alt": "I look at the dry earth in the pot.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-afbdf3f6-b324-48d6-8626-0f5d17d43557.png",
+      "prompt": "Page 3: SAME man/pot/plant. Slightly higher close view exposes DRY CRUMBLY lightly cracked EARTH at top of SAME terracotta pot. Man gently touches/checks topsoil with one fingertip. EXACT same ONE brown leaf still attached on left, other leaves green; blue watering can stays unused off to side. No wet earth, no falling leaves, no cause-proving symbols. Use case: illustration-story. One complete 512x512 square daily-life scene. Use supplied reference for exact character identity, clothing, objects, setting and warm polished cartoon volume, natural perspective, soft light, gentle shadows. Follow only this page's described change. No visible text, Chinese, readable letters/numbers, captions, labels, arrows, watermark, panels, collage, diagrams, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-46f0999d-f378-4bb4-b96c-24f55eeadd8e.png"
+    },
+    {
+      "file": "observation-4.webp",
+      "alt": "I look at the plant with care. I need more facts.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-8985845d-b790-4e6e-9864-2ab9e020b5ee.png",
+      "prompt": "Page 4: SAME brown-shirt glasses man pauses thoughtfully to consider further checks of SAME plant, looking carefully at another GREEN leaf while one brown leaf and dry earth remain visible. Hands gently support pot edge, NOT WATERING and not holding can. Same unused blue can remains aside. No thought bubbles, question marks, diagnosis, arrows or changed plant state. The possible explanation comes from webpage text. Use case: illustration-story. One complete 512x512 square daily-life scene. Use supplied reference for exact character identity, clothing, objects, setting and warm polished cartoon volume, natural perspective, soft light, gentle shadows. Follow only this page's described change. No visible text, Chinese, readable letters/numbers, captions, labels, arrows, watermark, panels, collage, diagrams, speech bubbles, flat icons or symbols.",
+      "referenceSource": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-46f0999d-f378-4bb4-b96c-24f55eeadd8e.png"
+    }
+  ]
+}

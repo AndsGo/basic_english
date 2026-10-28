@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-13-cat",
+  "id": "story-13-cat",
+  "wordId": "cat",
+  "narrator": "The person in green is speaking.",
+  "pages": [
+    {
+      "file": "cat-1.webp",
+      "alt": "A cat is near the door.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-3c48bc97-9e58-47a3-9fea-5f5f73e9054a.png",
+      "prompt": "Page 1 of a four-page story about a CAT. In a warm home entrance an orange-and-white domestic cat stands near a closed wooden door. Show its whole body with recognizable cat ears, whiskers, four legs and tail. A young adult woman with a black bob, sage-green cardigan and beige trousers is nearby, smiling gently. A wooden chair and a plain cream floor cushion are in the same room; cat is not under chair yet. Cat is main subject. Use case: illustration-story. Create a 512x512 square picture-book page, one complete concrete daily-life scene. Match the supplied STYLE REFERENCE's warm polished volumetric cartoon, friendly characters, natural perspective, soft daylight, gentle shadows, warm cream surroundings and lightly textured materials. Keep a simple clear focus. No readable text, Chinese, numbers, labels, arrows, diagram, panels, collage, speech bubbles, watermarks, flat icons or symbols. The reference is for style only, not an edit target."
+    },
+    {
+      "file": "cat-2.webp",
+      "alt": "The cat is under the chair.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-5f28a74d-9b65-4c21-846e-b2b63f0100ca.png",
+      "prompt": "Page 2: The SAME orange-and-white cat is now fully UNDER the seat of the wooden chair from the reference, all four chair legs and seat visible, cat's body and tail fit between the legs. The same sage-cardigan woman watches nearby. Keep home door and cushion. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "cat-3.webp",
+      "alt": "The cat is near my hand.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-7c1d9ca5-a9f1-478b-bc5b-05ba3ee19d35.png",
+      "prompt": "Page 3: The same woman in sage cardigan crouches and lowers ONE relaxed hand close to the floor, and the SAME orange-and-white cat actively approaches so its nose is close to her fingertips. Entire cat visible, gentle voluntary interaction. Chair and door establish same room. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "cat-4.webp",
+      "alt": "The cat is sleeping on a soft place.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-5c437e2e-2bf6-4388-8184-21ed13415376.png",
+      "prompt": "Page 4: The SAME orange-and-white cat curls up naturally ASLEEP, eyes closed, paws tucked, on the plain cream floor cushion from the reference. Same doorway and wooden chair visible in background. Woman watches calmly nearby. No sleep symbols or letters. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    }
+  ]
+}

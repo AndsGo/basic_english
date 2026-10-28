@@ -1,0 +1,36 @@
+{
+  "sourceId": "story-20-drawer",
+  "id": "story-20-drawer",
+  "wordId": "drawer",
+  "narrator": "The man is speaking.",
+  "pages": [
+    {
+      "file": "drawer-1.webp",
+      "alt": "My pens are on the table. The drawer is closed.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-f27b92c1-8308-4169-944e-121755f5ec85.png",
+      "prompt": "Page 1 of a four-page story about a DRAWER. A young adult man with short dark hair and teal sweater sits at a simple wooden writing desk in a warm room. Exactly TWO pens, one dark blue and one red, lie on otherwise empty tabletop. The desk has ONE shallow built-in central drawer with a small round wooden pull, currently CLOSED, clearly integrated under tabletop between desk legs. Both pens and closed drawer front visible together. Hands away from pens. Not a separate box on top of table. Use case: illustration-story. Create a 512x512 square picture-book page, one complete concrete daily-life scene. Match the supplied STYLE REFERENCE's warm polished volumetric cartoon, friendly characters, natural perspective, soft daylight, gentle shadows, warm cream surroundings and lightly textured materials. Keep a simple clear focus. No readable text, Chinese, numbers, labels, arrows, diagram, panels, collage, speech bubbles, watermarks, flat icons or symbols. The reference is for style only, not an edit target."
+    },
+    {
+      "file": "drawer-2.webp",
+      "alt": "I open the drawer. My pens are on the table.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-a850d522-d4a2-4794-a248-bcb2fa4d9731.png",
+      "prompt": "Page 2: SAME teal-sweater man, wooden desk, camera. He pulls the desk's ONE BUILT-IN central drawer straight OUT toward himself by round wooden knob, showing EMPTY shallow wooden interior connected to desk below tabletop. Exactly TWO original pens, blue and red, remain ON tabletop. Not a separate box, no extra drawers, wood proportions consistent. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "drawer-3.webp",
+      "alt": "I put the pens in the drawer.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-bc18784c-060d-4982-aedb-3bf98a193df5.png",
+      "prompt": "Page 3: SAME desk with built-in drawer open. The original BLUE pen now lies INSIDE drawer on its wooden bottom; same man places original RED pen beside it with one hand. Exactly TWO pens total, both within drawer boundary, no pens left on tabletop. Clearly show drawer attached below tabletop with side rails/desk structure, no separate desktop box. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    },
+    {
+      "file": "drawer-4.webp",
+      "alt": "My pens are in the drawer. The table is clean.",
+      "reviewed": true,
+      "source": "D:\\AppData\\Orca\\codex-accounts\\ccd4a5eb-7610-48bd-a20f-60ef7776c282\\home\\generated_images\\01a1783c-1e79-7392-bfab-8e45b7dde5f1\\exec-fb20eb97-5860-4d27-be6b-6c305db5f36f.png",
+      "prompt": "Page 4: SAME man smiles while looking into SAME open built-in desk drawer. Exactly TWO pens, BLUE and RED, lie neatly together INSIDE drawer; both hands rest away from pens, clean empty tabletop above. Show desk integration and drawer handle, not a box on top. Same shallow drawer, camera, clothing, room and pen colors. Use case: illustration-story. Output one complete 512x512 square daily-life scene. Use supplied reference as story continuity and style reference: preserve exact character, clothing, object colors, room/garden and warm polished cartoon volume, soft natural light, gentle shadows, light texture and natural perspective. Follow only this page's described change. No readable text, Chinese, letters, numbers, watermarks, captions, labels, arrows, diagrams, panels, speech bubbles, symbols, collage, flat icons or line art."
+    }
+  ]
+}

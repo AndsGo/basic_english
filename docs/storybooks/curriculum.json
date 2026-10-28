@@ -1,0 +1,3831 @@
+{
+  "title": "Basic English 850 配套绘本课程设计",
+  "status": "53 篇已完成制作并接入应用；850 词后续支线单独记录",
+  "sourceContentVersion": "1.52.0",
+  "intendedAudience": "中文母语、零基础至初级的成人与青少年",
+  "mainBookCount": 52,
+  "companionBooks": [
+    {
+      "id": "companion-open",
+      "courseWeek": 3,
+      "readAfterWeek": 3,
+      "courseTheme": "Every Day and Time",
+      "targetWordId": "open",
+      "title": "A book in a box",
+      "titleChinese": "盒子里有一本书",
+      "teachingDefinition": "to move something so it is not closed",
+      "senseChinese": "打开物体的动作",
+      "teachingMethod": "动作与结果",
+      "reviewWordIds": [
+        "book",
+        "box",
+        "have",
+        "in"
+      ],
+      "plot": "先打开盒子看到书，再打开书进行阅读。",
+      "continuity": "保留黄衣女孩、紫盒、绿书四张现有插画。",
+      "pages": [
+        {
+          "page": 1,
+          "text": "My book is in the box.",
+          "chinese": "我的书在盒子里。",
+          "artwork": "闭合紫盒，人物坐在桌边。"
+        },
+        {
+          "page": 2,
+          "text": "I open the box.",
+          "chinese": "我打开盒子。",
+          "artwork": "抬起盒盖，里面的绿书清楚可见。"
+        },
+        {
+          "page": 3,
+          "text": "I open the book.",
+          "chinese": "我打开书。",
+          "artwork": "人物展开绿书，空盒留在旁边。"
+        },
+        {
+          "page": 4,
+          "text": "Now I can read my book.",
+          "chinese": "现在我能读书了。",
+          "artwork": "人物看展开的书；书页只有图画没有可读字。"
+        }
+      ],
+      "check": {
+        "prompt": "I open a box. Is the box closed now?",
+        "options": [
+          "Yes.",
+          "No."
+        ],
+        "correctIndex": 1,
+        "explanation": "The box is open after I open it.",
+        "chinese": "打开盒子之后，盒子现在关着吗？"
+      },
+      "output": {
+        "frame": "I open the ___.",
+        "sample": "I open the book.",
+        "taskChinese": "换一种可以打开的日常物品。"
+      },
+      "sourceDefinition": "to move something so it is not closed",
+      "sourceExample": "I open the book.",
+      "requiresLexicalCorrection": false,
+      "contextSupport": [
+        {
+          "text": "now",
+          "definition": "at this time",
+          "chinese": "现在，此刻"
+        }
+      ],
+      "narratorChinese": "黄衣女孩"
+    }
+  ],
+  "books": [
+    {
+      "id": "story-01-friend",
+      "courseWeek": 1,
+      "readAfterWeek": 1,
+      "courseTheme": "Persons and Basic Sentences",
+      "targetWordId": "friend",
+      "title": "My new friend",
+      "titleChinese": "我的新朋友",
+      "teachingDefinition": "a person you like",
+      "senseChinese": "朋友，彼此愿意相处的人",
+      "teachingMethod": "人物关系",
+      "reviewWordIds": [
+        "name",
+        "she",
+        "kind",
+        "study"
+      ],
+      "plot": "Li 认识 Anna，注意到她友好的举动，最后与她一起学习。朋友通过共同活动和互相关心建立联系。",
+      "continuity": "Li 是讲述者，穿蓝上衣；Anna 穿米色上衣。四页同一学习室，避免仅靠两个人并排站立表达朋友。",
+      "sourceDefinition": "a person you like",
+      "sourceExample": "This is my friend.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My name is Li.",
+          "chinese": "我的名字叫 Li。",
+          "artwork": "Li 在学习室门口作自我介绍，Anna 在桌旁微笑回应。无姓名牌。"
+        },
+        {
+          "page": 2,
+          "text": "This is Anna. She is kind.",
+          "chinese": "这是 Anna。她很友好。",
+          "artwork": "Anna 为 Li 留出座位，把学习材料移到两人之间。"
+        },
+        {
+          "page": 3,
+          "text": "Anna is my friend.",
+          "chinese": "Anna 是我的朋友。",
+          "artwork": "两人互相展示画作，目光交流；保持同一身份。"
+        },
+        {
+          "page": 4,
+          "text": "I study English with my friend.",
+          "chinese": "我和朋友一起学英语。",
+          "artwork": "两人坐在桌边共同看图、练习表达。图片中的书页无文字。"
+        }
+      ],
+      "check": {
+        "prompt": "Li and Anna study together. Anna is Li's friend. Who is Li's friend?",
+        "options": [
+          "Anna.",
+          "The table."
+        ],
+        "correctIndex": 0,
+        "explanation": "Anna is a person. Li and Anna study together.",
+        "chinese": "Li 和 Anna 一起学习。Anna 是 Li 的朋友。谁是 Li 的朋友？"
+      },
+      "output": {
+        "frame": "This is my friend, ___.",
+        "sample": "This is my friend, Anna.",
+        "taskChinese": "介绍现实中的一位朋友；不要求使用真实姓名。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "Li"
+    },
+    {
+      "id": "story-02-under",
+      "courseWeek": 2,
+      "readAfterWeek": 3,
+      "courseTheme": "Home & Things",
+      "targetWordId": "under",
+      "title": "Where is my bag?",
+      "titleChinese": "书包在哪里",
+      "teachingDefinition": "below something",
+      "senseChinese": "在某个物体下方",
+      "teachingMethod": "空间关系",
+      "reviewWordIds": [
+        "bag",
+        "chair",
+        "book",
+        "table"
+      ],
+      "plot": "女孩寻找书包，先排除椅面，再在椅面下面发现书包，接着发现桌子下面的书。",
+      "continuity": "沿用已完成的红衣卷发女孩、青色书包、红书和木家具。椅面、桌面与下方物品必须同时可见。",
+      "sourceDefinition": "below something",
+      "sourceExample": "The bag is under the chair.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "Where is my bag?",
+          "chinese": "我的书包在哪里？",
+          "artwork": "女孩在房间寻找；书包在椅面下的地板上，书在桌下。"
+        },
+        {
+          "page": 2,
+          "text": "My bag is not on the chair.",
+          "chinese": "我的书包不在椅子上。",
+          "artwork": "女孩查看空椅面；不要把书包移动到椅子旁边。"
+        },
+        {
+          "page": 3,
+          "text": "The bag is under the chair.",
+          "chinese": "书包在椅子下面。",
+          "artwork": "女孩蹲下指向椅腿之间、椅面下方的书包。"
+        },
+        {
+          "page": 4,
+          "text": "My book is under the table.",
+          "chinese": "我的书在桌子下面。",
+          "artwork": "女孩指向桌面下的书，桌面和书的上下关系完整可见。"
+        }
+      ],
+      "check": {
+        "prompt": "The cup is under the table. Is the cup on the table?",
+        "options": [
+          "Yes, it is on the table.",
+          "No, it is under the table."
+        ],
+        "correctIndex": 1,
+        "explanation": "Under means below. The cup is not on top of the table.",
+        "chinese": "杯子在桌子下面。它是在桌子上面吗？"
+      },
+      "output": {
+        "frame": "The ___ is under the table.",
+        "sample": "The bag is under the table.",
+        "taskChinese": "用家中另一样物品说一个位置句子。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "红衣卷发女孩"
+    },
+    {
+      "id": "story-03-give",
+      "courseWeek": 3,
+      "readAfterWeek": 3,
+      "courseTheme": "Every Day and Time",
+      "targetWordId": "give",
+      "title": "A book for my friend",
+      "titleChinese": "给朋友一本书",
+      "teachingDefinition": "to let another person have something",
+      "senseChinese": "把某物交给另一个人，使对方持有",
+      "teachingMethod": "动作与结果",
+      "reviewWordIds": [
+        "book",
+        "friend",
+        "have",
+        "happy"
+      ],
+      "plot": "男孩有书，朋友没有；他把书交给朋友；最后朋友持有这本书。",
+      "continuity": "保留已确认的 give 四页插画和讲述者。单本绿色书；递交前后持有人明确。",
+      "sourceDefinition": "to let another person have something",
+      "sourceExample": "I give a book to my friend.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I have a book. My friend is here.",
+          "chinese": "我有一本书。我的朋友在这里。",
+          "artwork": "蓝衣男孩持有绿书，米色衣女孩在旁边。"
+        },
+        {
+          "page": 2,
+          "text": "My friend has no book.",
+          "chinese": "我的朋友没有书。",
+          "artwork": "女孩双手空着，男孩仍持有唯一一本书。"
+        },
+        {
+          "page": 3,
+          "text": "I give a book to my friend.",
+          "chinese": "我把一本书给我的朋友。",
+          "artwork": "双手递交与接收同一本书，动作清楚。"
+        },
+        {
+          "page": 4,
+          "text": "Now my friend has the book. She is happy.",
+          "chinese": "现在我的朋友有了这本书。她很高兴。",
+          "artwork": "女孩独自抱书，男孩双手空着。"
+        }
+      ],
+      "check": {
+        "prompt": "I give a pen to my friend. Who has the pen now?",
+        "options": [
+          "My friend has the pen.",
+          "I have the pen."
+        ],
+        "correctIndex": 0,
+        "explanation": "My friend has the pen after I give it to her.",
+        "chinese": "我把笔给朋友。现在谁有笔？"
+      },
+      "output": {
+        "frame": "I give a ___ to my friend.",
+        "sample": "I give a cup to my friend.",
+        "taskChinese": "替换成笔、杯子等物品，表达给的对象。"
+      },
+      "contextSupport": [
+        {
+          "text": "now",
+          "definition": "at this time",
+          "chinese": "现在，此刻"
+        },
+        {
+          "text": "no",
+          "definition": "not any",
+          "chinese": "没有；例如 no book 是没有书"
+        }
+      ],
+      "narratorChinese": "蓝衣男孩"
+    },
+    {
+      "id": "story-04-enough",
+      "courseWeek": 4,
+      "readAfterWeek": 4,
+      "courseTheme": "Food, Shopping & Needs",
+      "targetWordId": "enough",
+      "title": "Food for a friend and me",
+      "titleChinese": "两个人的食物",
+      "teachingDefinition": "as much as needed",
+      "senseChinese": "足以满足明确的需要",
+      "teachingMethod": "需要与数量",
+      "reviewWordIds": [
+        "food",
+        "bread",
+        "friend",
+        "have"
+      ],
+      "plot": "两位朋友各需要一份面包；一份不够，再增加一份后满足两人的需要。足够取决于需求，而非固定数量。",
+      "continuity": "同一张餐桌、两个餐位、相同大小的两片面包。需求在网页句子中交代，画面不写数字。",
+      "sourceDefinition": "as much as needed",
+      "sourceExample": "I have enough food.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My friend and I need some bread.",
+          "chinese": "朋友和我需要一些面包。",
+          "artwork": "两人在桌边准备吃饭，两个盘子空着。"
+        },
+        {
+          "page": 2,
+          "text": "I have bread for me, but not for my friend.",
+          "chinese": "我有自己吃的面包，却没有给朋友的。",
+          "artwork": "一人盘里有一片面包，另一人盘子空着。"
+        },
+        {
+          "page": 3,
+          "text": "Now I have bread for my friend.",
+          "chinese": "现在我也有给朋友的面包了。",
+          "artwork": "补上一片面包，两个餐位各有一片。"
+        },
+        {
+          "page": 4,
+          "text": "My friend and I have enough bread for this meal.",
+          "chinese": "这顿饭我们有足够的面包。",
+          "artwork": "两人各拿到所需的一份；不暗示全世界两片面包就够。"
+        }
+      ],
+      "check": {
+        "prompt": "I need a cup for me and a cup for my friend. I have one cup. Do I have enough?",
+        "options": [
+          "Yes.",
+          "No."
+        ],
+        "correctIndex": 1,
+        "explanation": "My friend needs a cup, and I need a cup. My friend has no cup.",
+        "chinese": "我和朋友各需要一个杯子，但现在只有一个，够吗？"
+      },
+      "output": {
+        "frame": "I have enough ___ for ___.",
+        "sample": "I have enough food for this meal.",
+        "taskChinese": "说清楚什么足够、足够做什么，不能只背数量。"
+      },
+      "contextSupport": [
+        {
+          "text": "now",
+          "definition": "at this time",
+          "chinese": "现在，此刻"
+        }
+      ],
+      "narratorChinese": "左侧就餐者"
+    },
+    {
+      "id": "story-05-left",
+      "courseWeek": 5,
+      "readAfterWeek": 5,
+      "courseTheme": "Going Outside for Things",
+      "targetWordId": "left",
+      "title": "The way to the shop",
+      "titleChinese": "去商店的路",
+      "teachingDefinition": "the side opposite right",
+      "senseChinese": "以指定行走者的朝向为准的左侧",
+      "teachingMethod": "方向与视角",
+      "reviewWordIds": [
+        "way",
+        "shop",
+        "turn",
+        "go"
+      ],
+      "plot": "行走者来到路口，按左转指示进入商店所在的路，再到达商店。",
+      "continuity": "使用跟随行走者背后的稳定视角；四页不镜像翻转。路口左侧店铺以水果实物辨认，不用店名文字或箭头。",
+      "sourceDefinition": "the side opposite right",
+      "sourceExample": "I turn left.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I want to go to the shop.",
+          "chinese": "我想去商店。",
+          "artwork": "背后视角看到行走者朝向前方路口。"
+        },
+        {
+          "page": 2,
+          "text": "The shop is on my left.",
+          "chinese": "商店在我的左边。",
+          "artwork": "维持相同朝向，店铺位于行走者左手一侧。"
+        },
+        {
+          "page": 3,
+          "text": "I turn left.",
+          "chinese": "我向左转。",
+          "artwork": "人物实际转身进入左边的路，双脚朝向新方向。"
+        },
+        {
+          "page": 4,
+          "text": "Now I am at the shop.",
+          "chinese": "现在我到了商店。",
+          "artwork": "人物到达同一家摆有水果的商店。"
+        }
+      ],
+      "check": {
+        "prompt": "The shop is on my left. Which way do I turn?",
+        "options": [
+          "Left.",
+          "Right."
+        ],
+        "correctIndex": 0,
+        "explanation": "I turn to my left to go to the shop.",
+        "chinese": "商店在我的左边，我要向哪边转？"
+      },
+      "output": {
+        "frame": "The ___ is on my left.",
+        "sample": "The door is on my left.",
+        "taskChinese": "以自己当前朝向描述左边的一个真实物品。"
+      },
+      "contextSupport": [
+        {
+          "text": "now",
+          "definition": "at this time",
+          "chinese": "现在，此刻"
+        }
+      ],
+      "narratorChinese": "背朝镜头的行走者"
+    },
+    {
+      "id": "story-06-repeat",
+      "courseWeek": 6,
+      "readAfterWeek": 6,
+      "courseTheme": "Problems Outside",
+      "targetWordId": "repeat",
+      "title": "Please say it again",
+      "titleChinese": "请再说一遍",
+      "teachingDefinition": "to say or do again",
+      "senseChinese": "把同样的信息再说一次",
+      "teachingMethod": "沟通修复",
+      "reviewWordIds": [
+        "ask",
+        "understand",
+        "way",
+        "shop"
+      ],
+      "plot": "人物问路，第一次没听清，礼貌请求重复，第二次听懂并走对路。",
+      "continuity": "同一位问路者和同一位回应者。关键路线句在网页中原样出现两次，不能把换一种说法称为 repeat。",
+      "sourceDefinition": "to say or do again",
+      "sourceExample": "Please repeat.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I ask for the way to the shop.",
+          "chinese": "我询问去商店的路。",
+          "artwork": "两人在具体路口交谈，不出现对话气泡。"
+        },
+        {
+          "page": 2,
+          "text": "My friend says, \"Turn left.\" I do not understand.",
+          "chinese": "朋友说“向左转”。我没有听懂。",
+          "artwork": "问路者露出不确定表情，朋友自然指向街道。"
+        },
+        {
+          "page": 3,
+          "text": "\"Please repeat,\" I say.",
+          "chinese": "我说：“请再说一遍。”",
+          "artwork": "人物礼貌请求，保持同一沟通场景。"
+        },
+        {
+          "page": 4,
+          "text": "My friend says, \"Turn left.\" Now I understand.",
+          "chinese": "朋友再次说“向左转”。现在我听懂了。",
+          "artwork": "问路者点头，准备向左走；方向与前页相同。"
+        }
+      ],
+      "check": {
+        "prompt": "I say, \"Open the book.\" You ask me to repeat. What do I say?",
+        "options": [
+          "Close the book.",
+          "Open the book."
+        ],
+        "correctIndex": 1,
+        "explanation": "To repeat is to say the same thing again.",
+        "chinese": "我说“打开书”，你请我重复，我应该再说哪一句？"
+      },
+      "output": {
+        "frame": "Please repeat ___.",
+        "sample": "Please repeat the question.",
+        "taskChinese": "模拟没听清一句话时，礼貌请求对方重复。"
+      },
+      "contextSupport": [
+        {
+          "text": "now",
+          "definition": "at this time",
+          "chinese": "现在，此刻"
+        }
+      ],
+      "narratorChinese": "问路者"
+    },
+    {
+      "id": "story-07-rest",
+      "courseWeek": 7,
+      "readAfterWeek": 7,
+      "courseTheme": "Body and Care",
+      "targetWordId": "rest",
+      "title": "A quiet time",
+      "titleChinese": "休息一会儿",
+      "teachingDefinition": "quiet time after work",
+      "senseChinese": "停止工作或活动，让身体休息",
+      "teachingMethod": "身体状态与行为",
+      "reviewWordIds": [
+        "work",
+        "tired",
+        "chair",
+        "water"
+      ],
+      "plot": "主人公做完工作觉得累，停下来坐着休息，之后再决定是否继续。",
+      "continuity": "青年人物在家做日常整理后坐下。休息是停止活动的行为，不画成必然治愈疾病。",
+      "sourceDefinition": "quiet time after work",
+      "sourceExample": "I need rest.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I do my work.",
+          "chinese": "我做自己的工作。",
+          "artwork": "人物整理桌面或搬放普通小物品。"
+        },
+        {
+          "page": 2,
+          "text": "I am tired. I need rest.",
+          "chinese": "我累了。我需要休息。",
+          "artwork": "人物停下工作，动作和表情显示疲倦。"
+        },
+        {
+          "page": 3,
+          "text": "I have a quiet rest in a chair.",
+          "chinese": "我坐在椅子上休息。",
+          "artwork": "身体放松，双手没有继续做事；水杯放在旁边。"
+        },
+        {
+          "page": 4,
+          "text": "After some rest, I feel ready to work again.",
+          "chinese": "休息了一会儿，我觉得可以再次工作了。",
+          "artwork": "人物平静起身；不暗示固定时长能让所有人恢复。"
+        }
+      ],
+      "check": {
+        "prompt": "I am tired after work. Which action is rest?",
+        "options": [
+          "A quiet time in a chair.",
+          "More work with no stop."
+        ],
+        "correctIndex": 0,
+        "explanation": "Rest is a quiet time when I stop working.",
+        "chinese": "工作后累了，哪一种行为是休息？"
+      },
+      "output": {
+        "frame": "After ___, I need rest.",
+        "sample": "After work, I need rest.",
+        "taskChinese": "说出自己在什么活动后需要休息。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "工作后休息的人"
+    },
+    {
+      "id": "story-08-family",
+      "courseWeek": 8,
+      "readAfterWeek": 8,
+      "courseTheme": "Family and Persons",
+      "targetWordId": "family",
+      "title": "At home together",
+      "titleChinese": "家人在一起",
+      "teachingDefinition": "a group with relations such as mother and son",
+      "senseChinese": "具有家庭成员关系的一组人，不以所有成员住在一起为必要条件",
+      "teachingMethod": "人物关系",
+      "reviewWordIds": [
+        "mother",
+        "father",
+        "sister",
+        "home"
+      ],
+      "plot": "讲述者依次介绍自己的家人，再呈现一家人一起做饭、吃饭的日常。",
+      "continuity": "一个具体家庭是例子，不把母亲父亲孩子的构成当作 family 的唯一条件。四页人物身份保持一致。",
+      "sourceDefinition": "persons living together",
+      "sourceExample": "This is my family.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "This is my mother.",
+          "chinese": "这是我的母亲。",
+          "artwork": "讲述者与母亲在家里准备餐桌。"
+        },
+        {
+          "page": 2,
+          "text": "This is my father. This is my sister.",
+          "chinese": "这是我的父亲。这是我的姐妹。",
+          "artwork": "父亲和姐妹走到桌边帮忙。"
+        },
+        {
+          "page": 3,
+          "text": "This is my family.",
+          "chinese": "这是我的家人。",
+          "artwork": "已经介绍过的家人与讲述者一起准备饭菜。"
+        },
+        {
+          "page": 4,
+          "text": "My family has a meal together.",
+          "chinese": "我的家人一起吃饭。",
+          "artwork": "同一组人物围桌用餐，温暖自然。"
+        }
+      ],
+      "check": {
+        "prompt": "My mother is a person in my ___.",
+        "options": [
+          "bag",
+          "family"
+        ],
+        "correctIndex": 1,
+        "explanation": "My mother is a person in my family.",
+        "chinese": "母亲是我的什么中的一员？"
+      },
+      "output": {
+        "frame": "This is my ___.",
+        "sample": "This is my sister.",
+        "taskChinese": "介绍一位家人；允许使用虚构家庭，不强求披露个人经历。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "介绍家人的青年"
+    },
+    {
+      "id": "story-09-rain",
+      "courseWeek": 9,
+      "readAfterWeek": 9,
+      "courseTheme": "Weather and Garden",
+      "targetWordId": "rain",
+      "title": "Water from the sky",
+      "titleChinese": "天空落下的水",
+      "teachingDefinition": "water falling from clouds",
+      "senseChinese": "从云中落下的雨水",
+      "teachingMethod": "自然现象",
+      "reviewWordIds": [
+        "cloud",
+        "water",
+        "window",
+        "garden"
+      ],
+      "plot": "人物在窗边看到云、落下的水和被雨水浇到的花园，辨认降雨。",
+      "continuity": "窗外同一座花园，雨水从上方向下落，不与水管浇花混淆；雨丝不画成箭头。",
+      "sourceDefinition": "water falling from the sky",
+      "sourceExample": "There is rain.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "There are clouds over the garden.",
+          "chinese": "花园上空有云。",
+          "artwork": "人物在室内窗边看向有云的花园。"
+        },
+        {
+          "page": 2,
+          "text": "Now there is rain.",
+          "chinese": "现在下雨了。",
+          "artwork": "雨水从云下落到花园，窗玻璃出现水滴。"
+        },
+        {
+          "page": 3,
+          "text": "The rain gives water to the flowers.",
+          "chinese": "雨给花朵带来水。",
+          "artwork": "同一花园里的花和地面被雨水浇到。"
+        },
+        {
+          "page": 4,
+          "text": "I look at the rain from my window.",
+          "chinese": "我从窗边看雨。",
+          "artwork": "人物安全留在室内，窗外持续下雨。"
+        }
+      ],
+      "check": {
+        "prompt": "Water falls from clouds. Is this rain?",
+        "options": [
+          "Yes.",
+          "No, it is a cup."
+        ],
+        "correctIndex": 0,
+        "explanation": "Rain is water falling from clouds.",
+        "chinese": "水从云中落下来，这是雨吗？"
+      },
+      "output": {
+        "frame": "There is rain in ___.",
+        "sample": "There is rain in the garden.",
+        "taskChinese": "描述一处正在下雨的具体场景。"
+      },
+      "contextSupport": [
+        {
+          "text": "now",
+          "definition": "at this time",
+          "chinese": "现在，此刻"
+        }
+      ],
+      "narratorChinese": "窗边观察的人"
+    },
+    {
+      "id": "story-10-record",
+      "courseWeek": 10,
+      "readAfterWeek": 10,
+      "courseTheme": "Office and Records",
+      "targetWordId": "record",
+      "title": "A page for my work",
+      "titleChinese": "把工作记下来",
+      "teachingDefinition": "an account on paper",
+      "senseChinese": "把做过或看到的事情记在纸上",
+      "teachingMethod": "事件与纸面记录",
+      "reviewWordIds": [
+        "work",
+        "page",
+        "write",
+        "day"
+      ],
+      "plot": "人物完成两项任务，在纸上记录，后来查看记录确认自己做了什么。",
+      "continuity": "纸面文字由网页的独立可访问文字区展示。插画里的纸保持无可读字，不使用含义不明的装饰勾号代替任务记录。",
+      "sourceDefinition": "an account on paper",
+      "sourceExample": "I make a record.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "Today I do some work.",
+          "chinese": "今天我做了一些工作。",
+          "artwork": "人物完成摆好书和整理桌面两件具体工作。"
+        },
+        {
+          "page": 2,
+          "text": "I write a record of my work.",
+          "chinese": "我写下自己的工作记录。",
+          "artwork": "人物拿笔在纸上记录；旁边网页文字呈现记录。",
+          "semanticText": {
+            "kind": "record",
+            "label": "Today",
+            "lines": [
+              "I put the books on the table.",
+              "I clean the table."
+            ],
+            "accessibleSummary": "This is a record of my work today."
+          }
+        },
+        {
+          "page": 3,
+          "text": "The record shows what I do today.",
+          "chinese": "记录显示我今天做了什么。",
+          "artwork": "人物看纸，网页记录明确列出两项已完成的工作。",
+          "semanticText": {
+            "kind": "record",
+            "label": "Today",
+            "lines": [
+              "I put the books on the table.",
+              "I clean the table."
+            ],
+            "accessibleSummary": "This is a record of my work today."
+          }
+        },
+        {
+          "page": 4,
+          "text": "I keep the record for another day.",
+          "chinese": "我把记录留到以后的日子查看。",
+          "artwork": "人物把同一张纸放进文件夹或盒中。"
+        }
+      ],
+      "check": {
+        "prompt": "Which is a record of my work?",
+        "options": [
+          "A cup of water.",
+          "A page with what I do."
+        ],
+        "correctIndex": 1,
+        "explanation": "A record keeps an account of what I do.",
+        "chinese": "哪一种可以是我的工作记录？"
+      },
+      "output": {
+        "frame": "Today I ___.",
+        "sample": "Today I open my book and study English.",
+        "taskChinese": "写下一项今天做过的事，作为可再次查看的文字记录。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "记录工作的人"
+    },
+    {
+      "id": "story-11-because",
+      "courseWeek": 11,
+      "readAfterWeek": 11,
+      "courseTheme": "Like and Reason",
+      "targetWordId": "because",
+      "title": "Why is my friend happy?",
+      "titleChinese": "朋友为什么高兴",
+      "teachingDefinition": "for the reason that",
+      "senseChinese": "连接一件事和说明它的原因的句子",
+      "teachingMethod": "原因关系",
+      "reviewWordIds": [
+        "friend",
+        "book",
+        "give",
+        "happy"
+      ],
+      "plot": "朋友没有书，男孩因此把书给她；朋友因有了书而高兴。两次把事件与原因直接说清楚。",
+      "continuity": "复用已经确认的赠书插画；同一画面用于不同重点时，网页句子与任务必须确实教 because。",
+      "sourceDefinition": "for the reason that",
+      "sourceExample": "I study English because it is useful.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My friend has no book.",
+          "chinese": "我的朋友没有书。",
+          "artwork": "女孩空手，男孩持绿书；使用 give 第2页。"
+        },
+        {
+          "page": 2,
+          "text": "I have a book for my friend.",
+          "chinese": "我有一本书要给我的朋友。",
+          "artwork": "男孩持书看向女孩；使用 give 第1页。"
+        },
+        {
+          "page": 3,
+          "text": "I give my friend the book because she has no book.",
+          "chinese": "我把书给朋友，因为她没有书。",
+          "artwork": "递书动作；使用 give 第3页。"
+        },
+        {
+          "page": 4,
+          "text": "My friend is happy because she has a book now.",
+          "chinese": "我的朋友很高兴，因为她现在有书了。",
+          "artwork": "女孩持书微笑；使用 give 第4页。"
+        }
+      ],
+      "check": {
+        "prompt": "I open the door because my friend is here. Why do I open the door?",
+        "options": [
+          "My friend is here.",
+          "My friend has a book."
+        ],
+        "correctIndex": 0,
+        "explanation": "My friend is here. That is the reason I open the door.",
+        "chinese": "我开门，因为朋友来了。开门的原因是什么？"
+      },
+      "output": {
+        "frame": "I am happy because ___.",
+        "sample": "I am happy because my friend is here.",
+        "taskChinese": "给出一个自己的原因；合理原因不只一个。"
+      },
+      "contextSupport": [
+        {
+          "text": "now",
+          "definition": "at this time",
+          "chinese": "现在，此刻"
+        }
+      ],
+      "narratorChinese": "蓝衣男孩"
+    },
+    {
+      "id": "story-12-will",
+      "courseWeek": 12,
+      "readAfterWeek": 12,
+      "courseTheme": "Time and Place",
+      "targetWordId": "will",
+      "title": "Tomorrow in the garden",
+      "titleChinese": "明天去花园",
+      "teachingDefinition": "a word for future action",
+      "senseChinese": "谈论将来的计划或行动",
+      "teachingMethod": "将来时间与计划",
+      "reviewWordIds": [
+        "tomorrow",
+        "garden",
+        "friend",
+        "go"
+      ],
+      "plot": "今天两位朋友在室内计划明天去花园，准备物品，再在下一天实行计划。",
+      "continuity": "网页用 Today 和 Tomorrow 标明时间；每页是一幅完整场景。计划画面只表现讨论和准备，不把想象云泡画进插画。",
+      "sourceDefinition": "a word for future action",
+      "sourceExample": "I will go tomorrow.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "Today I am at home.",
+          "chinese": "今天我在家。",
+          "artwork": "人物在家中与朋友计划次日活动。",
+          "semanticText": {
+            "kind": "timeContext",
+            "label": "Today",
+            "lines": [],
+            "accessibleSummary": "The persons are at home today. They talk about tomorrow."
+          }
+        },
+        {
+          "page": 2,
+          "text": "Tomorrow I will go to the garden.",
+          "chinese": "明天我会去花园。",
+          "artwork": "仍在今天的家中，人物准备外出物品；时间由网页说明。",
+          "semanticText": {
+            "kind": "timeContext",
+            "label": "Today",
+            "lines": [],
+            "accessibleSummary": "The persons are at home today. They talk about tomorrow."
+          }
+        },
+        {
+          "page": 3,
+          "text": "My friend will go with me.",
+          "chinese": "我的朋友会和我一起去。",
+          "artwork": "同一位朋友一起准备，保持还未出发。",
+          "semanticText": {
+            "kind": "timeContext",
+            "label": "Today",
+            "lines": [],
+            "accessibleSummary": "The persons are at home today. They talk about tomorrow."
+          }
+        },
+        {
+          "page": 4,
+          "text": "Now it is the next day. My friend and I go to the garden.",
+          "chinese": "现在到了第二天。我们去花园。",
+          "artwork": "场景转到次日花园，兑现前两页计划。",
+          "semanticText": {
+            "kind": "timeContext",
+            "label": "The next day",
+            "lines": [],
+            "accessibleSummary": "The next day is here. The persons go to the garden."
+          }
+        }
+      ],
+      "check": {
+        "prompt": "Today I am at home. Tomorrow I will go to the shop. When will I go to the shop?",
+        "options": [
+          "Today.",
+          "Tomorrow."
+        ],
+        "correctIndex": 1,
+        "explanation": "Will is used for the future action.",
+        "chinese": "今天在家，明天将去商店。去商店是什么时候？"
+      },
+      "output": {
+        "frame": "Tomorrow I will ___.",
+        "sample": "Tomorrow I will study English.",
+        "taskChinese": "说一项明天的计划；计划表达不等于未来必定发生。"
+      },
+      "contextSupport": [
+        {
+          "text": "now",
+          "definition": "at this time",
+          "chinese": "现在，此刻"
+        }
+      ],
+      "narratorChinese": "准备次日活动的人"
+    },
+    {
+      "id": "story-13-cat",
+      "courseWeek": 13,
+      "readAfterWeek": 13,
+      "courseTheme": "Things at Home",
+      "targetWordId": "cat",
+      "title": "A small friend at home",
+      "titleChinese": "家里的小猫",
+      "teachingDefinition": "a small animal often living at home",
+      "senseChinese": "猫，一种具体的动物",
+      "teachingMethod": "具体动物与行为",
+      "reviewWordIds": [
+        "door",
+        "chair",
+        "under",
+        "hand"
+      ],
+      "plot": "一只猫从门边走到椅子下，再到主人身边，最后安静睡觉。猫的外形和行动贯穿全篇。",
+      "continuity": "同一只橘白猫，真实猫形、四肢和尾巴；不拟人穿衣，不用猫头图标。",
+      "sourceDefinition": "a small animal in a home",
+      "sourceExample": "The cat is near the chair.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "There is a cat near the door.",
+          "chinese": "门边有一只猫。",
+          "artwork": "完整橘白猫站在门边，耳朵、尾巴和身体可见。"
+        },
+        {
+          "page": 2,
+          "text": "The cat is under the chair.",
+          "chinese": "猫在椅子下面。",
+          "artwork": "同一只猫进入椅面下方；保留清楚的上下关系。"
+        },
+        {
+          "page": 3,
+          "text": "The cat is near my hand.",
+          "chinese": "猫在我的手旁边。",
+          "artwork": "人物蹲下，猫主动靠近垂下的手。"
+        },
+        {
+          "page": 4,
+          "text": "Now the cat is sleeping.",
+          "chinese": "现在猫睡着了。",
+          "artwork": "猫在柔软垫子上自然蜷卧，不画睡眠文字或符号。"
+        }
+      ],
+      "check": {
+        "prompt": "Which animal is in the story?",
+        "options": [
+          "A cat.",
+          "A tree."
+        ],
+        "correctIndex": 0,
+        "explanation": "The small animal in the story is a cat.",
+        "chinese": "故事里的动物是什么？"
+      },
+      "output": {
+        "frame": "The cat is ___.",
+        "sample": "The cat is near the door.",
+        "taskChinese": "描述猫的一个位置或正在发生的动作。"
+      },
+      "contextSupport": [
+        {
+          "text": "now",
+          "definition": "at this time",
+          "chinese": "现在，此刻"
+        }
+      ],
+      "narratorChinese": "照看猫的人"
+    },
+    {
+      "id": "story-14-cloth",
+      "courseWeek": 14,
+      "readAfterWeek": 14,
+      "courseTheme": "Things and Materials",
+      "targetWordId": "cloth",
+      "title": "A clean table",
+      "titleChinese": "擦干净桌子",
+      "teachingDefinition": "soft material used for cleaning",
+      "senseChinese": "用来擦拭的布，区别于衣服 clothes",
+      "teachingMethod": "物品用途",
+      "reviewWordIds": [
+        "table",
+        "water",
+        "clean",
+        "use"
+      ],
+      "plot": "桌面洒了水，人物拿布吸水擦拭，把桌面清理好。",
+      "continuity": "一块可辨认的蓝色织物，保留褶皱、厚度和手持方式。不能用纸巾或衣服替代。",
+      "sourceDefinition": "a soft thing for cleaning",
+      "sourceExample": "The cloth is clean.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "There is water on the table.",
+          "chinese": "桌子上有水。",
+          "artwork": "杯边少量水洒在桌面，人物注意到。"
+        },
+        {
+          "page": 2,
+          "text": "I have a soft cloth.",
+          "chinese": "我有一块柔软的布。",
+          "artwork": "手中展示同一块蓝布，布边和织物纹理可见。"
+        },
+        {
+          "page": 3,
+          "text": "I use the cloth to clean the table.",
+          "chinese": "我用布擦桌子。",
+          "artwork": "布贴着桌面擦过水迹，动作清楚。"
+        },
+        {
+          "page": 4,
+          "text": "The table is clean. I wash the cloth.",
+          "chinese": "桌子干净了。我把布洗一洗。",
+          "artwork": "干净桌面留在背景，人物在水盆中清洗这块布。"
+        }
+      ],
+      "check": {
+        "prompt": "Which thing can I use to clean this table?",
+        "options": [
+          "A key.",
+          "A cloth."
+        ],
+        "correctIndex": 1,
+        "explanation": "The cloth can take up the water as I clean.",
+        "chinese": "这里可以用哪件东西擦桌子？"
+      },
+      "output": {
+        "frame": "I use a cloth to clean ___.",
+        "sample": "I use a cloth to clean the table.",
+        "taskChinese": "说清楚布在这个场景中的用途。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "擦桌子的人"
+    },
+    {
+      "id": "story-15-middle",
+      "courseWeek": 15,
+      "readAfterWeek": 15,
+      "courseTheme": "Forms and Position",
+      "targetWordId": "middle",
+      "title": "A place for the cup",
+      "titleChinese": "杯子放在中间",
+      "teachingDefinition": "the part between the sides",
+      "senseChinese": "一个范围两侧之间的中间部分",
+      "teachingMethod": "空间参照",
+      "reviewWordIds": [
+        "cup",
+        "table",
+        "left",
+        "put"
+      ],
+      "plot": "人物要把杯子放在桌面中间，先看两侧，再把杯子移到远离两边的中心位置。",
+      "continuity": "同一长方形桌面，镜头略俯视，左右边缘完整。不要只因杯子处于图片中心就声称它在桌子中间。",
+      "sourceDefinition": "the part between sides",
+      "sourceExample": "The cup is in the middle.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "Here is a cup on the table.",
+          "chinese": "桌子上有一个杯子。",
+          "artwork": "杯子靠近桌面左边缘，桌子完整可见。"
+        },
+        {
+          "page": 2,
+          "text": "The cup is near the left side.",
+          "chinese": "杯子靠近左侧。",
+          "artwork": "同一俯视角，明确杯子与桌左边缘的接近。"
+        },
+        {
+          "page": 3,
+          "text": "I put the cup in the middle of the table.",
+          "chinese": "我把杯子放到桌子中间。",
+          "artwork": "手移动杯子到桌面两侧之间的中间区域。"
+        },
+        {
+          "page": 4,
+          "text": "Now the cup is in the middle.",
+          "chinese": "现在杯子在中间了。",
+          "artwork": "杯子静止在桌面中部，两个边缘都保留在画面里。"
+        }
+      ],
+      "check": {
+        "prompt": "The cup is in the middle of the table. Is it near the left edge?",
+        "options": [
+          "No.",
+          "Yes."
+        ],
+        "correctIndex": 0,
+        "explanation": "In this scene the cup is between the sides, not near the edge.",
+        "chinese": "杯子在这张桌面的中间，它靠近左边缘吗？"
+      },
+      "output": {
+        "frame": "The ___ is in the middle of ___.",
+        "sample": "The book is in the middle of the table.",
+        "taskChinese": "必须说出“什么的中间”，使参照范围明确。"
+      },
+      "contextSupport": [
+        {
+          "text": "now",
+          "definition": "at this time",
+          "chinese": "现在，此刻"
+        }
+      ],
+      "narratorChinese": "摆放杯子的人"
+    },
+    {
+      "id": "story-16-equal",
+      "courseWeek": 16,
+      "readAfterWeek": 16,
+      "courseTheme": "Amount and Comparison",
+      "targetWordId": "equal",
+      "title": "The same number",
+      "titleChinese": "一样多",
+      "teachingDefinition": "the same in number",
+      "senseChinese": "数量相等，本篇只教数量这一义",
+      "teachingMethod": "数量对比",
+      "reviewWordIds": [
+        "cup",
+        "table",
+        "same",
+        "number"
+      ],
+      "plot": "两张桌子需要同样多的杯子；先一边两个、一边一个，再补一个，最终数量相等。",
+      "continuity": "同款同大小杯子，桌面干净、各组分开；数量变化由实际杯子呈现，不写等号或数字。",
+      "sourceDefinition": "the same in number or size",
+      "sourceExample": "The cups are equal.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "This table has 2 cups.",
+          "chinese": "这张桌子有两个杯子。",
+          "artwork": "左桌上两个完全相同的杯子。",
+          "semanticText": {
+            "kind": "comparison",
+            "label": "Cups on the tables",
+            "lines": [
+              "Left table: 2 cups.",
+              "Right table: one cup."
+            ],
+            "accessibleSummary": "The left table has 2 cups. The right table has one cup. The numbers are not equal."
+          }
+        },
+        {
+          "page": 2,
+          "text": "That table has one cup. The numbers are not equal.",
+          "chinese": "那张桌子有一个杯子。数量不相等。",
+          "artwork": "两桌同时可见：左二右一。",
+          "semanticText": {
+            "kind": "comparison",
+            "label": "Cups on the tables",
+            "lines": [
+              "Left table: 2 cups.",
+              "Right table: one cup."
+            ],
+            "accessibleSummary": "The left table has 2 cups. The right table has one cup. The numbers are not equal."
+          }
+        },
+        {
+          "page": 3,
+          "text": "I put another cup on that table.",
+          "chinese": "我在那张桌子上再放一个杯子。",
+          "artwork": "人物往右桌补上相同杯子，原有杯子不移动。",
+          "semanticText": {
+            "kind": "comparison",
+            "label": "Cups on the tables",
+            "lines": [
+              "Left table: 2 cups.",
+              "Right table: 2 cups."
+            ],
+            "accessibleSummary": "The left table has 2 cups. The right table has 2 cups. The numbers are equal."
+          }
+        },
+        {
+          "page": 4,
+          "text": "Now the numbers of cups are equal.",
+          "chinese": "现在杯子的数量相等了。",
+          "artwork": "两桌各有两个杯子；网页文字复述数量，不能仅靠颜色判断。",
+          "semanticText": {
+            "kind": "comparison",
+            "label": "Cups on the tables",
+            "lines": [
+              "Left table: 2 cups.",
+              "Right table: 2 cups."
+            ],
+            "accessibleSummary": "The left table has 2 cups. The right table has 2 cups. The numbers are equal."
+          }
+        }
+      ],
+      "check": {
+        "prompt": "2 books here and 2 books there. Are the numbers equal?",
+        "options": [
+          "No.",
+          "Yes."
+        ],
+        "correctIndex": 1,
+        "explanation": "The groups have the same number of books. The numbers are equal.",
+        "chinese": "这里两本书，那里也两本，数量相等吗？"
+      },
+      "output": {
+        "frame": "The numbers of ___ are equal.",
+        "sample": "The numbers of cups are equal.",
+        "taskChinese": "比较两组可数物品；不把大小和数量混为一谈。"
+      },
+      "contextSupport": [
+        {
+          "text": "now",
+          "definition": "at this time",
+          "chinese": "现在，此刻"
+        }
+      ],
+      "narratorChinese": "补充杯子的人"
+    },
+    {
+      "id": "story-17-shade",
+      "courseWeek": 17,
+      "readAfterWeek": 17,
+      "courseTheme": "Light, Color, and Look",
+      "targetWordId": "shade",
+      "title": "Under the tree",
+      "titleChinese": "树下乘凉",
+      "teachingDefinition": "a place where a tree or other thing keeps the light of the sun off it",
+      "senseChinese": "被树等遮住直射阳光的阴凉处",
+      "teachingMethod": "光照与遮挡",
+      "reviewWordIds": [
+        "sun",
+        "tree",
+        "garden",
+        "rest"
+      ],
+      "plot": "人物走过阳光照射的花园，来到树下的阴凉区域休息。",
+      "continuity": "阳光方向稳定，树冠与地面的投影对应；shade 不是单独黑色块或夜晚。",
+      "sourceDefinition": "a dark place under a tree",
+      "sourceExample": "The tree has shade.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "The sun is bright in the garden.",
+          "chinese": "花园里的阳光很明亮。",
+          "artwork": "人物走在明亮的花园小路，旁边有一棵大树。"
+        },
+        {
+          "page": 2,
+          "text": "The tree makes shade on the earth.",
+          "chinese": "树在地面上遮出一片阴凉。",
+          "artwork": "清楚呈现树冠遮住阳光、树下较暗的连续区域。"
+        },
+        {
+          "page": 3,
+          "text": "I go to the shade under the tree.",
+          "chinese": "我走到树下的阴凉处。",
+          "artwork": "人物从阳光区域走入树冠下的阴影区域。"
+        },
+        {
+          "page": 4,
+          "text": "I rest in the shade.",
+          "chinese": "我在阴凉处休息。",
+          "artwork": "人物在树下休息，背景仍是白天明亮花园。"
+        }
+      ],
+      "check": {
+        "prompt": "Where is the shade in this story?",
+        "options": [
+          "Under the tree, out of the sun.",
+          "In the bright sun."
+        ],
+        "correctIndex": 0,
+        "explanation": "The tree keeps the light of the sun off the place below it.",
+        "chinese": "故事中的阴凉处在哪里？"
+      },
+      "output": {
+        "frame": "There is shade under ___.",
+        "sample": "There is shade under the tree.",
+        "taskChinese": "找到一个被物体遮住直射阳光的地方。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "进入树荫的人"
+    },
+    {
+      "id": "story-18-pocket",
+      "courseWeek": 18,
+      "readAfterWeek": 18,
+      "courseTheme": "Clothes and Personal Things",
+      "targetWordId": "pocket",
+      "title": "A key in my coat",
+      "titleChinese": "外套口袋里的钥匙",
+      "teachingDefinition": "a small part of clothes for keeping things",
+      "senseChinese": "衣服上可以装小东西的口袋",
+      "teachingMethod": "物品与容纳关系",
+      "reviewWordIds": [
+        "key",
+        "coat",
+        "in",
+        "hand"
+      ],
+      "plot": "人物出门前把钥匙装进外套口袋，到门前再从同一口袋取出。",
+      "continuity": "口袋缝在外套上；整段过程中钥匙、外套颜色一致，不能误用手提包。",
+      "sourceDefinition": "a small place in clothes",
+      "sourceExample": "The key is in the pocket.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I have a key in my hand.",
+          "chinese": "我手里有一把钥匙。",
+          "artwork": "人物站在门边，手里清楚拿着钥匙。"
+        },
+        {
+          "page": 2,
+          "text": "My coat has a pocket.",
+          "chinese": "我的外套有一个口袋。",
+          "artwork": "近一些展示外套上的实际口袋开口。"
+        },
+        {
+          "page": 3,
+          "text": "I put the key in my pocket.",
+          "chinese": "我把钥匙放进口袋。",
+          "artwork": "手把钥匙送进口袋，钥匙部分进入开口。"
+        },
+        {
+          "page": 4,
+          "text": "At the door, I take the key out of my pocket.",
+          "chinese": "到了门边，我从口袋里取出钥匙。",
+          "artwork": "同一只手从同一口袋取出同一把钥匙。"
+        }
+      ],
+      "check": {
+        "prompt": "A small part of my coat keeps my key. What is it?",
+        "options": [
+          "A table.",
+          "A pocket."
+        ],
+        "correctIndex": 1,
+        "explanation": "The pocket is part of the coat and can keep a small thing.",
+        "chinese": "外套上装钥匙的小部分叫什么？"
+      },
+      "output": {
+        "frame": "I keep ___ in my pocket.",
+        "sample": "I keep my key in my pocket.",
+        "taskChinese": "说一种适合放入口袋的小物品。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "穿外套的人"
+    },
+    {
+      "id": "story-19-soup",
+      "courseWeek": 19,
+      "readAfterWeek": 19,
+      "courseTheme": "Food and Cooking",
+      "targetWordId": "soup",
+      "title": "A warm meal",
+      "titleChinese": "一碗热汤",
+      "teachingDefinition": "warm liquid food",
+      "senseChinese": "以液体为主、可以作为食物的汤",
+      "teachingMethod": "食物与用途",
+      "reviewWordIds": [
+        "pot",
+        "spoon",
+        "warm",
+        "meal"
+      ],
+      "plot": "人物准备一锅汤，把汤盛到容器里，再用勺子食用。",
+      "continuity": "成人操作锅；人物的手远离热源。用可见液体和食材表现汤，不把纯水、固体饭或烟雾当汤。",
+      "sourceDefinition": "warm liquid food",
+      "sourceExample": "The soup is warm.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "There is soup in the pot.",
+          "chinese": "锅里有汤。",
+          "artwork": "一锅可见液体和少量蔬菜的汤，锅在安全台面上。"
+        },
+        {
+          "page": 2,
+          "text": "The soup is warm.",
+          "chinese": "汤是温热的。",
+          "artwork": "成人把汤盛进适合用勺子吃的容器，只有轻微热气。"
+        },
+        {
+          "page": 3,
+          "text": "I have a spoon for my soup.",
+          "chinese": "我有一把喝汤的勺子。",
+          "artwork": "人物拿勺子，容器里的汤仍清楚可见。"
+        },
+        {
+          "page": 4,
+          "text": "The soup is part of my meal.",
+          "chinese": "汤是我这一餐的一部分。",
+          "artwork": "人物平静用餐，桌上保留一份主食与这份汤。"
+        }
+      ],
+      "check": {
+        "prompt": "Which food can I eat with a spoon in this story?",
+        "options": [
+          "Soup.",
+          "A key."
+        ],
+        "correctIndex": 0,
+        "explanation": "Soup is liquid food. I can take some soup with a spoon.",
+        "chinese": "这个故事里用勺子吃的食物是什么？"
+      },
+      "output": {
+        "frame": "The soup is ___.",
+        "sample": "The soup is warm.",
+        "taskChinese": "用一个已学形容词描述汤，不推断营养或医疗功效。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "喝汤的人"
+    },
+    {
+      "id": "story-20-drawer",
+      "courseWeek": 20,
+      "readAfterWeek": 20,
+      "courseTheme": "Home Story",
+      "targetWordId": "drawer",
+      "title": "A place for my pens",
+      "titleChinese": "笔的收纳位置",
+      "teachingDefinition": "a part of a table like a box that moves in and out",
+      "senseChinese": "家具中可以拉出、推进的抽屉",
+      "teachingMethod": "物品结构与用途",
+      "reviewWordIds": [
+        "table",
+        "pen",
+        "open",
+        "in"
+      ],
+      "plot": "人物打开桌子的抽屉，放入散放的笔，再关上；下次从同一抽屉找到笔。",
+      "continuity": "抽屉始终连在同一张桌子上，滑动方向一致；不能画成桌上的独立盒子。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The drawer is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My pens are on the table.",
+          "chinese": "我的笔放在桌上。",
+          "artwork": "桌面有两支笔，桌子带一个可辨认的抽屉。"
+        },
+        {
+          "page": 2,
+          "text": "I open the drawer in the table.",
+          "chinese": "我打开桌子的抽屉。",
+          "artwork": "抽屉从桌子里滑出，内部空间清楚可见。"
+        },
+        {
+          "page": 3,
+          "text": "I put the pens in the drawer.",
+          "chinese": "我把笔放进抽屉。",
+          "artwork": "人物把原来的两支笔放进抽屉内部。"
+        },
+        {
+          "page": 4,
+          "text": "Now my pens have a place in the drawer.",
+          "chinese": "现在我的笔有了放在抽屉里的固定位置。",
+          "artwork": "人物再次打开同一抽屉取笔，桌面整洁。"
+        }
+      ],
+      "check": {
+        "prompt": "Which part of the table moves out and keeps my pens?",
+        "options": [
+          "The window.",
+          "The drawer."
+        ],
+        "correctIndex": 1,
+        "explanation": "A drawer is part of the table and moves in and out.",
+        "chinese": "桌子上可以滑出、存放笔的是哪个部分？"
+      },
+      "output": {
+        "frame": "I keep ___ in the drawer.",
+        "sample": "I keep my pens in the drawer.",
+        "taskChinese": "说明自己的一个抽屉存放什么。"
+      },
+      "contextSupport": [
+        {
+          "text": "now",
+          "definition": "at this time",
+          "chinese": "现在，此刻"
+        }
+      ],
+      "narratorChinese": "整理笔的人"
+    },
+    {
+      "id": "story-21-while",
+      "courseWeek": 21,
+      "readAfterWeek": 21,
+      "courseTheme": "Time and Order",
+      "targetWordId": "while",
+      "title": "At the same time",
+      "titleChinese": "同一段时间",
+      "teachingDefinition": "at the same time as",
+      "senseChinese": "两个动作在时间上同时发生，本篇不教对比义",
+      "teachingMethod": "同时发生",
+      "reviewWordIds": [
+        "read",
+        "write",
+        "friend",
+        "table"
+      ],
+      "plot": "两人共用学习时间：一人读书时另一人写字，然后交换活动，再一起整理。",
+      "continuity": "每页同一完整场景中同时展示两人动作；同时性由句子和场景共同表达，不用拼贴或时间轴烘焙进图。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The while is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My friend and I are at the table.",
+          "chinese": "朋友和我在桌旁。",
+          "artwork": "两人分别准备书和纸笔。"
+        },
+        {
+          "page": 2,
+          "text": "I read while my friend writes.",
+          "chinese": "我读书的时候，朋友在写字。",
+          "artwork": "同一画面同时看见讲述者看书、朋友执笔写字。"
+        },
+        {
+          "page": 3,
+          "text": "My friend reads while I write.",
+          "chinese": "朋友读书的时候，我在写字。",
+          "artwork": "两人交换活动，仍在同一时间同一场景。"
+        },
+        {
+          "page": 4,
+          "text": "After the work, I put my book and pen in my bag.",
+          "chinese": "做完后，我把书和笔放进袋子里。",
+          "artwork": "讲述者停止读写，把自己的书和笔放进袋中；朋友也已停止读写。"
+        }
+      ],
+      "check": {
+        "prompt": "I read while my friend writes. Do my friend and I do this at the same time?",
+        "options": [
+          "Yes.",
+          "No, I read after my friend stops."
+        ],
+        "correctIndex": 0,
+        "explanation": "While tells of 2 actions at the same time.",
+        "chinese": "我读书时朋友写字，这两个动作是在同一时间吗？"
+      },
+      "output": {
+        "frame": "I ___ while my friend ___.",
+        "sample": "I read while my friend writes.",
+        "taskChinese": "描述两个能同时发生的活动。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "最初读书、随后写字的人"
+    },
+    {
+      "id": "story-22-example",
+      "courseWeek": 22,
+      "readAfterWeek": 22,
+      "courseTheme": "Work and Study",
+      "targetWordId": "example",
+      "title": "Show me one",
+      "titleChinese": "给我一个例子",
+      "teachingDefinition": "one thing that shows what a kind of thing is like",
+      "senseChinese": "用来说明一类事物的一个具体例子",
+      "teachingMethod": "类别与实例",
+      "reviewWordIds": [
+        "fruit",
+        "apple",
+        "orange",
+        "show"
+      ],
+      "plot": "人物想知道 fruit 指什么，朋友先拿苹果举例，再换橙子，理解例子不是整个类别。",
+      "continuity": "同一水果摊和人物，苹果、橙子都具体可见。分类词和解释在网页文字中展示。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The example is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My friend asks for an example of fruit.",
+          "chinese": "朋友想看一个水果的例子。",
+          "artwork": "两人在水果摊边，朋友自然询问。"
+        },
+        {
+          "page": 2,
+          "text": "I show an apple. An apple is an example of fruit.",
+          "chinese": "我拿出苹果。苹果是水果的一个例子。",
+          "artwork": "人物展示一只苹果，其他水果作为少量背景。"
+        },
+        {
+          "page": 3,
+          "text": "An orange is another example.",
+          "chinese": "橙子是另一个例子。",
+          "artwork": "换成展示橙子，苹果仍留在同一摊位。"
+        },
+        {
+          "page": 4,
+          "text": "There are different examples of fruit.",
+          "chinese": "水果有不同的例子。",
+          "artwork": "苹果、橙子并列可见，强调同类中的多个实例。"
+        }
+      ],
+      "check": {
+        "prompt": "Which is an example of clothes?",
+        "options": [
+          "A cup.",
+          "A coat."
+        ],
+        "correctIndex": 1,
+        "explanation": "A coat is one kind of clothes.",
+        "chinese": "哪一种是衣服的一个例子？"
+      },
+      "output": {
+        "frame": "___ is an example of ___.",
+        "sample": "An apple is an example of fruit.",
+        "taskChinese": "换一组已知的类别与实例，避免只会重复水果。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "拿出水果举例的人"
+    },
+    {
+      "id": "story-23-selection",
+      "courseWeek": 23,
+      "readAfterWeek": 23,
+      "courseTheme": "Asking and Answering",
+      "targetWordId": "selection",
+      "title": "A cup for tea",
+      "titleChinese": "选一个茶杯",
+      "teachingDefinition": "a thing you choose from a group",
+      "senseChinese": "从多个选项中选出的东西，本篇教选择结果",
+      "teachingMethod": "选择与结果",
+      "reviewWordIds": [
+        "cup",
+        "small",
+        "big",
+        "tea"
+      ],
+      "plot": "人物需要茶杯，在大小两个杯子之间作选择，最后选定适合自己的小杯子。",
+      "continuity": "两个杯子除大小外尽量相同，选择动作由拿起其中一个体现。无需把 selection 画成勾选图标。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The selection is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I want a cup for my tea.",
+          "chinese": "我想要一个喝茶的杯子。",
+          "artwork": "人物在家中桌旁，看着两个杯子。"
+        },
+        {
+          "page": 2,
+          "text": "Here is a small cup and a big cup.",
+          "chinese": "这里有一个小杯子和一个大杯子。",
+          "artwork": "同款杯子并列，只有大小差异。"
+        },
+        {
+          "page": 3,
+          "text": "I choose the small cup. It is my selection.",
+          "chinese": "我选小杯子。它是我选中的那个。",
+          "artwork": "手明确拿起小杯子，大杯子留在原位。"
+        },
+        {
+          "page": 4,
+          "text": "I use my selection for my tea.",
+          "chinese": "我用选中的杯子喝茶。",
+          "artwork": "人物用小杯子，大杯子放在旁边，不改变选择。"
+        }
+      ],
+      "check": {
+        "prompt": "I choose the blue cup, not the red cup. What is my selection?",
+        "options": [
+          "The blue cup.",
+          "The red cup."
+        ],
+        "correctIndex": 0,
+        "explanation": "My selection is the cup I choose.",
+        "chinese": "我选蓝杯子而不是红杯子，我选中的是哪一个？"
+      },
+      "output": {
+        "frame": "My selection is ___.",
+        "sample": "My selection is the small cup.",
+        "taskChinese": "从两件实际物品中选择一件，再说出选择结果。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "选小杯子的人"
+    },
+    {
+      "id": "story-24-cause",
+      "courseWeek": 24,
+      "readAfterWeek": 24,
+      "courseTheme": "Cause and Effect",
+      "targetWordId": "cause",
+      "title": "Why does the paper move?",
+      "titleChinese": "纸为什么动了",
+      "teachingDefinition": "something that makes an event take place",
+      "senseChinese": "使某件事发生的原因，本篇教名词",
+      "teachingMethod": "原因与可见结果",
+      "reviewWordIds": [
+        "paper",
+        "window",
+        "wind",
+        "open"
+      ],
+      "plot": "开窗时风把轻纸吹动；人物检查风和纸的关系，关窗后纸不再被这阵风吹动。",
+      "continuity": "同一张纸、同一扇窗；纸的移动和窗帘的摆动表现风。页面只描述这次事件，不把先后发生直接当作因果证明。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The cause is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "The window is open. Wind comes in.",
+          "chinese": "窗开着。风吹进房间。",
+          "artwork": "窗帘自然摆动，桌上只有一张轻纸。"
+        },
+        {
+          "page": 2,
+          "text": "The wind moves the paper.",
+          "chinese": "风吹动了纸。",
+          "artwork": "纸被同一阵风吹离原位，人物正在观察。"
+        },
+        {
+          "page": 3,
+          "text": "The wind is the cause of this change.",
+          "chinese": "风是这次移动的原因。",
+          "artwork": "仍呈现窗、风吹动的窗帘与移动的纸，说明具体原因。"
+        },
+        {
+          "page": 4,
+          "text": "I close the window. The paper is on the table.",
+          "chinese": "我关上窗。纸留在桌上。",
+          "artwork": "人物关窗，窗帘平静，纸稳定放在桌面。"
+        }
+      ],
+      "check": {
+        "prompt": "Rain gives water to a plant. What is the cause of the water on the plant?",
+        "options": [
+          "The color of the plant.",
+          "The rain."
+        ],
+        "correctIndex": 1,
+        "explanation": "Rain brings water to the plant in this scene.",
+        "chinese": "雨水落到植物上，植物上出现这些水的原因是什么？"
+      },
+      "output": {
+        "frame": "___ is the cause of ___.",
+        "sample": "The wind is the cause of the motion.",
+        "taskChinese": "说出一个有明确联系的原因和结果，允许用 because 辅助解释。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "在窗旁观察的人"
+    },
+    {
+      "id": "story-25-purpose",
+      "courseWeek": 25,
+      "readAfterWeek": 25,
+      "courseTheme": "Future Work",
+      "targetWordId": "purpose",
+      "title": "Why take a bag?",
+      "titleChinese": "为什么带上袋子",
+      "teachingDefinition": "the reason for doing something",
+      "senseChinese": "做一件事想达到的目的",
+      "teachingMethod": "行动与目的",
+      "reviewWordIds": [
+        "bag",
+        "shop",
+        "carry",
+        "food"
+      ],
+      "plot": "人物出门前拿空袋子，到商店装入食物，带回家，说明带袋子的用途与目的。",
+      "continuity": "同一只空袋逐步装入食物；目的文字放网页上，不用灯泡或靶心图标代表目的。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The purpose is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I take an empty bag to the shop.",
+          "chinese": "我带着一个空袋子去商店。",
+          "artwork": "人物离家时手中袋子空着。"
+        },
+        {
+          "page": 2,
+          "text": "I have a purpose for the bag.",
+          "chinese": "我带这个袋子有一个目的。",
+          "artwork": "人物来到食品摊，打开同一个袋子。"
+        },
+        {
+          "page": 3,
+          "text": "My purpose is to carry the food home.",
+          "chinese": "我的目的是把食物带回家。",
+          "artwork": "人物把买好的食物装进袋子。"
+        },
+        {
+          "page": 4,
+          "text": "The bag helps me carry the food.",
+          "chinese": "袋子帮助我提着食物。",
+          "artwork": "人物提着装有食物的袋子回到家。"
+        }
+      ],
+      "check": {
+        "prompt": "I take a cup because I want to drink water. What is my purpose?",
+        "options": [
+          "To drink water.",
+          "To write a letter."
+        ],
+        "correctIndex": 0,
+        "explanation": "The purpose is what I want to do with the cup.",
+        "chinese": "我为了喝水而拿杯子，我的目的是什么？"
+      },
+      "output": {
+        "frame": "My purpose is to ___.",
+        "sample": "My purpose is to carry the food home.",
+        "taskChinese": "解释一个日常动作想达到的目标。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "拿袋子购物的人"
+    },
+    {
+      "id": "story-26-loss",
+      "courseWeek": 26,
+      "readAfterWeek": 26,
+      "courseTheme": "Problems and Decisions",
+      "targetWordId": "loss",
+      "title": "Where is my key now?",
+      "titleChinese": "钥匙不见了",
+      "teachingDefinition": "not having something that was your property",
+      "senseChinese": "原先拥有的东西不在了造成的失去",
+      "teachingMethod": "拥有前后变化",
+      "reviewWordIds": [
+        "key",
+        "pocket",
+        "morning",
+        "problem"
+      ],
+      "plot": "人物原先有钥匙，之后发现口袋里没有，寻找仍未找到；把 loss 与暂时没看见区分开。",
+      "continuity": "开篇明确有同一把钥匙；后续多个具体位置均被查看。结尾不是凭空认定失窃，不虚构犯罪原因。开篇沿用 pocket 第 1 页的持钥匙画面，后续保持同一位穿赭色外套的人物；本篇用拥有、寻找及未找到的连续情节教授 loss。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The loss is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "In the morning, I have my key.",
+          "chinese": "早上我还拿着钥匙。",
+          "artwork": "人物把一把钥匙拿在手里，物品清楚可见。"
+        },
+        {
+          "page": 2,
+          "text": "Now the key is not in my pocket.",
+          "chinese": "现在钥匙不在口袋里。",
+          "artwork": "人物查看空口袋，表情疑惑。"
+        },
+        {
+          "page": 3,
+          "text": "I look for it. The key is not here.",
+          "chinese": "我寻找它，却找不到。",
+          "artwork": "人物查看桌面和袋子；一页保持一个房间场景。"
+        },
+        {
+          "page": 4,
+          "text": "The loss of my key is a problem.",
+          "chinese": "钥匙丢失给我带来了问题。",
+          "artwork": "人物与朋友在门旁商量办法；钥匙仍没有找到。"
+        }
+      ],
+      "check": {
+        "prompt": "I have a pen in the morning. Now I can find no pen. What is the loss?",
+        "options": [
+          "A new cup on the table.",
+          "The loss of my pen."
+        ],
+        "correctIndex": 1,
+        "explanation": "The pen was my property. Now I do not have it.",
+        "chinese": "原先有笔，寻找后仍找不到，丢失的是什么？"
+      },
+      "output": {
+        "frame": "The loss of ___ is a problem.",
+        "sample": "The loss of my key is a problem.",
+        "taskChinese": "描述一个虚构的小物品丢失，不强迫分享私人损失。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "钥匙的主人"
+    },
+    {
+      "id": "story-27-rule",
+      "courseWeek": 27,
+      "readAfterWeek": 27,
+      "courseTheme": "Rules and Control",
+      "targetWordId": "rule",
+      "title": "In the library",
+      "titleChinese": "图书馆里的规则",
+      "teachingDefinition": "a statement about what persons may or may not do",
+      "senseChinese": "共同场景中约定应当遵守的要求",
+      "teachingMethod": "规则与情境",
+      "reviewWordIds": [
+        "library",
+        "read",
+        "low",
+        "book"
+      ],
+      "plot": "人物来到供阅读的空间，理解轻声交流的规则，和朋友一起遵守，让大家继续阅读。",
+      "continuity": "同一图书馆。规则写在网页，不画可读告示；轻声行为以人物贴近自然交流表现，不用禁音图标。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The rule is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "Persons are reading in the library.",
+          "chinese": "人们正在图书馆里阅读。",
+          "artwork": "几位人物各自阅读，环境安静。"
+        },
+        {
+          "page": 2,
+          "text": "There is a rule: keep your voice low.",
+          "chinese": "这里有一条规则：轻声说话。",
+          "artwork": "朋友准备交谈，管理员自然提醒。"
+        },
+        {
+          "page": 3,
+          "text": "My friend and I keep the rule.",
+          "chinese": "朋友和我遵守规则。",
+          "artwork": "两人靠近轻声交流，不打扰旁边读者。"
+        },
+        {
+          "page": 4,
+          "text": "The rule helps persons read quietly.",
+          "chinese": "这条规则帮助大家安静阅读。",
+          "artwork": "同一批人物继续阅读，叙事结果与规则对应。"
+        }
+      ],
+      "check": {
+        "prompt": "The rule is to keep your voice low. Which action keeps this rule?",
+        "options": [
+          "Quiet talk.",
+          "A loud voice across the room."
+        ],
+        "correctIndex": 0,
+        "explanation": "Quiet talk keeps the rule in this library.",
+        "chinese": "规则要求轻声说话，哪种行为遵守规则？"
+      },
+      "output": {
+        "frame": "One rule here is ___.",
+        "sample": "One rule here is to keep your voice low.",
+        "taskChinese": "为一个明确场景说明一条合理规则，不把个人偏好当所有地方的规则。"
+      },
+      "contextSupport": [
+        {
+          "text": "voice",
+          "definition": "sound from a person",
+          "chinese": "人的说话声；keep your voice low 是轻声说话"
+        }
+      ],
+      "narratorChinese": "图书馆读者"
+    },
+    {
+      "id": "story-28-journey",
+      "courseWeek": 28,
+      "readAfterWeek": 28,
+      "courseTheme": "Daily Story",
+      "targetWordId": "journey",
+      "title": "From home to the market",
+      "titleChinese": "从家到集市",
+      "teachingDefinition": "the act of going from one place to another",
+      "senseChinese": "从一处到另一处的一段行程",
+      "teachingMethod": "起点过程终点",
+      "reviewWordIds": [
+        "home",
+        "bus",
+        "road",
+        "market"
+      ],
+      "plot": "人物从家出发，乘公交沿路前往集市，到达后回顾整段旅程。",
+      "continuity": "重复同一外套和袋子；家门、公交车、集市在不同完整场景出现。不要把四处地点拼成地图插画。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The journey is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My journey starts at home.",
+          "chinese": "我的行程从家里开始。",
+          "artwork": "人物带空袋走出家门。"
+        },
+        {
+          "page": 2,
+          "text": "I take a bus to the market.",
+          "chinese": "我乘公交去集市。",
+          "artwork": "人物坐在公交座位上，窗外是道路。"
+        },
+        {
+          "page": 3,
+          "text": "The bus goes on the road.",
+          "chinese": "公交车沿着道路行驶。",
+          "artwork": "自然街景中的公交车，人物衣着在车窗中可辨。"
+        },
+        {
+          "page": 4,
+          "text": "My journey ends at the market.",
+          "chinese": "我的行程在集市结束。",
+          "artwork": "人物下车来到同一集市入口。"
+        }
+      ],
+      "check": {
+        "prompt": "A journey starts at home and ends at school. Where does it end?",
+        "options": [
+          "At home.",
+          "At school."
+        ],
+        "correctIndex": 1,
+        "explanation": "The end of this journey is school.",
+        "chinese": "从家去学校的行程终点在哪里？"
+      },
+      "output": {
+        "frame": "My journey starts at ___ and ends at ___.",
+        "sample": "My journey starts at home and ends at the market.",
+        "taskChinese": "说清楚一段行程的起点和终点。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "乘公交的人"
+    },
+    {
+      "id": "story-29-group",
+      "courseWeek": 29,
+      "readAfterWeek": 29,
+      "courseTheme": "Family Story",
+      "targetWordId": "group",
+      "title": "Persons working together",
+      "titleChinese": "一起做事的一组人",
+      "teachingDefinition": "persons or things together",
+      "senseChinese": "被放在一起考虑的一组人，本篇只教人群义",
+      "teachingMethod": "整体与成员",
+      "reviewWordIds": [
+        "friend",
+        "garden",
+        "work",
+        "together"
+      ],
+      "plot": "三个人一起整理花园，分别做不同工作，最后共同完成，识别 group 与成员的关系。",
+      "continuity": "固定三个人及服装；不把路上偶然出现的所有人都算作同一工作小组。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The group is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "3 persons come to work in the garden.",
+          "chinese": "三个人来花园做事。",
+          "artwork": "三位人物带日常园艺用品会合。"
+        },
+        {
+          "page": 2,
+          "text": "They are a group.",
+          "chinese": "他们组成一个小组。",
+          "artwork": "三人一起商量工作，空间与互动形成明确一组。"
+        },
+        {
+          "page": 3,
+          "text": "One person brings water. The others clean.",
+          "chinese": "一个人送水，其他人清理。",
+          "artwork": "同一画面中三人各有工作，成员不增减。"
+        },
+        {
+          "page": 4,
+          "text": "The group finishes the work together.",
+          "chinese": "这个小组一起完成了工作。",
+          "artwork": "同样三人在整理好的花园边休息。"
+        }
+      ],
+      "check": {
+        "prompt": "3 friends work together. Are they a group?",
+        "options": [
+          "Yes.",
+          "No."
+        ],
+        "correctIndex": 0,
+        "explanation": "The 3 friends work together in a group.",
+        "chinese": "三个朋友一起组成小队做事，他们是一个小组吗？"
+      },
+      "output": {
+        "frame": "My group has ___ persons.",
+        "sample": "My group has 3 persons.",
+        "taskChinese": "介绍一组人的成员数和共同活动。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "描述三人小组的旁观者"
+    },
+    {
+      "id": "story-30-dirty",
+      "courseWeek": 30,
+      "readAfterWeek": 30,
+      "courseTheme": "Feeling Story",
+      "targetWordId": "dirty",
+      "title": "After the garden work",
+      "titleChinese": "做完园艺之后",
+      "teachingDefinition": "not clean",
+      "senseChinese": "表面有泥土或污物的，不干净",
+      "teachingMethod": "状态与变化",
+      "reviewWordIds": [
+        "hand",
+        "garden",
+        "wash",
+        "clean"
+      ],
+      "plot": "人物接触花园泥土后双手沾土，洗手后变干净，隔离 dirty 与正常肤色的区别。",
+      "continuity": "手的肤色全程一致，污物用明显附着的泥土表现。不能用深色皮肤代表脏。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The dirty is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I work in the garden.",
+          "chinese": "我在花园里做事。",
+          "artwork": "人物接触土和植物，背景为普通家庭花园。"
+        },
+        {
+          "page": 2,
+          "text": "Now my hands are dirty.",
+          "chinese": "现在我的手脏了。",
+          "artwork": "近景显示同一双手沾着可辨认的泥土。"
+        },
+        {
+          "page": 3,
+          "text": "I wash my dirty hands with water and soap.",
+          "chinese": "我用水和肥皂洗脏了的手。",
+          "artwork": "在水槽边洗手，肥皂和流水可见。"
+        },
+        {
+          "page": 4,
+          "text": "Now my hands are clean.",
+          "chinese": "现在我的手干净了。",
+          "artwork": "相同肤色的手已无泥土，与前页保持光照一致。"
+        }
+      ],
+      "check": {
+        "prompt": "There is earth on my shoes after garden work. Are they dirty?",
+        "options": [
+          "No, the earth makes the shoes clean.",
+          "Yes."
+        ],
+        "correctIndex": 1,
+        "explanation": "The earth on the shoes makes the shoes dirty in this scene.",
+        "chinese": "园艺后鞋上有泥，鞋子脏了吗？"
+      },
+      "output": {
+        "frame": "My ___ is dirty. I will clean it.",
+        "sample": "My coat is dirty. I will clean it.",
+        "taskChinese": "说一个具体物品的状态及合理处理。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "做园艺的人"
+    },
+    {
+      "id": "story-31-dry",
+      "courseWeek": 31,
+      "readAfterWeek": 31,
+      "courseTheme": "Body Story",
+      "targetWordId": "dry",
+      "title": "A cloth in the sun",
+      "titleChinese": "把布晾干",
+      "teachingDefinition": "with no water on or in it",
+      "senseChinese": "没有水分或已不潮湿的，本篇教状态",
+      "teachingMethod": "同物状态对比",
+      "reviewWordIds": [
+        "cloth",
+        "water",
+        "sun",
+        "wash"
+      ],
+      "plot": "洗过的布含水、滴水；人物把布挂在通风处，过一段时间后观察到布干了。",
+      "continuity": "同一块蓝布，初页明显滴水，后页无水滴、自然轻软。时间变化放网页；不能声称所有布固定多久干。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The dry is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I wash the cloth. There is water in it.",
+          "chinese": "我洗布，布里含着水。",
+          "artwork": "人物在水盆上拿起蓝布，水滴落入盆中。"
+        },
+        {
+          "page": 2,
+          "text": "I put the cloth in the sun.",
+          "chinese": "我把布放到阳光下晾。",
+          "artwork": "同一块布晾在安全的架子上，仍有少量水滴。"
+        },
+        {
+          "page": 3,
+          "text": "After some time, the cloth is dry.",
+          "chinese": "过了一段时间，布干了。",
+          "artwork": "同一布已无水滴，人物触摸检查，环境连续。"
+        },
+        {
+          "page": 4,
+          "text": "I use the dry cloth again.",
+          "chinese": "我再次使用这块干布。",
+          "artwork": "人物把布折好用于擦一个干净杯子外侧。"
+        }
+      ],
+      "check": {
+        "prompt": "A cloth has no water in it now. Is it dry?",
+        "options": [
+          "Yes.",
+          "No."
+        ],
+        "correctIndex": 0,
+        "explanation": "Dry means it does not have water on or in it.",
+        "chinese": "一块布现在没有水分了，它是干的吗？"
+      },
+      "output": {
+        "frame": "The ___ is dry now.",
+        "sample": "The cloth is dry now.",
+        "taskChinese": "描述具体物品的干燥状态，不把 dry 等同于 clean。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "洗布的人"
+    },
+    {
+      "id": "story-32-art",
+      "courseWeek": 32,
+      "readAfterWeek": 32,
+      "courseTheme": "Work Story",
+      "targetWordId": "art",
+      "title": "A picture for the wall",
+      "titleChinese": "给墙上画幅画",
+      "teachingDefinition": "pictures and other things that express ideas or feelings",
+      "senseChinese": "通过图画等作品表达想法或感受",
+      "teachingMethod": "创作与表达",
+      "reviewWordIds": [
+        "flower",
+        "color",
+        "wall",
+        "make"
+      ],
+      "plot": "人物观察花园，选择颜色画出自己的感受，把完成的画挂在墙上，与朋友交流。",
+      "continuity": "人物画作由简单具体花园图像构成，不要求照片般准确，也不把艺术等同于昂贵或写实。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The art is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I look at the flowers in the garden.",
+          "chinese": "我看花园里的花。",
+          "artwork": "人物观察几株花，手中带画具。"
+        },
+        {
+          "page": 2,
+          "text": "I make a picture with colors.",
+          "chinese": "我用颜色画一幅画。",
+          "artwork": "人物在纸上画花园，无文字。"
+        },
+        {
+          "page": 3,
+          "text": "My art shows how I feel about the garden.",
+          "chinese": "我的艺术作品表达我对花园的感受。",
+          "artwork": "展示色彩鲜明的花园画作，人物指向自己喜欢的部分。"
+        },
+        {
+          "page": 4,
+          "text": "I put my art on the wall for my friend to see.",
+          "chinese": "我把作品放到墙上给朋友看。",
+          "artwork": "同一幅画在墙上，朋友自然欣赏。"
+        }
+      ],
+      "check": {
+        "prompt": "I make a picture to show an idea. Can it be art?",
+        "options": [
+          "No, art is only for experts.",
+          "Yes."
+        ],
+        "correctIndex": 1,
+        "explanation": "A picture can express an idea. It can be art.",
+        "chinese": "我画一幅画表达想法，它可以是艺术作品吗？"
+      },
+      "output": {
+        "frame": "My art shows ___.",
+        "sample": "My art shows my garden.",
+        "taskChinese": "画一幅小画，并用一句英语说它表达什么。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "画画的人"
+    },
+    {
+      "id": "story-33-distance",
+      "courseWeek": 33,
+      "readAfterWeek": 33,
+      "courseTheme": "Town Places",
+      "targetWordId": "distance",
+      "title": "Near or far from home?",
+      "titleChinese": "离家多远",
+      "teachingDefinition": "the space between 2 places",
+      "senseChinese": "两个地点之间的距离",
+      "teachingMethod": "固定起点的比较",
+      "reviewWordIds": [
+        "home",
+        "shop",
+        "school",
+        "far"
+      ],
+      "plot": "同一个家到商店近、到学校远，人物分别走两条路，理解 distance 是地点间的间隔。",
+      "continuity": "固定同一家的起点；每页是完整街景。距离记录与比较在网页文字中，避免把画面透视大小直接当距离。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The distance is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "The shop is near my home.",
+          "chinese": "商店离我家近。",
+          "artwork": "同一条街景同时可见家门和近处商店。"
+        },
+        {
+          "page": 2,
+          "text": "The distance from home to the shop is short.",
+          "chinese": "从家到商店的距离短。",
+          "artwork": "人物沿短路段步行，起点和终点仍能辨认。"
+        },
+        {
+          "page": 3,
+          "text": "The school is far from my home.",
+          "chinese": "学校离我家远。",
+          "artwork": "另一次从同一家出发前往远处学校，网页说明同一起点。"
+        },
+        {
+          "page": 4,
+          "text": "The distance to the school is great.",
+          "chinese": "到学校的距离很大。",
+          "artwork": "人物到达学校；网页对比“家到商店”和“家到学校”。",
+          "semanticText": {
+            "kind": "comparison",
+            "label": "The same home",
+            "lines": [
+              "Home to the shop: a short distance.",
+              "Home to the school: a great distance."
+            ],
+            "accessibleSummary": "The journeys start at the same home. The shop is near and the school is far."
+          }
+        }
+      ],
+      "check": {
+        "prompt": "The shop is near home. The school is far from home. Which journey covers more distance?",
+        "options": [
+          "Home to the school.",
+          "Home to the shop."
+        ],
+        "correctIndex": 0,
+        "explanation": "The journeys start at the same home. The shop is near, and the school is far.",
+        "chinese": "同样从家出发，到商店近、到学校远，哪个距离更长？"
+      },
+      "output": {
+        "frame": "The distance from ___ to ___ is ___.",
+        "sample": "The distance from home to the shop is short.",
+        "taskChinese": "明确两个端点，再描述距离，不只说 near 或 far。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "从同一家出发的人"
+    },
+    {
+      "id": "story-34-growth",
+      "courseWeek": 34,
+      "readAfterWeek": 34,
+      "courseTheme": "Agreement and Respect",
+      "targetWordId": "growth",
+      "title": "The tree gets big",
+      "titleChinese": "小树长大了",
+      "teachingDefinition": "an increase in size",
+      "senseChinese": "生物随时间长大，本篇教植物生长",
+      "teachingMethod": "跨时间的同物变化",
+      "reviewWordIds": [
+        "tree",
+        "garden",
+        "year",
+        "water"
+      ],
+      "plot": "人物照看一棵小树，用同一场景在不同时间看到它长高、树冠变大。",
+      "continuity": "同一树的位置、花园围栏和镜头高度保持稳定；时间标签在网页，四页不做拼贴。",
+      "sourceDefinition": "a thing",
+      "sourceExample": "The growth is good.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "There is a small tree in the garden.",
+          "chinese": "花园里有一棵小树。",
+          "artwork": "固定围栏旁的小树，人物在旁边浇水。",
+          "semanticText": {
+            "kind": "time",
+            "label": "At first",
+            "lines": [],
+            "accessibleSummary": "The tree is small at first."
+          }
+        },
+        {
+          "page": 2,
+          "text": "The tree has water and light.",
+          "chinese": "树得到水和光。",
+          "artwork": "同一小树在正常阳光中，不暗示浇一次水就立即长大。",
+          "semanticText": {
+            "kind": "time",
+            "label": "At first",
+            "lines": [],
+            "accessibleSummary": "The tree is small at first."
+          }
+        },
+        {
+          "page": 3,
+          "text": "After a year, the tree is big.",
+          "chinese": "过了一年，这棵树长大了。",
+          "artwork": "网页标明一年后，固定参照下树明显长大。",
+          "semanticText": {
+            "kind": "time",
+            "label": "After a year",
+            "lines": [],
+            "accessibleSummary": "After a year, the same tree is big."
+          }
+        },
+        {
+          "page": 4,
+          "text": "This change is the growth of the tree.",
+          "chinese": "这种变化就是树的生长。",
+          "artwork": "展示长大的同一棵树与持续照看的人物。",
+          "semanticText": {
+            "kind": "time",
+            "label": "After a year",
+            "lines": [],
+            "accessibleSummary": "After a year, the same tree is big."
+          }
+        }
+      ],
+      "check": {
+        "prompt": "A small plant gets big over time. What is this?",
+        "options": [
+          "A change of its name.",
+          "Growth."
+        ],
+        "correctIndex": 1,
+        "explanation": "Growth is an increase in size over time.",
+        "chinese": "植物随时间长大了，这是什么变化？"
+      },
+      "output": {
+        "frame": "I can see the growth of ___.",
+        "sample": "I can see the growth of the tree.",
+        "taskChinese": "说一种随时间长大的植物，不把搬近镜头当生长。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "照看小树的人"
+    },
+    {
+      "id": "story-35-support",
+      "courseWeek": 35,
+      "readAfterWeek": 35,
+      "courseTheme": "Help and Support",
+      "targetWordId": "support",
+      "title": "Help with a bag",
+      "titleChinese": "帮忙提重袋子",
+      "teachingDefinition": "to help a person or thing",
+      "senseChinese": "通过实际帮助支持某人，本篇教帮助义",
+      "teachingMethod": "需要与帮助",
+      "reviewWordIds": [
+        "friend",
+        "bag",
+        "weight",
+        "help"
+      ],
+      "plot": "朋友带着重袋子难以继续走，讲述者承担一部分重量，两人一起完成搬运。",
+      "continuity": "青年或成人提普通生活物品，重量适度；帮助方式具体可见，避免无行动的点赞图标。",
+      "sourceDefinition": "to help a person or thing",
+      "sourceExample": "The support is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My friend has a bag full of food.",
+          "chinese": "朋友提着一个装满食物的袋子。",
+          "artwork": "朋友停下调整手势，袋子里是普通杂货。"
+        },
+        {
+          "page": 2,
+          "text": "The bag is not light. She needs help.",
+          "chinese": "袋子不轻。她需要帮忙。",
+          "artwork": "朋友开口求助，讲述者走近。"
+        },
+        {
+          "page": 3,
+          "text": "I support my friend by carrying some of the food.",
+          "chinese": "我帮忙提一部分食物，支持朋友。",
+          "artwork": "讲述者拿走部分物品装入另一只袋子，两人实际分担。"
+        },
+        {
+          "page": 4,
+          "text": "I carry food, and she carries food. I support her with this work.",
+          "chinese": "我提食物，她也提食物。我在这件事上支持她。",
+          "artwork": "两人各提适度重量的袋子到家。"
+        }
+      ],
+      "check": {
+        "prompt": "My friend needs help with her work. Which action can support her?",
+        "options": [
+          "Helping her with part of the work.",
+          "Doing no work to help."
+        ],
+        "correctIndex": 0,
+        "explanation": "To support her here is to give useful help.",
+        "chinese": "朋友需要帮忙做事，哪种行为是在支持她？"
+      },
+      "output": {
+        "frame": "I support ___ by ___.",
+        "sample": "I support my friend by helping with the work.",
+        "taskChinese": "提出一种具体、可实行的帮助方式。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "帮助朋友提食物的人"
+    },
+    {
+      "id": "story-36-opinion",
+      "courseWeek": 36,
+      "readAfterWeek": 36,
+      "courseTheme": "Person Story",
+      "targetWordId": "opinion",
+      "title": "Different cups for different persons",
+      "titleChinese": "每个人有自己的看法",
+      "teachingDefinition": "what a person has in mind about something",
+      "senseChinese": "一个人对事物的看法，可以与别人不同",
+      "teachingMethod": "观点与事实",
+      "reviewWordIds": [
+        "cup",
+        "small",
+        "big",
+        "like"
+      ],
+      "plot": "两人看同样的杯子，一人喜欢小杯，另一人喜欢大杯，各自说明看法，不把偏好判成唯一正确答案。",
+      "continuity": "同一对杯子，人物身份明确。偏好和观点用网页句子表达，插画不负责证明谁更正确。",
+      "sourceDefinition": "what a person has in mind",
+      "sourceExample": "The opinion is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My friend and I look at 2 cups.",
+          "chinese": "朋友和我看着两个杯子。",
+          "artwork": "同款大小两个杯子放在两人中间。"
+        },
+        {
+          "page": 2,
+          "text": "In my opinion, the small cup is best for me.",
+          "chinese": "在我看来，小杯子最适合我。",
+          "artwork": "讲述者拿起小杯子，朋友仍看着另一只。"
+        },
+        {
+          "page": 3,
+          "text": "My friend likes the big cup. That is her opinion.",
+          "chinese": "朋友喜欢大杯子。这是她的看法。",
+          "artwork": "朋友选择大杯子，不表现争吵或对错符号。"
+        },
+        {
+          "page": 4,
+          "text": "My opinion is different from hers. I like my cup, and she likes her cup.",
+          "chinese": "我的看法和她不同。我喜欢我的杯子，她喜欢她的杯子。",
+          "artwork": "两人各使用自己偏好的杯子。"
+        }
+      ],
+      "check": {
+        "prompt": "I say, \"I like the small cup best.\" Is this my opinion?",
+        "options": [
+          "No, all persons have to like it best.",
+          "Yes."
+        ],
+        "correctIndex": 1,
+        "explanation": "The sentence tells what I like. It is my opinion.",
+        "chinese": "我说“我最喜欢小杯子”，这是我的看法吗？"
+      },
+      "output": {
+        "frame": "In my opinion, ___ is good for me because ___.",
+        "sample": "In my opinion, the small cup is good for me because it is light.",
+        "taskChinese": "给出一个看法和理由，允许不同答案。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "喜欢小杯子的人"
+    },
+    {
+      "id": "story-37-river",
+      "courseWeek": 37,
+      "readAfterWeek": 37,
+      "courseTheme": "Land and Weather",
+      "targetWordId": "river",
+      "title": "A walk by moving water",
+      "titleChinese": "沿着河边走",
+      "teachingDefinition": "a long, natural body of moving water on land",
+      "senseChinese": "在陆地上沿一定河道流动的水",
+      "teachingMethod": "自然对象与特征",
+      "reviewWordIds": [
+        "water",
+        "land",
+        "bridge",
+        "walk"
+      ],
+      "plot": "人物沿河岸走，看水流经桥下，在安全位置观察河道延伸。",
+      "continuity": "河有两岸且持续延伸，水面有自然流动细节；不把静水杯或任意池塘称为 river。人物停留安全步道。",
+      "sourceDefinition": "moving water across land",
+      "sourceExample": "The river is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My friend and I walk near a river.",
+          "chinese": "我们在河边走。",
+          "artwork": "两人在河岸步道，河道和两岸可见。"
+        },
+        {
+          "page": 2,
+          "text": "The water moves in the river.",
+          "chinese": "水在河里流动。",
+          "artwork": "自然弯曲河道延伸，树木与岸线形成参照。"
+        },
+        {
+          "page": 3,
+          "text": "The water goes under a bridge.",
+          "chinese": "水从桥下流过。",
+          "artwork": "同一河段和桥，河水连续流经桥下。"
+        },
+        {
+          "page": 4,
+          "text": "My friend and I watch the river from a safe place.",
+          "chinese": "我们在安全的地方看河。",
+          "artwork": "两人在有护栏或宽阔安全间隔的岸边观察。"
+        }
+      ],
+      "check": {
+        "prompt": "Which is a river?",
+        "options": [
+          "A long, natural body of moving water on land.",
+          "Water in a cup."
+        ],
+        "correctIndex": 0,
+        "explanation": "A river is a long, natural body of moving water on land.",
+        "chinese": "哪一种是河流？"
+      },
+      "output": {
+        "frame": "The river goes ___.",
+        "sample": "The river goes under the bridge.",
+        "taskChinese": "描述河与周围一个具体地点的关系。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "在河边步行的人"
+    },
+    {
+      "id": "story-38-seed",
+      "courseWeek": 38,
+      "readAfterWeek": 38,
+      "courseTheme": "Animals and Living Things",
+      "targetWordId": "seed",
+      "title": "From a small seed",
+      "titleChinese": "从一粒种子开始",
+      "teachingDefinition": "a small part of a plant from which a new plant can come",
+      "senseChinese": "能在适当条件下长成新植物的种子",
+      "teachingMethod": "起点与生长过程",
+      "reviewWordIds": [
+        "plant",
+        "pot",
+        "water",
+        "growth"
+      ],
+      "plot": "人物把一粒种子放入土中，照料后看见幼芽，说明种子是新植物的起点。",
+      "continuity": "同一花盆、一个明确种子、同一种植物。时间经过由网页说明，不画一浇水立即变大。",
+      "sourceDefinition": "a small thing from a plant",
+      "sourceExample": "The seed is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I have a small seed.",
+          "chinese": "我有一粒小种子。",
+          "artwork": "手掌中一粒真实可辨的种子，旁边是花盆。"
+        },
+        {
+          "page": 2,
+          "text": "I put the seed in the earth in a pot.",
+          "chinese": "我把种子放进花盆的土里。",
+          "artwork": "手把同一粒种子放入浅土，容器一致。"
+        },
+        {
+          "page": 3,
+          "text": "I give it water and time.",
+          "chinese": "我给它水，也给它时间。",
+          "artwork": "网页标明一些日子经过，人物温和浇水。",
+          "semanticText": {
+            "kind": "time",
+            "label": "Over some days",
+            "lines": [],
+            "accessibleSummary": "I give the seed water over some days."
+          }
+        },
+        {
+          "page": 4,
+          "text": "A young plant comes from the seed.",
+          "chinese": "一株幼小的植物从种子长出来。",
+          "artwork": "同一花盆里出现幼芽，不出现完整成年大树。",
+          "semanticText": {
+            "kind": "time",
+            "label": "After some days",
+            "lines": [],
+            "accessibleSummary": "After some days, a young plant comes from the seed."
+          }
+        }
+      ],
+      "check": {
+        "prompt": "What can a new plant come from?",
+        "options": [
+          "A metal key.",
+          "A seed."
+        ],
+        "correctIndex": 1,
+        "explanation": "A new plant can come from a seed when conditions are right.",
+        "chinese": "在合适条件下，新植物能从什么长出来？"
+      },
+      "output": {
+        "frame": "A ___ can come from a seed.",
+        "sample": "A tree can come from a seed.",
+        "taskChinese": "指出一种由种子长成的植物；不声称每颗种子必定发芽。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "播种的人"
+    },
+    {
+      "id": "story-39-across",
+      "courseWeek": 39,
+      "readAfterWeek": 39,
+      "courseTheme": "Roads and Moving",
+      "targetWordId": "across",
+      "title": "To the other side",
+      "titleChinese": "到另一边去",
+      "teachingDefinition": "from one side to the other",
+      "senseChinese": "从一侧移动到另一侧",
+      "teachingMethod": "移动路径",
+      "reviewWordIds": [
+        "bridge",
+        "river",
+        "way",
+        "walk"
+      ],
+      "plot": "人物想去河对岸，通过桥从近岸走到远岸，完成跨越。",
+      "continuity": "起点和终点由固定桥及两岸区分；同一视角自然跟随，不用箭头、地图或路线叠加。",
+      "sourceDefinition": "from one side to the other",
+      "sourceExample": "The across is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My friend is on the other side of the river.",
+          "chinese": "朋友在河的另一边。",
+          "artwork": "两岸、连接两岸的桥与两位人物同框。"
+        },
+        {
+          "page": 2,
+          "text": "I go to the bridge.",
+          "chinese": "我走到桥边。",
+          "artwork": "讲述者来到近岸桥头，朋友留在对岸。"
+        },
+        {
+          "page": 3,
+          "text": "I walk across the bridge.",
+          "chinese": "我走过这座桥。",
+          "artwork": "人物在桥中段向对岸走，桥两端清楚。"
+        },
+        {
+          "page": 4,
+          "text": "Now I am on the other side with my friend.",
+          "chinese": "现在我和朋友在另一边了。",
+          "artwork": "讲述者到达朋友所在的一岸，完成跨越。"
+        }
+      ],
+      "check": {
+        "prompt": "I walk across a room. Where do I go?",
+        "options": [
+          "From one side to the other.",
+          "I am in the same place with no motion."
+        ],
+        "correctIndex": 0,
+        "explanation": "Across describes motion from one side to the other.",
+        "chinese": "我穿过房间，是怎样移动的？"
+      },
+      "output": {
+        "frame": "I go across ___.",
+        "sample": "I go across the bridge.",
+        "taskChinese": "描述一条安全、明确连接两侧的路径。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "去对岸找朋友的人"
+    },
+    {
+      "id": "story-40-receipt",
+      "courseWeek": 40,
+      "readAfterWeek": 40,
+      "courseTheme": "Trade and Money",
+      "targetWordId": "receipt",
+      "title": "A paper after payment",
+      "titleChinese": "付款之后的一张纸",
+      "teachingDefinition": "a paper that shows a payment",
+      "senseChinese": "证明已付款并记录交易的收据",
+      "teachingMethod": "交易与凭据",
+      "reviewWordIds": [
+        "pay",
+        "shop",
+        "buy",
+        "cup"
+      ],
+      "plot": "人物在商店付款，收到交易收据，带回家查看自己支付了什么。",
+      "continuity": "插画里的小纸片无可读字；网页配套显示简短交易记录。必须通过付款过程说明收据，不能仅看纸形状猜。",
+      "sourceDefinition": "a paper that shows a payment",
+      "sourceExample": "The receipt is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I buy a cup at the shop.",
+          "chinese": "我在商店买一个杯子。",
+          "artwork": "顾客和店员在柜台，杯子清楚。"
+        },
+        {
+          "page": 2,
+          "text": "I pay for the cup.",
+          "chinese": "我付杯子的钱。",
+          "artwork": "顾客付款，杯子与同一店员保持连续。"
+        },
+        {
+          "page": 3,
+          "text": "The shop gives me a receipt.",
+          "chinese": "商店给我一张收据。",
+          "artwork": "店员递小纸片；网页文字显示杯子及付款记录。",
+          "semanticText": {
+            "kind": "receipt",
+            "label": "Payment record",
+            "lines": [
+              "Payment for: a cup.",
+              "Payment: complete."
+            ],
+            "accessibleSummary": "This receipt shows a complete payment for one cup."
+          }
+        },
+        {
+          "page": 4,
+          "text": "The receipt shows my payment.",
+          "chinese": "收据显示我的付款。",
+          "artwork": "人物在家查看同一纸片，网页提供可读交易内容。",
+          "semanticText": {
+            "kind": "receipt",
+            "label": "Payment record",
+            "lines": [
+              "Payment for: a cup.",
+              "Payment: complete."
+            ],
+            "accessibleSummary": "This receipt shows a complete payment for one cup."
+          }
+        }
+      ],
+      "check": {
+        "prompt": "Which paper shows my payment for the cup?",
+        "options": [
+          "A page for a letter.",
+          "The receipt."
+        ],
+        "correctIndex": 1,
+        "explanation": "The receipt records the payment for the cup.",
+        "chinese": "哪张纸能显示我已经付了杯子的钱？"
+      },
+      "output": {
+        "frame": "The receipt shows payment for ___.",
+        "sample": "The receipt shows payment for a cup.",
+        "taskChinese": "根据一份明确示例收据说清楚付款对象。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "买杯子的顾客"
+    },
+    {
+      "id": "story-41-pull",
+      "courseWeek": 41,
+      "readAfterWeek": 41,
+      "courseTheme": "Machines and Work",
+      "targetWordId": "pull",
+      "title": "Open the drawer",
+      "titleChinese": "把抽屉拉开",
+      "teachingDefinition": "to move a thing to you",
+      "senseChinese": "把东西朝自己的方向拉",
+      "teachingMethod": "动作方向",
+      "reviewWordIds": [
+        "drawer",
+        "hand",
+        "open",
+        "move"
+      ],
+      "plot": "人物需要抽屉中的笔，握住把手向自己拉，抽屉打开后取出笔。",
+      "continuity": "侧面视角显示人物身体、手、把手和抽屉。抽屉朝人物移动，不把远离身体的推画成 pull。",
+      "sourceDefinition": "to move a thing to you",
+      "sourceExample": "The pull is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My pen is in the drawer.",
+          "chinese": "我的笔在抽屉里。",
+          "artwork": "人物站在关闭的桌抽屉前，网页说明笔在里面。"
+        },
+        {
+          "page": 2,
+          "text": "I put my hand on the drawer.",
+          "chinese": "我把手放到抽屉把手上。",
+          "artwork": "侧面近景，抓握把手而非按桌面。"
+        },
+        {
+          "page": 3,
+          "text": "I pull the drawer to me.",
+          "chinese": "我把抽屉朝自己拉。",
+          "artwork": "抽屉明显朝人物身体滑出，人物手臂配合回收。"
+        },
+        {
+          "page": 4,
+          "text": "The drawer is open. I can take my pen.",
+          "chinese": "抽屉打开了。我可以拿笔了。",
+          "artwork": "抽屉打开，人物取出同一支笔。"
+        }
+      ],
+      "check": {
+        "prompt": "To pull a box, which way do I move it?",
+        "options": [
+          "To me.",
+          "From me to my friend."
+        ],
+        "correctIndex": 0,
+        "explanation": "Pull means moving a thing to the person doing the action.",
+        "chinese": "拉一个盒子，是把它朝哪个方向移动？"
+      },
+      "output": {
+        "frame": "I pull ___ to me.",
+        "sample": "I pull the drawer to me.",
+        "taskChinese": "用轻小物品安全示范拉的方向。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "拉抽屉的人"
+    },
+    {
+      "id": "story-42-solid",
+      "courseWeek": 42,
+      "readAfterWeek": 42,
+      "courseTheme": "Materials and Making",
+      "targetWordId": "solid",
+      "title": "A stone and some water",
+      "titleChinese": "石头和水",
+      "teachingDefinition": "not liquid or air",
+      "senseChinese": "固体，本篇用固定形状与液体对照",
+      "teachingMethod": "材料状态比较",
+      "reviewWordIds": [
+        "stone",
+        "water",
+        "form",
+        "cup"
+      ],
+      "plot": "人物把水倒进不同容器，观察水随容器改变形状；同一块石头换容器后仍保持形状。",
+      "continuity": "稳定石头外形和大小；每页单一操作场景。只针对示例石头说明形状，不把所有可变形固体都排除。",
+      "sourceDefinition": "not liquid or air",
+      "sourceExample": "The solid is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I have a stone and some water.",
+          "chinese": "我有一块石头和一些水。",
+          "artwork": "桌上同一石头、两只不同形状的容器和少量水。"
+        },
+        {
+          "page": 2,
+          "text": "The water takes the form of its cup.",
+          "chinese": "水呈现装它的杯子的形状。",
+          "artwork": "人物把水倒入另一只容器，水面和容器形状可见。"
+        },
+        {
+          "page": 3,
+          "text": "The stone keeps its form. It is solid.",
+          "chinese": "石头保持形状。它是固体。",
+          "artwork": "人物把同一石头换到另一容器旁，轮廓不变。"
+        },
+        {
+          "page": 4,
+          "text": "This solid stone is different from the liquid water.",
+          "chinese": "这块固体石头与液态水不同。",
+          "artwork": "石头和水作为具体对比同时可见。"
+        }
+      ],
+      "check": {
+        "prompt": "Which is solid in this story?",
+        "options": [
+          "The water.",
+          "The stone."
+        ],
+        "correctIndex": 1,
+        "explanation": "The stone is solid; the water is liquid.",
+        "chinese": "这个故事里哪一个是固体？"
+      },
+      "output": {
+        "frame": "The ___ is solid.",
+        "sample": "The stone is solid.",
+        "taskChinese": "指出一种熟悉的固体，避免把“很硬”当固体定义。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "比较石头和水的人"
+    },
+    {
+      "id": "story-43-observation",
+      "courseWeek": 43,
+      "readAfterWeek": 43,
+      "courseTheme": "Science and Systems",
+      "targetWordId": "observation",
+      "title": "Look at the plant",
+      "titleChinese": "先观察再判断",
+      "teachingDefinition": "a fact learned by looking with care",
+      "senseChinese": "通过仔细看直接注意到的事实",
+      "teachingMethod": "观察与推测",
+      "reviewWordIds": [
+        "plant",
+        "leaf",
+        "see",
+        "water"
+      ],
+      "plot": "人物观察植物叶片和土壤，先说可见现象，再把可能原因明确标为想法。",
+      "continuity": "叶片形态和盆土细节足够可见。观察、猜想写在网页，不在插画上加放大镜图标、流程框。",
+      "sourceDefinition": "a thing you see by looking",
+      "sourceExample": "The observation is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I look at the plant with care.",
+          "chinese": "我仔细观察这株植物。",
+          "artwork": "人物靠近同一盆植物查看叶片和土。"
+        },
+        {
+          "page": 2,
+          "text": "One leaf is brown. That is my observation.",
+          "chinese": "一片叶子是棕色的。这是我的观察。",
+          "artwork": "一片棕叶在多片绿叶中清楚可辨，保持真实光照。",
+          "semanticText": {
+            "kind": "observation",
+            "label": "What I see",
+            "lines": [
+              "One leaf is brown."
+            ],
+            "accessibleSummary": "One brown leaf is a fact I can see."
+          }
+        },
+        {
+          "page": 3,
+          "text": "The earth is dry. That is another observation.",
+          "chinese": "土是干的。这是另一个观察。",
+          "artwork": "人物检查盆土，表面干燥特征可见。",
+          "semanticText": {
+            "kind": "observation",
+            "label": "What I see",
+            "lines": [
+              "The earth is dry."
+            ],
+            "accessibleSummary": "The dry earth is another observation."
+          }
+        },
+        {
+          "page": 4,
+          "text": "It is possible that the plant needs water. I need more facts to be certain.",
+          "chinese": "我有个想法：植物可能需要水。我需要更多事实才能确定。",
+          "artwork": "人物准备进一步检查；不把缺水画成唯一已证实原因。",
+          "semanticText": {
+            "kind": "inference",
+            "label": "One possible reason",
+            "lines": [
+              "The plant may need water."
+            ],
+            "accessibleSummary": "This is a possible reason, not a certain fact."
+          }
+        }
+      ],
+      "check": {
+        "prompt": "Which sentence is an observation?",
+        "options": [
+          "One leaf is brown.",
+          "It is possible that the plant is ill."
+        ],
+        "correctIndex": 0,
+        "explanation": "I can see the brown leaf. The other sentence gives a possible reason.",
+        "chinese": "哪一句是在说直接观察到的现象？"
+      },
+      "output": {
+        "frame": "I can see ___. My observation is ___.",
+        "sample": "I can see a brown leaf. My observation is that one leaf is brown.",
+        "taskChinese": "先描述能看见的事实，再另外提出可能的解释。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "观察植物的人"
+    },
+    {
+      "id": "story-44-parcel",
+      "courseWeek": 44,
+      "readAfterWeek": 44,
+      "courseTheme": "Story Time",
+      "targetWordId": "parcel",
+      "title": "A book in a parcel",
+      "titleChinese": "寄给远方的一本书",
+      "teachingDefinition": "a thing covered in paper for carrying or sending",
+      "senseChinese": "包好用于运送的一件或一组物品",
+      "teachingMethod": "包装前后用途",
+      "reviewWordIds": [
+        "book",
+        "paper",
+        "box",
+        "friend"
+      ],
+      "plot": "人物把书放进盒子，包好成为包裹，交给负责运送的人。",
+      "continuity": "同一书与盒子；标签和地址全部由网页文字承担，插画上不出现可读文字。",
+      "sourceDefinition": "a thing in paper for carrying",
+      "sourceExample": "The parcel is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I have a book for my friend.",
+          "chinese": "我有一本书要给朋友。",
+          "artwork": "人物在桌上准备一本书和空纸盒。"
+        },
+        {
+          "page": 2,
+          "text": "I put the book in a box and cover it with paper.",
+          "chinese": "我把书装进盒子，再用纸包好。",
+          "artwork": "包装过程，只有一份书和盒子。"
+        },
+        {
+          "page": 3,
+          "text": "Now it is a parcel.",
+          "chinese": "现在它是一个包裹。",
+          "artwork": "包裹完整包好，形状与内部盒子对应。"
+        },
+        {
+          "page": 4,
+          "text": "The parcel is ready to go to my friend.",
+          "chinese": "包裹准备送到朋友那里。",
+          "artwork": "人物把包裹交给服务台人员；地址在网页文字区。",
+          "semanticText": {
+            "kind": "address",
+            "label": "For my friend",
+            "lines": [
+              "To: Anna.",
+              "At: 2 Green Road."
+            ],
+            "accessibleSummary": "This parcel is for Anna at 2 Green Road."
+          }
+        }
+      ],
+      "check": {
+        "prompt": "A book is covered in paper for sending. What is it now?",
+        "options": [
+          "A river.",
+          "A parcel."
+        ],
+        "correctIndex": 1,
+        "explanation": "A parcel is a thing covered in paper for carrying or sending.",
+        "chinese": "一本书已包好准备寄出，包好的这一件是什么？"
+      },
+      "output": {
+        "frame": "The parcel has ___ in it.",
+        "sample": "The parcel has a book in it.",
+        "taskChinese": "说明一个包裹里装有什么，以及要送给谁。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "包装书的人"
+    },
+    {
+      "id": "story-45-news",
+      "courseWeek": 45,
+      "readAfterWeek": 45,
+      "courseTheme": "Past Story",
+      "targetWordId": "news",
+      "title": "A letter from my friend",
+      "titleChinese": "朋友来信了",
+      "teachingDefinition": "new knowledge about an event",
+      "senseChinese": "关于已发生事情的新消息",
+      "teachingMethod": "信息与过去事件",
+      "reviewWordIds": [
+        "letter",
+        "friend",
+        "work",
+        "tell"
+      ],
+      "plot": "讲述者昨天打开朋友的信，知道朋友已完成工作，把新消息告诉家人。",
+      "continuity": "过去时间由网页 Yesterday 标记；信件内容用网页引用，插画书信无可读字。只教消息这一义，不把 news 当可数单件物品。",
+      "sourceDefinition": "new words about a thing",
+      "sourceExample": "The news is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "Yesterday, I opened a letter from my friend.",
+          "chinese": "昨天，我打开朋友的一封信。",
+          "artwork": "人物在家拆信，网页明确昨天的情境。",
+          "semanticText": {
+            "kind": "time",
+            "label": "Yesterday",
+            "lines": [],
+            "accessibleSummary": "This is a story about yesterday."
+          }
+        },
+        {
+          "page": 2,
+          "text": "My friend finished her work. This is the news in the letter.",
+          "chinese": "朋友完成了工作。这是信中的消息。",
+          "artwork": "人物读信；朋友完成工作的事实以网页信件短文呈现。",
+          "semanticText": {
+            "kind": "letter",
+            "label": "Yesterday: from my friend",
+            "lines": [
+              "I finished my work."
+            ],
+            "accessibleSummary": "The letter says that my friend finished her work."
+          }
+        },
+        {
+          "page": 3,
+          "text": "I talked with my family about the news.",
+          "chinese": "我把这个消息告诉家人。",
+          "artwork": "同一天稍后，人物与家人交谈，信仍在手中。",
+          "semanticText": {
+            "kind": "time",
+            "label": "Yesterday",
+            "lines": [],
+            "accessibleSummary": "This is a story about yesterday."
+          }
+        },
+        {
+          "page": 4,
+          "text": "My family was happy about the good news.",
+          "chinese": "家人听到这个好消息很高兴。",
+          "artwork": "同一组家人自然交流，保持消息内容一致。",
+          "semanticText": {
+            "kind": "time",
+            "label": "Yesterday",
+            "lines": [],
+            "accessibleSummary": "This is a story about yesterday."
+          }
+        }
+      ],
+      "check": {
+        "prompt": "My friend tells me that she finished her work. What is the news?",
+        "options": [
+          "She finished her work.",
+          "The paper is white."
+        ],
+        "correctIndex": 0,
+        "explanation": "The news is the fact that the work is finished.",
+        "chinese": "朋友告诉我她完成了工作，新消息是什么？"
+      },
+      "output": {
+        "frame": "The news is that ___.",
+        "sample": "The news is that my friend finished her work.",
+        "taskChinese": "转述一条虚构或真实的简单消息，不要求分享私人信息。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "收到朋友来信的人"
+    },
+    {
+      "id": "story-46-between",
+      "courseWeek": 46,
+      "readAfterWeek": 46,
+      "courseTheme": "Future Purpose",
+      "targetWordId": "between",
+      "title": "A place for the plant",
+      "titleChinese": "花盆放在哪里",
+      "teachingDefinition": "in the space separating 2 things",
+      "senseChinese": "在两个明确参照物之间",
+      "teachingMethod": "双参照物位置",
+      "reviewWordIds": [
+        "plant",
+        "chair",
+        "window",
+        "place"
+      ],
+      "plot": "人物给盆栽找位置，先放在椅子旁，再移到椅子与窗户之间，朋友据此找到它。",
+      "continuity": "椅子、窗和盆栽在同一空间内，两个参照物始终完整可辨。不能只说画面中间就是 between。",
+      "sourceDefinition": "in the middle of things",
+      "sourceExample": "The between is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I need a place for the plant.",
+          "chinese": "我需要给盆栽找个位置。",
+          "artwork": "人物拿着小盆栽，椅子和窗都在场景中。"
+        },
+        {
+          "page": 2,
+          "text": "First, I put it near the chair.",
+          "chinese": "首先，我把它放在椅子旁。",
+          "artwork": "盆栽位于椅子的远窗一侧，只满足 near。"
+        },
+        {
+          "page": 3,
+          "text": "Then I put it between the chair and the window.",
+          "chinese": "然后我把它放在椅子和窗之间。",
+          "artwork": "盆栽位于两个指定参照物之间，位置关系清晰。"
+        },
+        {
+          "page": 4,
+          "text": "My friend finds it between the 2 things.",
+          "chinese": "朋友在这两样东西之间找到了它。",
+          "artwork": "朋友按关系句找到同一盆栽。"
+        }
+      ],
+      "check": {
+        "prompt": "A cup is between a book and a box. Which 2 things are on its sides?",
+        "options": [
+          "2 windows.",
+          "The book and the box."
+        ],
+        "correctIndex": 1,
+        "explanation": "Between needs the 2 named things in this scene.",
+        "chinese": "杯子在书和盒子之间，它两侧的参照物是哪两个？"
+      },
+      "output": {
+        "frame": "The ___ is between ___ and ___.",
+        "sample": "The cup is between the book and the box.",
+        "taskChinese": "完整说出目标物和两个参照物。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "摆放盆栽的人"
+    },
+    {
+      "id": "story-47-slow",
+      "courseWeek": 47,
+      "readAfterWeek": 47,
+      "courseTheme": "Comparison and Quality",
+      "targetWordId": "slow",
+      "title": "Take time with the cup",
+      "titleChinese": "端杯子慢一点",
+      "teachingDefinition": "not quick",
+      "senseChinese": "动作或移动速度较慢，本篇不评价智力或能力",
+      "teachingMethod": "速度与目的",
+      "reviewWordIds": [
+        "cup",
+        "water",
+        "carry",
+        "safe"
+      ],
+      "plot": "人物端一只满水杯走向桌子，为了不洒水放慢步伐，最后稳稳放下。",
+      "continuity": "静态插画只能支持小步、稳定端杯等动作线索；slow 的时间含义用网页句子与可选同路程时长记录补充，不能靠一张照片证明速度。",
+      "sourceDefinition": "not quick",
+      "sourceExample": "The slow is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "The cup is full of water.",
+          "chinese": "杯子里装满了水。",
+          "artwork": "人物双手端杯，水面接近杯沿。"
+        },
+        {
+          "page": 2,
+          "text": "I carry it with slow steps.",
+          "chinese": "我慢慢迈步端着它。",
+          "artwork": "同一路径上谨慎小步，杯子保持水平。"
+        },
+        {
+          "page": 3,
+          "text": "I am slow because I do not want to drop the cup.",
+          "chinese": "我放慢速度，因为我不想把杯子掉在地上。",
+          "artwork": "同一个连续搬运场景，网页解释速度和目的。"
+        },
+        {
+          "page": 4,
+          "text": "I put the cup on the table with care.",
+          "chinese": "我小心地把杯子放在桌上。",
+          "artwork": "杯子安全落在桌面，水未洒出。"
+        }
+      ],
+      "check": {
+        "prompt": "2 persons walk the same way. One takes more time. In this comparison, is that person slow or quick?",
+        "options": [
+          "Slow.",
+          "Quick."
+        ],
+        "correctIndex": 0,
+        "explanation": "For the same way, taking more time means moving more slowly.",
+        "chinese": "两个人走同一条路，一个人用时更长。在这次比较中，这个人是慢还是快？"
+      },
+      "output": {
+        "frame": "I am slow when I ___.",
+        "sample": "I am slow when I carry a full cup.",
+        "taskChinese": "说一个适合放慢动作的场景，不把慢等同于不好。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "端满水杯的人"
+    },
+    {
+      "id": "story-48-if",
+      "courseWeek": 48,
+      "readAfterWeek": 48,
+      "courseTheme": "Argument and Reason",
+      "targetWordId": "if",
+      "title": "What will I do tomorrow?",
+      "titleChinese": "看天气做计划",
+      "teachingDefinition": "on the condition that something happens",
+      "senseChinese": "某个条件成立时采用相应安排",
+      "teachingMethod": "条件与分支",
+      "reviewWordIds": [
+        "rain",
+        "garden",
+        "home",
+        "condition"
+      ],
+      "plot": "人物在今天准备明天的两种安排：下雨在家，不下雨去花园；次日观察天气后执行其中一种。",
+      "continuity": "计划文字在网页，插画每页一个完整场景；两种计划不能画成两个已经同时发生的事实，不把 if 画成 because 的同义词。",
+      "sourceDefinition": "on the condition that something happens",
+      "sourceExample": "The if is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I will do one of 2 things tomorrow.",
+          "chinese": "明天，我会在两种安排中采用一种。",
+          "artwork": "两人在室内看向窗外，准备讨论。"
+        },
+        {
+          "page": 2,
+          "text": "If there is rain, I will be at home.",
+          "chinese": "如果下雨，我就在家。",
+          "artwork": "仍是计划中的室内场景，网页注明条件尚未确定。",
+          "semanticText": {
+            "kind": "condition",
+            "label": "A possible future",
+            "lines": [
+              "If there is rain, I will be at home."
+            ],
+            "accessibleSummary": "This is a possible action for tomorrow, not a fact about today."
+          }
+        },
+        {
+          "page": 3,
+          "text": "If there is no rain, I will go to the garden.",
+          "chinese": "如果不下雨，我就去花园。",
+          "artwork": "人物准备外出物品但仍在今天家中；网页说明另一条件。",
+          "semanticText": {
+            "kind": "condition",
+            "label": "Another possible future",
+            "lines": [
+              "If there is no rain, I will go to the garden."
+            ],
+            "accessibleSummary": "This is another possible action for tomorrow, not a fact about today."
+          }
+        },
+        {
+          "page": 4,
+          "text": "The next day, there is rain. I am at home.",
+          "chinese": "到了第二天，下雨了。我在家里。",
+          "artwork": "次日窗外下雨，两人在家读书，只执行一个分支。",
+          "semanticText": {
+            "kind": "timeContext",
+            "label": "The next day",
+            "lines": [
+              "There is rain. I am at home."
+            ],
+            "accessibleSummary": "There is rain now. I am at home."
+          }
+        }
+      ],
+      "check": {
+        "prompt": "If there is rain, I will be at home. There is rain now. Where will I be?",
+        "options": [
+          "In the garden.",
+          "At home."
+        ],
+        "correctIndex": 1,
+        "explanation": "There is rain. The condition for being at home is true.",
+        "chinese": "计划说下雨就留家，现在下雨了，按计划该怎么做？"
+      },
+      "output": {
+        "frame": "If ___, I will ___.",
+        "sample": "If there is rain, I will be at home.",
+        "taskChinese": "给一项明确条件和相应计划；允许另一个合理的个人计划。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "准备次日活动的人"
+    },
+    {
+      "id": "story-49-thread",
+      "courseWeek": 49,
+      "readAfterWeek": 49,
+      "courseTheme": "Steps and Processes",
+      "targetWordId": "thread",
+      "title": "A button for my coat",
+      "titleChinese": "把纽扣缝回外套",
+      "teachingDefinition": "a thin line used for joining cloth",
+      "senseChinese": "缝合布料时用的细线",
+      "teachingMethod": "材料与操作用途",
+      "reviewWordIds": [
+        "button",
+        "coat",
+        "needle",
+        "cloth"
+      ],
+      "plot": "成人发现纽扣松了，用针和线把纽扣缝牢，最后收好针具。",
+      "continuity": "成年人物操作，线的连续细长形态可见，针与线有清楚连接。不是给儿童的无监督操作说明。",
+      "sourceDefinition": "a thin line used for joining cloth",
+      "sourceExample": "The thread is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "The button on my coat is loose.",
+          "chinese": "外套上的纽扣松了。",
+          "artwork": "成人在桌边查看纽扣与衣服连接处。"
+        },
+        {
+          "page": 2,
+          "text": "I put thread through the needle.",
+          "chinese": "我把线穿过针孔。",
+          "artwork": "近景显示细线穿过针孔，线轴和手比例自然。"
+        },
+        {
+          "page": 3,
+          "text": "The thread joins the button to the cloth.",
+          "chinese": "线把纽扣和布连在一起。",
+          "artwork": "成人完成一针，线经过纽扣孔与衣料。"
+        },
+        {
+          "page": 4,
+          "text": "Now the button is fixed. I put the needle in its box.",
+          "chinese": "现在纽扣固定好了。我把针收好。",
+          "artwork": "人物检查纽扣，针放回安全收纳盒。"
+        }
+      ],
+      "check": {
+        "prompt": "Which thing joins cloth in this story?",
+        "options": [
+          "Thread.",
+          "A glass of water."
+        ],
+        "correctIndex": 0,
+        "explanation": "The thin thread goes through the cloth and keeps the button in place.",
+        "chinese": "故事里是哪种材料把纽扣与布连起来？"
+      },
+      "output": {
+        "frame": "Thread is used to ___.",
+        "sample": "Thread is used to join cloth.",
+        "taskChinese": "说出线的用途；可以只描述画面，不实际操作针具。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "缝纽扣的成年人"
+    },
+    {
+      "id": "story-50-but",
+      "courseWeek": 50,
+      "readAfterWeek": 50,
+      "courseTheme": "Description Practice",
+      "targetWordId": "but",
+      "title": "A small bag can help",
+      "titleChinese": "小袋子也能派上用场",
+      "teachingDefinition": "used to put different ideas together",
+      "senseChinese": "连接有对比或转折关系的两句话",
+      "teachingMethod": "预期与转折",
+      "reviewWordIds": [
+        "bag",
+        "small",
+        "useful",
+        "carry"
+      ],
+      "plot": "人物以为小袋子装不了要带的书，实际发现它虽小却结实、装得下自己的物品。",
+      "continuity": "同一个小袋子与同一份书，尺寸和重量保持一致；不要用不合理超大容量制造转折。",
+      "sourceDefinition": "used to show a different idea",
+      "sourceExample": "The but is clear.",
+      "requiresLexicalCorrection": true,
+      "pages": [
+        {
+          "page": 1,
+          "text": "This bag is small.",
+          "chinese": "这个袋子很小。",
+          "artwork": "桌上小布袋与一本可以装入的书同框。"
+        },
+        {
+          "page": 2,
+          "text": "I have a book to carry.",
+          "chinese": "我有一本书要带走。",
+          "artwork": "人物拿书在袋口前比一比，仍是同一本书。"
+        },
+        {
+          "page": 3,
+          "text": "The bag is small, but it is strong.",
+          "chinese": "袋子虽然小，但很结实。",
+          "artwork": "人物把书装入，袋子正常承重。"
+        },
+        {
+          "page": 4,
+          "text": "It is small, but it can carry what I need.",
+          "chinese": "它虽小，但装得下我需要的东西。",
+          "artwork": "书装在袋中，人物自然提起，无夸张扩容。"
+        }
+      ],
+      "check": {
+        "prompt": "The bag is old, but it is useful. Can I still use it?",
+        "options": [
+          "No, old things have no use.",
+          "Yes, it is useful."
+        ],
+        "correctIndex": 1,
+        "explanation": "The sentence says the old bag is still useful.",
+        "chinese": "袋子虽然旧，但仍有用。我还能用它吗？"
+      },
+      "output": {
+        "frame": "___, but ___.",
+        "sample": "My bag is old, but it is useful.",
+        "taskChinese": "说两件有真实转折关系的事，不是任意两句都接 but。"
+      },
+      "contextSupport": [
+        {
+          "text": "strong",
+          "definition": "able to carry much weight",
+          "chinese": "这里说袋子结实，能承受重量"
+        }
+      ],
+      "narratorChinese": "用小袋子装书的人"
+    },
+    {
+      "id": "story-51-so",
+      "courseWeek": 51,
+      "readAfterWeek": 51,
+      "courseTheme": "Order and Place",
+      "targetWordId": "so",
+      "title": "Rain changes my day",
+      "titleChinese": "下雨后改变计划",
+      "teachingDefinition": "used to show what comes after a reason",
+      "senseChinese": "在原因之后引出相应结果",
+      "teachingMethod": "原因到结果",
+      "reviewWordIds": [
+        "rain",
+        "home",
+        "garden",
+        "read"
+      ],
+      "plot": "原计划去花园，出门时下雨，因此改为留家读书；把原因先说、结果后说。",
+      "continuity": "沿用已有读书人物，但雨、出门准备和留家行动明确连续。so 是本篇重点，because 作反向表达对照放网页。",
+      "sourceDefinition": "used to show what comes after a reason",
+      "sourceExample": "It is late, so I rest.",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "I want to go to the garden.",
+          "chinese": "我想去花园。",
+          "artwork": "两人在家门口准备出发。"
+        },
+        {
+          "page": 2,
+          "text": "There is rain, so I am at home.",
+          "chinese": "下雨了，所以我在家里。",
+          "artwork": "窗外下雨，两人把出门物品放回。",
+          "semanticText": {
+            "kind": "causeAndEffect",
+            "label": "The same reason and effect",
+            "lines": [
+              "There is rain, so I am at home.",
+              "I am at home because there is rain."
+            ],
+            "accessibleSummary": "Rain is the reason. Being at home is the effect."
+          }
+        },
+        {
+          "page": 3,
+          "text": "I am at home, so I can read with my friend.",
+          "chinese": "我在家里，所以可以和朋友一起读书。",
+          "artwork": "两人在同一室内坐下打开书。"
+        },
+        {
+          "page": 4,
+          "text": "I do not go to the garden. I read at home.",
+          "chinese": "我不去花园了。我在家读书。",
+          "artwork": "留家阅读的结果保持，不画另一条未执行的出行分支。"
+        }
+      ],
+      "check": {
+        "prompt": "The cup is empty, so I put water in it. What is the effect?",
+        "options": [
+          "I put water in the cup.",
+          "The cup was empty."
+        ],
+        "correctIndex": 0,
+        "explanation": "The empty cup is the reason. Putting water in it is the effect.",
+        "chinese": "杯子空了，所以我往里面倒水，结果是哪件事？"
+      },
+      "output": {
+        "frame": "___, so ___.",
+        "sample": "There is rain, so I am at home.",
+        "taskChinese": "先说原因再说结果，再尝试改为 because 表达同一关系。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "下雨时留在家里的人"
+    },
+    {
+      "id": "story-52-why",
+      "courseWeek": 52,
+      "readAfterWeek": 52,
+      "courseTheme": "Story Practice",
+      "targetWordId": "why",
+      "title": "Tell me the reason",
+      "titleChinese": "告诉我原因",
+      "teachingDefinition": "used to ask for a reason",
+      "senseChinese": "询问一件事的原因，而不是时间或地点",
+      "teachingMethod": "提问与解释",
+      "reviewWordIds": [
+        "because",
+        "book",
+        "carry",
+        "reason"
+      ],
+      "plot": "朋友看见讲述者带袋子、拿书、去学习，依次问原因；讲述者用 because 作答，最后自己提出一个问题。",
+      "continuity": "同一天同一对朋友，人物指代保持清楚。问题与回答由网页角色标识表达，插画不画问号或对话气泡。",
+      "sourceDefinition": "used to ask for a reason",
+      "sourceExample": "Why are you late?",
+      "requiresLexicalCorrection": false,
+      "pages": [
+        {
+          "page": 1,
+          "text": "My friend asks, \"Why do you take a bag?\"",
+          "chinese": "朋友问：“你为什么带袋子？”",
+          "artwork": "两人出门前，讲述者手持袋子，朋友自然询问。"
+        },
+        {
+          "page": 2,
+          "text": "I take it because I want to carry my book.",
+          "chinese": "我带它，因为我想装书。",
+          "artwork": "讲述者把自己的书放进袋子，原因与行动一致。"
+        },
+        {
+          "page": 3,
+          "text": "\"Why do you study English?\" my friend asks.",
+          "chinese": "朋友问：“你为什么学英语？”",
+          "artwork": "两人在学习室门口，场景衔接开篇学习目标。"
+        },
+        {
+          "page": 4,
+          "text": "I study because I want to talk with more persons. What is your reason?",
+          "chinese": "我学习，因为我想和更多人交流。你的原因是什么？",
+          "artwork": "人物在学习室与不同的人交流，回扣一年的实用表达目标。"
+        }
+      ],
+      "check": {
+        "prompt": "Why do I carry a cup? I want to drink water. Which answer gives the reason?",
+        "options": [
+          "At the table.",
+          "Because I want to drink water."
+        ],
+        "correctIndex": 1,
+        "explanation": "Why asks for a reason, not a place.",
+        "chinese": "问“为什么带杯子”，哪种回答提供了原因？"
+      },
+      "output": {
+        "frame": "Why do you ___? Because ___.",
+        "sample": "Why do you study English? Because I want to talk with more persons.",
+        "taskChinese": "自己提出一个 why 问题，再用有意义的原因回答。"
+      },
+      "contextSupport": [],
+      "narratorChinese": "回答朋友提问的学习者"
+    }
+  ]
+}

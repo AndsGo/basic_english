@@ -1,0 +1,236 @@
+{
+  "scope": "Design text and source consistency only; no artwork or UI acceptance implied.",
+  "sourceContentVersion": "1.52.0",
+  "mainBooks": 52,
+  "companionBooks": 1,
+  "pages": 212,
+  "lexicalErrors": [],
+  "canonicalWords": 850,
+  "coverageByHighestRole": {
+    "primary": 52,
+    "review": 82,
+    "textOnly": 92,
+    "exerciseOnly": 45,
+    "extensionNeeded": 579
+  },
+  "supplementaryPrimaryTargets": [
+    "repeat"
+  ],
+  "sourceEntriesNeedingEditorialCorrection": [],
+  "readingSupport": [
+    {
+      "bookId": "story-03-give",
+      "words": [
+        {
+          "word": "no",
+          "earliestInCurrentCourseText": 4,
+          "plannedContextSupport": {
+            "text": "no",
+            "definition": "not any",
+            "chinese": "没有；例如 no book 是没有书"
+          }
+        },
+        {
+          "word": "now",
+          "earliestInCurrentCourseText": 21,
+          "plannedContextSupport": {
+            "text": "now",
+            "definition": "at this time",
+            "chinese": "现在，此刻"
+          }
+        }
+      ]
+    },
+    {
+      "bookId": "story-04-enough",
+      "words": [
+        {
+          "word": "now",
+          "earliestInCurrentCourseText": 21,
+          "plannedContextSupport": {
+            "text": "now",
+            "definition": "at this time",
+            "chinese": "现在，此刻"
+          }
+        }
+      ]
+    },
+    {
+      "bookId": "story-05-left",
+      "words": [
+        {
+          "word": "now",
+          "earliestInCurrentCourseText": 21,
+          "plannedContextSupport": {
+            "text": "now",
+            "definition": "at this time",
+            "chinese": "现在，此刻"
+          }
+        }
+      ]
+    },
+    {
+      "bookId": "story-06-repeat",
+      "words": [
+        {
+          "word": "now",
+          "earliestInCurrentCourseText": 21,
+          "plannedContextSupport": {
+            "text": "now",
+            "definition": "at this time",
+            "chinese": "现在，此刻"
+          }
+        }
+      ]
+    },
+    {
+      "bookId": "story-09-rain",
+      "words": [
+        {
+          "word": "now",
+          "earliestInCurrentCourseText": 21,
+          "plannedContextSupport": {
+            "text": "now",
+            "definition": "at this time",
+            "chinese": "现在，此刻"
+          }
+        }
+      ]
+    },
+    {
+      "bookId": "story-11-because",
+      "words": [
+        {
+          "word": "now",
+          "earliestInCurrentCourseText": 21,
+          "plannedContextSupport": {
+            "text": "now",
+            "definition": "at this time",
+            "chinese": "现在，此刻"
+          }
+        }
+      ]
+    },
+    {
+      "bookId": "story-12-will",
+      "words": [
+        {
+          "word": "now",
+          "earliestInCurrentCourseText": 21,
+          "plannedContextSupport": {
+            "text": "now",
+            "definition": "at this time",
+            "chinese": "现在，此刻"
+          }
+        }
+      ]
+    },
+    {
+      "bookId": "story-13-cat",
+      "words": [
+        {
+          "word": "now",
+          "earliestInCurrentCourseText": 21,
+          "plannedContextSupport": {
+            "text": "now",
+            "definition": "at this time",
+            "chinese": "现在，此刻"
+          }
+        }
+      ]
+    },
+    {
+      "bookId": "story-15-middle",
+      "words": [
+        {
+          "word": "now",
+          "earliestInCurrentCourseText": 21,
+          "plannedContextSupport": {
+            "text": "now",
+            "definition": "at this time",
+            "chinese": "现在，此刻"
+          }
+        }
+      ]
+    },
+    {
+      "bookId": "story-16-equal",
+      "words": [
+        {
+          "word": "now",
+          "earliestInCurrentCourseText": 21,
+          "plannedContextSupport": {
+            "text": "now",
+            "definition": "at this time",
+            "chinese": "现在，此刻"
+          }
+        }
+      ]
+    },
+    {
+      "bookId": "story-20-drawer",
+      "words": [
+        {
+          "word": "now",
+          "earliestInCurrentCourseText": 21,
+          "plannedContextSupport": {
+            "text": "now",
+            "definition": "at this time",
+            "chinese": "现在，此刻"
+          }
+        }
+      ]
+    },
+    {
+      "bookId": "companion-open",
+      "words": [
+        {
+          "word": "now",
+          "earliestInCurrentCourseText": 21,
+          "plannedContextSupport": {
+            "text": "now",
+            "definition": "at this time",
+            "chinese": "现在，此刻"
+          }
+        }
+      ]
+    }
+  ],
+  "unresolvedReadingSupport": [],
+  "readingSupportMethod": "Earliest occurrence in existing course word text, definitions, examples and lesson-linked patterns. An occurrence indicates available context, not demonstrated learner mastery.",
+  "originalSourceEntriesNeedingEditorialCorrection": [
+    "drawer",
+    "while",
+    "example",
+    "selection",
+    "cause",
+    "purpose",
+    "loss",
+    "rule",
+    "journey",
+    "group",
+    "dirty",
+    "dry",
+    "art",
+    "distance",
+    "growth",
+    "support",
+    "opinion",
+    "river",
+    "seed",
+    "across",
+    "receipt",
+    "pull",
+    "solid",
+    "observation",
+    "parcel",
+    "news",
+    "between",
+    "slow",
+    "if",
+    "thread",
+    "but"
+  ],
+  "sourceCorrectionsAppliedFrom": "src/content/storyWordCorrections.json",
+  "contentErrors": []
+}

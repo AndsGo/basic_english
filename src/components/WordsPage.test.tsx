@@ -9,6 +9,29 @@ import { SpeechProvider } from '../speech/SpeechProvider';
 import type { ProgressRepository, WordProgress } from '../storage/progressRepository';
 import { WordsPage } from './WordsPage';
 
+it('switches stories with fresh page and answer state and independent reading records', async () => {
+  const user = userEvent.setup();
+  const repository = createRepository();
+  const saveWordProgress = vi.spyOn(repository, 'saveWordProgress');
+  renderWithSpeech(<WordsPage course={basicEnglishCourse} repository={repository} />);
+  await user.click(screen.getByRole('button', { name: 'Read a story with under' }));
+  expect(screen.getByRole('heading', { name: 'Where is my bag?' })).toBeInTheDocument();
+  for (let index = 0; index < 3; index++) await user.click(screen.getByRole('button', { name: 'Next page' }));
+  await user.click(screen.getByRole('button', { name: 'Finish story' }));
+  await user.click(screen.getByRole('button', { name: 'No, it is under the table.' }));
+  expect(screen.getByRole('status')).toHaveTextContent('Under means below.');
+  await user.selectOptions(screen.getByRole('combobox', { name: 'Choose a story' }), 'open-the-box');
+  expect(screen.getByText('1 / 4')).toBeInTheDocument();
+  expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  expect(screen.queryByText(/Week 3.*Read/)).not.toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Read story word open' })).toBeInTheDocument();
+  await user.selectOptions(screen.getByRole('combobox', { name: 'Choose a story' }), 'under-the-chair');
+  expect(screen.getByText(/Week 3.*Read/)).toBeInTheDocument();
+  expect(screen.getByText('1 / 4')).toBeInTheDocument();
+  expect(saveWordProgress).not.toHaveBeenCalled();
+  localStorage.removeItem('basic-english-story-under-the-chair-read');
+});
+
 const speechService = {
   isSupported: () => true,
   speak: vi.fn(() => null),

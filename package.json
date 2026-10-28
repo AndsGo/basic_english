@@ -4,6 +4,8 @@
     "build": "tsc -b && vite build",
     "assets:webp": "node scripts/convert-assets-to-webp.mjs",
     "content:health": "node scripts/course-health-report.cjs",
+    "stories:build": "node scripts/build-storybooks.cjs",
+    "stories:audit": "node scripts/audit-storybooks.cjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test"
