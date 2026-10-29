@@ -785,6 +785,7 @@ test.describe('Basic English MVP e2e', () => {
     await page.getByRole('button', { name: 'Course' }).click();
     await expect(page.getByText('0 / 7 days completed').first()).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Week 2: Home & Things' })).toBeVisible();
+    await page.locator('.week-section').filter({ has: page.getByRole('heading', { name: 'Week 2: Home & Things' }) }).locator('summary').click();
     const lockedDay8Card = page.getByRole('article').filter({ hasText: 'Day 8: My Room' });
     await expect(lockedDay8Card.getByText('Locked')).toBeVisible();
     await expect(lockedDay8Card.getByText('Complete Week 1 to unlock Home & Things.')).toBeVisible();

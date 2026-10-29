@@ -12,6 +12,7 @@ import type { PictureDescription, ProgressRepository, ReinforcementPracticeSessi
 import { SceneMap } from './SceneMap';
 import { getLatestCapabilityAttempts, type CapabilityCheckAttempt } from '../domain/capabilityCheck';
 import { capabilityChecksByDayId } from '../content/capabilityChecks';
+import { loadStoryProgress } from '../storage/storyProgress';
 
 const DEFAULT_TOTAL_DAY_COUNT = 7;
 
@@ -110,6 +111,18 @@ export function MePage({
   const [capabilityAttempts, setCapabilityAttempts] = useState<CapabilityCheckAttempt[]>([]);
   const [loadError, setLoadError] = useState(false);
   const [hasLoadedProgress, setHasLoadedProgress] = useState(false);
+  const [storySentences, setStorySentences] = useState<Array<{ id: string; title: string; wordId: string; sentence: string }>>([]);
+
+  useEffect(() => {
+    let active = true;
+    void import('../content/wordStories').then(({ wordStories }) => {
+      if (active) setStorySentences(wordStories.flatMap(story => {
+        const sentence = loadStoryProgress(story.id).sentence;
+        return sentence ? [{ id: story.id, title: story.title, wordId: story.wordId, sentence }] : [];
+      }));
+    });
+    return () => { active = false; };
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -223,7 +236,8 @@ export function MePage({
   } as const;
 
   return (
-    <section className="panel">
+    <section className="panel me-page">
+      <p className="eyebrow">Your English, growing every day</p>
       <h2>My Progress</h2>
       {loadError && <p role="alert">Progress could not be loaded.</p>}
       <p>
@@ -231,6 +245,11 @@ export function MePage({
       </p>
       <p>Current streak: {currentStreakDays} days</p>
       <p>Review items: {reviewItems.length}</p>
+      <section className="saved-story-sentences">
+        <h3>My story sentences</h3>
+        {storySentences.length === 0 ? <p className="muted">No sentences yet. Save your own sentence after a story.</p> :
+          storySentences.map(story => <article className="output-card" key={story.id}><p className="muted">{story.title} · {story.wordId}</p><p>{story.sentence}</p></article>)}
+      </section>
       {dailyLearningInsight && (
         <section className="daily-learning-report">
           <h3>Latest learning</h3>
@@ -342,7 +361,7 @@ export function MePage({
         </section>
       )}
       {hasSettings && (
-        <section>
+        <section className="settings-section">
           <h3>Settings</h3>
           {onShowChineseHelpChange && (
             <label>

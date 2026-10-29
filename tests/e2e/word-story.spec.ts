@@ -33,6 +33,8 @@ test('read the give story with Chinese help and retry its meaning check', async 
   await page.reload();
   await page.getByRole('button', { name: 'Words', exact: true }).click();
   await page.getByRole('button', { name: 'Stories', exact: true }).click();
+  await page.getByRole('button', { name: 'Open story A book for my friend', exact: true }).click();
+  await page.getByRole('button', { name: 'Read story', exact: true }).click();
   await expect(page.getByText(/Week 3.*Read/)).toBeVisible();
 });
 
@@ -42,6 +44,8 @@ test('fits a narrow screen with English help and disabled speech', async ({ page
   await page.goto('/basic_english/');
   await page.getByRole('button', { name: 'Words', exact: true }).click();
   await page.getByRole('button', { name: 'Stories', exact: true }).click();
+  await page.getByRole('button', { name: 'Open story A book for my friend', exact: true }).click();
+  await page.getByRole('button', { name: 'Read story', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Read story page' })).toBeDisabled();
   await expect(page.getByText('我有一本书。我的朋友在这里。')).toHaveCount(0);
   for (let index = 0; index < 3; index++) await page.getByRole('button', { name: 'Next page' }).click();
@@ -56,6 +60,8 @@ test('reads each new story with its own images, highlight and meaning check', as
   await page.goto('/basic_english/');
   await page.getByRole('button', { name: 'Words', exact: true }).click();
   await page.getByRole('button', { name: 'Stories', exact: true }).click();
+  await page.locator('.story-cover').first().click();
+  await page.getByRole('button', { name: 'Read story', exact: true }).click();
   const stories = catalog.filter(story => story.ready);
   for (const story of stories) {
     await page.getByRole('combobox', { name: 'Choose a story' }).selectOption(story.id);

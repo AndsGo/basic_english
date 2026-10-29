@@ -2,6 +2,8 @@ export interface StoryProgress {
   read: boolean;
   answer?: { question: string; text: string; correct: boolean };
   sentence?: string;
+  pageIndex?: number;
+  lastOpenedAt?: string;
 }
 
 export function loadStoryProgress(storyId: string): StoryProgress {
@@ -12,6 +14,8 @@ export function loadStoryProgress(storyId: string): StoryProgress {
       read: progress?.read === true || window.localStorage.getItem(`basic-english-story-${storyId}-read`) === 'true',
       answer: progress?.answer,
       sentence: typeof progress?.sentence === 'string' ? progress.sentence : '',
+      pageIndex: Number.isInteger(progress?.pageIndex) && progress.pageIndex >= 0 ? progress.pageIndex : undefined,
+      lastOpenedAt: typeof progress?.lastOpenedAt === 'string' ? progress.lastOpenedAt : undefined,
     };
   } catch {
     return { read: false, sentence: '' };
