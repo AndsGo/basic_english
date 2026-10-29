@@ -1,0 +1,210 @@
+{
+  "capturedAt": "2026-10-29T01:28:18.150Z",
+  "baseURL": "http://localhost:5195/basic_english/",
+  "sourceCommit": "758f9d22acbd24190ecf016fc3951a937cee890e",
+  "method": "Fresh Playwright browser context, real UI actions, no test output or progress fixtures; no CSS overrides or compositing.",
+  "settings": {
+    "primaryTheme": "light",
+    "chineseHelp": false,
+    "speechEnabled": true
+  },
+  "exampleSentence": "I give a book to my friend.",
+  "captures": [
+    {
+      "file": "01-today-desktop.png",
+      "description": "Day 1 before starting; full daily task and requirements.",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "captureViewport": {
+        "width": 1440,
+        "height": 2843
+      },
+      "fullPage": true
+    },
+    {
+      "file": "02-course-desktop.png",
+      "description": "Week 1 expanded, Day 1 current; no invented completed days.",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "captureViewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "fullPage": false
+    },
+    {
+      "file": "03-give-flashcard-front.png",
+      "description": "Give illustration, target word and IPA, before marking mastery.",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "captureViewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "fullPage": false
+    },
+    {
+      "file": "04-give-flashcard-back.png",
+      "description": "Give definition, example and audio/review controls.",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "captureViewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "fullPage": false
+    },
+    {
+      "file": "05-story-library-desktop.png",
+      "description": "Fresh catalog of 53 books before reading the give story.",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "captureViewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "fullPage": false
+    },
+    {
+      "file": "06-story-intro-desktop.png",
+      "description": "The give story introduction before first reading.",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "captureViewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "fullPage": false
+    },
+    {
+      "file": "07-story-intro-mobile.png",
+      "description": "Same give introduction; light theme, English-first.",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "captureViewport": {
+        "width": 390,
+        "height": 1287
+      },
+      "fullPage": true
+    },
+    {
+      "file": "08-give-reader-mobile.png",
+      "description": "Page 3 of the give story; illustration, sentence, playback and controls.",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "captureViewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "fullPage": false
+    },
+    {
+      "file": "09-give-reader-desktop.png",
+      "description": "The identical page 3 in the desktop reader.",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "captureViewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "fullPage": false
+    },
+    {
+      "file": "10-give-practice-desktop.png",
+      "description": "Correct meaning answer, saved personal sentence, and word added to review.",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "captureViewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "fullPage": false
+    },
+    {
+      "file": "11-give-sentence-mobile.png",
+      "description": "Practice scrolled to show the saved sentence and review confirmation.",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "captureViewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "fullPage": false
+    },
+    {
+      "file": "12-review-desktop.png",
+      "description": "The give word is now in Review, created by the preceding story action.",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "captureViewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "fullPage": true
+    },
+    {
+      "file": "13-my-sentence-desktop.png",
+      "description": "Me shows the exact sentence saved in the story; course-day progress remains independent.",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "captureViewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "fullPage": false
+    },
+    {
+      "file": "14-give-reader-desktop-dark.png",
+      "description": "Same give page 3, now dark theme; separate theme comparison.",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "captureViewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "fullPage": false
+    },
+    {
+      "file": "15-give-reader-mobile-dark.png",
+      "description": "Same give page 3, dark mobile comparison.",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "captureViewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "fullPage": false
+    }
+  ],
+  "runtimeErrors": []
+}

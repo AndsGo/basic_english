@@ -10,7 +10,9 @@ A browser-based Basic English learning application for building the ability to d
 
 Learn one word through a little everyday story, then use it in your own sentence. The app combines a structured 52-week course with 53 illustrated books, an 850-word library, and scheduled review.
 
-![Story catalog with illustrated covers, target words, suggested course weeks, search, and reading filters](docs/design/implementation/stories-desktop.png)
+![Product concept: learn words and patterns, read a story, check the meaning, make your own sentence, then review and use it again](docs/product/concepts/learning-loop.png)
+
+*Product concept illustration. The application screenshots below show the actual interface.*
 
 ## Learning goal
 
@@ -22,6 +24,10 @@ By completing the course, learners should be able to use a small, practical Engl
 - give simple reasons, preferences, plans, and opinions.
 
 The course is designed around meaningful output, not isolated word memorization. The app contains a small number of product-approved supplementary forms where they are needed for usable beginner language; the canonical Ogden vocabulary is kept and validated separately.
+
+![Learning goals illustrated through introducing yourself, describing a bag under a table, giving a book to a friend, and explaining a simple reason](docs/product/concepts/everyday-outcomes.png)
+
+These are examples of what you practice, rather than a promise of automatic fluency. You build the ability through lessons, personal expression, and repeated review.
 
 ## What is included
 
@@ -58,9 +64,11 @@ Chinese help is optional. Leave it off for an English-first environment, and ena
 | **Words** | Choose **List**, **Flashcards**, **850 Library**, or **Stories**. |
 | **Me** | View learning progress and saved story sentences; set Chinese help, speech, voice speed, accent, and theme. |
 
-![Today shows the current daily goal, four learning stages, and the active practice task](docs/design/implementation/today-desktop.png)
+[See a complete Today task](docs/product/screenshots/01-today-desktop.png). The first lesson practices introducing yourself through listening, a short answer, and a meaning check.
 
 ### Learn with a story
+
+![Newly captured story catalog showing 53 books, search and filters; the give story is A book for my friend](docs/product/screenshots/05-story-library-desktop.png)
 
 1. Open **Words → Stories**. Search by title or target word, or filter by reading status and course stage. The suggested reading week helps you choose; it does not lock the book.
 2. Select a cover. Read the target meaning and review words, then choose **Read story** or **Continue reading**.
@@ -71,14 +79,16 @@ Chinese help is optional. Leave it off for an English-first environment, and ena
   <tr>
     <th>1. Before reading</th>
     <th>2. Read in context</th>
-    <th>3. Use the word</th>
+    <th>3. Save your sentence</th>
   </tr>
   <tr>
-    <td valign="top"><img src="docs/design/implementation/intro-mobile.png" alt="Before-reading page with a story cover, target meaning, review words, and Read story button" width="240"></td>
-    <td valign="top"><img src="docs/design/implementation/reader-narrow-dark.png" alt="Dark-theme mobile reader with a daily-life illustration, English sentence, Chinese help, and stable page controls" width="240"></td>
-    <td valign="top"><img src="docs/screenshots/story-practice-mobile.png" alt="Story meaning check answered correctly, with a personal sentence and Saved on this device confirmation" width="240"></td>
+    <td valign="top"><img src="docs/product/screenshots/07-story-intro-mobile.png" alt="Light-theme introduction to A book for my friend, with the meaning of give and the review words" width="240"></td>
+    <td valign="top"><img src="docs/product/screenshots/08-give-reader-mobile.png" alt="The same story on page 3 of 4: I give a book to my friend, with illustration, audio and page controls" width="240"></td>
+    <td valign="top"><img src="docs/product/screenshots/11-give-sentence-mobile.png" alt="The same story after practice, scrolled to the saved sentence I give a book to my friend and the word-review confirmation" width="240"></td>
   </tr>
 </table>
+
+The three screens follow the same story in the same light-theme, English-first session. The last screen is scrolled to the saved sentence and review confirmation; [the desktop practice screen shows the whole meaning check and expression task](docs/product/screenshots/10-give-practice-desktop.png).
 
 Reading status, comprehension answers, saved sentences, and word mastery are separate records. Finishing a book does not automatically mark its word known or complete a course day. The 53 books supplement the 850-word course; they do not individually teach all 850 words. See the [curriculum and coverage notes](docs/storybooks/README.md).
 
@@ -86,24 +96,34 @@ Reading status, comprehension answers, saved sentences, and word mastery are sep
 
 Open **Words → Flashcards** to see the illustration, word, and IPA. Select **Flip** for the meaning, example, and playback controls, then choose **I know this** or **Add to review**. Use **850 Library** to search the complete core-word list.
 
-![Desktop word flashcard showing the illustration, word, IPA pronunciation, and Previous, Flip, and Next controls](docs/screenshots/flashcards-desktop.png)
+<table>
+  <tr><th>Connect the word with an action</th><th>Flip for meaning, example, and playback</th></tr>
+  <tr>
+    <td><img src="docs/product/screenshots/03-give-flashcard-front.png" alt="Give flashcard front showing one person handing a book to another, the word give, and its IPA" width="400"></td>
+    <td><img src="docs/product/screenshots/04-give-flashcard-back.png" alt="The same give flashcard back showing its definition, the example I give a book to my friend, and the audio and review controls" width="400"></td>
+  </tr>
+</table>
 
 <details>
-<summary>More screenshots: course, review, and mobile settings</summary>
+<summary>Continue the same session: course, review, saved expression, and dark theme</summary>
 
 **Course:** expand a week to view its goals, day states, and current lesson.
 
-![Expandable course weeks with the current week open and daily learning states](docs/design/implementation/course-desktop.png)
+![Course in the same fresh session, with Week 1 open and Day 1 current](docs/product/screenshots/02-course-desktop.png)
 
-**Review:** due mastery, capability, and practice items in the dark theme.
+**Review:** the word **give** appears after selecting **Review this word** in the story.
 
-![Dark-theme Review page with mastery review and capability-check sections](docs/design/implementation/review-desktop-dark.png)
+![Review now contains one give item created during the story-reading session](docs/product/screenshots/12-review-desktop.png)
 
-[Mobile story catalog](docs/design/implementation/stories-mobile-dark.png) · [My Progress on mobile](docs/design/implementation/me-mobile-dark.png) · [Theme-control comparison](docs/design/theme-review/README.md) · [All implementation screenshots](docs/design/implementation/README.md)
+**Me:** the same saved sentence is available under **My story sentences**. Course-day completion remains independent of story reading.
+
+![Me displays I give a book to my friend, one word-review item, and independent course progress](docs/product/screenshots/13-my-sentence-desktop.png)
+
+[Desktop reader](docs/product/screenshots/09-give-reader-desktop.png) · [Same page in dark theme](docs/product/screenshots/14-give-reader-desktop-dark.png) · [Dark mobile reader](docs/product/screenshots/15-give-reader-mobile-dark.png) · [Complete screenshot sequence and capture details](docs/product/README.md)
 
 </details>
 
-Screenshots show the implemented application. The example sentence in the practice screenshot is demonstration input; your own progress and saved sentences stay on your device.
+All application screenshots were freshly captured from one isolated browser session, using real UI actions rather than test-output images or progress fixtures. The concept illustrations explain the product; they are not screenshots. The personal sentence is demonstration input, and your own records stay on your device.
 
 ## Technology
 
@@ -166,7 +186,7 @@ Speech playback depends on the voices installed in the learner's browser or oper
 - Course composition is assembled in [src/content/course.ts](src/content/course.ts).
 - Content validation lives in [src/content/validateContent.test.ts](src/content/validateContent.test.ts).
 - Image creation and replacement rules are maintained in [AGENTS.md](AGENTS.md). Word and scene images must preserve their intended meaning and follow the project's 512 x 512 polished-cartoon visual standard.
-- [DESIGN.md](DESIGN.md) defines the authoritative page design standard. See the [implemented page designs](docs/design/implementation/README.md) and [storybook curriculum](docs/storybooks/README.md) for screenshots, teaching structure, and coverage.
+- [DESIGN.md](DESIGN.md) defines the authoritative page design standard. See the [product guide and current screenshots](docs/product/README.md) and [storybook curriculum](docs/storybooks/README.md) for the learning flow, teaching structure, and coverage.
 
 Supporting product, content, and implementation documents are in [docs](docs).
 

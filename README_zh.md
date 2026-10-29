@@ -10,7 +10,9 @@
 
 在一个生活小故事里学一个词，再用这个词说一句自己的话。应用将 52 周课程、53 本场景绘本、850 词库与到期复习结合起来。
 
-![绘本目录：通过封面选书，查看重点词和建议阅读周次，并按书名、单词、阅读状态或课程阶段筛选](docs/design/implementation/stories-desktop.png)
+![产品学习理念：学单词和句型，在故事中阅读，检查理解，用自己的句子表达，再复习和使用](docs/product/concepts/learning-loop.png)
+
+*上图是产品理念插画，下方使用截图展示实际应用界面。学习路径是：学习 → 阅读 → 练习 → 表达 → 复习再用。*
 
 ## 学习目标
 
@@ -22,6 +24,10 @@
 - 表达简单的原因、偏好、计划和看法。
 
 课程重视真实输出，而不是孤立背诵单词。为了让初学者能说出自然可用的句子，课程会使用少量经过产品确认的补充形式；Ogden Basic English 核心词表会被单独维护和验证。
+
+![日常英语表达目标：介绍自己、描述物品位置、表达日常动作，以及说明简单原因](docs/product/concepts/everyday-outcomes.png)
+
+图中的四个例子分别是“我叫 Li”“书包在桌子下面”“我给朋友一本书”和“因为下雨，我在家”。这些是课程中逐步练习的表达目标，需要通过学习、自己的表达和反复复习来积累。
 
 ## 主要内容
 
@@ -58,9 +64,11 @@
 | **Words** | 切换 **List** 列表、**Flashcards** 闪卡、**850 Library** 词库或 **Stories** 绘本。 |
 | **Me** | 查看学习记录与已保存的绘本句子，调整中文帮助、语音、语速、口音和主题。 |
 
-![Today 页面：当日目标、四个学习阶段和当前练习任务](docs/design/implementation/today-desktop.png)
+[查看完整的 Today 当日任务](docs/product/screenshots/01-today-desktop.png)：第一天通过听力、简短回答和意思检查，练习介绍自己。
 
 ### 用绘本学习一个词
+
+![重新拍摄的绘本书架：53 本绘本、搜索和筛选入口，以及重点学习 give 的 A book for my friend](docs/product/screenshots/05-story-library-desktop.png)
 
 1. 打开 **Words → Stories**，按书名或重点词搜索，也可按阅读状态、课程阶段筛选。建议阅读周次用于选书，不会额外锁定绘本。
 2. 点击封面，在读前页查看目标词义和复习词，再点击 **Read story** 开始，或通过 **Continue reading** 接着上次的位置阅读。
@@ -71,14 +79,16 @@
   <tr>
     <th>1. 读前了解</th>
     <th>2. 场景中阅读</th>
-    <th>3. 用词表达</th>
+    <th>3. 保存自己的表达</th>
   </tr>
   <tr>
-    <td valign="top"><img src="docs/design/implementation/intro-mobile.png" alt="绘本读前页：封面、重点词义、复习词和开始阅读按钮" width="240"></td>
-    <td valign="top"><img src="docs/design/implementation/reader-narrow-dark.png" alt="手机深色阅读页：生活场景插画、英文句子、中文帮助和稳定的翻页按钮" width="240"></td>
-    <td valign="top"><img src="docs/screenshots/story-practice-mobile.png" alt="读后练习：答对理解题，输入自己的句子，并显示已保存到本机的提示" width="240"></td>
+    <td valign="top"><img src="docs/product/screenshots/07-story-intro-mobile.png" alt="浅色读前页：同一本 A book for my friend，展示 give 的词义和复习词" width="240"></td>
+    <td valign="top"><img src="docs/product/screenshots/08-give-reader-mobile.png" alt="同一本绘本第 3 页：我给朋友一本书，完整展示插画、英文句子、朗读与翻页按钮" width="240"></td>
+    <td valign="top"><img src="docs/product/screenshots/11-give-sentence-mobile.png" alt="同一本绘本读后练习向下滚动，展示保存的句子 I give a book to my friend 和已加入单词复习的提示" width="240"></td>
   </tr>
 </table>
+
+这三张截图来自同一次阅读，统一使用浅色主题、英文优先设置。第三张滚动到了保存句子和复习提示的位置；[桌面练习截图](docs/product/screenshots/10-give-practice-desktop.png)完整展示理解题、造句和保存结果。
 
 已读、理解题、保存句子和单词掌握状态分别记录。读完绘本不会自动将单词标为已掌握，也不会自动完成课程日。53 本绘本是 850 词课程的补充，并不表示每个核心词都有一篇独立绘本；详见[绘本课程与覆盖说明](docs/storybooks/README.md)。
 
@@ -86,24 +96,34 @@
 
 打开 **Words → Flashcards** 查看插画、单词和音标；点击 **Flip** 查看释义和例句，并使用播放按钮听发音，再选择 **I know this** 标记已认识，或 **Add to review** 加入复习。**850 Library** 可以搜索完整核心词表。
 
-![桌面闪卡：单词插画、单词、音标，以及上一张、翻面和下一张按钮](docs/screenshots/flashcards-desktop.png)
+<table>
+  <tr><th>把单词与动作联系起来</th><th>翻面查看词义、例句并朗读</th></tr>
+  <tr>
+    <td><img src="docs/product/screenshots/03-give-flashcard-front.png" alt="give 闪卡正面：把书交给朋友的动作、目标词和音标" width="400"></td>
+    <td><img src="docs/product/screenshots/04-give-flashcard-back.png" alt="同一张 give 闪卡背面：英文释义、例句 I give a book to my friend，以及朗读和复习按钮" width="400"></td>
+  </tr>
+</table>
 
 <details>
-<summary>更多使用截图：课程、复习与手机设置</summary>
+<summary>继续同一次学习：课程、复习、保存的表达与深色对照</summary>
 
 **Course 课程目录：**展开周次，查看目标、日次状态与当前课程。
 
-![课程目录：默认展开当前周，显示每日学习状态，后续周次可展开查看](docs/design/implementation/course-desktop.png)
+![同一次新会话中的课程目录：展开第一周，第一天是当前课程](docs/product/screenshots/02-course-desktop.png)
 
-**Review 深色主题：**集中查看到期的掌握度复习、能力检查和待练习项目。
+**Review 复习页：**在绘本中点击 **Review this word** 后，目标词 **give** 出现在待复习项目中。
 
-![深色复习页：掌握度复习和能力检查区域](docs/design/implementation/review-desktop-dark.png)
+![复习页实际出现一个 give 项目，来自刚才阅读绘本时的加入复习操作](docs/product/screenshots/12-review-desktop.png)
 
-[手机绘本书架](docs/design/implementation/stories-mobile-dark.png) · [手机个人学习页](docs/design/implementation/me-mobile-dark.png) · [主题控件对照](docs/design/theme-review/README.md) · [完整页面截图](docs/design/implementation/README.md)
+**Me 个人页：**刚才保存的同一句表达出现在 **My story sentences** 中；课程日完成情况与绘本阅读分别记录。
+
+![个人页实际展示 I give a book to my friend、一个待复习词，以及独立的课程进度](docs/product/screenshots/13-my-sentence-desktop.png)
+
+[桌面阅读页](docs/product/screenshots/09-give-reader-desktop.png) · [同一页的深色对照](docs/product/screenshots/14-give-reader-desktop-dark.png) · [深色手机阅读页](docs/product/screenshots/15-give-reader-mobile-dark.png) · [完整截图顺序与拍摄说明](docs/product/README.md)
 
 </details>
 
-以上截图来自实际应用。练习截图中的句子是演示输入；你自己的学习进度和保存的表达只保存在当前设备。
+所有应用截图都在新的独立浏览器会话中，通过实际操作重新拍摄，未复用测试产物或填入虚构学习进度。理念插画用于解释产品，与实际截图分别标注。练习中的句子是演示输入，你自己的学习记录只保存在当前设备。
 
 ## 技术栈
 
@@ -166,7 +186,7 @@ npm run assets:webp -- --quality 85 --overwrite
 - 课程内容在 [src/content/course.ts](src/content/course.ts) 中组装。
 - 内容验证位于 [src/content/validateContent.test.ts](src/content/validateContent.test.ts)。
 - 图片生成和替换规则见 [AGENTS.md](AGENTS.md)。单词与场景图片必须准确表达预期语义，并遵循项目的 512 x 512 精致卡通视觉标准。
-- [DESIGN.md](DESIGN.md) 是统一页面设计规范；[页面改造记录](docs/design/implementation/README.md)和[绘本课程设计](docs/storybooks/README.md)提供实际截图、教学结构与词汇覆盖说明。
+- [DESIGN.md](DESIGN.md) 是统一页面设计规范；[产品说明与新拍截图](docs/product/README.md)和[绘本课程设计](docs/storybooks/README.md)提供学习流程、教学结构与词汇覆盖说明。
 
 产品、内容与实现文档位于 [docs](docs) 目录。
 
