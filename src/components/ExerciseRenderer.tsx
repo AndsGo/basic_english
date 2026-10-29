@@ -1,3 +1,5 @@
+import { TextField } from './ui/TextFields';
+import { AnswerOption, Button } from './ui/Button';
 import { useState } from 'react';
 import type { Exercise } from '../domain/types';
 import { checkExerciseAnswer, type ExerciseAnswer, type ExerciseResult } from '../domain/exercises';
@@ -51,15 +53,14 @@ export function ExerciseRenderer({
               <h3>{exercise.prompt}</h3>
               <div className="option-list">
                 {exercise.options.map((option) => (
-                  <button
+                  <AnswerOption
                     type="button"
                     key={option}
-                    aria-pressed={answers[exercise.id] === option}
-                    className={answers[exercise.id] === option ? 'selected-option' : ''}
-                    onClick={() => setAnswer(exercise, option)}
-                  >
+                    selected={answers[exercise.id] === option}
+                    result={checkExerciseAnswer(exercise, option) === 'correct' ? 'correct' : 'retry'}
+                    onClick={() => setAnswer(exercise, option)}>
                     {option}
-                  </button>
+                  </AnswerOption>
                 ))}
               </div>
               {answers[exercise.id] && (
@@ -73,11 +74,10 @@ export function ExerciseRenderer({
           {exercise.type === 'fill_blank' && (
             <>
               <h3>{exercise.prompt}</h3>
-              <input
+              <TextField label={exercise.prompt}
                 aria-label={exercise.prompt}
                 value={stringAnswer(answers[exercise.id])}
-                onChange={(event) => setAnswer(exercise, event.target.value)}
-              />
+                onChange={(event) => setAnswer(exercise, event.target.value)} />
               {answers[exercise.id] && (
                 <p role="status">
                   {checkExerciseAnswer(exercise, stringAnswer(answers[exercise.id])) === 'correct'
@@ -97,15 +97,14 @@ export function ExerciseRenderer({
                   const isSelected = isTokenSelected(selectedTokens, exercise.tokens, token, index);
 
                   return (
-                    <button
+                    <Button variant="secondary"
                       type="button"
                       key={`${exercise.id}-${token}-${index}`}
                       className={isSelected ? 'selected-order-token' : ''}
                       disabled={isSelected}
-                      onClick={() => setAnswer(exercise, [...selectedTokens, token])}
-                    >
+                      onClick={() => setAnswer(exercise, [...selectedTokens, token])}>
                       {token}
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
@@ -117,12 +116,12 @@ export function ExerciseRenderer({
                   {checkExerciseAnswer(exercise, tokenAnswer(answers[exercise.id])) === 'correct' ? 'Correct' : 'Try again'}
                 </p>
               )}
-              <button type="button" className="secondary-button" onClick={() => setAnswer(exercise, [])}>
+              <Button variant="secondary" type="button" onClick={() => setAnswer(exercise, [])}>
                 Clear sentence
-              </button>
-              <button type="button" className="secondary-button" onClick={() => showReference(exercise.id)}>
+              </Button>
+              <Button variant="secondary" type="button" onClick={() => showReference(exercise.id)}>
                 Show sentence order reference
-              </button>
+              </Button>
               {visibleReferences[exercise.id] && <p className="example">Answer: {exercise.finalSentence}</p>}
             </>
           )}
@@ -131,14 +130,13 @@ export function ExerciseRenderer({
             <>
               <h3>Make a sentence</h3>
               <p>{Object.values(exercise.slotValues).join(', ')}</p>
-              <input
+              <TextField label="Replacement answer"
                 aria-label="Replacement answer"
                 value={stringAnswer(answers[exercise.id])}
-                onChange={(event) => setAnswer(exercise, event.target.value)}
-              />
-              <button type="button" className="secondary-button" onClick={() => showReference(exercise.id)}>
+                onChange={(event) => setAnswer(exercise, event.target.value)} />
+              <Button variant="secondary" type="button" onClick={() => showReference(exercise.id)}>
                 Show replacement reference
-              </button>
+              </Button>
               {answers[exercise.id] && <p role="status">Answer saved</p>}
               {visibleReferences[exercise.id] && <p className="example">Reference: {exercise.referenceAnswer}</p>}
             </>

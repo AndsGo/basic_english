@@ -43,9 +43,9 @@ const baseURL = process.env.PRODUCT_CAPTURE_URL || 'http://localhost:5195/basic_
   await page.goto(baseURL);
   await tab('Me');
   await page.getByRole('radio', { name: 'Light', exact: true }).check();
-  await page.getByRole('checkbox', { name: 'Show Chinese help', exact: true }).uncheck();
+  await page.getByRole('switch', { name: 'Show Chinese help', exact: true }).uncheck();
   // Keep speech enabled, but mute the isolated browser page during capture.
-  await page.getByRole('checkbox', { name: 'Enable reading aloud', exact: true }).check();
+  await page.getByRole('switch', { name: 'Enable reading aloud', exact: true }).check();
   await tab('Today');
   await page.getByRole('heading', { name: 'Introduce yourself', exact: true }).waitFor();
   await capture('01-today-desktop', 'Day 1 before starting; full daily task and requirements.', true);

@@ -1,4 +1,5 @@
-import { useId } from 'react';
+import { TextField, TextArea } from './ui/TextFields';
+import { RadioGroup } from './ui/SelectionControls';
 import type { SceneGoal, SceneHelpMode, SceneOutput } from '../domain/types';
 
 const helpModes: Array<{ value: SceneHelpMode; label: string }> = [
@@ -16,7 +17,6 @@ export function SceneOutputEditor({
   value: SceneOutput;
   onChange: (output: SceneOutput) => void;
 }) {
-  const helpModeName = `${useId()}-${goal.id}-help-mode`;
 
   const updateValue = (patch: Partial<SceneOutput>) => {
     onChange({ ...value, ...patch });
@@ -30,20 +30,8 @@ export function SceneOutputEditor({
 
   return (
     <section className="scene-output-editor">
-      <div className="help-mode-control" role="radiogroup" aria-label="Output help mode">
-        {helpModes.map((mode) => (
-          <label key={mode.value}>
-            <input
-              type="radio"
-              name={helpModeName}
-              value={mode.value}
-              checked={value.helpMode === mode.value}
-              onChange={() => updateValue({ helpMode: mode.value })}
-            />{' '}
-            {mode.label}
-          </label>
-        ))}
-      </div>
+      <RadioGroup label="Output help mode" role="radiogroup" value={value.helpMode} options={helpModes}
+        onValueChange={mode => updateValue({ helpMode: mode as SceneHelpMode })} />
 
       <section>
         <h3>Build Sentences</h3>
@@ -63,27 +51,25 @@ export function SceneOutputEditor({
         )}
         {value.helpMode === 'free' && <p className="helper-text">Use at least 4 simple sentences.</p>}
         {value.sentences.map((sentence, index) => (
-          <input
+          <TextField label={`Scene sentence ${index + 1}`}
             key={index}
             type="text"
             value={sentence}
             onChange={(event) => updateSentence(index, event.target.value)}
             aria-label={`Scene sentence ${index + 1}`}
-            placeholder={`Sentence ${index + 1}`}
-          />
+            placeholder={`Sentence ${index + 1}`} />
         ))}
       </section>
 
       <section>
         <h3>Make a Scene</h3>
         <p className="helper-text">{goal.scenePrompt}</p>
-        <textarea
+        <TextArea label="Scene description"
           value={value.sceneText}
           onChange={(event) => updateValue({ sceneText: event.target.value })}
           rows={5}
           aria-label="Scene description"
-          placeholder="Write your scene here."
-        />
+          placeholder="Write your scene here." />
       </section>
 
       <section>
@@ -93,13 +79,12 @@ export function SceneOutputEditor({
             <p key={prompt}>{prompt}</p>
           ))}
         </div>
-        <textarea
+        <TextArea label="Scene dialogue"
           value={value.dialogue}
           onChange={(event) => updateValue({ dialogue: event.target.value })}
           rows={5}
           aria-label="Scene dialogue"
-          placeholder="A: ...&#10;B: ..."
-        />
+          placeholder="A: ...&#10;B: ..." />
       </section>
     </section>
   );

@@ -1,3 +1,4 @@
+import { Button } from './ui/Button';
 import { useState } from 'react';
 import type { DailyLearningInsight } from '../domain/dailyLearningInsights';
 import type { Course } from '../domain/types';
@@ -42,9 +43,9 @@ export function DailyLearningReport({
         </ul>
       )}
       {canPractice && !isPracticeOpen && (
-        <button type="button" className="secondary-button" onClick={() => setIsPracticeOpen(true)}>
+        <Button variant="secondary" type="button" onClick={() => setIsPracticeOpen(true)}>
           Start 3-minute practice
-        </button>
+        </Button>
       )}
       {canPractice && isPracticeOpen && insight && (
         <ReinforcementPracticePanel

@@ -1,3 +1,5 @@
+import { TextArea } from './ui/TextFields';
+import { AnswerOption, Button } from './ui/Button';
 import { useEffect, useRef, useState } from 'react';
 import { giveStory, type WordStoryContent } from '../content/wordStories';
 import type { Word } from '../domain/types';
@@ -94,25 +96,23 @@ export function WordStory({ words, showChineseHelp, story = giveStory, onReview 
               <p>{story.check.prompt}<SpeechButton text={story.check.prompt} label="Read story question" /></p>
               {showChineseHelp && <p className="muted">{story.check.chinese}</p>}
               <div className="story-answers" role="group" aria-label="Story question answers">
-                {story.check.options.map((option, index) => <button key={option} type="button"
-                  className={`secondary-button${answer === index ? ' selected-button' : ''}`}
-                  aria-pressed={answer === index} onClick={() => {
+                {story.check.options.map((option, index) => <AnswerOption key={option} type="button"
+                  selected={answer === index} result={index === story.check.correctIndex ? 'correct' : 'retry'} onClick={() => {
                     setAnswer(index);
                     updateProgress({ ...progress, answer: { question: story.check.prompt, text: option, correct: index === story.check.correctIndex } });
-                  }}>{option}</button>)}
+                  }}>{option}</AnswerOption>)}
               </div>
               {answer !== null && <p role="status">{answer === story.check.correctIndex ? story.check.success : story.check.retry}</p>}
               {answer === story.check.correctIndex && <div className="story-practice">
                 <p>Now make your own sentence:</p>
                 <strong>{story.practice}</strong>
-                <label htmlFor="story-sentence">Your sentence</label>
-                <textarea id="story-sentence" rows={3} value={sentence} placeholder={story.practice}
+                <TextArea label="Your sentence" id="story-sentence" rows={3} value={sentence} placeholder={story.practice}
                   onChange={(event) => { setSentence(event.target.value); setSaveFeedback(''); }} />
                 <div className="story-practice-actions">
-                  <button type="button" className="secondary-button" disabled={!sentence.trim()} onClick={() => {
+                  <Button variant="secondary" type="button" disabled={!sentence.trim()} onClick={() => {
                     const saved = updateProgress({ ...progress, sentence: sentence.trim() });
                     setSaveFeedback(saved ? 'Saved on this device.' : 'Kept for this visit.');
-                  }}>Save my sentence</button>
+                  }}>Save my sentence</Button>
                   <SpeechButton text={sentence} label="Read my story sentence" />
                 </div>
                 {saveFeedback && <p>{saveFeedback}</p>}
@@ -120,11 +120,11 @@ export function WordStory({ words, showChineseHelp, story = giveStory, onReview 
               </div>}
               <p className="muted">Story read. You can review the word again in Flashcards.</p>
               {onReview && <div>
-                <button type="button" className="secondary-button" disabled={reviewFeedback === 'Saving...'} onClick={async () => {
+                <Button variant="secondary" type="button" loading={reviewFeedback === 'Saving...'} loadingLabel="Saving..." onClick={async () => {
                   setReviewFeedback('Saving...');
                   try { await onReview(word); setReviewFeedback('Added to word review.'); }
                   catch { setReviewFeedback('Could not save. Please try again.'); }
-                }}>Review this word</button>
+                }}>Review this word</Button>
                 {reviewFeedback && <p>{reviewFeedback}</p>}
               </div>}
             </>
@@ -146,12 +146,12 @@ export function WordStory({ words, showChineseHelp, story = giveStory, onReview 
         </div>
       </div>
       <nav className="story-navigation" aria-label="Story pages">
-        <button type="button" className="secondary-button" disabled={pageIndex === 0} onClick={() => moveTo(pageIndex - 1)}>Previous page</button>
+        <Button variant="secondary" type="button" disabled={pageIndex === 0} onClick={() => moveTo(pageIndex - 1)}>Previous page</Button>
         <span>{isCheck ? 'Your turn' : `${pageIndex + 1} / ${story.pages.length}`}</span>
-        <button type="button" className="primary-button" onClick={() => {
+        <Button variant="primary" type="button" onClick={() => {
           if (isCheck) setAnswer(null);
           moveTo(isCheck ? 0 : pageIndex + 1, !isCheck);
-        }}>{isCheck ? 'Read again' : pageIndex === story.pages.length - 1 ? 'Finish story' : 'Next page'}</button>
+        }}>{isCheck ? 'Read again' : pageIndex === story.pages.length - 1 ? 'Finish story' : 'Next page'}</Button>
       </nav>
     </section>
   );

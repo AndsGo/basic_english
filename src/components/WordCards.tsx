@@ -1,3 +1,4 @@
+import { Button } from './ui/Button';
 import type { Word } from '../domain/types';
 import { PhoneticText } from './PhoneticText';
 import { SpeechButton } from './SpeechButton';
@@ -38,24 +39,20 @@ export function WordCards({ words, showChineseHelp = false, marks = {}, onReview
               <SpeechButton text={word.example} label={`Read example for ${word.text}`} />
             </p>
             <div className="card-actions">
-              <button
+              <Button variant="secondary"
                 type="button"
-                className={`secondary-button${marks[word.id] === 'review' ? ' selected-button' : ''}`}
                 aria-label={`Add to review: ${word.text}`}
                 aria-pressed={marks[word.id] === 'review'}
-                onClick={() => onReview(word.id)}
-              >
+                onClick={() => onReview(word.id)}>
                 Add to review
-              </button>
-              <button
+              </Button>
+              <Button variant="secondary"
                 type="button"
-                className={`secondary-button${marks[word.id] === 'known' ? ' selected-button' : ''}`}
                 aria-label={`I know this: ${word.text}`}
                 aria-pressed={marks[word.id] === 'known'}
-                onClick={() => onKnow(word.id)}
-              >
+                onClick={() => onKnow(word.id)}>
                 I know this
-              </button>
+              </Button>
             </div>
           </article>
         ))}

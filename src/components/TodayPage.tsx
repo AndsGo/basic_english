@@ -1,3 +1,4 @@
+import { Button } from './ui/Button';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { checkExerciseAnswer, type ExerciseAnswer, type ExerciseResult } from '../domain/exercises';
 import { createPendingMasteryProgress, selectDueMasteryProgress } from '../domain/mastery';
@@ -894,15 +895,14 @@ export function TodayPage({
       )}
 
       {hasStickyNext && (
-        <button
+        <Button variant="primary"
           type="button"
-          className="sticky-next primary-button"
+          className="sticky-next"
           onClick={moveNext}
           disabled={isHydrating || isAdvancing || !currentGate.isComplete}
-          aria-busy={isAdvancing}
-        >
-          {isAdvancing ? 'Saving...' : 'Continue'}
-        </button>
+          loading={isAdvancing} loadingLabel="Saving...">
+          Continue
+        </Button>
       )}
     </section>
   );

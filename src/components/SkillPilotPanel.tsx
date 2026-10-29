@@ -1,3 +1,4 @@
+import { AnswerOption, Button } from './ui/Button';
 import { useEffect, useRef, useState } from 'react';
 import type { SkillLessonContent, SpeakingTaskContent } from '../content/skillLessons';
 import { createSkillAttempt, type LocalRecording, type SpeakingSelfMark } from '../domain/skillTraining';
@@ -160,18 +161,18 @@ function SpeakingPractice({
   return <article className="skill-task speaking-task">
     <div className="section-header"><h4>{task.model ? 'Repeat' : 'Say it yourself'}</h4><span className="skill-status">Speaking</span></div>
     <p>{task.goal}</p>
-    {task.model && <button type="button" className="secondary-button" onClick={() => speech.speak(task.model, `pilot-model-${task.id}`)} disabled={state === 'recording'}>{speech.activeId === `pilot-model-${task.id}` ? 'Stop model' : 'Play model'}</button>}
+    {task.model && <Button variant="secondary" type="button" onClick={() => speech.speak(task.model, `pilot-model-${task.id}`)} disabled={state === 'recording'}>{speech.activeId === `pilot-model-${task.id}` ? 'Stop model' : 'Play model'}</Button>}
     <div className="hint-actions">
-      <button type="button" className="text-button" onClick={() => void recordHint('keywords')}>Show keywords</button>
-      <button type="button" className="text-button" onClick={() => void recordHint('reference')}>Show reference</button>
+      <Button variant="quiet" type="button" onClick={() => void recordHint('keywords')}>Show keywords</Button>
+      <Button variant="quiet" type="button" onClick={() => void recordHint('reference')}>Show reference</Button>
     </div>
     {showKeywords && <p className="hint-content">{task.keywords.join(' · ')}</p>}
     {showReference && <p className="hint-content">{task.reference}</p>}
     <div className="recording-actions">
-      {state === 'recording' ? <button type="button" className="primary-button" onClick={stopRecording}>Stop recording</button> : <button type="button" className="primary-button" onClick={() => void startRecording()} disabled={!recordSupported || state === 'requesting' || state === 'saving'}>{state === 'requesting' ? 'Waiting...' : state === 'saving' ? 'Saving...' : 'Record answer'}</button>}
-      {recording && <button type="button" className="secondary-button" onClick={playRecording}>Play recording</button>}
+      {state === 'recording' ? <Button variant="primary" type="button" onClick={stopRecording}>Stop recording</Button> : <Button variant="primary" type="button" onClick={() => void startRecording()} disabled={!recordSupported || state === 'requesting' || state === 'saving'}>{state === 'requesting' ? 'Waiting...' : state === 'saving' ? 'Saving...' : 'Record answer'}</Button>}
+      {recording && <Button variant="secondary" type="button" onClick={playRecording}>Play recording</Button>}
     </div>
-    {recording && !selfMark && <div className="self-check" aria-label="Speaking self-check"><p>{hasPlayedRecording ? 'After listening, was your meaning clear?' : 'Play your recording once before your self-check.'}</p><button type="button" className="secondary-button" disabled={!hasPlayedRecording} onClick={() => void saveSelfMark('clear')}>Clear</button><button type="button" className="secondary-button" disabled={!hasPlayedRecording} onClick={() => void saveSelfMark('try_again')}>Try again</button></div>}
+    {recording && !selfMark && <div className="self-check" aria-label="Speaking self-check"><p>{hasPlayedRecording ? 'After listening, was your meaning clear?' : 'Play your recording once before your self-check.'}</p><Button variant="secondary" type="button" disabled={!hasPlayedRecording} onClick={() => void saveSelfMark('clear')}>Clear</Button><Button variant="secondary" type="button" disabled={!hasPlayedRecording} onClick={() => void saveSelfMark('try_again')}>Try again</Button></div>}
     {message && <p className="helper-text" role="status">{message}</p>}
     {!recordSupported && <p role="alert">Recording is unavailable in this browser. You can use the text model and continue with the lesson.</p>}
   </article>;
@@ -204,12 +205,12 @@ export function SkillPilotPanel({ lesson, repository }: { lesson: SkillLessonCon
     <div className="section-header"><div><p className="eyebrow">Pilot practice</p><h3>Listen and speak</h3></div><span className="skill-status">Day 1</span></div>
     <p className="helper-text">Listen without the text first. Record your own answer on this device.</p>
     <section className="skill-section"><h4>Listen</h4>{lesson.listening.map((task) => <article key={task.id} className="skill-task">
-      <button type="button" className="secondary-button" onClick={() => speech.speak(task.script, `pilot-listen-${task.id}`)}>{speech.activeId === `pilot-listen-${task.id}` ? 'Stop audio' : 'Play audio'}</button>
-      <p>{task.question}</p><div className="option-list">{task.options.map((option) => <button key={option} type="button" aria-pressed={answers[task.id] === option} className={answers[task.id] === option ? 'selected-option' : ''} disabled={submitted[task.id]} onClick={() => setAnswers((current) => ({ ...current, [task.id]: option }))}>{option}</button>)}</div>
-      {!submitted[task.id] ? <button type="button" className="text-button" onClick={() => setShowTranscript((current) => ({ ...current, [task.id]: true }))}>Show transcript</button> : <p className={answers[task.id] === task.answer ? 'answer-correct' : 'answer-review'}>{answers[task.id] === task.answer ? 'Correct. ' : 'Review. '}{task.feedback}</p>}
+      <Button variant="secondary" type="button" onClick={() => speech.speak(task.script, `pilot-listen-${task.id}`)}>{speech.activeId === `pilot-listen-${task.id}` ? 'Stop audio' : 'Play audio'}</Button>
+      <p>{task.question}</p><div className="option-list">{task.options.map((option) => <AnswerOption key={option} type="button" selected={answers[task.id] === option} result={submitted[task.id] ? (option === task.answer ? 'correct' : 'retry') : undefined} disabled={submitted[task.id]} onClick={() => setAnswers((current) => ({ ...current, [task.id]: option }))}>{option}</AnswerOption>)}</div>
+      {!submitted[task.id] ? <Button variant="quiet" type="button" onClick={() => setShowTranscript((current) => ({ ...current, [task.id]: true }))}>Show transcript</Button> : <p className={answers[task.id] === task.answer ? 'answer-correct' : 'answer-review'}>{answers[task.id] === task.answer ? 'Correct. ' : 'Review. '}{task.feedback}</p>}
       {showTranscript[task.id] && <p className="hint-content">{task.script}</p>}
-      {!submitted[task.id] && <button type="button" className="secondary-button" disabled={!answers[task.id]} onClick={() => void saveListening(task.id, answers[task.id])}>Check answer</button>}
+      {!submitted[task.id] && <Button variant="secondary" type="button" disabled={!answers[task.id]} onClick={() => void saveListening(task.id, answers[task.id])}>Check answer</Button>}
     </article>)}</section>
-    <section className="skill-section"><div className="section-header"><h4>Speak</h4>{!speakingPending && <button type="button" className="text-button" onClick={() => void skipSpeaking()}>Skip for now</button>}</div>{speakingPending && <p className="pending-note">Speaking pending. You can return to this Day 1 practice later.</p>}{lesson.speaking.map((task) => <SpeakingPractice key={task.id} task={task} dayId={lesson.dayId} revision={lesson.revision} repository={repository} onChanged={() => undefined} />)}</section>
+    <section className="skill-section"><div className="section-header"><h4>Speak</h4>{!speakingPending && <Button variant="quiet" type="button" onClick={() => void skipSpeaking()}>Skip for now</Button>}</div>{speakingPending && <p className="pending-note">Speaking pending. You can return to this Day 1 practice later.</p>}{lesson.speaking.map((task) => <SpeakingPractice key={task.id} task={task} dayId={lesson.dayId} revision={lesson.revision} repository={repository} onChanged={() => undefined} />)}</section>
   </section>;
 }

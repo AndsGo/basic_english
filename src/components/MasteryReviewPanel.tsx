@@ -1,3 +1,5 @@
+import { TextField } from './ui/TextFields';
+import { AnswerOption, Button } from './ui/Button';
 import { useEffect, useState } from 'react';
 import { applyMasteryAnswer, selectDueMasteryProgress, toLocalDateString, type MasteryProgress } from '../domain/mastery';
 import { buildMasteryQuestion, type MasteryQuestion } from '../domain/masteryQuestions';
@@ -84,6 +86,7 @@ export function MasteryReviewPanel({
 
   const submitAnswer = async (answer: string | string[]) => {
     if (!scheduled || saving || answered) return;
+    if (typeof answer === 'string') setTextAnswer(answer);
 
     const current = now();
     const correct = answersMatch(scheduled.question, answer);
@@ -163,9 +166,9 @@ export function MasteryReviewPanel({
         {question.options && (
           <div className="mastery-review-options">
             {question.options.map((option) => (
-              <button key={option} type="button" className="secondary-button" disabled={controlsDisabled} onClick={() => void submitAnswer(option)}>
+              <AnswerOption key={option} type="button" selected={textAnswer === option} result={answered ? (answersMatch(question, textAnswer) ? 'correct' : 'retry') : undefined} disabled={controlsDisabled} onClick={() => void submitAnswer(option)}>
                 {option}
-              </button>
+              </AnswerOption>
             ))}
           </div>
         )}
@@ -174,9 +177,8 @@ export function MasteryReviewPanel({
             event.preventDefault();
             void submitAnswer(textAnswer);
           }}>
-            <label htmlFor={`mastery-answer-${question.id}`}>Your answer</label>
-            <input id={`mastery-answer-${question.id}`} value={textAnswer} disabled={controlsDisabled} onChange={(event) => setTextAnswer(event.target.value)} />
-            <button type="submit" className="primary-button" disabled={controlsDisabled || !textAnswer.trim()}>Submit answer</button>
+            <TextField label="Your answer" id={`mastery-answer-${question.id}`} value={textAnswer} disabled={controlsDisabled} onChange={(event) => setTextAnswer(event.target.value)} />
+            <Button variant="primary" type="submit" loading={saving} loadingLabel="Saving..." disabled={controlsDisabled || !textAnswer.trim()}>Submit answer</Button>
           </form>
         )}
         {question.kind === 'pattern_sentence_order' && question.tokens && (
@@ -184,23 +186,23 @@ export function MasteryReviewPanel({
             <p>{orderedAnswer.map((index) => question.tokens?.[index]).join(' ')}</p>
             <div className="mastery-review-options">
               {question.tokens.map((token, index) => (
-                <button key={`${token}-${index}`} type="button" className="secondary-button" disabled={controlsDisabled || orderedAnswer.includes(index)} onClick={() => setOrderedAnswer((current) => [...current, index])}>
+                <Button variant="secondary" key={`${token}-${index}`} type="button" disabled={controlsDisabled || orderedAnswer.includes(index)} onClick={() => setOrderedAnswer((current) => [...current, index])}>
                   {token}
-                </button>
+                </Button>
               ))}
             </div>
-            <button type="button" className="primary-button" disabled={controlsDisabled || orderedAnswer.length !== question.tokens.length} onClick={() => void submitAnswer(orderedAnswer.map((index) => question.tokens![index]))}>
+            <Button variant="primary" type="button" disabled={controlsDisabled || orderedAnswer.length !== question.tokens.length} onClick={() => void submitAnswer(orderedAnswer.map((index) => question.tokens![index]))}>
               Submit answer
-            </button>
+            </Button>
           </div>
         )}
       </article>
       {saveError && <p role="alert">Mastery review could not be saved.</p>}
       {feedback && <p className="mastery-review-feedback" role="status">{feedback}</p>}
       {answered && (
-        <button type="button" className="primary-button mastery-review-continue" onClick={continueToNext}>
+        <Button variant="primary" type="button" className="mastery-review-continue" onClick={continueToNext}>
           {position + 1 === questions.length ? 'Finish' : 'Next question'}
-        </button>
+        </Button>
       )}
     </section>
   );

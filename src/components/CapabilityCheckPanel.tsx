@@ -1,3 +1,6 @@
+import { TextArea } from './ui/TextFields';
+import { Button } from './ui/Button';
+import { Checkbox, RadioGroup } from './ui/SelectionControls';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CapabilityCheckTask } from '../content/capabilityChecks';
 import {
@@ -167,9 +170,9 @@ export function CapabilityCheckPanel({
         </div>
         <p>{savedAttempt.writtenText}</p>
         <p className="muted">Next check: {formatReviewDate(savedAttempt.dueAt)}</p>
-        <button type="button" className="secondary-button" onClick={resetForRetry}>
+        <Button variant="secondary" type="button" onClick={resetForRetry}>
           Try again
-        </button>
+        </Button>
       </section>
     );
   }
@@ -189,31 +192,18 @@ export function CapabilityCheckPanel({
         <div className="section-header">
           <h3>1. Listen</h3>
           {speechEnabled && speechSupported ? (
-            <button type="button" className="secondary-button capability-audio-button" onClick={playListening}>
+            <Button variant="secondary" type="button" className="capability-audio-button" onClick={playListening}>
               {activeId === `capability-listening-${task.id}` ? 'Stop audio' : 'Play mission audio'}
-            </button>
+            </Button>
           ) : (
-            <button type="button" className="secondary-button capability-audio-button" onClick={() => setHasListened(true)}>
+            <Button variant="secondary" type="button" className="capability-audio-button" onClick={() => setHasListened(true)}>
               Read listening text
-            </button>
+            </Button>
           )}
         </div>
         {(!speechEnabled || !speechSupported) && hasListened && <p className="listening-fallback">{task.listening.script}</p>}
-        <fieldset className="capability-options">
-          <legend>{task.listening.question}</legend>
-          {task.listening.options.map((option) => (
-            <label key={option} className={listeningAnswer === option ? 'selected' : undefined}>
-              <input
-                type="radio"
-                name={`${task.id}-listening`}
-                value={option}
-                checked={listeningAnswer === option}
-                onChange={() => setListeningAnswer(option)}
-              />
-              {option}
-            </label>
-          ))}
-        </fieldset>
+        <RadioGroup label={task.listening.question} name={task.id + '-listening'} value={listeningAnswer}
+          options={task.listening.options.map(option => ({ value: option, label: option }))} onValueChange={setListeningAnswer} />
         <div className="capability-listening-feedback" aria-live="polite">
           {listeningAnswer && (
             <p className={isListeningCorrect ? 'answer-correct' : 'answer-review'}>
@@ -227,17 +217,14 @@ export function CapabilityCheckPanel({
         <h3>2. Respond</h3>
         <p>{task.outputPrompt}</p>
         <div className="capability-hint-actions" aria-label="Optional help">
-          <button type="button" className="text-button" onClick={() => revealHint('keywords')}>Show keywords</button>
-          <button type="button" className="text-button" onClick={() => revealHint('patterns')}>Show sentence starters</button>
-          <button type="button" className="text-button" onClick={() => revealHint('reference')}>Show example</button>
+          <Button variant="quiet" type="button" onClick={() => revealHint('keywords')}>Show keywords</Button>
+          <Button variant="quiet" type="button" onClick={() => revealHint('patterns')}>Show sentence starters</Button>
+          <Button variant="quiet" type="button" onClick={() => revealHint('reference')}>Show example</Button>
         </div>
         {visibleHints.includes('keywords') && <p className="hint-content">Keywords: {task.keywords.join(', ')}</p>}
         {visibleHints.includes('patterns') && <p className="hint-content">Start with: {task.sentenceStarters.join(' / ')}</p>}
         {visibleHints.includes('reference') && <p className="hint-content">Example: {task.referenceAnswer}</p>}
-        <label className="capability-answer">
-          Your answer
-          <textarea value={writtenText} onChange={(event) => setWrittenText(event.target.value)} rows={5} />
-        </label>
+        <TextArea label="Your answer" value={writtenText} onChange={(event) => setWrittenText(event.target.value)} rows={5} />
         <p className="capability-count" role="status">
           {currentSentenceCount} / {task.minimumSentenceCount} sentences
         </p>
@@ -248,23 +235,17 @@ export function CapabilityCheckPanel({
         <ul className="capability-required-ideas">
           {task.requiredIdeas.map((idea) => <li key={idea}>{idea}</li>)}
         </ul>
-        <label className="check-row">
-          <input type="checkbox" checked={meaningComplete} onChange={(event) => setMeaningComplete(event.target.checked)} />
-          My answer includes all three ideas.
-        </label>
-        <fieldset className="capability-clarity">
-          <legend>Could another person understand you?</legend>
-          <label><input type="radio" name={`${task.id}-clarity`} checked={clarity === 'clear'} onChange={() => setClarity('clear')} /> Clear</label>
-          <label><input type="radio" name={`${task.id}-clarity`} checked={clarity === 'partly-clear'} onChange={() => setClarity('partly-clear')} /> Partly clear</label>
-          <label><input type="radio" name={`${task.id}-clarity`} checked={clarity === 'unclear'} onChange={() => setClarity('unclear')} /> Not clear yet</label>
-        </fieldset>
+        <Checkbox label="My answer includes all three ideas." checked={meaningComplete} onChange={event => setMeaningComplete(event.target.checked)} />
+        <RadioGroup label="Could another person understand you?" name={task.id + '-clarity'} value={clarity}
+          options={[{ value: 'clear', label: 'Clear' }, { value: 'partly-clear', label: 'Partly clear' }, { value: 'unclear', label: 'Not clear yet' }]}
+          onValueChange={value => setClarity(value as CapabilityClarity)} />
       </section>
 
       {usedHints.length > 0 && <p className="capability-help-note">This check will be saved as With help when your meaning is clear.</p>}
       {saveError && <p role="alert">The capability check could not be saved. Try again.</p>}
-      <button type="button" className="primary-button" disabled={!canSave} aria-busy={isSaving} onClick={() => void saveAttempt()}>
-        {isSaving ? 'Saving...' : 'Save capability check'}
-      </button>
+      <Button variant="primary" type="button" disabled={!canSave} loading={isSaving} loadingLabel="Saving..." onClick={() => void saveAttempt()}>
+        Save capability check
+      </Button>
       {!canSave && (
         <p className="muted">Listen, choose the correct answer, and write {task.minimumSentenceCount} sentences to save this check.</p>
       )}

@@ -598,7 +598,7 @@ describe('TodayPage', () => {
     renderWithSpeech(<TodayPage course={basicEnglishCourse} repository={repository} sceneGoalsByDayId={sceneGoalsByDayId} />);
 
     expect(await screen.findByRole('heading', { level: 2, name: 'My Room' })).toBeInTheDocument();
-    expect(screen.getByRole('listitem', { name: /Week 1 Self Story Completed/ })).toHaveClass('scene-map-item--completed');
+    expect(await screen.findByRole('listitem', { name: /Week 1 Self Story Completed/ })).toHaveClass('scene-map-item--completed');
     expect(screen.getByRole('listitem', { name: /Room Today/ })).toHaveClass('scene-map-item--current');
   });
 
@@ -797,7 +797,7 @@ describe('TodayPage', () => {
     await user.click(knowName);
 
     expect(knowName).toHaveAttribute('aria-pressed', 'true');
-    expect(knowName).toHaveClass('selected-button');
+    expect(knowName).toHaveClass('ui-button--secondary');
 
     for (const button of screen.getAllByRole('button', { name: /^I know this/ })) {
       if (button !== knowName) await user.click(button);
@@ -809,7 +809,7 @@ describe('TodayPage', () => {
     await user.click(practiceButton);
 
     expect(practiceButton).toHaveAttribute('aria-pressed', 'true');
-    expect(practiceButton).toHaveClass('selected-button');
+    expect(practiceButton).toHaveClass('ui-button--secondary');
     expect(screen.getByText('Practiced')).toBeInTheDocument();
   });
 
@@ -1716,7 +1716,7 @@ describe('MePage', () => {
       />,
     );
 
-    await user.click(screen.getByRole('checkbox', { name: 'Enable reading aloud' }));
+    await user.click(screen.getByRole('switch', { name: 'Enable reading aloud' }));
     await user.click(screen.getByRole('radio', { name: 'Slow' }));
     await user.click(screen.getByRole('radio', { name: 'British English' }));
 

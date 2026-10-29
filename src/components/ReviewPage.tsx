@@ -1,3 +1,4 @@
+import { Button } from './ui/Button';
 import { useCallback, useEffect, useState } from 'react';
 import {
   REVIEW_INTERVAL_DAYS,
@@ -183,9 +184,9 @@ export function ReviewPage({
           <>
             <p>No practice items due today.</p>
             {onStartToday && (
-              <button type="button" className="primary-button" onClick={onStartToday}>
+              <Button variant="primary" type="button" onClick={onStartToday}>
                 Start today
-              </button>
+              </Button>
             )}
           </>
         ) : (
@@ -219,12 +220,12 @@ export function ReviewPage({
               {item.userAnswer && <p>User answer: {item.userAnswer}</p>}
               {item.referenceAnswer && <p>Reference answer: {item.referenceAnswer}</p>}
               <div className="button-row">
-                <button type="button" className="primary-button" onClick={() => void markKnown(item)}>
+                <Button variant="primary" type="button" onClick={() => void markKnown(item)}>
                   I know this
-                </button>
-                <button type="button" className="secondary-button" onClick={() => void reviewAgain(item)}>
+                </Button>
+                <Button variant="secondary" type="button" onClick={() => void reviewAgain(item)}>
                   Review again
-                </button>
+                </Button>
               </div>
             </article>
           ),

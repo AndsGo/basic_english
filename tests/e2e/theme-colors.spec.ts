@@ -42,6 +42,7 @@ for (const theme of ['light', 'dark'] as const) {
     await expect(primary).toBeVisible();
     await expect(primary).toBeEnabled();
     await page.mouse.move(1, 1);
+    await expect(primary).toHaveCSS('background-color', nativeAccent);
     const primaryDefault = await colors(primary);
     expect(primaryDefault.background).toBe(nativeAccent);
     expect(primaryDefault.contrast).toBeGreaterThanOrEqual(4.5);

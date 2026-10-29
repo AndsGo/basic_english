@@ -1,3 +1,5 @@
+import { TextArea } from './ui/TextFields';
+import { Button } from './ui/Button';
 import type { ReviewItem } from '../domain/review';
 
 export function PictureDescriptionReviewCard({
@@ -40,22 +42,18 @@ export function PictureDescriptionReviewCard({
           </ul>
         </div>
       )}
-      <label className="field-label" htmlFor={`picture-review-${item.id}`}>
-        Picture description review answer
-      </label>
-      <textarea
+      <TextArea label="Picture description review answer"
         id={`picture-review-${item.id}`}
         className="large-textarea"
         defaultValue=""
-        placeholder="Write the picture description again."
-      />
+        placeholder="Write the picture description again." />
       <div className="button-row">
-        <button type="button" className="primary-button" onClick={() => void onKnown()}>
+        <Button variant="primary" type="button" onClick={() => void onKnown()}>
           I know this
-        </button>
-        <button type="button" className="secondary-button" onClick={() => void onReviewAgain?.()}>
+        </Button>
+        <Button variant="secondary" type="button" onClick={() => void onReviewAgain?.()}>
           Review again
-        </button>
+        </Button>
       </div>
     </article>
   );

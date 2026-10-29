@@ -1,3 +1,5 @@
+import { TextField } from './ui/TextFields';
+import { Button } from './ui/Button';
 import { useMemo, useState } from 'react';
 import { basicEnglishWordList } from '../content/basicEnglish850';
 import { wordFlashcardImages } from '../content/wordFlashcardImages';
@@ -93,34 +95,28 @@ export function WordsPage({
       <div className="section-header">
         <h2>{mode === 'stories' ? 'Stories for everyday life' : 'Course Words'}</h2>
         <div className="segmented-control words-view-modes" aria-label="Words view mode">
-          <button
+          <Button variant="secondary"
             type="button"
-            className={`secondary-button${mode === 'list' ? ' selected-button' : ''}`}
             aria-pressed={mode === 'list'}
-            onClick={() => setMode('list')}
-          >
+            onClick={() => setMode('list')}>
             List
-          </button>
-          <button
+          </Button>
+          <Button variant="secondary"
             type="button"
-            className={`secondary-button${mode === 'flashcards' ? ' selected-button' : ''}`}
             aria-pressed={mode === 'flashcards'}
-            onClick={() => setMode('flashcards')}
-          >
+            onClick={() => setMode('flashcards')}>
             Flashcards
-          </button>
-          <button
+          </Button>
+          <Button variant="secondary"
             type="button"
-            className={`secondary-button${mode === 'library' ? ' selected-button' : ''}`}
             aria-pressed={mode === 'library'}
-            onClick={() => setMode('library')}
-          >
+            onClick={() => setMode('library')}>
             850 Library
-          </button>
-          <button type="button" className={`secondary-button${mode === 'stories' ? ' selected-button' : ''}`}
+          </Button>
+          <Button variant="secondary" type="button"
             aria-pressed={mode === 'stories'} onClick={() => { setSelectedStoryId(undefined); setMode('stories'); }}>
             Stories
-          </button>
+          </Button>
         </div>
       </div>
       {mode === 'stories' ? (
@@ -149,9 +145,7 @@ export function WordsPage({
           </div>
 
           <div className="basic-library-controls">
-            <label>
-              <span>Search</span>
-              <input
+            <TextField label="Search"
                 type="search"
                 aria-label="Search Basic English 850 words"
                 value={libraryQuery}
@@ -159,34 +153,26 @@ export function WordsPage({
                   setLibraryQuery(event.target.value);
                   setLibraryLimit(LIBRARY_VISIBLE_LIMIT);
                 }}
-                placeholder="word"
-              />
-            </label>
+                placeholder="word" />
             <div className="segmented-control" aria-label="Basic English library filter">
-              <button
+              <Button variant="secondary"
                 type="button"
-                className={`secondary-button${libraryFilter === 'all' ? ' selected-button' : ''}`}
                 aria-pressed={libraryFilter === 'all'}
-                onClick={() => { setLibraryFilter('all'); setLibraryLimit(LIBRARY_VISIBLE_LIMIT); }}
-              >
+                onClick={() => { setLibraryFilter('all'); setLibraryLimit(LIBRARY_VISIBLE_LIMIT); }}>
                 All
-              </button>
-              <button
+              </Button>
+              <Button variant="secondary"
                 type="button"
-                className={`secondary-button${libraryFilter === 'course' ? ' selected-button' : ''}`}
                 aria-pressed={libraryFilter === 'course'}
-                onClick={() => { setLibraryFilter('course'); setLibraryLimit(LIBRARY_VISIBLE_LIMIT); }}
-              >
+                onClick={() => { setLibraryFilter('course'); setLibraryLimit(LIBRARY_VISIBLE_LIMIT); }}>
                 In Course
-              </button>
-              <button
+              </Button>
+              <Button variant="secondary"
                 type="button"
-                className={`secondary-button${libraryFilter === 'future' ? ' selected-button' : ''}`}
                 aria-pressed={libraryFilter === 'future'}
-                onClick={() => { setLibraryFilter('future'); setLibraryLimit(LIBRARY_VISIBLE_LIMIT); }}
-              >
+                onClick={() => { setLibraryFilter('future'); setLibraryLimit(LIBRARY_VISIBLE_LIMIT); }}>
                 Future
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -212,10 +198,10 @@ export function WordsPage({
             <p className="muted">No words match this filter.</p>
           )}
           {visibleLibraryEntries.length < libraryEntries.length && (
-            <button type="button" className="secondary-button"
+            <Button variant="secondary" type="button"
               onClick={() => setLibraryLimit((limit) => limit + LIBRARY_VISIBLE_LIMIT)}>
               Show more
-            </button>
+            </Button>
           )}
         </div>
       ) : (
@@ -236,10 +222,10 @@ export function WordsPage({
                 {word.example}
                 <SpeechButton text={word.example} label={`Read example for ${word.text}`} />
               </small>
-              {availableStories.filter((story) => story.wordId === word.id).map((story) => <button key={story.id} type="button" className="secondary-button" onClick={() => {
+              {availableStories.filter((story) => story.wordId === word.id).map((story) => <Button variant="secondary" key={story.id} type="button" onClick={() => {
                 setSelectedStoryId(story.id);
                 setMode('stories');
-              }}>Read a story with {word.text}</button>)}
+              }}>Read a story with {word.text}</Button>)}
             </article>
           ))}
         </div>

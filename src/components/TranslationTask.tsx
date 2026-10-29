@@ -1,3 +1,6 @@
+import { TextArea } from './ui/TextFields';
+import { Button } from './ui/Button';
+import { RadioGroup } from './ui/SelectionControls';
 import { useState } from 'react';
 import type { TranslationExercise } from '../domain/types';
 import type { TranslationDraft } from '../domain/stepCompletion';
@@ -29,20 +32,17 @@ export function TranslationTask({
           <article className="exercise-card" key={exercise.id}>
             <h3>{exercise.chinesePrompt}</h3>
             <p>Core meaning: {exercise.coreMeaningHint}</p>
-            <textarea
+            <TextArea label="Your translation"
               aria-label={`Translation answer for ${exercise.id}`}
               value={draft.answer ?? ''}
               onChange={(event) => updateDraft(exercise.id, { ...draft, answer: event.target.value })}
-              rows={4}
-            />
-            <button
+              rows={4} />
+            <Button variant="secondary"
               type="button"
-              className="secondary-button"
               disabled={!draft.answer?.trim()}
-              onClick={() => setShown((current) => ({ ...current, [exercise.id]: true }))}
-            >
+              onClick={() => setShown((current) => ({ ...current, [exercise.id]: true }))}>
               Show reference
-            </button>
+            </Button>
             {shown[exercise.id] && (
               <>
                 <ul>
@@ -50,27 +50,9 @@ export function TranslationTask({
                     <li key={answer}>{answer}</li>
                   ))}
                 </ul>
-                <fieldset className="self-rating">
-                  <legend>Self mark</legend>
-                  <label>
-                    <input
-                      type="radio"
-                      name={`${exercise.id}-self-mark`}
-                      checked={draft.selfMark === 'close'}
-                      onChange={() => updateDraft(exercise.id, { ...draft, selfMark: 'close' })}
-                    />{' '}
-                    Close enough
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name={`${exercise.id}-self-mark`}
-                      checked={draft.selfMark === 'review'}
-                      onChange={() => updateDraft(exercise.id, { ...draft, selfMark: 'review' })}
-                    />{' '}
-                    Need review
-                  </label>
-                </fieldset>
+                <RadioGroup label="Self mark" name={exercise.id + '-self-mark'} value={draft.selfMark ?? ''}
+                  options={[{ value: 'close', label: 'Close enough' }, { value: 'review', label: 'Need review' }]}
+                  onValueChange={mark => updateDraft(exercise.id, { ...draft, selfMark: mark as 'close' | 'review' })} />
               </>
             )}
           </article>

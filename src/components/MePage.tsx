@@ -1,3 +1,4 @@
+import { RadioGroup, Switch } from './ui/SelectionControls';
 import { useEffect, useState } from 'react';
 import { getCapabilityStates, getScenarioCapabilityMasteryState } from '../domain/capabilities';
 import { buildDailyLearningInsight, type DailyLearningInsight } from '../domain/dailyLearningInsights';
@@ -363,131 +364,14 @@ export function MePage({
       {hasSettings && (
         <section className="settings-section">
           <h3>Settings</h3>
-          {onShowChineseHelpChange && (
-            <label>
-              <input
-                type="checkbox"
-                checked={showChineseHelp}
-                onChange={(event) => onShowChineseHelpChange(event.target.checked)}
-              />{' '}
-              Show Chinese help
-            </label>
-          )}
-          {onReadingEnabledChange && (
-            <label>
-              <input
-                type="checkbox"
-                checked={readingEnabled}
-                onChange={(event) => onReadingEnabledChange(event.target.checked)}
-              />{' '}
-              Enable reading aloud
-            </label>
-          )}
-          {onSpeechRateChange && (
-            <fieldset className="self-rating">
-              <legend>Voice speed</legend>
-              <label>
-                <input
-                  type="radio"
-                  name="speech-rate"
-                  value="normal"
-                  checked={speechRate === 'normal'}
-                  onChange={() => onSpeechRateChange('normal')}
-                />{' '}
-                Normal
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="speech-rate"
-                  value="slow"
-                  checked={speechRate === 'slow'}
-                  onChange={() => onSpeechRateChange('slow')}
-                />{' '}
-                Slow
-              </label>
-            </fieldset>
-          )}
-          {onSpeechLanguageChange && (
-            <fieldset className="self-rating">
-              <legend>Voice language</legend>
-              <label>
-                <input
-                  type="radio"
-                  name="speech-language"
-                  value="en-US"
-                  checked={speechLanguage === 'en-US'}
-                  onChange={() => onSpeechLanguageChange('en-US')}
-                />{' '}
-                American English
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="speech-language"
-                  value="en-GB"
-                  checked={speechLanguage === 'en-GB'}
-                  onChange={() => onSpeechLanguageChange('en-GB')}
-                />{' '}
-                British English
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="speech-language"
-                  value="en-AU"
-                  checked={speechLanguage === 'en-AU'}
-                  onChange={() => onSpeechLanguageChange('en-AU')}
-                />{' '}
-                Australian English
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="speech-language"
-                  value="en-CA"
-                  checked={speechLanguage === 'en-CA'}
-                  onChange={() => onSpeechLanguageChange('en-CA')}
-                />{' '}
-                Canadian English
-              </label>
-            </fieldset>
-          )}
-          {onThemePreferenceChange && (
-            <fieldset className="self-rating">
-              <legend>Theme</legend>
-              <label>
-                <input
-                  type="radio"
-                  name="theme"
-                  value="system"
-                  checked={themePreference === 'system'}
-                  onChange={() => onThemePreferenceChange('system')}
-                />{' '}
-                System
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="theme"
-                  value="light"
-                  checked={themePreference === 'light'}
-                  onChange={() => onThemePreferenceChange('light')}
-                />{' '}
-                Light
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="theme"
-                  value="dark"
-                  checked={themePreference === 'dark'}
-                  onChange={() => onThemePreferenceChange('dark')}
-                />{' '}
-                Dark
-              </label>
-            </fieldset>
-          )}
+          {onShowChineseHelpChange && <Switch label="Show Chinese help" checked={showChineseHelp} onChange={event => onShowChineseHelpChange(event.target.checked)} />}
+          {onReadingEnabledChange && <Switch label="Enable reading aloud" checked={readingEnabled} onChange={event => onReadingEnabledChange(event.target.checked)} />}
+          {onSpeechRateChange && <RadioGroup label="Voice speed" name="speech-rate" value={speechRate} onValueChange={value => onSpeechRateChange(value as SpeechRate)}
+            options={[{ value: 'normal', label: 'Normal' }, { value: 'slow', label: 'Slow' }]} />}
+          {onSpeechLanguageChange && <RadioGroup label="Voice language" name="speech-language" value={speechLanguage} onValueChange={value => onSpeechLanguageChange(value as SpeechLanguage)}
+            options={[{ value: 'en-US', label: 'American English' }, { value: 'en-GB', label: 'British English' }, { value: 'en-AU', label: 'Australian English' }, { value: 'en-CA', label: 'Canadian English' }]} />}
+          {onThemePreferenceChange && <RadioGroup label="Theme" name="theme" value={themePreference} onValueChange={value => onThemePreferenceChange(value as ThemePreference)}
+            options={[{ value: 'system', label: 'System' }, { value: 'light', label: 'Light' }, { value: 'dark', label: 'Dark' }]} />}
         </section>
       )}
       {hasLoadedProgress && !loadError && !repository.listCapabilityCheckAttempts && sceneGoals.length > 0 && (

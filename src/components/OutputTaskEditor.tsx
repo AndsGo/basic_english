@@ -1,3 +1,5 @@
+import { TextArea } from './ui/TextFields';
+import { Checkbox, RadioGroup } from './ui/SelectionControls';
 import { countSentences } from '../domain/exercises';
 import type { OutputTask } from '../domain/types';
 import type { UserOutput } from '../storage/progressRepository';
@@ -50,7 +52,7 @@ export function OutputTaskEditor({
           <code key={line}>{line}</code>
         ))}
       </div>
-      <textarea
+      <TextArea label="Daily output"
         value={value.text}
         onChange={(event) =>
           updateValue({
@@ -60,42 +62,16 @@ export function OutputTaskEditor({
         }
         rows={8}
         aria-label="Daily output"
-        placeholder="Write your sentences here."
-      />
+        placeholder="Write your sentences here." />
       <p className="helper-text">
         {value.sentenceCount} / {task.requiredSentenceCount} sentences
       </p>
       <div className="checklist">
-        {checklistItems.map((item) => (
-          <label key={item.key}>
-            <input
-              type="checkbox"
-              checked={value.checklist[item.key]}
-              onChange={(event) =>
-                updateValue({
-                  checklist: { ...value.checklist, [item.key]: event.target.checked },
-                })
-              }
-            />{' '}
-            {item.label}
-          </label>
-        ))}
+        {checklistItems.map(item => <Checkbox key={item.key} label={item.label} checked={value.checklist[item.key]}
+          onChange={event => updateValue({ checklist: { ...value.checklist, [item.key]: event.target.checked } })} />)}
       </div>
-      <fieldset className="self-rating">
-        <legend>Self rating</legend>
-        {selfRatings.map((rating) => (
-          <label key={rating.value}>
-            <input
-              type="radio"
-              name={`${task.id}-self-rating`}
-              value={rating.value}
-              checked={value.selfRating === rating.value}
-              onChange={() => updateValue({ selfRating: rating.value })}
-            />{' '}
-            {rating.label}
-          </label>
-        ))}
-      </fieldset>
+      <RadioGroup label="Self rating" name={task.id + '-self-rating'} value={value.selfRating ?? ''} options={selfRatings}
+        onValueChange={rating => updateValue({ selfRating: rating as UserOutput['selfRating'] })} />
     </section>
   );
 }

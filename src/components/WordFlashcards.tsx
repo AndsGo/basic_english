@@ -1,3 +1,4 @@
+import { Button } from './ui/Button';
 import { useMemo, useState } from 'react';
 import type { Word } from '../domain/types';
 import { PhoneticText } from './PhoneticText';
@@ -130,12 +131,12 @@ export function WordFlashcards({
               <SpeechButton text={currentWord.example} label={`Read example for ${currentWord.text}`} />
             </p>
             <div className="card-actions">
-              <button type="button" className="secondary-button" onClick={() => void save('review')} disabled={isSaving}>
+              <Button variant="secondary" type="button" onClick={() => void save('review')} disabled={isSaving}>
                 Add to review
-              </button>
-              <button type="button" className="secondary-button" onClick={() => void save('known')} disabled={isSaving}>
+              </Button>
+              <Button variant="secondary" type="button" onClick={() => void save('known')} disabled={isSaving}>
                 I know this
-              </button>
+              </Button>
             </div>
           </div>
         )}
@@ -144,30 +145,24 @@ export function WordFlashcards({
       {feedback === 'known' && <p className="selection-status" role="status">Marked Known</p>}
       {feedback === 'error' && <p className="requirement-list" role="alert">Could not save. Try again.</p>}
       <div className="flashcard-navigation">
-        <button
+        <Button variant="secondary"
           type="button"
-          className="secondary-button"
           onClick={() => moveTo(safeCurrentIndex - 1)}
-          disabled={isSaving || safeCurrentIndex === 0}
-        >
+          disabled={isSaving || safeCurrentIndex === 0}>
           Previous
-        </button>
-        <button
+        </Button>
+        <Button variant="secondary"
           type="button"
-          className="secondary-button"
           onClick={() => setIsBackVisible((current) => !current)}
-          disabled={isSaving}
-        >
+          disabled={isSaving}>
           Flip
-        </button>
-        <button
+        </Button>
+        <Button variant="secondary"
           type="button"
-          className="secondary-button"
           onClick={() => moveTo(safeCurrentIndex + 1)}
-          disabled={isSaving || safeCurrentIndex === queue.length - 1}
-        >
+          disabled={isSaving || safeCurrentIndex === queue.length - 1}>
           Next
-        </button>
+        </Button>
       </div>
     </section>
   );

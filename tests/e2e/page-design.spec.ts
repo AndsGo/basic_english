@@ -13,7 +13,7 @@ test('page designs fit themes and narrow screens, with a cover catalog and resum
       for (const chinese of [false, true]) {
         await page.getByRole('button', { name: 'Me', exact: true }).click();
         await page.getByRole('radio', { name: theme === 'light' ? 'Light' : 'Dark', exact: true }).check();
-        await page.getByRole('checkbox', { name: 'Show Chinese help' }).setChecked(chinese);
+        await page.getByRole('switch', { name: 'Show Chinese help' }).setChecked(chinese);
         for (const tab of ['Today', 'Course', 'Review', 'Words', 'Me']) {
           await page.getByRole('button', { name: tab, exact: true }).click();
           expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

@@ -1,3 +1,4 @@
+import { Button } from './ui/Button';
 import { useState } from 'react';
 import type { SceneGoal } from '../domain/types';
 
@@ -34,9 +35,9 @@ export function SceneMap({
       <div className="scene-map-header">
         <h3>Scenes I Can Describe</h3>
         {isFoldable && (
-          <button type="button" className="secondary-button scene-map-toggle" onClick={() => setIsExpanded((current) => !current)}>
+          <Button variant="secondary" type="button" className="scene-map-toggle" onClick={() => setIsExpanded((current) => !current)}>
             {isExpanded ? 'Show fewer scenes' : 'Show all scenes'}
-          </button>
+          </Button>
         )}
       </div>
       <ul>

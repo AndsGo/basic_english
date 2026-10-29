@@ -1,0 +1,91 @@
+/* Shared controls consume DESIGN.md tokens; styles affect only ui-* classes. */
+.ui-button, .ui-input, .ui-choice-row { font: inherit; font-size: 1rem; }
+.ui-button {
+  position: relative; display: inline-grid; place-items: center; min-height: 48px;
+  max-width: 100%; padding: 10px 18px; border: 1px solid transparent; border-radius: 10px;
+  background: var(--color-primary); color: var(--color-on-primary); font-weight: 600; line-height: 1.5;
+  cursor: pointer; transition: background-color 150ms, border-color 150ms;
+}
+.ui-button:hover:not(:disabled) { background: var(--color-primary-hover); }
+.ui-button:active:not(:disabled) { background: var(--color-primary-active); }
+.ui-button--secondary { border-color: var(--color-selected-border); color: var(--color-accent-text); background: var(--color-surface); }
+.ui-button--quiet { color: var(--color-accent-text); background: transparent; }
+.ui-button--secondary:hover:not(:disabled), .ui-button--quiet:hover:not(:disabled) { background: var(--color-accent-soft); border-color: var(--color-selected-border); }
+.ui-button--secondary:active:not(:disabled), .ui-button--quiet:active:not(:disabled) { background: var(--color-accent-softer); }
+.ui-button--secondary[aria-pressed='true'], .ui-button--quiet[aria-pressed='true'] { background: var(--color-accent-softer); border-color: var(--color-selected-border); }
+.ui-answer-option { width: 100%; text-align: left; justify-items: start; }
+.ui-answer-option[aria-pressed='true']:disabled { background: var(--color-accent-softer); color: var(--color-accent-text); border-color: var(--color-selected-border); }
+.ui-answer-option[data-result='retry'], .ui-answer-option[data-result='retry']:disabled { background: var(--color-warning-bg); color: var(--color-text); border-color: var(--color-selected-border); }
+.ui-button:disabled:not([data-loading]) { color: var(--color-disabled-text); background: var(--color-disabled-bg); border-color: var(--color-border); cursor: default; }
+.ui-button[data-loading] { cursor: progress; }
+.ui-button-label, .ui-button-loading { grid-area: 1 / 1; }
+.ui-button[data-loading] .ui-button-label { visibility: hidden; }
+.ui-button-loading { display: inline-flex; align-items: center; gap: 8px; visibility: hidden; }
+.ui-button[data-loading] .ui-button-loading { visibility: visible; }
+.ui-spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; flex-shrink: 0; }
+.ui-button[data-loading] .ui-spinner { animation: ui-spin 850ms linear infinite; }
+@keyframes ui-spin { to { transform: rotate(360deg); } }
+.ui-icon-button { width: 48px; min-width: 48px; padding: 0; }
+.ui-icon-button .ui-button-label, .ui-icon-button .ui-button-label > span { display: grid; place-items: center; }
+.ui-icon-button svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.ui-button:focus-visible, .ui-input:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+.ui-field, .ui-choice-field { display: grid; gap: 8px; min-width: 0; }
+.ui-field-label, .ui-field-group > legend { color: var(--color-text); font-weight: 600; font-size: 1rem; }
+.ui-field-hint { display: block; color: var(--color-text-muted); font-size: .9375rem; line-height: 1.6; margin: 0; font-weight: 400; }
+.ui-field-error { color: var(--color-danger); font-size: .9375rem; line-height: 1.6; margin: 0; }
+.ui-field-group { margin: 0; padding: 0; min-width: 0; border: 0; }
+.ui-field-group > legend { padding: 0; margin-bottom: 12px; }
+.ui-field-group > .ui-field-hint { margin-bottom: 12px; }
+.ui-field-group-items { display: grid; gap: 8px; }
+.ui-field-group > .ui-field-error { margin-top: 8px; }
+.ui-choice-row {
+  display: flex; align-items: flex-start; gap: 12px; min-height: 48px; padding: 12px;
+  border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-surface);
+  color: var(--color-text); line-height: 1.5; cursor: pointer; overflow-wrap: anywhere;
+}
+.ui-choice-row:hover:not(:has(input:disabled)) { background: var(--color-accent-soft); }
+.ui-choice-row:has(input:checked) { border-color: var(--color-selected-border); background: var(--color-accent-soft); }
+.ui-choice-row:has(input:focus-visible) { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+.ui-choice-row:has(input:disabled) { color: var(--color-disabled-text); background: var(--color-disabled-bg); cursor: default; }
+.ui-choice-row:has(input[aria-invalid='true']) { border-color: var(--color-danger); }
+.ui-choice-copy { display: grid; gap: 4px; min-width: 0; }
+.ui-control-box { position: relative; display: inline-grid; place-items: center; width: 24px; height: 24px; flex: 0 0 24px; }
+.ui-control-box input { position: absolute; inset: 2px; width: 20px; height: 20px; margin: 0; opacity: 0; cursor: inherit; }
+.ui-choice-mark { display: grid; place-items: center; width: 20px; height: 20px; border: 2px solid var(--color-selected-border); border-radius: 5px; background: var(--color-surface-raised); color: var(--color-on-primary); pointer-events: none; }
+.ui-choice-mark svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; visibility: hidden; }
+input:checked + .ui-choice-mark { background: var(--color-primary); border-color: var(--color-primary); }
+input:checked + .ui-choice-mark svg { visibility: visible; }
+.ui-choice-row--radio .ui-choice-mark { border-radius: 50%; }
+.ui-choice-row--radio .ui-choice-mark::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--color-on-primary); visibility: hidden; }
+.ui-choice-row--radio input:checked + .ui-choice-mark::after { visibility: visible; }
+.ui-choice-row:has(input:disabled) .ui-choice-mark { border-color: var(--color-disabled-text); background: var(--color-disabled-bg); color: var(--color-disabled-text); }
+.ui-choice-row--radio input:disabled + .ui-choice-mark::after { background: var(--color-disabled-text); }
+.ui-choice-row--switch { flex-direction: row-reverse; justify-content: space-between; }
+.ui-choice-row--switch .ui-control-box { width: 44px; flex-basis: 44px; }
+.ui-choice-row--switch input { inset: 0; width: 44px; height: 24px; }
+.ui-choice-row--switch .ui-choice-mark { width: 44px; height: 24px; border-radius: 999px; background: var(--color-surface-sunken); }
+.ui-choice-row--switch .ui-choice-mark::after { content: ''; width: 16px; height: 16px; border-radius: 50%; background: var(--color-text-muted); transform: translateX(-9px); }
+.ui-choice-row--switch input:checked + .ui-choice-mark { background: var(--color-primary); }
+.ui-choice-row--switch input:checked + .ui-choice-mark::after { background: var(--color-on-primary); transform: translateX(9px); }
+.ui-choice-row--switch input:disabled + .ui-choice-mark::after { background: var(--color-disabled-text); }
+.ui-input {
+  width: 100%; min-width: 0; min-height: 48px; padding: 10px 12px; border: 1px solid var(--color-selected-border);
+  border-radius: 10px; background: var(--color-surface-raised); color: var(--color-text); line-height: 1.6;
+}
+.ui-input::placeholder { color: var(--color-text-muted); opacity: 1; }
+.ui-input[aria-invalid='true'] { border-color: var(--color-danger); }
+.ui-input:disabled { color: var(--color-disabled-text); background: var(--color-disabled-bg); cursor: default; opacity: 1; }
+.ui-input[readonly] { background: var(--color-surface-muted); }
+.ui-textarea { display: block; resize: vertical; }
+.ui-select-wrap { position: relative; display: block; min-width: 0; }
+.ui-select { appearance: none; padding-right: 40px; }
+.ui-select-wrap > svg { position: absolute; right: 12px; top: 15px; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.75; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .ui-button { transition: none; } .ui-spinner { animation: none; } }
+@media (forced-colors: active) {
+  .ui-button, .ui-input, .ui-choice-row { border-color: ButtonText; }
+  .ui-choice-row:has(input:checked) { outline: 1px solid Highlight; }
+  .ui-control-box input { position: static; opacity: 1; appearance: auto; forced-color-adjust: auto; width: 20px; height: 20px; }
+  .ui-choice-mark { display: none; }
+  .ui-select { appearance: auto; }
+  .ui-select-wrap > svg { display: none; }
+}

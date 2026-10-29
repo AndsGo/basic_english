@@ -1,3 +1,5 @@
+import { TextArea } from './ui/TextFields';
+import { Button } from './ui/Button';
 import { useState } from 'react';
 import type { SceneRemixSelfMark, SceneRemixTask } from '../domain/types';
 
@@ -39,24 +41,18 @@ export function SceneRemixCard({
       <p>{task.prompt}</p>
       {task.source && <p className="scene-remix-source">Source: {task.source}</p>}
 
-      <label>
-        Scene remix answer
-        <textarea
+      <TextArea label="Scene remix answer"
           aria-label="Scene remix answer"
           value={answer}
           onChange={(event) => setAnswer(event.target.value)}
-          rows={4}
-        />
-      </label>
+          rows={4} />
 
-      <button
+      <Button variant="secondary"
         type="button"
-        className="secondary-button"
         disabled={!trimmedAnswer}
-        onClick={() => setReferencesVisible(true)}
-      >
+        onClick={() => setReferencesVisible(true)}>
         Show reference
-      </button>
+      </Button>
 
       {referencesVisible && (
         <section className="scene-remix-reference" aria-labelledby={`${task.id}-reference-heading`}>
@@ -69,12 +65,12 @@ export function SceneRemixCard({
             ))}
           </ul>
           <div className="card-actions">
-            <button type="button" className="primary-button" disabled={submitting} onClick={() => submit('close')}>
+            <Button variant="primary" type="button" disabled={submitting} onClick={() => submit('close')}>
               Close enough
-            </button>
-            <button type="button" className="secondary-button" disabled={submitting} onClick={() => submit('review')}>
+            </Button>
+            <Button variant="secondary" type="button" disabled={submitting} onClick={() => submit('review')}>
               Need review
-            </button>
+            </Button>
           </div>
         </section>
       )}

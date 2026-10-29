@@ -1,3 +1,4 @@
+import { Button } from './ui/Button';
 import type { Pattern } from '../domain/types';
 import { SpeechButton } from './SpeechButton';
 
@@ -36,14 +37,12 @@ export function PatternCards({
               ))}
             </div>
             {practicedPatternIds.has(pattern.id) && <p className="selection-status">Practiced</p>}
-            <button
+            <Button variant="secondary"
               type="button"
-              className={`secondary-button${practicedPatternIds.has(pattern.id) ? ' selected-button' : ''}`}
               aria-pressed={practicedPatternIds.has(pattern.id)}
-              onClick={() => onPractice?.(pattern.id)}
-            >
+              onClick={() => onPractice?.(pattern.id)}>
               Practice this
-            </button>
+            </Button>
           </article>
         ))}
       </div>

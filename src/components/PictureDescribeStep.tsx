@@ -1,3 +1,5 @@
+import { TextArea } from './ui/TextFields';
+import { Button } from './ui/Button';
 import { useEffect, useMemo, useState } from 'react';
 import { checkPictureDescription, countMeaningfulSentences } from '../domain/pictureDescription';
 import type { PictureDescribeTask } from '../domain/types';
@@ -91,27 +93,23 @@ export function PictureDescribeStep({
           </div>
         </div>
 
-        <label className="field-label" htmlFor={`picture-description-${task.id}`}>
-          Picture description
-        </label>
-        <textarea
+        <TextArea label="Picture description"
           id={`picture-description-${task.id}`}
           className="large-textarea"
           value={draft.text}
           placeholder="Write 3 simple sentences about the picture."
-          onChange={(event) => updateText(event.target.value)}
-        />
+          onChange={(event) => updateText(event.target.value)} />
         <p className="sentence-counter">
           {sentenceCount} / {task.requiredSentenceCount} sentences
         </p>
 
         <div className="button-row">
-          <button type="button" className="primary-button" onClick={check} disabled={!hasText}>
+          <Button variant="primary" type="button" onClick={check} disabled={!hasText}>
             Check
-          </button>
-          <button type="button" className="secondary-button" onClick={addToReview} disabled={!hasText || reviewAlreadyAdded}>
+          </Button>
+          <Button variant="secondary" type="button" onClick={addToReview} disabled={!hasText || reviewAlreadyAdded}>
             {reviewAlreadyAdded ? 'Added to Review' : 'Add to Review'}
-          </button>
+          </Button>
         </div>
 
         {draft.feedback && (

@@ -1,3 +1,4 @@
+import { Button } from './ui/Button';
 import type { Course } from '../domain/types';
 import { deriveCourseDayStates, type CourseDayState } from '../domain/progress';
 
@@ -74,9 +75,9 @@ export function CoursePage({
                     <small>{day.estimatedMinutes} minutes</small>
                     {lockedMessage && <small className="helper-text">{lockedMessage}</small>}
                 {state === 'current' && actionLabel && (
-                  <button type="button" className="secondary-button" onClick={() => onStartDay(day.id)}>
+                  <Button variant="secondary" type="button" onClick={() => onStartDay(day.id)}>
                     {actionLabel}
-                  </button>
+                  </Button>
                     )}
                   </article>
                 );

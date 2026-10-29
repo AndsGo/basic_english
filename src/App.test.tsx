@@ -221,7 +221,7 @@ describe('App shell', () => {
     expect(screen.queryByText(/名字/)).not.toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Me' }));
-    await user.click(screen.getByRole('checkbox', { name: 'Show Chinese help' }));
+    await user.click(screen.getByRole('switch', { name: 'Show Chinese help' }));
     await user.click(screen.getByRole('button', { name: 'Words' }));
 
     expect(await screen.findByText('the word for a person or thing', {}, { timeout: 15000 })).toBeInTheDocument();
@@ -249,7 +249,7 @@ describe('App shell', () => {
 
     await user.click(screen.getByRole('button', { name: 'Me' }));
 
-    const readingCheckbox = screen.getByRole('checkbox', { name: 'Enable reading aloud' });
+    const readingCheckbox = screen.getByRole('switch', { name: 'Enable reading aloud' });
     expect(readingCheckbox).toBeChecked();
     expect(screen.getByRole('radio', { name: 'Normal' })).toBeChecked();
     expect(screen.getByRole('radio', { name: 'American English' })).toBeChecked();
@@ -274,7 +274,7 @@ describe('App shell', () => {
     await user.click(screen.getByRole('button', { name: 'Me' }));
 
     expect(screen.getByRole('heading', { name: 'My Progress' })).toBeInTheDocument();
-    expect(screen.getByRole('checkbox', { name: 'Enable reading aloud' })).toBeChecked();
+    expect(screen.getByRole('switch', { name: 'Enable reading aloud' })).toBeChecked();
     expect(screen.getByRole('radio', { name: 'Normal' })).toBeChecked();
     expect(screen.getByRole('radio', { name: 'American English' })).toBeChecked();
   });
@@ -289,11 +289,11 @@ describe('App shell', () => {
       throw new Error('localStorage write failed');
     });
 
-    await user.click(screen.getByRole('checkbox', { name: 'Enable reading aloud' }));
+    await user.click(screen.getByRole('switch', { name: 'Enable reading aloud' }));
     await user.click(screen.getByRole('radio', { name: 'Slow' }));
     await user.click(screen.getByRole('radio', { name: 'Australian English' }));
 
-    expect(screen.getByRole('checkbox', { name: 'Enable reading aloud' })).not.toBeChecked();
+    expect(screen.getByRole('switch', { name: 'Enable reading aloud' })).not.toBeChecked();
     expect(screen.getByRole('radio', { name: 'Slow' })).toBeChecked();
     expect(screen.getByRole('radio', { name: 'Australian English' })).toBeChecked();
   });

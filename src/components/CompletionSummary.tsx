@@ -1,3 +1,4 @@
+import { Button } from './ui/Button';
 import type { ReactNode } from 'react';
 import type { Day, SceneRemixTask } from '../domain/types';
 import type { UserOutput } from '../storage/progressRepository';
@@ -68,9 +69,9 @@ export function CompletionSummary({
         <SceneRemixCard task={remixTask} onSubmit={(result) => onSceneRemixSubmit(remixTask, result)} />
       )}
       {nextDay ? (
-        <button type="button" className="primary-button" onClick={onStartNextDay}>
+        <Button variant="primary" type="button" onClick={onStartNextDay}>
           Start Day {nextDay.dayNumber}
-        </button>
+        </Button>
       ) : (
         <p>View course result</p>
       )}

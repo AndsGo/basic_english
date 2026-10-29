@@ -1,3 +1,5 @@
+import { TextField, Select } from './ui/TextFields';
+import { Button } from './ui/Button';
 import { useLayoutEffect, useRef, useState } from 'react';
 import type { WordStoryContent } from '../content/wordStories';
 import type { Word } from '../domain/types';
@@ -34,12 +36,10 @@ export function StoryLibrary({ stories, words, showChineseHelp, initialStoryId, 
     const progress = loadStoryProgress(selected.id);
     return <div className={reading ? 'story-reader-view' : 'story-intro-view'}>
       <div className="story-reader-toolbar">
-        <button type="button" className="secondary-button" onClick={() => { setSelectedId(undefined); setReading(false); }}>Back to stories</button>
-        {reading && <label className="story-picker">Choose a story
-          <select value={selected.id} onChange={event => setSelectedId(event.target.value)}>
+        <Button variant="secondary" type="button" onClick={() => { setSelectedId(undefined); setReading(false); }}>Back to stories</Button>
+        {reading && <Select label="Choose a story" fieldClassName="story-picker" value={selected.id} onChange={event => setSelectedId(event.target.value)}>
             {stories.map(story => <option key={story.id} value={story.id}>Week {story.week} · {story.wordId} · {story.title}</option>)}
-          </select>
-        </label>}
+          </Select>}
       </div>
       {reading ? <WordStory key={selected.id} story={selected} words={words} showChineseHelp={showChineseHelp} onReview={onReview} /> :
         <section className="story-intro" aria-label="Before reading">
@@ -52,7 +52,7 @@ export function StoryLibrary({ stories, words, showChineseHelp, initialStoryId, 
             {showChineseHelp && <p className="muted">{selected.definitionChinese}</p>}
             <p className="muted">Words to read again: {selected.reviewWordIds.join(', ')}</p>
             {selected.contextSupport.length > 0 && <details><summary>A little help before reading</summary>{selected.contextSupport.map(item => <p key={item.text}><strong>{item.text}</strong> — {item.definition}{showChineseHelp && ` · ${item.chinese}`}<SpeechButton text={item.text} label={`Read story help word ${item.text}`} /></p>)}</details>}
-            <button type="button" className="primary-button" onClick={() => setReading(true)}>{progress.pageIndex !== undefined && progress.pageIndex < selected.pages.length ? 'Continue reading' : 'Read story'}</button>
+            <Button variant="primary" type="button" onClick={() => setReading(true)}>{progress.pageIndex !== undefined && progress.pageIndex < selected.pages.length ? 'Continue reading' : 'Read story'}</Button>
             <p className="helper-text">Next page reads aloud when speech is enabled.</p>
           </div>
         </section>}
@@ -68,9 +68,9 @@ export function StoryLibrary({ stories, words, showChineseHelp, initialStoryId, 
   return <section className="story-library" aria-label="Story library">
     <header className="catalog-heading"><p className="muted">One word to learn. Familiar words to read again.</p></header>
     <div className="story-filters">
-      <label>Search stories<input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Title or word" /></label>
-      <label>Reading status<select value={status} onChange={event => setStatus(event.target.value)}><option value="all">All stories</option><option value="unread">Unread</option><option value="read">Read</option></select></label>
-      <label>Course stage<select value={phase} onChange={event => setPhase(event.target.value)}><option value="all">All stages</option>{[1, 2, 3, 4].map(number => <option key={number} value={number}>Weeks {(number - 1) * 13 + 1}–{number * 13}</option>)}</select></label>
+      <TextField label="Search stories" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Title or word" />
+      <Select label="Reading status" value={status} onChange={event => setStatus(event.target.value)}><option value="all">All stories</option><option value="unread">Unread</option><option value="read">Read</option></Select>
+      <Select label="Course stage" value={phase} onChange={event => setPhase(event.target.value)}><option value="all">All stages</option>{[1, 2, 3, 4].map(number => <option key={number} value={number}>Weeks {(number - 1) * 13 + 1}–{number * 13}</option>)}</Select>
     </div>
     <p className="helper-text" role="status">{visible.length} stories</p>
     <div className="story-cover-grid">
@@ -84,6 +84,6 @@ export function StoryLibrary({ stories, words, showChineseHelp, initialStoryId, 
         </button>;
       })}
     </div>
-    {visible.length === 0 && <div className="catalog-empty"><h3>No stories match these filters.</h3><button type="button" className="secondary-button" onClick={() => { setQuery(''); setStatus('all'); setPhase('all'); }}>Clear filters</button></div>}
+    {visible.length === 0 && <div className="catalog-empty"><h3>No stories match these filters.</h3><Button variant="secondary" type="button" onClick={() => { setQuery(''); setStatus('all'); setPhase('all'); }}>Clear filters</Button></div>}
   </section>;
 }

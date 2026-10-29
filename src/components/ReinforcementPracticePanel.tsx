@@ -1,3 +1,5 @@
+import { TextField } from './ui/TextFields';
+import { AnswerOption, Button } from './ui/Button';
 import { useEffect, useState } from 'react';
 import { toLocalDateString, type MasteryProgress } from '../domain/mastery';
 import { buildMasteryQuestion, MasteryQuestionContentError, type MasteryQuestion } from '../domain/masteryQuestions';
@@ -184,6 +186,7 @@ export function ReinforcementPracticePanel({
 
   const submitAnswer = async (answer: string | string[]) => {
     if (!session || !currentQuestion || saving || answered) return;
+    if (typeof answer === 'string') setTextAnswer(answer);
 
     const current = now();
     const correct = answersMatch(currentQuestion.question, answer);
@@ -231,7 +234,7 @@ export function ReinforcementPracticePanel({
     return (
       <section className="reinforcement-practice">
         <p role="alert">Reinforcement practice could not be loaded.</p>
-        <button type="button" className="secondary-button" onClick={retryInitialization}>Try again</button>
+        <Button variant="secondary" type="button" onClick={retryInitialization}>Try again</Button>
       </section>
     );
   }
@@ -263,8 +266,8 @@ export function ReinforcementPracticePanel({
         {saveError && <p role="alert">Reinforcement practice could not be saved.</p>}
         {feedback && <p className="reinforcement-practice-feedback" role="status">{feedback}</p>}
         <div className="reinforcement-practice-actions">
-          <button type="button" className="primary-button" disabled={saving} onClick={() => void finishPractice()}>Finish practice</button>
-          <button type="button" className="secondary-button" disabled={saving} onClick={() => void skipPractice()}>Skip practice</button>
+          <Button variant="primary" type="button" disabled={saving} onClick={() => void finishPractice()}>Finish practice</Button>
+          <Button variant="secondary" type="button" disabled={saving} onClick={() => void skipPractice()}>Skip practice</Button>
         </div>
       </section>
     );
@@ -288,7 +291,7 @@ export function ReinforcementPracticePanel({
         {question.options && (
           <div className="reinforcement-practice-options">
             {question.options.map((option) => (
-              <button key={option} type="button" className="secondary-button" disabled={controlsDisabled} onClick={() => void submitAnswer(option)}>{option}</button>
+              <AnswerOption key={option} type="button" selected={textAnswer === option} result={answered ? (answersMatch(question, textAnswer) ? 'correct' : 'retry') : undefined} disabled={controlsDisabled} onClick={() => void submitAnswer(option)}>{option}</AnswerOption>
             ))}
           </div>
         )}
@@ -297,9 +300,8 @@ export function ReinforcementPracticePanel({
             event.preventDefault();
             void submitAnswer(textAnswer);
           }}>
-            <label htmlFor={`reinforcement-answer-${question.id}`}>Your answer</label>
-            <input id={`reinforcement-answer-${question.id}`} value={textAnswer} disabled={controlsDisabled} onChange={(event) => setTextAnswer(event.target.value)} />
-            <button type="submit" className="primary-button" disabled={controlsDisabled || !textAnswer.trim()}>Submit answer</button>
+            <TextField label="Your answer" id={`reinforcement-answer-${question.id}`} value={textAnswer} disabled={controlsDisabled} onChange={(event) => setTextAnswer(event.target.value)} />
+            <Button variant="primary" type="submit" loading={saving} loadingLabel="Saving..." disabled={controlsDisabled || !textAnswer.trim()}>Submit answer</Button>
           </form>
         )}
         {question.kind === 'pattern_sentence_order' && question.tokens && (
@@ -307,18 +309,18 @@ export function ReinforcementPracticePanel({
             <p>{orderedAnswer.map((index) => question.tokens?.[index]).join(' ')}</p>
             <div className="reinforcement-practice-options">
               {question.tokens.map((token, index) => (
-                <button key={`${token}-${index}`} type="button" className="secondary-button" disabled={controlsDisabled || orderedAnswer.includes(index)} onClick={() => setOrderedAnswer((current) => [...current, index])}>{token}</button>
+                <Button variant="secondary" key={`${token}-${index}`} type="button" disabled={controlsDisabled || orderedAnswer.includes(index)} onClick={() => setOrderedAnswer((current) => [...current, index])}>{token}</Button>
               ))}
             </div>
-            <button type="button" className="primary-button" disabled={controlsDisabled || orderedAnswer.length !== question.tokens.length} onClick={() => void submitAnswer(orderedAnswer.map((index) => question.tokens![index]))}>Submit answer</button>
+            <Button variant="primary" type="button" disabled={controlsDisabled || orderedAnswer.length !== question.tokens.length} onClick={() => void submitAnswer(orderedAnswer.map((index) => question.tokens![index]))}>Submit answer</Button>
           </div>
         )}
       </article>
       {saveError && <p role="alert">Reinforcement practice could not be saved.</p>}
       {feedback && <p className="reinforcement-practice-feedback" role="status">{feedback}</p>}
       <div className="reinforcement-practice-actions">
-        {answered && session?.status === 'in_progress' && <button type="button" className="primary-button" onClick={nextQuestion}>Next question</button>}
-        <button type="button" className="secondary-button" disabled={saving} onClick={() => void skipPractice()}>Skip practice</button>
+        {answered && session?.status === 'in_progress' && <Button variant="primary" type="button" onClick={nextQuestion}>Next question</Button>}
+        <Button variant="secondary" type="button" disabled={saving} onClick={() => void skipPractice()}>Skip practice</Button>
       </div>
     </section>
   );
