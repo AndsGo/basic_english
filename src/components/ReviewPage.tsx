@@ -142,7 +142,8 @@ export function ReviewPage({
   }, [loadItems, onReviewChange]);
 
   return (
-    <section className="panel">
+    <section className="panel review-page">
+      <p className="eyebrow">Keep familiar words close</p>
       <h2>Review today</h2>
       <section aria-label="Mastery review">
         <MasteryReviewPanel course={course} repository={repository} onChange={onReviewChange} />

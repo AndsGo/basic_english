@@ -30,7 +30,10 @@ export function CoursePage({
   const completedDays = new Set(completedDayIds);
 
   return (
-    <section className="panel">
+    <section className="panel course-page">
+      <p className="eyebrow">Your learning path</p>
+      <h2>A year of everyday English</h2>
+      <p className="muted">Course progress: {completedDayIds.length} / {allDays.length} days</p>
       <p>
         Review: {reviewCount} {reviewCount === 1 ? 'item' : 'items'}
       </p>
@@ -43,7 +46,8 @@ export function CoursePage({
         const lockedMessage = isWeekLocked ? `Complete Week ${week.number - 1} to unlock ${week.title}.` : undefined;
 
         return (
-          <section className="week-section" key={week.id}>
+          <details className="week-section" key={week.id} open={week.days.some(day => dayStates[day.id] === 'current') || (completedDayIds.length === allDays.length && weekIndex === course.weeks.length - 1)}>
+            <summary>
             <h2>
               Week {week.number}: {week.title}
             </h2>
@@ -51,6 +55,7 @@ export function CoursePage({
             <p>
               {completedWeekDayCount} / {week.days.length} days completed
             </p>
+            </summary>
             <div className="day-list">
               {week.days.map((day) => {
                 const state = isWeekLocked ? 'locked' : dayStates[day.id];
@@ -58,7 +63,7 @@ export function CoursePage({
                   state === 'current' ? 'Open Today' : state === 'review_needed' ? 'Review Day' : undefined;
 
                 return (
-                  <article className="day-row" key={day.id}>
+                  <article className={`day-row day-row--${state}`} key={day.id}>
                     <div className="button-row">
                       <strong>
                         Day {day.dayNumber}: {day.title}
@@ -77,7 +82,7 @@ export function CoursePage({
                 );
               })}
             </div>
-          </section>
+          </details>
         );
       })}
     </section>

@@ -619,8 +619,8 @@ describe('TodayPage', () => {
 
     expect(await screen.findByRole('heading', { name: /Morning Acts/i })).toBeInTheDocument();
     expect(screen.getByText(/Week 3 \/ Day 15/i)).toBeInTheDocument();
-    expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Words');
-    expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Picture');
+    expect(screen.getByRole('list', { name: 'Today steps', hidden: true })).toHaveTextContent('Words');
+    expect(screen.getByRole('list', { name: 'Today steps', hidden: true })).toHaveTextContent('Picture');
   });
 
   it('renders a Week 4 Today lesson without changing the existing flow', async () => {
@@ -645,8 +645,8 @@ describe('TodayPage', () => {
 
     expect(await screen.findByRole('heading', { name: /Food and Drink/i })).toBeInTheDocument();
     expect(screen.getByText(/Week 4 \/ Day 22/i)).toBeInTheDocument();
-    expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Scene Remix');
-    expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Output');
+    expect(screen.getByRole('list', { name: 'Today steps', hidden: true })).toHaveTextContent('Scene Remix');
+    expect(screen.getByRole('list', { name: 'Today steps', hidden: true })).toHaveTextContent('Output');
   });
 
   it('renders the Week 5 Day 29 Today story sentence flow', async () => {
@@ -672,7 +672,7 @@ describe('TodayPage', () => {
     expect(screen.getByText(/Week 5 \/ Day 29/i)).toBeInTheDocument();
     expect(await screen.findByText('Today story sentence')).toBeInTheDocument();
     expect(screen.getByText('Make a short story about going outside and stopping at a place.')).toBeInTheDocument();
-    const todaySteps = screen.getByRole('list', { name: 'Today steps' });
+    const todaySteps = screen.getByRole('list', { name: 'Today steps', hidden: true });
     expect(todaySteps).toHaveTextContent('Picture');
     expect(todaySteps).toHaveTextContent('Scene Remix');
     expect(todaySteps).toHaveTextContent('Output');
@@ -715,7 +715,7 @@ describe('TodayPage', () => {
       'I understand.',
       'I am kind.',
     ]);
-    const todaySteps = screen.getByRole('list', { name: 'Today steps' });
+    const todaySteps = screen.getByRole('list', { name: 'Today steps', hidden: true });
     expect(todaySteps).toHaveTextContent('Picture');
     expect(todaySteps).toHaveTextContent('Scene Remix');
     expect(todaySteps).toHaveTextContent('Output');
@@ -764,7 +764,7 @@ describe('TodayPage', () => {
 
       await user.click(await getEnabledContinueButton());
 
-      await waitFor(() => expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Words'));
+      await waitFor(() => expect(screen.getByRole('list', { name: 'Today steps', hidden: true })).toHaveTextContent('Words'));
       expect(scrollIntoView).toHaveBeenCalledWith({ block: 'start', behavior: 'smooth' });
     } finally {
       Element.prototype.scrollIntoView = originalScrollIntoView;
@@ -993,8 +993,8 @@ describe('TodayPage', () => {
 
     expect(screen.getByRole('heading', { level: 2, name: 'My Name' })).toBeInTheDocument();
     expect(await screen.findByRole('heading', { name: 'Mastery review' })).toBeInTheDocument();
-    expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Review');
-    expect(screen.getByRole('list', { name: 'Today steps' })).toHaveTextContent('Output');
+    expect(screen.getByRole('list', { name: 'Today steps', hidden: true })).toHaveTextContent('Review');
+    expect(screen.getByRole('list', { name: 'Today steps', hidden: true })).toHaveTextContent('Output');
 
     await user.click(await getEnabledContinueButton());
     expect(screen.getByRole('heading', { name: 'Quick Review' })).toBeInTheDocument();

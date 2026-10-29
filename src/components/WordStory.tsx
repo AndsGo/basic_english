@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { giveStory, type WordStoryContent } from '../content/wordStories';
 import type { Word } from '../domain/types';
 import { useSpeech } from '../speech/SpeechProvider';
@@ -14,7 +14,7 @@ export function WordStory({ words, showChineseHelp, story = giveStory, onReview 
 }) {
   const word = words.find((entry) => entry.id === story.wordId);
   const [progress, setProgress] = useState(() => loadStoryProgress(story.id));
-  const [pageIndex, setPageIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState(() => progress.pageIndex !== undefined && progress.pageIndex <= story.pages.length ? progress.pageIndex : 0);
   const [answer, setAnswer] = useState<number | null>(() => {
     const saved = progress.answer;
     const index = saved?.question === story.check.prompt ? story.check.options.indexOf(saved.text) : -1;
@@ -24,17 +24,20 @@ export function WordStory({ words, showChineseHelp, story = giveStory, onReview 
   const [saveFeedback, setSaveFeedback] = useState('');
   const [reviewFeedback, setReviewFeedback] = useState('');
   const { stop, speak } = useSpeech();
+  const contentRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   useEffect(() => () => stop(), [stop]);
+  useEffect(() => { titleRef.current?.focus({ preventScroll: true }); }, []);
+  useEffect(() => { if (contentRef.current) contentRef.current.scrollTop = 0; }, [pageIndex]);
+  useEffect(() => {
+    const saved = loadStoryProgress(story.id);
+    saveStoryProgress(story.id, { ...saved, pageIndex: saved.pageIndex !== undefined && saved.pageIndex <= story.pages.length ? saved.pageIndex : 0, lastOpenedAt: new Date().toISOString() });
+  }, [story.id, story.pages.length]);
 
   if (!word) return <p>No stories for these words yet.</p>;
 
   const page = story.pages[pageIndex];
   const isCheck = pageIndex === story.pages.length;
-  const sentenceLines = Math.max(4, ...story.pages.map(item => Math.ceil(item.text.length / 16)));
-  const chineseLines = Math.max(2, ...story.pages.map(item => Math.ceil(item.chinese.length / 10)));
-  const recordLines = Math.max(0, ...story.pages.map(item => item.semanticText
-    ? Math.ceil(item.semanticText.label.length / 20) + item.semanticText.lines.reduce((sum, line) => sum + Math.ceil(line.length / 20), 0)
-    : 0));
   const updateProgress = (next: typeof progress) => {
     setProgress(next);
     return saveStoryProgress(story.id, next);
@@ -45,9 +48,7 @@ export function WordStory({ words, showChineseHelp, story = giveStory, onReview 
     if (autoRead && story.pages[index]) {
       speak(story.pages[index].text, 'Read story page');
     }
-    if (index === story.pages.length) {
-      updateProgress({ ...progress, read: true });
-    }
+    updateProgress({ ...progress, read: progress.read || index === story.pages.length, pageIndex: index, lastOpenedAt: new Date().toISOString() });
   };
 
   return (
@@ -55,7 +56,7 @@ export function WordStory({ words, showChineseHelp, story = giveStory, onReview 
       <header className="story-heading">
         <div>
           <p className="muted">Week {story.week} · A short story {progress.read && '· Read'}</p>
-          <h3>{story.title}</h3>
+          <h3 ref={titleRef} tabIndex={-1}>{story.title}</h3>
         </div>
         <div className="word-heading">
           <strong>{word.text}</strong>
@@ -63,6 +64,7 @@ export function WordStory({ words, showChineseHelp, story = giveStory, onReview 
           <SpeechButton text={word.text} label={`Read story word ${word.text}`} />
         </div>
       </header>
+      <details className="story-reading-help"><summary>Reading help</summary>
       <p>{story.definition}{showChineseHelp && ` · ${story.definitionChinese}`}</p>
       {story.contextSupport.length > 0 && <details className="story-context">
         <summary>A little help before reading</summary>
@@ -82,7 +84,8 @@ export function WordStory({ words, showChineseHelp, story = giveStory, onReview 
           </p>;
         })}
       </details>
-      <div className={`story-spread${isCheck ? ' story-check' : ''}`}>
+      </details>
+      <div ref={contentRef} className={`story-spread${isCheck ? ' story-check' : ''}`} tabIndex={0} role="region" aria-label="Story content">
         {!isCheck && <img className="story-image" src={page.image} alt={page.alt} width="512" height="512" />}
         <div className="story-copy" aria-live="polite">
           {isCheck ? (
@@ -129,10 +132,10 @@ export function WordStory({ words, showChineseHelp, story = giveStory, onReview 
             <>
               <p className="muted">{story.narrator}</p>
               {showChineseHelp && <p className="muted">{story.narratorChinese}</p>}
-              <p className="story-sentence" style={{ minHeight: `${sentenceLines * 1.65}em` }}>{page.text.split(new RegExp(`\\b(${story.wordId})\\b`, 'i')).map((part, index) => part.toLowerCase() === story.wordId ? <mark key={index}>{part}</mark> : part)}</p>
+              <p className="story-sentence">{page.text.split(new RegExp(`\\b(${story.wordId})\\b`, 'i')).map((part, index) => part.toLowerCase() === story.wordId ? <mark key={index}>{part}</mark> : part)}</p>
               <SpeechButton text={page.text} label="Read story page" />
-              {showChineseHelp && <p className="story-chinese" style={{ minHeight: `${chineseLines * 1.6}em` }}>{page.chinese}</p>}
-              {recordLines > 0 && <div className="story-record-region" style={{ minHeight: `${(recordLines + 2) * 1.6}em` }}>
+              {showChineseHelp && <p className="story-chinese">{page.chinese}</p>}
+              {page.semanticText && <div className="story-record-region">
                 {page.semanticText && <aside className="story-record" aria-label={page.semanticText.accessibleSummary}>
                   <strong>{page.semanticText.label}</strong>
                   {page.semanticText.lines.length > 0 && <ul>{page.semanticText.lines.map(line => <li key={line}>{line}</li>)}</ul>}
@@ -145,7 +148,7 @@ export function WordStory({ words, showChineseHelp, story = giveStory, onReview 
       <nav className="story-navigation" aria-label="Story pages">
         <button type="button" className="secondary-button" disabled={pageIndex === 0} onClick={() => moveTo(pageIndex - 1)}>Previous page</button>
         <span>{isCheck ? 'Your turn' : `${pageIndex + 1} / ${story.pages.length}`}</span>
-        <button type="button" className="secondary-button" onClick={() => {
+        <button type="button" className="primary-button" onClick={() => {
           if (isCheck) setAnswer(null);
           moveTo(isCheck ? 0 : pageIndex + 1, !isCheck);
         }}>{isCheck ? 'Read again' : pageIndex === story.pages.length - 1 ? 'Finish story' : 'Next page'}</button>

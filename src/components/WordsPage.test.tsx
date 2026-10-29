@@ -9,7 +9,7 @@ import { SpeechProvider } from '../speech/SpeechProvider';
 import type { ProgressRepository, WordProgress } from '../storage/progressRepository';
 import { WordsPage } from './WordsPage';
 
-it('switches stories with fresh page and answer state and independent reading records', async () => {
+it('switches stories and restores their independent reading and answer records', async () => {
   const user = userEvent.setup();
   const repository = createRepository();
   const saveWordProgress = vi.spyOn(repository, 'saveWordProgress');
@@ -27,7 +27,7 @@ it('switches stories with fresh page and answer state and independent reading re
   expect(screen.getByRole('button', { name: 'Read story word open' })).toBeInTheDocument();
   await user.selectOptions(screen.getByRole('combobox', { name: 'Choose a story' }), 'under-the-chair');
   expect(screen.getByText(/Week 3.*Read/)).toBeInTheDocument();
-  expect(screen.getByText('1 / 4')).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'Your turn' })).toBeInTheDocument();
   expect(saveWordProgress).not.toHaveBeenCalled();
   localStorage.removeItem('basic-english-story-under-the-chair-read');
 });
@@ -57,6 +57,7 @@ it('can browse beyond the first library batch and resets when searching', async 
 
 afterEach(() => {
   cleanup();
+  localStorage.clear();
   vi.clearAllMocks();
 });
 

@@ -1,0 +1,624 @@
+{
+  "scope": "Standalone design preview only; not production application acceptance.",
+  "screenChecks": 84,
+  "readingChecks": 72,
+  "interactions": [
+    "search",
+    "read filter",
+    "stage filter",
+    "empty/reset",
+    "four-page reading",
+    "retry/correct check",
+    "sentence feedback",
+    "independent read marker"
+  ],
+  "horizontalOverflow": false,
+  "navigationMovementUnder2px": true,
+  "squareImages": true,
+  "browserErrors": [],
+  "applicationStorageUnchanged": true,
+  "screenshots": [
+    "stories-desktop.png",
+    "stories-mobile.png",
+    "stories-narrow.png",
+    "reader-desktop.png",
+    "reader-mobile.png",
+    "reader-dark-mobile.png",
+    "today-desktop.png",
+    "me-dark-mobile.png",
+    "design-system.png",
+    "reader-dark-record.png",
+    "stories-mobile-covers.png"
+  ],
+  "layouts": [
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": false,
+      "screen": "words",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": false,
+      "screen": "today",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": false,
+      "screen": "course",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": false,
+      "screen": "review",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": false,
+      "screen": "me",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": false,
+      "screen": "reader",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": false,
+      "screen": "system",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": true,
+      "screen": "words",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": true,
+      "screen": "today",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": true,
+      "screen": "course",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": true,
+      "screen": "review",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": true,
+      "screen": "me",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": true,
+      "screen": "reader",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "light",
+      "chinese": true,
+      "screen": "system",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "words",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "today",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "course",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "review",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "me",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "reader",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "system",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "words",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "today",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "course",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "review",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "me",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "reader",
+      "width": 1375
+    },
+    {
+      "size": "desktop",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "system",
+      "width": 1375
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": false,
+      "screen": "words",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": false,
+      "screen": "today",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": false,
+      "screen": "course",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": false,
+      "screen": "review",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": false,
+      "screen": "me",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": false,
+      "screen": "reader",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": false,
+      "screen": "system",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": true,
+      "screen": "words",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": true,
+      "screen": "today",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": true,
+      "screen": "course",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": true,
+      "screen": "review",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": true,
+      "screen": "me",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": true,
+      "screen": "reader",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "light",
+      "chinese": true,
+      "screen": "system",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "words",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "today",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "course",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "review",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "me",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "reader",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "system",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "words",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "today",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "course",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "review",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "me",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "reader",
+      "width": 373
+    },
+    {
+      "size": "mobile",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "system",
+      "width": 373
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": false,
+      "screen": "words",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": false,
+      "screen": "today",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": false,
+      "screen": "course",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": false,
+      "screen": "review",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": false,
+      "screen": "me",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": false,
+      "screen": "reader",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": false,
+      "screen": "system",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": true,
+      "screen": "words",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": true,
+      "screen": "today",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": true,
+      "screen": "course",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": true,
+      "screen": "review",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": true,
+      "screen": "me",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": true,
+      "screen": "reader",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "light",
+      "chinese": true,
+      "screen": "system",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "words",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "today",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "course",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "review",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "me",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "reader",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": false,
+      "screen": "system",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "words",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "today",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "course",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "review",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "me",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "reader",
+      "width": 303
+    },
+    {
+      "size": "narrow",
+      "theme": "dark",
+      "chinese": true,
+      "screen": "system",
+      "width": 303
+    }
+  ],
+  "designVersion": "1.1"
+}

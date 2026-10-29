@@ -734,10 +734,6 @@ export function TodayPage({
         <Stepper currentStep={currentStep} />
       </div>
 
-      {currentStep === 'mastery-review' && allSceneGoals.length > 0 && sceneGoal && (
-        <SceneMap goals={allSceneGoals} completedSceneIds={completedSceneIds} currentSceneId={sceneGoal.id} />
-      )}
-
       <div className="panel today-step-panel">
         {isHydrating ? (
           <section>
@@ -882,6 +878,10 @@ export function TodayPage({
           </>
         )}
       </div>
+
+      {currentStep === 'mastery-review' && allSceneGoals.length > 0 && sceneGoal && (
+        <SceneMap goals={allSceneGoals} completedSceneIds={completedSceneIds} currentSceneId={sceneGoal.id} />
+      )}
 
       {hasMasterySeedingError && <p role="alert">Mastery review could not be updated. You can continue with today&apos;s lesson.</p>}
 

@@ -75,8 +75,7 @@ it('restores the meaning check and saved sentence without marking the word known
   await user.click(screen.getByRole('button', { name: 'Save my sentence' }));
   view.unmount();
   setup();
-  for (let index = 0; index < 3; index++) await user.click(screen.getByRole('button', { name: 'Next page' }));
-  await user.click(screen.getByRole('button', { name: 'Finish story' }));
+  expect(screen.getByRole('heading', { name: 'Your turn' })).toBeInTheDocument();
   expect(screen.getByRole('textbox', { name: 'Your sentence' })).toHaveValue('I give a cup to my friend.');
   expect(screen.getByRole('status')).toHaveTextContent(giveStory.check.success);
   expect(JSON.parse(localStorage.getItem('basic-english-story-give-a-book-progress')!).answer.correct).toBe(true);
@@ -92,4 +91,23 @@ it('keeps read flags saved before the progress format was added', () => {
   localStorage.setItem('basic-english-story-give-a-book-read', 'true');
   setup();
   expect(screen.getByText(/Week 3.*Read/)).toBeInTheDocument();
+});
+
+it('resumes the saved page without starting speech or marking the story read', async () => {
+  const user = userEvent.setup();
+  const view = setup();
+  await user.click(screen.getByRole('button', { name: 'Next page' }));
+  view.unmount();
+  vi.clearAllMocks();
+  setup();
+  expect(screen.getByText('2 / 4')).toBeInTheDocument();
+  expect(screen.getByText(giveStory.pages[1].text)).toBeInTheDocument();
+  expect(service.speak).not.toHaveBeenCalled();
+  expect(localStorage.getItem('basic-english-story-give-a-book-read')).toBeNull();
+});
+
+it.each([-1, 99, '2'])('starts at page one when the stored page is invalid: %s', pageIndex => {
+  localStorage.setItem('basic-english-story-give-a-book-progress', JSON.stringify({ read: false, pageIndex }));
+  setup();
+  expect(screen.getByText('1 / 4')).toBeInTheDocument();
 });

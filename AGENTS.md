@@ -1,5 +1,17 @@
 # Agent Guidelines
 
+## Page Design Standard
+
+The user adopted [DESIGN.md](DESIGN.md) on 2026-10-28 as the authoritative page design standard for future UI additions and renovations.
+
+- Read DESIGN.md before changing page layouts, visual styles, navigation, or learning interactions. It covers Today, Course, Review, Words, Me, story discovery, reading, and post-reading practice.
+- Use its warm-white and forest-green palette, editorial title hierarchy, clear learning text, cover-based story catalog, semantic tokens, component states, and responsive rules.
+- When older design documents or the illustrative preview differ, DESIGN.md takes precedence for page design. Explicit user instructions take precedence over this standard.
+- Treat docs/design/preview.html as a visual and interaction reference. Its sample data, progress, and simplified controls are not production requirements or application data sources.
+- Preserve existing course progression, speech settings, automatic next-page narration, Chinese-help preferences, review scheduling, known-word behavior, and independent story records unless the task explicitly changes them.
+- Verify affected pages on desktop, 390px and 320px widths, in light and dark themes, with Chinese help on and off. Check long content, focus visibility, overflow, and stable learning navigation; run regression checks appropriate to the change.
+- Apply the standard within the requested scope. Its adoption does not require an unrelated rewrite of existing pages. The image and semantic teaching rules below remain mandatory.
+
 ## Image Asset Style Rules
 
 These rules are mandatory for any future agent that creates or replaces image assets in this project.
